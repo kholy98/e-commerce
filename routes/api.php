@@ -5,6 +5,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\OrderController;
 use App\Http\Controllers\CartController;
+use App\Http\Controllers\PaymentController;
 
 Route::get('/user', function (Request $request) {
     return $request->user();
@@ -40,21 +41,23 @@ Route::middleware('auth:sanctum')->group(function () {
     });
 
     // Admin routes
-    Route::middleware('admin')->group(function () {
-        Route::prefix('admin')->group(function () {
-            // Product management
-            Route::prefix('products')->group(function () {
-                Route::post('/', [ProductController::class, 'store']);
-                Route::put('/{product}', [ProductController::class, 'update']);
-                Route::delete('/{product}', [ProductController::class, 'destroy']);
-                Route::get('/low-stock', [ProductController::class, 'lowStock']);
-            });
+    Route::prefix('admin')->group(function () {
+        // Product management
+        Route::prefix('products')->group(function () {
+            Route::post('/', [ProductController::class, 'store']);
+            Route::put('/{product}', [ProductController::class, 'update']);
+            Route::delete('/{product}', [ProductController::class, 'destroy']);
+            Route::get('/low-stock', [ProductController::class, 'lowStock']);
+        });
 
-            // Order management
-            Route::prefix('orders')->group(function () {
-                Route::get('/statistics', [OrderController::class, 'statistics']);
-            });
+        // Order management
+        Route::prefix('orders')->group(function () {
+            Route::get('/statistics', [OrderController::class, 'statistics']);
         });
     });
+
 });
+
+Route::post('/payment/process', [PaymentController::class, 'paymentProcess']);
+Route::match(['GET','POST'],'/payment/callback', [PaymentController::class, 'callBack']);
 
