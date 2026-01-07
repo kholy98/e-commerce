@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Cart;
 use App\Models\Order;
 use App\Models\OrderItem;
 use App\Models\Product;
@@ -59,9 +60,9 @@ class OrderController extends Controller
     public function store(Request $request): JsonResponse
     {
         $validated = $request->validate([
-            'items' => 'required|array|min:1',
-            'items.*.product_id' => 'required|exists:products,id',
-            'items.*.quantity' => 'required|integer|min:1',
+            'items' => 'sometimes|array|min:1',
+            'items.*.product_id' => 'required_with:items|exists:products,id',
+            'items.*.quantity' => 'required_with:items|integer|min:1',
             'shipping_address' => 'required|array',
             'shipping_address.street' => 'required|string',
             'shipping_address.city' => 'required|string',
@@ -73,10 +74,36 @@ class OrderController extends Controller
         try {
             DB::beginTransaction();
 
+            $user = $request->user();
+
+            // Get items from request or from user's cart
+            if (isset($validated['items'])) {
+                $cartItems = collect($validated['items'])->map(function ($item) {
+                    return (object) [
+                        'product_id' => $item['product_id'],
+                        'quantity' => $item['quantity'],
+                    ];
+                });
+            } else {
+                $cartItems = $user->carts()->with('product')->get()->map(function ($cartItem) {
+                    return (object) [
+                        'product_id' => $cartItem->product_id,
+                        'quantity' => $cartItem->quantity,
+                    ];
+                });
+
+                if ($cartItems->isEmpty()) {
+                    return response()->json([
+                        'success' => false,
+                        'message' => 'Cart is empty',
+                    ], 422);
+                }
+            }
+
             // Create order
             $order = Order::create([
                 'order_number' => Order::generateOrderNumber(),
-                'user_id' => auth()->id(),
+                'user_id' => $user->id,
                 'status' => Order::STATUS_PENDING,
                 'payment_status' => Order::PAYMENT_STATUS_PENDING,
                 'shipping_address' => $validated['shipping_address'],
@@ -84,11 +111,11 @@ class OrderController extends Controller
             ]);
 
             // Add items to order
-            foreach ($validated['items'] as $item) {
-                $product = Product::findOrFail($item['product_id']);
+            foreach ($cartItems as $item) {
+                $product = Product::findOrFail($item->product_id);
 
                 // Check stock
-                if (!$product->hasStock($item['quantity'])) {
+                if (!$product->hasStock($item->quantity)) {
                     DB::rollBack();
                     return response()->json([
                         'success' => false,
@@ -100,13 +127,18 @@ class OrderController extends Controller
                 OrderItem::create([
                     'order_id' => $order->id,
                     'product_id' => $product->id,
-                    'quantity' => $item['quantity'],
+                    'quantity' => $item->quantity,
                     'unit_price' => $product->price,
-                    'subtotal' => round($product->price * $item['quantity'], 2),
+                    'subtotal' => round($product->price * $item->quantity, 2),
                 ]);
 
                 // Reduce product stock
-                $product->reduceStock($item['quantity']);
+                $product->reduceStock($item->quantity);
+            }
+
+            // Clear cart if items were taken from cart
+            if (!isset($validated['items'])) {
+                $user->carts()->delete();
             }
 
             // Calculate totals
@@ -117,7 +149,7 @@ class OrderController extends Controller
             return response()->json([
                 'success' => true,
                 'message' => 'Order created successfully',
-                'data' => $order->load('items'),
+                'data' => $order->load('items.product'),
             ], 201);
         } catch (\Exception $e) {
             DB::rollBack();

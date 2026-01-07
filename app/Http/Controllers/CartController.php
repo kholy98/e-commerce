@@ -2,43 +2,56 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Cart;
 use App\Models\Product;
 use Illuminate\Http\Request;
 use Illuminate\Http\JsonResponse;
+use Illuminate\Support\Facades\DB;
 
 class CartController extends Controller
 {
     /**
-     * Get the user's cart (stored in session)
+     * Get the user's cart items
      */
     public function index(Request $request): JsonResponse
     {
-        $cart = $request->session()->get('cart', []);
+        $cartItems = $request->user()->carts()->with('product.category')->get();
 
-        $cartItems = [];
+        $items = [];
         $total = 0;
+        $itemCount = 0;
 
-        foreach ($cart as $productId => $quantity) {
-            $product = Product::find($productId);
-            if ($product) {
-                $subtotal = $product->price * $quantity;
-                $cartItems[] = [
-                    'product_id' => $product->id,
-                    'product_name' => $product->name,
-                    'price' => $product->price,
-                    'quantity' => $quantity,
+        foreach ($cartItems as $cartItem) {
+            if ($cartItem->product) {
+                $subtotal = $cartItem->product->price * $cartItem->quantity;
+                $items[] = [
+                    'product_id' => $cartItem->product->id,
+                    'product_name' => $cartItem->product->name,
+                    'slug' => $cartItem->product->slug,
+                    'description' => $cartItem->product->description,
+                    'price' => $cartItem->product->price,
+                    'sku' => $cartItem->product->sku,
+                    'stock' => $cartItem->product->stock,
+                    'is_active' => $cartItem->product->is_active,
+                    'category' => $cartItem->product->category ? [
+                        'id' => $cartItem->product->category->id,
+                        'name' => $cartItem->product->category->name,
+                        'slug' => $cartItem->product->category->slug,
+                    ] : null,
+                    'quantity' => $cartItem->quantity,
                     'subtotal' => $subtotal,
                 ];
                 $total += $subtotal;
+                $itemCount += $cartItem->quantity;
             }
         }
 
         return response()->json([
             'success' => true,
             'data' => [
-                'items' => $cartItems,
+                'items' => $items,
                 'total' => round($total, 2),
-                'item_count' => array_sum($cart),
+                'item_count' => $itemCount,
             ],
         ]);
     }
@@ -62,35 +75,36 @@ class CartController extends Controller
             ], 422);
         }
 
-        if (!$product->hasStock($validated['quantity'])) {
-            return response()->json([
-                'success' => false,
-                'message' => 'Insufficient stock',
-            ], 422);
-        }
+        $user = $request->user();
 
-        $cart = $request->session()->get('cart', []);
+        // Check if product already in cart
+        $existingCartItem = $user->carts()->where('product_id', $validated['product_id'])->first();
 
-        // If product already in cart, add to quantity
-        if (isset($cart[$validated['product_id']])) {
-            $newQuantity = $cart[$validated['product_id']] + $validated['quantity'];
+        if ($existingCartItem) {
+            $newQuantity = $existingCartItem->quantity + $validated['quantity'];
             if (!$product->hasStock($newQuantity)) {
                 return response()->json([
                     'success' => false,
                     'message' => 'Cannot add more, insufficient stock',
                 ], 422);
             }
-            $cart[$validated['product_id']] = $newQuantity;
+            $existingCartItem->update(['quantity' => $newQuantity]);
         } else {
-            $cart[$validated['product_id']] = $validated['quantity'];
+            if (!$product->hasStock($validated['quantity'])) {
+                return response()->json([
+                    'success' => false,
+                    'message' => 'Insufficient stock',
+                ], 422);
+            }
+            $user->carts()->create([
+                'product_id' => $validated['product_id'],
+                'quantity' => $validated['quantity'],
+            ]);
         }
-
-        $request->session()->put('cart', $cart);
 
         return response()->json([
             'success' => true,
             'message' => 'Item added to cart',
-            'data' => ['product_id' => $validated['product_id'], 'quantity' => $cart[$validated['product_id']]],
         ]);
     }
 
@@ -112,10 +126,18 @@ class CartController extends Controller
             ], 404);
         }
 
-        $cart = $request->session()->get('cart', []);
+        $user = $request->user();
+        $cartItem = $user->carts()->where('product_id', $productId)->first();
+
+        if (!$cartItem) {
+            return response()->json([
+                'success' => false,
+                'message' => 'Item not in cart',
+            ], 404);
+        }
 
         if ($validated['quantity'] === 0) {
-            unset($cart[$productId]);
+            $cartItem->delete();
         } else {
             if (!$product->hasStock($validated['quantity'])) {
                 return response()->json([
@@ -123,10 +145,8 @@ class CartController extends Controller
                     'message' => 'Insufficient stock for this quantity',
                 ], 422);
             }
-            $cart[$productId] = $validated['quantity'];
+            $cartItem->update(['quantity' => $validated['quantity']]);
         }
-
-        $request->session()->put('cart', $cart);
 
         return response()->json([
             'success' => true,
@@ -139,11 +159,11 @@ class CartController extends Controller
      */
     public function remove(Request $request, $productId): JsonResponse
     {
-        $cart = $request->session()->get('cart', []);
+        $user = $request->user();
+        $cartItem = $user->carts()->where('product_id', $productId)->first();
 
-        if (isset($cart[$productId])) {
-            unset($cart[$productId]);
-            $request->session()->put('cart', $cart);
+        if ($cartItem) {
+            $cartItem->delete();
         }
 
         return response()->json([
@@ -157,7 +177,7 @@ class CartController extends Controller
      */
     public function clear(Request $request): JsonResponse
     {
-        $request->session()->forget('cart');
+        $request->user()->carts()->delete();
 
         return response()->json([
             'success' => true,
@@ -170,16 +190,15 @@ class CartController extends Controller
      */
     public function summary(Request $request): JsonResponse
     {
-        $cart = $request->session()->get('cart', []);
+        $cartItems = $request->user()->carts()->with('product.category')->get();
 
         $subtotal = 0;
         $itemCount = 0;
 
-        foreach ($cart as $productId => $quantity) {
-            $product = Product::find($productId);
-            if ($product) {
-                $subtotal += $product->price * $quantity;
-                $itemCount += $quantity;
+        foreach ($cartItems as $cartItem) {
+            if ($cartItem->product) {
+                $subtotal += $cartItem->product->price * $cartItem->quantity;
+                $itemCount += $cartItem->quantity;
             }
         }
 

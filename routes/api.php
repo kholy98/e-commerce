@@ -2,13 +2,68 @@
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Hash;
+use App\Models\User;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\OrderController;
 use App\Http\Controllers\CartController;
 use App\Http\Controllers\PaymentController;
+use App\Http\Controllers\ShipmentController;
 
 Route::get('/user', function (Request $request) {
     return $request->user();
+})->middleware('auth:sanctum');
+
+// Authentication routes
+Route::post('/register', function (Request $request) {
+    $request->validate([
+        'name' => 'required|string|max:255',
+        'email' => 'required|string|email|max:255|unique:users',
+        'password' => 'required|string|min:8|confirmed',
+    ]);
+
+    $user = User::create([
+        'name' => $request->name,
+        'email' => $request->email,
+        'password' => Hash::make($request->password),
+    ]);
+
+    $token = $user->createToken('API Token')->plainTextToken;
+
+    return response()->json([
+        'user' => $user,
+        'token' => $token,
+    ]);
+});
+
+Route::post('/login', function (Request $request) {
+    $request->validate([
+        'email' => 'required|string|email',
+        'password' => 'required|string',
+    ]);
+
+    if (!Auth::attempt($request->only('email', 'password'))) {
+        return response()->json([
+            'message' => 'Invalid credentials',
+        ], 401);
+    }
+
+    $user = Auth::user();
+    $token = $user->createToken('API Token')->plainTextToken;
+
+    return response()->json([
+        'user' => $user,
+        'token' => $token,
+    ]);
+});
+
+Route::post('/logout', function (Request $request) {
+    $request->user()->currentAccessToken()->delete();
+
+    return response()->json([
+        'message' => 'Logged out successfully',
+    ]);
 })->middleware('auth:sanctum');
 
 // Public routes
@@ -60,4 +115,11 @@ Route::middleware('auth:sanctum')->group(function () {
 
 Route::post('/payment/process', [PaymentController::class, 'paymentProcess']);
 Route::match(['GET','POST'],'/payment/callback', [PaymentController::class, 'callBack']);
+
+
+Route::post('/shipments', [ShipmentController::class, 'create']);
+Route::get('/shipments/{tracking_number}', [ShipmentController::class, 'track']);
+Route::put('/shipments/{tracking_number}', [ShipmentController::class, 'update']);
+Route::post('/pickups', [ShipmentController::class, 'createPickup']);
+Route::post('/webhook/bosta', [App\Http\Controllers\BostaWebhookController::class, 'handle']);
 

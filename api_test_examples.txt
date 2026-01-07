@@ -1,0 +1,384 @@
+# API Test Examples: Order Creation to Payment Flow
+
+This file contains example API requests to test the complete flow from adding items to cart, creating an order, and processing payment.
+
+## Prerequisites
+- Run `php artisan db:seed` to populate the database with test data
+- User must be authenticated with Sanctum token
+- Replace `YOUR_TOKEN` with actual bearer token
+- Replace `BASE_URL` with your API base URL (e.g., http://localhost:8000/api)
+
+## Seeded Test Data
+
+### Users
+- test@example.com / password (ID: 1)
+- john@example.com / password (ID: 2)
+- jane@example.com / password (ID: 3)
+- admin@example.com / password (ID: 4)
+
+### Categories
+1. Electronics
+2. Clothing
+3. Books
+4. Home & Garden
+5. Sports
+
+### Products
+1. Wireless Headphones (Electronics) - $129.99
+2. Smartwatch (Electronics) - $199.99
+3. Cotton T-Shirt (Clothing) - $29.99
+4. Denim Jeans (Clothing) - $59.99
+5. Programming Book (Books) - $39.99
+6. Yoga Mat (Sports) - $49.99
+7. Plant Pot (Home & Garden) - $24.99
+
+## Authentication
+
+### Register a new user (optional)
+```bash
+curl -X POST BASE_URL/register \
+  -H "Content-Type: application/json" \
+  -d '{
+    "name": "New User",
+    "email": "newuser@example.com",
+    "password": "password123",
+    "password_confirmation": "password123"
+  }'
+```
+
+### Login to get token
+```bash
+curl -X POST BASE_URL/login \
+  -H "Content-Type: application/json" \
+  -d '{
+    "email": "test@example.com",
+    "password": "password"
+  }'
+```
+
+Expected response:
+```json
+{
+  "user": {
+    "id": 1,
+    "name": "Test User",
+    "email": "test@example.com",
+    "email_verified_at": null,
+    "created_at": "2024-01-07T10:00:00.000000Z",
+    "updated_at": "2024-01-07T10:00:00.000000Z"
+  },
+  "token": "YOUR_TOKEN_HERE"
+}
+```
+
+### Logout (optional)
+```bash
+curl -X POST BASE_URL/logout \
+  -H "Authorization: Bearer YOUR_TOKEN"
+```
+
+## 1. Add Items to Cart
+
+### Add Product to Cart (Wireless Headphones)
+```bash
+curl -X POST BASE_URL/cart/add \
+  -H "Authorization: Bearer YOUR_TOKEN" \
+  -H "Content-Type: application/json" \
+  -d '{
+    "product_id": 1,
+    "quantity": 2
+  }'
+```
+
+### Add Another Product to Cart (Cotton T-Shirt)
+```bash
+curl -X POST BASE_URL/cart/add \
+  -H "Authorization: Bearer YOUR_TOKEN" \
+  -H "Content-Type: application/json" \
+  -d '{
+    "product_id": 3,
+    "quantity": 1
+  }'
+```
+
+### Get Cart Summary
+```bash
+curl -X GET BASE_URL/cart/summary \
+  -H "Authorization: Bearer YOUR_TOKEN"
+```
+
+## 2. Create Order
+
+### Create Order from Cart
+```bash
+curl -X POST BASE_URL/orders \
+  -H "Authorization: Bearer YOUR_TOKEN" \
+  -H "Content-Type: application/json" \
+  -d '{
+    "shipping_address": {
+      "street": "123 Main St",
+      "city": "Cairo",
+      "state": "Cairo",
+      "postal_code": "12345",
+      "country": "Egypt"
+    },
+    "notes": "Please handle with care"
+  }'
+```
+
+### Alternative: Create Order with Specific Items (bypasses cart)
+```bash
+curl -X POST BASE_URL/orders \
+  -H "Authorization: Bearer YOUR_TOKEN" \
+  -H "Content-Type: application/json" \
+  -d '{
+    "items": [
+      {
+        "product_id": 1,
+        "quantity": 2
+      },
+      {
+        "product_id": 3,
+        "quantity": 1
+      }
+    ],
+    "shipping_address": {
+      "street": "123 Main St",
+      "city": "Cairo",
+      "state": "Cairo",
+      "postal_code": "12345",
+      "country": "Egypt"
+    },
+    "notes": "Please handle with care"
+  }'
+```
+
+### Get Order Details
+```bash
+curl -X GET BASE_URL/orders/1 \
+  -H "Authorization: Bearer YOUR_TOKEN"
+```
+
+## 3. Process Payment
+
+### Process Payment for Order
+```bash
+curl -X POST BASE_URL/payment/process \
+  -H "Content-Type: application/json" \
+  -d '{
+    "order_id": 1,
+    "payment_method": "card",
+    "card_details": {
+      "number": "4111111111111111",
+      "expiry_month": "12",
+      "expiry_year": "2025",
+      "cvv": "123"
+    },
+    "billing_address": {
+      "street": "123 Main St",
+      "city": "Cairo",
+      "state": "Cairo",
+      "postal_code": "12345",
+      "country": "Egypt"
+    }
+  }'
+```
+
+### Payment Callback (handled by payment gateway)
+```bash
+curl -X POST BASE_URL/payment/callback \
+  -H "Content-Type: application/json" \
+  -d '{
+    "transaction_id": "txn_123456",
+    "order_id": 1,
+    "status": "success",
+    "amount": 328.96
+  }'
+```
+
+## 4. Optional: Shipment Creation (after payment success)
+
+### Create Shipment
+```bash
+curl -X POST BASE_URL/shipments \
+  -H "Authorization: Bearer YOUR_TOKEN" \
+  -H "Content-Type: application/json" \
+  -d '{
+    "order_id": 1,
+    "receiver": {
+      "firstName": "John",
+      "lastName": "Doe",
+      "phone": "+201234567890",
+      "email": "john@example.com"
+    },
+    "dropOffAddress": {
+      "city": "Cairo",
+      "zoneId": "1",
+      "districtId": "1",
+      "firstLine": "123 Main St",
+      "secondLine": "Apartment 4B",
+      "buildingNumber": "123",
+      "floor": "4",
+      "apartment": "4B"
+    },
+    "cod": 328.96
+  }'
+```
+
+### Track Shipment
+```bash
+curl -X GET BASE_URL/shipments/TRACKING_NUMBER
+```
+
+## Expected Response Examples
+
+### Cart Items Response (GET /api/cart)
+```json
+{
+  "success": true,
+  "data": {
+    "items": [
+      {
+        "product_id": 1,
+        "product_name": "Wireless Headphones",
+        "slug": "wireless-headphones",
+        "description": "High-quality wireless headphones with noise cancellation",
+        "price": 129.99,
+        "sku": "WH-001",
+        "stock": 48,
+        "is_active": true,
+        "category": {
+          "id": 1,
+          "name": "Electronics",
+          "slug": "electronics"
+        },
+        "quantity": 2,
+        "subtotal": 259.98
+      },
+      {
+        "product_id": 3,
+        "product_name": "Cotton T-Shirt",
+        "slug": "cotton-t-shirt",
+        "description": "Comfortable 100% cotton t-shirt",
+        "price": 29.99,
+        "sku": "TS-001",
+        "stock": 199,
+        "is_active": true,
+        "category": {
+          "id": 2,
+          "name": "Clothing",
+          "slug": "clothing"
+        },
+        "quantity": 1,
+        "subtotal": 29.99
+      }
+    ],
+    "total": 289.97,
+    "item_count": 3
+  }
+}
+```
+
+### Cart Summary Response (GET /api/cart/summary)
+```json
+{
+  "success": true,
+  "data": {
+    "subtotal": 289.97,
+    "tax": 28.99,
+    "shipping": 10.00,
+    "total": 328.96,
+    "item_count": 3
+  }
+}
+```
+
+### Order Creation Response
+```json
+{
+  "id": 1,
+  "tracking_number": "ORD-2024-001",
+  "status": "pending",
+  "payment_status": "pending",
+  "subtotal": 289.97,
+  "tax": 28.99,
+  "shipping_cost": 10.00,
+  "total_amount": 328.96,
+  "shipping_address": {
+    "street": "123 Main St",
+    "city": "Cairo",
+    "state": "Cairo",
+    "postal_code": "12345",
+    "country": "Egypt"
+  },
+  "items": [
+    {
+      "id": 1,
+      "order_id": 1,
+      "product_id": 1,
+      "quantity": 2,
+      "unit_price": 129.99,
+      "subtotal": 259.98,
+      "product": {
+        "id": 1,
+        "name": "Wireless Headphones",
+        "slug": "wireless-headphones",
+        "description": "High-quality wireless headphones with noise cancellation",
+        "price": 129.99,
+        "sku": "WH-001",
+        "stock": 48,
+        "is_active": true,
+        "category": {
+          "id": 1,
+          "name": "Electronics",
+          "slug": "electronics"
+        }
+      }
+    },
+    {
+      "id": 2,
+      "order_id": 1,
+      "product_id": 3,
+      "quantity": 1,
+      "unit_price": 29.99,
+      "subtotal": 29.99,
+      "product": {
+        "id": 3,
+        "name": "Cotton T-Shirt",
+        "slug": "cotton-t-shirt",
+        "description": "Comfortable 100% cotton t-shirt",
+        "price": 29.99,
+        "sku": "TS-001",
+        "stock": 199,
+        "is_active": true,
+        "category": {
+          "id": 2,
+          "name": "Clothing",
+          "slug": "clothing"
+        }
+      }
+    }
+  ],
+  "created_at": "2024-01-07T10:00:00Z"
+}
+```
+
+### Payment Process Response
+```json
+{
+  "success": true,
+  "payment_url": "https://paymob.com/pay/123456",
+  "transaction_id": "txn_123456"
+}
+```
+
+## Testing Flow Checklist
+1. ✅ Add items to cart
+2. ✅ Verify cart summary
+3. ✅ Create order
+4. ✅ Verify order details
+5. ✅ Process payment
+6. ✅ Handle payment callback
+7. ✅ Check order status updated
+8. ✅ Create shipment (if applicable)
+9. ✅ Track shipment status
