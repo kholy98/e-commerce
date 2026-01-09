@@ -10,13 +10,15 @@ use App\Http\Controllers\OrderController;
 use App\Http\Controllers\CartController;
 use App\Http\Controllers\PaymentController;
 use App\Http\Controllers\ShipmentController;
+use App\Http\Controllers\CheckoutController;
+use App\Services\SessionCartService;
 
 Route::get('/user', function (Request $request) {
     return $request->user();
 })->middleware('auth:sanctum');
 
 // Authentication routes
-Route::post('/register', function (Request $request) {
+Route::post('/register', function (Request $request, SessionCartService $cartService) {
     $request->validate([
         'name' => 'required|string|max:255',
         'email' => 'required|string|email|max:255|unique:users',
@@ -29,6 +31,11 @@ Route::post('/register', function (Request $request) {
         'password' => Hash::make($request->password),
     ]);
 
+    // Migrate guest cart to user cart after authentication
+    Auth::login($user);
+    $cartService->migrateSessionToDatabase();
+    Auth::logout();
+
     $token = $user->createToken('API Token')->plainTextToken;
 
     return response()->json([
@@ -37,7 +44,7 @@ Route::post('/register', function (Request $request) {
     ]);
 });
 
-Route::post('/login', function (Request $request) {
+Route::post('/login', function (Request $request, SessionCartService $cartService) {
     $request->validate([
         'email' => 'required|string|email',
         'password' => 'required|string',
@@ -50,6 +57,10 @@ Route::post('/login', function (Request $request) {
     }
 
     $user = Auth::user();
+    
+    // Migrate guest cart to user cart
+    $cartService->migrateSessionToDatabase();
+    
     $token = $user->createToken('API Token')->plainTextToken;
 
     return response()->json([
@@ -73,18 +84,27 @@ Route::prefix('products')->group(function () {
     Route::get('/{product}', [ProductController::class, 'show']);
 });
 
+// Cart routes - now public for both guest and authenticated users
+Route::prefix('cart')->group(function () {
+    Route::get('/', [CartController::class, 'index']);
+    Route::post('/add', [CartController::class, 'add']);
+    Route::patch('/{productId}', [CartController::class, 'update']);
+    Route::delete('/{productId}', [CartController::class, 'remove']);
+    Route::delete('/', [CartController::class, 'clear']);
+    Route::get('/summary', [CartController::class, 'summary']);
+    Route::get('/count', [CartController::class, 'count']);
+});
+
+// Checkout routes - public for guest checkout, but can be used by authenticated users too
+Route::prefix('checkout')->group(function () {
+    Route::post('/initiate', [CheckoutController::class, 'initiate']);
+    Route::post('/complete', [CheckoutController::class, 'complete']);
+    Route::post('/fail', [CheckoutController::class, 'fail']);
+    Route::get('/status', [CheckoutController::class, 'status']);
+});
+
 // Protected routes - require authentication
 Route::middleware('auth:sanctum')->group(function () {
-
-    // Cart routes
-    Route::prefix('cart')->group(function () {
-        Route::get('/', [CartController::class, 'index']);
-        Route::post('/add', [CartController::class, 'add']);
-        Route::patch('/{productId}', [CartController::class, 'update']);
-        Route::delete('/{productId}', [CartController::class, 'remove']);
-        Route::delete('/', [CartController::class, 'clear']);
-        Route::get('/summary', [CartController::class, 'summary']);
-    });
 
     // Order routes
     Route::prefix('orders')->group(function () {
@@ -113,10 +133,12 @@ Route::middleware('auth:sanctum')->group(function () {
 
 });
 
+// Payment routes
 Route::post('/payment/process', [PaymentController::class, 'paymentProcess']);
 Route::match(['GET','POST'],'/payment/callback', [PaymentController::class, 'callBack']);
+Route::post('/payment/webhook', [PaymentController::class, 'webhook']);
 
-
+// Shipment routes
 Route::post('/shipments', [ShipmentController::class, 'create']);
 Route::get('/shipments/{tracking_number}', [ShipmentController::class, 'track']);
 Route::put('/shipments/{tracking_number}', [ShipmentController::class, 'update']);

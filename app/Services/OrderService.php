@@ -102,6 +102,50 @@ class OrderService
     }
 
     /**
+     * Create order after successful payment and shipment
+     */
+    public function createOrderAfterPayment(array $orderData, array $shipmentData, string $paymentId): Order
+    {
+        return DB::transaction(function () use ($orderData, $shipmentData, $paymentId) {
+            // Create order
+            $order = Order::create([
+                'order_number' => Order::generateOrderNumber(),
+                'user_id' => $orderData['user_id'],
+                'status' => Order::STATUS_PROCESSING, // Payment and shipment successful
+                'payment_status' => Order::PAYMENT_STATUS_PAID,
+                'payment_id' => $paymentId,
+                'tracking_number' => $shipmentData['tracking_number'],
+                'shipment_status' => $shipmentData['status'],
+                'subtotal' => $orderData['subtotal'],
+                'tax' => $orderData['tax'],
+                'shipping_cost' => $orderData['shipping_cost'],
+                'total_amount' => $orderData['total_amount'],
+                'shipping_address' => $orderData['shipping_address'],
+                'billing_address' => $orderData['billing_address'],
+                'notes' => $orderData['notes'],
+            ]);
+
+            // Create order items
+            foreach ($orderData['items'] as $productId => $quantity) {
+                $product = Product::findOrFail($productId);
+
+                OrderItem::create([
+                    'order_id' => $order->id,
+                    'product_id' => $product->id,
+                    'quantity' => $quantity,
+                    'unit_price' => $product->price,
+                    'subtotal' => round($product->price * $quantity, 2),
+                ]);
+
+                // Reduce product stock
+                $product->reduceStock($quantity);
+            }
+
+            return $order;
+        });
+    }
+
+    /**
      * Get order statistics
      */
     public function getStatistics(): array

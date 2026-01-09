@@ -1,12 +1,21 @@
-# API Test Examples: Order Creation to Payment Flow
+# E-commerce API Test Examples: Guest & User Checkout Flow
 
-This file contains example API requests to test the complete flow from adding items to cart, creating an order, and processing payment.
+This file contains example API requests to test the complete e-commerce flow that supports both guest and authenticated users. The flow ensures orders are only created after successful payment and shipment.
+
+## 🛒 New Flow Overview
+
+1. **User selects products** - Browse and add items to cart
+2. **Cart in session** - Cart stored in session for guests, database for users
+3. **Login/Register (optional)** - If user chooses to login/register, migrate cart to database
+4. **Create shipment** - Generate shipment through Bosta API
+5. **Process payment** - Initiate payment through Paymob
+6. **Create order** - Order is only created after BOTH shipment and payment are successful
 
 ## Prerequisites
 - Run `php artisan db:seed` to populate the database with test data
-- User must be authenticated with Sanctum token
-- Replace `YOUR_TOKEN` with actual bearer token
 - Replace `BASE_URL` with your API base URL (e.g., http://localhost:8000/api)
+- No authentication required for cart operations (guest flow supported)
+- Authentication optional for checkout flow
 
 ## Seeded Test Data
 
@@ -77,12 +86,23 @@ curl -X POST BASE_URL/logout \
   -H "Authorization: Bearer YOUR_TOKEN"
 ```
 
-## 1. Add Items to Cart
+## 1. 🛍️ Browse Products (Public)
 
-### Add Product to Cart (Wireless Headphones)
+### Get All Products
+```bash
+curl -X GET BASE_URL/products
+```
+
+### Get Product Details
+```bash
+curl -X GET BASE_URL/products/1
+```
+
+## 2. 🛒 Manage Cart (Guest & User)
+
+### Add Product to Cart (Guest - No Auth Required)
 ```bash
 curl -X POST BASE_URL/cart/add \
-  -H "Authorization: Bearer YOUR_TOKEN" \
   -H "Content-Type: application/json" \
   -d '{
     "product_id": 1,
@@ -90,10 +110,9 @@ curl -X POST BASE_URL/cart/add \
   }'
 ```
 
-### Add Another Product to Cart (Cotton T-Shirt)
+### Add Another Product to Cart
 ```bash
 curl -X POST BASE_URL/cart/add \
-  -H "Authorization: Bearer YOUR_TOKEN" \
   -H "Content-Type: application/json" \
   -d '{
     "product_id": 3,
@@ -101,138 +120,324 @@ curl -X POST BASE_URL/cart/add \
   }'
 ```
 
+### View Cart Items
+```bash
+curl -X GET BASE_URL/cart
+```
+
 ### Get Cart Summary
 ```bash
-curl -X GET BASE_URL/cart/summary \
+curl -X GET BASE_URL/cart/summary
+```
+
+### Get Cart Count
+```bash
+curl -X GET BASE_URL/cart/count
+```
+
+### Update Cart Item Quantity (by product ID)
+```bash
+curl -X PATCH BASE_URL/cart/1 \
+  -H "Content-Type: application/json" \
+  -d '{
+    "quantity": 3
+  }'
+```
+
+### Remove Item from Cart (by product ID)
+```bash
+curl -X DELETE BASE_URL/cart/1
+```
+
+### Clear Entire Cart
+```bash
+curl -X DELETE BASE_URL/cart
+```
+
+## 3. 🔐 User Authentication (Optional)
+
+### Register New User (Cart will be migrated automatically)
+```bash
+curl -X POST BASE_URL/register \
+  -H "Content-Type: application/json" \
+  -d '{
+    "name": "John Doe",
+    "email": "john@example.com",
+    "password": "password123",
+    "password_confirmation": "password123"
+  }'
+```
+
+### Login (Cart will be migrated automatically)
+```bash
+curl -X POST BASE_URL/login \
+  -H "Content-Type: application/json" \
+  -d '{
+    "email": "john@example.com",
+    "password": "password123"
+  }'
+```
+
+## 4. 🚀 Complete Checkout (New Flow)
+
+### Initiate Checkout - Creates Shipment & Payment
+```bash
+curl -X POST BASE_URL/checkout/initiate \
+  -H "Content-Type: application/json" \
+  -d '{
+    "shipping_address": {
+      "street": "123 Main St",
+      "city": "Cairo",
+      "zip_code": "12345",
+      "country": "Egypt",
+      "building_number": "123",
+      "floor": "4",
+      "apartment": "4B",
+      "zone": "Nasr City"
+    },
+    "billing_address": {
+      "first_name": "John",
+      "last_name": "Doe",
+      "email": "john@example.com",
+      "phone": "+201234567890",
+      "street": "123 Main St",
+      "city": "Cairo",
+      "zip_code": "12345",
+      "country": "Egypt"
+    },
+    "notes": "Please handle with care"
+  }'
+```
+
+**Expected Response:**
+```json
+{
+  "success": true,
+  "message": "Checkout initiated successfully",
+  "data": {
+    "payment_key": "pay_123456789",
+    "iframe_url": "https://accept.paymob.com/api/acceptance/iframes/123456?payment_token=pay_123456789",
+    "temp_order_id": "TEMP-123456789",
+    "tracking_number": "BOSTA123456789"
+  }
+}
+```
+
+### Get Checkout Status
+```bash
+curl -X GET BASE_URL/checkout/status
+```
+
+### Complete Checkout (Called after successful payment)
+```bash
+curl -X POST BASE_URL/checkout/complete \
+  -H "Content-Type: application/json" \
+  -d '{
+    "success": true,
+    "payment_id": "txn_123456789"
+  }'
+```
+
+### Handle Checkout Failure
+```bash
+curl -X POST BASE_URL/checkout/fail \
+  -H "Content-Type: application/json" \
+  -d '{
+    "error": "Payment failed"
+  }'
+```
+
+## 5. 🎯 Payment Completion
+
+### Direct Payment Processing (Alternative)
+```bash
+curl -X POST BASE_URL/payment/process \
+  -H "Content-Type: application/json" \
+  -d '{
+    "amount_cents": 32896,
+    "currency": "EGP",
+    "order_id": "TEMP-123456789",
+    "billing_data": {
+      "first_name": "John",
+      "last_name": "Doe",
+      "email": "john@example.com",
+      "phone": "+201234567890",
+      "street": "123 Main St",
+      "city": "Cairo",
+      "country": "Egypt",
+      "postal_code": "12345"
+    }
+  }'
+```
+
+### Payment Webhook (Automated by Paymob)
+```bash
+curl -X POST BASE_URL/payment/webhook \
+  -H "Content-Type: application/json" \
+  -d '{
+    "obj": {
+      "id": "txn_123456789",
+      "success": true,
+      "order": {
+        "id": "TEMP-123456789"
+      },
+      "amount_cents": 32896
+    }
+  }'
+```
+
+### Payment Callback (Frontend Redirect)
+```bash
+curl -X GET BASE_URL/payment/callback?success=true&transaction_id=txn_123456789
+```
+
+## 6. 📦 Order Management (After Successful Checkout)
+
+### View User Orders (Requires Auth)
+```bash
+curl -X GET BASE_URL/orders \
   -H "Authorization: Bearer YOUR_TOKEN"
 ```
 
-## 2. Create Order
-
-### Create Order from Cart
-```bash
-curl -X POST BASE_URL/orders \
-  -H "Authorization: Bearer YOUR_TOKEN" \
-  -H "Content-Type: application/json" \
-  -d '{
-    "shipping_address": {
-      "street": "123 Main St",
-      "city": "Cairo",
-      "state": "Cairo",
-      "postal_code": "12345",
-      "country": "Egypt"
-    },
-    "notes": "Please handle with care"
-  }'
-```
-
-### Alternative: Create Order with Specific Items (bypasses cart)
-```bash
-curl -X POST BASE_URL/orders \
-  -H "Authorization: Bearer YOUR_TOKEN" \
-  -H "Content-Type: application/json" \
-  -d '{
-    "items": [
-      {
-        "product_id": 1,
-        "quantity": 2
-      },
-      {
-        "product_id": 3,
-        "quantity": 1
-      }
-    ],
-    "shipping_address": {
-      "street": "123 Main St",
-      "city": "Cairo",
-      "state": "Cairo",
-      "postal_code": "12345",
-      "country": "Egypt"
-    },
-    "notes": "Please handle with care"
-  }'
-```
-
-### Get Order Details
+### Get Specific Order Details
 ```bash
 curl -X GET BASE_URL/orders/1 \
   -H "Authorization: Bearer YOUR_TOKEN"
 ```
 
-## 3. Process Payment
-
-### Process Payment for Order
+### Update Order Status (Admin/Customer)
 ```bash
-curl -X POST BASE_URL/payment/process \
-  -H "Content-Type: application/json" \
-  -d '{
-    "order_id": 1,
-    "payment_method": "card",
-    "card_details": {
-      "number": "4111111111111111",
-      "expiry_month": "12",
-      "expiry_year": "2025",
-      "cvv": "123"
-    },
-    "billing_address": {
-      "street": "123 Main St",
-      "city": "Cairo",
-      "state": "Cairo",
-      "postal_code": "12345",
-      "country": "Egypt"
-    }
-  }'
-```
-
-### Payment Callback (handled by payment gateway)
-```bash
-curl -X POST BASE_URL/payment/callback \
-  -H "Content-Type: application/json" \
-  -d '{
-    "transaction_id": "txn_123456",
-    "order_id": 1,
-    "status": "success",
-    "amount": 328.96
-  }'
-```
-
-## 4. Optional: Shipment Creation (after payment success)
-
-### Create Shipment
-```bash
-curl -X POST BASE_URL/shipments \
+curl -X PATCH BASE_URL/orders/1/status \
   -H "Authorization: Bearer YOUR_TOKEN" \
   -H "Content-Type: application/json" \
   -d '{
-    "order_id": 1,
-    "receiver": {
-      "firstName": "John",
-      "lastName": "Doe",
-      "phone": "+201234567890",
-      "email": "john@example.com"
-    },
-    "dropOffAddress": {
-      "city": "Cairo",
-      "zoneId": "1",
-      "districtId": "1",
-      "firstLine": "123 Main St",
-      "secondLine": "Apartment 4B",
-      "buildingNumber": "123",
-      "floor": "4",
-      "apartment": "4B"
-    },
-    "cod": 328.96
+    "status": "shipped"
   }'
+```
+
+### Cancel Order
+```bash
+curl -X POST BASE_URL/orders/1/cancel \
+  -H "Authorization: Bearer YOUR_TOKEN"
 ```
 
 ### Track Shipment
 ```bash
-curl -X GET BASE_URL/shipments/TRACKING_NUMBER
+curl -X GET BASE_URL/shipments/BOSTA123456789
 ```
 
-## Expected Response Examples
+### Create Shipment Manually
+```bash
+curl -X POST BASE_URL/shipments \
+  -H "Content-Type: application/json" \
+  -d '{
+    "type": 10,
+    "receiver_first_name": "John",
+    "receiver_last_name": "Doe",
+    "receiver_phone": "+201234567890",
+    "receiver_email": "john@example.com",
+    "building_number": "123",
+    "floor": "4",
+    "apartment": "4B",
+    "first_line": "123 Main St",
+    "city": "Cairo",
+    "zone": "Nasr City",
+    "notes": "Handle with care",
+    "cod": 0
+  }'
+```
 
-### Cart Items Response (GET /api/cart)
+### Update Shipment Status
+```bash
+curl -X PUT BASE_URL/shipments/BOSTA123456789 \
+  -H "Content-Type: application/json" \
+  -d '{
+    "status": "delivered"
+  }'
+```
+
+### Create Pickup Request
+```bash
+curl -X POST BASE_URL/pickups \
+  -H "Content-Type: application/json" \
+  -d '{
+    "scheduled_date": "2026-01-10",
+    "scheduled_time_slot": "10:00-12:00",
+    "business_location_id": "location123",
+    "notes": "Pickup request for multiple packages",
+    "contact_person": {
+      "name": "John Doe",
+      "phone": "+201234567890"
+    }
+  }'
+```
+
+## 8. 🛠️ Admin Operations (Requires Authentication & Admin Role)
+
+### Create New Product (Admin Only)
+```bash
+curl -X POST BASE_URL/admin/products \
+  -H "Authorization: Bearer YOUR_ADMIN_TOKEN" \
+  -H "Content-Type: application/json" \
+  -d '{
+    "name": "New Product",
+    "description": "Product description",
+    "price": 99.99,
+    "sku": "NEW-001",
+    "stock": 100,
+    "category_id": 1,
+    "is_active": true
+  }'
+```
+
+### Update Product (Admin Only)
+```bash
+curl -X PUT BASE_URL/admin/products/1 \
+  -H "Authorization: Bearer YOUR_ADMIN_TOKEN" \
+  -H "Content-Type: application/json" \
+  -d '{
+    "name": "Updated Product Name",
+    "price": 149.99,
+    "stock": 50
+  }'
+```
+
+### Delete Product (Admin Only)
+```bash
+curl -X DELETE BASE_URL/admin/products/1 \
+  -H "Authorization: Bearer YOUR_ADMIN_TOKEN"
+```
+
+### Get Low Stock Products (Admin Only)
+```bash
+curl -X GET BASE_URL/admin/products/low-stock \
+  -H "Authorization: Bearer YOUR_ADMIN_TOKEN"
+```
+
+### Get Order Statistics (Admin Only)
+```bash
+curl -X GET BASE_URL/admin/orders/statistics \
+  -H "Authorization: Bearer YOUR_ADMIN_TOKEN"
+```
+
+## 7. 💳 Payment & Shipping Webhooks
+
+### Bosta Shipment Webhook
+```bash
+curl -X POST BASE_URL/webhook/bosta \
+  -H "Content-Type: application/json" \
+  -d '{
+    "trackingNumber": "BOSTA123456789",
+    "state": {
+      "value": "delivered",
+      "status": "Delivered"
+    }
+  }'
+```
+
+## 🎯 Expected Response Examples
+
+### Cart Response (Guest or Authenticated User)
 ```json
 {
   "success": true,
@@ -254,131 +459,176 @@ curl -X GET BASE_URL/shipments/TRACKING_NUMBER
         },
         "quantity": 2,
         "subtotal": 259.98
-      },
-      {
-        "product_id": 3,
-        "product_name": "Cotton T-Shirt",
-        "slug": "cotton-t-shirt",
-        "description": "Comfortable 100% cotton t-shirt",
-        "price": 29.99,
-        "sku": "TS-001",
-        "stock": 199,
-        "is_active": true,
-        "category": {
-          "id": 2,
-          "name": "Clothing",
-          "slug": "clothing"
-        },
-        "quantity": 1,
-        "subtotal": 29.99
       }
     ],
-    "total": 289.97,
-    "item_count": 3
+    "total": 259.98,
+    "item_count": 2,
+    "is_guest": true
   }
 }
 ```
 
-### Cart Summary Response (GET /api/cart/summary)
+### Cart Summary Response
 ```json
 {
   "success": true,
   "data": {
-    "subtotal": 289.97,
-    "tax": 28.99,
+    "subtotal": 259.98,
+    "tax": 26.00,
     "shipping": 10.00,
-    "total": 328.96,
-    "item_count": 3
+    "total": 295.98,
+    "item_count": 2
   }
 }
 ```
 
-### Order Creation Response
-```json
-{
-  "id": 1,
-  "tracking_number": "ORD-2024-001",
-  "status": "pending",
-  "payment_status": "pending",
-  "subtotal": 289.97,
-  "tax": 28.99,
-  "shipping_cost": 10.00,
-  "total_amount": 328.96,
-  "shipping_address": {
-    "street": "123 Main St",
-    "city": "Cairo",
-    "state": "Cairo",
-    "postal_code": "12345",
-    "country": "Egypt"
-  },
-  "items": [
-    {
-      "id": 1,
-      "order_id": 1,
-      "product_id": 1,
-      "quantity": 2,
-      "unit_price": 129.99,
-      "subtotal": 259.98,
-      "product": {
-        "id": 1,
-        "name": "Wireless Headphones",
-        "slug": "wireless-headphones",
-        "description": "High-quality wireless headphones with noise cancellation",
-        "price": 129.99,
-        "sku": "WH-001",
-        "stock": 48,
-        "is_active": true,
-        "category": {
-          "id": 1,
-          "name": "Electronics",
-          "slug": "electronics"
-        }
-      }
-    },
-    {
-      "id": 2,
-      "order_id": 1,
-      "product_id": 3,
-      "quantity": 1,
-      "unit_price": 29.99,
-      "subtotal": 29.99,
-      "product": {
-        "id": 3,
-        "name": "Cotton T-Shirt",
-        "slug": "cotton-t-shirt",
-        "description": "Comfortable 100% cotton t-shirt",
-        "price": 29.99,
-        "sku": "TS-001",
-        "stock": 199,
-        "is_active": true,
-        "category": {
-          "id": 2,
-          "name": "Clothing",
-          "slug": "clothing"
-        }
-      }
-    }
-  ],
-  "created_at": "2024-01-07T10:00:00Z"
-}
-```
-
-### Payment Process Response
+### Cart Count Response
 ```json
 {
   "success": true,
-  "payment_url": "https://paymob.com/pay/123456",
-  "transaction_id": "txn_123456"
+  "data": {
+    "item_count": 2,
+    "is_empty": false,
+    "is_guest": true
+  }
 }
 ```
 
-## Testing Flow Checklist
-1. ✅ Add items to cart
-2. ✅ Verify cart summary
-3. ✅ Create order
-4. ✅ Verify order details
-5. ✅ Process payment
-6. ✅ Handle payment callback
-7. ✅ Check order status updated
-8. ✅ Create shipment (if applicable)
-9. ✅ Track shipment status
+### Checkout Initiation Response
+```json
+{
+  "success": true,
+  "message": "Checkout initiated successfully",
+  "data": {
+    "payment_key": "pay_123456789",
+    "iframe_url": "https://accept.paymob.com/api/acceptance/iframes/123456?payment_token=pay_123456789",
+    "temp_order_id": "TEMP-123456789",
+    "tracking_number": "BOSTA123456789"
+  }
+}
+```
+
+### Final Order Creation Response (After Payment Success)
+```json
+{
+  "success": true,
+  "message": "Order created successfully",
+  "data": {
+    "id": 1,
+    "order_number": "ORD-2026-001",
+    "tracking_number": "BOSTA123456789",
+    "status": "processing",
+    "payment_status": "paid",
+    "payment_id": "txn_123456789",
+    "shipment_status": "created",
+    "subtotal": 259.98,
+    "tax": 26.00,
+    "shipping_cost": 10.00,
+    "total_amount": 295.98,
+    "shipping_address": {
+      "street": "123 Main St",
+      "city": "Cairo",
+      "zip_code": "12345",
+      "country": "Egypt",
+      "building_number": "123",
+      "floor": "4",
+      "apartment": "4B",
+      "zone": "Nasr City"
+    },
+    "billing_address": {
+      "first_name": "John",
+      "last_name": "Doe",
+      "email": "john@example.com",
+      "phone": "+201234567890",
+      "street": "123 Main St",
+      "city": "Cairo",
+      "zip_code": "12345",
+      "country": "Egypt"
+    },
+    "items": [
+      {
+        "id": 1,
+        "order_id": 1,
+        "product_id": 1,
+        "quantity": 2,
+        "unit_price": 129.99,
+        "subtotal": 259.98,
+        "product": {
+          "id": 1,
+          "name": "Wireless Headphones",
+          "slug": "wireless-headphones",
+          "price": 129.99,
+          "sku": "WH-001",
+          "stock": 46,
+          "is_active": true,
+          "category": {
+            "id": 1,
+            "name": "Electronics",
+            "slug": "electronics"
+          }
+        }
+      }
+    ],
+    "created_at": "2026-01-08T12:00:00Z"
+  }
+}
+```
+
+## 🧪 Testing Flow Checklist
+
+### Guest Flow (No Authentication Required)
+1. ✅ Add items to cart (session-based)
+2. ✅ View cart and summary
+3. ✅ Initiate checkout with shipping/billing info (creates shipment + payment)
+4. ✅ System creates shipment via Bosta API
+5. ✅ System initiates payment via Paymob
+6. ✅ User completes payment via iframe
+7. ✅ Paymob sends webhook on payment success
+8. ✅ Checkout complete endpoint creates order
+9. ✅ Cart is cleared, session data removed
+10. ✅ Order created with payment_id and tracking_number
+
+### Authenticated User Flow
+1. ✅ Login/Register with automatic cart migration
+2. ✅ Add items to cart (database-based)
+3. ✅ Follow same checkout flow as guest
+4. ✅ Order associated with user account
+
+### Order Management
+1. ✅ Orders viewable in user account
+2. ✅ Shipment tracking via Bosta
+3. ✅ Payment status tracking
+4. ✅ Order status updates
+5. ✅ Order cancellation (if applicable)
+
+### Admin Operations
+1. ✅ Product CRUD operations
+2. ✅ Low stock monitoring
+3. ✅ Order statistics and analytics
+4. ✅ Shipment management
+
+## 🔧 Error Scenarios
+
+### Cart Errors
+- `422` - Product not available/insufficient stock
+- `404` - Product not found
+
+### Checkout Errors
+- `422` - Cart empty, validation failed, shipment/payment failed
+- `500` - Server error during checkout process
+
+### Payment Errors
+- `422` - Payment initiation failed
+- `500` - Webhook processing error
+
+## 💡 Key Features
+
+✅ **Guest Checkout** - No authentication required for cart and checkout
+✅ **Session Cart** - Cart stored in session for guests
+✅ **Cart Migration** - Automatic migration to database on login
+✅ **Shipment First** - Shipment created before payment
+✅ **Payment Gateway** - Paymob integration with webhooks
+✅ **Order Creation** - Only after successful payment AND shipment
+✅ **Stock Management** - Automatic stock reduction/restoration
+✅ **Error Handling** - Comprehensive error responses
+✅ **Webhook Support** - Automated payment/shipment updates

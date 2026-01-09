@@ -55,109 +55,16 @@ class OrderController extends Controller
     }
 
     /**
-     * Create a new order from cart items
+     * Create a new order from cart items (DEPRECATED - use checkout flow)
+     * Orders are now created only through checkout process after successful payment and shipment
      */
     public function store(Request $request): JsonResponse
     {
-        $validated = $request->validate([
-            'items' => 'sometimes|array|min:1',
-            'items.*.product_id' => 'required_with:items|exists:products,id',
-            'items.*.quantity' => 'required_with:items|integer|min:1',
-            'shipping_address' => 'required|array',
-            'shipping_address.street' => 'required|string',
-            'shipping_address.city' => 'required|string',
-            'shipping_address.zip_code' => 'required|string',
-            'shipping_address.country' => 'required|string',
-            'notes' => 'nullable|string',
-        ]);
-
-        try {
-            DB::beginTransaction();
-
-            $user = $request->user();
-
-            // Get items from request or from user's cart
-            if (isset($validated['items'])) {
-                $cartItems = collect($validated['items'])->map(function ($item) {
-                    return (object) [
-                        'product_id' => $item['product_id'],
-                        'quantity' => $item['quantity'],
-                    ];
-                });
-            } else {
-                $cartItems = $user->carts()->with('product')->get()->map(function ($cartItem) {
-                    return (object) [
-                        'product_id' => $cartItem->product_id,
-                        'quantity' => $cartItem->quantity,
-                    ];
-                });
-
-                if ($cartItems->isEmpty()) {
-                    return response()->json([
-                        'success' => false,
-                        'message' => 'Cart is empty',
-                    ], 422);
-                }
-            }
-
-            // Create order
-            $order = Order::create([
-                'order_number' => Order::generateOrderNumber(),
-                'user_id' => $user->id,
-                'status' => Order::STATUS_PENDING,
-                'payment_status' => Order::PAYMENT_STATUS_PENDING,
-                'shipping_address' => $validated['shipping_address'],
-                'notes' => $validated['notes'] ?? null,
-            ]);
-
-            // Add items to order
-            foreach ($cartItems as $item) {
-                $product = Product::findOrFail($item->product_id);
-
-                // Check stock
-                if (!$product->hasStock($item->quantity)) {
-                    DB::rollBack();
-                    return response()->json([
-                        'success' => false,
-                        'message' => "Product {$product->name} has insufficient stock",
-                    ], 422);
-                }
-
-                // Create order item
-                OrderItem::create([
-                    'order_id' => $order->id,
-                    'product_id' => $product->id,
-                    'quantity' => $item->quantity,
-                    'unit_price' => $product->price,
-                    'subtotal' => round($product->price * $item->quantity, 2),
-                ]);
-
-                // Reduce product stock
-                $product->reduceStock($item->quantity);
-            }
-
-            // Clear cart if items were taken from cart
-            if (!isset($validated['items'])) {
-                $user->carts()->delete();
-            }
-
-            // Calculate totals
-            $order->calculateTotal();
-
-            DB::commit();
-
-            return response()->json([
-                'success' => true,
-                'message' => 'Order created successfully',
-                'data' => $order->load('items.product'),
-            ], 201);
-        } catch (\Exception $e) {
-            DB::rollBack();
-            return response()->json([
-                'success' => false,
-                'message' => 'Failed to create order: ' . $e->getMessage(),
-            ], 500);
-        }
+        return response()->json([
+            'success' => false,
+            'message' => 'Direct order creation is deprecated. Please use the checkout flow: POST /checkout/initiate',
+            'checkout_url' => '/checkout/initiate',
+        ], 422);
     }
 
     /**

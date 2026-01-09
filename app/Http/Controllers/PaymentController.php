@@ -3,7 +3,12 @@
 namespace App\Http\Controllers;
 
 use App\Interfaces\PaymentGatewayInterface;
+use App\Services\SessionCartService;
+use App\Services\OrderService;
+use App\Services\BostaApiService;
 use Illuminate\Http\Request;
+use Illuminate\Http\JsonResponse;
+use Illuminate\Support\Facades\Log;
 
 class PaymentController extends Controller
 {
@@ -45,9 +50,63 @@ class PaymentController extends Controller
     {
         $response = $this->paymentGateway->callBack($request);
 
-        return redirect()->route(
-            $response ? 'payment.success' : 'payment.failed'
-        );
+        // For new checkout flow, redirect to completion
+        if ($response) {
+            return redirect()->route('checkout.complete');
+        } else {
+            return redirect()->route('checkout.fail');
+        }
+    }
+
+    /**
+     * Handle payment webhook from Paymob
+     */
+    public function webhook(Request $request): JsonResponse
+    {
+        try {
+            $payload = $request->all();
+            
+            // Log webhook for debugging
+            Log::info('Paymob webhook received', $payload);
+
+            // Extract payment information
+            $transactionId = $payload['obj']['id'] ?? null;
+            $success = $payload['obj']['success'] ?? false;
+            $orderId = $payload['obj']['order']['id'] ?? null;
+            $amount = $payload['obj']['amount_cents'] ?? 0;
+
+            if ($success && $transactionId && $orderId) {
+                // Call checkout completion
+                $checkoutController = app(CheckoutController::class);
+
+                $completeRequest = new Request([
+                    'success' => true,
+                    'payment_id' => $transactionId,
+                    'order_id' => $orderId,
+                    'amount' => $amount / 100, // Convert back to currency
+                ]);
+
+                return $checkoutController->complete($completeRequest);
+            } else {
+                // Payment failed
+                $checkoutController = app(CheckoutController::class);
+
+                $failRequest = new Request([
+                    'success' => false,
+                    'error' => 'Payment failed',
+                    'payment_id' => $transactionId,
+                ]);
+
+                return $checkoutController->fail($failRequest);
+            }
+
+        } catch (\Exception $e) {
+            Log::error('Paymob webhook error: ' . $e->getMessage());
+            return response()->json([
+                'success' => false,
+                'message' => 'Webhook processing failed',
+            ], 500);
+        }
     }
 
     /**
