@@ -70,7 +70,7 @@ class CartService
     /**
      * Get cart summary with totals
      */
-    public function getSummary(array $cart): array
+    public function getSummary(array $cart, string $shippingCity = null): array
     {
         $subtotal = 0;
         $itemCount = 0;
@@ -84,7 +84,11 @@ class CartService
         }
 
         $tax = round($subtotal * 0.1, 2);
-        $shipping = $subtotal > 100 ? 0 : 10;
+
+        // Use Bosta pricing service for shipping calculation
+        $bostaPricing = app(\App\Services\BostaPricingService::class);
+        $shipping = $bostaPricing->calculateShippingCost($shippingCity ?: 'cairo', null, $subtotal);
+
         $total = $subtotal + $tax + $shipping;
 
         return [

@@ -57,10 +57,10 @@ Route::post('/login', function (Request $request, SessionCartService $cartServic
     }
 
     $user = Auth::user();
-    
+
     // Migrate guest cart to user cart
     $cartService->migrateSessionToDatabase();
-    
+
     $token = $user->createToken('API Token')->plainTextToken;
 
     return response()->json([
@@ -96,13 +96,16 @@ Route::prefix('cart')->group(function () {
 });
 
 // Checkout routes - public for guest checkout, but can be used by authenticated users too
-Route::prefix('checkout')->group(function () {
-    Route::post('/initiate', [CheckoutController::class, 'initiate']);
-    Route::post('/complete', [CheckoutController::class, 'complete']);
-    Route::post('/fail', [CheckoutController::class, 'fail']);
-    Route::get('/status', [CheckoutController::class, 'status']);
-});
+    Route::prefix('checkout')->group(function () {
+        Route::post('/initiate', [CheckoutController::class, 'initiate']);
+        Route::match(['GET', 'POST'], '/complete', [CheckoutController::class, 'complete'])->name('checkout.complete');
+        Route::match(['GET', 'POST'], '/fail', [CheckoutController::class, 'fail'])->name('checkout.fail');
+        Route::get('/status', [CheckoutController::class, 'status']);
+        Route::post('/test-complete', [CheckoutController::class, 'testComplete']);
+    });
 
+
+    
 // Protected routes - require authentication
 Route::middleware('auth:sanctum')->group(function () {
 
@@ -144,4 +147,5 @@ Route::get('/shipments/{tracking_number}', [ShipmentController::class, 'track'])
 Route::put('/shipments/{tracking_number}', [ShipmentController::class, 'update']);
 Route::post('/pickups', [ShipmentController::class, 'createPickup']);
 Route::post('/webhook/bosta', [App\Http\Controllers\BostaWebhookController::class, 'handle']);
+Route::post('/test/webhook/bosta', [App\Http\Controllers\BostaWebhookController::class, 'testWebhook']);
 

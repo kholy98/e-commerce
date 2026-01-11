@@ -227,7 +227,7 @@ class SessionCartService
     /**
      * Get cart summary with totals
      */
-    public function getSummary(): array
+    public function getSummary(string $shippingCity = null): array
     {
         $cartItems = $this->getCartItems();
         $subtotal = 0;
@@ -242,7 +242,12 @@ class SessionCartService
         }
 
         $tax = round($subtotal * 0.1, 2);
-        $shipping = $subtotal > 100 ? 0 : 10;
+
+
+        // Use Bosta pricing service for shipping calculation
+        $bostaPricing = app(\App\Services\BostaPricingService::class);
+        $shipping = $bostaPricing->calculateShippingCost($shippingCity ?: 'cairo', 'small_medium', $subtotal);
+
         $total = $subtotal + $tax + $shipping;
 
         return [
@@ -299,7 +304,7 @@ class SessionCartService
         }
 
         $sessionCart = Session::get(self::SESSION_KEY, []);
-        
+
         if (empty($sessionCart)) {
             return;
         }

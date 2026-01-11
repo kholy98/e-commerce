@@ -187,10 +187,50 @@ class CartTest extends TestCase
                 'data' => [
                     'subtotal' => 200.0, // 100 * 2
                     'tax' => 20.0, // 10% of 200
-                    'shipping' => 0.0, // Since subtotal > 100
-                    'total' => 220.0, // 200 + 20 + 0
+                    'shipping' => 80.0, // Bosta shipping (Cairo)
+                    'total' => 300.0, // 200 + 20 + 80
                     'item_count' => 2,
                 ]
             ]);
+    }
+
+    public function test_checkout_initiation_logs()
+    {
+        // Add item to cart
+        $this->user->carts()->create([
+            'product_id' => $this->product->id,
+            'quantity' => 1,
+        ]);
+
+        // Attempt checkout initiation
+        $response = $this->actingAs($this->user, 'sanctum')
+            ->postJson('/api/checkout/initiate', [
+                'shipping_address' => [
+                    'street' => '123 Main St',
+                    'city' => 'Cairo',
+                    'zip_code' => '12345',
+                    'country' => 'Egypt',
+                    'building_number' => '123',
+                    'floor' => '4',
+                    'apartment' => '4B',
+                    'zone' => 'Nasr City'
+                ],
+                'billing_address' => [
+                    'first_name' => 'John',
+                    'last_name' => 'Doe',
+                    'email' => 'john@example.com',
+                    'phone' => '+201234567890',
+                    'street' => '123 Main St',
+                    'city' => 'Cairo',
+                    'zip_code' => '12345',
+                    'country' => 'Egypt',
+                    'floor' => '4',
+                    'apartment' => '4B'
+                ],
+                'notes' => 'Test order'
+            ]);
+
+        // We expect this to fail due to missing Paymob config, but it will generate logs
+        $response->assertStatus(422); // Validation or API error
     }
 }

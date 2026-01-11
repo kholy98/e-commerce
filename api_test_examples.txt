@@ -203,11 +203,15 @@ curl -X POST BASE_URL/checkout/initiate \
       "street": "123 Main St",
       "city": "Cairo",
       "zip_code": "12345",
-      "country": "Egypt"
+      "country": "Egypt",
+      "floor": "4",
+      "apartment": "4B"
     },
     "notes": "Please handle with care"
   }'
 ```
+
+**Note:** This endpoint now correctly structures the Bosta API payload with `receiver` and `dropOffAddress` objects, fixing the "receiver is required" error. Checkout data is stored in database for reliable webhook processing.
 
 **Expected Response:**
 ```json
@@ -218,7 +222,14 @@ curl -X POST BASE_URL/checkout/initiate \
     "payment_key": "pay_123456789",
     "iframe_url": "https://accept.paymob.com/api/acceptance/iframes/123456?payment_token=pay_123456789",
     "temp_order_id": "TEMP-123456789",
-    "tracking_number": "BOSTA123456789"
+    "tracking_number": "BOSTA123456789",
+    "cost_breakdown": {
+      "subtotal": 259.98,
+      "tax": 26.00,
+      "shipping": 80.00,
+      "total": 365.98,
+      "item_count": 3
+    }
   }
 }
 ```
@@ -230,22 +241,62 @@ curl -X GET BASE_URL/checkout/status
 
 ### Complete Checkout (Called after successful payment)
 ```bash
+# API call (POST) - used by webhooks
 curl -X POST BASE_URL/checkout/complete \
   -H "Content-Type: application/json" \
   -d '{
     "success": true,
     "payment_id": "txn_123456789"
   }'
+
+# OR web redirect (GET) - used by PaymentController after successful payment
+curl -X GET BASE_URL/checkout/complete
 ```
+
+**API Response:**
+```json
+{
+  "success": true,
+  "message": "Order created successfully",
+  "data": {
+    "id": 1,
+    "order_number": "ORD-2026-001",
+    "tracking_number": "BOSTA123456789",
+    "status": "processing",
+    "payment_status": "paid",
+    "subtotal": 259.98,
+    "tax": 26.00,
+    "shipping_cost": 80.00,
+    "total_amount": 365.98
+  }
+}
+```
+
+**Web redirect goes to:** `/payment-success` page with order data
 
 ### Handle Checkout Failure
 ```bash
+# API call (POST)
 curl -X POST BASE_URL/checkout/fail \
   -H "Content-Type: application/json" \
   -d '{
     "error": "Payment failed"
   }'
+
+# OR web redirect (GET) - used by PaymentController
+curl -X GET BASE_URL/checkout/fail
 ```
+
+**API Response:**
+```json
+{
+  "success": false,
+  "message": "Checkout failed",
+  "error": "Payment failed"
+}
+```
+
+**Web redirect goes to:** `/payment-failed` page
 
 ## 5. 🎯 Payment Completion
 
@@ -261,11 +312,16 @@ curl -X POST BASE_URL/payment/process \
       "first_name": "John",
       "last_name": "Doe",
       "email": "john@example.com",
-      "phone": "+201234567890",
+      "phone_number": "+201234567890",
       "street": "123 Main St",
+      "building": "123 Main St",
+      "floor": "4",
+      "apartment": "4B",
       "city": "Cairo",
       "country": "Egypt",
-      "postal_code": "12345"
+      "postal_code": "12345",
+      "state": "NA",
+      "shipping_method": "NA"
     }
   }'
 ```
@@ -473,14 +529,20 @@ curl -X POST BASE_URL/webhook/bosta \
 {
   "success": true,
   "data": {
-    "subtotal": 259.98,
-    "tax": 26.00,
-    "shipping": 10.00,
-    "total": 295.98,
+    "subtotal": 200.0, // 100 * 2
+    "tax": 20.0, // 10% of 200
+    "shipping": 80.0, // Bosta shipping (Cairo: 80 EGP for small package)
+    "total": 300.0, // 200 + 20 + 80
     "item_count": 2
   }
 }
 ```
+
+**Note:** Shipping costs now use Bosta pricing based on delivery zone (in EGP):
+- **Cairo**: 80 EGP for small packages
+- **Alexandria**: 85 EGP for small packages
+- **Upper Egypt**: 116 EGP for small packages
+- **Free shipping** for orders ≥ 5000 EGP
 
 ### Cart Count Response
 ```json
@@ -523,8 +585,8 @@ curl -X POST BASE_URL/webhook/bosta \
     "shipment_status": "created",
     "subtotal": 259.98,
     "tax": 26.00,
-    "shipping_cost": 10.00,
-    "total_amount": 295.98,
+    "shipping_cost": 80.00, // Bosta shipping cost (EGP)
+    "total_amount": 365.98,
     "shipping_address": {
       "street": "123 Main St",
       "city": "Cairo",
@@ -630,5 +692,9 @@ curl -X POST BASE_URL/webhook/bosta \
 ✅ **Payment Gateway** - Paymob integration with webhooks
 ✅ **Order Creation** - Only after successful payment AND shipment
 ✅ **Stock Management** - Automatic stock reduction/restoration
+✅ **Bosta Shipping** - Dynamic pricing based on delivery zone and package size
+✅ **Free Shipping** - Orders ≥ 5000 EGP get free delivery
+✅ **Database Storage** - Pending checkout data stored in database for webhook reliability
+✅ **Auto Cleanup** - Expired pending checkouts removed hourly
 ✅ **Error Handling** - Comprehensive error responses
 ✅ **Webhook Support** - Automated payment/shipment updates

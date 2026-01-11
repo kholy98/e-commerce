@@ -54,4 +54,13 @@ class BostaApiService
     {
         return $this->makeRequest('post', '/pickups', $data);
     }
+
+    // Cancel delivery
+    public function cancelDelivery($trackingNumber)
+    {
+        // According to Bosta API, you can update the delivery state to cancelled
+        return $this->updateDelivery($trackingNumber, [
+            'state' => 49 // cancelled state
+        ]);
+    }
 }

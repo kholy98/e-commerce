@@ -198,7 +198,14 @@ Expected Response:
     "payment_key": "pay_123456",
     "iframe_url": "https://accept.paymob.com/api/acceptance/iframes/123456?payment_token=pay_123456",
     "temp_order_id": "TEMP-123456789",
-    "tracking_number": "BOSTA123456789"
+    "tracking_number": "BOSTA123456789",
+    "cost_breakdown": {
+      "subtotal": 259.98,
+      "tax": 26.00,
+      "shipping": 80.00,
+      "total": 365.98,
+      "item_count": 3
+    }
   }
 }
 ```

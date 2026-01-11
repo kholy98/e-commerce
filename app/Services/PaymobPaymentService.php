@@ -26,7 +26,7 @@ class PaymobPaymentService extends BasePaymentService implements PaymentGatewayI
         ];
 
         // Iframe integration IDs
-        $this->integrations_id = env("PAYMOB_INTEGRATIONS_ID", [5425213]);
+        $this->integrations_id = env("PAYMOB_INTEGRATIONS_ID", [985473]);
     }
 
     /**
@@ -34,7 +34,9 @@ class PaymobPaymentService extends BasePaymentService implements PaymentGatewayI
      */
     protected function generateToken(): string
     {
+        \Log::info('Paymob: Generating auth token', ['api_key' => substr($this->api_key, 0, 10) . '...']);
         $response = $this->buildRequest('POST', '/api/auth/tokens', ['api_key' => $this->api_key]);
+        \Log::info('Paymob: Auth token response', ['response' => $response->getData(true)]);
         return $response->getData(true)['data']['token'];
     }
 
@@ -51,7 +53,14 @@ class PaymobPaymentService extends BasePaymentService implements PaymentGatewayI
             ? json_decode($this->integrations_id)
             : $this->integrations_id;
 
+        \Log::info('Paymob: Creating order', [
+            'orderData' => $orderData,
+            'auth_token' => substr($auth_token, 0, 20) . '...'
+        ]);
+
         $response = $this->buildRequest('POST', '/api/ecommerce/orders', $orderData);
+
+        \Log::info('Paymob: Order creation response', ['response' => $response->getData(true)]);
 
         if (!$response->getData(true)['success']) {
             return [
@@ -81,7 +90,7 @@ class PaymobPaymentService extends BasePaymentService implements PaymentGatewayI
                 $paymentData,
                 'json'
             );
-            
+
 
             if (!$response->getData(true)['success']) {
                 return [
@@ -164,11 +173,32 @@ class PaymobPaymentService extends BasePaymentService implements PaymentGatewayI
     /**
      * Handle payment callback
      */
-    public function callBack(Request $request): bool
+    public function callBack(Request $request): array
     {
         $response = $request->all();
         Storage::put('paymob_response.json', json_encode($request->all()));
 
-        return isset($response['success']) && $response['success'] === 'true';
+        // Paymob sends different formats for webhook vs callback
+        // Webhook: nested under 'obj', Callback: direct parameters
+        $obj = $response['obj'] ?? $response;
+
+        $success = isset($obj['success']) && ($obj['success'] === true || $obj['success'] === 'true');
+        $orderId = $obj['order']['id'] ?? $obj['order'] ?? null;
+        $paymentId = $obj['id'] ?? null; // Transaction ID
+
+        \Log::info('Paymob callback parsed', [
+            'original_response' => $response,
+            'obj' => $obj,
+            'success' => $success,
+            'order_id' => $orderId,
+            'payment_id' => $paymentId
+        ]);
+
+        return [
+            'success' => $success,
+            'order_id' => $orderId,
+            'payment_id' => $paymentId,
+            'response' => $response
+        ];
     }
 }

@@ -66,7 +66,7 @@ class BostaWebhookController extends Controller
 
         // Prepare update data
         $updateData = [
-            'status' => $status,
+            'shipment_status' => $status,
             'state_code' => $stateCode,
         ];
 
@@ -108,7 +108,7 @@ class BostaWebhookController extends Controller
             $order->update($updateData);
             Log::info('Order updated via webhook', [
                 'tracking_number' => $trackingNumber,
-                'new_status' => $status,
+                'new_shipment_status' => $status,
                 'state_code' => $stateCode,
             ]);
         } else {
@@ -118,5 +118,42 @@ class BostaWebhookController extends Controller
         }
 
         return response()->json(['status' => 'ok']);
+    }
+
+    /**
+     * Test webhook endpoint for development
+     */
+    public function testWebhook(Request $request)
+    {
+        // Create a test order with tracking number for testing
+        $testOrder = Order::firstOrCreate(
+            ['tracking_number' => 'TEST123456'],
+            [
+                'order_number' => 'TEST-ORDER-001',
+                'user_id' => 1,
+                'status' => 'processing',
+                'payment_status' => 'paid',
+                'total_amount' => 100.00,
+            ]
+        );
+
+        // Test webhook payload
+        $testPayload = [
+            'trackingNumber' => 'TEST123456',
+            'state' => 30, // in_transit
+            '_id' => 'test_bosta_id',
+            'type' => 'SEND',
+            'cod' => 0,
+            'timeStamp' => time() * 1000,
+            'isConfirmedDelivery' => false,
+            'deliveryPromiseDate' => date('Y-m-d', strtotime('+3 days')),
+        ];
+
+        // Call the handle method with test data
+        $testRequest = new Request($testPayload);
+
+        Log::info('Testing Bosta webhook', ['payload' => $testPayload]);
+
+        return $this->handle($testRequest);
     }
 }

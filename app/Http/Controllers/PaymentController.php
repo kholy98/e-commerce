@@ -46,16 +46,60 @@ class PaymentController extends Controller
     /**
      * Handle payment callback from Paymob
      */
-    public function callBack(Request $request): \Illuminate\Http\RedirectResponse
+    public function callBack(Request $request): \Illuminate\Http\JsonResponse
     {
-        $response = $this->paymentGateway->callBack($request);
+        \Log::info('Payment callback received', [
+            'all_params' => $request->all(),
+            'method' => $request->method(),
+            'headers' => $request->headers->all()
+        ]);
 
-        // For new checkout flow, redirect to completion
-        if ($response) {
-            return redirect()->route('checkout.complete');
-        } else {
-            return redirect()->route('checkout.fail');
+        $callbackData = $this->paymentGateway->callBack($request);
+
+        // Get tracking number from pending checkout if available
+        $trackingNumber = null;
+        if ($callbackData['order_id']) {
+            $pendingCheckout = \App\Models\PendingCheckout::where('temp_order_id', $callbackData['order_id'])
+                ->active()
+                ->first();
+
+            if ($pendingCheckout && isset($pendingCheckout->shipment_data['tracking_number'])) {
+                $trackingNumber = $pendingCheckout->shipment_data['tracking_number'];
+            }
         }
+
+        if (!$callbackData['success'] && $trackingNumber) {
+            // Cancel shipment if payment failed
+            try {
+                $bostaService = app(\App\Services\BostaApiService::class);
+                $cancelResult = $bostaService->cancelDelivery($trackingNumber);
+
+                \Log::info('Shipment cancelled due to payment failure', [
+                    'tracking_number' => $trackingNumber,
+                    'cancel_result' => $cancelResult
+                ]);
+            } catch (\Exception $e) {
+                \Log::error('Failed to cancel shipment', [
+                    'tracking_number' => $trackingNumber,
+                    'error' => $e->getMessage()
+                ]);
+            }
+        }
+
+        \Log::info('Payment callback processed', [
+            'success' => $callbackData['success'],
+            'order_id' => $callbackData['order_id'],
+            'payment_id' => $callbackData['payment_id'],
+            'tracking_number' => $trackingNumber
+        ]);
+
+        return response()->json([
+            'success' => $callbackData['success'],
+            'payment_status' => $callbackData['success'] ? 'paid' : 'failed',
+            'order_id' => $callbackData['order_id'],
+            'payment_id' => $callbackData['payment_id'],
+            'tracking_number' => $trackingNumber
+        ]);
     }
 
     /**
@@ -74,6 +118,18 @@ class PaymentController extends Controller
             $success = $payload['obj']['success'] ?? false;
             $orderId = $payload['obj']['order']['id'] ?? null;
             $amount = $payload['obj']['amount_cents'] ?? 0;
+
+            \Log::info('Paymob webhook data extraction', [
+                'transaction_id' => $transactionId,
+                'success' => $success,
+                'order_id' => $orderId,
+                'order_id_type' => gettype($orderId),
+                'amount' => $amount,
+                'payload_keys' => array_keys($payload),
+                'obj_keys' => isset($payload['obj']) ? array_keys($payload['obj']) : [],
+                'order_keys' => isset($payload['obj']['order']) ? array_keys($payload['obj']['order']) : [],
+                'full_order_data' => $payload['obj']['order'] ?? null
+            ]);
 
             if ($success && $transactionId && $orderId) {
                 // Call checkout completion

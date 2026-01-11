@@ -11,6 +11,7 @@ class Order extends Model
     protected $fillable = [
         'order_number',
         'tracking_number',
+        'shipment_status',
         'user_id',
         'status',
         'payment_status',
@@ -19,7 +20,20 @@ class Order extends Model
         'shipping_cost',
         'total_amount',
         'shipping_address',
+        'billing_address',
         'notes',
+        'payment_id',
+        'bosta_id',
+        'state_code',
+        'type',
+        'cod',
+        'state_changed_at',
+        'is_confirmed_delivery',
+        'delivery_promise_date',
+        'exception_reason',
+        'exception_code',
+        'business_reference',
+        'number_of_attempts',
     ];
 
     protected $casts = [
@@ -28,6 +42,7 @@ class Order extends Model
         'shipping_cost' => 'decimal:2',
         'total_amount' => 'decimal:2',
         'shipping_address' => 'array',
+        'billing_address' => 'array',
     ];
 
     const STATUS_PENDING = 'pending';

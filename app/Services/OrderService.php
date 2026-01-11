@@ -107,26 +107,49 @@ class OrderService
     public function createOrderAfterPayment(array $orderData, array $shipmentData, string $paymentId): Order
     {
         return DB::transaction(function () use ($orderData, $shipmentData, $paymentId) {
+            // Handle guest checkout - create temporary user if needed
+            $userId = $orderData['user_id'];
+            if (!$userId) {
+                // Create a guest user for this order
+                $guestUser = \App\Models\User::firstOrCreate(
+                    ['email' => 'guest_' . time() . '@example.com'],
+                    [
+                        'name' => 'Guest User',
+                        'password' => bcrypt('guest_password'),
+                    ]
+                );
+                $userId = $guestUser->id;
+            }
+
             // Create order
             $order = Order::create([
                 'order_number' => Order::generateOrderNumber(),
-                'user_id' => $orderData['user_id'],
-                'status' => Order::STATUS_PROCESSING, // Payment and shipment successful
+                'user_id' => $userId,
+                'status' => $orderData['status'] ?? Order::STATUS_PROCESSING,
                 'payment_status' => Order::PAYMENT_STATUS_PAID,
                 'payment_id' => $paymentId,
-                'tracking_number' => $shipmentData['tracking_number'],
-                'shipment_status' => $shipmentData['status'],
-                'subtotal' => $orderData['subtotal'],
-                'tax' => $orderData['tax'],
-                'shipping_cost' => $orderData['shipping_cost'],
-                'total_amount' => $orderData['total_amount'],
-                'shipping_address' => $orderData['shipping_address'],
-                'billing_address' => $orderData['billing_address'],
-                'notes' => $orderData['notes'],
+                'tracking_number' => $shipmentData['tracking_number'] ?? null,
+                'shipment_status' => $shipmentData['status'] ?? 'pending',
+                'subtotal' => $orderData['subtotal'] ?? 0,
+                'tax' => $orderData['tax'] ?? 0,
+                'shipping_cost' => $orderData['shipping_cost'] ?? 0,
+                'total_amount' => $orderData['total_amount'] ?? 0,
+                'shipping_address' => $orderData['shipping_address'] ?? null,
+                'billing_address' => $orderData['billing_address'] ?? null,
+                'notes' => $orderData['notes'] ?? null,
             ]);
 
             // Create order items
-            foreach ($orderData['items'] as $productId => $quantity) {
+            foreach ($orderData['items'] as $key => $value) {
+                // Handle both formats: ['product_id' => quantity] or [['product_id' => 1, 'quantity' => 2], ...]
+                if (is_array($value) && isset($value['product_id'])) {
+                    $productId = $value['product_id'];
+                    $quantity = $value['quantity'];
+                } else {
+                    $productId = $key;
+                    $quantity = $value;
+                }
+
                 $product = Product::findOrFail($productId);
 
                 OrderItem::create([
