@@ -17,6 +17,7 @@ class OrderResource extends JsonResource
             'order_number' => $this->order_number,
             'user_id' => $this->user_id,
             'status' => $this->status,
+            'status_ar' => $this->status_ar,
             'payment_status' => $this->payment_status,
             'subtotal' => (float) $this->subtotal,
             'tax' => (float) $this->tax,
@@ -24,6 +25,7 @@ class OrderResource extends JsonResource
             'total_amount' => (float) $this->total_amount,
             'shipping_address' => $this->shipping_address,
             'notes' => $this->notes,
+            'notes_ar' => $this->notes_ar,
             'items' => OrderItemResource::collection($this->whenLoaded('items')),
             'user' => $this->whenLoaded('user', function () {
                 return [

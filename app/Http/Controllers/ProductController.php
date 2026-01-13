@@ -41,9 +41,52 @@ class ProductController extends Controller
 
         $products = $query->paginate($request->get('per_page', 15));
 
+        $enProducts = $products->getCollection()->map(function ($product) {
+            return [
+                'id' => $product->id,
+                'name' => $product->name,
+                'description' => $product->description,
+                'price' => (float) $product->price,
+                'cost' => (float) $product->cost,
+                'stock' => $product->stock,
+                'sku' => $product->sku,
+                'category_id' => $product->category_id,
+                'is_active' => $product->is_active,
+                'slug' => $product->slug,
+                'created_at' => $product->created_at,
+                'updated_at' => $product->updated_at,
+            ];
+        });
+
+        $arProducts = $products->getCollection()->map(function ($product) {
+            return [
+                'id' => $product->id,
+                'name' => $product->name_ar ?: $product->name,
+                'description' => $product->description_ar ?: $product->description,
+                'price' => (float) $product->price,
+                'cost' => (float) $product->cost,
+                'stock' => $product->stock,
+                'sku' => $product->sku,
+                'category_id' => $product->category_id,
+                'is_active' => $product->is_active,
+                'slug' => $product->slug,
+                'created_at' => $product->created_at,
+                'updated_at' => $product->updated_at,
+            ];
+        });
+
         return response()->json([
-            'success' => true,
-            'data' => $products,
+            'data' => [
+                'success' => true,
+                'en' => $enProducts,
+                'ar' => $arProducts,
+                'pagination' => [
+                    'current_page' => $products->currentPage(),
+                    'last_page' => $products->lastPage(),
+                    'per_page' => $products->perPage(),
+                    'total' => $products->total(),
+                ],
+            ],
         ]);
     }
 
@@ -72,7 +115,9 @@ class ProductController extends Controller
     {
         $validated = $request->validate([
             'name' => 'required|string|max:255',
+            'name_ar' => 'nullable|string|max:255',
             'description' => 'required|string',
+            'description_ar' => 'nullable|string',
             'price' => 'required|numeric|min:0.01',
             'cost' => 'nullable|numeric|min:0',
             'stock' => 'required|integer|min:0',
@@ -96,7 +141,9 @@ class ProductController extends Controller
     {
         $validated = $request->validate([
             'name' => 'sometimes|string|max:255',
+            'name_ar' => 'nullable|string|max:255',
             'description' => 'sometimes|string',
+            'description_ar' => 'nullable|string',
             'price' => 'sometimes|numeric|min:0.01',
             'cost' => 'sometimes|numeric|min:0',
             'stock' => 'sometimes|integer|min:0',
@@ -149,9 +196,38 @@ class ProductController extends Controller
     {
         $categories = Category::where('is_active', true)->get();
 
+        $enCategories = $categories->map(function ($category) {
+            return [
+                'id' => $category->id,
+                'name' => $category->name,
+                'description' => $category->description,
+                'slug' => $category->slug,
+                'is_active' => $category->is_active,
+                'sort_order' => $category->sort_order,
+                'created_at' => $category->created_at,
+                'updated_at' => $category->updated_at,
+            ];
+        });
+
+        $arCategories = $categories->map(function ($category) {
+            return [
+                'id' => $category->id,
+                'name' => $category->name_ar ?: $category->name,
+                'description' => $category->description_ar ?: $category->description,
+                'slug' => $category->slug,
+                'is_active' => $category->is_active,
+                'sort_order' => $category->sort_order,
+                'created_at' => $category->created_at,
+                'updated_at' => $category->updated_at,
+            ];
+        });
+
         return response()->json([
-            'success' => true,
-            'data' => $categories,
+            'data' => [
+                'success' => true,
+                'en' => $enCategories,
+                'ar' => $arCategories,
+            ],
         ]);
     }
 }

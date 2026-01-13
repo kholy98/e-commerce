@@ -33,9 +33,54 @@ class OrderController extends Controller
             ->latest()
             ->paginate($request->get('per_page', 15));
 
+        $enOrders = $orders->getCollection()->map(function ($order) {
+            return [
+                'id' => $order->id,
+                'order_number' => $order->order_number,
+                'user_id' => $order->user_id,
+                'status' => $order->status,
+                'payment_status' => $order->payment_status,
+                'subtotal' => (float) $order->subtotal,
+                'tax' => (float) $order->tax,
+                'shipping_cost' => (float) $order->shipping_cost,
+                'total_amount' => (float) $order->total_amount,
+                'shipping_address' => $order->shipping_address,
+                'notes' => $order->notes,
+                'created_at' => $order->created_at,
+                'updated_at' => $order->updated_at,
+            ];
+        });
+
+        $arOrders = $orders->getCollection()->map(function ($order) {
+            return [
+                'id' => $order->id,
+                'order_number' => $order->order_number,
+                'user_id' => $order->user_id,
+                'status' => $order->status_ar ?: $order->status,
+                'payment_status' => $order->payment_status,
+                'subtotal' => (float) $order->subtotal,
+                'tax' => (float) $order->tax,
+                'shipping_cost' => (float) $order->shipping_cost,
+                'total_amount' => (float) $order->total_amount,
+                'shipping_address' => $order->shipping_address,
+                'notes' => $order->notes_ar ?: $order->notes,
+                'created_at' => $order->created_at,
+                'updated_at' => $order->updated_at,
+            ];
+        });
+
         return response()->json([
-            'success' => true,
-            'data' => $orders,
+            'data' => [
+                'success' => true,
+                'en' => $enOrders,
+                'ar' => $arOrders,
+                'pagination' => [
+                    'current_page' => $orders->currentPage(),
+                    'last_page' => $orders->lastPage(),
+                    'per_page' => $orders->perPage(),
+                    'total' => $orders->total(),
+                ],
+            ],
         ]);
     }
 
@@ -74,6 +119,7 @@ class OrderController extends Controller
     {
         $validated = $request->validate([
             'status' => 'required|in:pending,processing,shipped,delivered,cancelled',
+            'status_ar' => 'nullable|string',
             'payment_status' => 'sometimes|in:pending,paid,failed,refunded',
         ]);
 
