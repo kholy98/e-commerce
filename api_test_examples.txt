@@ -656,6 +656,352 @@ curl -X POST BASE_URL/webhook/bosta \
 3. ✅ Follow same checkout flow as guest
 4. ✅ Order associated with user account
 
+## 🛒 Complete Flow: Add to Cart → Register/Login → Checkout → Order
+
+This section demonstrates the complete end-to-end flow starting from adding products to cart as a guest, then registering or logging in to save the cart data in the database, and completing the order.
+
+### Step 1: Browse Products (As Guest)
+```bash
+curl -X GET BASE_URL/products
+```
+
+### Step 2: Add Products to Cart (As Guest - Stored in Session)
+```bash
+# Add Wireless Headphones
+curl -X POST BASE_URL/cart/add \
+  -H "Content-Type: application/json" \
+  -d '{
+    "product_id": 1,
+    "quantity": 2
+  }'
+
+# Add Cotton T-Shirt
+curl -X POST BASE_URL/cart/add \
+  -H "Content-Type: application/json" \
+  -d '{
+    "product_id": 3,
+    "quantity": 1
+  }'
+```
+
+### Step 3: View Cart (As Guest)
+```bash
+curl -X GET BASE_URL/cart
+```
+
+**Expected Response:**
+```json
+{
+  "success": true,
+  "data": {
+    "items": [
+      {
+        "product_id": 1,
+        "product_name": "Wireless Headphones",
+        "price": 129.99,
+        "quantity": 2,
+        "subtotal": 259.98
+      },
+      {
+        "product_id": 3,
+        "product_name": "Cotton T-Shirt",
+        "price": 29.99,
+        "quantity": 1,
+        "subtotal": 29.99
+      }
+    ],
+    "total": 289.97,
+    "item_count": 3,
+    "is_guest": true
+  }
+}
+```
+
+### Step 4: Register New User (Cart will be automatically migrated to database)
+```bash
+curl -X POST BASE_URL/register \
+  -H "Content-Type: application/json" \
+  -d '{
+    "name": "Jane Smith",
+    "email": "jane.smith@example.com",
+    "password": "password123",
+    "password_confirmation": "password123"
+  }'
+```
+
+**Expected Response:**
+```json
+{
+  "user": {
+    "id": 5,
+    "name": "Jane Smith",
+    "email": "jane.smith@example.com",
+    "email_verified_at": null,
+    "created_at": "2026-01-12T10:00:00.000000Z",
+    "updated_at": "2026-01-12T10:00:00.000000Z"
+  },
+  "token": "YOUR_JWT_TOKEN_HERE"
+}
+```
+
+**Note:** Behind the scenes, the system automatically calls `SessionCartService->migrateSessionToDatabase()` to transfer all guest cart items to the user's database cart.
+
+### Step 5: View Cart After Registration (Now stored in database)
+```bash
+curl -X GET BASE_URL/cart \
+  -H "Authorization: Bearer YOUR_JWT_TOKEN"
+```
+
+**Expected Response:**
+```json
+{
+  "success": true,
+  "data": {
+    "items": [
+      {
+        "product_id": 1,
+        "product_name": "Wireless Headphones",
+        "price": 129.99,
+        "quantity": 2,
+        "subtotal": 259.98
+      },
+      {
+        "product_id": 3,
+        "product_name": "Cotton T-Shirt",
+        "price": 29.99,
+        "quantity": 1,
+        "subtotal": 29.99
+      }
+    ],
+    "total": 289.97,
+    "item_count": 3,
+    "is_guest": false
+  }
+}
+```
+
+### Step 6: Get Cart Summary
+```bash
+curl -X GET BASE_URL/cart/summary \
+  -H "Authorization: Bearer YOUR_JWT_TOKEN"
+```
+
+**Expected Response:**
+```json
+{
+  "success": true,
+  "data": {
+    "subtotal": 289.97,
+    "tax": 29.00,
+    "shipping": 80.00,
+    "total": 398.97,
+    "item_count": 3
+  }
+}
+```
+
+### Step 7: Initiate Checkout (Creates Shipment & Payment)
+```bash
+curl -X POST BASE_URL/checkout/initiate \
+  -H "Content-Type: application/json" \
+  -H "Authorization: Bearer YOUR_JWT_TOKEN" \
+  -d '{
+    "shipping_address": {
+      "street": "456 Oak Avenue",
+      "city": "Cairo",
+      "zip_code": "67890",
+      "country": "Egypt",
+      "building_number": "456",
+      "floor": "2",
+      "apartment": "2A",
+      "zone": "Zamalek"
+    },
+    "billing_address": {
+      "first_name": "Jane",
+      "last_name": "Smith",
+      "email": "jane.smith@example.com",
+      "phone": "+201987654321",
+      "street": "456 Oak Avenue",
+      "city": "Cairo",
+      "zip_code": "67890",
+      "country": "Egypt",
+      "floor": "2",
+      "apartment": "2A"
+    },
+    "notes": "Please deliver between 2-4 PM"
+  }'
+```
+
+**Expected Response:**
+```json
+{
+  "success": true,
+  "message": "Checkout initiated successfully",
+  "data": {
+    "payment_key": "pay_987654321",
+    "iframe_url": "https://accept.paymob.com/api/acceptance/iframes/123456?payment_token=pay_987654321",
+    "temp_order_id": "TEMP-987654321",
+    "tracking_number": "BOSTA987654321",
+    "cost_breakdown": {
+      "subtotal": 289.97,
+      "tax": 29.00,
+      "shipping": 80.00,
+      "total": 398.97,
+      "item_count": 3
+    }
+  }
+}
+```
+
+### Step 8: Complete Payment (Simulated - In real flow, user would complete payment via iframe)
+```bash
+# Simulate successful payment webhook
+curl -X POST BASE_URL/payment/webhook \
+  -H "Content-Type: application/json" \
+  -d '{
+    "obj": {
+      "id": "txn_987654321",
+      "success": true,
+      "order": {
+        "id": "TEMP-987654321"
+      },
+      "amount_cents": 39897
+    }
+  }'
+```
+
+### Step 9: Complete Checkout (Creates Final Order)
+```bash
+curl -X POST BASE_URL/checkout/complete \
+  -H "Content-Type: application/json" \
+  -d '{
+    "success": true,
+    "payment_id": "txn_987654321"
+  }'
+```
+
+**Expected Response:**
+```json
+{
+  "success": true,
+  "message": "Order created successfully",
+  "data": {
+    "id": 2,
+    "order_number": "ORD-2026-002",
+    "tracking_number": "BOSTA987654321",
+    "status": "processing",
+    "payment_status": "paid",
+    "payment_id": "txn_987654321",
+    "shipment_status": "created",
+    "subtotal": 289.97,
+    "tax": 29.00,
+    "shipping_cost": 80.00,
+    "total_amount": 398.97,
+    "user_id": 5,
+    "shipping_address": {
+      "street": "456 Oak Avenue",
+      "city": "Cairo",
+      "zip_code": "67890",
+      "country": "Egypt",
+      "building_number": "456",
+      "floor": "2",
+      "apartment": "2A",
+      "zone": "Zamalek"
+    },
+    "billing_address": {
+      "first_name": "Jane",
+      "last_name": "Smith",
+      "email": "jane.smith@example.com",
+      "phone": "+201987654321",
+      "street": "456 Oak Avenue",
+      "city": "Cairo",
+      "zip_code": "67890",
+      "country": "Egypt"
+    },
+    "items": [
+      {
+        "id": 3,
+        "order_id": 2,
+        "product_id": 1,
+        "quantity": 2,
+        "unit_price": 129.99,
+        "subtotal": 259.98,
+        "product": {
+          "id": 1,
+          "name": "Wireless Headphones",
+          "slug": "wireless-headphones",
+          "price": 129.99,
+          "sku": "WH-001",
+          "stock": 46,
+          "is_active": true
+        }
+      },
+      {
+        "id": 4,
+        "order_id": 2,
+        "product_id": 3,
+        "quantity": 1,
+        "unit_price": 29.99,
+        "subtotal": 29.99,
+        "product": {
+          "id": 3,
+          "name": "Cotton T-Shirt",
+          "slug": "cotton-t-shirt",
+          "price": 29.99,
+          "sku": "CT-001",
+          "stock": 98,
+          "is_active": true
+        }
+      }
+    ],
+    "created_at": "2026-01-12T12:00:00Z"
+  }
+}
+```
+
+### Step 10: View User's Orders
+```bash
+curl -X GET BASE_URL/orders \
+  -H "Authorization: Bearer YOUR_JWT_TOKEN"
+```
+
+**Expected Response:**
+```json
+{
+  "success": true,
+  "data": [
+    {
+      "id": 2,
+      "order_number": "ORD-2026-002",
+      "tracking_number": "BOSTA987654321",
+      "status": "processing",
+      "payment_status": "paid",
+      "total_amount": 398.97,
+      "created_at": "2026-01-12T12:00:00Z"
+    }
+  ]
+}
+```
+
+### Step 11: Track Shipment
+```bash
+curl -X GET BASE_URL/shipments/BOSTA987654321
+```
+
+## Flow Order Summary
+
+1. **Browse Products** - GET /products (as guest)
+2. **Add to Cart** - POST /cart/add (stored in session as guest)
+3. **Review Cart** - GET /cart (shows is_guest: true)
+4. **User Registration** - POST /register (automatically migrates session cart to database)
+5. **Cart Migration** - Session cart automatically transferred to user database cart
+6. **Review Cart Again** - GET /cart (now shows is_guest: false)
+7. **Initiate Checkout** - POST /checkout/initiate (creates shipment + payment)
+8. **Complete Payment** - User pays via Paymob iframe
+9. **Payment Webhook** - Paymob sends success webhook
+10. **Order Creation** - POST /checkout/complete creates final order
+11. **Order Management** - User can view/track orders
+
 ### Order Management
 1. ✅ Orders viewable in user account
 2. ✅ Shipment tracking via Bosta
@@ -683,6 +1029,172 @@ curl -X POST BASE_URL/webhook/bosta \
 - `422` - Payment initiation failed
 - `500` - Webhook processing error
 
+## 🧪 Payment Failure Flow with Shipment Termination
+
+This section demonstrates the complete payment failure scenario where a shipment is created but payment fails, triggering automatic shipment termination.
+
+### Step 1: Add Products to Cart
+```bash
+curl -X POST BASE_URL/cart/add \
+  -H "Content-Type: application/json" \
+  -d '{
+    "product_id": 1,
+    "quantity": 1
+  }'
+```
+
+### Step 2: Initiate Checkout (Creates Shipment & Payment)
+```bash
+curl -X POST BASE_URL/checkout/initiate \
+  -H "Content-Type: application/json" \
+  -d '{
+    "shipping_address": {
+      "street": "123 Test St",
+      "city": "Cairo",
+      "zip_code": "12345",
+      "country": "Egypt",
+      "building_number": "123",
+      "floor": "1",
+      "apartment": "1A",
+      "zone": "Nasr City"
+    },
+    "billing_address": {
+      "first_name": "Test",
+      "last_name": "User",
+      "email": "test@example.com",
+      "phone": "+201234567890",
+      "street": "123 Test St",
+      "city": "Cairo",
+      "zip_code": "12345",
+      "country": "Egypt",
+      "floor": "1",
+      "apartment": "1A"
+    },
+    "notes": "Test payment failure scenario"
+  }'
+```
+
+**Expected Response:**
+```json
+{
+  "success": true,
+  "message": "Checkout initiated successfully",
+  "data": {
+    "payment_key": "pay_test_failure",
+    "iframe_url": "https://accept.paymob.com/api/acceptance/iframes/...",
+    "temp_order_id": "TEMP-FAILURE-123",
+    "tracking_number": "BOSTA-FAILURE-123",
+    "cost_breakdown": {
+      "subtotal": 129.99,
+      "tax": 13.00,
+      "shipping": 80.00,
+      "total": 222.99,
+      "item_count": 1
+    }
+  }
+}
+```
+
+### Step 3: Simulate Payment Failure via Callback
+```bash
+curl -X GET "BASE_URL/payment/callback?success=false&transaction_id=txn_failed_123&order_id=TEMP-FAILURE-123"
+```
+
+**What happens internally:**
+1. Payment callback receives `success=false`
+2. System detects payment failure
+3. **Shipment termination triggered**: `BostaApiService::cancelDelivery()` called with terminate endpoint
+4. API call: `POST /deliveries/business/BOSTA-FAILURE-123/terminate`
+5. Logs show termination attempt and result
+6. Pending checkout data remains (no order created)
+
+**Expected Response:**
+```json
+{
+  "success": false,
+  "payment_status": "failed",
+  "order_id": "TEMP-FAILURE-123",
+  "payment_id": "txn_failed_123",
+  "tracking_number": "BOSTA-FAILURE-123"
+}
+```
+
+### Step 4: Verify Shipment Termination (Check Logs)
+The system logs will show:
+```
+[INFO] Shipment cancelled due to payment failure
+{
+  "tracking_number": "BOSTA-FAILURE-123",
+  "cancel_result": {...}, // Bosta API response
+}
+```
+
+### Step 5: Simulate Payment Failure via Webhook
+```bash
+curl -X POST BASE_URL/payment/webhook \
+  -H "Content-Type: application/json" \
+  -d '{
+    "obj": {
+      "id": "txn_webhook_failed_123",
+      "success": false,
+      "order": {
+        "id": "TEMP-FAILURE-123"
+      },
+      "amount_cents": 22299
+    }
+  }'
+```
+
+**What happens internally:**
+1. Webhook receives `success: false`
+2. System calls `CheckoutController::fail()`
+3. **Shipment termination triggered**: Same terminate endpoint called
+4. Session and pending checkout data cleaned up
+5. User redirected to payment failed page
+
+**Expected Response:**
+```json
+{
+  "success": false,
+  "message": "Checkout failed",
+  "error": "Payment failed"
+}
+```
+
+### Step 6: Verify No Order Created
+```bash
+curl -X GET BASE_URL/orders
+```
+**Expected:** Empty array or no orders for this session
+
+### Step 7: Verify Cart Still Intact
+```bash
+curl -X GET BASE_URL/cart
+```
+**Expected:** Cart still contains the product (not cleared on failure)
+
+## 🔍 Payment Failure Flow Details
+
+### **Shipment Termination Process**
+1. **Trigger**: Payment failure detected (callback/webhook)
+2. **API Call**: `POST /deliveries/business/{trackingNumber}/terminate`
+3. **Success**: Shipment marked as terminated/cancelled in Bosta
+4. **Failure**: Logged as error, shipment may remain active
+5. **Cleanup**: Pending checkout data removed, session cleared
+
+### **Key Behaviors**
+- ✅ **No order created** on payment failure
+- ✅ **Shipment terminated** using official Bosta terminate endpoint
+- ✅ **Stock not reduced** (no order items created)
+- ✅ **Cart preserved** for retry attempts
+- ✅ **Session cleaned** after failure handling
+- ✅ **Comprehensive logging** for debugging
+
+### **Error Scenarios**
+- **Terminate API fails**: Shipment remains active, logged as error
+- **Invalid tracking number**: Exception thrown, logged
+- **Network issues**: Retry logic could be added in future
+
 ## 💡 Key Features
 
 ✅ **Guest Checkout** - No authentication required for cart and checkout
@@ -698,3 +1210,4 @@ curl -X POST BASE_URL/webhook/bosta \
 ✅ **Auto Cleanup** - Expired pending checkouts removed hourly
 ✅ **Error Handling** - Comprehensive error responses
 ✅ **Webhook Support** - Automated payment/shipment updates
+✅ **Shipment Termination** - Automatic cancellation on payment failure using terminate endpoint

@@ -55,8 +55,15 @@ class BostaApiService
         return $this->makeRequest('post', '/pickups', $data);
     }
 
-    // Cancel delivery
+    // Cancel delivery using terminate endpoint
     public function cancelDelivery($trackingNumber)
+    {
+        // Use the dedicated terminate endpoint for proper cancellation
+        return $this->makeRequest('delete', "/deliveries/business/{$trackingNumber}/terminate");
+    }
+
+    // Legacy method - cancel delivery using state update (deprecated)
+    public function cancelDeliveryByState($trackingNumber)
     {
         // According to Bosta API, you can update the delivery state to cancelled
         return $this->updateDelivery($trackingNumber, [
