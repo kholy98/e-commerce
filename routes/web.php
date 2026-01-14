@@ -1,12 +1,19 @@
 <?php
 
-use App\Http\Controllers\PaymentController;
 use Illuminate\Support\Facades\Route;
+use Inertia\Inertia;
+use Laravel\Fortify\Features;
 
 Route::get('/', function () {
-    return view('welcome');
+    return Inertia::render('welcome', [
+        'canRegister' => Features::enabled(Features::registration()),
+    ]);
+})->name('home');
+
+Route::middleware(['auth', 'verified'])->group(function () {
+    Route::get('dashboard', function () {
+        return Inertia::render('dashboard');
+    })->name('dashboard');
 });
 
-
-Route::get('/payment-success', [PaymentController::class, 'success'])->name('payment.success');
-Route::get('/payment-failed', [PaymentController::class, 'failed'])->name('payment.failed');
+require __DIR__.'/settings.php';
