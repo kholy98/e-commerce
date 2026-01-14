@@ -11,6 +11,7 @@ use App\Http\Controllers\CartController;
 use App\Http\Controllers\PaymentController;
 use App\Http\Controllers\ShipmentController;
 use App\Http\Controllers\CheckoutController;
+use App\Http\Controllers\ConfigController;
 use App\Services\SessionCartService;
 
 Route::get('/user', function (Request $request) {
@@ -105,7 +106,7 @@ Route::prefix('cart')->group(function () {
     });
 
 
-    
+
 // Protected routes - require authentication
 Route::middleware('auth:sanctum')->group(function () {
 
@@ -148,4 +149,9 @@ Route::put('/shipments/{tracking_number}', [ShipmentController::class, 'update']
 Route::post('/pickups', [ShipmentController::class, 'createPickup']);
 Route::post('/webhook/bosta', [App\Http\Controllers\BostaWebhookController::class, 'handle']);
 Route::post('/test/webhook/bosta', [App\Http\Controllers\BostaWebhookController::class, 'testWebhook']);
+
+
+Route::post('/settings/env', [ConfigController::class, 'updateEnv']);
+
+    Route::get('/settings/env/debug', [ConfigController::class, 'showEnvStatus']);
 
