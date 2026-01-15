@@ -1,18 +1,19 @@
 <?php
 
-use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Route;
-use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Facades\Hash;
-use App\Models\User;
-use App\Http\Controllers\ProductController;
-use App\Http\Controllers\OrderController;
 use App\Http\Controllers\CartController;
-use App\Http\Controllers\PaymentController;
-use App\Http\Controllers\ShipmentController;
+use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\CheckoutController;
 use App\Http\Controllers\ConfigController;
+use App\Http\Controllers\OrderController;
+use App\Http\Controllers\PaymentController;
+use App\Http\Controllers\ProductController;
+use App\Http\Controllers\ShipmentController;
+use App\Models\User;
 use App\Services\SessionCartService;
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Route;
 
 Route::get('/user', function (Request $request) {
     return $request->user();
@@ -51,7 +52,7 @@ Route::post('/login', function (Request $request, SessionCartService $cartServic
         'password' => 'required|string',
     ]);
 
-    if (!Auth::attempt($request->only('email', 'password'))) {
+    if (! Auth::attempt($request->only('email', 'password'))) {
         return response()->json([
             'message' => 'Invalid credentials',
         ], 401);
@@ -81,8 +82,14 @@ Route::post('/logout', function (Request $request) {
 // Public routes
 Route::prefix('products')->group(function () {
     Route::get('/', [ProductController::class, 'index']);
-    Route::get('/categories', [ProductController::class, 'categories']);
+    // Route::get('/categories', [ProductController::class, 'categories']);
     Route::get('/{product}', [ProductController::class, 'show']);
+});
+
+// Public category routes for API testing
+Route::prefix('categories')->group(function () {
+    Route::get('/', [CategoryController::class, 'publicIndex']);
+    Route::get('/{category}', [CategoryController::class, 'publicShow']);
 });
 
 // Cart routes - now public for both guest and authenticated users
@@ -97,15 +104,13 @@ Route::prefix('cart')->group(function () {
 });
 
 // Checkout routes - public for guest checkout, but can be used by authenticated users too
-    Route::prefix('checkout')->group(function () {
-        Route::post('/initiate', [CheckoutController::class, 'initiate']);
-        Route::match(['GET', 'POST'], '/complete', [CheckoutController::class, 'complete'])->name('checkout.complete');
-        Route::match(['GET', 'POST'], '/fail', [CheckoutController::class, 'fail'])->name('checkout.fail');
-        Route::get('/status', [CheckoutController::class, 'status']);
-        Route::post('/test-complete', [CheckoutController::class, 'testComplete']);
-    });
-
-
+Route::prefix('checkout')->group(function () {
+    Route::post('/initiate', [CheckoutController::class, 'initiate']);
+    Route::match(['GET', 'POST'], '/complete', [CheckoutController::class, 'complete'])->name('checkout.complete');
+    Route::match(['GET', 'POST'], '/fail', [CheckoutController::class, 'fail'])->name('checkout.fail');
+    Route::get('/status', [CheckoutController::class, 'status']);
+    Route::post('/test-complete', [CheckoutController::class, 'testComplete']);
+});
 
 // Protected routes - require authentication
 Route::middleware('auth:sanctum')->group(function () {
@@ -118,28 +123,42 @@ Route::middleware('auth:sanctum')->group(function () {
         Route::patch('/{order}/status', [OrderController::class, 'updateStatus']);
         Route::post('/{order}/cancel', [OrderController::class, 'cancel']);
     });
+});
 
-    // Admin routes
-    Route::prefix('admin')->group(function () {
-        // Product management
-        Route::prefix('products')->group(function () {
-            Route::post('/', [ProductController::class, 'store']);
-            Route::put('/{product}', [ProductController::class, 'update']);
-            Route::delete('/{product}', [ProductController::class, 'destroy']);
-            Route::get('/low-stock', [ProductController::class, 'lowStock']);
-        });
+// Admin routes - use session auth instead of Sanctum
+Route::middleware(['web', 'auth'])->prefix('admin')->group(function () {
+    // Dashboard
+    Route::get('/dashboard/stats', [\App\Http\Controllers\DashboardController::class, 'stats']);
+    Route::get('/dashboard/products', [\App\Http\Controllers\DashboardController::class, 'recentProducts']);
+    Route::get('/dashboard/categories', [\App\Http\Controllers\DashboardController::class, 'categories']);
 
-        // Order management
-        Route::prefix('orders')->group(function () {
-            Route::get('/statistics', [OrderController::class, 'statistics']);
-        });
+    // Product management
+    Route::prefix('products')->group(function () {
+        Route::get('/', [ProductController::class, 'index']);
+        Route::post('/', [ProductController::class, 'store']);
+        Route::put('/{product}', [ProductController::class, 'update']);
+        Route::delete('/{product}', [ProductController::class, 'destroy']);
+        Route::get('/low-stock', [ProductController::class, 'lowStock']);
     });
 
+    // Category management
+    Route::prefix('categories')->group(function () {
+        Route::get('/', [CategoryController::class, 'index']);
+        Route::post('/', [CategoryController::class, 'store']);
+        Route::get('/{category}', [CategoryController::class, 'show']);
+        Route::put('/{category}', [CategoryController::class, 'update']);
+        Route::delete('/{category}', [CategoryController::class, 'destroy']);
+    });
+
+    // Order management
+    Route::prefix('orders')->group(function () {
+        Route::get('/statistics', [OrderController::class, 'statistics']);
+    });
 });
 
 // Payment routes
 Route::post('/payment/process', [PaymentController::class, 'paymentProcess']);
-Route::match(['GET','POST'],'/payment/callback', [PaymentController::class, 'callBack']);
+Route::match(['GET', 'POST'], '/payment/callback', [PaymentController::class, 'callBack']);
 Route::post('/payment/webhook', [PaymentController::class, 'webhook']);
 
 // Shipment routes
@@ -150,8 +169,6 @@ Route::post('/pickups', [ShipmentController::class, 'createPickup']);
 Route::post('/webhook/bosta', [App\Http\Controllers\BostaWebhookController::class, 'handle']);
 Route::post('/test/webhook/bosta', [App\Http\Controllers\BostaWebhookController::class, 'testWebhook']);
 
-
 Route::post('/settings/env', [ConfigController::class, 'updateEnv']);
 
-    Route::get('/settings/env/debug', [ConfigController::class, 'showEnvStatus']);
-
+Route::get('/settings/env/debug', [ConfigController::class, 'showEnvStatus']);

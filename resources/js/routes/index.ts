@@ -176,3 +176,262 @@ register.head = (options?: RouteQueryOptions): RouteDefinition<'head'> => ({
     url: register.url(options),
     method: 'head',
 });
+
+/**
+ * Dashboard stats API route
+ * @route '/api/admin/dashboard/stats'
+ */
+export const dashboardStats = (
+    options?: RouteQueryOptions,
+): RouteDefinition<'get'> => ({
+    url: dashboardStats.url(options),
+    method: 'get',
+});
+
+dashboardStats.definition = {
+    methods: ['get'],
+    url: '/api/admin/dashboard/stats',
+} satisfies RouteDefinition<['get']>;
+
+dashboardStats.url = (options?: RouteQueryOptions) => {
+    return dashboardStats.definition.url + queryParams(options);
+};
+
+dashboardStats.get = (options?: RouteQueryOptions): RouteDefinition<'get'> => ({
+    url: dashboardStats.url(options),
+    method: 'get',
+});
+
+/**
+ * Dashboard products API route
+ * @route '/api/admin/dashboard/products'
+ */
+export const dashboardProducts = (
+    options?: RouteQueryOptions,
+): RouteDefinition<'get'> => ({
+    url: dashboardProducts.url(options),
+    method: 'get',
+});
+
+dashboardProducts.definition = {
+    methods: ['get'],
+    url: '/api/admin/dashboard/products',
+} satisfies RouteDefinition<['get']>;
+
+dashboardProducts.url = (options?: RouteQueryOptions) => {
+    return dashboardProducts.definition.url + queryParams(options);
+};
+
+dashboardProducts.get = (
+    options?: RouteQueryOptions,
+): RouteDefinition<'get'> => ({
+    url: dashboardProducts.url(options),
+    method: 'get',
+});
+
+/**
+ * Dashboard categories API route
+ * @route '/api/admin/dashboard/categories'
+ */
+export const dashboardCategories = (
+    options?: RouteQueryOptions,
+): RouteDefinition<'get'> => ({
+    url: dashboardCategories.url(options),
+    method: 'get',
+});
+
+dashboardCategories.definition = {
+    methods: ['get'],
+    url: '/api/admin/dashboard/categories',
+} satisfies RouteDefinition<['get']>;
+
+dashboardCategories.url = (options?: RouteQueryOptions) => {
+    return dashboardCategories.definition.url + queryParams(options);
+};
+
+dashboardCategories.get = (
+    options?: RouteQueryOptions,
+): RouteDefinition<'get'> => ({
+    url: dashboardCategories.url(options),
+    method: 'get',
+});
+
+/**
+ * Admin products index route
+ * @route '/admin/products'
+ */
+export const adminProducts = (
+    options?: RouteQueryOptions,
+): RouteDefinition<'get'> => ({
+    url: '/admin/products' + queryParams(options),
+    method: 'get',
+});
+
+/**
+ * Admin products create route
+ * @route '/admin/products/create'
+ */
+export const adminProductsCreate = (
+    options?: RouteQueryOptions,
+): RouteDefinition<'get'> => ({
+    url: '/admin/products/create' + queryParams(options),
+    method: 'get',
+});
+
+/**
+ * Admin products edit route
+ * @route '/admin/products/{product}/edit'
+ */
+export const adminProductsEdit = (
+    product: string | number,
+    options?: RouteQueryOptions,
+): RouteDefinition<'get'> => ({
+    url: `/admin/products/${product}/edit` + queryParams(options),
+    method: 'get',
+});
+
+/**
+ * Admin products show route
+ * @route '/admin/products/{product}'
+ */
+export const adminProductsShow = (
+    product: string | number,
+    options?: RouteQueryOptions,
+): RouteDefinition<'get'> => ({
+    url: `/admin/products/${product}` + queryParams(options),
+    method: 'get',
+});
+
+/**
+ * Admin categories index route
+ * @route '/admin/categories'
+ */
+export const adminCategories = (
+    options?: RouteQueryOptions,
+): RouteDefinition<'get'> => ({
+    url: '/admin/categories' + queryParams(options),
+    method: 'get',
+});
+
+/**
+ * Admin categories create route
+ * @route '/admin/categories/create'
+ */
+export const adminCategoriesCreate = (
+    options?: RouteQueryOptions,
+): RouteDefinition<'get'> => ({
+    url: '/admin/categories/create' + queryParams(options),
+    method: 'get',
+});
+
+/**
+ * Admin categories edit route
+ * @route '/admin/categories/{category}/edit'
+ */
+export const adminCategoriesEdit = (
+    category: string | number,
+    options?: RouteQueryOptions,
+): RouteDefinition<'get'> => ({
+    url: `/admin/categories/${category}/edit` + queryParams(options),
+    method: 'get',
+});
+
+/**
+ * Admin categories show route
+ * @route '/admin/categories/{category}'
+ */
+export const adminCategoriesShow = (
+    category: string | number,
+    options?: RouteQueryOptions,
+): RouteDefinition<'get'> => ({
+    url: `/admin/categories/${category}` + queryParams(options),
+    method: 'get',
+});
+
+/**
+ * Admin categories API route
+ * @route '/api/admin/categories'
+ */
+export const adminCategoriesApi = (
+    options?: RouteQueryOptions,
+): RouteDefinition<'get' | 'post'> => ({
+    url: '/api/admin/categories' + queryParams(options),
+    method: 'get',
+});
+
+/**
+ * Admin categories API route with ID
+ * @route '/api/admin/categories/{category}'
+ */
+export const adminCategoriesApiId = (
+    category: string | number,
+    options?: RouteQueryOptions,
+): RouteDefinition<'get' | 'put' | 'delete'> => ({
+    url: adminCategoriesApiId.url(category, options),
+    method: 'get',
+});
+
+adminCategoriesApiId.url = (
+    category: string | number,
+    options?: RouteQueryOptions,
+) => `/api/admin/categories/${category}` + queryParams(options);
+
+adminCategoriesApiId.put = (
+    category: string | number,
+    options?: RouteQueryOptions,
+): RouteDefinition<'put'> => ({
+    url: adminCategoriesApiId.url(category, options),
+    method: 'put',
+});
+
+adminCategoriesApiId.delete = (
+    category: string | number,
+    options?: RouteQueryOptions,
+): RouteDefinition<'delete'> => ({
+    url: adminCategoriesApiId.url(category, options),
+    method: 'delete',
+});
+
+/**
+ * Admin products API route
+ * @route '/api/admin/products'
+ */
+export const adminProductsApi = (
+    options?: RouteQueryOptions,
+): RouteDefinition<'get' | 'post'> => ({
+    url: '/api/admin/products' + queryParams(options),
+    method: 'get',
+});
+
+/**
+ * Admin products API route with ID
+ * @route '/api/admin/products/{product}'
+ */
+export const adminProductsApiId = (
+    product: string | number,
+    options?: RouteQueryOptions,
+): RouteDefinition<'get' | 'put' | 'delete'> => ({
+    url: adminProductsApiId.url(product, options),
+    method: 'get',
+});
+
+adminProductsApiId.url = (
+    product: string | number,
+    options?: RouteQueryOptions,
+) => `/api/admin/products/${product}` + queryParams(options);
+
+adminProductsApiId.put = (
+    product: string | number,
+    options?: RouteQueryOptions,
+): RouteDefinition<'put'> => ({
+    url: adminProductsApiId.url(product, options),
+    method: 'put',
+});
+
+adminProductsApiId.delete = (
+    product: string | number,
+    options?: RouteQueryOptions,
+): RouteDefinition<'delete'> => ({
+    url: adminProductsApiId.url(product, options),
+    method: 'delete',
+});
