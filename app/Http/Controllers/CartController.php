@@ -34,6 +34,7 @@ class CartController extends Controller
                 'total' => $summary['total'],
                 'item_count' => $summary['item_count'],
                 'is_guest' => !Auth::check(),
+                'session_data' => session()->all(),
             ],
         ]);
     }
