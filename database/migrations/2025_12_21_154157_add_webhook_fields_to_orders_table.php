@@ -13,7 +13,6 @@ return new class extends Migration
     {
         Schema::table('orders', function (Blueprint $table) {
             $table->string('tracking_number')->unique()->nullable(); // Bosta tracking number
-            $table->string('shipment_status')->nullable(); // Current shipment status from Bosta
             $table->string('bosta_id')->nullable(); // _id from webhook
             $table->integer('state_code')->nullable(); // state number
             $table->string('type')->nullable(); // SEND, EXCHANGE, etc.
@@ -36,7 +35,6 @@ return new class extends Migration
         Schema::table('orders', function (Blueprint $table) {
             $table->dropColumn([
                 'tracking_number',
-                'shipment_status',
                 'bosta_id',
                 'state_code',
                 'type',
