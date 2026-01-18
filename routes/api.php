@@ -4,6 +4,7 @@ use App\Http\Controllers\CartController;
 use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\CheckoutController;
 use App\Http\Controllers\ConfigController;
+use App\Http\Controllers\ContactInquiryController;
 use App\Http\Controllers\OrderController;
 use App\Http\Controllers\PaymentController;
 use App\Http\Controllers\ProductController;
@@ -162,6 +163,17 @@ Route::prefix('admin/team-members')->group(function () {
     Route::get('/', [TeamMemberApiController::class, 'index']);
     Route::get('/{teamMember}', [TeamMemberApiController::class, 'show']);
 });
+
+
+// Contact Inquiries API routes
+Route::get('contact-inquiries', [ContactInquiryController::class, 'index'])->name('api.contact-inquiries.index');
+Route::post('contact-inquiries', [ContactInquiryController::class, 'store'])->name('api.contact-inquiries.store');
+Route::get('contact-inquiries/{inquiry}', [ContactInquiryController::class, 'show'])->name('api.contact-inquiries.show');
+Route::put('contact-inquiries/{inquiry}', [ContactInquiryController::class, 'update'])->name('api.contact-inquiries.update');
+Route::patch('contact-inquiries/{inquiry}', [ContactInquiryController::class, 'patch'])->name('api.contact-inquiries.patch');
+Route::post('contact-inquiries/{inquiry}/reply', [ContactInquiryController::class, 'reply'])->name('api.contact-inquiries.reply');
+Route::delete('contact-inquiries/{inquiry}', [ContactInquiryController::class, 'destroy'])->name('api.contact-inquiries.destroy');
+
 
 // Payment routes
 Route::post('/payment/process', [PaymentController::class, 'paymentProcess']);

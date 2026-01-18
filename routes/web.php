@@ -111,6 +111,23 @@ Route::middleware(['auth', 'verified'])->group(function () {
         Route::post('team-members', [\App\Http\Controllers\TeamMemberController::class, 'store'])->name('team-members.store');
         Route::post('team-members/{teamMember}', [\App\Http\Controllers\TeamMemberController::class, 'update'])->name('team-members.update');
         Route::delete('team-members/{teamMember}', [\App\Http\Controllers\TeamMemberController::class, 'destroy'])->name('team-members.destroy');
+
+        // Contact Inquiries
+        Route::get('inquiries', function () {
+            return Inertia::render('admin/inquiries/index', [
+                'inquiries' => \App\Models\ContactInquiry::paginate(15),
+            ]);
+        })->name('inquiries.index');
+
+        Route::get('inquiries/{inquiry}', function (\App\Models\ContactInquiry $inquiry) {
+            return Inertia::render('admin/inquiries/show', [
+                'inquiry' => $inquiry,
+            ]);
+        })->name('inquiries.show');
+
+        // Inquiry form handling
+        Route::post('inquiries/{inquiry}/reply', [\App\Http\Controllers\ContactInquiryAdminController::class, 'reply'])->name('inquiries.reply');
+        Route::post('inquiries/{inquiry}/status', [\App\Http\Controllers\ContactInquiryAdminController::class, 'updateStatus'])->name('inquiries.update-status');
     });
 });
 

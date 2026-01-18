@@ -481,3 +481,26 @@ export const adminTeamMembersShow = (
     url: `/admin/team-members/${teamMember}` + queryParams(options),
     method: 'get',
 });
+
+/**
+ * Admin inquiries index route
+ * @route '/admin/inquiries'
+ */
+export const adminInquiries = (
+    options?: RouteQueryOptions,
+): RouteDefinition<'get'> => ({
+    url: '/admin/inquiries' + queryParams(options),
+    method: 'get',
+});
+
+/**
+ * Admin inquiries show route
+ * @route '/admin/inquiries/{inquiry}'
+ */
+export const adminInquiriesShow = (
+    inquiry: string | number,
+    options?: RouteQueryOptions,
+): RouteDefinition<'get'> => ({
+    url: `/admin/inquiries/${inquiry}` + queryParams(options),
+    method: 'get',
+});
