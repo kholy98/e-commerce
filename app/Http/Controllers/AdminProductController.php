@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Product;
+use Illuminate\Http\JsonResponse;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 
@@ -62,7 +63,6 @@ class AdminProductController extends Controller
             'remove_images.*' => 'integer',
         ]);
 
-
         $product->update($validated);
 
         // Handle image management
@@ -92,10 +92,13 @@ class AdminProductController extends Controller
     /**
      * Delete a product
      */
-    public function destroy(Product $product): RedirectResponse
+    public function destroy(Product $product): JsonResponse
     {
         $product->delete();
 
-        return redirect()->route('admin.products.index')->with('success', 'Product deleted successfully');
+        return response()->json([
+            'success' => true,
+            'message' => 'Product deleted successfully',
+        ]);
     }
 }

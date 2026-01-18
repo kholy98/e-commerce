@@ -18,7 +18,6 @@ import AppLayout from '@/layouts/app-layout';
 import {
     adminCategories,
     adminCategoriesApi,
-    adminCategoriesApiId,
     adminCategoriesCreate,
     adminCategoriesEdit,
     adminCategoriesShow,
@@ -114,22 +113,30 @@ export default function CategoriesIndex() {
             return;
         }
 
-        try {
-            const response = await fetch(adminCategoriesApiId(categoryId).url, {
-                method: 'DELETE',
-                headers: {
-                    Accept: 'application/json',
-                    'X-Requested-With': 'XMLHttpRequest',
-                },
-                credentials: 'same-origin',
-            });
+        const csrfToken = document
+            .querySelector('meta[name="csrf-token"]')
+            ?.getAttribute('content');
 
-            if (response.ok) {
-                fetchCategories(currentPage, search);
-            }
-        } catch (error) {
-            console.error('Failed to delete category:', error);
-        }
+        fetch(`/admin/categories/${categoryId}`, {
+            method: 'DELETE',
+            headers: {
+                Accept: 'application/json',
+                'X-Requested-With': 'XMLHttpRequest',
+                'X-CSRF-TOKEN': csrfToken || '',
+            },
+            credentials: 'same-origin',
+        })
+            .then((response) => response.json())
+            .then((data) => {
+                if (data.success) {
+                    fetchCategories(currentPage, search);
+                } else {
+                    alert(data.message || 'Failed to delete category');
+                }
+            })
+            .catch((error) => {
+                console.error('Failed to delete category:', error);
+            });
     };
 
     if (loading) {

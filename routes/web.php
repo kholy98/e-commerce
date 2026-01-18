@@ -78,6 +78,11 @@ Route::middleware(['auth', 'verified'])->group(function () {
         Route::get('categories/{category}', function (\App\Models\Category $category) {
             return Inertia::render('admin/categories/show', ['category' => $category]);
         })->name('categories.show');
+
+        // Category form handling
+        Route::post('categories', [\App\Http\Controllers\AdminCategoryController::class, 'store'])->name('categories.store');
+        Route::post('categories/{category}', [\App\Http\Controllers\AdminCategoryController::class, 'update'])->name('categories.update');
+        Route::delete('categories/{category}', [\App\Http\Controllers\AdminCategoryController::class, 'destroy'])->name('categories.destroy');
     });
 });
 

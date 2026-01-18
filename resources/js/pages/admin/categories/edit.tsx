@@ -10,7 +10,7 @@ import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
 import { Textarea } from '@/components/ui/textarea';
 import AppLayout from '@/layouts/app-layout';
-import { adminCategories, adminCategoriesApiId } from '@/routes';
+import { adminCategories } from '@/routes';
 import { type BreadcrumbItem, type SharedData } from '@/types';
 
 interface Category {
@@ -102,32 +102,14 @@ export default function CategoriesEdit() {
                 formDataToSend.append('remove_image', '1');
             }
 
-            const response = await fetch(
-                adminCategoriesApiId.put(category.id).url,
-                {
-                    method: 'PUT',
-                    body: formDataToSend,
-                    headers: {
-                        Accept: 'application/json',
-                        'X-Requested-With': 'XMLHttpRequest',
-                    },
-                    credentials: 'same-origin',
+            router.post(`/admin/categories/${category.id}`, formDataToSend, {
+                onSuccess: () => {
+                    router.visit(adminCategories());
                 },
-            );
-
-            const data = await response.json();
-
-            if (response.ok) {
-                // Success - redirect to categories index
-                router.visit(adminCategories());
-            } else {
-                // Handle validation errors
-                if (data.errors) {
-                    setErrors(data.errors);
-                } else {
-                    setErrors({ general: data.message || 'An error occurred' });
-                }
-            }
+                onError: (errors) => {
+                    setErrors(errors);
+                },
+            });
         } catch (error) {
             console.error('Failed to update category:', error);
             setErrors({

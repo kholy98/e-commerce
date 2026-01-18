@@ -10,7 +10,7 @@ import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
 import { Textarea } from '@/components/ui/textarea';
 import AppLayout from '@/layouts/app-layout';
-import { adminCategories, adminCategoriesApi } from '@/routes';
+import { adminCategories } from '@/routes';
 import { type BreadcrumbItem, type SharedData } from '@/types';
 
 const breadcrumbs: BreadcrumbItem[] = [
@@ -69,29 +69,14 @@ export default function CategoriesCreate() {
                 formDataToSend.append('image', image);
             }
 
-            const response = await fetch(adminCategoriesApi().url, {
-                method: 'POST',
-                body: formDataToSend,
-                headers: {
-                    Accept: 'application/json',
-                    'X-Requested-With': 'XMLHttpRequest',
+            router.post('/admin/categories', formDataToSend, {
+                onSuccess: () => {
+                    router.visit(adminCategories());
                 },
-                credentials: 'same-origin',
+                onError: (errors) => {
+                    setErrors(errors);
+                },
             });
-
-            const data = await response.json();
-
-            if (response.ok) {
-                // Success - redirect to categories index
-                router.visit(adminCategories());
-            } else {
-                // Handle validation errors
-                if (data.errors) {
-                    setErrors(data.errors);
-                } else {
-                    setErrors({ general: data.message || 'An error occurred' });
-                }
-            }
         } catch (error) {
             console.error('Failed to create category:', error);
             setErrors({

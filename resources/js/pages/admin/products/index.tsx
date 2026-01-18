@@ -18,7 +18,6 @@ import AppLayout from '@/layouts/app-layout';
 import {
     adminProducts,
     adminProductsApi,
-    adminProductsApiId,
     adminProductsCreate,
     adminProductsEdit,
     adminProductsShow,
@@ -111,22 +110,30 @@ export default function ProductsIndex() {
             return;
         }
 
-        try {
-            const response = await fetch(adminProductsApiId(productId).url, {
-                method: 'DELETE',
-                headers: {
-                    Accept: 'application/json',
-                    'X-Requested-With': 'XMLHttpRequest',
-                },
-                credentials: 'same-origin',
-            });
+        const csrfToken = document
+            .querySelector('meta[name="csrf-token"]')
+            ?.getAttribute('content');
 
-            if (response.ok) {
-                fetchProducts(currentPage, search);
-            }
-        } catch (error) {
-            console.error('Failed to delete product:', error);
-        }
+        fetch(`/admin/products/${productId}`, {
+            method: 'DELETE',
+            headers: {
+                Accept: 'application/json',
+                'X-Requested-With': 'XMLHttpRequest',
+                'X-CSRF-TOKEN': csrfToken || '',
+            },
+            credentials: 'same-origin',
+        })
+            .then((response) => response.json())
+            .then((data) => {
+                if (data.success) {
+                    fetchProducts(currentPage, search);
+                } else {
+                    alert(data.message || 'Failed to delete product');
+                }
+            })
+            .catch((error) => {
+                console.error('Failed to delete product:', error);
+            });
     };
 
     if (loading) {
