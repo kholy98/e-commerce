@@ -2,10 +2,10 @@
 
 namespace App\Services;
 
-use App\Models\Product;
 use App\Models\Cart;
-use Illuminate\Support\Facades\Session;
+use App\Models\Product;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Session;
 
 class SessionCartService
 {
@@ -47,11 +47,11 @@ class SessionCartService
     {
         $product = Product::find($productId);
 
-        if (!$product || !$product->is_active) {
+        if (! $product || ! $product->is_active) {
             throw new \Exception('Product not available');
         }
 
-        if (!$product->hasStock($quantity)) {
+        if (! $product->hasStock($quantity)) {
             throw new \Exception('Insufficient stock');
         }
 
@@ -72,7 +72,7 @@ class SessionCartService
         if (isset($cart[$productId])) {
             $newQuantity = $cart[$productId] + $quantity;
             $product = Product::find($productId);
-            if (!$product->hasStock($newQuantity)) {
+            if (! $product->hasStock($newQuantity)) {
                 throw new \Exception('Cannot add more, insufficient stock');
             }
             $cart[$productId] = $newQuantity;
@@ -81,6 +81,7 @@ class SessionCartService
         }
 
         Session::put(self::SESSION_KEY, $cart);
+
         return $cart;
     }
 
@@ -95,12 +96,14 @@ class SessionCartService
         $existingCartItem = $user->carts()->where('product_id', $productId)->first();
 
         if ($existingCartItem) {
+            dd('cart exists');
             $newQuantity = $existingCartItem->quantity + $quantity;
-            if (!$product->hasStock($newQuantity)) {
+            if (! $product->hasStock($newQuantity)) {
                 throw new \Exception('Cannot add more, insufficient stock');
             }
             $existingCartItem->update(['quantity' => $newQuantity]);
         } else {
+            dd('cart here');
             $user->carts()->create([
                 'product_id' => $productId,
                 'quantity' => $quantity,
@@ -117,7 +120,7 @@ class SessionCartService
     {
         $product = Product::find($productId);
 
-        if (!$product) {
+        if (! $product) {
             throw new \Exception('Product not found');
         }
 
@@ -139,13 +142,14 @@ class SessionCartService
         if ($quantity === 0) {
             unset($cart[$productId]);
         } else {
-            if (!$product->hasStock($quantity)) {
+            if (! $product->hasStock($quantity)) {
                 throw new \Exception('Insufficient stock for this quantity');
             }
             $cart[$productId] = $quantity;
         }
 
         Session::put(self::SESSION_KEY, $cart);
+
         return $cart;
     }
 
@@ -157,7 +161,7 @@ class SessionCartService
         $user = Auth::user();
         $cartItem = $user->carts()->where('product_id', $productId)->first();
 
-        if (!$cartItem) {
+        if (! $cartItem) {
             throw new \Exception('Item not in cart');
         }
 
@@ -165,7 +169,7 @@ class SessionCartService
             $cartItem->delete();
         } else {
             $product = Product::find($productId);
-            if (!$product->hasStock($quantity)) {
+            if (! $product->hasStock($quantity)) {
                 throw new \Exception('Insufficient stock for this quantity');
             }
             $cartItem->update(['quantity' => $quantity]);
@@ -194,6 +198,7 @@ class SessionCartService
         $cart = Session::get(self::SESSION_KEY, []);
         unset($cart[$productId]);
         Session::put(self::SESSION_KEY, $cart);
+
         return $cart;
     }
 
@@ -227,7 +232,7 @@ class SessionCartService
     /**
      * Get cart summary with totals
      */
-    public function getSummary(string $shippingCity = null): array
+    public function getSummary(?string $shippingCity = null): array
     {
         $cartItems = $this->getCartItems();
         $subtotal = 0;
@@ -242,7 +247,6 @@ class SessionCartService
         }
 
         $tax = round($subtotal * 0.1, 2);
-
 
         // Use Bosta pricing service for shipping calculation
         $bostaPricing = app(\App\Services\BostaPricingService::class);
@@ -299,7 +303,7 @@ class SessionCartService
      */
     public function migrateSessionToDatabase(): void
     {
-        if (!Auth::check()) {
+        if (! Auth::check()) {
             return;
         }
 
@@ -313,7 +317,7 @@ class SessionCartService
 
         foreach ($sessionCart as $productId => $quantity) {
             $product = Product::find($productId);
-            if (!$product || !$product->is_active) {
+            if (! $product || ! $product->is_active) {
                 continue;
             }
 
@@ -344,6 +348,7 @@ class SessionCartService
     public function getItemCount(): int
     {
         $cartItems = $this->getCartItems();
+
         return array_sum($cartItems);
     }
 

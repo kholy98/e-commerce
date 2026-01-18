@@ -2,9 +2,11 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Resources\CategoryResource;
 use App\Http\Resources\ProductResource;
 use App\Models\Category;
 use App\Models\Product;
+use App\Weight;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 
@@ -54,6 +56,18 @@ class ProductController extends Controller
                 'category_id' => $product->category_id,
                 'is_active' => $product->is_active,
                 'slug' => $product->slug,
+                'grind_type' => $product->grind_type ? [
+                    'en' => $product->grind_type->label(),
+                    'ar' => $product->grind_type->labelAr(),
+                ] : null,
+                'weight' => (float) $product->weight,
+                'weight_label' => Weight::fromKg((float) $product->weight)?->label(),
+                'product_details' => collect($product->product_details ?? [])->map(function ($detail) {
+                    return [
+                        'title' => $detail['title_en'] ?? '',
+                        'value' => $detail['value_en'] ?? '',
+                    ];
+                })->toArray(),
                 'created_at' => $product->created_at,
                 'updated_at' => $product->updated_at,
                 'images' => $product->getMedia('images')->map(function ($media) {
@@ -67,6 +81,7 @@ class ProductController extends Controller
 
                     ];
                 }),
+
             ];
         });
 
@@ -82,6 +97,18 @@ class ProductController extends Controller
                 'category_id' => $product->category_id,
                 'is_active' => $product->is_active,
                 'slug' => $product->slug,
+                'grind_type' => $product->grind_type ? [
+                    'en' => $product->grind_type->label(),
+                    'ar' => $product->grind_type->labelAr(),
+                ] : null,
+                'weight' => (float) $product->weight,
+                'weight_label' => Weight::fromKg((float) $product->weight)?->label(),
+                'product_details' => collect($product->product_details ?? [])->map(function ($detail) {
+                    return [
+                        'title' => $detail['title_ar'] ?? '',
+                        'value' => $detail['value_ar'] ?? '',
+                    ];
+                })->toArray(),
                 'created_at' => $product->created_at,
                 'updated_at' => $product->updated_at,
                 'images' => $product->getMedia('images')->map(function ($media) {
@@ -95,6 +122,7 @@ class ProductController extends Controller
 
                     ];
                 }),
+
             ];
         });
 
@@ -125,9 +153,80 @@ class ProductController extends Controller
             ], 404);
         }
 
+        $product->load(['category', 'media']);
+
         return response()->json([
             'success' => true,
-            'data' => new ProductResource($product->load(['category', 'media'])),
+            'data' => [
+                'en' => [
+                    'id' => $product->id,
+                    'name' => $product->name,
+                    'description' => $product->description,
+                    'price' => (float) $product->price,
+                    'cost' => (float) $product->cost,
+                    'stock' => $product->stock,
+                    'sku' => $product->sku,
+                    'category_id' => $product->category_id,
+                    'is_active' => $product->is_active,
+                    'grind_type' => $product->grind_type?->value,
+                    'grind_type_label' => $product->grind_type?->label(),
+                    'weight' => (float) $product->weight,
+                    'weight_label' => Weight::fromKg((float) $product->weight)?->label(),
+                    'product_details' => collect($product->product_details ?? [])->map(function ($detail) {
+                        return [
+                            'title' => $detail['title_en'] ?? '',
+                            'value' => $detail['value_en'] ?? '',
+                        ];
+                    })->toArray(),
+                    'category' => new CategoryResource($product->category),
+                    'images' => $product->media->map(function ($media) {
+                        return [
+                            'id' => $media->id,
+                            'name' => $media->name,
+                            'file_name' => $media->file_name,
+                            'mime_type' => $media->mime_type,
+                            'size' => $media->size,
+                            'url' => $media->getUrl(),
+                        ];
+                    }),
+                    'created_at' => $product->created_at,
+                    'updated_at' => $product->updated_at,
+                ],
+                'ar' => [
+                    'id' => $product->id,
+                    'name' => $product->name_ar ?: $product->name,
+                    'description' => $product->description_ar ?: $product->description,
+                    'price' => (float) $product->price,
+                    'cost' => (float) $product->cost,
+                    'stock' => $product->stock,
+                    'sku' => $product->sku,
+                    'category_id' => $product->category_id,
+                    'is_active' => $product->is_active,
+                    //'grind_type' => $product->grind_type?->value,
+                    'grind_type_label' => $product->grind_type?->labelAr(),
+                    'weight' => (float) $product->weight,
+                    'weight_label' => Weight::fromKg((float) $product->weight)?->label(),
+                    'product_details' => collect($product->product_details ?? [])->map(function ($detail) {
+                        return [
+                            'title' => $detail['title_ar'] ?? '',
+                            'value' => $detail['value_ar'] ?? '',
+                        ];
+                    })->toArray(),
+                    'category' => new CategoryResource($product->category),
+                    'images' => $product->media->map(function ($media) {
+                        return [
+                            'id' => $media->id,
+                            'name' => $media->name,
+                            'file_name' => $media->file_name,
+                            'mime_type' => $media->mime_type,
+                            'size' => $media->size,
+                            'url' => $media->getUrl(),
+                        ];
+                    }),
+                    'created_at' => $product->created_at,
+                    'updated_at' => $product->updated_at,
+                ],
+            ],
         ]);
     }
 
@@ -146,6 +245,13 @@ class ProductController extends Controller
             'stock' => 'required|integer|min:0',
             'sku' => 'required|string|unique:products',
             'category_id' => 'required|exists:categories,id',
+            'grind_type' => 'nullable|in:whole_bean,coarse,medium,fine,extra_fine',
+            'weight' => 'nullable|numeric|in:0.125,0.250,0.500,1.000',
+            'product_details' => 'nullable|array',
+            'product_details.*.title_en' => 'required|string|max:255',
+            'product_details.*.title_ar' => 'required|string|max:255',
+            'product_details.*.value_en' => 'required|string|max:1000',
+            'product_details.*.value_ar' => 'required|string|max:1000',
             'images' => 'nullable|array',
             'images.*' => 'image|mimes:jpeg,png,jpg,gif,webp|max:2048',
         ]);
@@ -191,6 +297,13 @@ class ProductController extends Controller
                 'sku' => 'sometimes|string|unique:products,sku,'.$product->id,
                 'category_id' => 'sometimes|exists:categories,id',
                 'is_active' => 'sometimes|boolean',
+                'grind_type' => 'nullable|in:whole_bean,coarse,medium,fine,extra_fine',
+                'weight' => 'sometimes|numeric|in:0.125,0.250,0.500,1.000',
+                'product_details' => 'nullable|array',
+                'product_details.*.title_en' => 'required|string|max:255',
+                'product_details.*.title_ar' => 'required|string|max:255',
+                'product_details.*.value_en' => 'required|string|max:1000',
+                'product_details.*.value_ar' => 'required|string|max:1000',
                 'images' => 'nullable|array',
                 'images.*' => 'image|mimes:jpeg,png,jpg,gif,webp|max:2048',
                 'remove_images' => 'nullable|array',

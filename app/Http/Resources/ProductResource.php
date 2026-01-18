@@ -2,6 +2,7 @@
 
 namespace App\Http\Resources;
 
+use App\Weight;
 use Illuminate\Http\Request;
 use Illuminate\Http\Resources\Json\JsonResource;
 
@@ -24,6 +25,24 @@ class ProductResource extends JsonResource
             'sku' => $this->sku,
             'category_id' => $this->category_id,
             'is_active' => $this->is_active,
+            'grind_type' => $this->grind_type?->value,
+            'grind_type_label' => $this->grind_type?->label(),
+            'weight' => (float) $this->weight,
+            'weight_label' => Weight::fromKg((float) $this->weight)?->label(),
+            'product_details' => [
+                'en' => collect($this->product_details ?? [])->map(function ($detail) {
+                    return [
+                        'title' => $detail['title_en'] ?? '',
+                        'value' => $detail['value_en'] ?? '',
+                    ];
+                })->toArray(),
+                'ar' => collect($this->product_details ?? [])->map(function ($detail) {
+                    return [
+                        'title' => $detail['title_ar'] ?? '',
+                        'value' => $detail['value_ar'] ?? '',
+                    ];
+                })->toArray(),
+            ],
             'category' => new CategoryResource($this->whenLoaded('category')),
             'images' => $this->whenLoaded('media', function () {
                 return $this->getMedia('images')->map(function ($media) {

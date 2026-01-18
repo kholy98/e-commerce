@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use App\GrindType;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
@@ -27,6 +28,9 @@ class Product extends Model implements HasMedia
         'sku',
         'category_id',
         'is_active',
+        'grind_type',
+        'weight',
+        'product_details',
     ];
 
     protected $casts = [
@@ -34,6 +38,9 @@ class Product extends Model implements HasMedia
         'cost' => 'decimal:2',
         'stock' => 'integer',
         'is_active' => 'boolean',
+        'grind_type' => GrindType::class,
+        'weight' => 'decimal:2',
+        'product_details' => 'array',
     ];
 
     /**

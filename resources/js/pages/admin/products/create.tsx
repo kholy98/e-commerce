@@ -56,6 +56,16 @@ export default function ProductCreate({ categories }: Props) {
     const [sku, setSku] = useState('');
     const [categoryId, setCategoryId] = useState('');
     const [isActive, setIsActive] = useState(true);
+    const [grindType, setGrindType] = useState('');
+    const [weight, setWeight] = useState('');
+    const [productDetails, setProductDetails] = useState<
+        Array<{
+            title_en: string;
+            title_ar: string;
+            value_en: string;
+            value_ar: string;
+        }>
+    >([]);
     const [images, setImages] = useState<File[]>([]);
 
     const handleSubmit = async (e: React.FormEvent) => {
@@ -74,6 +84,26 @@ export default function ProductCreate({ categories }: Props) {
             formData.append('sku', sku);
             formData.append('category_id', categoryId);
             formData.append('is_active', isActive ? '1' : '0');
+            if (grindType) formData.append('grind_type', grindType);
+            if (weight) formData.append('weight', weight);
+            productDetails.forEach((detail, index) => {
+                formData.append(
+                    `product_details[${index}][title_en]`,
+                    detail.title_en,
+                );
+                formData.append(
+                    `product_details[${index}][title_ar]`,
+                    detail.title_ar,
+                );
+                formData.append(
+                    `product_details[${index}][value_en]`,
+                    detail.value_en,
+                );
+                formData.append(
+                    `product_details[${index}][value_ar]`,
+                    detail.value_ar,
+                );
+            });
 
             // Add images
             images.forEach((image, index) => {
@@ -211,6 +241,173 @@ export default function ProductCreate({ categories }: Props) {
                                             ))}
                                         </SelectContent>
                                     </Select>
+                                </div>
+
+                                <div className="space-y-2">
+                                    <Label htmlFor="grind_type">
+                                        Grind Type
+                                    </Label>
+                                    <Select
+                                        value={grindType}
+                                        onValueChange={setGrindType}
+                                    >
+                                        <SelectTrigger>
+                                            <SelectValue placeholder="Select grind type" />
+                                        </SelectTrigger>
+                                        <SelectContent>
+                                            <SelectItem value="whole_bean">
+                                                Whole Bean
+                                            </SelectItem>
+                                            <SelectItem value="coarse">
+                                                Coarse
+                                            </SelectItem>
+                                            <SelectItem value="medium">
+                                                Medium
+                                            </SelectItem>
+                                            <SelectItem value="fine">
+                                                Fine
+                                            </SelectItem>
+                                            <SelectItem value="extra_fine">
+                                                Extra Fine
+                                            </SelectItem>
+                                        </SelectContent>
+                                    </Select>
+                                </div>
+
+                                <div className="space-y-2">
+                                    <Label htmlFor="weight">Weight</Label>
+                                    <Select
+                                        value={weight}
+                                        onValueChange={setWeight}
+                                    >
+                                        <SelectTrigger>
+                                            <SelectValue placeholder="Select weight" />
+                                        </SelectTrigger>
+                                        <SelectContent>
+                                            <SelectItem value="0.125">
+                                                125g
+                                            </SelectItem>
+                                            <SelectItem value="0.250">
+                                                250g
+                                            </SelectItem>
+                                            <SelectItem value="0.500">
+                                                500g
+                                            </SelectItem>
+                                            <SelectItem value="1.000">
+                                                1kg
+                                            </SelectItem>
+                                        </SelectContent>
+                                    </Select>
+                                </div>
+
+                                <div className="space-y-2">
+                                    <Label>Product Details</Label>
+                                    {productDetails.map((detail, index) => (
+                                        <div
+                                            key={index}
+                                            className="space-y-2 rounded border p-4"
+                                        >
+                                            <div className="grid grid-cols-2 gap-2">
+                                                <Input
+                                                    placeholder="Title (EN)"
+                                                    value={detail.title_en}
+                                                    onChange={(e) => {
+                                                        const newDetails = [
+                                                            ...productDetails,
+                                                        ];
+                                                        newDetails[
+                                                            index
+                                                        ].title_en =
+                                                            e.target.value;
+                                                        setProductDetails(
+                                                            newDetails,
+                                                        );
+                                                    }}
+                                                />
+                                                <Input
+                                                    placeholder="Title (AR)"
+                                                    value={detail.title_ar}
+                                                    onChange={(e) => {
+                                                        const newDetails = [
+                                                            ...productDetails,
+                                                        ];
+                                                        newDetails[
+                                                            index
+                                                        ].title_ar =
+                                                            e.target.value;
+                                                        setProductDetails(
+                                                            newDetails,
+                                                        );
+                                                    }}
+                                                />
+                                            </div>
+                                            <div className="grid grid-cols-2 gap-2">
+                                                <Input
+                                                    placeholder="Value (EN)"
+                                                    value={detail.value_en}
+                                                    onChange={(e) => {
+                                                        const newDetails = [
+                                                            ...productDetails,
+                                                        ];
+                                                        newDetails[
+                                                            index
+                                                        ].value_en =
+                                                            e.target.value;
+                                                        setProductDetails(
+                                                            newDetails,
+                                                        );
+                                                    }}
+                                                />
+                                                <Input
+                                                    placeholder="Value (AR)"
+                                                    value={detail.value_ar}
+                                                    onChange={(e) => {
+                                                        const newDetails = [
+                                                            ...productDetails,
+                                                        ];
+                                                        newDetails[
+                                                            index
+                                                        ].value_ar =
+                                                            e.target.value;
+                                                        setProductDetails(
+                                                            newDetails,
+                                                        );
+                                                    }}
+                                                />
+                                            </div>
+                                            <Button
+                                                type="button"
+                                                variant="outline"
+                                                onClick={() => {
+                                                    setProductDetails(
+                                                        productDetails.filter(
+                                                            (_, i) =>
+                                                                i !== index,
+                                                        ),
+                                                    );
+                                                }}
+                                            >
+                                                Remove
+                                            </Button>
+                                        </div>
+                                    ))}
+                                    <Button
+                                        type="button"
+                                        variant="outline"
+                                        onClick={() => {
+                                            setProductDetails([
+                                                ...productDetails,
+                                                {
+                                                    title_en: '',
+                                                    title_ar: '',
+                                                    value_en: '',
+                                                    value_ar: '',
+                                                },
+                                            ]);
+                                        }}
+                                    >
+                                        Add Detail
+                                    </Button>
                                 </div>
 
                                 <div className="flex items-center space-x-2">
