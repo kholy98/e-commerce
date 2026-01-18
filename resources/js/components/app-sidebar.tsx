@@ -5,6 +5,7 @@ import {
     LayoutGrid,
     MessageSquare,
     Package,
+    Phone,
     Tag,
     Users,
 } from 'lucide-react';
@@ -23,6 +24,7 @@ import {
 } from '@/components/ui/sidebar';
 import {
     adminCategories,
+    adminContactUs,
     adminInquiries,
     adminProducts,
     adminTeamMembers,
@@ -57,6 +59,11 @@ const mainNavItems: NavItem[] = [
         title: 'Inquiries',
         href: adminInquiries(),
         icon: MessageSquare,
+    },
+    {
+        title: 'Contact Us',
+        href: adminContactUs(),
+        icon: Phone,
     },
 ];
 

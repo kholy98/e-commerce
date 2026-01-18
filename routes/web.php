@@ -128,6 +128,14 @@ Route::middleware(['auth', 'verified'])->group(function () {
         // Inquiry form handling
         Route::post('inquiries/{inquiry}/reply', [\App\Http\Controllers\ContactInquiryAdminController::class, 'reply'])->name('inquiries.reply');
         Route::post('inquiries/{inquiry}/status', [\App\Http\Controllers\ContactInquiryAdminController::class, 'updateStatus'])->name('inquiries.update-status');
+
+        // Contact Us
+        Route::get('contact-us', function () {
+            return Inertia::render('admin/contact-us/edit');
+        })->name('contact-us.edit');
+
+        Route::get('api/contact-us', [\App\Http\Controllers\Admin\AdminContactUsController::class, 'show'])->name('contact-us.show');
+        Route::post('api/contact-us', [\App\Http\Controllers\Admin\AdminContactUsController::class, 'update'])->name('contact-us.update');
     });
 });
 

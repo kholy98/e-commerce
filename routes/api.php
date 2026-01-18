@@ -5,6 +5,7 @@ use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\CheckoutController;
 use App\Http\Controllers\ConfigController;
 use App\Http\Controllers\ContactInquiryController;
+use App\Http\Controllers\ContactUsController;
 use App\Http\Controllers\OrderController;
 use App\Http\Controllers\PaymentController;
 use App\Http\Controllers\ProductController;
@@ -94,6 +95,9 @@ Route::prefix('categories')->group(function () {
     Route::get('/{category}', [CategoryController::class, 'publicShow']);
 });
 
+// Contact Us
+Route::get('/contact-us', [ContactUsController::class, 'index']);
+
 // Cart routes - now public for both guest and authenticated users
 Route::prefix('cart')->group(function () {
     Route::get('/', [CartController::class, 'index']);
@@ -164,7 +168,6 @@ Route::prefix('admin/team-members')->group(function () {
     Route::get('/{teamMember}', [TeamMemberApiController::class, 'show']);
 });
 
-
 // Contact Inquiries API routes
 Route::get('contact-inquiries', [ContactInquiryController::class, 'index'])->name('api.contact-inquiries.index');
 Route::post('contact-inquiries', [ContactInquiryController::class, 'store'])->name('api.contact-inquiries.store');
@@ -173,7 +176,6 @@ Route::put('contact-inquiries/{inquiry}', [ContactInquiryController::class, 'upd
 Route::patch('contact-inquiries/{inquiry}', [ContactInquiryController::class, 'patch'])->name('api.contact-inquiries.patch');
 Route::post('contact-inquiries/{inquiry}/reply', [ContactInquiryController::class, 'reply'])->name('api.contact-inquiries.reply');
 Route::delete('contact-inquiries/{inquiry}', [ContactInquiryController::class, 'destroy'])->name('api.contact-inquiries.destroy');
-
 
 // Payment routes
 Route::post('/payment/process', [PaymentController::class, 'paymentProcess']);

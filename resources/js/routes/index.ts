@@ -504,3 +504,16 @@ export const adminInquiriesShow = (
     url: `/admin/inquiries/${inquiry}` + queryParams(options),
     method: 'get',
 });
+
+/**
+ * Admin contact us edit route
+ * @route '/admin/contact-us'
+ */
+export const adminContactUs = (
+    options?: RouteQueryOptions,
+): RouteDefinition<'get'> => ({
+    url: '/admin/contact-us' + queryParams(options),
+    method: 'get',
+});
+
+export { default as admin } from './admin';
