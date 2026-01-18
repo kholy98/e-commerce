@@ -114,7 +114,7 @@ export default function ProductEdit({ product, categories }: Props) {
                 formData.append('remove_images[]', imageId.toString());
             });
 
-            router.put(`/admin/products/${product.id}`, formData, {
+            router.post(`/admin/products/${product.id}`, formData, {
                 onSuccess: () => {
                     router.visit(adminProducts());
                 },
@@ -325,10 +325,13 @@ export default function ProductEdit({ product, categories }: Props) {
                                     imagesToDelete={imagesToDelete}
                                     onFilesChange={setImages}
                                     onRemoveExisting={(imageId) => {
-                                        setImagesToDelete((prev) => [
-                                            ...prev,
-                                            imageId,
-                                        ]);
+                                        setImagesToDelete((prev) =>
+                                            prev.includes(imageId)
+                                                ? prev.filter(
+                                                      (id) => id !== imageId,
+                                                  )
+                                                : [...prev, imageId],
+                                        );
                                     }}
                                     onRemoveFile={(index) => {
                                         const newImages = images.filter(

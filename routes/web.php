@@ -53,9 +53,9 @@ Route::middleware(['auth', 'verified'])->group(function () {
         })->name('products.show');
 
         // Product form handling
-        Route::post('products', [\App\Http\Controllers\ProductController::class, 'store'])->name('products.store');
-        Route::put('products/{product}', [\App\Http\Controllers\ProductController::class, 'update'])->name('products.update');
-        Route::delete('products/{product}', [\App\Http\Controllers\ProductController::class, 'destroy'])->name('products.destroy');
+        Route::post('products', [\App\Http\Controllers\AdminProductController::class, 'store'])->name('products.store');
+        Route::post('products/{product}', [\App\Http\Controllers\AdminProductController::class, 'update'])->name('products.update');
+        Route::delete('products/{product}', [\App\Http\Controllers\AdminProductController::class, 'destroy'])->name('products.destroy');
 
         // Categories
         Route::get('categories', function () {

@@ -191,6 +191,8 @@ class ProductController extends Controller
                 'sku' => 'sometimes|string|unique:products,sku,'.$product->id,
                 'category_id' => 'sometimes|exists:categories,id',
                 'is_active' => 'sometimes|boolean',
+                'images' => 'nullable|array',
+                'images.*' => 'image|mimes:jpeg,png,jpg,gif,webp|max:2048',
                 'remove_images' => 'nullable|array',
                 'remove_images.*' => 'integer',
             ]);
@@ -222,7 +224,7 @@ class ProductController extends Controller
             \Log::info('Removing images', ['ids' => $removeImageIds]);
 
             foreach ($removeImageIds as $mediaId) {
-                $media = $product->media()->find($mediaId);
+                $media = $product->getMedia('images')->find($mediaId);
                 if ($media) {
                     \Log::info('Deleting media', ['id' => $mediaId, 'name' => $media->name]);
                     $media->delete();
