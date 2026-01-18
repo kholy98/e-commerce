@@ -435,3 +435,49 @@ adminProductsApiId.delete = (
     url: adminProductsApiId.url(product, options),
     method: 'delete',
 });
+
+/**
+ * Admin team members index route
+ * @route '/admin/team-members'
+ */
+export const adminTeamMembers = (
+    options?: RouteQueryOptions,
+): RouteDefinition<'get'> => ({
+    url: '/admin/team-members' + queryParams(options),
+    method: 'get',
+});
+
+/**
+ * Admin team members create route
+ * @route '/admin/team-members/create'
+ */
+export const adminTeamMembersCreate = (
+    options?: RouteQueryOptions,
+): RouteDefinition<'get'> => ({
+    url: '/admin/team-members/create' + queryParams(options),
+    method: 'get',
+});
+
+/**
+ * Admin team members edit route
+ * @route '/admin/team-members/{teamMember}/edit'
+ */
+export const adminTeamMembersEdit = (
+    teamMember: string | number,
+    options?: RouteQueryOptions,
+): RouteDefinition<'get'> => ({
+    url: `/admin/team-members/${teamMember}/edit` + queryParams(options),
+    method: 'get',
+});
+
+/**
+ * Admin team members show route
+ * @route '/admin/team-members/{teamMember}'
+ */
+export const adminTeamMembersShow = (
+    teamMember: string | number,
+    options?: RouteQueryOptions,
+): RouteDefinition<'get'> => ({
+    url: `/admin/team-members/${teamMember}` + queryParams(options),
+    method: 'get',
+});

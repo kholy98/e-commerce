@@ -1,5 +1,5 @@
 import { Link } from '@inertiajs/react';
-import { BookOpen, Folder, LayoutGrid, Package, Tag } from 'lucide-react';
+import { BookOpen, Folder, LayoutGrid, Package, Tag, Users } from 'lucide-react';
 
 import { NavFooter } from '@/components/nav-footer';
 import { NavMain } from '@/components/nav-main';
@@ -13,7 +13,7 @@ import {
     SidebarMenuButton,
     SidebarMenuItem,
 } from '@/components/ui/sidebar';
-import { dashboard, adminProducts, adminCategories } from '@/routes';
+import { adminCategories, adminProducts, adminTeamMembers, dashboard } from '@/routes';
 import { type NavItem } from '@/types';
 
 import AppLogo from './app-logo';
@@ -33,6 +33,11 @@ const mainNavItems: NavItem[] = [
         title: 'Categories',
         href: adminCategories(),
         icon: Tag,
+    },
+    {
+        title: 'Team Members',
+        href: adminTeamMembers(),
+        icon: Users,
     },
 ];
 

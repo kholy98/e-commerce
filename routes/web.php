@@ -83,6 +83,34 @@ Route::middleware(['auth', 'verified'])->group(function () {
         Route::post('categories', [\App\Http\Controllers\AdminCategoryController::class, 'store'])->name('categories.store');
         Route::post('categories/{category}', [\App\Http\Controllers\AdminCategoryController::class, 'update'])->name('categories.update');
         Route::delete('categories/{category}', [\App\Http\Controllers\AdminCategoryController::class, 'destroy'])->name('categories.destroy');
+
+        // Team Members
+        Route::get('team-members', function () {
+            return Inertia::render('admin/team-members/index', [
+                'teamMembers' => \App\Models\TeamMember::all(),
+            ]);
+        })->name('team-members.index');
+
+        Route::get('team-members/create', function () {
+            return Inertia::render('admin/team-members/create');
+        })->name('team-members.create');
+
+        Route::get('team-members/{teamMember}/edit', function (\App\Models\TeamMember $teamMember) {
+            return Inertia::render('admin/team-members/edit', [
+                'teamMember' => $teamMember->load('media'),
+            ]);
+        })->name('team-members.edit');
+
+        Route::get('team-members/{teamMember}', function (\App\Models\TeamMember $teamMember) {
+            return Inertia::render('admin/team-members/show', [
+                'teamMember' => $teamMember->load('media'),
+            ]);
+        })->name('team-members.show');
+
+        // Team Member form handling
+        Route::post('team-members', [\App\Http\Controllers\TeamMemberController::class, 'store'])->name('team-members.store');
+        Route::post('team-members/{teamMember}', [\App\Http\Controllers\TeamMemberController::class, 'update'])->name('team-members.update');
+        Route::delete('team-members/{teamMember}', [\App\Http\Controllers\TeamMemberController::class, 'destroy'])->name('team-members.destroy');
     });
 });
 
