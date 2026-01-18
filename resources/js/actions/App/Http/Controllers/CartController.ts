@@ -44,7 +44,7 @@ index.head = (options?: RouteQueryOptions): RouteDefinition<'head'> => ({
 
 /**
 * @see \App\Http\Controllers\CartController::add
- * @see app/Http/Controllers/CartController.php:44
+ * @see app/Http/Controllers/CartController.php:45
  * @route '/api/cart/add'
  */
 export const add = (options?: RouteQueryOptions): RouteDefinition<'post'> => ({
@@ -59,7 +59,7 @@ add.definition = {
 
 /**
 * @see \App\Http\Controllers\CartController::add
- * @see app/Http/Controllers/CartController.php:44
+ * @see app/Http/Controllers/CartController.php:45
  * @route '/api/cart/add'
  */
 add.url = (options?: RouteQueryOptions) => {
@@ -68,7 +68,7 @@ add.url = (options?: RouteQueryOptions) => {
 
 /**
 * @see \App\Http\Controllers\CartController::add
- * @see app/Http/Controllers/CartController.php:44
+ * @see app/Http/Controllers/CartController.php:45
  * @route '/api/cart/add'
  */
 add.post = (options?: RouteQueryOptions): RouteDefinition<'post'> => ({
@@ -78,7 +78,7 @@ add.post = (options?: RouteQueryOptions): RouteDefinition<'post'> => ({
 
 /**
 * @see \App\Http\Controllers\CartController::update
- * @see app/Http/Controllers/CartController.php:73
+ * @see app/Http/Controllers/CartController.php:74
  * @route '/api/cart/{productId}'
  */
 export const update = (args: { productId: string | number } | [productId: string | number ] | string | number, options?: RouteQueryOptions): RouteDefinition<'patch'> => ({
@@ -93,7 +93,7 @@ update.definition = {
 
 /**
 * @see \App\Http\Controllers\CartController::update
- * @see app/Http/Controllers/CartController.php:73
+ * @see app/Http/Controllers/CartController.php:74
  * @route '/api/cart/{productId}'
  */
 update.url = (args: { productId: string | number } | [productId: string | number ] | string | number, options?: RouteQueryOptions) => {
@@ -121,7 +121,7 @@ update.url = (args: { productId: string | number } | [productId: string | number
 
 /**
 * @see \App\Http\Controllers\CartController::update
- * @see app/Http/Controllers/CartController.php:73
+ * @see app/Http/Controllers/CartController.php:74
  * @route '/api/cart/{productId}'
  */
 update.patch = (args: { productId: string | number } | [productId: string | number ] | string | number, options?: RouteQueryOptions): RouteDefinition<'patch'> => ({
@@ -131,7 +131,7 @@ update.patch = (args: { productId: string | number } | [productId: string | numb
 
 /**
 * @see \App\Http\Controllers\CartController::remove
- * @see app/Http/Controllers/CartController.php:101
+ * @see app/Http/Controllers/CartController.php:102
  * @route '/api/cart/{productId}'
  */
 export const remove = (args: { productId: string | number } | [productId: string | number ] | string | number, options?: RouteQueryOptions): RouteDefinition<'delete'> => ({
@@ -146,7 +146,7 @@ remove.definition = {
 
 /**
 * @see \App\Http\Controllers\CartController::remove
- * @see app/Http/Controllers/CartController.php:101
+ * @see app/Http/Controllers/CartController.php:102
  * @route '/api/cart/{productId}'
  */
 remove.url = (args: { productId: string | number } | [productId: string | number ] | string | number, options?: RouteQueryOptions) => {
@@ -174,7 +174,7 @@ remove.url = (args: { productId: string | number } | [productId: string | number
 
 /**
 * @see \App\Http\Controllers\CartController::remove
- * @see app/Http/Controllers/CartController.php:101
+ * @see app/Http/Controllers/CartController.php:102
  * @route '/api/cart/{productId}'
  */
 remove.delete = (args: { productId: string | number } | [productId: string | number ] | string | number, options?: RouteQueryOptions): RouteDefinition<'delete'> => ({
@@ -184,7 +184,7 @@ remove.delete = (args: { productId: string | number } | [productId: string | num
 
 /**
 * @see \App\Http\Controllers\CartController::clear
- * @see app/Http/Controllers/CartController.php:115
+ * @see app/Http/Controllers/CartController.php:116
  * @route '/api/cart'
  */
 export const clear = (options?: RouteQueryOptions): RouteDefinition<'delete'> => ({
@@ -199,7 +199,7 @@ clear.definition = {
 
 /**
 * @see \App\Http\Controllers\CartController::clear
- * @see app/Http/Controllers/CartController.php:115
+ * @see app/Http/Controllers/CartController.php:116
  * @route '/api/cart'
  */
 clear.url = (options?: RouteQueryOptions) => {
@@ -208,7 +208,7 @@ clear.url = (options?: RouteQueryOptions) => {
 
 /**
 * @see \App\Http\Controllers\CartController::clear
- * @see app/Http/Controllers/CartController.php:115
+ * @see app/Http/Controllers/CartController.php:116
  * @route '/api/cart'
  */
 clear.delete = (options?: RouteQueryOptions): RouteDefinition<'delete'> => ({
@@ -218,7 +218,7 @@ clear.delete = (options?: RouteQueryOptions): RouteDefinition<'delete'> => ({
 
 /**
 * @see \App\Http\Controllers\CartController::summary
- * @see app/Http/Controllers/CartController.php:128
+ * @see app/Http/Controllers/CartController.php:129
  * @route '/api/cart/summary'
  */
 export const summary = (options?: RouteQueryOptions): RouteDefinition<'get'> => ({
@@ -233,7 +233,7 @@ summary.definition = {
 
 /**
 * @see \App\Http\Controllers\CartController::summary
- * @see app/Http/Controllers/CartController.php:128
+ * @see app/Http/Controllers/CartController.php:129
  * @route '/api/cart/summary'
  */
 summary.url = (options?: RouteQueryOptions) => {
@@ -242,7 +242,7 @@ summary.url = (options?: RouteQueryOptions) => {
 
 /**
 * @see \App\Http\Controllers\CartController::summary
- * @see app/Http/Controllers/CartController.php:128
+ * @see app/Http/Controllers/CartController.php:129
  * @route '/api/cart/summary'
  */
 summary.get = (options?: RouteQueryOptions): RouteDefinition<'get'> => ({
@@ -251,7 +251,7 @@ summary.get = (options?: RouteQueryOptions): RouteDefinition<'get'> => ({
 })
 /**
 * @see \App\Http\Controllers\CartController::summary
- * @see app/Http/Controllers/CartController.php:128
+ * @see app/Http/Controllers/CartController.php:129
  * @route '/api/cart/summary'
  */
 summary.head = (options?: RouteQueryOptions): RouteDefinition<'head'> => ({
@@ -261,7 +261,7 @@ summary.head = (options?: RouteQueryOptions): RouteDefinition<'head'> => ({
 
 /**
 * @see \App\Http\Controllers\CartController::count
- * @see app/Http/Controllers/CartController.php:141
+ * @see app/Http/Controllers/CartController.php:142
  * @route '/api/cart/count'
  */
 export const count = (options?: RouteQueryOptions): RouteDefinition<'get'> => ({
@@ -276,7 +276,7 @@ count.definition = {
 
 /**
 * @see \App\Http\Controllers\CartController::count
- * @see app/Http/Controllers/CartController.php:141
+ * @see app/Http/Controllers/CartController.php:142
  * @route '/api/cart/count'
  */
 count.url = (options?: RouteQueryOptions) => {
@@ -285,7 +285,7 @@ count.url = (options?: RouteQueryOptions) => {
 
 /**
 * @see \App\Http\Controllers\CartController::count
- * @see app/Http/Controllers/CartController.php:141
+ * @see app/Http/Controllers/CartController.php:142
  * @route '/api/cart/count'
  */
 count.get = (options?: RouteQueryOptions): RouteDefinition<'get'> => ({
@@ -294,7 +294,7 @@ count.get = (options?: RouteQueryOptions): RouteDefinition<'get'> => ({
 })
 /**
 * @see \App\Http\Controllers\CartController::count
- * @see app/Http/Controllers/CartController.php:141
+ * @see app/Http/Controllers/CartController.php:142
  * @route '/api/cart/count'
  */
 count.head = (options?: RouteQueryOptions): RouteDefinition<'head'> => ({

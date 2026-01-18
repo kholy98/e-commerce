@@ -8,6 +8,7 @@ use App\Http\Controllers\OrderController;
 use App\Http\Controllers\PaymentController;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\ShipmentController;
+use App\Http\Controllers\TeamMemberApiController;
 use App\Models\User;
 use App\Services\SessionCartService;
 use Illuminate\Http\Request;
@@ -154,6 +155,12 @@ Route::middleware(['web', 'auth'])->prefix('admin')->group(function () {
     Route::prefix('orders')->group(function () {
         Route::get('/statistics', [OrderController::class, 'statistics']);
     });
+});
+
+// Team member API routes - public for now to return JSON
+Route::prefix('admin/team-members')->group(function () {
+    Route::get('/', [TeamMemberApiController::class, 'index']);
+    Route::get('/{teamMember}', [TeamMemberApiController::class, 'show']);
 });
 
 // Payment routes
