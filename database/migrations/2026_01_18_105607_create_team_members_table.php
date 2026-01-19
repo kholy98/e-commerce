@@ -11,11 +11,12 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::table('team_members', function (Blueprint $table) {
-            $table->renameColumn('full_name', 'fullname');
-            $table->dropColumn('bio');
-            $table->dropColumn('image_path');
-            $table->json('social_media')->nullable()->after('email');
+        Schema::create('team_members', function (Blueprint $table) {
+            $table->string('fullname');
+            $table->string('phone')->nullable();
+            $table->string('email');
+            $table->string('title');
+            $table->json('social_media')->nullable();
         });
     }
 
@@ -25,10 +26,7 @@ return new class extends Migration
     public function down(): void
     {
         Schema::table('team_members', function (Blueprint $table) {
-            $table->renameColumn('fullname', 'full_name');
-            $table->dropColumn('social_media');
-            $table->text('bio')->nullable()->after('email');
-            $table->string('image_path')->nullable()->after('bio');
+            $table->dropColumn(['fullname', 'phone', 'email', 'social_media', 'title']);
         });
     }
 };

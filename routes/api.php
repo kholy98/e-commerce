@@ -11,6 +11,7 @@ use App\Http\Controllers\PaymentController;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\ShipmentController;
 use App\Http\Controllers\TeamMemberApiController;
+use App\Http\Controllers\WishlistController;
 use App\Models\User;
 use App\Services\SessionCartService;
 use Illuminate\Http\Request;
@@ -128,6 +129,15 @@ Route::middleware('auth:sanctum')->group(function () {
         Route::get('/{order}', [OrderController::class, 'show']);
         Route::patch('/{order}/status', [OrderController::class, 'updateStatus']);
         Route::post('/{order}/cancel', [OrderController::class, 'cancel']);
+    });
+
+    // Wishlist routes
+    Route::prefix('wishlist')->group(function () {
+        Route::get('/', [WishlistController::class, 'index']);
+        Route::post('/', [WishlistController::class, 'store']);
+        Route::delete('/{productId}', [WishlistController::class, 'destroy']);
+        Route::get('/check/{productId}', [WishlistController::class, 'check']);
+        Route::delete('/', [WishlistController::class, 'clear']);
     });
 });
 

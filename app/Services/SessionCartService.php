@@ -269,33 +269,76 @@ class SessionCartService
     public function getFormattedItems(): array
     {
         $cartItems = $this->getCartItems();
-        $formattedItems = [];
+        $enItems = [];
+        $arItems = [];
 
         foreach ($cartItems as $productId => $quantity) {
             $product = Product::with('category')->find($productId);
             if ($product) {
                 $subtotal = $product->price * $quantity;
-                $formattedItems[] = [
-                    'product_id' => $product->id,
+
+                // English version
+                $enItems[] = array_merge([
                     'product_name' => $product->name,
-                    'slug' => $product->slug,
                     'description' => $product->description,
-                    'price' => $product->price,
+                    'category' => $product->category ? [
+                        'name' => $product->category->name,
+                        'description' => $product->category->description,
+                    ] : null,
+                ], [
+                    'product_id' => $product->id,
+                    'slug' => $product->slug,
+                    'price' => (float) $product->price,
                     'sku' => $product->sku,
                     'stock' => $product->stock,
                     'is_active' => $product->is_active,
-                    'category' => $product->category ? [
-                        'id' => $product->category->id,
-                        'name' => $product->category->name,
-                        'slug' => $product->category->slug,
-                    ] : null,
+                    'grind_type' => $product->grind_type?->value,
+                    'weight' => (float) $product->weight,
+                    'product_details' => $product->product_details,
+                    'image' => $product->getFirstMediaUrl('images'),
                     'quantity' => $quantity,
                     'subtotal' => round($subtotal, 2),
-                ];
+                    'created_at' => $product->created_at,
+                    'updated_at' => $product->updated_at,
+                ]);
+
+                // Arabic version
+                $arItems[] = array_merge([
+                    'product_name' => $product->name_ar ?: $product->name,
+                    'description' => $product->description_ar ?: $product->description,
+                    'category' => $product->category ? [
+                        'name' => $product->category->name_ar ?: $product->category->name,
+                        'description' => $product->category->description_ar ?: $product->category->description,
+                    ] : null,
+                ], [
+                    'product_id' => $product->id,
+                    'slug' => $product->slug,
+                    'price' => (float) $product->price,
+                    'sku' => $product->sku,
+                    'stock' => $product->stock,
+                    'is_active' => $product->is_active,
+                    'grind_type' => $product->grind_type?->value,
+                    'weight' => (float) $product->weight,
+                    'product_details' => $product->product_details,
+                    'image' => $product->getFirstMediaUrl('images'),
+                    'quantity' => $quantity,
+                    'subtotal' => round($subtotal, 2),
+                    'created_at' => $product->created_at,
+                    'updated_at' => $product->updated_at,
+                ]);
             }
         }
 
-        return $formattedItems;
+        return [
+            'en' => [
+                'items' => $enItems,
+                'count' => count($enItems),
+            ],
+            'ar' => [
+                'items' => $arItems,
+                'count' => count($arItems),
+            ],
+        ];
     }
 
     /**

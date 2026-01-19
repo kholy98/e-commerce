@@ -30,11 +30,17 @@ class CartController extends Controller
         return response()->json([
             'success' => true,
             'data' => [
-                'items' => $items,
-                'total' => $summary['total'],
-                'item_count' => $summary['item_count'],
+                'en' => [
+                    'items' => $items['en']['items'],
+                    'count' => $items['en']['count'],
+                    'summary' => $summary,
+                ],
+                'ar' => [
+                    'items' => $items['ar']['items'],
+                    'count' => $items['ar']['count'],
+                    'summary' => $summary,
+                ],
                 'is_guest' => !Auth::check(),
-                'session_data' => session()->all(),
             ],
         ]);
     }
