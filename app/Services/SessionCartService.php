@@ -96,14 +96,14 @@ class SessionCartService
         $existingCartItem = $user->carts()->where('product_id', $productId)->first();
 
         if ($existingCartItem) {
-            dd('cart exists');
+
             $newQuantity = $existingCartItem->quantity + $quantity;
             if (! $product->hasStock($newQuantity)) {
                 throw new \Exception('Cannot add more, insufficient stock');
             }
             $existingCartItem->update(['quantity' => $newQuantity]);
         } else {
-            dd('cart here');
+            
             $user->carts()->create([
                 'product_id' => $productId,
                 'quantity' => $quantity,
