@@ -102,7 +102,7 @@ Route::get('/contact-us', [ContactUsController::class, 'index']);
 Route::prefix('cart')->group(function () {
     Route::get('/', [CartController::class, 'index']);
     Route::post('/add', [CartController::class, 'add']);
-    Route::patch('/{productId}', [CartController::class, 'update']);
+    Route::put('/{productId}', [CartController::class, 'update']);
     Route::delete('/{productId}', [CartController::class, 'remove']);
     Route::delete('/', [CartController::class, 'clear']);
     Route::get('/summary', [CartController::class, 'summary']);
