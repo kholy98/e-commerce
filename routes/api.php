@@ -76,7 +76,11 @@ Route::post('/login', function (Request $request, SessionCartService $cartServic
 });
 
 Route::post('/logout', function (Request $request) {
-    $request->user()->currentAccessToken()->delete();
+    $token = $request->user()->currentAccessToken();
+
+    if ($token) {
+        $token->delete();
+    }
 
     return response()->json([
         'message' => 'Logged out successfully',
@@ -99,7 +103,7 @@ Route::prefix('categories')->group(function () {
 // Contact Us
 Route::get('/contact-us', [ContactUsController::class, 'index']);
 
-// Cart routes - now public for both guest and authenticated users
+// Cart routes - support both guest and authenticated users
 Route::prefix('cart')->group(function () {
     Route::get('/', [CartController::class, 'index']);
     Route::post('/add', [CartController::class, 'add']);

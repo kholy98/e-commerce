@@ -75,18 +75,32 @@ class CartTest extends TestCase
             ->assertJson([
                 'success' => true,
                 'data' => [
-                    'items' => [
-                        [
-                            'product_id' => $this->product->id,
-                            'product_name' => $this->product->name,
-                            'price' => $this->product->price,
-                            'quantity' => 1,
-                            'subtotal' => 100.0,
-                        ]
+                    'en' => [
+                        'items' => [
+                            [
+                                'product_id' => $this->product->id,
+                                'product_name' => $this->product->name,
+                                'price' => $this->product->price,
+                                'quantity' => 1,
+                                'subtotal' => 100.0,
+                            ]
+                        ],
+                        'count' => 1,
                     ],
-                    'total' => 100.0,
-                    'item_count' => 1,
-                ]
+                    'ar' => [
+                        'items' => [
+                            [
+                                'product_id' => $this->product->id,
+                                'product_name' => $this->product->name,
+                                'price' => $this->product->price,
+                                'quantity' => 1,
+                                'subtotal' => 100.0,
+                            ]
+                        ],
+                        'count' => 1,
+                    ],
+                    'is_guest' => false,
+                ],
             ]);
     }
 
@@ -99,7 +113,7 @@ class CartTest extends TestCase
         ]);
 
         $response = $this->actingAs($this->user, 'sanctum')
-            ->patchJson("/api/cart/{$this->product->id}", [
+            ->putJson("/api/cart/{$this->product->id}", [
                 'quantity' => 3,
             ]);
 

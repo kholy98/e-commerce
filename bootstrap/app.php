@@ -28,6 +28,11 @@ return Application::configure(basePath: dirname(__DIR__))
             AddLinkHeadersForPreloadedAssets::class,
         ]);
 
+        // Register middleware aliases
+        $middleware->alias([
+            'optional.sanctum' => \App\Http\Middleware\OptionalSanctumAuth::class,
+        ]);
+
     })
     ->withExceptions(function (Exceptions $exceptions): void {
         //
