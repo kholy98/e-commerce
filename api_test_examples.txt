@@ -7,9 +7,10 @@ This file contains example API requests to test the complete e-commerce flow tha
 1. **User selects products** - Browse and add items to cart
 2. **Cart in session** - Cart stored in session for guests, database for users
 3. **Login/Register (optional)** - If user chooses to login/register, migrate cart to database
-4. **Create shipment** - Generate shipment through Bosta API
-5. **Process payment** - Initiate payment through Paymob
-6. **Create order** - Order is only created after BOTH shipment and payment are successful
+4. **Manage addresses (optional)** - Authenticated users can save/manage multiple addresses
+5. **Create shipment** - Generate shipment through Bosta API (uses stored or provided address)
+6. **Process payment** - Initiate payment through Paymob (uses stored or provided address)
+7. **Create order** - Order is only created after BOTH shipment and payment are successful
 
 ## Prerequisites
 - Run `php artisan db:seed` to populate the database with test data
@@ -84,6 +85,154 @@ Expected response:
 ```bash
 curl -X POST BASE_URL/logout \
   -H "Authorization: Bearer YOUR_TOKEN"
+```
+
+## 2.5. 📍 Customer Address Management (Authenticated Users)
+
+### List User's Addresses
+```bash
+curl -X GET BASE_URL/addresses \
+  -H "Authorization: Bearer YOUR_TOKEN"
+```
+
+**Expected Response:**
+```json
+{
+  "success": true,
+  "data": [
+    {
+      "id": 1,
+      "user_id": 1,
+      "label": "Home",
+      "name": "John Doe",
+      "phone": "+201234567890",
+      "address": "123 Main Street, Cairo",
+      "city": "Cairo",
+      "zip_code": "12345",
+      "country": "Egypt",
+      "state": null,
+      "is_default": true,
+      "is_billing": true,
+      "is_shipping": true,
+      "created_at": "2026-01-20T10:00:00.000000Z",
+      "updated_at": "2026-01-20T10:00:00.000000Z"
+    }
+  ]
+}
+```
+
+### Create New Address
+```bash
+curl -X POST BASE_URL/addresses \
+  -H "Authorization: Bearer YOUR_TOKEN" \
+  -H "Content-Type: application/json" \
+  -d '{
+    "label": "Work",
+    "name": "John Doe",
+    "phone": "+201234567891",
+    "address": "456 Business Ave, Cairo",
+    "city": "Cairo",
+    "zip_code": "67890",
+    "country": "Egypt",
+    "is_default": false,
+    "is_billing": true,
+    "is_shipping": false
+  }'
+```
+
+**Expected Response:**
+```json
+{
+  "success": true,
+  "message": "Address created successfully",
+  "data": {
+    "id": 2,
+    "user_id": 1,
+    "label": "Work",
+    "name": "John Doe",
+    "phone": "+201234567891",
+    "address": "456 Business Ave, Cairo",
+    "city": "Cairo",
+    "zip_code": "67890",
+    "country": "Egypt",
+    "is_default": false,
+    "is_billing": true,
+    "is_shipping": false,
+    "created_at": "2026-01-20T10:05:00.000000Z",
+    "updated_at": "2026-01-20T10:05:00.000000Z"
+  }
+}
+```
+
+### Update Address
+```bash
+curl -X PUT BASE_URL/addresses/1 \
+  -H "Authorization: Bearer YOUR_TOKEN" \
+  -H "Content-Type: application/json" \
+  -d '{
+    "phone": "+201234567892",
+    "address": "123 Updated Street, Cairo"
+  }'
+```
+
+**Expected Response:**
+```json
+{
+  "success": true,
+  "message": "Address updated successfully",
+  "data": {
+    "id": 1,
+    "user_id": 1,
+    "label": "Home",
+    "name": "John Doe",
+    "phone": "+201234567892",
+    "address": "123 Updated Street, Cairo",
+    "city": "Cairo",
+    "zip_code": "12345",
+    "country": "Egypt",
+    "is_default": true,
+    "is_billing": true,
+    "is_shipping": true,
+    "created_at": "2026-01-20T10:00:00.000000Z",
+    "updated_at": "2026-01-20T10:10:00.000000Z"
+  }
+}
+```
+
+### Set Address as Default
+```bash
+curl -X PATCH BASE_URL/addresses/2/default \
+  -H "Authorization: Bearer YOUR_TOKEN"
+```
+
+**Expected Response:**
+```json
+{
+  "success": true,
+  "message": "Address set as default successfully",
+  "data": {
+    "id": 2,
+    "user_id": 1,
+    "label": "Work",
+    "is_default": true,
+    "is_billing": true,
+    "is_shipping": false
+  }
+}
+```
+
+### Delete Address
+```bash
+curl -X DELETE BASE_URL/addresses/1 \
+  -H "Authorization: Bearer YOUR_TOKEN"
+```
+
+**Expected Response:**
+```json
+{
+  "success": true,
+  "message": "Address deleted successfully"
+}
 ```
 
 ## 1. 🛍️ Browse Products (Public)
@@ -181,6 +330,20 @@ curl -X POST BASE_URL/login \
 ## 4. 🚀 Complete Checkout (New Flow)
 
 ### Initiate Checkout - Creates Shipment & Payment
+
+#### Option 1: Using Stored Addresses (Recommended for authenticated users)
+```bash
+curl -X POST BASE_URL/checkout/initiate \
+  -H "Authorization: Bearer YOUR_TOKEN" \
+  -H "Content-Type: application/json" \
+  -d '{
+    "shipping_address_id": 1,
+    "billing_address_id": 1,
+    "notes": "Please handle with care"
+  }'
+```
+
+#### Option 2: Using Inline Addresses (For guests or custom addresses)
 ```bash
 curl -X POST BASE_URL/checkout/initiate \
   -H "Content-Type: application/json" \
@@ -653,8 +816,17 @@ curl -X POST BASE_URL/webhook/bosta \
 ### Authenticated User Flow
 1. ✅ Login/Register with automatic cart migration
 2. ✅ Add items to cart (database-based)
-3. ✅ Follow same checkout flow as guest
-4. ✅ Order associated with user account
+3. ✅ Manage customer addresses (optional)
+4. ✅ Initiate checkout using stored addresses (recommended)
+5. ✅ Order associated with user account
+
+### Address Management Flow
+1. ✅ Create multiple addresses (home, work, etc.)
+2. ✅ Set default address automatically
+3. ✅ Update address information
+4. ✅ Delete unused addresses
+5. ✅ Use stored addresses in checkout
+6. ✅ Addresses automatically formatted for APIs
 
 ## 🛒 Complete Flow: Add to Cart → Register/Login → Checkout → Order
 
@@ -746,6 +918,50 @@ curl -X POST BASE_URL/register \
 
 **Note:** Behind the scenes, the system automatically calls `SessionCartService->migrateSessionToDatabase()` to transfer all guest cart items to the user's database cart.
 
+### Step 4.5: Manage Customer Addresses (Optional but Recommended)
+```bash
+# Create shipping/billing address
+curl -X POST BASE_URL/addresses \
+  -H "Authorization: Bearer YOUR_JWT_TOKEN" \
+  -H "Content-Type: application/json" \
+  -d '{
+    "label": "Home",
+    "name": "Jane Smith",
+    "phone": "+201987654321",
+    "address": "456 Oak Avenue, Zamalek",
+    "city": "Cairo",
+    "zip_code": "67890",
+    "country": "Egypt",
+    "is_default": true,
+    "is_billing": true,
+    "is_shipping": true
+  }'
+```
+
+**Expected Response:**
+```json
+{
+  "success": true,
+  "message": "Address created successfully",
+  "data": {
+    "id": 1,
+    "user_id": 5,
+    "label": "Home",
+    "name": "Jane Smith",
+    "phone": "+201987654321",
+    "address": "456 Oak Avenue, Zamalek",
+    "city": "Cairo",
+    "zip_code": "67890",
+    "country": "Egypt",
+    "is_default": true,
+    "is_billing": true,
+    "is_shipping": true,
+    "created_at": "2026-01-12T10:05:00.000000Z",
+    "updated_at": "2026-01-12T10:05:00.000000Z"
+  }
+}
+```
+
 ### Step 5: View Cart After Registration (Now stored in database)
 ```bash
 curl -X GET BASE_URL/cart \
@@ -802,9 +1018,22 @@ curl -X GET BASE_URL/cart/summary \
 
 ### Step 7: Initiate Checkout (Creates Shipment & Payment)
 ```bash
+# Using stored address (recommended)
 curl -X POST BASE_URL/checkout/initiate \
-  -H "Content-Type: application/json" \
   -H "Authorization: Bearer YOUR_JWT_TOKEN" \
+  -H "Content-Type: application/json" \
+  -d '{
+    "shipping_address_id": 1,
+    "billing_address_id": 1,
+    "notes": "Please deliver between 2-4 PM"
+  }'
+```
+
+**Alternative: Using inline addresses**
+```bash
+curl -X POST BASE_URL/checkout/initiate \
+  -H "Authorization: Bearer YOUR_JWT_TOKEN" \
+  -H "Content-Type: application/json" \
   -d '{
     "shipping_address": {
       "street": "456 Oak Avenue",
@@ -995,12 +1224,13 @@ curl -X GET BASE_URL/shipments/BOSTA987654321
 3. **Review Cart** - GET /cart (shows is_guest: true)
 4. **User Registration** - POST /register (automatically migrates session cart to database)
 5. **Cart Migration** - Session cart automatically transferred to user database cart
-6. **Review Cart Again** - GET /cart (now shows is_guest: false)
-7. **Initiate Checkout** - POST /checkout/initiate (creates shipment + payment)
-8. **Complete Payment** - User pays via Paymob iframe
-9. **Payment Webhook** - Paymob sends success webhook
-10. **Order Creation** - POST /checkout/complete creates final order
-11. **Order Management** - User can view/track orders
+6. **Manage Addresses** - POST /addresses (create shipping/billing addresses)
+7. **Review Cart Again** - GET /cart (now shows is_guest: false)
+8. **Initiate Checkout** - POST /checkout/initiate (creates shipment + payment using stored addresses)
+9. **Complete Payment** - User pays via Paymob iframe
+10. **Payment Webhook** - Paymob sends success webhook
+11. **Order Creation** - POST /checkout/complete creates final order
+12. **Order Management** - User can view/track orders
 
 ### Order Management
 1. ✅ Orders viewable in user account
@@ -1014,6 +1244,36 @@ curl -X GET BASE_URL/shipments/BOSTA987654321
 2. ✅ Low stock monitoring
 3. ✅ Order statistics and analytics
 4. ✅ Shipment management
+
+## 📍 Address Integration Scenarios
+
+### Scenario 1: Guest Checkout (No Addresses Stored)
+- User provides shipping/billing addresses inline during checkout
+- Addresses used directly for Bosta and Paymob APIs
+- No address storage in database
+
+### Scenario 2: Authenticated User - First Time
+- User logs in/registers
+- Creates addresses during or after registration
+- Uses stored addresses for checkout
+- Addresses saved for future use
+
+### Scenario 3: Authenticated User - Returning Customer
+- User logs in (cart migrates automatically)
+- Selects from saved addresses or creates new one
+- Uses stored addresses for faster checkout
+- Default address pre-selected
+
+### Scenario 4: Mixed Addresses
+- User uses stored address for shipping
+- Provides different billing address inline
+- System handles both stored and inline addresses seamlessly
+
+### Address API Integration
+- **Bosta API**: `toBostaAddress()` formats address for shipment creation
+- **Paymob API**: `toPaymobAddress()` formats address for payment processing
+- **Order Storage**: Addresses stored in order with proper relationships
+- **Validation**: Addresses validated for required fields per API requirements
 
 ## 🔧 Error Scenarios
 
@@ -1200,6 +1460,8 @@ curl -X GET BASE_URL/cart
 ✅ **Guest Checkout** - No authentication required for cart and checkout
 ✅ **Session Cart** - Cart stored in session for guests
 ✅ **Cart Migration** - Automatic migration to database on login
+✅ **Multiple Addresses** - Users can save/manage multiple shipping and billing addresses
+✅ **Address Integration** - Stored addresses automatically format for Bosta and Paymob APIs
 ✅ **Shipment First** - Shipment created before payment
 ✅ **Payment Gateway** - Paymob integration with webhooks
 ✅ **Order Creation** - Only after successful payment AND shipment

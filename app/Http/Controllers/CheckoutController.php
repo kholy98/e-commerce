@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Cart;
+use App\Models\CustomerAddress;
 use App\Models\Order;
 use App\Models\OrderItem;
 use App\Models\PendingCheckout;
@@ -42,29 +43,61 @@ class CheckoutController extends Controller
     public function initiate(Request $request): JsonResponse
     {
         $validated = $request->validate([
-            'shipping_address' => 'required|array',
-            'shipping_address.street' => 'required|string',
-            'shipping_address.city' => 'required|string',
-            'shipping_address.zip_code' => 'required|string',
-            'shipping_address.country' => 'required|string',
-            'shipping_address.building_number' => 'required|string',
+            'shipping_address_id' => 'nullable|exists:customer_addresses,id',
+            'billing_address_id' => 'nullable|exists:customer_addresses,id',
+            'shipping_address' => 'required_without:shipping_address_id|array',
+            'shipping_address.street' => 'required_with:shipping_address|string',
+            'shipping_address.city' => 'required_with:shipping_address|string',
+            'shipping_address.zip_code' => 'required_with:shipping_address|string',
+            'shipping_address.country' => 'required_with:shipping_address|string',
+            'shipping_address.building_number' => 'required_with:shipping_address|string',
             'shipping_address.floor' => 'nullable|string',
             'shipping_address.apartment' => 'nullable|string',
-            'shipping_address.zone' => 'required|string',
-            'billing_address' => 'required|array',
-             'billing_address.first_name' => 'required|string',
-             'billing_address.last_name' => 'required|string',
-             'billing_address.email' => 'required|email',
-             'billing_address.phone' => 'required|string',
-             'billing_address.street' => 'required|string',
-             'billing_address.city' => 'required|string',
-             'billing_address.zip_code' => 'required|string',
-             'billing_address.country' => 'required|string',
-             'billing_address.floor' => 'nullable|string', // Optional for Paymob (defaults to NA)
-             'billing_address.apartment' => 'nullable|string', // Optional for Paymob (defaults to NA)
+            'shipping_address.zone' => 'required_with:shipping_address|string',
+            'billing_address' => 'required_without:billing_address_id|array',
+            'billing_address.first_name' => 'required_with:billing_address|string',
+            'billing_address.last_name' => 'required_with:billing_address|string',
+            'billing_address.email' => 'required_with:billing_address|email',
+            'billing_address.phone' => 'required_with:billing_address|string',
+            'billing_address.street' => 'required_with:billing_address|string',
+            'billing_address.city' => 'required_with:billing_address|string',
+            'billing_address.zip_code' => 'required_with:billing_address|string',
+            'billing_address.country' => 'required_with:billing_address|string',
+            'billing_address.floor' => 'nullable|string',
+            'billing_address.apartment' => 'nullable|string',
             'notes' => 'nullable|string',
             'user_id' => 'nullable|exists:users,id', // For guest checkout with user creation
         ]);
+
+        // Load stored addresses if IDs are provided
+        $shippingAddress = null;
+        $billingAddress = null;
+
+        if (isset($validated['shipping_address_id'])) {
+            $shippingAddress = CustomerAddress::where('id', $validated['shipping_address_id'])
+                ->where('user_id', Auth::id())
+                ->first();
+
+            if (!$shippingAddress) {
+                return response()->json([
+                    'success' => false,
+                    'message' => 'Shipping address not found',
+                ], 404);
+            }
+        }
+
+        if (isset($validated['billing_address_id'])) {
+            $billingAddress = CustomerAddress::where('id', $validated['billing_address_id'])
+                ->where('user_id', Auth::id())
+                ->first();
+
+            if (!$billingAddress) {
+                return response()->json([
+                    'success' => false,
+                    'message' => 'Billing address not found',
+                ], 404);
+            }
+        }
 
         try {
             $cartItems = $this->cartService->getCartItems();
@@ -88,28 +121,48 @@ class CheckoutController extends Controller
                 'subtotal' => $summary['subtotal'],
                 'tax' => $summary['tax'],
                 'shipping_cost' => $summary['shipping'],
-                'shipping_address' => $validated['shipping_address'],
-                'billing_address' => $validated['billing_address'],
+                'shipping_address' => $shippingAddress ? $shippingAddress->toArray() : $validated['shipping_address'],
+                'billing_address' => $billingAddress ? $billingAddress->toArray() : $validated['billing_address'],
+                'shipping_address_id' => $shippingAddress?->id,
+                'billing_address_id' => $billingAddress?->id,
                 'notes' => $validated['notes'] ?? null,
             ];
 
             // Step 1: Create shipment with Bosta
-            $shipmentPayload = [
-                'type' => 10, // Required field for Bosta API - 10 = standard delivery
-                'receiver' => [
+            if ($billingAddress) {
+                $billingData = $billingAddress->toPaymobAddress();
+                $receiver = [
+                    'firstName' => $billingData['first_name'],
+                    'lastName' => $billingData['last_name'],
+                    'phone' => $billingData['phone_number'],
+                    'email' => $billingData['email'],
+                ];
+            } else {
+                $receiver = [
                     'firstName' => $validated['billing_address']['first_name'],
                     'lastName' => $validated['billing_address']['last_name'],
                     'phone' => $validated['billing_address']['phone'],
                     'email' => $validated['billing_address']['email'],
-                ],
-                'dropOffAddress' => [
+                ];
+            }
+
+            if ($shippingAddress) {
+                $dropOffAddress = $shippingAddress->toBostaAddress();
+            } else {
+                $dropOffAddress = [
                     'buildingNumber' => $validated['shipping_address']['building_number'],
                     'firstLine' => $validated['shipping_address']['street'],
                     'city' => $validated['shipping_address']['city'],
                     'zone' => $validated['shipping_address']['zone'],
                     'floor' => $validated['shipping_address']['floor'] ?? null,
                     'apartment' => $validated['shipping_address']['apartment'] ?? null,
-                ],
+                ];
+            }
+
+            $shipmentPayload = [
+                'type' => 10, // Required field for Bosta API - 10 = standard delivery
+                'receiver' => $receiver,
+                'dropOffAddress' => $dropOffAddress,
                 'notes' => $validated['notes'] ?? '',
                 'cod' => 0, // We're using online payment, no COD
             ];
@@ -131,25 +184,31 @@ class CheckoutController extends Controller
             ]]);
 
             // Step 2: Initiate payment with Paymob
+            if ($billingAddress) {
+                $billingData = $billingAddress->toPaymobAddress();
+            } else {
+                $billingData = [
+                    'first_name' => $validated['billing_address']['first_name'],
+                    'last_name' => $validated['billing_address']['last_name'],
+                    'email' => $validated['billing_address']['email'],
+                    'phone_number' => $validated['billing_address']['phone'],
+                    'street' => $validated['billing_address']['street'],
+                    'building' => $validated['billing_address']['street'],
+                    'floor' => $validated['billing_address']['floor'] ?? 'NA',
+                    'apartment' => $validated['billing_address']['apartment'] ?? 'NA',
+                    'city' => $validated['billing_address']['city'],
+                    'country' => $validated['billing_address']['country'],
+                    'postal_code' => $validated['billing_address']['zip_code'],
+                    'state' => 'NA',
+                    'shipping_method' => 'NA',
+                ];
+            }
+
             $paymentData = [
                 'amount_cents' => intval($summary['total'] * 100), // Convert to cents
                 'currency' => 'EGP',
                 'order_id' => 'TEMP-' . time(), // Temporary order ID
-                'billing_data' => [
-                    'first_name' => $validated['billing_address']['first_name'],
-                    'last_name' => $validated['billing_address']['last_name'],
-                    'email' => $validated['billing_address']['email'],
-                    'phone_number' => $validated['billing_address']['phone'], // Paymob expects phone_number
-                    'street' => $validated['billing_address']['street'], // Paymob expects street
-                    'building' => $validated['billing_address']['street'], // Paymob also expects building (same as street)
-                    'floor' => $validated['billing_address']['floor'] ?? 'NA', // Paymob requires floor
-                    'apartment' => $validated['billing_address']['apartment'] ?? 'NA', // Paymob requires apartment
-                    'city' => $validated['billing_address']['city'],
-                    'country' => $validated['billing_address']['country'],
-                    'postal_code' => $validated['billing_address']['zip_code'],
-                    'state' => 'NA', // Optional
-                    'shipping_method' => 'NA', // Optional
-                ],
+                'billing_data' => $billingData,
             ];
 
             \Log::info('Checkout: Initiating payment', [
