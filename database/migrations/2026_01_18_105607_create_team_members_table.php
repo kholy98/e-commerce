@@ -17,6 +17,7 @@ return new class extends Migration
             $table->string('email');
             $table->string('title');
             $table->json('social_media')->nullable();
+            $table->timestamps();
         });
     }
 
@@ -25,8 +26,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::table('team_members', function (Blueprint $table) {
-            $table->dropColumn(['fullname', 'phone', 'email', 'social_media', 'title']);
-        });
+        Schema::dropIfExists('team_members');
     }
 };
