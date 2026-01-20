@@ -75,9 +75,65 @@ Expected response:
     "email": "test@example.com",
     "email_verified_at": null,
     "created_at": "2024-01-07T10:00:00.000000Z",
-    "updated_at": "2024-01-07T10:00:00.000000Z"
+    "updated_at": "2024-01-07T10:00:00.000000Z",
+    "addresses": [
+      {
+        "id": 1,
+        "user_id": 1,
+        "label": "Home",
+        "name": "John Doe",
+        "phone": "+201234567890",
+        "address": "123 Main Street, Cairo",
+        "city": "Cairo",
+        "zip_code": "12345",
+        "country": "Egypt",
+        "state": null,
+        "is_default": true,
+        "is_billing": true,
+        "is_shipping": true,
+        "created_at": "2026-01-20T10:00:00.000000Z",
+        "updated_at": "2026-01-20T10:00:00.000000Z"
+      }
+    ]
   },
   "token": "YOUR_TOKEN_HERE"
+}
+```
+
+### Get User Profile (with addresses)
+```bash
+curl -X GET BASE_URL/user \
+  -H "Authorization: Bearer YOUR_TOKEN"
+```
+
+**Expected Response:**
+```json
+{
+  "id": 1,
+  "name": "Test User",
+  "email": "test@example.com",
+  "email_verified_at": null,
+  "created_at": "2024-01-07T10:00:00.000000Z",
+  "updated_at": "2024-01-07T10:00:00.000000Z",
+  "addresses": [
+    {
+      "id": 1,
+      "user_id": 1,
+      "label": "Home",
+      "name": "John Doe",
+      "phone": "+201234567890",
+      "address": "123 Main Street, Cairo",
+      "city": "Cairo",
+      "zip_code": "12345",
+      "country": "Egypt",
+      "state": null,
+      "is_default": true,
+      "is_billing": true,
+      "is_shipping": true,
+      "created_at": "2026-01-20T10:00:00.000000Z",
+      "updated_at": "2026-01-20T10:00:00.000000Z"
+    }
+  ]
 }
 ```
 

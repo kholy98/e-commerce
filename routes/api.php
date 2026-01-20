@@ -23,7 +23,9 @@ use Illuminate\Support\Facades\Route;
 use Laravel\Sanctum\PersonalAccessToken;
 
 Route::get('/user', function (Request $request) {
-    return $request->user();
+    return $request->user()->load(['addresses' => function ($query) {
+        $query->orderBy('is_default', 'desc')->orderBy('created_at', 'desc');
+    }]);
 })->middleware('auth:sanctum');
 
 // Authentication routes
@@ -48,7 +50,9 @@ Route::post('/register', function (Request $request, SessionCartService $cartSer
     $token = $user->createToken('API Token')->plainTextToken;
 
     return response()->json([
-        'user' => $user,
+        'user' => $user->load(['addresses' => function ($query) {
+            $query->orderBy('is_default', 'desc')->orderBy('created_at', 'desc');
+        }]),
         'token' => $token,
     ]);
 });
@@ -73,7 +77,9 @@ Route::post('/login', function (Request $request, SessionCartService $cartServic
     $token = $user->createToken('API Token')->plainTextToken;
 
     return response()->json([
-        'user' => $user,
+        'user' => $user->load(['addresses' => function ($query) {
+            $query->orderBy('is_default', 'desc')->orderBy('created_at', 'desc');
+        }]),
         'token' => $token,
     ]);
 });

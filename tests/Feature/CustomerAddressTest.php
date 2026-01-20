@@ -146,4 +146,40 @@ class CustomerAddressTest extends TestCase
 
         $this->assertEquals(1, $defaultAddresses);
     }
+
+    public function test_user_profile_includes_addresses()
+    {
+        // Create some addresses for the user
+        CustomerAddress::factory()->count(2)->create(['user_id' => $this->user->id]);
+
+        $response = $this->actingAs($this->user, 'sanctum')
+            ->getJson('/api/user');
+
+        $response->assertStatus(200)
+            ->assertJsonStructure([
+                'id',
+                'name',
+                'email',
+                'addresses' => [
+                    '*' => [
+                        'id',
+                        'user_id',
+                        'name',
+                        'phone',
+                        'address',
+                        'city',
+                        'zip_code',
+                        'country',
+                        'is_default',
+                        'is_billing',
+                        'is_shipping',
+                    ]
+                ]
+            ]);
+
+        // Verify addresses are included
+        $responseData = $response->json();
+        $this->assertCount(2, $responseData['addresses']);
+        $this->assertEquals($this->user->id, $responseData['addresses'][0]['user_id']);
+    }
 }
