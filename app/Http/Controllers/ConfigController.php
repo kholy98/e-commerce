@@ -19,6 +19,14 @@ class ConfigController extends Controller
             'PAYMOB_IFRAME_ID'      => 'sometimes|numeric',
             'BOSTA_API_KEY'         => 'sometimes|string',
             'BOSTA_BASE_URL'        => 'sometimes|url',
+            'MAIL_MAILER'           => 'sometimes|string',
+            'MAIL_SCHEME'           => 'sometimes|string|nullable',
+            'MAIL_HOST'             => 'sometimes|string',
+            'MAIL_PORT'             => 'sometimes|numeric',
+            'MAIL_USERNAME'         => 'sometimes|string',
+            'MAIL_PASSWORD'         => 'sometimes|string',
+            'MAIL_FROM_ADDRESS'     => 'sometimes|email',
+            'MAIL_FROM_NAME'        => 'sometimes|string',
         ]);
 
         $path = base_path('.env');
@@ -79,6 +87,14 @@ class ConfigController extends Controller
                 'PAYMOB_BASE_URL' => env('PAYMOB_BASE_URL'),
                 'PAYMOB_API_KEY' => env('PAYMOB_API_KEY'),
                 'BOSTA_API_KEY' => env('BOSTA_API_KEY'),
+                'MAIL_MAILER' => env('MAIL_MAILER'),
+                'MAIL_SCHEME' => env('MAIL_SCHEME'),
+                'MAIL_HOST' => env('MAIL_HOST'),
+                'MAIL_PORT' => env('MAIL_PORT'),
+                'MAIL_USERNAME' => env('MAIL_USERNAME'),
+                'MAIL_PASSWORD' => env('MAIL_PASSWORD'),
+                'MAIL_FROM_ADDRESS' => env('MAIL_FROM_ADDRESS'),
+                'MAIL_FROM_NAME' => env('MAIL_FROM_NAME'),
             ]
         ]);
     }

@@ -81,7 +81,7 @@ store.post = (options?: RouteQueryOptions): RouteDefinition<'post'> => ({
  * @see app/Http/Controllers/OrderController.php:90
  * @route '/api/orders/{order}'
  */
-export const show = (args: { order: number | { id: number } } | [order: number | { id: number } ] | number | { id: number }, options?: RouteQueryOptions): RouteDefinition<'get'> => ({
+export const show = (args: { order: string | number | { id: string | number } } | [order: string | number | { id: string | number } ] | string | number | { id: string | number }, options?: RouteQueryOptions): RouteDefinition<'get'> => ({
     url: show.url(args, options),
     method: 'get',
 })
@@ -96,7 +96,7 @@ show.definition = {
  * @see app/Http/Controllers/OrderController.php:90
  * @route '/api/orders/{order}'
  */
-show.url = (args: { order: number | { id: number } } | [order: number | { id: number } ] | number | { id: number }, options?: RouteQueryOptions) => {
+show.url = (args: { order: string | number | { id: string | number } } | [order: string | number | { id: string | number } ] | string | number | { id: string | number }, options?: RouteQueryOptions) => {
     if (typeof args === 'string' || typeof args === 'number') {
         args = { order: args }
     }
@@ -129,7 +129,7 @@ show.url = (args: { order: number | { id: number } } | [order: number | { id: nu
  * @see app/Http/Controllers/OrderController.php:90
  * @route '/api/orders/{order}'
  */
-show.get = (args: { order: number | { id: number } } | [order: number | { id: number } ] | number | { id: number }, options?: RouteQueryOptions): RouteDefinition<'get'> => ({
+show.get = (args: { order: string | number | { id: string | number } } | [order: string | number | { id: string | number } ] | string | number | { id: string | number }, options?: RouteQueryOptions): RouteDefinition<'get'> => ({
     url: show.url(args, options),
     method: 'get',
 })
@@ -138,7 +138,7 @@ show.get = (args: { order: number | { id: number } } | [order: number | { id: nu
  * @see app/Http/Controllers/OrderController.php:90
  * @route '/api/orders/{order}'
  */
-show.head = (args: { order: number | { id: number } } | [order: number | { id: number } ] | number | { id: number }, options?: RouteQueryOptions): RouteDefinition<'head'> => ({
+show.head = (args: { order: string | number | { id: string | number } } | [order: string | number | { id: string | number } ] | string | number | { id: string | number }, options?: RouteQueryOptions): RouteDefinition<'head'> => ({
     url: show.url(args, options),
     method: 'head',
 })
@@ -148,7 +148,7 @@ show.head = (args: { order: number | { id: number } } | [order: number | { id: n
  * @see app/Http/Controllers/OrderController.php:118
  * @route '/api/orders/{order}/status'
  */
-export const updateStatus = (args: { order: number | { id: number } } | [order: number | { id: number } ] | number | { id: number }, options?: RouteQueryOptions): RouteDefinition<'patch'> => ({
+export const updateStatus = (args: { order: string | number | { id: string | number } } | [order: string | number | { id: string | number } ] | string | number | { id: string | number }, options?: RouteQueryOptions): RouteDefinition<'patch'> => ({
     url: updateStatus.url(args, options),
     method: 'patch',
 })
@@ -163,7 +163,7 @@ updateStatus.definition = {
  * @see app/Http/Controllers/OrderController.php:118
  * @route '/api/orders/{order}/status'
  */
-updateStatus.url = (args: { order: number | { id: number } } | [order: number | { id: number } ] | number | { id: number }, options?: RouteQueryOptions) => {
+updateStatus.url = (args: { order: string | number | { id: string | number } } | [order: string | number | { id: string | number } ] | string | number | { id: string | number }, options?: RouteQueryOptions) => {
     if (typeof args === 'string' || typeof args === 'number') {
         args = { order: args }
     }
@@ -196,7 +196,7 @@ updateStatus.url = (args: { order: number | { id: number } } | [order: number | 
  * @see app/Http/Controllers/OrderController.php:118
  * @route '/api/orders/{order}/status'
  */
-updateStatus.patch = (args: { order: number | { id: number } } | [order: number | { id: number } ] | number | { id: number }, options?: RouteQueryOptions): RouteDefinition<'patch'> => ({
+updateStatus.patch = (args: { order: string | number | { id: string | number } } | [order: string | number | { id: string | number } ] | string | number | { id: string | number }, options?: RouteQueryOptions): RouteDefinition<'patch'> => ({
     url: updateStatus.url(args, options),
     method: 'patch',
 })
@@ -206,7 +206,7 @@ updateStatus.patch = (args: { order: number | { id: number } } | [order: number 
  * @see app/Http/Controllers/OrderController.php:138
  * @route '/api/orders/{order}/cancel'
  */
-export const cancel = (args: { order: number | { id: number } } | [order: number | { id: number } ] | number | { id: number }, options?: RouteQueryOptions): RouteDefinition<'post'> => ({
+export const cancel = (args: { order: string | number | { id: string | number } } | [order: string | number | { id: string | number } ] | string | number | { id: string | number }, options?: RouteQueryOptions): RouteDefinition<'post'> => ({
     url: cancel.url(args, options),
     method: 'post',
 })
@@ -221,7 +221,7 @@ cancel.definition = {
  * @see app/Http/Controllers/OrderController.php:138
  * @route '/api/orders/{order}/cancel'
  */
-cancel.url = (args: { order: number | { id: number } } | [order: number | { id: number } ] | number | { id: number }, options?: RouteQueryOptions) => {
+cancel.url = (args: { order: string | number | { id: string | number } } | [order: string | number | { id: string | number } ] | string | number | { id: string | number }, options?: RouteQueryOptions) => {
     if (typeof args === 'string' || typeof args === 'number') {
         args = { order: args }
     }
@@ -254,7 +254,7 @@ cancel.url = (args: { order: number | { id: number } } | [order: number | { id: 
  * @see app/Http/Controllers/OrderController.php:138
  * @route '/api/orders/{order}/cancel'
  */
-cancel.post = (args: { order: number | { id: number } } | [order: number | { id: number } ] | number | { id: number }, options?: RouteQueryOptions): RouteDefinition<'post'> => ({
+cancel.post = (args: { order: string | number | { id: string | number } } | [order: string | number | { id: string | number } ] | string | number | { id: string | number }, options?: RouteQueryOptions): RouteDefinition<'post'> => ({
     url: cancel.url(args, options),
     method: 'post',
 })

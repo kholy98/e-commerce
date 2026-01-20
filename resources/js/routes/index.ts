@@ -516,4 +516,15 @@ export const adminContactUs = (
     method: 'get',
 });
 
+/**
+ * Admin settings environment route
+ * @route '/admin/settings/environment'
+ */
+export const adminSettingsEnvironment = (
+    options?: RouteQueryOptions,
+): RouteDefinition<'get'> => ({
+    url: '/admin/settings/environment' + queryParams(options),
+    method: 'get',
+});
+
 export { default as admin } from './admin';

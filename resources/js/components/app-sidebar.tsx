@@ -6,6 +6,7 @@ import {
     MessageSquare,
     Package,
     Phone,
+    Settings,
     Tag,
     Users,
 } from 'lucide-react';
@@ -27,6 +28,7 @@ import {
     adminContactUs,
     adminInquiries,
     adminProducts,
+    adminSettingsEnvironment,
     adminTeamMembers,
     dashboard,
 } from '@/routes';
@@ -64,6 +66,11 @@ const mainNavItems: NavItem[] = [
         title: 'Contact Us',
         href: adminContactUs(),
         icon: Phone,
+    },
+    {
+        title: 'Environment Settings',
+        href: adminSettingsEnvironment(),
+        icon: Settings,
     },
 ];
 

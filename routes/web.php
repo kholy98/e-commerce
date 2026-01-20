@@ -136,6 +136,11 @@ Route::middleware(['auth', 'verified'])->group(function () {
 
         Route::get('api/contact-us', [\App\Http\Controllers\Admin\AdminContactUsController::class, 'show'])->name('contact-us.show');
         Route::post('api/contact-us', [\App\Http\Controllers\Admin\AdminContactUsController::class, 'update'])->name('contact-us.update');
+
+        // Environment Settings
+        Route::get('settings/environment', function () {
+            return Inertia::render('admin/settings/environment');
+        })->name('settings.environment');
     });
 });
 

@@ -1,7 +1,7 @@
 import { queryParams, type RouteQueryOptions, type RouteDefinition, applyUrlDefaults } from './../../../../wayfinder'
 /**
 * @see \App\Http\Controllers\ProductController::index
- * @see app/Http/Controllers/ProductController.php:16
+ * @see app/Http/Controllers/ProductController.php:18
  * @route '/api/products'
  */
 const index6ab24975c76dbf11a1bc082b81a80bc0 = (options?: RouteQueryOptions): RouteDefinition<'get'> => ({
@@ -16,7 +16,7 @@ index6ab24975c76dbf11a1bc082b81a80bc0.definition = {
 
 /**
 * @see \App\Http\Controllers\ProductController::index
- * @see app/Http/Controllers/ProductController.php:16
+ * @see app/Http/Controllers/ProductController.php:18
  * @route '/api/products'
  */
 index6ab24975c76dbf11a1bc082b81a80bc0.url = (options?: RouteQueryOptions) => {
@@ -25,7 +25,7 @@ index6ab24975c76dbf11a1bc082b81a80bc0.url = (options?: RouteQueryOptions) => {
 
 /**
 * @see \App\Http\Controllers\ProductController::index
- * @see app/Http/Controllers/ProductController.php:16
+ * @see app/Http/Controllers/ProductController.php:18
  * @route '/api/products'
  */
 index6ab24975c76dbf11a1bc082b81a80bc0.get = (options?: RouteQueryOptions): RouteDefinition<'get'> => ({
@@ -34,7 +34,7 @@ index6ab24975c76dbf11a1bc082b81a80bc0.get = (options?: RouteQueryOptions): Route
 })
 /**
 * @see \App\Http\Controllers\ProductController::index
- * @see app/Http/Controllers/ProductController.php:16
+ * @see app/Http/Controllers/ProductController.php:18
  * @route '/api/products'
  */
 index6ab24975c76dbf11a1bc082b81a80bc0.head = (options?: RouteQueryOptions): RouteDefinition<'head'> => ({
@@ -44,7 +44,7 @@ index6ab24975c76dbf11a1bc082b81a80bc0.head = (options?: RouteQueryOptions): Rout
 
     /**
 * @see \App\Http\Controllers\ProductController::index
- * @see app/Http/Controllers/ProductController.php:16
+ * @see app/Http/Controllers/ProductController.php:18
  * @route '/api/admin/products'
  */
 const index13f7c3a9a0716a5e847b6b329b9ba456 = (options?: RouteQueryOptions): RouteDefinition<'get'> => ({
@@ -59,7 +59,7 @@ index13f7c3a9a0716a5e847b6b329b9ba456.definition = {
 
 /**
 * @see \App\Http\Controllers\ProductController::index
- * @see app/Http/Controllers/ProductController.php:16
+ * @see app/Http/Controllers/ProductController.php:18
  * @route '/api/admin/products'
  */
 index13f7c3a9a0716a5e847b6b329b9ba456.url = (options?: RouteQueryOptions) => {
@@ -68,7 +68,7 @@ index13f7c3a9a0716a5e847b6b329b9ba456.url = (options?: RouteQueryOptions) => {
 
 /**
 * @see \App\Http\Controllers\ProductController::index
- * @see app/Http/Controllers/ProductController.php:16
+ * @see app/Http/Controllers/ProductController.php:18
  * @route '/api/admin/products'
  */
 index13f7c3a9a0716a5e847b6b329b9ba456.get = (options?: RouteQueryOptions): RouteDefinition<'get'> => ({
@@ -77,7 +77,7 @@ index13f7c3a9a0716a5e847b6b329b9ba456.get = (options?: RouteQueryOptions): Route
 })
 /**
 * @see \App\Http\Controllers\ProductController::index
- * @see app/Http/Controllers/ProductController.php:16
+ * @see app/Http/Controllers/ProductController.php:18
  * @route '/api/admin/products'
  */
 index13f7c3a9a0716a5e847b6b329b9ba456.head = (options?: RouteQueryOptions): RouteDefinition<'head'> => ({
@@ -92,10 +92,10 @@ export const index = {
 
 /**
 * @see \App\Http\Controllers\ProductController::show
- * @see app/Http/Controllers/ProductController.php:119
+ * @see app/Http/Controllers/ProductController.php:147
  * @route '/api/products/{product}'
  */
-export const show = (args: { product: number | { id: number } } | [product: number | { id: number } ] | number | { id: number }, options?: RouteQueryOptions): RouteDefinition<'get'> => ({
+export const show = (args: { product: string | number | { id: string | number } } | [product: string | number | { id: string | number } ] | string | number | { id: string | number }, options?: RouteQueryOptions): RouteDefinition<'get'> => ({
     url: show.url(args, options),
     method: 'get',
 })
@@ -107,10 +107,10 @@ show.definition = {
 
 /**
 * @see \App\Http\Controllers\ProductController::show
- * @see app/Http/Controllers/ProductController.php:119
+ * @see app/Http/Controllers/ProductController.php:147
  * @route '/api/products/{product}'
  */
-show.url = (args: { product: number | { id: number } } | [product: number | { id: number } ] | number | { id: number }, options?: RouteQueryOptions) => {
+show.url = (args: { product: string | number | { id: string | number } } | [product: string | number | { id: string | number } ] | string | number | { id: string | number }, options?: RouteQueryOptions) => {
     if (typeof args === 'string' || typeof args === 'number') {
         args = { product: args }
     }
@@ -140,26 +140,26 @@ show.url = (args: { product: number | { id: number } } | [product: number | { id
 
 /**
 * @see \App\Http\Controllers\ProductController::show
- * @see app/Http/Controllers/ProductController.php:119
+ * @see app/Http/Controllers/ProductController.php:147
  * @route '/api/products/{product}'
  */
-show.get = (args: { product: number | { id: number } } | [product: number | { id: number } ] | number | { id: number }, options?: RouteQueryOptions): RouteDefinition<'get'> => ({
+show.get = (args: { product: string | number | { id: string | number } } | [product: string | number | { id: string | number } ] | string | number | { id: string | number }, options?: RouteQueryOptions): RouteDefinition<'get'> => ({
     url: show.url(args, options),
     method: 'get',
 })
 /**
 * @see \App\Http\Controllers\ProductController::show
- * @see app/Http/Controllers/ProductController.php:119
+ * @see app/Http/Controllers/ProductController.php:147
  * @route '/api/products/{product}'
  */
-show.head = (args: { product: number | { id: number } } | [product: number | { id: number } ] | number | { id: number }, options?: RouteQueryOptions): RouteDefinition<'head'> => ({
+show.head = (args: { product: string | number | { id: string | number } } | [product: string | number | { id: string | number } ] | string | number | { id: string | number }, options?: RouteQueryOptions): RouteDefinition<'head'> => ({
     url: show.url(args, options),
     method: 'head',
 })
 
 /**
 * @see \App\Http\Controllers\ProductController::store
- * @see app/Http/Controllers/ProductController.php:137
+ * @see app/Http/Controllers/ProductController.php:236
  * @route '/api/admin/products'
  */
 export const store = (options?: RouteQueryOptions): RouteDefinition<'post'> => ({
@@ -174,7 +174,7 @@ store.definition = {
 
 /**
 * @see \App\Http\Controllers\ProductController::store
- * @see app/Http/Controllers/ProductController.php:137
+ * @see app/Http/Controllers/ProductController.php:236
  * @route '/api/admin/products'
  */
 store.url = (options?: RouteQueryOptions) => {
@@ -183,7 +183,7 @@ store.url = (options?: RouteQueryOptions) => {
 
 /**
 * @see \App\Http\Controllers\ProductController::store
- * @see app/Http/Controllers/ProductController.php:137
+ * @see app/Http/Controllers/ProductController.php:236
  * @route '/api/admin/products'
  */
 store.post = (options?: RouteQueryOptions): RouteDefinition<'post'> => ({
@@ -193,10 +193,10 @@ store.post = (options?: RouteQueryOptions): RouteDefinition<'post'> => ({
 
 /**
 * @see \App\Http\Controllers\ProductController::update
- * @see app/Http/Controllers/ProductController.php:173
+ * @see app/Http/Controllers/ProductController.php:279
  * @route '/api/admin/products/{product}'
  */
-export const update = (args: { product: number | { id: number } } | [product: number | { id: number } ] | number | { id: number }, options?: RouteQueryOptions): RouteDefinition<'put'> => ({
+export const update = (args: { product: string | number | { id: string | number } } | [product: string | number | { id: string | number } ] | string | number | { id: string | number }, options?: RouteQueryOptions): RouteDefinition<'put'> => ({
     url: update.url(args, options),
     method: 'put',
 })
@@ -208,10 +208,10 @@ update.definition = {
 
 /**
 * @see \App\Http\Controllers\ProductController::update
- * @see app/Http/Controllers/ProductController.php:173
+ * @see app/Http/Controllers/ProductController.php:279
  * @route '/api/admin/products/{product}'
  */
-update.url = (args: { product: number | { id: number } } | [product: number | { id: number } ] | number | { id: number }, options?: RouteQueryOptions) => {
+update.url = (args: { product: string | number | { id: string | number } } | [product: string | number | { id: string | number } ] | string | number | { id: string | number }, options?: RouteQueryOptions) => {
     if (typeof args === 'string' || typeof args === 'number') {
         args = { product: args }
     }
@@ -241,20 +241,20 @@ update.url = (args: { product: number | { id: number } } | [product: number | { 
 
 /**
 * @see \App\Http\Controllers\ProductController::update
- * @see app/Http/Controllers/ProductController.php:173
+ * @see app/Http/Controllers/ProductController.php:279
  * @route '/api/admin/products/{product}'
  */
-update.put = (args: { product: number | { id: number } } | [product: number | { id: number } ] | number | { id: number }, options?: RouteQueryOptions): RouteDefinition<'put'> => ({
+update.put = (args: { product: string | number | { id: string | number } } | [product: string | number | { id: string | number } ] | string | number | { id: string | number }, options?: RouteQueryOptions): RouteDefinition<'put'> => ({
     url: update.url(args, options),
     method: 'put',
 })
 
 /**
 * @see \App\Http\Controllers\ProductController::destroy
- * @see app/Http/Controllers/ProductController.php:258
+ * @see app/Http/Controllers/ProductController.php:371
  * @route '/api/admin/products/{product}'
  */
-export const destroy = (args: { product: number | { id: number } } | [product: number | { id: number } ] | number | { id: number }, options?: RouteQueryOptions): RouteDefinition<'delete'> => ({
+export const destroy = (args: { product: string | number | { id: string | number } } | [product: string | number | { id: string | number } ] | string | number | { id: string | number }, options?: RouteQueryOptions): RouteDefinition<'delete'> => ({
     url: destroy.url(args, options),
     method: 'delete',
 })
@@ -266,10 +266,10 @@ destroy.definition = {
 
 /**
 * @see \App\Http\Controllers\ProductController::destroy
- * @see app/Http/Controllers/ProductController.php:258
+ * @see app/Http/Controllers/ProductController.php:371
  * @route '/api/admin/products/{product}'
  */
-destroy.url = (args: { product: number | { id: number } } | [product: number | { id: number } ] | number | { id: number }, options?: RouteQueryOptions) => {
+destroy.url = (args: { product: string | number | { id: string | number } } | [product: string | number | { id: string | number } ] | string | number | { id: string | number }, options?: RouteQueryOptions) => {
     if (typeof args === 'string' || typeof args === 'number') {
         args = { product: args }
     }
@@ -299,17 +299,17 @@ destroy.url = (args: { product: number | { id: number } } | [product: number | {
 
 /**
 * @see \App\Http\Controllers\ProductController::destroy
- * @see app/Http/Controllers/ProductController.php:258
+ * @see app/Http/Controllers/ProductController.php:371
  * @route '/api/admin/products/{product}'
  */
-destroy.delete = (args: { product: number | { id: number } } | [product: number | { id: number } ] | number | { id: number }, options?: RouteQueryOptions): RouteDefinition<'delete'> => ({
+destroy.delete = (args: { product: string | number | { id: string | number } } | [product: string | number | { id: string | number } ] | string | number | { id: string | number }, options?: RouteQueryOptions): RouteDefinition<'delete'> => ({
     url: destroy.url(args, options),
     method: 'delete',
 })
 
 /**
 * @see \App\Http\Controllers\ProductController::lowStock
- * @see app/Http/Controllers/ProductController.php:271
+ * @see app/Http/Controllers/ProductController.php:384
  * @route '/api/admin/products/low-stock'
  */
 export const lowStock = (options?: RouteQueryOptions): RouteDefinition<'get'> => ({
@@ -324,7 +324,7 @@ lowStock.definition = {
 
 /**
 * @see \App\Http\Controllers\ProductController::lowStock
- * @see app/Http/Controllers/ProductController.php:271
+ * @see app/Http/Controllers/ProductController.php:384
  * @route '/api/admin/products/low-stock'
  */
 lowStock.url = (options?: RouteQueryOptions) => {
@@ -333,7 +333,7 @@ lowStock.url = (options?: RouteQueryOptions) => {
 
 /**
 * @see \App\Http\Controllers\ProductController::lowStock
- * @see app/Http/Controllers/ProductController.php:271
+ * @see app/Http/Controllers/ProductController.php:384
  * @route '/api/admin/products/low-stock'
  */
 lowStock.get = (options?: RouteQueryOptions): RouteDefinition<'get'> => ({
@@ -342,7 +342,7 @@ lowStock.get = (options?: RouteQueryOptions): RouteDefinition<'get'> => ({
 })
 /**
 * @see \App\Http\Controllers\ProductController::lowStock
- * @see app/Http/Controllers/ProductController.php:271
+ * @see app/Http/Controllers/ProductController.php:384
  * @route '/api/admin/products/low-stock'
  */
 lowStock.head = (options?: RouteQueryOptions): RouteDefinition<'head'> => ({
