@@ -303,7 +303,7 @@ class CheckoutController extends Controller
             $paymentData = [
                 'amount_cents' => intval($summary['total'] * 100), // Convert to cents
                 'currency' => 'EGP',
-                'order_id' => 'TEMP-'.time(), // Temporary order ID
+                'order_id' => 'TEMP-' . time(), // Temporary order ID
                 'billing_data' => $billingData,
             ];
 
