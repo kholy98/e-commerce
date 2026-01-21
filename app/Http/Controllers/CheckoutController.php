@@ -211,7 +211,7 @@ class CheckoutController extends Controller
 
             // Create temporary order data (not saved to database yet)
             $orderData = [
-                'user_id' => Auth::check() ? Auth::id() : ($validated['user_id'] ?? null),
+                'user_id' => Auth::guard('sanctum')->check() ? auth('sanctum')->id() : ($validated['user_id'] ?? null),
                 'status' => \App\Models\Order::STATUS_PENDING,
                 'items' => $cartItems,
                 'total_amount' => $summary['total'],
@@ -497,6 +497,8 @@ class CheckoutController extends Controller
             // For POST requests (webhooks), get order_id from request
             $tempOrderId = $request->input('order_id');
 
+            dump('tempOrderId before fallback: '.$tempOrderId);
+
             \Log::info('Checkout complete called', [
                 'method' => $request->method(),
                 'temp_order_id' => $tempOrderId,
@@ -555,6 +557,8 @@ class CheckoutController extends Controller
             $pendingCheckout = PendingCheckout::where('temp_order_id', $tempOrderId)
                 ->active() // Only non-expired
                 ->first();
+
+            dd($pendingCheckout);
 
             \Log::info('Pending checkout lookup result', [
                 'temp_order_id' => $tempOrderId,
