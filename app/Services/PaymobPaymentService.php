@@ -15,18 +15,17 @@ class PaymobPaymentService extends BasePaymentService implements PaymentGatewayI
 
     public function __construct()
     {
-        $this->base_url = env("PAYMOB_BASE_URL");
-        $this->api_key = env("PAYMOB_API_KEY");
-        $this->integration_id = env("PAYMOB_INTEGRATION_ID");
-        $this->iframe_id = env("PAYMOB_IFRAME_ID");
+        $this->base_url = config('paymob.base_url');
+        $this->api_key = config('paymob.api_key');
+        $this->integration_id = config('paymob.integration_id');
+        $this->iframe_id = config('paymob.iframe_id');
 
         $this->header = [
             'Accept' => 'application/json',
             'Content-Type' => 'application/json',
         ];
 
-        // Iframe integration IDs
-        $this->integrations_id = env("PAYMOB_INTEGRATIONS_ID", [985473]);
+        $this->integrations_id = config('paymob.integrations_id');
     }
 
     /**

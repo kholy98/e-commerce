@@ -46,7 +46,7 @@ class PaymentController extends Controller
     /**
      * Handle payment callback from Paymob
      */
-    public function callBack(Request $request): \Illuminate\Http\JsonResponse
+    public function callBack(Request $request): \Illuminate\Http\RedirectResponse
     {
         \Log::info('Payment callback received', [
             'all_params' => $request->all(),
@@ -93,13 +93,24 @@ class PaymentController extends Controller
             'tracking_number' => $trackingNumber
         ]);
 
-        return response()->json([
-            'success' => $callbackData['success'],
-            'payment_status' => $callbackData['success'] ? 'paid' : 'failed',
+        $frontendUrl = env('FRONTEND_URL', 'http://localhost:3000');
+        $redirectParams = [
+            'payment_status' => $callbackData['success'] ? 'success' : 'failed',
             'order_id' => $callbackData['order_id'],
             'payment_id' => $callbackData['payment_id'],
             'tracking_number' => $trackingNumber
-        ]);
+        ];
+
+        $redirectUrl = http_build_query($redirectParams);
+        return redirect($frontendUrl . '?' . $redirectUrl);
+
+        // return response()->json([
+        //     'success' => $callbackData['success'],
+        //     'payment_status' => $callbackData['success'] ? 'paid' : 'failed',
+        //     'order_id' => $callbackData['order_id'],
+        //     'payment_id' => $callbackData['payment_id'],
+        //     'tracking_number' => $trackingNumber
+        // ]);
     }
 
     /**
@@ -109,7 +120,7 @@ class PaymentController extends Controller
     {
         try {
             $payload = $request->all();
-            
+
             // Log webhook for debugging
             Log::info('Paymob webhook received', $payload);
 
