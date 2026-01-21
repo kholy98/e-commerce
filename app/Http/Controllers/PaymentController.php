@@ -102,7 +102,7 @@ class PaymentController extends Controller
         ];
 
         $redirectUrl = http_build_query($redirectParams);
-        return redirect($frontendUrl . '?' . $redirectUrl);
+        return redirect($frontendUrl . '/checkout_confirmation' .'?' . $redirectUrl);
 
         // return response()->json([
         //     'success' => $callbackData['success'],
