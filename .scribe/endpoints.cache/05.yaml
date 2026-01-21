@@ -6,11 +6,13 @@ description: |-
   APIs for the checkout process.
 
   The checkout flow consists of:
-  1. Initiate checkout - validates cart, creates pending checkout, and returns payment URL
-  2. Payment processing - handled by payment gateway (Paymob)
-  3. Complete/Fail callbacks - finalize or cancel the order based on payment result
+  1. **Initiate checkout** - Validates cart, creates shipment with Bosta, initiates payment with Paymob, and returns payment URL
+  2. **Payment processing** - Customer completes payment on Paymob iframe
+  3. **Complete callback** - Called after successful payment to create the final order
+  4. **Fail callback** - Called if payment fails, cleans up pending data
 
   Supports both guest checkout and authenticated user checkout.
+  Guest carts are session-based and migrate to user account upon login.
 endpoints:
   -
     custom: []
@@ -25,17 +27,23 @@ endpoints:
         APIs for the checkout process.
 
         The checkout flow consists of:
-        1. Initiate checkout - validates cart, creates pending checkout, and returns payment URL
-        2. Payment processing - handled by payment gateway (Paymob)
-        3. Complete/Fail callbacks - finalize or cancel the order based on payment result
+        1. **Initiate checkout** - Validates cart, creates shipment with Bosta, initiates payment with Paymob, and returns payment URL
+        2. **Payment processing** - Customer completes payment on Paymob iframe
+        3. **Complete callback** - Called after successful payment to create the final order
+        4. **Fail callback** - Called if payment fails, cleans up pending data
 
         Supports both guest checkout and authenticated user checkout.
+        Guest carts are session-based and migrate to user account upon login.
       subgroup: ''
       subgroupDescription: ''
       title: 'Initiate checkout'
       description: |-
-        Start the checkout process by validating the cart, creating a pending checkout,
-        and returning a payment URL. Supports both guest and authenticated users.
+        Start the checkout process by validating the cart, creating a shipment with Bosta,
+        initiating payment with Paymob, and returning the payment iframe URL.
+        Supports both guest and authenticated users.
+
+        The checkout creates a pending checkout record that expires after 24 hours.
+        Once payment is completed, the pending checkout is converted to a real order.
       authenticated: false
       deprecated: false
     headers:
@@ -46,10 +54,32 @@ endpoints:
     queryParameters: []
     cleanQueryParameters: []
     bodyParameters:
+      shipping_address_id:
+        custom: []
+        name: shipping_address_id
+        description: 'Use a saved shipping address by ID (for authenticated users).'
+        required: false
+        example: 1
+        type: integer
+        enumValues: []
+        exampleWasSpecified: true
+        nullable: true
+        deprecated: false
+      billing_address_id:
+        custom: []
+        name: billing_address_id
+        description: 'Use a saved billing address by ID (for authenticated users).'
+        required: false
+        example: 1
+        type: integer
+        enumValues: []
+        exampleWasSpecified: true
+        nullable: true
+        deprecated: false
       shipping_address:
         custom: []
         name: shipping_address
-        description: 'The shipping address details.'
+        description: 'Required if shipping_address_id not provided. The shipping address details.'
         required: true
         example: []
         type: object
@@ -71,7 +101,7 @@ endpoints:
       shipping_address.city:
         custom: []
         name: shipping_address.city
-        description: 'The city name.'
+        description: 'The city name (used for shipping cost calculation).'
         required: true
         example: Cairo
         type: string
@@ -115,7 +145,7 @@ endpoints:
       shipping_address.floor:
         custom: []
         name: shipping_address.floor
-        description: 'The floor number.'
+        description: 'The floor number (optional).'
         required: false
         example: '3'
         type: string
@@ -126,7 +156,7 @@ endpoints:
       shipping_address.apartment:
         custom: []
         name: shipping_address.apartment
-        description: 'The apartment number.'
+        description: 'The apartment number (optional).'
         required: false
         example: 5A
         type: string
@@ -137,7 +167,7 @@ endpoints:
       shipping_address.zone:
         custom: []
         name: shipping_address.zone
-        description: 'The zone/district.'
+        description: 'The zone/district for Bosta delivery.'
         required: true
         example: Maadi
         type: string
@@ -148,7 +178,7 @@ endpoints:
       billing_address:
         custom: []
         name: billing_address
-        description: 'The billing address and contact details.'
+        description: 'Required if billing_address_id not provided. The billing and contact details for payment.'
         required: true
         example: []
         type: object
@@ -181,7 +211,7 @@ endpoints:
       billing_address.email:
         custom: []
         name: billing_address.email
-        description: "Customer's email address."
+        description: "Customer's email for order confirmation."
         required: true
         example: john@example.com
         type: string
@@ -192,7 +222,7 @@ endpoints:
       billing_address.phone:
         custom: []
         name: billing_address.phone
-        description: "Customer's phone number."
+        description: "Customer's phone for delivery contact."
         required: true
         example: '+201234567890'
         type: string
@@ -247,7 +277,7 @@ endpoints:
       billing_address.floor:
         custom: []
         name: billing_address.floor
-        description: 'The floor number.'
+        description: 'The floor number (optional, defaults to NA for Paymob).'
         required: false
         example: '3'
         type: string
@@ -258,7 +288,7 @@ endpoints:
       billing_address.apartment:
         custom: []
         name: billing_address.apartment
-        description: 'The apartment number.'
+        description: 'The apartment number (optional, defaults to NA for Paymob).'
         required: false
         example: 5A
         type: string
@@ -269,7 +299,7 @@ endpoints:
       notes:
         custom: []
         name: notes
-        description: 'Optional order notes.'
+        description: 'Optional order notes for delivery instructions.'
         required: false
         example: 'Please deliver in the morning'
         type: string
@@ -280,15 +310,17 @@ endpoints:
       user_id:
         custom: []
         name: user_id
-        description: 'Optional user ID for guest checkout with user creation.'
+        description: 'Optional user ID for associating guest checkout with a user.'
         required: false
-        example: architecto
-        type: string
+        example: 16
+        type: integer
         enumValues: []
         exampleWasSpecified: false
         nullable: true
         deprecated: false
     cleanBodyParameters:
+      shipping_address_id: 1
+      billing_address_id: 1
       shipping_address:
         street: '123 Main St'
         city: Cairo
@@ -310,7 +342,7 @@ endpoints:
         floor: '3'
         apartment: 5A
       notes: 'Please deliver in the morning'
-      user_id: architecto
+      user_id: 16
     fileParameters: []
     responses:
       -
@@ -321,20 +353,31 @@ endpoints:
             "success": true,
             "message": "Checkout initiated successfully",
             "data": {
-              "checkout_id": "chk_abc123",
-              "payment_url": "https://accept.paymob.com/api/acceptance/iframes/12345?payment_token=xyz",
-              "order_summary": {
-                "subtotal": 100.00,
-                "shipping": 50.00,
-                "tax": 14.00,
-                "total": 164.00,
+              "payment_key": "ZXlKaGJHY2lPaUpJVXpVeE1pSXNJblI1Y0NJNklrcFhWQ0o5...",
+              "iframe_url": "https://accept.paymob.com/api/acceptance/iframes/123456?payment_token=ZXlKaGJHY2lPaUpJVXpVeE1pSXNJblI1Y0NJNklrcFhWQ0o5...",
+              "temp_order_id": "149823756",
+              "tracking_number": "BOSTA-123456789",
+              "cost_breakdown": {
+                "subtotal": 250.00,
+                "tax": 35.00,
+                "shipping": 80.00,
+                "total": 365.00,
                 "item_count": 3
-              },
-              "expires_at": "2024-01-15T11:00:00.000000Z"
+              }
             }
           }
         headers: []
         description: Success
+      -
+        custom: []
+        status: 404
+        content: |-
+          {
+            "success": false,
+            "message": "Shipping address not found"
+          }
+        headers: []
+        description: 'Saved Address Not Found'
       -
         custom: []
         status: 422
@@ -350,13 +393,47 @@ endpoints:
         status: 422
         content: |-
           {
+            "success": false,
+            "message": "Failed to create shipment",
+            "error": "Invalid zone specified for delivery"
+          }
+        headers: []
+        description: 'Shipment Creation Failed'
+      -
+        custom: []
+        status: 422
+        content: |-
+          {
+            "success": false,
+            "message": "Payment initiation failed",
+            "error": "Invalid billing data"
+          }
+        headers: []
+        description: 'Payment Initiation Failed'
+      -
+        custom: []
+        status: 422
+        content: |-
+          {
             "message": "The shipping address.street field is required.",
             "errors": {
-              "shipping_address.street": ["The shipping address.street field is required."]
+              "shipping_address.street": ["The shipping address.street field is required."],
+              "shipping_address.city": ["The shipping address.city field is required."],
+              "billing_address.email": ["The billing address.email must be a valid email address."]
             }
           }
         headers: []
         description: 'Validation Error'
+      -
+        custom: []
+        status: 500
+        content: |-
+          {
+            "success": false,
+            "message": "Checkout failed: Connection to payment gateway timed out"
+          }
+        headers: []
+        description: 'Server Error'
     responseFields: []
     auth: []
     controller: null
@@ -376,18 +453,23 @@ endpoints:
         APIs for the checkout process.
 
         The checkout flow consists of:
-        1. Initiate checkout - validates cart, creates pending checkout, and returns payment URL
-        2. Payment processing - handled by payment gateway (Paymob)
-        3. Complete/Fail callbacks - finalize or cancel the order based on payment result
+        1. **Initiate checkout** - Validates cart, creates shipment with Bosta, initiates payment with Paymob, and returns payment URL
+        2. **Payment processing** - Customer completes payment on Paymob iframe
+        3. **Complete callback** - Called after successful payment to create the final order
+        4. **Fail callback** - Called if payment fails, cleans up pending data
 
         Supports both guest checkout and authenticated user checkout.
+        Guest carts are session-based and migrate to user account upon login.
       subgroup: ''
       subgroupDescription: ''
       title: 'Complete checkout'
       description: |-
         Finalize the checkout process after successful payment.
-        This endpoint is called by the payment gateway callback or webhook.
-        It creates the final order, processes the shipment, and clears the cart.
+        This endpoint is called by the Paymob payment gateway callback (redirect) or webhook.
+        It retrieves the pending checkout data, creates the final order, and clears the cart.
+
+        For GET requests (browser redirects from Paymob), the order_id can be retrieved from the session.
+        For POST requests (webhooks), the order_id must be provided in the request body.
       authenticated: false
       deprecated: false
     headers:
@@ -399,18 +481,66 @@ endpoints:
       order_id:
         custom: []
         name: order_id
-        description: 'The temporary order ID from the checkout initiation.'
+        description: 'The temporary order ID from Paymob (returned during checkout initiation).'
         required: false
-        example: chk_abc123
+        example: '149823756'
+        type: string
+        enumValues: []
+        exampleWasSpecified: true
+        nullable: false
+        deprecated: false
+      payment_id:
+        custom: []
+        name: payment_id
+        description: 'The payment transaction ID from Paymob.'
+        required: false
+        example: '98765432'
         type: string
         enumValues: []
         exampleWasSpecified: true
         nullable: false
         deprecated: false
     cleanQueryParameters:
-      order_id: chk_abc123
-    bodyParameters: []
-    cleanBodyParameters: []
+      order_id: '149823756'
+      payment_id: '98765432'
+    bodyParameters:
+      order_id:
+        custom: []
+        name: order_id
+        description: 'The temporary order ID (for webhook POST requests).'
+        required: false
+        example: '149823756'
+        type: string
+        enumValues: []
+        exampleWasSpecified: true
+        nullable: false
+        deprecated: false
+      payment_id:
+        custom: []
+        name: payment_id
+        description: 'The payment transaction ID (for webhook POST requests).'
+        required: false
+        example: '98765432'
+        type: string
+        enumValues: []
+        exampleWasSpecified: true
+        nullable: false
+        deprecated: false
+      success:
+        custom: []
+        name: success
+        description: 'Payment success status (for webhook POST requests).'
+        required: false
+        example: true
+        type: boolean
+        enumValues: []
+        exampleWasSpecified: true
+        nullable: false
+        deprecated: false
+    cleanBodyParameters:
+      order_id: '149823756'
+      payment_id: '98765432'
+      success: true
     fileParameters: []
     responses:
       -
@@ -421,12 +551,83 @@ endpoints:
             "success": true,
             "message": "Order created successfully",
             "data": {
-              "order_id": 1,
-              "order_number": "ORD-2024-001",
+              "id": 42,
+              "order_number": "ORD-2024-00042",
+              "user_id": 1,
               "status": "processing",
+              "status_ar": "قيد المعالجة",
               "payment_status": "paid",
-              "total_amount": 164.00,
-              "tracking_number": "BOSTA123456"
+              "subtotal": 250.00,
+              "tax": 35.00,
+              "shipping_cost": 80.00,
+              "total_amount": 365.00,
+              "shipping_address": {
+                "street": "123 Main St",
+                "city": "Cairo",
+                "zip_code": "12345",
+                "country": "Egypt",
+                "building_number": "15",
+                "floor": "3",
+                "apartment": "5A",
+                "zone": "Maadi"
+              },
+              "billing_address": {
+                "first_name": "John",
+                "last_name": "Doe",
+                "email": "john@example.com",
+                "phone": "+201234567890",
+                "street": "123 Main St",
+                "city": "Cairo",
+                "zip_code": "12345",
+                "country": "Egypt"
+              },
+              "notes": "Please deliver in the morning",
+              "created_at": "2024-01-15T10:30:00.000000Z",
+              "updated_at": "2024-01-15T10:30:00.000000Z",
+              "items": [
+                {
+                  "id": 101,
+                  "order_id": 42,
+                  "product_id": 5,
+                  "quantity": 2,
+                  "price": 75.00,
+                  "total": 150.00,
+                  "product": {
+                    "id": 5,
+                    "name": "Premium Coffee Beans",
+                    "slug": "premium-coffee-beans",
+                    "price": 75.00,
+                    "sku": "COF-005",
+                    "images": [
+                      {
+                        "id": 1,
+                        "url": "https://example.com/storage/products/coffee.jpg"
+                      }
+                    ]
+                  }
+                },
+                {
+                  "id": 102,
+                  "order_id": 42,
+                  "product_id": 8,
+                  "quantity": 1,
+                  "price": 100.00,
+                  "total": 100.00,
+                  "product": {
+                    "id": 8,
+                    "name": "Coffee Grinder",
+                    "slug": "coffee-grinder",
+                    "price": 100.00,
+                    "sku": "GRN-008",
+                    "images": [
+                      {
+                        "id": 3,
+                        "url": "https://example.com/storage/products/grinder.jpg"
+                      }
+                    ]
+                  }
+                }
+              ]
             }
           }
         headers: []
@@ -447,10 +648,30 @@ endpoints:
         content: |-
           {
             "success": false,
-            "message": "Checkout session not found or expired"
+            "message": "No pending checkout found"
           }
         headers: []
-        description: 'Checkout Not Found'
+        description: 'Checkout Not Found or Expired'
+      -
+        custom: []
+        status: 422
+        content: |-
+          {
+            "success": false,
+            "message": "Payment was not successful"
+          }
+        headers: []
+        description: 'Payment Not Successful'
+      -
+        custom: []
+        status: 500
+        content: |-
+          {
+            "success": false,
+            "message": "Order creation failed: Database connection error"
+          }
+        headers: []
+        description: 'Order Creation Failed'
     responseFields: []
     auth: []
     controller: null
@@ -470,17 +691,22 @@ endpoints:
         APIs for the checkout process.
 
         The checkout flow consists of:
-        1. Initiate checkout - validates cart, creates pending checkout, and returns payment URL
-        2. Payment processing - handled by payment gateway (Paymob)
-        3. Complete/Fail callbacks - finalize or cancel the order based on payment result
+        1. **Initiate checkout** - Validates cart, creates shipment with Bosta, initiates payment with Paymob, and returns payment URL
+        2. **Payment processing** - Customer completes payment on Paymob iframe
+        3. **Complete callback** - Called after successful payment to create the final order
+        4. **Fail callback** - Called if payment fails, cleans up pending data
 
         Supports both guest checkout and authenticated user checkout.
+        Guest carts are session-based and migrate to user account upon login.
       subgroup: ''
       subgroupDescription: ''
       title: 'Handle checkout failure'
       description: |-
-        Handle failed checkout due to payment or shipment failure.
-        Clears pending checkout data and redirects or returns error response.
+        Handle failed checkout due to payment decline, cancellation, or gateway error.
+        Clears all pending checkout data from both session and database.
+
+        For web requests (GET), redirects to the payment failed page.
+        For API requests (expects JSON), returns a JSON error response.
       authenticated: false
       deprecated: false
     headers:
@@ -492,16 +718,40 @@ endpoints:
       error:
         custom: []
         name: error
-        description: 'The error message from the payment gateway.'
+        description: 'The error message or code from the payment gateway.'
         required: false
-        example: 'Payment declined'
+        example: 'Payment declined by bank'
+        type: string
+        enumValues: []
+        exampleWasSpecified: true
+        nullable: false
+        deprecated: false
+      order_id:
+        custom: []
+        name: order_id
+        description: 'The temporary order ID that failed.'
+        required: false
+        example: '149823756'
+        type: string
+        enumValues: []
+        exampleWasSpecified: true
+        nullable: false
+        deprecated: false
+      txn_response_code:
+        custom: []
+        name: txn_response_code
+        description: 'Transaction response code from Paymob.'
+        required: false
+        example: DECLINED
         type: string
         enumValues: []
         exampleWasSpecified: true
         nullable: false
         deprecated: false
     cleanQueryParameters:
-      error: 'Payment declined'
+      error: 'Payment declined by bank'
+      order_id: '149823756'
+      txn_response_code: DECLINED
     bodyParameters: []
     cleanBodyParameters: []
     fileParameters: []
@@ -513,10 +763,27 @@ endpoints:
           {
             "success": false,
             "message": "Checkout failed",
-            "error": "Payment declined"
+            "error": "Payment declined by bank"
           }
         headers: []
-        description: 'API Response'
+        description: 'API Request'
+      -
+        custom: []
+        status: 200
+        content: |-
+          {
+            "success": false,
+            "message": "Checkout failed",
+            "error": "Unknown error"
+          }
+        headers: []
+        description: 'Unknown Error'
+      -
+        custom: []
+        status: 302
+        content: 'Redirects to /payment-failed'
+        headers: []
+        description: 'Web Request'
     responseFields: []
     auth: []
     controller: null
@@ -535,17 +802,24 @@ endpoints:
         APIs for the checkout process.
 
         The checkout flow consists of:
-        1. Initiate checkout - validates cart, creates pending checkout, and returns payment URL
-        2. Payment processing - handled by payment gateway (Paymob)
-        3. Complete/Fail callbacks - finalize or cancel the order based on payment result
+        1. **Initiate checkout** - Validates cart, creates shipment with Bosta, initiates payment with Paymob, and returns payment URL
+        2. **Payment processing** - Customer completes payment on Paymob iframe
+        3. **Complete callback** - Called after successful payment to create the final order
+        4. **Fail callback** - Called if payment fails, cleans up pending data
 
         Supports both guest checkout and authenticated user checkout.
+        Guest carts are session-based and migrate to user account upon login.
       subgroup: ''
       subgroupDescription: ''
       title: 'Get checkout status'
       description: |-
         Check if there's a pending checkout session and get current cart summary.
-        Useful for resuming interrupted checkout flows.
+        Useful for:
+        - Resuming interrupted checkout flows
+        - Checking if user has abandoned checkout
+        - Displaying cart summary before checkout
+
+        Checks both session storage and database for pending checkouts.
       authenticated: false
       deprecated: false
     headers:
@@ -568,11 +842,12 @@ endpoints:
             "data": {
               "has_pending_checkout": true,
               "cart_summary": {
-                "subtotal": 100.00,
-                "tax": 14.00,
-                "shipping": 50.00,
-                "total": 164.00,
-                "item_count": 3
+                "subtotal": 250.00,
+                "tax": 35.00,
+                "shipping": 80.00,
+                "total": 365.00,
+                "item_count": 3,
+                "discount": 0.00
               },
               "cart_items_count": 3
             }
@@ -592,13 +867,35 @@ endpoints:
                 "tax": 0.00,
                 "shipping": 0.00,
                 "total": 0.00,
-                "item_count": 0
+                "item_count": 0,
+                "discount": 0.00
               },
               "cart_items_count": 0
             }
           }
         headers: []
         description: 'No Pending Checkout'
+      -
+        custom: []
+        status: 200
+        content: |-
+          {
+            "success": true,
+            "data": {
+              "has_pending_checkout": false,
+              "cart_summary": {
+                "subtotal": 150.00,
+                "tax": 21.00,
+                "shipping": 80.00,
+                "total": 251.00,
+                "item_count": 2,
+                "discount": 0.00
+              },
+              "cart_items_count": 2
+            }
+          }
+        headers: []
+        description: 'Cart With Items But No Checkout Started'
     responseFields: []
     auth: []
     controller: null
@@ -617,17 +914,22 @@ endpoints:
         APIs for the checkout process.
 
         The checkout flow consists of:
-        1. Initiate checkout - validates cart, creates pending checkout, and returns payment URL
-        2. Payment processing - handled by payment gateway (Paymob)
-        3. Complete/Fail callbacks - finalize or cancel the order based on payment result
+        1. **Initiate checkout** - Validates cart, creates shipment with Bosta, initiates payment with Paymob, and returns payment URL
+        2. **Payment processing** - Customer completes payment on Paymob iframe
+        3. **Complete callback** - Called after successful payment to create the final order
+        4. **Fail callback** - Called if payment fails, cleans up pending data
 
         Supports both guest checkout and authenticated user checkout.
+        Guest carts are session-based and migrate to user account upon login.
       subgroup: ''
       subgroupDescription: ''
       title: 'Test checkout completion'
       description: |-
-        Test endpoint to complete checkout with real pending checkout data.
-        This is useful for testing the checkout flow without going through payment.
+        Test endpoint to simulate completing a checkout with real pending checkout data.
+        This is useful for development and testing the checkout flow without going through
+        the actual Paymob payment process.
+
+        **Warning:** This endpoint should be disabled or protected in production environments.
       authenticated: false
       deprecated: false
     headers:
@@ -647,12 +949,48 @@ endpoints:
         content: |-
           {
             "success": true,
-            "message": "Test order created successfully",
+            "message": "Order created successfully",
             "data": {
-              "id": 1,
-              "order_number": "ORD-2024-001",
+              "id": 42,
+              "order_number": "ORD-2024-00042",
+              "user_id": 1,
               "status": "processing",
-              "payment_status": "paid"
+              "status_ar": "قيد المعالجة",
+              "payment_status": "paid",
+              "subtotal": 250.00,
+              "tax": 35.00,
+              "shipping_cost": 80.00,
+              "total_amount": 365.00,
+              "shipping_address": {
+                "street": "123 Main St",
+                "city": "Cairo",
+                "zip_code": "12345",
+                "country": "Egypt",
+                "building_number": "15",
+                "floor": "3",
+                "apartment": "5A",
+                "zone": "Maadi"
+              },
+              "notes": "Test order",
+              "created_at": "2024-01-15T10:30:00.000000Z",
+              "updated_at": "2024-01-15T10:30:00.000000Z",
+              "items": [
+                {
+                  "id": 101,
+                  "order_id": 42,
+                  "product_id": 5,
+                  "quantity": 2,
+                  "price": 75.00,
+                  "total": 150.00,
+                  "product": {
+                    "id": 5,
+                    "name": "Premium Coffee Beans",
+                    "slug": "premium-coffee-beans",
+                    "price": 75.00,
+                    "sku": "COF-005"
+                  }
+                }
+              ]
             }
           }
         headers: []
@@ -667,6 +1005,16 @@ endpoints:
           }
         headers: []
         description: 'No Pending Checkout'
+      -
+        custom: []
+        status: 500
+        content: |-
+          {
+            "success": false,
+            "message": "Test failed: Order creation error"
+          }
+        headers: []
+        description: 'Test Failed'
     responseFields: []
     auth: []
     controller: null

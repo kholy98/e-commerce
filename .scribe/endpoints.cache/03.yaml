@@ -38,8 +38,528 @@ endpoints:
           content-type: application/json
           access-control-allow-origin: 'http://localhost:3000'
           access-control-allow-credentials: 'true'
-          set-cookie: 'laravel-session=eyJpdiI6IjVkcTF1NjJZOXVzVVh6aSt4R1dWMXc9PSIsInZhbHVlIjoiK1NGdElPbnZ2aUI0eHVVbTIzYTR3bmhFYitWSmt5WHlyendpK2lDTjVFTWF1Y1lJYWxLNWR2STZoNGJHa29lOXhnbjB3ZWF4clR1R0pFeHY2elUwVzhWMVZNTXh4UFUrajlGc09WbldtcHRSazBXc3FLdkVpdHdiZG5aL2ErTmQiLCJtYWMiOiJkY2QyYjg3NGNmZGQzYzQ2MTE1NmNiYWM2NmQwM2ZmZDcyZjEyM2YzZTJiM2JiNWY4NzNmZWU2MjkyZWZmN2FhIiwidGFnIjoiIn0%3D; expires=Wed, 21 Jan 2026 11:27:13 GMT; Max-Age=7200; path=/; httponly; samesite=lax'
+          set-cookie: 'laravel-session=eyJpdiI6IkxzclVJQnQvVnB5TXh6dzg2ekxlMWc9PSIsInZhbHVlIjoiLzBQYXluNEloNXVFY29hbW9lTElPUVN2Q3hwT0lDem9ZdE9FWkdLZUM2QndHekhHMjFSMnhYVXhVYlM4QXh6Z0FmcHVzQ2RwanBuSEo0QVcvZTNtZjB5MUdwL3cxZDB2ak12emFmYmh1ekhCZE8rdmtrVStoMU1XTW1DQmRMbjgiLCJtYWMiOiI0OGZhYTgyMGJkN2Y0NTQxNDNmNjE1ODQzZmJmNGRkMWEyYmI5MjA0YjkyZjIyYzcyM2QwMjMwNjIxNzRkMjllIiwidGFnIjoiIn0%3D; expires=Wed, 21 Jan 2026 11:38:44 GMT; Max-Age=7200; path=/; httponly; samesite=lax'
         description: null
+    responseFields: []
+    auth: []
+    controller: null
+    method: null
+    route: null
+  -
+    custom: []
+    httpMethods:
+      - GET
+    uri: api/addresses
+    metadata:
+      custom: []
+      groupName: Endpoints
+      groupDescription: ''
+      subgroup: ''
+      subgroupDescription: ''
+      title: "Display a listing of the user's addresses."
+      description: ''
+      authenticated: false
+      deprecated: false
+    headers:
+      Content-Type: application/json
+      Accept: application/json
+    urlParameters: []
+    cleanUrlParameters: []
+    queryParameters: []
+    cleanQueryParameters: []
+    bodyParameters: []
+    cleanBodyParameters: []
+    fileParameters: []
+    responses:
+      -
+        custom: []
+        status: 401
+        content: '{"message":"Unauthenticated."}'
+        headers:
+          cache-control: 'no-cache, private'
+          content-type: application/json
+          access-control-allow-origin: 'http://localhost:3000'
+          access-control-allow-credentials: 'true'
+          set-cookie: 'laravel-session=eyJpdiI6IlRHYXFtcnNOY2ZBbkM4NStEd3F5OWc9PSIsInZhbHVlIjoiVEZPZUZiZktrQi9KeVd5NUVkU3I3QTcrc3pVRkh3YUxkeS9KQlg4dnRVY0VxbHNDNGFvck5PUEFYZjdTaVBGbU81bzVNT0NwV3plY2JzWXZUdzNINjBrSU1CcUd6TXR2VUhtWUdERTdKMFRzMjZLa0R2UVBEUkYyeGtRcFdOdkMiLCJtYWMiOiJlZDAzNjFiNDI1ZmI1MjZlNWZhMDhhNjAzYzM2ZDRlZmRiMGFjZDIwOTIyNzIxZjE4YWNmNDY1MjhlZjJhYzE0IiwidGFnIjoiIn0%3D; expires=Wed, 21 Jan 2026 11:38:44 GMT; Max-Age=7200; path=/; httponly; samesite=lax'
+        description: null
+    responseFields: []
+    auth: []
+    controller: null
+    method: null
+    route: null
+  -
+    custom: []
+    httpMethods:
+      - POST
+    uri: api/addresses
+    metadata:
+      custom: []
+      groupName: Endpoints
+      groupDescription: ''
+      subgroup: ''
+      subgroupDescription: ''
+      title: 'Store a newly created address.'
+      description: ''
+      authenticated: false
+      deprecated: false
+    headers:
+      Content-Type: application/json
+      Accept: application/json
+    urlParameters: []
+    cleanUrlParameters: []
+    queryParameters: []
+    cleanQueryParameters: []
+    bodyParameters:
+      label:
+        custom: []
+        name: label
+        description: 'Must not be greater than 255 characters.'
+        required: false
+        example: b
+        type: string
+        enumValues: []
+        exampleWasSpecified: false
+        nullable: true
+        deprecated: false
+      name:
+        custom: []
+        name: name
+        description: 'Must not be greater than 255 characters.'
+        required: true
+        example: 'n'
+        type: string
+        enumValues: []
+        exampleWasSpecified: false
+        nullable: false
+        deprecated: false
+      phone:
+        custom: []
+        name: phone
+        description: 'Must not be greater than 20 characters.'
+        required: true
+        example: gzmiyvdljnikhway
+        type: string
+        enumValues: []
+        exampleWasSpecified: false
+        nullable: false
+        deprecated: false
+      address:
+        custom: []
+        name: address
+        description: ''
+        required: true
+        example: architecto
+        type: string
+        enumValues: []
+        exampleWasSpecified: false
+        nullable: false
+        deprecated: false
+      city:
+        custom: []
+        name: city
+        description: 'Must not be greater than 255 characters.'
+        required: true
+        example: 'n'
+        type: string
+        enumValues: []
+        exampleWasSpecified: false
+        nullable: false
+        deprecated: false
+      zip_code:
+        custom: []
+        name: zip_code
+        description: 'Must not be greater than 20 characters.'
+        required: true
+        example: gzmiyvdljnikhway
+        type: string
+        enumValues: []
+        exampleWasSpecified: false
+        nullable: false
+        deprecated: false
+      country:
+        custom: []
+        name: country
+        description: 'Must not be greater than 255 characters.'
+        required: true
+        example: k
+        type: string
+        enumValues: []
+        exampleWasSpecified: false
+        nullable: false
+        deprecated: false
+      state:
+        custom: []
+        name: state
+        description: 'Must not be greater than 255 characters.'
+        required: false
+        example: c
+        type: string
+        enumValues: []
+        exampleWasSpecified: false
+        nullable: true
+        deprecated: false
+      is_default:
+        custom: []
+        name: is_default
+        description: ''
+        required: false
+        example: false
+        type: boolean
+        enumValues: []
+        exampleWasSpecified: false
+        nullable: false
+        deprecated: false
+      is_billing:
+        custom: []
+        name: is_billing
+        description: ''
+        required: false
+        example: true
+        type: boolean
+        enumValues: []
+        exampleWasSpecified: false
+        nullable: false
+        deprecated: false
+      is_shipping:
+        custom: []
+        name: is_shipping
+        description: ''
+        required: false
+        example: false
+        type: boolean
+        enumValues: []
+        exampleWasSpecified: false
+        nullable: false
+        deprecated: false
+    cleanBodyParameters:
+      label: b
+      name: 'n'
+      phone: gzmiyvdljnikhway
+      address: architecto
+      city: 'n'
+      zip_code: gzmiyvdljnikhway
+      country: k
+      state: c
+      is_default: false
+      is_billing: true
+      is_shipping: false
+    fileParameters: []
+    responses: []
+    responseFields: []
+    auth: []
+    controller: null
+    method: null
+    route: null
+  -
+    custom: []
+    httpMethods:
+      - GET
+    uri: 'api/addresses/{address_id}'
+    metadata:
+      custom: []
+      groupName: Endpoints
+      groupDescription: ''
+      subgroup: ''
+      subgroupDescription: ''
+      title: 'Display the specified address.'
+      description: ''
+      authenticated: false
+      deprecated: false
+    headers:
+      Content-Type: application/json
+      Accept: application/json
+    urlParameters:
+      address_id:
+        custom: []
+        name: address_id
+        description: 'The ID of the address.'
+        required: true
+        example: 16
+        type: integer
+        enumValues: []
+        exampleWasSpecified: false
+        nullable: false
+        deprecated: false
+    cleanUrlParameters:
+      address_id: 16
+    queryParameters: []
+    cleanQueryParameters: []
+    bodyParameters: []
+    cleanBodyParameters: []
+    fileParameters: []
+    responses:
+      -
+        custom: []
+        status: 401
+        content: '{"message":"Unauthenticated."}'
+        headers:
+          cache-control: 'no-cache, private'
+          content-type: application/json
+          access-control-allow-origin: 'http://localhost:3000'
+          access-control-allow-credentials: 'true'
+          set-cookie: 'laravel-session=eyJpdiI6Ill2OEx6YURONFBxazVBMjdXWWVwNXc9PSIsInZhbHVlIjoiMUF6LzNPWitValcxczhWVzd1QWMranY0WDJoVi9LeUFvT3RYeG5kSGJldEpkMWg3ZFlSUnkrd3V3cDVUTWJBalRJNGVKL1Nic3BhYm1Wb0NrYmxrYzJqMGtkYkg2emF1NnpWc05tc1BhUGxPd1JqN1BWVXRKbE5CTmdUS3hWNS8iLCJtYWMiOiJlOTc0ZjkwN2E3ZDY0MmE0MmE2ZDIzZjhmYTgwNWNiNTQzZjg3ZmVlZTg1ZTYzZWNhMjVkYjM4MDE2MzAwOWM5IiwidGFnIjoiIn0%3D; expires=Wed, 21 Jan 2026 11:38:44 GMT; Max-Age=7200; path=/; httponly; samesite=lax'
+        description: null
+    responseFields: []
+    auth: []
+    controller: null
+    method: null
+    route: null
+  -
+    custom: []
+    httpMethods:
+      - PUT
+    uri: 'api/addresses/{address_id}'
+    metadata:
+      custom: []
+      groupName: Endpoints
+      groupDescription: ''
+      subgroup: ''
+      subgroupDescription: ''
+      title: 'Update the specified address.'
+      description: ''
+      authenticated: false
+      deprecated: false
+    headers:
+      Content-Type: application/json
+      Accept: application/json
+    urlParameters:
+      address_id:
+        custom: []
+        name: address_id
+        description: 'The ID of the address.'
+        required: true
+        example: 16
+        type: integer
+        enumValues: []
+        exampleWasSpecified: false
+        nullable: false
+        deprecated: false
+    cleanUrlParameters:
+      address_id: 16
+    queryParameters: []
+    cleanQueryParameters: []
+    bodyParameters:
+      label:
+        custom: []
+        name: label
+        description: 'Must not be greater than 255 characters.'
+        required: false
+        example: b
+        type: string
+        enumValues: []
+        exampleWasSpecified: false
+        nullable: true
+        deprecated: false
+      name:
+        custom: []
+        name: name
+        description: 'Must not be greater than 255 characters.'
+        required: false
+        example: 'n'
+        type: string
+        enumValues: []
+        exampleWasSpecified: false
+        nullable: false
+        deprecated: false
+      phone:
+        custom: []
+        name: phone
+        description: 'Must not be greater than 20 characters.'
+        required: false
+        example: gzmiyvdljnikhway
+        type: string
+        enumValues: []
+        exampleWasSpecified: false
+        nullable: false
+        deprecated: false
+      address:
+        custom: []
+        name: address
+        description: ''
+        required: false
+        example: architecto
+        type: string
+        enumValues: []
+        exampleWasSpecified: false
+        nullable: false
+        deprecated: false
+      city:
+        custom: []
+        name: city
+        description: 'Must not be greater than 255 characters.'
+        required: false
+        example: 'n'
+        type: string
+        enumValues: []
+        exampleWasSpecified: false
+        nullable: false
+        deprecated: false
+      zip_code:
+        custom: []
+        name: zip_code
+        description: 'Must not be greater than 20 characters.'
+        required: false
+        example: gzmiyvdljnikhway
+        type: string
+        enumValues: []
+        exampleWasSpecified: false
+        nullable: false
+        deprecated: false
+      country:
+        custom: []
+        name: country
+        description: 'Must not be greater than 255 characters.'
+        required: false
+        example: k
+        type: string
+        enumValues: []
+        exampleWasSpecified: false
+        nullable: false
+        deprecated: false
+      state:
+        custom: []
+        name: state
+        description: 'Must not be greater than 255 characters.'
+        required: false
+        example: c
+        type: string
+        enumValues: []
+        exampleWasSpecified: false
+        nullable: true
+        deprecated: false
+      is_default:
+        custom: []
+        name: is_default
+        description: ''
+        required: false
+        example: true
+        type: boolean
+        enumValues: []
+        exampleWasSpecified: false
+        nullable: false
+        deprecated: false
+      is_billing:
+        custom: []
+        name: is_billing
+        description: ''
+        required: false
+        example: false
+        type: boolean
+        enumValues: []
+        exampleWasSpecified: false
+        nullable: false
+        deprecated: false
+      is_shipping:
+        custom: []
+        name: is_shipping
+        description: ''
+        required: false
+        example: false
+        type: boolean
+        enumValues: []
+        exampleWasSpecified: false
+        nullable: false
+        deprecated: false
+    cleanBodyParameters:
+      label: b
+      name: 'n'
+      phone: gzmiyvdljnikhway
+      address: architecto
+      city: 'n'
+      zip_code: gzmiyvdljnikhway
+      country: k
+      state: c
+      is_default: true
+      is_billing: false
+      is_shipping: false
+    fileParameters: []
+    responses: []
+    responseFields: []
+    auth: []
+    controller: null
+    method: null
+    route: null
+  -
+    custom: []
+    httpMethods:
+      - DELETE
+    uri: 'api/addresses/{address_id}'
+    metadata:
+      custom: []
+      groupName: Endpoints
+      groupDescription: ''
+      subgroup: ''
+      subgroupDescription: ''
+      title: 'Remove the specified address.'
+      description: ''
+      authenticated: false
+      deprecated: false
+    headers:
+      Content-Type: application/json
+      Accept: application/json
+    urlParameters:
+      address_id:
+        custom: []
+        name: address_id
+        description: 'The ID of the address.'
+        required: true
+        example: 16
+        type: integer
+        enumValues: []
+        exampleWasSpecified: false
+        nullable: false
+        deprecated: false
+    cleanUrlParameters:
+      address_id: 16
+    queryParameters: []
+    cleanQueryParameters: []
+    bodyParameters: []
+    cleanBodyParameters: []
+    fileParameters: []
+    responses: []
+    responseFields: []
+    auth: []
+    controller: null
+    method: null
+    route: null
+  -
+    custom: []
+    httpMethods:
+      - PATCH
+    uri: 'api/addresses/{address_id}/default'
+    metadata:
+      custom: []
+      groupName: Endpoints
+      groupDescription: ''
+      subgroup: ''
+      subgroupDescription: ''
+      title: 'Set an address as default.'
+      description: ''
+      authenticated: false
+      deprecated: false
+    headers:
+      Content-Type: application/json
+      Accept: application/json
+    urlParameters:
+      address_id:
+        custom: []
+        name: address_id
+        description: 'The ID of the address.'
+        required: true
+        example: 16
+        type: integer
+        enumValues: []
+        exampleWasSpecified: false
+        nullable: false
+        deprecated: false
+    cleanUrlParameters:
+      address_id: 16
+    queryParameters: []
+    cleanQueryParameters: []
+    bodyParameters: []
+    cleanBodyParameters: []
+    fileParameters: []
+    responses: []
     responseFields: []
     auth: []
     controller: null
@@ -80,7 +600,7 @@ endpoints:
           content-type: application/json
           access-control-allow-origin: 'http://localhost:3000'
           access-control-allow-credentials: 'true'
-          set-cookie: 'laravel-session=eyJpdiI6Im9nT2o2V0FjQ2RvaXRZMk5TUkZrNXc9PSIsInZhbHVlIjoidVdYZnRFbUVlQ0MxdjFaaGVRN0dvalBhNlRGMmZiQkFHdGI1OHFrbVczcGE5WjI4SExwdWc1TlVLSTE5WVQrbWJyWHRsQzdmdTA4MDllTzltNjNnOHU4NjY5QW1CaDJRdW5wdkJiMW1GTU82Tjl0Tk9aVU4zV3drdm1YRENJNFAiLCJtYWMiOiIyN2FkMTJmMGE0Y2M0NGZmNGY2M2M4YmFiYWJmZmI4NjBkZjY0YmY3MDRmYjU1OTM1ZDA0NWVjNDI3MjlhOTc1IiwidGFnIjoiIn0%3D; expires=Wed, 21 Jan 2026 11:27:14 GMT; Max-Age=7200; path=/; httponly; samesite=lax'
+          set-cookie: 'laravel-session=eyJpdiI6Ino1eGhLMWxXNnF1eDZRdklBR3NuMGc9PSIsInZhbHVlIjoicUFHSklhOEppcU9YSkdXSUpTS2tIbTBPODBvQ05hWmhNbTI2eWQzNUhXczh1b2xxbkkvWDY1WUVKWWVUMWg4aEY0S3BIazRCbGdLWlFGdzY2Zk1aTXRZdUpSL2libUsrYUR3NERDU091RjFxb01UOWQ2SEl2T3p5bk54cEVUeDciLCJtYWMiOiJiMmNlZjYwNTVlNzhkZmE5MmFjMTcwMmIwMWE1NjBhYWUxZGFhZDg5NTE1YjljZWNkZjFlZjk2ZTNlMzllOGU1IiwidGFnIjoiIn0%3D; expires=Wed, 21 Jan 2026 11:38:44 GMT; Max-Age=7200; path=/; httponly; samesite=lax'
         description: null
     responseFields: []
     auth: []
@@ -251,7 +771,7 @@ endpoints:
           content-type: application/json
           access-control-allow-origin: 'http://localhost:3000'
           access-control-allow-credentials: 'true'
-          set-cookie: 'laravel-session=eyJpdiI6Im4rcEt4WEZwTFAvVi83UmlVTTdDcnc9PSIsInZhbHVlIjoicjlTL00rS3FmbmIxOXVNK0tlaGp4QnhQOThyaDMwTWptVzhQeG9tZW5SUVNxQ1R4aXBNTnFQN0xIQUF4TWJPNXNGODBqdlM4NW9BanZwV1d1ZnhlQzRURTBsMmxzTmIvMkJNT0RNbitobnZEZHkzamxpaU1yVUZ0VW94NU5wdUIiLCJtYWMiOiJhNzAzNzI3OWE2ZmQzN2NlNzQxNmNmNzM0YzhhNzhlY2QzNWUxNTAwNDc2YzAxYmY3YjI4OGMyYjhhMTc4ODg4IiwidGFnIjoiIn0%3D; expires=Wed, 21 Jan 2026 11:27:14 GMT; Max-Age=7200; path=/; httponly; samesite=lax'
+          set-cookie: 'laravel-session=eyJpdiI6InRYY2hsQnFsY2JHQnFwYm9aRmNnU0E9PSIsInZhbHVlIjoiN0ovTHJGVFUrRnNReE83KzNSeDNJS2hiRmhyd1o5TFJjL3daeWRDS05rTTM0ZFdtaDBIU1FwZDlJT1VTYWJuZHpTc3BEOUI1Ym9OQ1ZXZlAzdHFBWEJoSnVNbVpUWXBuMGRBcm9GenFoOExpVXNjYjNhMlY0bGNacXMzRFZ4SmsiLCJtYWMiOiIwM2M0ZGQ5OGNmNTNiZDgwMmY3NmU1OGE5NDdlOTc2NjQ2ZGU3NWUzMzgzNmM1NjNmNmZmMzQzMmMyMDNjODA4IiwidGFnIjoiIn0%3D; expires=Wed, 21 Jan 2026 11:38:44 GMT; Max-Age=7200; path=/; httponly; samesite=lax'
         description: null
     responseFields: []
     auth: []
@@ -375,7 +895,7 @@ endpoints:
         name: status
         description: ''
         required: false
-        example: pending
+        example: replied
         type: string
         enumValues:
           - pending
@@ -391,7 +911,7 @@ endpoints:
       company: 'y'
       service: u
       message: architecto
-      status: pending
+      status: replied
     fileParameters: []
     responses: []
     responseFields: []
@@ -607,7 +1127,7 @@ endpoints:
           content-type: application/json
           access-control-allow-origin: 'http://localhost:3000'
           access-control-allow-credentials: 'true'
-          set-cookie: 'laravel-session=eyJpdiI6ImhLbDFNZmt2NUtoUnliNmJ3bXdKVWc9PSIsInZhbHVlIjoiNk9QaldWckwyVkFENWhTYXF3UWJjWlJFbzZzVGM5eUE3S3N1S0IzODJmeWZnT1ZJc3RBTmFIRTJqMjJGdjIyWVhTTHNLYXJJTEc4TnRqR0R0bmU1cnFRVzVsVkEzeERKeUkxM3hwck9GdXZuWFlwM3BZaXZMeVpFb2ZOektNM0siLCJtYWMiOiJmNjVlYzcxZTgwMzk4MGFiZWRmNjJlYjJmODU2N2MyOTkwMTI1YWQ1OWU5YzQwM2UyYzg1Yzk4OTNhNjllOWRjIiwidGFnIjoiIn0%3D; expires=Wed, 21 Jan 2026 11:27:14 GMT; Max-Age=7200; path=/; httponly; samesite=lax'
+          set-cookie: 'laravel-session=eyJpdiI6IlRVRE1UUGNSWUp5WmZXRXpVcGcwZGc9PSIsInZhbHVlIjoicDRBT05EWDd5YTRVbkRsVnJDalhBOUN0VXdjSmZrWjNEeXA0dWx1LzBGeng3RTVwYkZpMWYvcjh0OEJ5c05leVkwTFhIbE4yN2xMSjJRZ25Icm1CNEZNeEJHelMyaGpPcWNhYWNHTlVuQzFyalhFOUdOZFZZemNZQWdHTnk4Q1ciLCJtYWMiOiI0M2RhYWI2ZGU3YWYwMDdmOTc0ZGQ1NTQ3NmQ2ODUxZGU2NTM5ZWVjNjRmZTk2NDNlZGExMjkyMjUxMTg0YmJkIiwidGFnIjoiIn0%3D; expires=Wed, 21 Jan 2026 11:38:44 GMT; Max-Age=7200; path=/; httponly; samesite=lax'
         description: null
     responseFields: []
     auth: []
@@ -890,7 +1410,7 @@ endpoints:
           content-type: application/json
           access-control-allow-origin: 'http://localhost:3000'
           access-control-allow-credentials: 'true'
-          set-cookie: 'laravel-session=eyJpdiI6IkdhaTNYWkMrSWg1RlFqb3ZkaG9ndUE9PSIsInZhbHVlIjoidXVLWkpjSXpRdEdZUGRDVTMzMWUrYk1aNXNsM05yV0NwdzE3R082c1pmR2M5K0QzeUdQeFlEbXlmaTJxUllLVGJZV244bXFuWGhONmo4ZmlDdStvYjR1cHNtbjZ1L24wcjRqaCsxYlgzSSs0N0FpRTZ0ZEoxUG4wazFGTFMyMmIiLCJtYWMiOiJkOTdlZDIwZjkxM2QzODM4YjFmMzM5MTA0YjkwMzExNzZkM2JjMDFjMGNkNjI5MGY0NGU2OTczYzAzMjYxMGI0IiwidGFnIjoiIn0%3D; expires=Wed, 21 Jan 2026 11:27:15 GMT; Max-Age=7200; path=/; httponly; samesite=lax'
+          set-cookie: 'laravel-session=eyJpdiI6IlFNR2s3UXNLUHg0TWFkdmhsMng0MHc9PSIsInZhbHVlIjoicGtWbGt3NjdPWWRydU5Sd3RGdFloWHdpTExQQjVLdjI0Qis2RTROZ0piclQxbStRVnJtbHNEMUZicDNOYTJNNVF1Zy9VeUZsYjErRm9ybXJrTnZmZEhmQkhmRXN1L2tZOWJjVCtYOXliSmJ5SnE5VkI4L2FFYVduS2dWZFE4bTQiLCJtYWMiOiIzZjUyOGFiNDE1ZDBkNGVmOTBiNTA1ZTQ3YTFhYzU4ZGIxNWM1NmExZmZlMjkyNTc0MjRlN2QyMjNhMDg0ZTMyIiwidGFnIjoiIn0%3D; expires=Wed, 21 Jan 2026 11:38:45 GMT; Max-Age=7200; path=/; httponly; samesite=lax'
         description: null
     responseFields: []
     auth: []
@@ -1091,7 +1611,7 @@ endpoints:
         name: packageType
         description: ''
         required: false
-        example: Normal
+        example: 'Heavy Bulky'
         type: string
         enumValues:
           - Normal
@@ -1116,7 +1636,7 @@ endpoints:
         name: repeatedData.repeatedType
         description: ''
         required: false
-        example: 'One Time'
+        example: Weekly
         type: string
         enumValues:
           - 'One Time'
@@ -1131,7 +1651,7 @@ endpoints:
         description: ''
         required: false
         example:
-          - Wednesday
+          - Monday
         type: 'string[]'
         enumValues:
           - Sunday
@@ -1149,7 +1669,7 @@ endpoints:
         name: repeatedData.startDate
         description: 'Must be a valid date.'
         required: false
-        example: '2026-01-21T09:27:15'
+        example: '2026-01-21T09:38:45'
         type: string
         enumValues: []
         exampleWasSpecified: false
@@ -1176,12 +1696,12 @@ endpoints:
         email: zbailey@example.net
       notes: architecto
       noOfPackages: 22
-      packageType: Normal
+      packageType: 'Heavy Bulky'
       repeatedData:
-        repeatedType: 'One Time'
+        repeatedType: Weekly
         days:
-          - Wednesday
-        startDate: '2026-01-21T09:27:15'
+          - Monday
+        startDate: '2026-01-21T09:38:45'
         endDate: '2052-02-14'
     fileParameters: []
     responses: []
@@ -1486,7 +2006,7 @@ endpoints:
           content-type: application/json
           access-control-allow-origin: 'http://localhost:3000'
           access-control-allow-credentials: 'true'
-          set-cookie: 'laravel-session=eyJpdiI6InpWdS9mWUNoZ1M1RHR5OE1nVXh2cGc9PSIsInZhbHVlIjoiUjhaVlpqZ3BpNjVEQlNUZFZNaXhPUzFiTUNZbFJsbzVVMVMrU0xOK1RyMk96V1dzclpNNUtyZit5M2hIaGFOd29NL1daQURPMEh2QUlkZHViNTRmTU1sK1g5RUpRd3RreVRlc0t6K1FHeDFKWFFHRUVCek9DQUVJcjM3MXljVU8iLCJtYWMiOiJjN2U3Nzk4ZTg0MTE2MGU2ZGIzM2I4NzMzMTQ0MWIyZmE2MTMyZjY0N2UwODIxNWUyMjVlN2VlMmMzZTdlMzM4IiwidGFnIjoiIn0%3D; expires=Wed, 21 Jan 2026 11:27:15 GMT; Max-Age=7200; path=/; httponly; samesite=lax'
+          set-cookie: 'laravel-session=eyJpdiI6ImI4OFVTeGVnSk5GZW8yTHJKM0hxNWc9PSIsInZhbHVlIjoiSWZ5eFp1Mi9uRXRxSDA4Z0FWNnF1a0wyaFZPaEFud25rZ21uU21TWDZsNFYvdHRBelpYMm54bmpyMkcvY1dRZm96WklBbHZyOTJjVVB4Zmg1ejZhODI3SzU4d2M1Y213MjkzMVpiYnMvbVVnaDhPbzFpa2orbGpKUFJvOWtxR04iLCJtYWMiOiJmMzdiMWUwMGE3NzFkNjk3MjNiN2RjZDAwZTczZGUzY2QzMTIxYmYyMzY4OTU3NjNhYjk4MGQxZWE3NjA2YjBmIiwidGFnIjoiIn0%3D; expires=Wed, 21 Jan 2026 11:38:45 GMT; Max-Age=7200; path=/; httponly; samesite=lax'
         description: null
     responseFields: []
     auth: []

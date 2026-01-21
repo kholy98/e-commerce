@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Interfaces\PaymentGatewayInterface;
 use App\Models\Cart;
+use App\Models\CustomerAddress;
 use App\Models\Order;
 use App\Models\PendingCheckout;
 use App\Models\Shipment;
@@ -20,11 +21,13 @@ use Illuminate\Support\Facades\Auth;
  * APIs for the checkout process.
  *
  * The checkout flow consists of:
- * 1. Initiate checkout - validates cart, creates pending checkout, and returns payment URL
- * 2. Payment processing - handled by payment gateway (Paymob)
- * 3. Complete/Fail callbacks - finalize or cancel the order based on payment result
+ * 1. **Initiate checkout** - Validates cart, creates shipment with Bosta, initiates payment with Paymob, and returns payment URL
+ * 2. **Payment processing** - Customer completes payment on Paymob iframe
+ * 3. **Complete callback** - Called after successful payment to create the final order
+ * 4. **Fail callback** - Called if payment fails, cleans up pending data
  *
  * Supports both guest checkout and authenticated user checkout.
+ * Guest carts are session-based and migrate to user account upon login.
  */
 class CheckoutController extends Controller
 {
@@ -51,87 +54,146 @@ class CheckoutController extends Controller
     /**
      * Initiate checkout
      *
-     * Start the checkout process by validating the cart, creating a pending checkout,
-     * and returning a payment URL. Supports both guest and authenticated users.
+     * Start the checkout process by validating the cart, creating a shipment with Bosta,
+     * initiating payment with Paymob, and returning the payment iframe URL.
+     * Supports both guest and authenticated users.
+     *
+     * The checkout creates a pending checkout record that expires after 24 hours.
+     * Once payment is completed, the pending checkout is converted to a real order.
      *
      * @unauthenticated
      *
-     * @bodyParam shipping_address object required The shipping address details.
+     * @bodyParam shipping_address_id integer Use a saved shipping address by ID (for authenticated users). Example: 1
+     * @bodyParam billing_address_id integer Use a saved billing address by ID (for authenticated users). Example: 1
+     * @bodyParam shipping_address object required Required if shipping_address_id not provided. The shipping address details.
      * @bodyParam shipping_address.street string required The street address. Example: 123 Main St
-     * @bodyParam shipping_address.city string required The city name. Example: Cairo
+     * @bodyParam shipping_address.city string required The city name (used for shipping cost calculation). Example: Cairo
      * @bodyParam shipping_address.zip_code string required The postal/zip code. Example: 12345
      * @bodyParam shipping_address.country string required The country name. Example: Egypt
      * @bodyParam shipping_address.building_number string required The building number. Example: 15
-     * @bodyParam shipping_address.floor string The floor number. Example: 3
-     * @bodyParam shipping_address.apartment string The apartment number. Example: 5A
-     * @bodyParam shipping_address.zone string required The zone/district. Example: Maadi
-     * @bodyParam billing_address object required The billing address and contact details.
+     * @bodyParam shipping_address.floor string The floor number (optional). Example: 3
+     * @bodyParam shipping_address.apartment string The apartment number (optional). Example: 5A
+     * @bodyParam shipping_address.zone string required The zone/district for Bosta delivery. Example: Maadi
+     * @bodyParam billing_address object required Required if billing_address_id not provided. The billing and contact details for payment.
      * @bodyParam billing_address.first_name string required Customer's first name. Example: John
      * @bodyParam billing_address.last_name string required Customer's last name. Example: Doe
-     * @bodyParam billing_address.email string required Customer's email address. Example: john@example.com
-     * @bodyParam billing_address.phone string required Customer's phone number. Example: +201234567890
+     * @bodyParam billing_address.email string required Customer's email for order confirmation. Example: john@example.com
+     * @bodyParam billing_address.phone string required Customer's phone for delivery contact. Example: +201234567890
      * @bodyParam billing_address.street string required The billing street address. Example: 123 Main St
      * @bodyParam billing_address.city string required The billing city. Example: Cairo
      * @bodyParam billing_address.zip_code string required The billing postal/zip code. Example: 12345
      * @bodyParam billing_address.country string required The billing country. Example: Egypt
-     * @bodyParam billing_address.floor string The floor number. Example: 3
-     * @bodyParam billing_address.apartment string The apartment number. Example: 5A
-     * @bodyParam notes string Optional order notes. Example: Please deliver in the morning
-     * @bodyParam user_id string Optional user ID for guest checkout with user creation.
+     * @bodyParam billing_address.floor string The floor number (optional, defaults to NA for Paymob). Example: 3
+     * @bodyParam billing_address.apartment string The apartment number (optional, defaults to NA for Paymob). Example: 5A
+     * @bodyParam notes string Optional order notes for delivery instructions. Example: Please deliver in the morning
+     * @bodyParam user_id integer Optional user ID for associating guest checkout with a user.
      *
      * @response 200 scenario="Success" {
      *   "success": true,
      *   "message": "Checkout initiated successfully",
      *   "data": {
-     *     "checkout_id": "chk_abc123",
-     *     "payment_url": "https://accept.paymob.com/api/acceptance/iframes/12345?payment_token=xyz",
-     *     "order_summary": {
-     *       "subtotal": 100.00,
-     *       "shipping": 50.00,
-     *       "tax": 14.00,
-     *       "total": 164.00,
+     *     "payment_key": "ZXlKaGJHY2lPaUpJVXpVeE1pSXNJblI1Y0NJNklrcFhWQ0o5...",
+     *     "iframe_url": "https://accept.paymob.com/api/acceptance/iframes/123456?payment_token=ZXlKaGJHY2lPaUpJVXpVeE1pSXNJblI1Y0NJNklrcFhWQ0o5...",
+     *     "temp_order_id": "149823756",
+     *     "tracking_number": "BOSTA-123456789",
+     *     "cost_breakdown": {
+     *       "subtotal": 250.00,
+     *       "tax": 35.00,
+     *       "shipping": 80.00,
+     *       "total": 365.00,
      *       "item_count": 3
-     *     },
-     *     "expires_at": "2024-01-15T11:00:00.000000Z"
+     *     }
      *   }
      * }
      * @response 422 scenario="Empty Cart" {
      *   "success": false,
      *   "message": "Cart is empty"
      * }
+     * @response 422 scenario="Shipment Creation Failed" {
+     *   "success": false,
+     *   "message": "Failed to create shipment",
+     *   "error": "Invalid zone specified for delivery"
+     * }
+     * @response 422 scenario="Payment Initiation Failed" {
+     *   "success": false,
+     *   "message": "Payment initiation failed",
+     *   "error": "Invalid billing data"
+     * }
      * @response 422 scenario="Validation Error" {
      *   "message": "The shipping address.street field is required.",
      *   "errors": {
-     *     "shipping_address.street": ["The shipping address.street field is required."]
+     *     "shipping_address.street": ["The shipping address.street field is required."],
+     *     "shipping_address.city": ["The shipping address.city field is required."],
+     *     "billing_address.email": ["The billing address.email must be a valid email address."]
      *   }
+     * }
+     * @response 404 scenario="Saved Address Not Found" {
+     *   "success": false,
+     *   "message": "Shipping address not found"
+     * }
+     * @response 500 scenario="Server Error" {
+     *   "success": false,
+     *   "message": "Checkout failed: Connection to payment gateway timed out"
      * }
      */
     public function initiate(Request $request): JsonResponse
     {
         $validated = $request->validate([
-            'shipping_address' => 'required|array',
-            'shipping_address.street' => 'required|string',
-            'shipping_address.city' => 'required|string',
-            'shipping_address.zip_code' => 'required|string',
-            'shipping_address.country' => 'required|string',
-            'shipping_address.building_number' => 'required|string',
+            'shipping_address_id' => 'nullable|exists:customer_addresses,id',
+            'billing_address_id' => 'nullable|exists:customer_addresses,id',
+            'shipping_address' => 'required_without:shipping_address_id|array',
+            'shipping_address.street' => 'required_with:shipping_address|string',
+            'shipping_address.city' => 'required_with:shipping_address|string',
+            'shipping_address.zip_code' => 'required_with:shipping_address|string',
+            'shipping_address.country' => 'required_with:shipping_address|string',
+            'shipping_address.building_number' => 'required_with:shipping_address|string',
             'shipping_address.floor' => 'nullable|string',
             'shipping_address.apartment' => 'nullable|string',
-            'shipping_address.zone' => 'required|string',
-            'billing_address' => 'required|array',
-            'billing_address.first_name' => 'required|string',
-            'billing_address.last_name' => 'required|string',
-            'billing_address.email' => 'required|email',
-            'billing_address.phone' => 'required|string',
-            'billing_address.street' => 'required|string',
-            'billing_address.city' => 'required|string',
-            'billing_address.zip_code' => 'required|string',
-            'billing_address.country' => 'required|string',
-            'billing_address.floor' => 'nullable|string', // Optional for Paymob (defaults to NA)
-            'billing_address.apartment' => 'nullable|string', // Optional for Paymob (defaults to NA)
+            'shipping_address.zone' => 'required_with:shipping_address|string',
+            'billing_address' => 'required_without:billing_address_id|array',
+            'billing_address.first_name' => 'required_with:billing_address|string',
+            'billing_address.last_name' => 'required_with:billing_address|string',
+            'billing_address.email' => 'required_with:billing_address|email',
+            'billing_address.phone' => 'required_with:billing_address|string',
+            'billing_address.street' => 'required_with:billing_address|string',
+            'billing_address.city' => 'required_with:billing_address|string',
+            'billing_address.zip_code' => 'required_with:billing_address|string',
+            'billing_address.country' => 'required_with:billing_address|string',
+            'billing_address.floor' => 'nullable|string',
+            'billing_address.apartment' => 'nullable|string',
             'notes' => 'nullable|string',
             'user_id' => 'nullable|exists:users,id', // For guest checkout with user creation
         ]);
+
+        // Load stored addresses if IDs are provided
+        $shippingAddress = null;
+        $billingAddress = null;
+
+        if (isset($validated['shipping_address_id'])) {
+            $shippingAddress = CustomerAddress::where('id', $validated['shipping_address_id'])
+                ->where('user_id', Auth::id())
+                ->first();
+
+            if (! $shippingAddress) {
+                return response()->json([
+                    'success' => false,
+                    'message' => 'Shipping address not found',
+                ], 404);
+            }
+        }
+
+        if (isset($validated['billing_address_id'])) {
+            $billingAddress = CustomerAddress::where('id', $validated['billing_address_id'])
+                ->where('user_id', Auth::id())
+                ->first();
+
+            if (! $billingAddress) {
+                return response()->json([
+                    'success' => false,
+                    'message' => 'Billing address not found',
+                ], 404);
+            }
+        }
 
         try {
             $cartItems = $this->cartService->getCartItems();
@@ -155,28 +217,48 @@ class CheckoutController extends Controller
                 'subtotal' => $summary['subtotal'],
                 'tax' => $summary['tax'],
                 'shipping_cost' => $summary['shipping'],
-                'shipping_address' => $validated['shipping_address'],
-                'billing_address' => $validated['billing_address'],
+                'shipping_address' => $shippingAddress ? $shippingAddress->toArray() : $validated['shipping_address'],
+                'billing_address' => $billingAddress ? $billingAddress->toArray() : $validated['billing_address'],
+                'shipping_address_id' => $shippingAddress?->id,
+                'billing_address_id' => $billingAddress?->id,
                 'notes' => $validated['notes'] ?? null,
             ];
 
             // Step 1: Create shipment with Bosta
-            $shipmentPayload = [
-                'type' => 10, // Required field for Bosta API - 10 = standard delivery
-                'receiver' => [
+            if ($billingAddress) {
+                $billingData = $billingAddress->toPaymobAddress();
+                $receiver = [
+                    'firstName' => $billingData['first_name'],
+                    'lastName' => $billingData['last_name'],
+                    'phone' => $billingData['phone_number'],
+                    'email' => $billingData['email'],
+                ];
+            } else {
+                $receiver = [
                     'firstName' => $validated['billing_address']['first_name'],
                     'lastName' => $validated['billing_address']['last_name'],
                     'phone' => $validated['billing_address']['phone'],
                     'email' => $validated['billing_address']['email'],
-                ],
-                'dropOffAddress' => [
+                ];
+            }
+
+            if ($shippingAddress) {
+                $dropOffAddress = $shippingAddress->toBostaAddress();
+            } else {
+                $dropOffAddress = [
                     'buildingNumber' => $validated['shipping_address']['building_number'],
                     'firstLine' => $validated['shipping_address']['street'],
                     'city' => $validated['shipping_address']['city'],
                     'zone' => $validated['shipping_address']['zone'],
                     'floor' => $validated['shipping_address']['floor'] ?? null,
                     'apartment' => $validated['shipping_address']['apartment'] ?? null,
-                ],
+                ];
+            }
+
+            $shipmentPayload = [
+                'type' => 10, // Required field for Bosta API - 10 = standard delivery
+                'receiver' => $receiver,
+                'dropOffAddress' => $dropOffAddress,
                 'notes' => $validated['notes'] ?? '',
                 'cod' => 0, // We're using online payment, no COD
             ];
@@ -198,25 +280,31 @@ class CheckoutController extends Controller
             ]]);
 
             // Step 2: Initiate payment with Paymob
+            if ($billingAddress) {
+                $billingData = $billingAddress->toPaymobAddress();
+            } else {
+                $billingData = [
+                    'first_name' => $validated['billing_address']['first_name'],
+                    'last_name' => $validated['billing_address']['last_name'],
+                    'email' => $validated['billing_address']['email'],
+                    'phone_number' => $validated['billing_address']['phone'],
+                    'street' => $validated['billing_address']['street'],
+                    'building' => $validated['billing_address']['street'],
+                    'floor' => $validated['billing_address']['floor'] ?? 'NA',
+                    'apartment' => $validated['billing_address']['apartment'] ?? 'NA',
+                    'city' => $validated['billing_address']['city'],
+                    'country' => $validated['billing_address']['country'],
+                    'postal_code' => $validated['billing_address']['zip_code'],
+                    'state' => 'NA',
+                    'shipping_method' => 'NA',
+                ];
+            }
+
             $paymentData = [
                 'amount_cents' => intval($summary['total'] * 100), // Convert to cents
                 'currency' => 'EGP',
                 'order_id' => 'TEMP-'.time(), // Temporary order ID
-                'billing_data' => [
-                    'first_name' => $validated['billing_address']['first_name'],
-                    'last_name' => $validated['billing_address']['last_name'],
-                    'email' => $validated['billing_address']['email'],
-                    'phone_number' => $validated['billing_address']['phone'], // Paymob expects phone_number
-                    'street' => $validated['billing_address']['street'], // Paymob expects street
-                    'building' => $validated['billing_address']['street'], // Paymob also expects building (same as street)
-                    'floor' => $validated['billing_address']['floor'] ?? 'NA', // Paymob requires floor
-                    'apartment' => $validated['billing_address']['apartment'] ?? 'NA', // Paymob requires apartment
-                    'city' => $validated['billing_address']['city'],
-                    'country' => $validated['billing_address']['country'],
-                    'postal_code' => $validated['billing_address']['zip_code'],
-                    'state' => 'NA', // Optional
-                    'shipping_method' => 'NA', // Optional
-                ],
+                'billing_data' => $billingData,
             ];
 
             \Log::info('Checkout: Initiating payment', [
@@ -286,32 +374,119 @@ class CheckoutController extends Controller
      * Complete checkout
      *
      * Finalize the checkout process after successful payment.
-     * This endpoint is called by the payment gateway callback or webhook.
-     * It creates the final order, processes the shipment, and clears the cart.
+     * This endpoint is called by the Paymob payment gateway callback (redirect) or webhook.
+     * It retrieves the pending checkout data, creates the final order, and clears the cart.
+     *
+     * For GET requests (browser redirects from Paymob), the order_id can be retrieved from the session.
+     * For POST requests (webhooks), the order_id must be provided in the request body.
      *
      * @unauthenticated
      *
-     * @queryParam order_id string The temporary order ID from the checkout initiation. Example: chk_abc123
+     * @queryParam order_id string The temporary order ID from Paymob (returned during checkout initiation). Example: 149823756
+     * @queryParam payment_id string The payment transaction ID from Paymob. Example: 98765432
+     *
+     * @bodyParam order_id string The temporary order ID (for webhook POST requests). Example: 149823756
+     * @bodyParam payment_id string The payment transaction ID (for webhook POST requests). Example: 98765432
+     * @bodyParam success boolean Payment success status (for webhook POST requests). Example: true
      *
      * @response 200 scenario="Success" {
      *   "success": true,
      *   "message": "Order created successfully",
      *   "data": {
-     *     "order_id": 1,
-     *     "order_number": "ORD-2024-001",
+     *     "id": 42,
+     *     "order_number": "ORD-2024-00042",
+     *     "user_id": 1,
      *     "status": "processing",
+     *     "status_ar": "قيد المعالجة",
      *     "payment_status": "paid",
-     *     "total_amount": 164.00,
-     *     "tracking_number": "BOSTA123456"
+     *     "subtotal": 250.00,
+     *     "tax": 35.00,
+     *     "shipping_cost": 80.00,
+     *     "total_amount": 365.00,
+     *     "shipping_address": {
+     *       "street": "123 Main St",
+     *       "city": "Cairo",
+     *       "zip_code": "12345",
+     *       "country": "Egypt",
+     *       "building_number": "15",
+     *       "floor": "3",
+     *       "apartment": "5A",
+     *       "zone": "Maadi"
+     *     },
+     *     "billing_address": {
+     *       "first_name": "John",
+     *       "last_name": "Doe",
+     *       "email": "john@example.com",
+     *       "phone": "+201234567890",
+     *       "street": "123 Main St",
+     *       "city": "Cairo",
+     *       "zip_code": "12345",
+     *       "country": "Egypt"
+     *     },
+     *     "notes": "Please deliver in the morning",
+     *     "created_at": "2024-01-15T10:30:00.000000Z",
+     *     "updated_at": "2024-01-15T10:30:00.000000Z",
+     *     "items": [
+     *       {
+     *         "id": 101,
+     *         "order_id": 42,
+     *         "product_id": 5,
+     *         "quantity": 2,
+     *         "price": 75.00,
+     *         "total": 150.00,
+     *         "product": {
+     *           "id": 5,
+     *           "name": "Premium Coffee Beans",
+     *           "slug": "premium-coffee-beans",
+     *           "price": 75.00,
+     *           "sku": "COF-005",
+     *           "images": [
+     *             {
+     *               "id": 1,
+     *               "url": "https://example.com/storage/products/coffee.jpg"
+     *             }
+     *           ]
+     *         }
+     *       },
+     *       {
+     *         "id": 102,
+     *         "order_id": 42,
+     *         "product_id": 8,
+     *         "quantity": 1,
+     *         "price": 100.00,
+     *         "total": 100.00,
+     *         "product": {
+     *           "id": 8,
+     *           "name": "Coffee Grinder",
+     *           "slug": "coffee-grinder",
+     *           "price": 100.00,
+     *           "sku": "GRN-008",
+     *           "images": [
+     *             {
+     *               "id": 3,
+     *               "url": "https://example.com/storage/products/grinder.jpg"
+     *             }
+     *           ]
+     *         }
+     *       }
+     *     ]
      *   }
      * }
      * @response 400 scenario="Order ID Required" {
      *   "success": false,
      *   "message": "Order ID is required"
      * }
-     * @response 404 scenario="Checkout Not Found" {
+     * @response 404 scenario="Checkout Not Found or Expired" {
      *   "success": false,
-     *   "message": "Checkout session not found or expired"
+     *   "message": "No pending checkout found"
+     * }
+     * @response 422 scenario="Payment Not Successful" {
+     *   "success": false,
+     *   "message": "Payment was not successful"
+     * }
+     * @response 500 scenario="Order Creation Failed" {
+     *   "success": false,
+     *   "message": "Order creation failed: Database connection error"
      * }
      */
     public function complete(Request $request): JsonResponse
@@ -459,17 +634,28 @@ class CheckoutController extends Controller
     /**
      * Handle checkout failure
      *
-     * Handle failed checkout due to payment or shipment failure.
-     * Clears pending checkout data and redirects or returns error response.
+     * Handle failed checkout due to payment decline, cancellation, or gateway error.
+     * Clears all pending checkout data from both session and database.
+     *
+     * For web requests (GET), redirects to the payment failed page.
+     * For API requests (expects JSON), returns a JSON error response.
      *
      * @unauthenticated
      *
-     * @queryParam error string The error message from the payment gateway. Example: Payment declined
+     * @queryParam error string The error message or code from the payment gateway. Example: Payment declined by bank
+     * @queryParam order_id string The temporary order ID that failed. Example: 149823756
+     * @queryParam txn_response_code string Transaction response code from Paymob. Example: DECLINED
      *
-     * @response 200 scenario="API Response" {
+     * @response 302 scenario="Web Request" Redirects to /payment-failed
+     * @response 200 scenario="API Request" {
      *   "success": false,
      *   "message": "Checkout failed",
-     *   "error": "Payment declined"
+     *   "error": "Payment declined by bank"
+     * }
+     * @response 200 scenario="Unknown Error" {
+     *   "success": false,
+     *   "message": "Checkout failed",
+     *   "error": "Unknown error"
      * }
      */
     public function fail(Request $request)
@@ -497,7 +683,12 @@ class CheckoutController extends Controller
      * Get checkout status
      *
      * Check if there's a pending checkout session and get current cart summary.
-     * Useful for resuming interrupted checkout flows.
+     * Useful for:
+     * - Resuming interrupted checkout flows
+     * - Checking if user has abandoned checkout
+     * - Displaying cart summary before checkout
+     *
+     * Checks both session storage and database for pending checkouts.
      *
      * @unauthenticated
      *
@@ -506,11 +697,12 @@ class CheckoutController extends Controller
      *   "data": {
      *     "has_pending_checkout": true,
      *     "cart_summary": {
-     *       "subtotal": 100.00,
-     *       "tax": 14.00,
-     *       "shipping": 50.00,
-     *       "total": 164.00,
-     *       "item_count": 3
+     *       "subtotal": 250.00,
+     *       "tax": 35.00,
+     *       "shipping": 80.00,
+     *       "total": 365.00,
+     *       "item_count": 3,
+     *       "discount": 0.00
      *     },
      *     "cart_items_count": 3
      *   }
@@ -524,9 +716,25 @@ class CheckoutController extends Controller
      *       "tax": 0.00,
      *       "shipping": 0.00,
      *       "total": 0.00,
-     *       "item_count": 0
+     *       "item_count": 0,
+     *       "discount": 0.00
      *     },
      *     "cart_items_count": 0
+     *   }
+     * }
+     * @response 200 scenario="Cart With Items But No Checkout Started" {
+     *   "success": true,
+     *   "data": {
+     *     "has_pending_checkout": false,
+     *     "cart_summary": {
+     *       "subtotal": 150.00,
+     *       "tax": 21.00,
+     *       "shipping": 80.00,
+     *       "total": 251.00,
+     *       "item_count": 2,
+     *       "discount": 0.00
+     *     },
+     *     "cart_items_count": 2
      *   }
      * }
      */
@@ -555,24 +763,67 @@ class CheckoutController extends Controller
     /**
      * Test checkout completion
      *
-     * Test endpoint to complete checkout with real pending checkout data.
-     * This is useful for testing the checkout flow without going through payment.
+     * Test endpoint to simulate completing a checkout with real pending checkout data.
+     * This is useful for development and testing the checkout flow without going through
+     * the actual Paymob payment process.
+     *
+     * **Warning:** This endpoint should be disabled or protected in production environments.
      *
      * @unauthenticated
      *
      * @response 200 scenario="Success" {
      *   "success": true,
-     *   "message": "Test order created successfully",
+     *   "message": "Order created successfully",
      *   "data": {
-     *     "id": 1,
-     *     "order_number": "ORD-2024-001",
+     *     "id": 42,
+     *     "order_number": "ORD-2024-00042",
+     *     "user_id": 1,
      *     "status": "processing",
-     *     "payment_status": "paid"
+     *     "status_ar": "قيد المعالجة",
+     *     "payment_status": "paid",
+     *     "subtotal": 250.00,
+     *     "tax": 35.00,
+     *     "shipping_cost": 80.00,
+     *     "total_amount": 365.00,
+     *     "shipping_address": {
+     *       "street": "123 Main St",
+     *       "city": "Cairo",
+     *       "zip_code": "12345",
+     *       "country": "Egypt",
+     *       "building_number": "15",
+     *       "floor": "3",
+     *       "apartment": "5A",
+     *       "zone": "Maadi"
+     *     },
+     *     "notes": "Test order",
+     *     "created_at": "2024-01-15T10:30:00.000000Z",
+     *     "updated_at": "2024-01-15T10:30:00.000000Z",
+     *     "items": [
+     *       {
+     *         "id": 101,
+     *         "order_id": 42,
+     *         "product_id": 5,
+     *         "quantity": 2,
+     *         "price": 75.00,
+     *         "total": 150.00,
+     *         "product": {
+     *           "id": 5,
+     *           "name": "Premium Coffee Beans",
+     *           "slug": "premium-coffee-beans",
+     *           "price": 75.00,
+     *           "sku": "COF-005"
+     *         }
+     *       }
+     *     ]
      *   }
      * }
      * @response 404 scenario="No Pending Checkout" {
      *   "success": false,
      *   "message": "No active pending checkout found for testing"
+     * }
+     * @response 500 scenario="Test Failed" {
+     *   "success": false,
+     *   "message": "Test failed: Order creation error"
      * }
      */
     public function testComplete(Request $request): JsonResponse

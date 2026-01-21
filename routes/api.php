@@ -6,6 +6,7 @@ use App\Http\Controllers\CheckoutController;
 use App\Http\Controllers\ConfigController;
 use App\Http\Controllers\ContactInquiryController;
 use App\Http\Controllers\ContactUsController;
+use App\Http\Controllers\CustomerAddressController;
 use App\Http\Controllers\OrderController;
 use App\Http\Controllers\PaymentController;
 use App\Http\Controllers\ProductController;
@@ -16,8 +17,10 @@ use App\Models\User;
 use App\Services\SessionCartService;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Cookie;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Route;
+use Laravel\Sanctum\PersonalAccessToken;
 
 /**
  * @group Authentication
@@ -41,7 +44,9 @@ use Illuminate\Support\Facades\Route;
  * }
  */
 Route::get('/user', function (Request $request) {
-    return $request->user();
+    return $request->user()->load(['addresses' => function ($query) {
+        $query->orderBy('is_default', 'desc')->orderBy('created_at', 'desc');
+    }]);
 })->middleware('auth:sanctum');
 
 /**
@@ -97,7 +102,9 @@ Route::post('/register', function (Request $request, SessionCartService $cartSer
     $token = $user->createToken('API Token')->plainTextToken;
 
     return response()->json([
-        'user' => $user,
+        'user' => $user->load(['addresses' => function ($query) {
+            $query->orderBy('is_default', 'desc')->orderBy('created_at', 'desc');
+        }]),
         'token' => $token,
     ]);
 });
@@ -156,7 +163,9 @@ Route::post('/login', function (Request $request, SessionCartService $cartServic
     $token = $user->createToken('API Token')->plainTextToken;
 
     return response()->json([
-        'user' => $user,
+        'user' => $user->load(['addresses' => function ($query) {
+            $query->orderBy('is_default', 'desc')->orderBy('created_at', 'desc');
+        }]),
         'token' => $token,
     ]);
 });
@@ -178,15 +187,23 @@ Route::post('/login', function (Request $request, SessionCartService $cartServic
  * }
  */
 Route::post('/logout', function (Request $request) {
-    $token = $request->user()->currentAccessToken();
+    $user = $request->user();
 
-    if ($token) {
-        $token->delete();
-    }
+    // 1. Delete ALL tokens for this user (Permanent Logout from all devices)
+    $user->tokens()->delete();
+
+    // 2. Force the Session to be destroyed (If any exists)
+    Auth::guard('web')->logout();
+    $request->session()->invalidate();
+    $request->session()->regenerateToken();
+
+    // 3. Clear the Laravel Authentication Cookie manually
+    // This is the 'secret' to stopping /api/user from working immediately
+    $cookie = Cookie::forget('laravel_session');
 
     return response()->json([
-        'message' => 'Logged out successfully',
-    ]);
+        'message' => 'Every token and session has been wiped.'
+    ], 200)->withCookie($cookie);
 })->middleware('auth:sanctum');
 
 // Public routes
@@ -244,6 +261,16 @@ Route::middleware('auth:sanctum')->group(function () {
         Route::delete('/{productId}', [WishlistController::class, 'destroy']);
         Route::get('/check/{productId}', [WishlistController::class, 'check']);
         Route::delete('/', [WishlistController::class, 'clear']);
+    });
+
+    // Customer address routes
+    Route::prefix('addresses')->group(function () {
+        Route::get('/', [CustomerAddressController::class, 'index']);
+        Route::post('/', [CustomerAddressController::class, 'store']);
+        Route::get('/{address}', [CustomerAddressController::class, 'show']);
+        Route::put('/{address}', [CustomerAddressController::class, 'update']);
+        Route::delete('/{address}', [CustomerAddressController::class, 'destroy']);
+        Route::patch('/{address}/default', [CustomerAddressController::class, 'setDefault']);
     });
 });
 
