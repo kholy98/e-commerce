@@ -16,6 +16,11 @@ class CustomerAddress extends Model
         'name',
         'phone',
         'address',
+        'street',
+        'building_number',
+        'floor',
+        'apartment',
+        'zone',
         'city',
         'zip_code',
         'country',
@@ -69,12 +74,12 @@ class CustomerAddress extends Model
     public function toBostaAddress(): array
     {
         return [
-            'buildingNumber' => $this->extractBuildingNumber(),
-            'firstLine' => $this->address,
+            'buildingNumber' => $this->building_number,
+            'firstLine' => $this->street,
             'city' => $this->city,
-            'zone' => $this->city, // Using city as zone for now
-            'floor' => $this->extractFloor(),
-            'apartment' => $this->extractApartment(),
+            'zone' => $this->zone,
+            'floor' => $this->floor,
+            'apartment' => $this->apartment,
         ];
     }
 
@@ -90,10 +95,10 @@ class CustomerAddress extends Model
             'last_name' => $nameParts[1] ?? '',
             'email' => $this->user->email ?? '',
             'phone_number' => $this->phone,
-            'street' => $this->address,
-            'building' => $this->address,
-            'floor' => $this->extractFloor() ?: 'NA',
-            'apartment' => $this->extractApartment() ?: 'NA',
+            'street' => $this->street,
+            'building' => $this->building_number,
+            'floor' => $this->floor ?: 'NA',
+            'apartment' => $this->apartment ?: 'NA',
             'city' => $this->city,
             'country' => $this->country,
             'postal_code' => $this->zip_code,
@@ -109,6 +114,7 @@ class CustomerAddress extends Model
     {
         // Simple extraction - can be enhanced with regex
         $parts = explode(',', $this->address);
+
         return trim($parts[0] ?? $this->address);
     }
 

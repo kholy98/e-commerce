@@ -217,6 +217,31 @@ Invalidate the current API token and log out the user.</a>
                             </li>
                                                                         </ul>
                             </ul>
+                    <ul id="tocify-header-customer-addresses" class="tocify-header">
+                <li class="tocify-item level-1" data-unique="customer-addresses">
+                    <a href="#customer-addresses">Customer Addresses</a>
+                </li>
+                                    <ul id="tocify-subheader-customer-addresses" class="tocify-subheader">
+                                                    <li class="tocify-item level-2" data-unique="customer-addresses-GETapi-addresses">
+                                <a href="#customer-addresses-GETapi-addresses">List all customer addresses</a>
+                            </li>
+                                                                                <li class="tocify-item level-2" data-unique="customer-addresses-POSTapi-addresses">
+                                <a href="#customer-addresses-POSTapi-addresses">Create a new customer address</a>
+                            </li>
+                                                                                <li class="tocify-item level-2" data-unique="customer-addresses-GETapi-addresses--address_id-">
+                                <a href="#customer-addresses-GETapi-addresses--address_id-">Get a specific customer address</a>
+                            </li>
+                                                                                <li class="tocify-item level-2" data-unique="customer-addresses-PUTapi-addresses--address_id-">
+                                <a href="#customer-addresses-PUTapi-addresses--address_id-">Update a customer address</a>
+                            </li>
+                                                                                <li class="tocify-item level-2" data-unique="customer-addresses-DELETEapi-addresses--address_id-">
+                                <a href="#customer-addresses-DELETEapi-addresses--address_id-">Delete a customer address</a>
+                            </li>
+                                                                                <li class="tocify-item level-2" data-unique="customer-addresses-PATCHapi-addresses--address_id--default">
+                                <a href="#customer-addresses-PATCHapi-addresses--address_id--default">Set address as default</a>
+                            </li>
+                                                                        </ul>
+                            </ul>
                     <ul id="tocify-header-endpoints" class="tocify-header">
                 <li class="tocify-item level-1" data-unique="endpoints">
                     <a href="#endpoints">Endpoints</a>
@@ -224,24 +249,6 @@ Invalidate the current API token and log out the user.</a>
                                     <ul id="tocify-subheader-endpoints" class="tocify-subheader">
                                                     <li class="tocify-item level-2" data-unique="endpoints-GETapi-contact-us">
                                 <a href="#endpoints-GETapi-contact-us">GET api/contact-us</a>
-                            </li>
-                                                                                <li class="tocify-item level-2" data-unique="endpoints-GETapi-addresses">
-                                <a href="#endpoints-GETapi-addresses">Display a listing of the user's addresses.</a>
-                            </li>
-                                                                                <li class="tocify-item level-2" data-unique="endpoints-POSTapi-addresses">
-                                <a href="#endpoints-POSTapi-addresses">Store a newly created address.</a>
-                            </li>
-                                                                                <li class="tocify-item level-2" data-unique="endpoints-GETapi-addresses--address_id-">
-                                <a href="#endpoints-GETapi-addresses--address_id-">Display the specified address.</a>
-                            </li>
-                                                                                <li class="tocify-item level-2" data-unique="endpoints-PUTapi-addresses--address_id-">
-                                <a href="#endpoints-PUTapi-addresses--address_id-">Update the specified address.</a>
-                            </li>
-                                                                                <li class="tocify-item level-2" data-unique="endpoints-DELETEapi-addresses--address_id-">
-                                <a href="#endpoints-DELETEapi-addresses--address_id-">Remove the specified address.</a>
-                            </li>
-                                                                                <li class="tocify-item level-2" data-unique="endpoints-PATCHapi-addresses--address_id--default">
-                                <a href="#endpoints-PATCHapi-addresses--address_id--default">Set an address as default.</a>
                             </li>
                                                                                 <li class="tocify-item level-2" data-unique="endpoints-GETapi-contact-inquiries">
                                 <a href="#endpoints-GETapi-contact-inquiries">Display a listing of contact inquiries.</a>
@@ -5372,7 +5379,7 @@ You can check the Dev Tools console for debugging information.</code></pre>
 
 <div class="bash-example">
     <pre><code class="language-bash">curl --request GET \
-    --get "http://127.0.0.1:8000/api/orders/16" \
+    --get "http://127.0.0.1:8000/api/orders/1" \
     --header "Authorization: Bearer {YOUR_API_TOKEN}" \
     --header "Content-Type: application/json" \
     --header "Accept: application/json"</code></pre></div>
@@ -5380,7 +5387,7 @@ You can check the Dev Tools console for debugging information.</code></pre>
 
 <div class="javascript-example">
     <pre><code class="language-javascript">const url = new URL(
-    "http://127.0.0.1:8000/api/orders/16"
+    "http://127.0.0.1:8000/api/orders/1"
 );
 
 const headers = {
@@ -5397,7 +5404,7 @@ fetch(url, {
 
 <div class="php-example">
     <pre><code class="language-php">$client = new \GuzzleHttp\Client();
-$url = 'http://127.0.0.1:8000/api/orders/16';
+$url = 'http://127.0.0.1:8000/api/orders/1';
 $response = $client-&gt;get(
     $url,
     [
@@ -5556,10 +5563,10 @@ You can check the Dev Tools console for debugging information.</code></pre>
  &nbsp;
                 <input type="number" style="display: none"
                step="any"               name="order_id"                data-endpoint="GETapi-orders--order_id-"
-               value="16"
+               value="1"
                data-component="url">
     <br>
-<p>The ID of the order. Example: <code>16</code></p>
+<p>The ID of the order. Example: <code>1</code></p>
             </div>
                     <div style="padding-left: 28px; clear: unset;">
                 <b style="line-height: 2;"><code>order</code></b>&nbsp;&nbsp;
@@ -5589,7 +5596,7 @@ You can check the Dev Tools console for debugging information.</code></pre>
 
 <div class="bash-example">
     <pre><code class="language-bash">curl --request PATCH \
-    "http://127.0.0.1:8000/api/orders/16/status" \
+    "http://127.0.0.1:8000/api/orders/1/status" \
     --header "Authorization: Bearer {YOUR_API_TOKEN}" \
     --header "Content-Type: application/json" \
     --header "Accept: application/json" \
@@ -5603,7 +5610,7 @@ You can check the Dev Tools console for debugging information.</code></pre>
 
 <div class="javascript-example">
     <pre><code class="language-javascript">const url = new URL(
-    "http://127.0.0.1:8000/api/orders/16/status"
+    "http://127.0.0.1:8000/api/orders/1/status"
 );
 
 const headers = {
@@ -5627,7 +5634,7 @@ fetch(url, {
 
 <div class="php-example">
     <pre><code class="language-php">$client = new \GuzzleHttp\Client();
-$url = 'http://127.0.0.1:8000/api/orders/16/status';
+$url = 'http://127.0.0.1:8000/api/orders/1/status';
 $response = $client-&gt;patch(
     $url,
     [
@@ -5771,10 +5778,10 @@ You can check the Dev Tools console for debugging information.</code></pre>
  &nbsp;
                 <input type="number" style="display: none"
                step="any"               name="order_id"                data-endpoint="PATCHapi-orders--order_id--status"
-               value="16"
+               value="1"
                data-component="url">
     <br>
-<p>The ID of the order. Example: <code>16</code></p>
+<p>The ID of the order. Example: <code>1</code></p>
             </div>
                     <div style="padding-left: 28px; clear: unset;">
                 <b style="line-height: 2;"><code>order</code></b>&nbsp;&nbsp;
@@ -5841,7 +5848,7 @@ You can check the Dev Tools console for debugging information.</code></pre>
 
 <div class="bash-example">
     <pre><code class="language-bash">curl --request POST \
-    "http://127.0.0.1:8000/api/orders/16/cancel" \
+    "http://127.0.0.1:8000/api/orders/1/cancel" \
     --header "Authorization: Bearer {YOUR_API_TOKEN}" \
     --header "Content-Type: application/json" \
     --header "Accept: application/json"</code></pre></div>
@@ -5849,7 +5856,7 @@ You can check the Dev Tools console for debugging information.</code></pre>
 
 <div class="javascript-example">
     <pre><code class="language-javascript">const url = new URL(
-    "http://127.0.0.1:8000/api/orders/16/cancel"
+    "http://127.0.0.1:8000/api/orders/1/cancel"
 );
 
 const headers = {
@@ -5866,7 +5873,7 @@ fetch(url, {
 
 <div class="php-example">
     <pre><code class="language-php">$client = new \GuzzleHttp\Client();
-$url = 'http://127.0.0.1:8000/api/orders/16/cancel';
+$url = 'http://127.0.0.1:8000/api/orders/1/cancel';
 $response = $client-&gt;post(
     $url,
     [
@@ -6009,10 +6016,10 @@ You can check the Dev Tools console for debugging information.</code></pre>
  &nbsp;
                 <input type="number" style="display: none"
                step="any"               name="order_id"                data-endpoint="POSTapi-orders--order_id--cancel"
-               value="16"
+               value="1"
                data-component="url">
     <br>
-<p>The ID of the order. Example: <code>16</code></p>
+<p>The ID of the order. Example: <code>1</code></p>
             </div>
                     <div style="padding-left: 28px; clear: unset;">
                 <b style="line-height: 2;"><code>order</code></b>&nbsp;&nbsp;
@@ -6995,6 +7002,1844 @@ You can check the Dev Tools console for debugging information.</code></pre>
             </div>
                         </form>
 
+                <h1 id="customer-addresses">Customer Addresses</h1>
+
+    <p>APIs for managing customer addresses.
+All endpoints require authentication.</p>
+
+                                <h2 id="customer-addresses-GETapi-addresses">List all customer addresses</h2>
+
+<p>
+<small class="badge badge-darkred">requires authentication</small>
+</p>
+
+<p>Get a paginated list of all addresses for the authenticated user.
+Addresses are ordered by default status (default first) then by creation date.</p>
+
+<span id="example-requests-GETapi-addresses">
+<blockquote>Example request:</blockquote>
+
+
+<div class="bash-example">
+    <pre><code class="language-bash">curl --request GET \
+    --get "http://127.0.0.1:8000/api/addresses" \
+    --header "Authorization: Bearer {YOUR_API_TOKEN}" \
+    --header "Content-Type: application/json" \
+    --header "Accept: application/json"</code></pre></div>
+
+
+<div class="javascript-example">
+    <pre><code class="language-javascript">const url = new URL(
+    "http://127.0.0.1:8000/api/addresses"
+);
+
+const headers = {
+    "Authorization": "Bearer {YOUR_API_TOKEN}",
+    "Content-Type": "application/json",
+    "Accept": "application/json",
+};
+
+fetch(url, {
+    method: "GET",
+    headers,
+}).then(response =&gt; response.json());</code></pre></div>
+
+
+<div class="php-example">
+    <pre><code class="language-php">$client = new \GuzzleHttp\Client();
+$url = 'http://127.0.0.1:8000/api/addresses';
+$response = $client-&gt;get(
+    $url,
+    [
+        'headers' =&gt; [
+            'Authorization' =&gt; 'Bearer {YOUR_API_TOKEN}',
+            'Content-Type' =&gt; 'application/json',
+            'Accept' =&gt; 'application/json',
+        ],
+    ]
+);
+$body = $response-&gt;getBody();
+print_r(json_decode((string) $body));</code></pre></div>
+
+</span>
+
+<span id="example-responses-GETapi-addresses">
+            <blockquote>
+            <p>Example response (200, Success):</p>
+        </blockquote>
+                <pre>
+
+<code class="language-json" style="max-height: 300px;">{
+    &quot;success&quot;: true,
+    &quot;data&quot;: [
+        {
+            &quot;id&quot;: 1,
+            &quot;user_id&quot;: 1,
+            &quot;label&quot;: &quot;Home&quot;,
+            &quot;name&quot;: &quot;John Doe&quot;,
+            &quot;phone&quot;: &quot;+201234567890&quot;,
+            &quot;address&quot;: &quot;123 Main St, Cairo, Egypt&quot;,
+            &quot;street&quot;: &quot;123 Main St&quot;,
+            &quot;building_number&quot;: &quot;15&quot;,
+            &quot;floor&quot;: &quot;3&quot;,
+            &quot;apartment&quot;: &quot;5A&quot;,
+            &quot;zone&quot;: &quot;Maadi&quot;,
+            &quot;city&quot;: &quot;Cairo&quot;,
+            &quot;zip_code&quot;: &quot;12345&quot;,
+            &quot;country&quot;: &quot;Egypt&quot;,
+            &quot;state&quot;: &quot;Cairo Governorate&quot;,
+            &quot;is_default&quot;: true,
+            &quot;is_billing&quot;: true,
+            &quot;is_shipping&quot;: true,
+            &quot;created_at&quot;: &quot;2024-01-15T10:00:00.000000Z&quot;,
+            &quot;updated_at&quot;: &quot;2024-01-15T10:00:00.000000Z&quot;
+        },
+        {
+            &quot;id&quot;: 2,
+            &quot;user_id&quot;: 1,
+            &quot;label&quot;: &quot;Work&quot;,
+            &quot;name&quot;: &quot;John Doe&quot;,
+            &quot;phone&quot;: &quot;+201234567891&quot;,
+            &quot;address&quot;: &quot;456 Business Ave, Cairo, Egypt&quot;,
+            &quot;street&quot;: &quot;456 Business Ave&quot;,
+            &quot;building_number&quot;: &quot;20&quot;,
+            &quot;floor&quot;: &quot;5&quot;,
+            &quot;apartment&quot;: &quot;10B&quot;,
+            &quot;zone&quot;: &quot;New Cairo&quot;,
+            &quot;city&quot;: &quot;Cairo&quot;,
+            &quot;zip_code&quot;: &quot;12346&quot;,
+            &quot;country&quot;: &quot;Egypt&quot;,
+            &quot;state&quot;: &quot;Cairo Governorate&quot;,
+            &quot;is_default&quot;: false,
+            &quot;is_billing&quot;: false,
+            &quot;is_shipping&quot;: true,
+            &quot;created_at&quot;: &quot;2024-01-16T10:00:00.000000Z&quot;,
+            &quot;updated_at&quot;: &quot;2024-01-16T10:00:00.000000Z&quot;
+        }
+    ]
+}</code>
+ </pre>
+            <blockquote>
+            <p>Example response (401, Unauthenticated):</p>
+        </blockquote>
+                <pre>
+
+<code class="language-json" style="max-height: 300px;">{
+    &quot;message&quot;: &quot;Unauthenticated.&quot;
+}</code>
+ </pre>
+    </span>
+<span id="execution-results-GETapi-addresses" hidden>
+    <blockquote>Received response<span
+                id="execution-response-status-GETapi-addresses"></span>:
+    </blockquote>
+    <pre class="json"><code id="execution-response-content-GETapi-addresses"
+      data-empty-response-text="<Empty response>" style="max-height: 400px;"></code></pre>
+</span>
+<span id="execution-error-GETapi-addresses" hidden>
+    <blockquote>Request failed with error:</blockquote>
+    <pre><code id="execution-error-message-GETapi-addresses">
+
+Tip: Check that you&#039;re properly connected to the network.
+If you&#039;re a maintainer of ths API, verify that your API is running and you&#039;ve enabled CORS.
+You can check the Dev Tools console for debugging information.</code></pre>
+</span>
+<form id="form-GETapi-addresses" data-method="GET"
+      data-path="api/addresses"
+      data-authed="1"
+      data-hasfiles="0"
+      data-isarraybody="0"
+      autocomplete="off"
+      onsubmit="event.preventDefault(); executeTryOut('GETapi-addresses', this);">
+    <h3>
+        Request&nbsp;&nbsp;&nbsp;
+                    <button type="button"
+                    style="background-color: #8fbcd4; padding: 5px 10px; border-radius: 5px; border-width: thin;"
+                    id="btn-tryout-GETapi-addresses"
+                    onclick="tryItOut('GETapi-addresses');">Try it out ⚡
+            </button>
+            <button type="button"
+                    style="background-color: #c97a7e; padding: 5px 10px; border-radius: 5px; border-width: thin;"
+                    id="btn-canceltryout-GETapi-addresses"
+                    onclick="cancelTryOut('GETapi-addresses');" hidden>Cancel 🛑
+            </button>&nbsp;&nbsp;
+            <button type="submit"
+                    style="background-color: #6ac174; padding: 5px 10px; border-radius: 5px; border-width: thin;"
+                    id="btn-executetryout-GETapi-addresses"
+                    data-initial-text="Send Request 💥"
+                    data-loading-text="⏱ Sending..."
+                    hidden>Send Request 💥
+            </button>
+            </h3>
+            <p>
+            <small class="badge badge-green">GET</small>
+            <b><code>api/addresses</code></b>
+        </p>
+                <h4 class="fancy-heading-panel"><b>Headers</b></h4>
+                                <div style="padding-left: 28px; clear: unset;">
+                <b style="line-height: 2;"><code>Authorization</code></b>&nbsp;&nbsp;
+&nbsp;
+ &nbsp;
+ &nbsp;
+                <input type="text" style="display: none"
+                              name="Authorization" class="auth-value"               data-endpoint="GETapi-addresses"
+               value="Bearer {YOUR_API_TOKEN}"
+               data-component="header">
+    <br>
+<p>Example: <code>Bearer {YOUR_API_TOKEN}</code></p>
+            </div>
+                                <div style="padding-left: 28px; clear: unset;">
+                <b style="line-height: 2;"><code>Content-Type</code></b>&nbsp;&nbsp;
+&nbsp;
+ &nbsp;
+ &nbsp;
+                <input type="text" style="display: none"
+                              name="Content-Type"                data-endpoint="GETapi-addresses"
+               value="application/json"
+               data-component="header">
+    <br>
+<p>Example: <code>application/json</code></p>
+            </div>
+                                <div style="padding-left: 28px; clear: unset;">
+                <b style="line-height: 2;"><code>Accept</code></b>&nbsp;&nbsp;
+&nbsp;
+ &nbsp;
+ &nbsp;
+                <input type="text" style="display: none"
+                              name="Accept"                data-endpoint="GETapi-addresses"
+               value="application/json"
+               data-component="header">
+    <br>
+<p>Example: <code>application/json</code></p>
+            </div>
+                        </form>
+
+                    <h2 id="customer-addresses-POSTapi-addresses">Create a new customer address</h2>
+
+<p>
+<small class="badge badge-darkred">requires authentication</small>
+</p>
+
+<p>Create a new address for the authenticated user.
+If is_default is set to true, all other addresses will be unset as default.</p>
+
+<span id="example-requests-POSTapi-addresses">
+<blockquote>Example request:</blockquote>
+
+
+<div class="bash-example">
+    <pre><code class="language-bash">curl --request POST \
+    "http://127.0.0.1:8000/api/addresses" \
+    --header "Authorization: Bearer {YOUR_API_TOKEN}" \
+    --header "Content-Type: application/json" \
+    --header "Accept: application/json" \
+    --data "{
+    \"label\": \"Home\",
+    \"name\": \"John Doe\",
+    \"phone\": \"+201234567890\",
+    \"address\": \"123 Main St, Cairo, Egypt\",
+    \"street\": \"123 Main St\",
+    \"building_number\": \"15\",
+    \"floor\": \"3\",
+    \"apartment\": \"5A\",
+    \"zone\": \"Maadi\",
+    \"city\": \"Cairo\",
+    \"zip_code\": \"12345\",
+    \"country\": \"Egypt\",
+    \"state\": \"Cairo Governorate\",
+    \"is_default\": true,
+    \"is_billing\": true,
+    \"is_shipping\": true
+}"
+</code></pre></div>
+
+
+<div class="javascript-example">
+    <pre><code class="language-javascript">const url = new URL(
+    "http://127.0.0.1:8000/api/addresses"
+);
+
+const headers = {
+    "Authorization": "Bearer {YOUR_API_TOKEN}",
+    "Content-Type": "application/json",
+    "Accept": "application/json",
+};
+
+let body = {
+    "label": "Home",
+    "name": "John Doe",
+    "phone": "+201234567890",
+    "address": "123 Main St, Cairo, Egypt",
+    "street": "123 Main St",
+    "building_number": "15",
+    "floor": "3",
+    "apartment": "5A",
+    "zone": "Maadi",
+    "city": "Cairo",
+    "zip_code": "12345",
+    "country": "Egypt",
+    "state": "Cairo Governorate",
+    "is_default": true,
+    "is_billing": true,
+    "is_shipping": true
+};
+
+fetch(url, {
+    method: "POST",
+    headers,
+    body: JSON.stringify(body),
+}).then(response =&gt; response.json());</code></pre></div>
+
+
+<div class="php-example">
+    <pre><code class="language-php">$client = new \GuzzleHttp\Client();
+$url = 'http://127.0.0.1:8000/api/addresses';
+$response = $client-&gt;post(
+    $url,
+    [
+        'headers' =&gt; [
+            'Authorization' =&gt; 'Bearer {YOUR_API_TOKEN}',
+            'Content-Type' =&gt; 'application/json',
+            'Accept' =&gt; 'application/json',
+        ],
+        'json' =&gt; [
+            'label' =&gt; 'Home',
+            'name' =&gt; 'John Doe',
+            'phone' =&gt; '+201234567890',
+            'address' =&gt; '123 Main St, Cairo, Egypt',
+            'street' =&gt; '123 Main St',
+            'building_number' =&gt; '15',
+            'floor' =&gt; '3',
+            'apartment' =&gt; '5A',
+            'zone' =&gt; 'Maadi',
+            'city' =&gt; 'Cairo',
+            'zip_code' =&gt; '12345',
+            'country' =&gt; 'Egypt',
+            'state' =&gt; 'Cairo Governorate',
+            'is_default' =&gt; true,
+            'is_billing' =&gt; true,
+            'is_shipping' =&gt; true,
+        ],
+    ]
+);
+$body = $response-&gt;getBody();
+print_r(json_decode((string) $body));</code></pre></div>
+
+</span>
+
+<span id="example-responses-POSTapi-addresses">
+            <blockquote>
+            <p>Example response (201, Success):</p>
+        </blockquote>
+                <pre>
+
+<code class="language-json" style="max-height: 300px;">{
+    &quot;success&quot;: true,
+    &quot;message&quot;: &quot;Address created successfully&quot;,
+    &quot;data&quot;: {
+        &quot;id&quot;: 1,
+        &quot;user_id&quot;: 1,
+        &quot;label&quot;: &quot;Home&quot;,
+        &quot;name&quot;: &quot;John Doe&quot;,
+        &quot;phone&quot;: &quot;+201234567890&quot;,
+        &quot;address&quot;: &quot;123 Main St, Cairo, Egypt&quot;,
+        &quot;street&quot;: &quot;123 Main St&quot;,
+        &quot;building_number&quot;: &quot;15&quot;,
+        &quot;floor&quot;: &quot;3&quot;,
+        &quot;apartment&quot;: &quot;5A&quot;,
+        &quot;zone&quot;: &quot;Maadi&quot;,
+        &quot;city&quot;: &quot;Cairo&quot;,
+        &quot;zip_code&quot;: &quot;12345&quot;,
+        &quot;country&quot;: &quot;Egypt&quot;,
+        &quot;state&quot;: &quot;Cairo Governorate&quot;,
+        &quot;is_default&quot;: true,
+        &quot;is_billing&quot;: true,
+        &quot;is_shipping&quot;: true,
+        &quot;created_at&quot;: &quot;2024-01-15T10:00:00.000000Z&quot;,
+        &quot;updated_at&quot;: &quot;2024-01-15T10:00:00.000000Z&quot;
+    }
+}</code>
+ </pre>
+            <blockquote>
+            <p>Example response (401, Unauthenticated):</p>
+        </blockquote>
+                <pre>
+
+<code class="language-json" style="max-height: 300px;">{
+    &quot;message&quot;: &quot;Unauthenticated.&quot;
+}</code>
+ </pre>
+            <blockquote>
+            <p>Example response (422, Validation Error):</p>
+        </blockquote>
+                <pre>
+
+<code class="language-json" style="max-height: 300px;">{
+    &quot;message&quot;: &quot;The given data was invalid.&quot;,
+    &quot;errors&quot;: {
+        &quot;name&quot;: [
+            &quot;The name field is required.&quot;
+        ],
+        &quot;city&quot;: [
+            &quot;The city field is required.&quot;
+        ]
+    }
+}</code>
+ </pre>
+    </span>
+<span id="execution-results-POSTapi-addresses" hidden>
+    <blockquote>Received response<span
+                id="execution-response-status-POSTapi-addresses"></span>:
+    </blockquote>
+    <pre class="json"><code id="execution-response-content-POSTapi-addresses"
+      data-empty-response-text="<Empty response>" style="max-height: 400px;"></code></pre>
+</span>
+<span id="execution-error-POSTapi-addresses" hidden>
+    <blockquote>Request failed with error:</blockquote>
+    <pre><code id="execution-error-message-POSTapi-addresses">
+
+Tip: Check that you&#039;re properly connected to the network.
+If you&#039;re a maintainer of ths API, verify that your API is running and you&#039;ve enabled CORS.
+You can check the Dev Tools console for debugging information.</code></pre>
+</span>
+<form id="form-POSTapi-addresses" data-method="POST"
+      data-path="api/addresses"
+      data-authed="1"
+      data-hasfiles="0"
+      data-isarraybody="0"
+      autocomplete="off"
+      onsubmit="event.preventDefault(); executeTryOut('POSTapi-addresses', this);">
+    <h3>
+        Request&nbsp;&nbsp;&nbsp;
+                    <button type="button"
+                    style="background-color: #8fbcd4; padding: 5px 10px; border-radius: 5px; border-width: thin;"
+                    id="btn-tryout-POSTapi-addresses"
+                    onclick="tryItOut('POSTapi-addresses');">Try it out ⚡
+            </button>
+            <button type="button"
+                    style="background-color: #c97a7e; padding: 5px 10px; border-radius: 5px; border-width: thin;"
+                    id="btn-canceltryout-POSTapi-addresses"
+                    onclick="cancelTryOut('POSTapi-addresses');" hidden>Cancel 🛑
+            </button>&nbsp;&nbsp;
+            <button type="submit"
+                    style="background-color: #6ac174; padding: 5px 10px; border-radius: 5px; border-width: thin;"
+                    id="btn-executetryout-POSTapi-addresses"
+                    data-initial-text="Send Request 💥"
+                    data-loading-text="⏱ Sending..."
+                    hidden>Send Request 💥
+            </button>
+            </h3>
+            <p>
+            <small class="badge badge-black">POST</small>
+            <b><code>api/addresses</code></b>
+        </p>
+                <h4 class="fancy-heading-panel"><b>Headers</b></h4>
+                                <div style="padding-left: 28px; clear: unset;">
+                <b style="line-height: 2;"><code>Authorization</code></b>&nbsp;&nbsp;
+&nbsp;
+ &nbsp;
+ &nbsp;
+                <input type="text" style="display: none"
+                              name="Authorization" class="auth-value"               data-endpoint="POSTapi-addresses"
+               value="Bearer {YOUR_API_TOKEN}"
+               data-component="header">
+    <br>
+<p>Example: <code>Bearer {YOUR_API_TOKEN}</code></p>
+            </div>
+                                <div style="padding-left: 28px; clear: unset;">
+                <b style="line-height: 2;"><code>Content-Type</code></b>&nbsp;&nbsp;
+&nbsp;
+ &nbsp;
+ &nbsp;
+                <input type="text" style="display: none"
+                              name="Content-Type"                data-endpoint="POSTapi-addresses"
+               value="application/json"
+               data-component="header">
+    <br>
+<p>Example: <code>application/json</code></p>
+            </div>
+                                <div style="padding-left: 28px; clear: unset;">
+                <b style="line-height: 2;"><code>Accept</code></b>&nbsp;&nbsp;
+&nbsp;
+ &nbsp;
+ &nbsp;
+                <input type="text" style="display: none"
+                              name="Accept"                data-endpoint="POSTapi-addresses"
+               value="application/json"
+               data-component="header">
+    <br>
+<p>Example: <code>application/json</code></p>
+            </div>
+                                <h4 class="fancy-heading-panel"><b>Body Parameters</b></h4>
+        <div style=" padding-left: 28px;  clear: unset;">
+            <b style="line-height: 2;"><code>label</code></b>&nbsp;&nbsp;
+<small>string</small>&nbsp;
+<i>optional</i> &nbsp;
+ &nbsp;
+                <input type="text" style="display: none"
+                              name="label"                data-endpoint="POSTapi-addresses"
+               value="Home"
+               data-component="body">
+    <br>
+<p>optional A custom label for the address (e.g., &quot;Home&quot;, &quot;Work&quot;). Example: <code>Home</code></p>
+        </div>
+                <div style=" padding-left: 28px;  clear: unset;">
+            <b style="line-height: 2;"><code>name</code></b>&nbsp;&nbsp;
+<small>string</small>&nbsp;
+ &nbsp;
+ &nbsp;
+                <input type="text" style="display: none"
+                              name="name"                data-endpoint="POSTapi-addresses"
+               value="John Doe"
+               data-component="body">
+    <br>
+<p>The full name of the recipient. Example: <code>John Doe</code></p>
+        </div>
+                <div style=" padding-left: 28px;  clear: unset;">
+            <b style="line-height: 2;"><code>phone</code></b>&nbsp;&nbsp;
+<small>string</small>&nbsp;
+ &nbsp;
+ &nbsp;
+                <input type="text" style="display: none"
+                              name="phone"                data-endpoint="POSTapi-addresses"
+               value="+201234567890"
+               data-component="body">
+    <br>
+<p>The phone number. Example: <code>+201234567890</code></p>
+        </div>
+                <div style=" padding-left: 28px;  clear: unset;">
+            <b style="line-height: 2;"><code>address</code></b>&nbsp;&nbsp;
+<small>string</small>&nbsp;
+ &nbsp;
+ &nbsp;
+                <input type="text" style="display: none"
+                              name="address"                data-endpoint="POSTapi-addresses"
+               value="123 Main St, Cairo, Egypt"
+               data-component="body">
+    <br>
+<p>The full address text. Example: <code>123 Main St, Cairo, Egypt</code></p>
+        </div>
+                <div style=" padding-left: 28px;  clear: unset;">
+            <b style="line-height: 2;"><code>street</code></b>&nbsp;&nbsp;
+<small>string</small>&nbsp;
+<i>optional</i> &nbsp;
+ &nbsp;
+                <input type="text" style="display: none"
+                              name="street"                data-endpoint="POSTapi-addresses"
+               value="123 Main St"
+               data-component="body">
+    <br>
+<p>optional The street name. Example: <code>123 Main St</code></p>
+        </div>
+                <div style=" padding-left: 28px;  clear: unset;">
+            <b style="line-height: 2;"><code>building_number</code></b>&nbsp;&nbsp;
+<small>string</small>&nbsp;
+<i>optional</i> &nbsp;
+ &nbsp;
+                <input type="text" style="display: none"
+                              name="building_number"                data-endpoint="POSTapi-addresses"
+               value="15"
+               data-component="body">
+    <br>
+<p>optional The building number. Example: <code>15</code></p>
+        </div>
+                <div style=" padding-left: 28px;  clear: unset;">
+            <b style="line-height: 2;"><code>floor</code></b>&nbsp;&nbsp;
+<small>string</small>&nbsp;
+<i>optional</i> &nbsp;
+ &nbsp;
+                <input type="text" style="display: none"
+                              name="floor"                data-endpoint="POSTapi-addresses"
+               value="3"
+               data-component="body">
+    <br>
+<p>optional The floor number. Example: <code>3</code></p>
+        </div>
+                <div style=" padding-left: 28px;  clear: unset;">
+            <b style="line-height: 2;"><code>apartment</code></b>&nbsp;&nbsp;
+<small>string</small>&nbsp;
+<i>optional</i> &nbsp;
+ &nbsp;
+                <input type="text" style="display: none"
+                              name="apartment"                data-endpoint="POSTapi-addresses"
+               value="5A"
+               data-component="body">
+    <br>
+<p>optional The apartment number. Example: <code>5A</code></p>
+        </div>
+                <div style=" padding-left: 28px;  clear: unset;">
+            <b style="line-height: 2;"><code>zone</code></b>&nbsp;&nbsp;
+<small>string</small>&nbsp;
+<i>optional</i> &nbsp;
+ &nbsp;
+                <input type="text" style="display: none"
+                              name="zone"                data-endpoint="POSTapi-addresses"
+               value="Maadi"
+               data-component="body">
+    <br>
+<p>optional The zone/area. Example: <code>Maadi</code></p>
+        </div>
+                <div style=" padding-left: 28px;  clear: unset;">
+            <b style="line-height: 2;"><code>city</code></b>&nbsp;&nbsp;
+<small>string</small>&nbsp;
+ &nbsp;
+ &nbsp;
+                <input type="text" style="display: none"
+                              name="city"                data-endpoint="POSTapi-addresses"
+               value="Cairo"
+               data-component="body">
+    <br>
+<p>The city name. Example: <code>Cairo</code></p>
+        </div>
+                <div style=" padding-left: 28px;  clear: unset;">
+            <b style="line-height: 2;"><code>zip_code</code></b>&nbsp;&nbsp;
+<small>string</small>&nbsp;
+ &nbsp;
+ &nbsp;
+                <input type="text" style="display: none"
+                              name="zip_code"                data-endpoint="POSTapi-addresses"
+               value="12345"
+               data-component="body">
+    <br>
+<p>The postal/ZIP code. Example: <code>12345</code></p>
+        </div>
+                <div style=" padding-left: 28px;  clear: unset;">
+            <b style="line-height: 2;"><code>country</code></b>&nbsp;&nbsp;
+<small>string</small>&nbsp;
+ &nbsp;
+ &nbsp;
+                <input type="text" style="display: none"
+                              name="country"                data-endpoint="POSTapi-addresses"
+               value="Egypt"
+               data-component="body">
+    <br>
+<p>The country name. Example: <code>Egypt</code></p>
+        </div>
+                <div style=" padding-left: 28px;  clear: unset;">
+            <b style="line-height: 2;"><code>state</code></b>&nbsp;&nbsp;
+<small>string</small>&nbsp;
+<i>optional</i> &nbsp;
+ &nbsp;
+                <input type="text" style="display: none"
+                              name="state"                data-endpoint="POSTapi-addresses"
+               value="Cairo Governorate"
+               data-component="body">
+    <br>
+<p>optional The state/province. Example: <code>Cairo Governorate</code></p>
+        </div>
+                <div style=" padding-left: 28px;  clear: unset;">
+            <b style="line-height: 2;"><code>is_default</code></b>&nbsp;&nbsp;
+<small>boolean</small>&nbsp;
+<i>optional</i> &nbsp;
+ &nbsp;
+                <label data-endpoint="POSTapi-addresses" style="display: none">
+            <input type="radio" name="is_default"
+                   value="true"
+                   data-endpoint="POSTapi-addresses"
+                   data-component="body"             >
+            <code>true</code>
+        </label>
+        <label data-endpoint="POSTapi-addresses" style="display: none">
+            <input type="radio" name="is_default"
+                   value="false"
+                   data-endpoint="POSTapi-addresses"
+                   data-component="body"             >
+            <code>false</code>
+        </label>
+    <br>
+<p>optional Whether this should be the default address. Default: false. Example: <code>true</code></p>
+        </div>
+                <div style=" padding-left: 28px;  clear: unset;">
+            <b style="line-height: 2;"><code>is_billing</code></b>&nbsp;&nbsp;
+<small>boolean</small>&nbsp;
+<i>optional</i> &nbsp;
+ &nbsp;
+                <label data-endpoint="POSTapi-addresses" style="display: none">
+            <input type="radio" name="is_billing"
+                   value="true"
+                   data-endpoint="POSTapi-addresses"
+                   data-component="body"             >
+            <code>true</code>
+        </label>
+        <label data-endpoint="POSTapi-addresses" style="display: none">
+            <input type="radio" name="is_billing"
+                   value="false"
+                   data-endpoint="POSTapi-addresses"
+                   data-component="body"             >
+            <code>false</code>
+        </label>
+    <br>
+<p>optional Whether this can be used for billing. Default: false. Example: <code>true</code></p>
+        </div>
+                <div style=" padding-left: 28px;  clear: unset;">
+            <b style="line-height: 2;"><code>is_shipping</code></b>&nbsp;&nbsp;
+<small>boolean</small>&nbsp;
+<i>optional</i> &nbsp;
+ &nbsp;
+                <label data-endpoint="POSTapi-addresses" style="display: none">
+            <input type="radio" name="is_shipping"
+                   value="true"
+                   data-endpoint="POSTapi-addresses"
+                   data-component="body"             >
+            <code>true</code>
+        </label>
+        <label data-endpoint="POSTapi-addresses" style="display: none">
+            <input type="radio" name="is_shipping"
+                   value="false"
+                   data-endpoint="POSTapi-addresses"
+                   data-component="body"             >
+            <code>false</code>
+        </label>
+    <br>
+<p>optional Whether this can be used for shipping. Default: false. Example: <code>true</code></p>
+        </div>
+        </form>
+
+                    <h2 id="customer-addresses-GETapi-addresses--address_id-">Get a specific customer address</h2>
+
+<p>
+<small class="badge badge-darkred">requires authentication</small>
+</p>
+
+<p>Retrieve details of a specific address belonging to the authenticated user.</p>
+
+<span id="example-requests-GETapi-addresses--address_id-">
+<blockquote>Example request:</blockquote>
+
+
+<div class="bash-example">
+    <pre><code class="language-bash">curl --request GET \
+    --get "http://127.0.0.1:8000/api/addresses/1" \
+    --header "Authorization: Bearer {YOUR_API_TOKEN}" \
+    --header "Content-Type: application/json" \
+    --header "Accept: application/json"</code></pre></div>
+
+
+<div class="javascript-example">
+    <pre><code class="language-javascript">const url = new URL(
+    "http://127.0.0.1:8000/api/addresses/1"
+);
+
+const headers = {
+    "Authorization": "Bearer {YOUR_API_TOKEN}",
+    "Content-Type": "application/json",
+    "Accept": "application/json",
+};
+
+fetch(url, {
+    method: "GET",
+    headers,
+}).then(response =&gt; response.json());</code></pre></div>
+
+
+<div class="php-example">
+    <pre><code class="language-php">$client = new \GuzzleHttp\Client();
+$url = 'http://127.0.0.1:8000/api/addresses/1';
+$response = $client-&gt;get(
+    $url,
+    [
+        'headers' =&gt; [
+            'Authorization' =&gt; 'Bearer {YOUR_API_TOKEN}',
+            'Content-Type' =&gt; 'application/json',
+            'Accept' =&gt; 'application/json',
+        ],
+    ]
+);
+$body = $response-&gt;getBody();
+print_r(json_decode((string) $body));</code></pre></div>
+
+</span>
+
+<span id="example-responses-GETapi-addresses--address_id-">
+            <blockquote>
+            <p>Example response (200, Success):</p>
+        </blockquote>
+                <pre>
+
+<code class="language-json" style="max-height: 300px;">{
+    &quot;success&quot;: true,
+    &quot;data&quot;: {
+        &quot;id&quot;: 1,
+        &quot;user_id&quot;: 1,
+        &quot;label&quot;: &quot;Home&quot;,
+        &quot;name&quot;: &quot;John Doe&quot;,
+        &quot;phone&quot;: &quot;+201234567890&quot;,
+        &quot;address&quot;: &quot;123 Main St, Cairo, Egypt&quot;,
+        &quot;street&quot;: &quot;123 Main St&quot;,
+        &quot;building_number&quot;: &quot;15&quot;,
+        &quot;floor&quot;: &quot;3&quot;,
+        &quot;apartment&quot;: &quot;5A&quot;,
+        &quot;zone&quot;: &quot;Maadi&quot;,
+        &quot;city&quot;: &quot;Cairo&quot;,
+        &quot;zip_code&quot;: &quot;12345&quot;,
+        &quot;country&quot;: &quot;Egypt&quot;,
+        &quot;state&quot;: &quot;Cairo Governorate&quot;,
+        &quot;is_default&quot;: true,
+        &quot;is_billing&quot;: true,
+        &quot;is_shipping&quot;: true,
+        &quot;created_at&quot;: &quot;2024-01-15T10:00:00.000000Z&quot;,
+        &quot;updated_at&quot;: &quot;2024-01-15T10:00:00.000000Z&quot;
+    }
+}</code>
+ </pre>
+            <blockquote>
+            <p>Example response (401, Unauthenticated):</p>
+        </blockquote>
+                <pre>
+
+<code class="language-json" style="max-height: 300px;">{
+    &quot;message&quot;: &quot;Unauthenticated.&quot;
+}</code>
+ </pre>
+            <blockquote>
+            <p>Example response (404, Not Found):</p>
+        </blockquote>
+                <pre>
+
+<code class="language-json" style="max-height: 300px;">{
+    &quot;success&quot;: false,
+    &quot;message&quot;: &quot;Address not found&quot;
+}</code>
+ </pre>
+    </span>
+<span id="execution-results-GETapi-addresses--address_id-" hidden>
+    <blockquote>Received response<span
+                id="execution-response-status-GETapi-addresses--address_id-"></span>:
+    </blockquote>
+    <pre class="json"><code id="execution-response-content-GETapi-addresses--address_id-"
+      data-empty-response-text="<Empty response>" style="max-height: 400px;"></code></pre>
+</span>
+<span id="execution-error-GETapi-addresses--address_id-" hidden>
+    <blockquote>Request failed with error:</blockquote>
+    <pre><code id="execution-error-message-GETapi-addresses--address_id-">
+
+Tip: Check that you&#039;re properly connected to the network.
+If you&#039;re a maintainer of ths API, verify that your API is running and you&#039;ve enabled CORS.
+You can check the Dev Tools console for debugging information.</code></pre>
+</span>
+<form id="form-GETapi-addresses--address_id-" data-method="GET"
+      data-path="api/addresses/{address_id}"
+      data-authed="1"
+      data-hasfiles="0"
+      data-isarraybody="0"
+      autocomplete="off"
+      onsubmit="event.preventDefault(); executeTryOut('GETapi-addresses--address_id-', this);">
+    <h3>
+        Request&nbsp;&nbsp;&nbsp;
+                    <button type="button"
+                    style="background-color: #8fbcd4; padding: 5px 10px; border-radius: 5px; border-width: thin;"
+                    id="btn-tryout-GETapi-addresses--address_id-"
+                    onclick="tryItOut('GETapi-addresses--address_id-');">Try it out ⚡
+            </button>
+            <button type="button"
+                    style="background-color: #c97a7e; padding: 5px 10px; border-radius: 5px; border-width: thin;"
+                    id="btn-canceltryout-GETapi-addresses--address_id-"
+                    onclick="cancelTryOut('GETapi-addresses--address_id-');" hidden>Cancel 🛑
+            </button>&nbsp;&nbsp;
+            <button type="submit"
+                    style="background-color: #6ac174; padding: 5px 10px; border-radius: 5px; border-width: thin;"
+                    id="btn-executetryout-GETapi-addresses--address_id-"
+                    data-initial-text="Send Request 💥"
+                    data-loading-text="⏱ Sending..."
+                    hidden>Send Request 💥
+            </button>
+            </h3>
+            <p>
+            <small class="badge badge-green">GET</small>
+            <b><code>api/addresses/{address_id}</code></b>
+        </p>
+                <h4 class="fancy-heading-panel"><b>Headers</b></h4>
+                                <div style="padding-left: 28px; clear: unset;">
+                <b style="line-height: 2;"><code>Authorization</code></b>&nbsp;&nbsp;
+&nbsp;
+ &nbsp;
+ &nbsp;
+                <input type="text" style="display: none"
+                              name="Authorization" class="auth-value"               data-endpoint="GETapi-addresses--address_id-"
+               value="Bearer {YOUR_API_TOKEN}"
+               data-component="header">
+    <br>
+<p>Example: <code>Bearer {YOUR_API_TOKEN}</code></p>
+            </div>
+                                <div style="padding-left: 28px; clear: unset;">
+                <b style="line-height: 2;"><code>Content-Type</code></b>&nbsp;&nbsp;
+&nbsp;
+ &nbsp;
+ &nbsp;
+                <input type="text" style="display: none"
+                              name="Content-Type"                data-endpoint="GETapi-addresses--address_id-"
+               value="application/json"
+               data-component="header">
+    <br>
+<p>Example: <code>application/json</code></p>
+            </div>
+                                <div style="padding-left: 28px; clear: unset;">
+                <b style="line-height: 2;"><code>Accept</code></b>&nbsp;&nbsp;
+&nbsp;
+ &nbsp;
+ &nbsp;
+                <input type="text" style="display: none"
+                              name="Accept"                data-endpoint="GETapi-addresses--address_id-"
+               value="application/json"
+               data-component="header">
+    <br>
+<p>Example: <code>application/json</code></p>
+            </div>
+                        <h4 class="fancy-heading-panel"><b>URL Parameters</b></h4>
+                    <div style="padding-left: 28px; clear: unset;">
+                <b style="line-height: 2;"><code>address_id</code></b>&nbsp;&nbsp;
+<small>integer</small>&nbsp;
+ &nbsp;
+ &nbsp;
+                <input type="number" style="display: none"
+               step="any"               name="address_id"                data-endpoint="GETapi-addresses--address_id-"
+               value="1"
+               data-component="url">
+    <br>
+<p>The ID of the address. Example: <code>1</code></p>
+            </div>
+                    <div style="padding-left: 28px; clear: unset;">
+                <b style="line-height: 2;"><code>address</code></b>&nbsp;&nbsp;
+<small>integer</small>&nbsp;
+ &nbsp;
+ &nbsp;
+                <input type="number" style="display: none"
+               step="any"               name="address"                data-endpoint="GETapi-addresses--address_id-"
+               value="1"
+               data-component="url">
+    <br>
+<p>The address ID. Example: <code>1</code></p>
+            </div>
+                    </form>
+
+                    <h2 id="customer-addresses-PUTapi-addresses--address_id-">Update a customer address</h2>
+
+<p>
+<small class="badge badge-darkred">requires authentication</small>
+</p>
+
+<p>Update an existing address belonging to the authenticated user.
+If is_default is set to true, all other addresses will be unset as default.</p>
+
+<span id="example-requests-PUTapi-addresses--address_id-">
+<blockquote>Example request:</blockquote>
+
+
+<div class="bash-example">
+    <pre><code class="language-bash">curl --request PUT \
+    "http://127.0.0.1:8000/api/addresses/1" \
+    --header "Authorization: Bearer {YOUR_API_TOKEN}" \
+    --header "Content-Type: application/json" \
+    --header "Accept: application/json" \
+    --data "{
+    \"label\": \"Home\",
+    \"name\": \"John Doe\",
+    \"phone\": \"+201234567890\",
+    \"address\": \"123 Main St, Cairo, Egypt\",
+    \"street\": \"123 Main St\",
+    \"building_number\": \"15\",
+    \"floor\": \"3\",
+    \"apartment\": \"5A\",
+    \"zone\": \"Maadi\",
+    \"city\": \"Cairo\",
+    \"zip_code\": \"12345\",
+    \"country\": \"Egypt\",
+    \"state\": \"Cairo Governorate\",
+    \"is_default\": true,
+    \"is_billing\": true,
+    \"is_shipping\": true
+}"
+</code></pre></div>
+
+
+<div class="javascript-example">
+    <pre><code class="language-javascript">const url = new URL(
+    "http://127.0.0.1:8000/api/addresses/1"
+);
+
+const headers = {
+    "Authorization": "Bearer {YOUR_API_TOKEN}",
+    "Content-Type": "application/json",
+    "Accept": "application/json",
+};
+
+let body = {
+    "label": "Home",
+    "name": "John Doe",
+    "phone": "+201234567890",
+    "address": "123 Main St, Cairo, Egypt",
+    "street": "123 Main St",
+    "building_number": "15",
+    "floor": "3",
+    "apartment": "5A",
+    "zone": "Maadi",
+    "city": "Cairo",
+    "zip_code": "12345",
+    "country": "Egypt",
+    "state": "Cairo Governorate",
+    "is_default": true,
+    "is_billing": true,
+    "is_shipping": true
+};
+
+fetch(url, {
+    method: "PUT",
+    headers,
+    body: JSON.stringify(body),
+}).then(response =&gt; response.json());</code></pre></div>
+
+
+<div class="php-example">
+    <pre><code class="language-php">$client = new \GuzzleHttp\Client();
+$url = 'http://127.0.0.1:8000/api/addresses/1';
+$response = $client-&gt;put(
+    $url,
+    [
+        'headers' =&gt; [
+            'Authorization' =&gt; 'Bearer {YOUR_API_TOKEN}',
+            'Content-Type' =&gt; 'application/json',
+            'Accept' =&gt; 'application/json',
+        ],
+        'json' =&gt; [
+            'label' =&gt; 'Home',
+            'name' =&gt; 'John Doe',
+            'phone' =&gt; '+201234567890',
+            'address' =&gt; '123 Main St, Cairo, Egypt',
+            'street' =&gt; '123 Main St',
+            'building_number' =&gt; '15',
+            'floor' =&gt; '3',
+            'apartment' =&gt; '5A',
+            'zone' =&gt; 'Maadi',
+            'city' =&gt; 'Cairo',
+            'zip_code' =&gt; '12345',
+            'country' =&gt; 'Egypt',
+            'state' =&gt; 'Cairo Governorate',
+            'is_default' =&gt; true,
+            'is_billing' =&gt; true,
+            'is_shipping' =&gt; true,
+        ],
+    ]
+);
+$body = $response-&gt;getBody();
+print_r(json_decode((string) $body));</code></pre></div>
+
+</span>
+
+<span id="example-responses-PUTapi-addresses--address_id-">
+            <blockquote>
+            <p>Example response (200, Success):</p>
+        </blockquote>
+                <pre>
+
+<code class="language-json" style="max-height: 300px;">{
+    &quot;success&quot;: true,
+    &quot;message&quot;: &quot;Address updated successfully&quot;,
+    &quot;data&quot;: {
+        &quot;id&quot;: 1,
+        &quot;user_id&quot;: 1,
+        &quot;label&quot;: &quot;Home Updated&quot;,
+        &quot;name&quot;: &quot;John Doe&quot;,
+        &quot;phone&quot;: &quot;+201234567890&quot;,
+        &quot;address&quot;: &quot;123 Main St, Cairo, Egypt&quot;,
+        &quot;street&quot;: &quot;123 Main St&quot;,
+        &quot;building_number&quot;: &quot;15&quot;,
+        &quot;floor&quot;: &quot;3&quot;,
+        &quot;apartment&quot;: &quot;5A&quot;,
+        &quot;zone&quot;: &quot;Maadi&quot;,
+        &quot;city&quot;: &quot;Cairo&quot;,
+        &quot;zip_code&quot;: &quot;12345&quot;,
+        &quot;country&quot;: &quot;Egypt&quot;,
+        &quot;state&quot;: &quot;Cairo Governorate&quot;,
+        &quot;is_default&quot;: true,
+        &quot;is_billing&quot;: true,
+        &quot;is_shipping&quot;: true,
+        &quot;created_at&quot;: &quot;2024-01-15T10:00:00.000000Z&quot;,
+        &quot;updated_at&quot;: &quot;2024-01-15T11:00:00.000000Z&quot;
+    }
+}</code>
+ </pre>
+            <blockquote>
+            <p>Example response (401, Unauthenticated):</p>
+        </blockquote>
+                <pre>
+
+<code class="language-json" style="max-height: 300px;">{
+    &quot;message&quot;: &quot;Unauthenticated.&quot;
+}</code>
+ </pre>
+            <blockquote>
+            <p>Example response (404, Not Found):</p>
+        </blockquote>
+                <pre>
+
+<code class="language-json" style="max-height: 300px;">{
+    &quot;success&quot;: false,
+    &quot;message&quot;: &quot;Address not found&quot;
+}</code>
+ </pre>
+            <blockquote>
+            <p>Example response (422, Validation Error):</p>
+        </blockquote>
+                <pre>
+
+<code class="language-json" style="max-height: 300px;">{
+    &quot;message&quot;: &quot;The given data was invalid.&quot;,
+    &quot;errors&quot;: {
+        &quot;name&quot;: [
+            &quot;The name field is required.&quot;
+        ]
+    }
+}</code>
+ </pre>
+    </span>
+<span id="execution-results-PUTapi-addresses--address_id-" hidden>
+    <blockquote>Received response<span
+                id="execution-response-status-PUTapi-addresses--address_id-"></span>:
+    </blockquote>
+    <pre class="json"><code id="execution-response-content-PUTapi-addresses--address_id-"
+      data-empty-response-text="<Empty response>" style="max-height: 400px;"></code></pre>
+</span>
+<span id="execution-error-PUTapi-addresses--address_id-" hidden>
+    <blockquote>Request failed with error:</blockquote>
+    <pre><code id="execution-error-message-PUTapi-addresses--address_id-">
+
+Tip: Check that you&#039;re properly connected to the network.
+If you&#039;re a maintainer of ths API, verify that your API is running and you&#039;ve enabled CORS.
+You can check the Dev Tools console for debugging information.</code></pre>
+</span>
+<form id="form-PUTapi-addresses--address_id-" data-method="PUT"
+      data-path="api/addresses/{address_id}"
+      data-authed="1"
+      data-hasfiles="0"
+      data-isarraybody="0"
+      autocomplete="off"
+      onsubmit="event.preventDefault(); executeTryOut('PUTapi-addresses--address_id-', this);">
+    <h3>
+        Request&nbsp;&nbsp;&nbsp;
+                    <button type="button"
+                    style="background-color: #8fbcd4; padding: 5px 10px; border-radius: 5px; border-width: thin;"
+                    id="btn-tryout-PUTapi-addresses--address_id-"
+                    onclick="tryItOut('PUTapi-addresses--address_id-');">Try it out ⚡
+            </button>
+            <button type="button"
+                    style="background-color: #c97a7e; padding: 5px 10px; border-radius: 5px; border-width: thin;"
+                    id="btn-canceltryout-PUTapi-addresses--address_id-"
+                    onclick="cancelTryOut('PUTapi-addresses--address_id-');" hidden>Cancel 🛑
+            </button>&nbsp;&nbsp;
+            <button type="submit"
+                    style="background-color: #6ac174; padding: 5px 10px; border-radius: 5px; border-width: thin;"
+                    id="btn-executetryout-PUTapi-addresses--address_id-"
+                    data-initial-text="Send Request 💥"
+                    data-loading-text="⏱ Sending..."
+                    hidden>Send Request 💥
+            </button>
+            </h3>
+            <p>
+            <small class="badge badge-darkblue">PUT</small>
+            <b><code>api/addresses/{address_id}</code></b>
+        </p>
+                <h4 class="fancy-heading-panel"><b>Headers</b></h4>
+                                <div style="padding-left: 28px; clear: unset;">
+                <b style="line-height: 2;"><code>Authorization</code></b>&nbsp;&nbsp;
+&nbsp;
+ &nbsp;
+ &nbsp;
+                <input type="text" style="display: none"
+                              name="Authorization" class="auth-value"               data-endpoint="PUTapi-addresses--address_id-"
+               value="Bearer {YOUR_API_TOKEN}"
+               data-component="header">
+    <br>
+<p>Example: <code>Bearer {YOUR_API_TOKEN}</code></p>
+            </div>
+                                <div style="padding-left: 28px; clear: unset;">
+                <b style="line-height: 2;"><code>Content-Type</code></b>&nbsp;&nbsp;
+&nbsp;
+ &nbsp;
+ &nbsp;
+                <input type="text" style="display: none"
+                              name="Content-Type"                data-endpoint="PUTapi-addresses--address_id-"
+               value="application/json"
+               data-component="header">
+    <br>
+<p>Example: <code>application/json</code></p>
+            </div>
+                                <div style="padding-left: 28px; clear: unset;">
+                <b style="line-height: 2;"><code>Accept</code></b>&nbsp;&nbsp;
+&nbsp;
+ &nbsp;
+ &nbsp;
+                <input type="text" style="display: none"
+                              name="Accept"                data-endpoint="PUTapi-addresses--address_id-"
+               value="application/json"
+               data-component="header">
+    <br>
+<p>Example: <code>application/json</code></p>
+            </div>
+                        <h4 class="fancy-heading-panel"><b>URL Parameters</b></h4>
+                    <div style="padding-left: 28px; clear: unset;">
+                <b style="line-height: 2;"><code>address_id</code></b>&nbsp;&nbsp;
+<small>integer</small>&nbsp;
+ &nbsp;
+ &nbsp;
+                <input type="number" style="display: none"
+               step="any"               name="address_id"                data-endpoint="PUTapi-addresses--address_id-"
+               value="1"
+               data-component="url">
+    <br>
+<p>The ID of the address. Example: <code>1</code></p>
+            </div>
+                    <div style="padding-left: 28px; clear: unset;">
+                <b style="line-height: 2;"><code>address</code></b>&nbsp;&nbsp;
+<small>integer</small>&nbsp;
+ &nbsp;
+ &nbsp;
+                <input type="number" style="display: none"
+               step="any"               name="address"                data-endpoint="PUTapi-addresses--address_id-"
+               value="1"
+               data-component="url">
+    <br>
+<p>The address ID. Example: <code>1</code></p>
+            </div>
+                            <h4 class="fancy-heading-panel"><b>Body Parameters</b></h4>
+        <div style=" padding-left: 28px;  clear: unset;">
+            <b style="line-height: 2;"><code>label</code></b>&nbsp;&nbsp;
+<small>string</small>&nbsp;
+<i>optional</i> &nbsp;
+ &nbsp;
+                <input type="text" style="display: none"
+                              name="label"                data-endpoint="PUTapi-addresses--address_id-"
+               value="Home"
+               data-component="body">
+    <br>
+<p>optional A custom label for the address (e.g., &quot;Home&quot;, &quot;Work&quot;). Example: <code>Home</code></p>
+        </div>
+                <div style=" padding-left: 28px;  clear: unset;">
+            <b style="line-height: 2;"><code>name</code></b>&nbsp;&nbsp;
+<small>string</small>&nbsp;
+ &nbsp;
+ &nbsp;
+                <input type="text" style="display: none"
+                              name="name"                data-endpoint="PUTapi-addresses--address_id-"
+               value="John Doe"
+               data-component="body">
+    <br>
+<p>The full name of the recipient. Example: <code>John Doe</code></p>
+        </div>
+                <div style=" padding-left: 28px;  clear: unset;">
+            <b style="line-height: 2;"><code>phone</code></b>&nbsp;&nbsp;
+<small>string</small>&nbsp;
+ &nbsp;
+ &nbsp;
+                <input type="text" style="display: none"
+                              name="phone"                data-endpoint="PUTapi-addresses--address_id-"
+               value="+201234567890"
+               data-component="body">
+    <br>
+<p>The phone number. Example: <code>+201234567890</code></p>
+        </div>
+                <div style=" padding-left: 28px;  clear: unset;">
+            <b style="line-height: 2;"><code>address</code></b>&nbsp;&nbsp;
+<small>string</small>&nbsp;
+ &nbsp;
+ &nbsp;
+                <input type="text" style="display: none"
+                              name="address"                data-endpoint="PUTapi-addresses--address_id-"
+               value="123 Main St, Cairo, Egypt"
+               data-component="body">
+    <br>
+<p>The full address text. Example: <code>123 Main St, Cairo, Egypt</code></p>
+        </div>
+                <div style=" padding-left: 28px;  clear: unset;">
+            <b style="line-height: 2;"><code>street</code></b>&nbsp;&nbsp;
+<small>string</small>&nbsp;
+<i>optional</i> &nbsp;
+ &nbsp;
+                <input type="text" style="display: none"
+                              name="street"                data-endpoint="PUTapi-addresses--address_id-"
+               value="123 Main St"
+               data-component="body">
+    <br>
+<p>optional The street name. Example: <code>123 Main St</code></p>
+        </div>
+                <div style=" padding-left: 28px;  clear: unset;">
+            <b style="line-height: 2;"><code>building_number</code></b>&nbsp;&nbsp;
+<small>string</small>&nbsp;
+<i>optional</i> &nbsp;
+ &nbsp;
+                <input type="text" style="display: none"
+                              name="building_number"                data-endpoint="PUTapi-addresses--address_id-"
+               value="15"
+               data-component="body">
+    <br>
+<p>optional The building number. Example: <code>15</code></p>
+        </div>
+                <div style=" padding-left: 28px;  clear: unset;">
+            <b style="line-height: 2;"><code>floor</code></b>&nbsp;&nbsp;
+<small>string</small>&nbsp;
+<i>optional</i> &nbsp;
+ &nbsp;
+                <input type="text" style="display: none"
+                              name="floor"                data-endpoint="PUTapi-addresses--address_id-"
+               value="3"
+               data-component="body">
+    <br>
+<p>optional The floor number. Example: <code>3</code></p>
+        </div>
+                <div style=" padding-left: 28px;  clear: unset;">
+            <b style="line-height: 2;"><code>apartment</code></b>&nbsp;&nbsp;
+<small>string</small>&nbsp;
+<i>optional</i> &nbsp;
+ &nbsp;
+                <input type="text" style="display: none"
+                              name="apartment"                data-endpoint="PUTapi-addresses--address_id-"
+               value="5A"
+               data-component="body">
+    <br>
+<p>optional The apartment number. Example: <code>5A</code></p>
+        </div>
+                <div style=" padding-left: 28px;  clear: unset;">
+            <b style="line-height: 2;"><code>zone</code></b>&nbsp;&nbsp;
+<small>string</small>&nbsp;
+<i>optional</i> &nbsp;
+ &nbsp;
+                <input type="text" style="display: none"
+                              name="zone"                data-endpoint="PUTapi-addresses--address_id-"
+               value="Maadi"
+               data-component="body">
+    <br>
+<p>optional The zone/area. Example: <code>Maadi</code></p>
+        </div>
+                <div style=" padding-left: 28px;  clear: unset;">
+            <b style="line-height: 2;"><code>city</code></b>&nbsp;&nbsp;
+<small>string</small>&nbsp;
+ &nbsp;
+ &nbsp;
+                <input type="text" style="display: none"
+                              name="city"                data-endpoint="PUTapi-addresses--address_id-"
+               value="Cairo"
+               data-component="body">
+    <br>
+<p>The city name. Example: <code>Cairo</code></p>
+        </div>
+                <div style=" padding-left: 28px;  clear: unset;">
+            <b style="line-height: 2;"><code>zip_code</code></b>&nbsp;&nbsp;
+<small>string</small>&nbsp;
+ &nbsp;
+ &nbsp;
+                <input type="text" style="display: none"
+                              name="zip_code"                data-endpoint="PUTapi-addresses--address_id-"
+               value="12345"
+               data-component="body">
+    <br>
+<p>The postal/ZIP code. Example: <code>12345</code></p>
+        </div>
+                <div style=" padding-left: 28px;  clear: unset;">
+            <b style="line-height: 2;"><code>country</code></b>&nbsp;&nbsp;
+<small>string</small>&nbsp;
+ &nbsp;
+ &nbsp;
+                <input type="text" style="display: none"
+                              name="country"                data-endpoint="PUTapi-addresses--address_id-"
+               value="Egypt"
+               data-component="body">
+    <br>
+<p>The country name. Example: <code>Egypt</code></p>
+        </div>
+                <div style=" padding-left: 28px;  clear: unset;">
+            <b style="line-height: 2;"><code>state</code></b>&nbsp;&nbsp;
+<small>string</small>&nbsp;
+<i>optional</i> &nbsp;
+ &nbsp;
+                <input type="text" style="display: none"
+                              name="state"                data-endpoint="PUTapi-addresses--address_id-"
+               value="Cairo Governorate"
+               data-component="body">
+    <br>
+<p>optional The state/province. Example: <code>Cairo Governorate</code></p>
+        </div>
+                <div style=" padding-left: 28px;  clear: unset;">
+            <b style="line-height: 2;"><code>is_default</code></b>&nbsp;&nbsp;
+<small>boolean</small>&nbsp;
+<i>optional</i> &nbsp;
+ &nbsp;
+                <label data-endpoint="PUTapi-addresses--address_id-" style="display: none">
+            <input type="radio" name="is_default"
+                   value="true"
+                   data-endpoint="PUTapi-addresses--address_id-"
+                   data-component="body"             >
+            <code>true</code>
+        </label>
+        <label data-endpoint="PUTapi-addresses--address_id-" style="display: none">
+            <input type="radio" name="is_default"
+                   value="false"
+                   data-endpoint="PUTapi-addresses--address_id-"
+                   data-component="body"             >
+            <code>false</code>
+        </label>
+    <br>
+<p>optional Whether this should be the default address. Example: <code>true</code></p>
+        </div>
+                <div style=" padding-left: 28px;  clear: unset;">
+            <b style="line-height: 2;"><code>is_billing</code></b>&nbsp;&nbsp;
+<small>boolean</small>&nbsp;
+<i>optional</i> &nbsp;
+ &nbsp;
+                <label data-endpoint="PUTapi-addresses--address_id-" style="display: none">
+            <input type="radio" name="is_billing"
+                   value="true"
+                   data-endpoint="PUTapi-addresses--address_id-"
+                   data-component="body"             >
+            <code>true</code>
+        </label>
+        <label data-endpoint="PUTapi-addresses--address_id-" style="display: none">
+            <input type="radio" name="is_billing"
+                   value="false"
+                   data-endpoint="PUTapi-addresses--address_id-"
+                   data-component="body"             >
+            <code>false</code>
+        </label>
+    <br>
+<p>optional Whether this can be used for billing. Example: <code>true</code></p>
+        </div>
+                <div style=" padding-left: 28px;  clear: unset;">
+            <b style="line-height: 2;"><code>is_shipping</code></b>&nbsp;&nbsp;
+<small>boolean</small>&nbsp;
+<i>optional</i> &nbsp;
+ &nbsp;
+                <label data-endpoint="PUTapi-addresses--address_id-" style="display: none">
+            <input type="radio" name="is_shipping"
+                   value="true"
+                   data-endpoint="PUTapi-addresses--address_id-"
+                   data-component="body"             >
+            <code>true</code>
+        </label>
+        <label data-endpoint="PUTapi-addresses--address_id-" style="display: none">
+            <input type="radio" name="is_shipping"
+                   value="false"
+                   data-endpoint="PUTapi-addresses--address_id-"
+                   data-component="body"             >
+            <code>false</code>
+        </label>
+    <br>
+<p>optional Whether this can be used for shipping. Example: <code>true</code></p>
+        </div>
+        </form>
+
+                    <h2 id="customer-addresses-DELETEapi-addresses--address_id-">Delete a customer address</h2>
+
+<p>
+<small class="badge badge-darkred">requires authentication</small>
+</p>
+
+<p>Delete an existing address belonging to the authenticated user.</p>
+
+<span id="example-requests-DELETEapi-addresses--address_id-">
+<blockquote>Example request:</blockquote>
+
+
+<div class="bash-example">
+    <pre><code class="language-bash">curl --request DELETE \
+    "http://127.0.0.1:8000/api/addresses/1" \
+    --header "Authorization: Bearer {YOUR_API_TOKEN}" \
+    --header "Content-Type: application/json" \
+    --header "Accept: application/json"</code></pre></div>
+
+
+<div class="javascript-example">
+    <pre><code class="language-javascript">const url = new URL(
+    "http://127.0.0.1:8000/api/addresses/1"
+);
+
+const headers = {
+    "Authorization": "Bearer {YOUR_API_TOKEN}",
+    "Content-Type": "application/json",
+    "Accept": "application/json",
+};
+
+fetch(url, {
+    method: "DELETE",
+    headers,
+}).then(response =&gt; response.json());</code></pre></div>
+
+
+<div class="php-example">
+    <pre><code class="language-php">$client = new \GuzzleHttp\Client();
+$url = 'http://127.0.0.1:8000/api/addresses/1';
+$response = $client-&gt;delete(
+    $url,
+    [
+        'headers' =&gt; [
+            'Authorization' =&gt; 'Bearer {YOUR_API_TOKEN}',
+            'Content-Type' =&gt; 'application/json',
+            'Accept' =&gt; 'application/json',
+        ],
+    ]
+);
+$body = $response-&gt;getBody();
+print_r(json_decode((string) $body));</code></pre></div>
+
+</span>
+
+<span id="example-responses-DELETEapi-addresses--address_id-">
+            <blockquote>
+            <p>Example response (200, Success):</p>
+        </blockquote>
+                <pre>
+
+<code class="language-json" style="max-height: 300px;">{
+    &quot;success&quot;: true,
+    &quot;message&quot;: &quot;Address deleted successfully&quot;
+}</code>
+ </pre>
+            <blockquote>
+            <p>Example response (401, Unauthenticated):</p>
+        </blockquote>
+                <pre>
+
+<code class="language-json" style="max-height: 300px;">{
+    &quot;message&quot;: &quot;Unauthenticated.&quot;
+}</code>
+ </pre>
+            <blockquote>
+            <p>Example response (404, Not Found):</p>
+        </blockquote>
+                <pre>
+
+<code class="language-json" style="max-height: 300px;">{
+    &quot;success&quot;: false,
+    &quot;message&quot;: &quot;Address not found&quot;
+}</code>
+ </pre>
+    </span>
+<span id="execution-results-DELETEapi-addresses--address_id-" hidden>
+    <blockquote>Received response<span
+                id="execution-response-status-DELETEapi-addresses--address_id-"></span>:
+    </blockquote>
+    <pre class="json"><code id="execution-response-content-DELETEapi-addresses--address_id-"
+      data-empty-response-text="<Empty response>" style="max-height: 400px;"></code></pre>
+</span>
+<span id="execution-error-DELETEapi-addresses--address_id-" hidden>
+    <blockquote>Request failed with error:</blockquote>
+    <pre><code id="execution-error-message-DELETEapi-addresses--address_id-">
+
+Tip: Check that you&#039;re properly connected to the network.
+If you&#039;re a maintainer of ths API, verify that your API is running and you&#039;ve enabled CORS.
+You can check the Dev Tools console for debugging information.</code></pre>
+</span>
+<form id="form-DELETEapi-addresses--address_id-" data-method="DELETE"
+      data-path="api/addresses/{address_id}"
+      data-authed="1"
+      data-hasfiles="0"
+      data-isarraybody="0"
+      autocomplete="off"
+      onsubmit="event.preventDefault(); executeTryOut('DELETEapi-addresses--address_id-', this);">
+    <h3>
+        Request&nbsp;&nbsp;&nbsp;
+                    <button type="button"
+                    style="background-color: #8fbcd4; padding: 5px 10px; border-radius: 5px; border-width: thin;"
+                    id="btn-tryout-DELETEapi-addresses--address_id-"
+                    onclick="tryItOut('DELETEapi-addresses--address_id-');">Try it out ⚡
+            </button>
+            <button type="button"
+                    style="background-color: #c97a7e; padding: 5px 10px; border-radius: 5px; border-width: thin;"
+                    id="btn-canceltryout-DELETEapi-addresses--address_id-"
+                    onclick="cancelTryOut('DELETEapi-addresses--address_id-');" hidden>Cancel 🛑
+            </button>&nbsp;&nbsp;
+            <button type="submit"
+                    style="background-color: #6ac174; padding: 5px 10px; border-radius: 5px; border-width: thin;"
+                    id="btn-executetryout-DELETEapi-addresses--address_id-"
+                    data-initial-text="Send Request 💥"
+                    data-loading-text="⏱ Sending..."
+                    hidden>Send Request 💥
+            </button>
+            </h3>
+            <p>
+            <small class="badge badge-red">DELETE</small>
+            <b><code>api/addresses/{address_id}</code></b>
+        </p>
+                <h4 class="fancy-heading-panel"><b>Headers</b></h4>
+                                <div style="padding-left: 28px; clear: unset;">
+                <b style="line-height: 2;"><code>Authorization</code></b>&nbsp;&nbsp;
+&nbsp;
+ &nbsp;
+ &nbsp;
+                <input type="text" style="display: none"
+                              name="Authorization" class="auth-value"               data-endpoint="DELETEapi-addresses--address_id-"
+               value="Bearer {YOUR_API_TOKEN}"
+               data-component="header">
+    <br>
+<p>Example: <code>Bearer {YOUR_API_TOKEN}</code></p>
+            </div>
+                                <div style="padding-left: 28px; clear: unset;">
+                <b style="line-height: 2;"><code>Content-Type</code></b>&nbsp;&nbsp;
+&nbsp;
+ &nbsp;
+ &nbsp;
+                <input type="text" style="display: none"
+                              name="Content-Type"                data-endpoint="DELETEapi-addresses--address_id-"
+               value="application/json"
+               data-component="header">
+    <br>
+<p>Example: <code>application/json</code></p>
+            </div>
+                                <div style="padding-left: 28px; clear: unset;">
+                <b style="line-height: 2;"><code>Accept</code></b>&nbsp;&nbsp;
+&nbsp;
+ &nbsp;
+ &nbsp;
+                <input type="text" style="display: none"
+                              name="Accept"                data-endpoint="DELETEapi-addresses--address_id-"
+               value="application/json"
+               data-component="header">
+    <br>
+<p>Example: <code>application/json</code></p>
+            </div>
+                        <h4 class="fancy-heading-panel"><b>URL Parameters</b></h4>
+                    <div style="padding-left: 28px; clear: unset;">
+                <b style="line-height: 2;"><code>address_id</code></b>&nbsp;&nbsp;
+<small>integer</small>&nbsp;
+ &nbsp;
+ &nbsp;
+                <input type="number" style="display: none"
+               step="any"               name="address_id"                data-endpoint="DELETEapi-addresses--address_id-"
+               value="1"
+               data-component="url">
+    <br>
+<p>The ID of the address. Example: <code>1</code></p>
+            </div>
+                    <div style="padding-left: 28px; clear: unset;">
+                <b style="line-height: 2;"><code>address</code></b>&nbsp;&nbsp;
+<small>integer</small>&nbsp;
+ &nbsp;
+ &nbsp;
+                <input type="number" style="display: none"
+               step="any"               name="address"                data-endpoint="DELETEapi-addresses--address_id-"
+               value="1"
+               data-component="url">
+    <br>
+<p>The address ID. Example: <code>1</code></p>
+            </div>
+                    </form>
+
+                    <h2 id="customer-addresses-PATCHapi-addresses--address_id--default">Set address as default</h2>
+
+<p>
+<small class="badge badge-darkred">requires authentication</small>
+</p>
+
+<p>Set a specific address as the default address for the authenticated user.
+All other addresses will be unset as default.</p>
+
+<span id="example-requests-PATCHapi-addresses--address_id--default">
+<blockquote>Example request:</blockquote>
+
+
+<div class="bash-example">
+    <pre><code class="language-bash">curl --request PATCH \
+    "http://127.0.0.1:8000/api/addresses/1/default" \
+    --header "Authorization: Bearer {YOUR_API_TOKEN}" \
+    --header "Content-Type: application/json" \
+    --header "Accept: application/json"</code></pre></div>
+
+
+<div class="javascript-example">
+    <pre><code class="language-javascript">const url = new URL(
+    "http://127.0.0.1:8000/api/addresses/1/default"
+);
+
+const headers = {
+    "Authorization": "Bearer {YOUR_API_TOKEN}",
+    "Content-Type": "application/json",
+    "Accept": "application/json",
+};
+
+fetch(url, {
+    method: "PATCH",
+    headers,
+}).then(response =&gt; response.json());</code></pre></div>
+
+
+<div class="php-example">
+    <pre><code class="language-php">$client = new \GuzzleHttp\Client();
+$url = 'http://127.0.0.1:8000/api/addresses/1/default';
+$response = $client-&gt;patch(
+    $url,
+    [
+        'headers' =&gt; [
+            'Authorization' =&gt; 'Bearer {YOUR_API_TOKEN}',
+            'Content-Type' =&gt; 'application/json',
+            'Accept' =&gt; 'application/json',
+        ],
+    ]
+);
+$body = $response-&gt;getBody();
+print_r(json_decode((string) $body));</code></pre></div>
+
+</span>
+
+<span id="example-responses-PATCHapi-addresses--address_id--default">
+            <blockquote>
+            <p>Example response (200, Success):</p>
+        </blockquote>
+                <pre>
+
+<code class="language-json" style="max-height: 300px;">{
+    &quot;success&quot;: true,
+    &quot;message&quot;: &quot;Address set as default successfully&quot;,
+    &quot;data&quot;: {
+        &quot;id&quot;: 1,
+        &quot;user_id&quot;: 1,
+        &quot;label&quot;: &quot;Home&quot;,
+        &quot;name&quot;: &quot;John Doe&quot;,
+        &quot;phone&quot;: &quot;+201234567890&quot;,
+        &quot;address&quot;: &quot;123 Main St, Cairo, Egypt&quot;,
+        &quot;street&quot;: &quot;123 Main St&quot;,
+        &quot;building_number&quot;: &quot;15&quot;,
+        &quot;floor&quot;: &quot;3&quot;,
+        &quot;apartment&quot;: &quot;5A&quot;,
+        &quot;zone&quot;: &quot;Maadi&quot;,
+        &quot;city&quot;: &quot;Cairo&quot;,
+        &quot;zip_code&quot;: &quot;12345&quot;,
+        &quot;country&quot;: &quot;Egypt&quot;,
+        &quot;state&quot;: &quot;Cairo Governorate&quot;,
+        &quot;is_default&quot;: true,
+        &quot;is_billing&quot;: true,
+        &quot;is_shipping&quot;: true,
+        &quot;created_at&quot;: &quot;2024-01-15T10:00:00.000000Z&quot;,
+        &quot;updated_at&quot;: &quot;2024-01-15T11:00:00.000000Z&quot;
+    }
+}</code>
+ </pre>
+            <blockquote>
+            <p>Example response (401, Unauthenticated):</p>
+        </blockquote>
+                <pre>
+
+<code class="language-json" style="max-height: 300px;">{
+    &quot;message&quot;: &quot;Unauthenticated.&quot;
+}</code>
+ </pre>
+            <blockquote>
+            <p>Example response (404, Not Found):</p>
+        </blockquote>
+                <pre>
+
+<code class="language-json" style="max-height: 300px;">{
+    &quot;success&quot;: false,
+    &quot;message&quot;: &quot;Address not found&quot;
+}</code>
+ </pre>
+    </span>
+<span id="execution-results-PATCHapi-addresses--address_id--default" hidden>
+    <blockquote>Received response<span
+                id="execution-response-status-PATCHapi-addresses--address_id--default"></span>:
+    </blockquote>
+    <pre class="json"><code id="execution-response-content-PATCHapi-addresses--address_id--default"
+      data-empty-response-text="<Empty response>" style="max-height: 400px;"></code></pre>
+</span>
+<span id="execution-error-PATCHapi-addresses--address_id--default" hidden>
+    <blockquote>Request failed with error:</blockquote>
+    <pre><code id="execution-error-message-PATCHapi-addresses--address_id--default">
+
+Tip: Check that you&#039;re properly connected to the network.
+If you&#039;re a maintainer of ths API, verify that your API is running and you&#039;ve enabled CORS.
+You can check the Dev Tools console for debugging information.</code></pre>
+</span>
+<form id="form-PATCHapi-addresses--address_id--default" data-method="PATCH"
+      data-path="api/addresses/{address_id}/default"
+      data-authed="1"
+      data-hasfiles="0"
+      data-isarraybody="0"
+      autocomplete="off"
+      onsubmit="event.preventDefault(); executeTryOut('PATCHapi-addresses--address_id--default', this);">
+    <h3>
+        Request&nbsp;&nbsp;&nbsp;
+                    <button type="button"
+                    style="background-color: #8fbcd4; padding: 5px 10px; border-radius: 5px; border-width: thin;"
+                    id="btn-tryout-PATCHapi-addresses--address_id--default"
+                    onclick="tryItOut('PATCHapi-addresses--address_id--default');">Try it out ⚡
+            </button>
+            <button type="button"
+                    style="background-color: #c97a7e; padding: 5px 10px; border-radius: 5px; border-width: thin;"
+                    id="btn-canceltryout-PATCHapi-addresses--address_id--default"
+                    onclick="cancelTryOut('PATCHapi-addresses--address_id--default');" hidden>Cancel 🛑
+            </button>&nbsp;&nbsp;
+            <button type="submit"
+                    style="background-color: #6ac174; padding: 5px 10px; border-radius: 5px; border-width: thin;"
+                    id="btn-executetryout-PATCHapi-addresses--address_id--default"
+                    data-initial-text="Send Request 💥"
+                    data-loading-text="⏱ Sending..."
+                    hidden>Send Request 💥
+            </button>
+            </h3>
+            <p>
+            <small class="badge badge-purple">PATCH</small>
+            <b><code>api/addresses/{address_id}/default</code></b>
+        </p>
+                <h4 class="fancy-heading-panel"><b>Headers</b></h4>
+                                <div style="padding-left: 28px; clear: unset;">
+                <b style="line-height: 2;"><code>Authorization</code></b>&nbsp;&nbsp;
+&nbsp;
+ &nbsp;
+ &nbsp;
+                <input type="text" style="display: none"
+                              name="Authorization" class="auth-value"               data-endpoint="PATCHapi-addresses--address_id--default"
+               value="Bearer {YOUR_API_TOKEN}"
+               data-component="header">
+    <br>
+<p>Example: <code>Bearer {YOUR_API_TOKEN}</code></p>
+            </div>
+                                <div style="padding-left: 28px; clear: unset;">
+                <b style="line-height: 2;"><code>Content-Type</code></b>&nbsp;&nbsp;
+&nbsp;
+ &nbsp;
+ &nbsp;
+                <input type="text" style="display: none"
+                              name="Content-Type"                data-endpoint="PATCHapi-addresses--address_id--default"
+               value="application/json"
+               data-component="header">
+    <br>
+<p>Example: <code>application/json</code></p>
+            </div>
+                                <div style="padding-left: 28px; clear: unset;">
+                <b style="line-height: 2;"><code>Accept</code></b>&nbsp;&nbsp;
+&nbsp;
+ &nbsp;
+ &nbsp;
+                <input type="text" style="display: none"
+                              name="Accept"                data-endpoint="PATCHapi-addresses--address_id--default"
+               value="application/json"
+               data-component="header">
+    <br>
+<p>Example: <code>application/json</code></p>
+            </div>
+                        <h4 class="fancy-heading-panel"><b>URL Parameters</b></h4>
+                    <div style="padding-left: 28px; clear: unset;">
+                <b style="line-height: 2;"><code>address_id</code></b>&nbsp;&nbsp;
+<small>integer</small>&nbsp;
+ &nbsp;
+ &nbsp;
+                <input type="number" style="display: none"
+               step="any"               name="address_id"                data-endpoint="PATCHapi-addresses--address_id--default"
+               value="1"
+               data-component="url">
+    <br>
+<p>The ID of the address. Example: <code>1</code></p>
+            </div>
+                    <div style="padding-left: 28px; clear: unset;">
+                <b style="line-height: 2;"><code>address</code></b>&nbsp;&nbsp;
+<small>integer</small>&nbsp;
+ &nbsp;
+ &nbsp;
+                <input type="number" style="display: none"
+               step="any"               name="address"                data-endpoint="PATCHapi-addresses--address_id--default"
+               value="1"
+               data-component="url">
+    <br>
+<p>The address ID. Example: <code>1</code></p>
+            </div>
+                    </form>
+
                 <h1 id="endpoints">Endpoints</h1>
 
     
@@ -7062,7 +8907,7 @@ print_r(json_decode((string) $body));</code></pre></div>
 content-type: application/json
 access-control-allow-origin: http://localhost:3000
 access-control-allow-credentials: true
-set-cookie: laravel-session=eyJpdiI6IkxzclVJQnQvVnB5TXh6dzg2ekxlMWc9PSIsInZhbHVlIjoiLzBQYXluNEloNXVFY29hbW9lTElPUVN2Q3hwT0lDem9ZdE9FWkdLZUM2QndHekhHMjFSMnhYVXhVYlM4QXh6Z0FmcHVzQ2RwanBuSEo0QVcvZTNtZjB5MUdwL3cxZDB2ak12emFmYmh1ekhCZE8rdmtrVStoMU1XTW1DQmRMbjgiLCJtYWMiOiI0OGZhYTgyMGJkN2Y0NTQxNDNmNjE1ODQzZmJmNGRkMWEyYmI5MjA0YjkyZjIyYzcyM2QwMjMwNjIxNzRkMjllIiwidGFnIjoiIn0%3D; expires=Wed, 21 Jan 2026 11:38:44 GMT; Max-Age=7200; path=/; httponly; samesite=lax
+set-cookie: laravel-session=eyJpdiI6Imc5WnFWN2dZbGxCcW5xam5WV0dGQnc9PSIsInZhbHVlIjoia1hNWUdlNGY2eENZZGY5SWpZa1RhbjZIMVE1UmhCTVpDSWlabWhIeW9JMmlwalFWM2RYRTJ3eng4M2FkeEVFaU43ZEVsL084ZkFCenpvMEw3OUxibzU3RU44QzNjRy9rOUdKMnZhVktNeDFpRDNlTnJKQVJseUozbXJielZtS28iLCJtYWMiOiI4YTA5OTFkYzk2OGM0YmFhMzRlYzA4YmM4NTY4OTEwZDAwOTZjNzk1MjA3N2IwOWExNDk4ZDllZmIxNmUwODk4IiwidGFnIjoiIn0%3D; expires=Wed, 21 Jan 2026 14:24:05 GMT; Max-Age=7200; path=/; httponly; samesite=lax
  </code></pre></details>         <pre>
 
 <code class="language-json" style="max-height: 300px;">{
@@ -7179,1260 +9024,6 @@ You can check the Dev Tools console for debugging information.</code></pre>
             </div>
                         </form>
 
-                    <h2 id="endpoints-GETapi-addresses">Display a listing of the user&#039;s addresses.</h2>
-
-<p>
-</p>
-
-
-
-<span id="example-requests-GETapi-addresses">
-<blockquote>Example request:</blockquote>
-
-
-<div class="bash-example">
-    <pre><code class="language-bash">curl --request GET \
-    --get "http://127.0.0.1:8000/api/addresses" \
-    --header "Content-Type: application/json" \
-    --header "Accept: application/json"</code></pre></div>
-
-
-<div class="javascript-example">
-    <pre><code class="language-javascript">const url = new URL(
-    "http://127.0.0.1:8000/api/addresses"
-);
-
-const headers = {
-    "Content-Type": "application/json",
-    "Accept": "application/json",
-};
-
-fetch(url, {
-    method: "GET",
-    headers,
-}).then(response =&gt; response.json());</code></pre></div>
-
-
-<div class="php-example">
-    <pre><code class="language-php">$client = new \GuzzleHttp\Client();
-$url = 'http://127.0.0.1:8000/api/addresses';
-$response = $client-&gt;get(
-    $url,
-    [
-        'headers' =&gt; [
-            'Content-Type' =&gt; 'application/json',
-            'Accept' =&gt; 'application/json',
-        ],
-    ]
-);
-$body = $response-&gt;getBody();
-print_r(json_decode((string) $body));</code></pre></div>
-
-</span>
-
-<span id="example-responses-GETapi-addresses">
-            <blockquote>
-            <p>Example response (401):</p>
-        </blockquote>
-                <details class="annotation">
-            <summary style="cursor: pointer;">
-                <small onclick="textContent = parentElement.parentElement.open ? 'Show headers' : 'Hide headers'">Show headers</small>
-            </summary>
-            <pre><code class="language-http">cache-control: no-cache, private
-content-type: application/json
-access-control-allow-origin: http://localhost:3000
-access-control-allow-credentials: true
-set-cookie: laravel-session=eyJpdiI6IlRHYXFtcnNOY2ZBbkM4NStEd3F5OWc9PSIsInZhbHVlIjoiVEZPZUZiZktrQi9KeVd5NUVkU3I3QTcrc3pVRkh3YUxkeS9KQlg4dnRVY0VxbHNDNGFvck5PUEFYZjdTaVBGbU81bzVNT0NwV3plY2JzWXZUdzNINjBrSU1CcUd6TXR2VUhtWUdERTdKMFRzMjZLa0R2UVBEUkYyeGtRcFdOdkMiLCJtYWMiOiJlZDAzNjFiNDI1ZmI1MjZlNWZhMDhhNjAzYzM2ZDRlZmRiMGFjZDIwOTIyNzIxZjE4YWNmNDY1MjhlZjJhYzE0IiwidGFnIjoiIn0%3D; expires=Wed, 21 Jan 2026 11:38:44 GMT; Max-Age=7200; path=/; httponly; samesite=lax
- </code></pre></details>         <pre>
-
-<code class="language-json" style="max-height: 300px;">{
-    &quot;message&quot;: &quot;Unauthenticated.&quot;
-}</code>
- </pre>
-    </span>
-<span id="execution-results-GETapi-addresses" hidden>
-    <blockquote>Received response<span
-                id="execution-response-status-GETapi-addresses"></span>:
-    </blockquote>
-    <pre class="json"><code id="execution-response-content-GETapi-addresses"
-      data-empty-response-text="<Empty response>" style="max-height: 400px;"></code></pre>
-</span>
-<span id="execution-error-GETapi-addresses" hidden>
-    <blockquote>Request failed with error:</blockquote>
-    <pre><code id="execution-error-message-GETapi-addresses">
-
-Tip: Check that you&#039;re properly connected to the network.
-If you&#039;re a maintainer of ths API, verify that your API is running and you&#039;ve enabled CORS.
-You can check the Dev Tools console for debugging information.</code></pre>
-</span>
-<form id="form-GETapi-addresses" data-method="GET"
-      data-path="api/addresses"
-      data-authed="0"
-      data-hasfiles="0"
-      data-isarraybody="0"
-      autocomplete="off"
-      onsubmit="event.preventDefault(); executeTryOut('GETapi-addresses', this);">
-    <h3>
-        Request&nbsp;&nbsp;&nbsp;
-                    <button type="button"
-                    style="background-color: #8fbcd4; padding: 5px 10px; border-radius: 5px; border-width: thin;"
-                    id="btn-tryout-GETapi-addresses"
-                    onclick="tryItOut('GETapi-addresses');">Try it out ⚡
-            </button>
-            <button type="button"
-                    style="background-color: #c97a7e; padding: 5px 10px; border-radius: 5px; border-width: thin;"
-                    id="btn-canceltryout-GETapi-addresses"
-                    onclick="cancelTryOut('GETapi-addresses');" hidden>Cancel 🛑
-            </button>&nbsp;&nbsp;
-            <button type="submit"
-                    style="background-color: #6ac174; padding: 5px 10px; border-radius: 5px; border-width: thin;"
-                    id="btn-executetryout-GETapi-addresses"
-                    data-initial-text="Send Request 💥"
-                    data-loading-text="⏱ Sending..."
-                    hidden>Send Request 💥
-            </button>
-            </h3>
-            <p>
-            <small class="badge badge-green">GET</small>
-            <b><code>api/addresses</code></b>
-        </p>
-                <h4 class="fancy-heading-panel"><b>Headers</b></h4>
-                                <div style="padding-left: 28px; clear: unset;">
-                <b style="line-height: 2;"><code>Content-Type</code></b>&nbsp;&nbsp;
-&nbsp;
- &nbsp;
- &nbsp;
-                <input type="text" style="display: none"
-                              name="Content-Type"                data-endpoint="GETapi-addresses"
-               value="application/json"
-               data-component="header">
-    <br>
-<p>Example: <code>application/json</code></p>
-            </div>
-                                <div style="padding-left: 28px; clear: unset;">
-                <b style="line-height: 2;"><code>Accept</code></b>&nbsp;&nbsp;
-&nbsp;
- &nbsp;
- &nbsp;
-                <input type="text" style="display: none"
-                              name="Accept"                data-endpoint="GETapi-addresses"
-               value="application/json"
-               data-component="header">
-    <br>
-<p>Example: <code>application/json</code></p>
-            </div>
-                        </form>
-
-                    <h2 id="endpoints-POSTapi-addresses">Store a newly created address.</h2>
-
-<p>
-</p>
-
-
-
-<span id="example-requests-POSTapi-addresses">
-<blockquote>Example request:</blockquote>
-
-
-<div class="bash-example">
-    <pre><code class="language-bash">curl --request POST \
-    "http://127.0.0.1:8000/api/addresses" \
-    --header "Content-Type: application/json" \
-    --header "Accept: application/json" \
-    --data "{
-    \"label\": \"b\",
-    \"name\": \"n\",
-    \"phone\": \"gzmiyvdljnikhway\",
-    \"address\": \"architecto\",
-    \"city\": \"n\",
-    \"zip_code\": \"gzmiyvdljnikhway\",
-    \"country\": \"k\",
-    \"state\": \"c\",
-    \"is_default\": false,
-    \"is_billing\": true,
-    \"is_shipping\": false
-}"
-</code></pre></div>
-
-
-<div class="javascript-example">
-    <pre><code class="language-javascript">const url = new URL(
-    "http://127.0.0.1:8000/api/addresses"
-);
-
-const headers = {
-    "Content-Type": "application/json",
-    "Accept": "application/json",
-};
-
-let body = {
-    "label": "b",
-    "name": "n",
-    "phone": "gzmiyvdljnikhway",
-    "address": "architecto",
-    "city": "n",
-    "zip_code": "gzmiyvdljnikhway",
-    "country": "k",
-    "state": "c",
-    "is_default": false,
-    "is_billing": true,
-    "is_shipping": false
-};
-
-fetch(url, {
-    method: "POST",
-    headers,
-    body: JSON.stringify(body),
-}).then(response =&gt; response.json());</code></pre></div>
-
-
-<div class="php-example">
-    <pre><code class="language-php">$client = new \GuzzleHttp\Client();
-$url = 'http://127.0.0.1:8000/api/addresses';
-$response = $client-&gt;post(
-    $url,
-    [
-        'headers' =&gt; [
-            'Content-Type' =&gt; 'application/json',
-            'Accept' =&gt; 'application/json',
-        ],
-        'json' =&gt; [
-            'label' =&gt; 'b',
-            'name' =&gt; 'n',
-            'phone' =&gt; 'gzmiyvdljnikhway',
-            'address' =&gt; 'architecto',
-            'city' =&gt; 'n',
-            'zip_code' =&gt; 'gzmiyvdljnikhway',
-            'country' =&gt; 'k',
-            'state' =&gt; 'c',
-            'is_default' =&gt; false,
-            'is_billing' =&gt; true,
-            'is_shipping' =&gt; false,
-        ],
-    ]
-);
-$body = $response-&gt;getBody();
-print_r(json_decode((string) $body));</code></pre></div>
-
-</span>
-
-<span id="example-responses-POSTapi-addresses">
-</span>
-<span id="execution-results-POSTapi-addresses" hidden>
-    <blockquote>Received response<span
-                id="execution-response-status-POSTapi-addresses"></span>:
-    </blockquote>
-    <pre class="json"><code id="execution-response-content-POSTapi-addresses"
-      data-empty-response-text="<Empty response>" style="max-height: 400px;"></code></pre>
-</span>
-<span id="execution-error-POSTapi-addresses" hidden>
-    <blockquote>Request failed with error:</blockquote>
-    <pre><code id="execution-error-message-POSTapi-addresses">
-
-Tip: Check that you&#039;re properly connected to the network.
-If you&#039;re a maintainer of ths API, verify that your API is running and you&#039;ve enabled CORS.
-You can check the Dev Tools console for debugging information.</code></pre>
-</span>
-<form id="form-POSTapi-addresses" data-method="POST"
-      data-path="api/addresses"
-      data-authed="0"
-      data-hasfiles="0"
-      data-isarraybody="0"
-      autocomplete="off"
-      onsubmit="event.preventDefault(); executeTryOut('POSTapi-addresses', this);">
-    <h3>
-        Request&nbsp;&nbsp;&nbsp;
-                    <button type="button"
-                    style="background-color: #8fbcd4; padding: 5px 10px; border-radius: 5px; border-width: thin;"
-                    id="btn-tryout-POSTapi-addresses"
-                    onclick="tryItOut('POSTapi-addresses');">Try it out ⚡
-            </button>
-            <button type="button"
-                    style="background-color: #c97a7e; padding: 5px 10px; border-radius: 5px; border-width: thin;"
-                    id="btn-canceltryout-POSTapi-addresses"
-                    onclick="cancelTryOut('POSTapi-addresses');" hidden>Cancel 🛑
-            </button>&nbsp;&nbsp;
-            <button type="submit"
-                    style="background-color: #6ac174; padding: 5px 10px; border-radius: 5px; border-width: thin;"
-                    id="btn-executetryout-POSTapi-addresses"
-                    data-initial-text="Send Request 💥"
-                    data-loading-text="⏱ Sending..."
-                    hidden>Send Request 💥
-            </button>
-            </h3>
-            <p>
-            <small class="badge badge-black">POST</small>
-            <b><code>api/addresses</code></b>
-        </p>
-                <h4 class="fancy-heading-panel"><b>Headers</b></h4>
-                                <div style="padding-left: 28px; clear: unset;">
-                <b style="line-height: 2;"><code>Content-Type</code></b>&nbsp;&nbsp;
-&nbsp;
- &nbsp;
- &nbsp;
-                <input type="text" style="display: none"
-                              name="Content-Type"                data-endpoint="POSTapi-addresses"
-               value="application/json"
-               data-component="header">
-    <br>
-<p>Example: <code>application/json</code></p>
-            </div>
-                                <div style="padding-left: 28px; clear: unset;">
-                <b style="line-height: 2;"><code>Accept</code></b>&nbsp;&nbsp;
-&nbsp;
- &nbsp;
- &nbsp;
-                <input type="text" style="display: none"
-                              name="Accept"                data-endpoint="POSTapi-addresses"
-               value="application/json"
-               data-component="header">
-    <br>
-<p>Example: <code>application/json</code></p>
-            </div>
-                                <h4 class="fancy-heading-panel"><b>Body Parameters</b></h4>
-        <div style=" padding-left: 28px;  clear: unset;">
-            <b style="line-height: 2;"><code>label</code></b>&nbsp;&nbsp;
-<small>string</small>&nbsp;
-<i>optional</i> &nbsp;
- &nbsp;
-                <input type="text" style="display: none"
-                              name="label"                data-endpoint="POSTapi-addresses"
-               value="b"
-               data-component="body">
-    <br>
-<p>Must not be greater than 255 characters. Example: <code>b</code></p>
-        </div>
-                <div style=" padding-left: 28px;  clear: unset;">
-            <b style="line-height: 2;"><code>name</code></b>&nbsp;&nbsp;
-<small>string</small>&nbsp;
- &nbsp;
- &nbsp;
-                <input type="text" style="display: none"
-                              name="name"                data-endpoint="POSTapi-addresses"
-               value="n"
-               data-component="body">
-    <br>
-<p>Must not be greater than 255 characters. Example: <code>n</code></p>
-        </div>
-                <div style=" padding-left: 28px;  clear: unset;">
-            <b style="line-height: 2;"><code>phone</code></b>&nbsp;&nbsp;
-<small>string</small>&nbsp;
- &nbsp;
- &nbsp;
-                <input type="text" style="display: none"
-                              name="phone"                data-endpoint="POSTapi-addresses"
-               value="gzmiyvdljnikhway"
-               data-component="body">
-    <br>
-<p>Must not be greater than 20 characters. Example: <code>gzmiyvdljnikhway</code></p>
-        </div>
-                <div style=" padding-left: 28px;  clear: unset;">
-            <b style="line-height: 2;"><code>address</code></b>&nbsp;&nbsp;
-<small>string</small>&nbsp;
- &nbsp;
- &nbsp;
-                <input type="text" style="display: none"
-                              name="address"                data-endpoint="POSTapi-addresses"
-               value="architecto"
-               data-component="body">
-    <br>
-<p>Example: <code>architecto</code></p>
-        </div>
-                <div style=" padding-left: 28px;  clear: unset;">
-            <b style="line-height: 2;"><code>city</code></b>&nbsp;&nbsp;
-<small>string</small>&nbsp;
- &nbsp;
- &nbsp;
-                <input type="text" style="display: none"
-                              name="city"                data-endpoint="POSTapi-addresses"
-               value="n"
-               data-component="body">
-    <br>
-<p>Must not be greater than 255 characters. Example: <code>n</code></p>
-        </div>
-                <div style=" padding-left: 28px;  clear: unset;">
-            <b style="line-height: 2;"><code>zip_code</code></b>&nbsp;&nbsp;
-<small>string</small>&nbsp;
- &nbsp;
- &nbsp;
-                <input type="text" style="display: none"
-                              name="zip_code"                data-endpoint="POSTapi-addresses"
-               value="gzmiyvdljnikhway"
-               data-component="body">
-    <br>
-<p>Must not be greater than 20 characters. Example: <code>gzmiyvdljnikhway</code></p>
-        </div>
-                <div style=" padding-left: 28px;  clear: unset;">
-            <b style="line-height: 2;"><code>country</code></b>&nbsp;&nbsp;
-<small>string</small>&nbsp;
- &nbsp;
- &nbsp;
-                <input type="text" style="display: none"
-                              name="country"                data-endpoint="POSTapi-addresses"
-               value="k"
-               data-component="body">
-    <br>
-<p>Must not be greater than 255 characters. Example: <code>k</code></p>
-        </div>
-                <div style=" padding-left: 28px;  clear: unset;">
-            <b style="line-height: 2;"><code>state</code></b>&nbsp;&nbsp;
-<small>string</small>&nbsp;
-<i>optional</i> &nbsp;
- &nbsp;
-                <input type="text" style="display: none"
-                              name="state"                data-endpoint="POSTapi-addresses"
-               value="c"
-               data-component="body">
-    <br>
-<p>Must not be greater than 255 characters. Example: <code>c</code></p>
-        </div>
-                <div style=" padding-left: 28px;  clear: unset;">
-            <b style="line-height: 2;"><code>is_default</code></b>&nbsp;&nbsp;
-<small>boolean</small>&nbsp;
-<i>optional</i> &nbsp;
- &nbsp;
-                <label data-endpoint="POSTapi-addresses" style="display: none">
-            <input type="radio" name="is_default"
-                   value="true"
-                   data-endpoint="POSTapi-addresses"
-                   data-component="body"             >
-            <code>true</code>
-        </label>
-        <label data-endpoint="POSTapi-addresses" style="display: none">
-            <input type="radio" name="is_default"
-                   value="false"
-                   data-endpoint="POSTapi-addresses"
-                   data-component="body"             >
-            <code>false</code>
-        </label>
-    <br>
-<p>Example: <code>false</code></p>
-        </div>
-                <div style=" padding-left: 28px;  clear: unset;">
-            <b style="line-height: 2;"><code>is_billing</code></b>&nbsp;&nbsp;
-<small>boolean</small>&nbsp;
-<i>optional</i> &nbsp;
- &nbsp;
-                <label data-endpoint="POSTapi-addresses" style="display: none">
-            <input type="radio" name="is_billing"
-                   value="true"
-                   data-endpoint="POSTapi-addresses"
-                   data-component="body"             >
-            <code>true</code>
-        </label>
-        <label data-endpoint="POSTapi-addresses" style="display: none">
-            <input type="radio" name="is_billing"
-                   value="false"
-                   data-endpoint="POSTapi-addresses"
-                   data-component="body"             >
-            <code>false</code>
-        </label>
-    <br>
-<p>Example: <code>true</code></p>
-        </div>
-                <div style=" padding-left: 28px;  clear: unset;">
-            <b style="line-height: 2;"><code>is_shipping</code></b>&nbsp;&nbsp;
-<small>boolean</small>&nbsp;
-<i>optional</i> &nbsp;
- &nbsp;
-                <label data-endpoint="POSTapi-addresses" style="display: none">
-            <input type="radio" name="is_shipping"
-                   value="true"
-                   data-endpoint="POSTapi-addresses"
-                   data-component="body"             >
-            <code>true</code>
-        </label>
-        <label data-endpoint="POSTapi-addresses" style="display: none">
-            <input type="radio" name="is_shipping"
-                   value="false"
-                   data-endpoint="POSTapi-addresses"
-                   data-component="body"             >
-            <code>false</code>
-        </label>
-    <br>
-<p>Example: <code>false</code></p>
-        </div>
-        </form>
-
-                    <h2 id="endpoints-GETapi-addresses--address_id-">Display the specified address.</h2>
-
-<p>
-</p>
-
-
-
-<span id="example-requests-GETapi-addresses--address_id-">
-<blockquote>Example request:</blockquote>
-
-
-<div class="bash-example">
-    <pre><code class="language-bash">curl --request GET \
-    --get "http://127.0.0.1:8000/api/addresses/16" \
-    --header "Content-Type: application/json" \
-    --header "Accept: application/json"</code></pre></div>
-
-
-<div class="javascript-example">
-    <pre><code class="language-javascript">const url = new URL(
-    "http://127.0.0.1:8000/api/addresses/16"
-);
-
-const headers = {
-    "Content-Type": "application/json",
-    "Accept": "application/json",
-};
-
-fetch(url, {
-    method: "GET",
-    headers,
-}).then(response =&gt; response.json());</code></pre></div>
-
-
-<div class="php-example">
-    <pre><code class="language-php">$client = new \GuzzleHttp\Client();
-$url = 'http://127.0.0.1:8000/api/addresses/16';
-$response = $client-&gt;get(
-    $url,
-    [
-        'headers' =&gt; [
-            'Content-Type' =&gt; 'application/json',
-            'Accept' =&gt; 'application/json',
-        ],
-    ]
-);
-$body = $response-&gt;getBody();
-print_r(json_decode((string) $body));</code></pre></div>
-
-</span>
-
-<span id="example-responses-GETapi-addresses--address_id-">
-            <blockquote>
-            <p>Example response (401):</p>
-        </blockquote>
-                <details class="annotation">
-            <summary style="cursor: pointer;">
-                <small onclick="textContent = parentElement.parentElement.open ? 'Show headers' : 'Hide headers'">Show headers</small>
-            </summary>
-            <pre><code class="language-http">cache-control: no-cache, private
-content-type: application/json
-access-control-allow-origin: http://localhost:3000
-access-control-allow-credentials: true
-set-cookie: laravel-session=eyJpdiI6Ill2OEx6YURONFBxazVBMjdXWWVwNXc9PSIsInZhbHVlIjoiMUF6LzNPWitValcxczhWVzd1QWMranY0WDJoVi9LeUFvT3RYeG5kSGJldEpkMWg3ZFlSUnkrd3V3cDVUTWJBalRJNGVKL1Nic3BhYm1Wb0NrYmxrYzJqMGtkYkg2emF1NnpWc05tc1BhUGxPd1JqN1BWVXRKbE5CTmdUS3hWNS8iLCJtYWMiOiJlOTc0ZjkwN2E3ZDY0MmE0MmE2ZDIzZjhmYTgwNWNiNTQzZjg3ZmVlZTg1ZTYzZWNhMjVkYjM4MDE2MzAwOWM5IiwidGFnIjoiIn0%3D; expires=Wed, 21 Jan 2026 11:38:44 GMT; Max-Age=7200; path=/; httponly; samesite=lax
- </code></pre></details>         <pre>
-
-<code class="language-json" style="max-height: 300px;">{
-    &quot;message&quot;: &quot;Unauthenticated.&quot;
-}</code>
- </pre>
-    </span>
-<span id="execution-results-GETapi-addresses--address_id-" hidden>
-    <blockquote>Received response<span
-                id="execution-response-status-GETapi-addresses--address_id-"></span>:
-    </blockquote>
-    <pre class="json"><code id="execution-response-content-GETapi-addresses--address_id-"
-      data-empty-response-text="<Empty response>" style="max-height: 400px;"></code></pre>
-</span>
-<span id="execution-error-GETapi-addresses--address_id-" hidden>
-    <blockquote>Request failed with error:</blockquote>
-    <pre><code id="execution-error-message-GETapi-addresses--address_id-">
-
-Tip: Check that you&#039;re properly connected to the network.
-If you&#039;re a maintainer of ths API, verify that your API is running and you&#039;ve enabled CORS.
-You can check the Dev Tools console for debugging information.</code></pre>
-</span>
-<form id="form-GETapi-addresses--address_id-" data-method="GET"
-      data-path="api/addresses/{address_id}"
-      data-authed="0"
-      data-hasfiles="0"
-      data-isarraybody="0"
-      autocomplete="off"
-      onsubmit="event.preventDefault(); executeTryOut('GETapi-addresses--address_id-', this);">
-    <h3>
-        Request&nbsp;&nbsp;&nbsp;
-                    <button type="button"
-                    style="background-color: #8fbcd4; padding: 5px 10px; border-radius: 5px; border-width: thin;"
-                    id="btn-tryout-GETapi-addresses--address_id-"
-                    onclick="tryItOut('GETapi-addresses--address_id-');">Try it out ⚡
-            </button>
-            <button type="button"
-                    style="background-color: #c97a7e; padding: 5px 10px; border-radius: 5px; border-width: thin;"
-                    id="btn-canceltryout-GETapi-addresses--address_id-"
-                    onclick="cancelTryOut('GETapi-addresses--address_id-');" hidden>Cancel 🛑
-            </button>&nbsp;&nbsp;
-            <button type="submit"
-                    style="background-color: #6ac174; padding: 5px 10px; border-radius: 5px; border-width: thin;"
-                    id="btn-executetryout-GETapi-addresses--address_id-"
-                    data-initial-text="Send Request 💥"
-                    data-loading-text="⏱ Sending..."
-                    hidden>Send Request 💥
-            </button>
-            </h3>
-            <p>
-            <small class="badge badge-green">GET</small>
-            <b><code>api/addresses/{address_id}</code></b>
-        </p>
-                <h4 class="fancy-heading-panel"><b>Headers</b></h4>
-                                <div style="padding-left: 28px; clear: unset;">
-                <b style="line-height: 2;"><code>Content-Type</code></b>&nbsp;&nbsp;
-&nbsp;
- &nbsp;
- &nbsp;
-                <input type="text" style="display: none"
-                              name="Content-Type"                data-endpoint="GETapi-addresses--address_id-"
-               value="application/json"
-               data-component="header">
-    <br>
-<p>Example: <code>application/json</code></p>
-            </div>
-                                <div style="padding-left: 28px; clear: unset;">
-                <b style="line-height: 2;"><code>Accept</code></b>&nbsp;&nbsp;
-&nbsp;
- &nbsp;
- &nbsp;
-                <input type="text" style="display: none"
-                              name="Accept"                data-endpoint="GETapi-addresses--address_id-"
-               value="application/json"
-               data-component="header">
-    <br>
-<p>Example: <code>application/json</code></p>
-            </div>
-                        <h4 class="fancy-heading-panel"><b>URL Parameters</b></h4>
-                    <div style="padding-left: 28px; clear: unset;">
-                <b style="line-height: 2;"><code>address_id</code></b>&nbsp;&nbsp;
-<small>integer</small>&nbsp;
- &nbsp;
- &nbsp;
-                <input type="number" style="display: none"
-               step="any"               name="address_id"                data-endpoint="GETapi-addresses--address_id-"
-               value="16"
-               data-component="url">
-    <br>
-<p>The ID of the address. Example: <code>16</code></p>
-            </div>
-                    </form>
-
-                    <h2 id="endpoints-PUTapi-addresses--address_id-">Update the specified address.</h2>
-
-<p>
-</p>
-
-
-
-<span id="example-requests-PUTapi-addresses--address_id-">
-<blockquote>Example request:</blockquote>
-
-
-<div class="bash-example">
-    <pre><code class="language-bash">curl --request PUT \
-    "http://127.0.0.1:8000/api/addresses/16" \
-    --header "Content-Type: application/json" \
-    --header "Accept: application/json" \
-    --data "{
-    \"label\": \"b\",
-    \"name\": \"n\",
-    \"phone\": \"gzmiyvdljnikhway\",
-    \"address\": \"architecto\",
-    \"city\": \"n\",
-    \"zip_code\": \"gzmiyvdljnikhway\",
-    \"country\": \"k\",
-    \"state\": \"c\",
-    \"is_default\": true,
-    \"is_billing\": false,
-    \"is_shipping\": false
-}"
-</code></pre></div>
-
-
-<div class="javascript-example">
-    <pre><code class="language-javascript">const url = new URL(
-    "http://127.0.0.1:8000/api/addresses/16"
-);
-
-const headers = {
-    "Content-Type": "application/json",
-    "Accept": "application/json",
-};
-
-let body = {
-    "label": "b",
-    "name": "n",
-    "phone": "gzmiyvdljnikhway",
-    "address": "architecto",
-    "city": "n",
-    "zip_code": "gzmiyvdljnikhway",
-    "country": "k",
-    "state": "c",
-    "is_default": true,
-    "is_billing": false,
-    "is_shipping": false
-};
-
-fetch(url, {
-    method: "PUT",
-    headers,
-    body: JSON.stringify(body),
-}).then(response =&gt; response.json());</code></pre></div>
-
-
-<div class="php-example">
-    <pre><code class="language-php">$client = new \GuzzleHttp\Client();
-$url = 'http://127.0.0.1:8000/api/addresses/16';
-$response = $client-&gt;put(
-    $url,
-    [
-        'headers' =&gt; [
-            'Content-Type' =&gt; 'application/json',
-            'Accept' =&gt; 'application/json',
-        ],
-        'json' =&gt; [
-            'label' =&gt; 'b',
-            'name' =&gt; 'n',
-            'phone' =&gt; 'gzmiyvdljnikhway',
-            'address' =&gt; 'architecto',
-            'city' =&gt; 'n',
-            'zip_code' =&gt; 'gzmiyvdljnikhway',
-            'country' =&gt; 'k',
-            'state' =&gt; 'c',
-            'is_default' =&gt; true,
-            'is_billing' =&gt; false,
-            'is_shipping' =&gt; false,
-        ],
-    ]
-);
-$body = $response-&gt;getBody();
-print_r(json_decode((string) $body));</code></pre></div>
-
-</span>
-
-<span id="example-responses-PUTapi-addresses--address_id-">
-</span>
-<span id="execution-results-PUTapi-addresses--address_id-" hidden>
-    <blockquote>Received response<span
-                id="execution-response-status-PUTapi-addresses--address_id-"></span>:
-    </blockquote>
-    <pre class="json"><code id="execution-response-content-PUTapi-addresses--address_id-"
-      data-empty-response-text="<Empty response>" style="max-height: 400px;"></code></pre>
-</span>
-<span id="execution-error-PUTapi-addresses--address_id-" hidden>
-    <blockquote>Request failed with error:</blockquote>
-    <pre><code id="execution-error-message-PUTapi-addresses--address_id-">
-
-Tip: Check that you&#039;re properly connected to the network.
-If you&#039;re a maintainer of ths API, verify that your API is running and you&#039;ve enabled CORS.
-You can check the Dev Tools console for debugging information.</code></pre>
-</span>
-<form id="form-PUTapi-addresses--address_id-" data-method="PUT"
-      data-path="api/addresses/{address_id}"
-      data-authed="0"
-      data-hasfiles="0"
-      data-isarraybody="0"
-      autocomplete="off"
-      onsubmit="event.preventDefault(); executeTryOut('PUTapi-addresses--address_id-', this);">
-    <h3>
-        Request&nbsp;&nbsp;&nbsp;
-                    <button type="button"
-                    style="background-color: #8fbcd4; padding: 5px 10px; border-radius: 5px; border-width: thin;"
-                    id="btn-tryout-PUTapi-addresses--address_id-"
-                    onclick="tryItOut('PUTapi-addresses--address_id-');">Try it out ⚡
-            </button>
-            <button type="button"
-                    style="background-color: #c97a7e; padding: 5px 10px; border-radius: 5px; border-width: thin;"
-                    id="btn-canceltryout-PUTapi-addresses--address_id-"
-                    onclick="cancelTryOut('PUTapi-addresses--address_id-');" hidden>Cancel 🛑
-            </button>&nbsp;&nbsp;
-            <button type="submit"
-                    style="background-color: #6ac174; padding: 5px 10px; border-radius: 5px; border-width: thin;"
-                    id="btn-executetryout-PUTapi-addresses--address_id-"
-                    data-initial-text="Send Request 💥"
-                    data-loading-text="⏱ Sending..."
-                    hidden>Send Request 💥
-            </button>
-            </h3>
-            <p>
-            <small class="badge badge-darkblue">PUT</small>
-            <b><code>api/addresses/{address_id}</code></b>
-        </p>
-                <h4 class="fancy-heading-panel"><b>Headers</b></h4>
-                                <div style="padding-left: 28px; clear: unset;">
-                <b style="line-height: 2;"><code>Content-Type</code></b>&nbsp;&nbsp;
-&nbsp;
- &nbsp;
- &nbsp;
-                <input type="text" style="display: none"
-                              name="Content-Type"                data-endpoint="PUTapi-addresses--address_id-"
-               value="application/json"
-               data-component="header">
-    <br>
-<p>Example: <code>application/json</code></p>
-            </div>
-                                <div style="padding-left: 28px; clear: unset;">
-                <b style="line-height: 2;"><code>Accept</code></b>&nbsp;&nbsp;
-&nbsp;
- &nbsp;
- &nbsp;
-                <input type="text" style="display: none"
-                              name="Accept"                data-endpoint="PUTapi-addresses--address_id-"
-               value="application/json"
-               data-component="header">
-    <br>
-<p>Example: <code>application/json</code></p>
-            </div>
-                        <h4 class="fancy-heading-panel"><b>URL Parameters</b></h4>
-                    <div style="padding-left: 28px; clear: unset;">
-                <b style="line-height: 2;"><code>address_id</code></b>&nbsp;&nbsp;
-<small>integer</small>&nbsp;
- &nbsp;
- &nbsp;
-                <input type="number" style="display: none"
-               step="any"               name="address_id"                data-endpoint="PUTapi-addresses--address_id-"
-               value="16"
-               data-component="url">
-    <br>
-<p>The ID of the address. Example: <code>16</code></p>
-            </div>
-                            <h4 class="fancy-heading-panel"><b>Body Parameters</b></h4>
-        <div style=" padding-left: 28px;  clear: unset;">
-            <b style="line-height: 2;"><code>label</code></b>&nbsp;&nbsp;
-<small>string</small>&nbsp;
-<i>optional</i> &nbsp;
- &nbsp;
-                <input type="text" style="display: none"
-                              name="label"                data-endpoint="PUTapi-addresses--address_id-"
-               value="b"
-               data-component="body">
-    <br>
-<p>Must not be greater than 255 characters. Example: <code>b</code></p>
-        </div>
-                <div style=" padding-left: 28px;  clear: unset;">
-            <b style="line-height: 2;"><code>name</code></b>&nbsp;&nbsp;
-<small>string</small>&nbsp;
-<i>optional</i> &nbsp;
- &nbsp;
-                <input type="text" style="display: none"
-                              name="name"                data-endpoint="PUTapi-addresses--address_id-"
-               value="n"
-               data-component="body">
-    <br>
-<p>Must not be greater than 255 characters. Example: <code>n</code></p>
-        </div>
-                <div style=" padding-left: 28px;  clear: unset;">
-            <b style="line-height: 2;"><code>phone</code></b>&nbsp;&nbsp;
-<small>string</small>&nbsp;
-<i>optional</i> &nbsp;
- &nbsp;
-                <input type="text" style="display: none"
-                              name="phone"                data-endpoint="PUTapi-addresses--address_id-"
-               value="gzmiyvdljnikhway"
-               data-component="body">
-    <br>
-<p>Must not be greater than 20 characters. Example: <code>gzmiyvdljnikhway</code></p>
-        </div>
-                <div style=" padding-left: 28px;  clear: unset;">
-            <b style="line-height: 2;"><code>address</code></b>&nbsp;&nbsp;
-<small>string</small>&nbsp;
-<i>optional</i> &nbsp;
- &nbsp;
-                <input type="text" style="display: none"
-                              name="address"                data-endpoint="PUTapi-addresses--address_id-"
-               value="architecto"
-               data-component="body">
-    <br>
-<p>Example: <code>architecto</code></p>
-        </div>
-                <div style=" padding-left: 28px;  clear: unset;">
-            <b style="line-height: 2;"><code>city</code></b>&nbsp;&nbsp;
-<small>string</small>&nbsp;
-<i>optional</i> &nbsp;
- &nbsp;
-                <input type="text" style="display: none"
-                              name="city"                data-endpoint="PUTapi-addresses--address_id-"
-               value="n"
-               data-component="body">
-    <br>
-<p>Must not be greater than 255 characters. Example: <code>n</code></p>
-        </div>
-                <div style=" padding-left: 28px;  clear: unset;">
-            <b style="line-height: 2;"><code>zip_code</code></b>&nbsp;&nbsp;
-<small>string</small>&nbsp;
-<i>optional</i> &nbsp;
- &nbsp;
-                <input type="text" style="display: none"
-                              name="zip_code"                data-endpoint="PUTapi-addresses--address_id-"
-               value="gzmiyvdljnikhway"
-               data-component="body">
-    <br>
-<p>Must not be greater than 20 characters. Example: <code>gzmiyvdljnikhway</code></p>
-        </div>
-                <div style=" padding-left: 28px;  clear: unset;">
-            <b style="line-height: 2;"><code>country</code></b>&nbsp;&nbsp;
-<small>string</small>&nbsp;
-<i>optional</i> &nbsp;
- &nbsp;
-                <input type="text" style="display: none"
-                              name="country"                data-endpoint="PUTapi-addresses--address_id-"
-               value="k"
-               data-component="body">
-    <br>
-<p>Must not be greater than 255 characters. Example: <code>k</code></p>
-        </div>
-                <div style=" padding-left: 28px;  clear: unset;">
-            <b style="line-height: 2;"><code>state</code></b>&nbsp;&nbsp;
-<small>string</small>&nbsp;
-<i>optional</i> &nbsp;
- &nbsp;
-                <input type="text" style="display: none"
-                              name="state"                data-endpoint="PUTapi-addresses--address_id-"
-               value="c"
-               data-component="body">
-    <br>
-<p>Must not be greater than 255 characters. Example: <code>c</code></p>
-        </div>
-                <div style=" padding-left: 28px;  clear: unset;">
-            <b style="line-height: 2;"><code>is_default</code></b>&nbsp;&nbsp;
-<small>boolean</small>&nbsp;
-<i>optional</i> &nbsp;
- &nbsp;
-                <label data-endpoint="PUTapi-addresses--address_id-" style="display: none">
-            <input type="radio" name="is_default"
-                   value="true"
-                   data-endpoint="PUTapi-addresses--address_id-"
-                   data-component="body"             >
-            <code>true</code>
-        </label>
-        <label data-endpoint="PUTapi-addresses--address_id-" style="display: none">
-            <input type="radio" name="is_default"
-                   value="false"
-                   data-endpoint="PUTapi-addresses--address_id-"
-                   data-component="body"             >
-            <code>false</code>
-        </label>
-    <br>
-<p>Example: <code>true</code></p>
-        </div>
-                <div style=" padding-left: 28px;  clear: unset;">
-            <b style="line-height: 2;"><code>is_billing</code></b>&nbsp;&nbsp;
-<small>boolean</small>&nbsp;
-<i>optional</i> &nbsp;
- &nbsp;
-                <label data-endpoint="PUTapi-addresses--address_id-" style="display: none">
-            <input type="radio" name="is_billing"
-                   value="true"
-                   data-endpoint="PUTapi-addresses--address_id-"
-                   data-component="body"             >
-            <code>true</code>
-        </label>
-        <label data-endpoint="PUTapi-addresses--address_id-" style="display: none">
-            <input type="radio" name="is_billing"
-                   value="false"
-                   data-endpoint="PUTapi-addresses--address_id-"
-                   data-component="body"             >
-            <code>false</code>
-        </label>
-    <br>
-<p>Example: <code>false</code></p>
-        </div>
-                <div style=" padding-left: 28px;  clear: unset;">
-            <b style="line-height: 2;"><code>is_shipping</code></b>&nbsp;&nbsp;
-<small>boolean</small>&nbsp;
-<i>optional</i> &nbsp;
- &nbsp;
-                <label data-endpoint="PUTapi-addresses--address_id-" style="display: none">
-            <input type="radio" name="is_shipping"
-                   value="true"
-                   data-endpoint="PUTapi-addresses--address_id-"
-                   data-component="body"             >
-            <code>true</code>
-        </label>
-        <label data-endpoint="PUTapi-addresses--address_id-" style="display: none">
-            <input type="radio" name="is_shipping"
-                   value="false"
-                   data-endpoint="PUTapi-addresses--address_id-"
-                   data-component="body"             >
-            <code>false</code>
-        </label>
-    <br>
-<p>Example: <code>false</code></p>
-        </div>
-        </form>
-
-                    <h2 id="endpoints-DELETEapi-addresses--address_id-">Remove the specified address.</h2>
-
-<p>
-</p>
-
-
-
-<span id="example-requests-DELETEapi-addresses--address_id-">
-<blockquote>Example request:</blockquote>
-
-
-<div class="bash-example">
-    <pre><code class="language-bash">curl --request DELETE \
-    "http://127.0.0.1:8000/api/addresses/16" \
-    --header "Content-Type: application/json" \
-    --header "Accept: application/json"</code></pre></div>
-
-
-<div class="javascript-example">
-    <pre><code class="language-javascript">const url = new URL(
-    "http://127.0.0.1:8000/api/addresses/16"
-);
-
-const headers = {
-    "Content-Type": "application/json",
-    "Accept": "application/json",
-};
-
-fetch(url, {
-    method: "DELETE",
-    headers,
-}).then(response =&gt; response.json());</code></pre></div>
-
-
-<div class="php-example">
-    <pre><code class="language-php">$client = new \GuzzleHttp\Client();
-$url = 'http://127.0.0.1:8000/api/addresses/16';
-$response = $client-&gt;delete(
-    $url,
-    [
-        'headers' =&gt; [
-            'Content-Type' =&gt; 'application/json',
-            'Accept' =&gt; 'application/json',
-        ],
-    ]
-);
-$body = $response-&gt;getBody();
-print_r(json_decode((string) $body));</code></pre></div>
-
-</span>
-
-<span id="example-responses-DELETEapi-addresses--address_id-">
-</span>
-<span id="execution-results-DELETEapi-addresses--address_id-" hidden>
-    <blockquote>Received response<span
-                id="execution-response-status-DELETEapi-addresses--address_id-"></span>:
-    </blockquote>
-    <pre class="json"><code id="execution-response-content-DELETEapi-addresses--address_id-"
-      data-empty-response-text="<Empty response>" style="max-height: 400px;"></code></pre>
-</span>
-<span id="execution-error-DELETEapi-addresses--address_id-" hidden>
-    <blockquote>Request failed with error:</blockquote>
-    <pre><code id="execution-error-message-DELETEapi-addresses--address_id-">
-
-Tip: Check that you&#039;re properly connected to the network.
-If you&#039;re a maintainer of ths API, verify that your API is running and you&#039;ve enabled CORS.
-You can check the Dev Tools console for debugging information.</code></pre>
-</span>
-<form id="form-DELETEapi-addresses--address_id-" data-method="DELETE"
-      data-path="api/addresses/{address_id}"
-      data-authed="0"
-      data-hasfiles="0"
-      data-isarraybody="0"
-      autocomplete="off"
-      onsubmit="event.preventDefault(); executeTryOut('DELETEapi-addresses--address_id-', this);">
-    <h3>
-        Request&nbsp;&nbsp;&nbsp;
-                    <button type="button"
-                    style="background-color: #8fbcd4; padding: 5px 10px; border-radius: 5px; border-width: thin;"
-                    id="btn-tryout-DELETEapi-addresses--address_id-"
-                    onclick="tryItOut('DELETEapi-addresses--address_id-');">Try it out ⚡
-            </button>
-            <button type="button"
-                    style="background-color: #c97a7e; padding: 5px 10px; border-radius: 5px; border-width: thin;"
-                    id="btn-canceltryout-DELETEapi-addresses--address_id-"
-                    onclick="cancelTryOut('DELETEapi-addresses--address_id-');" hidden>Cancel 🛑
-            </button>&nbsp;&nbsp;
-            <button type="submit"
-                    style="background-color: #6ac174; padding: 5px 10px; border-radius: 5px; border-width: thin;"
-                    id="btn-executetryout-DELETEapi-addresses--address_id-"
-                    data-initial-text="Send Request 💥"
-                    data-loading-text="⏱ Sending..."
-                    hidden>Send Request 💥
-            </button>
-            </h3>
-            <p>
-            <small class="badge badge-red">DELETE</small>
-            <b><code>api/addresses/{address_id}</code></b>
-        </p>
-                <h4 class="fancy-heading-panel"><b>Headers</b></h4>
-                                <div style="padding-left: 28px; clear: unset;">
-                <b style="line-height: 2;"><code>Content-Type</code></b>&nbsp;&nbsp;
-&nbsp;
- &nbsp;
- &nbsp;
-                <input type="text" style="display: none"
-                              name="Content-Type"                data-endpoint="DELETEapi-addresses--address_id-"
-               value="application/json"
-               data-component="header">
-    <br>
-<p>Example: <code>application/json</code></p>
-            </div>
-                                <div style="padding-left: 28px; clear: unset;">
-                <b style="line-height: 2;"><code>Accept</code></b>&nbsp;&nbsp;
-&nbsp;
- &nbsp;
- &nbsp;
-                <input type="text" style="display: none"
-                              name="Accept"                data-endpoint="DELETEapi-addresses--address_id-"
-               value="application/json"
-               data-component="header">
-    <br>
-<p>Example: <code>application/json</code></p>
-            </div>
-                        <h4 class="fancy-heading-panel"><b>URL Parameters</b></h4>
-                    <div style="padding-left: 28px; clear: unset;">
-                <b style="line-height: 2;"><code>address_id</code></b>&nbsp;&nbsp;
-<small>integer</small>&nbsp;
- &nbsp;
- &nbsp;
-                <input type="number" style="display: none"
-               step="any"               name="address_id"                data-endpoint="DELETEapi-addresses--address_id-"
-               value="16"
-               data-component="url">
-    <br>
-<p>The ID of the address. Example: <code>16</code></p>
-            </div>
-                    </form>
-
-                    <h2 id="endpoints-PATCHapi-addresses--address_id--default">Set an address as default.</h2>
-
-<p>
-</p>
-
-
-
-<span id="example-requests-PATCHapi-addresses--address_id--default">
-<blockquote>Example request:</blockquote>
-
-
-<div class="bash-example">
-    <pre><code class="language-bash">curl --request PATCH \
-    "http://127.0.0.1:8000/api/addresses/16/default" \
-    --header "Content-Type: application/json" \
-    --header "Accept: application/json"</code></pre></div>
-
-
-<div class="javascript-example">
-    <pre><code class="language-javascript">const url = new URL(
-    "http://127.0.0.1:8000/api/addresses/16/default"
-);
-
-const headers = {
-    "Content-Type": "application/json",
-    "Accept": "application/json",
-};
-
-fetch(url, {
-    method: "PATCH",
-    headers,
-}).then(response =&gt; response.json());</code></pre></div>
-
-
-<div class="php-example">
-    <pre><code class="language-php">$client = new \GuzzleHttp\Client();
-$url = 'http://127.0.0.1:8000/api/addresses/16/default';
-$response = $client-&gt;patch(
-    $url,
-    [
-        'headers' =&gt; [
-            'Content-Type' =&gt; 'application/json',
-            'Accept' =&gt; 'application/json',
-        ],
-    ]
-);
-$body = $response-&gt;getBody();
-print_r(json_decode((string) $body));</code></pre></div>
-
-</span>
-
-<span id="example-responses-PATCHapi-addresses--address_id--default">
-</span>
-<span id="execution-results-PATCHapi-addresses--address_id--default" hidden>
-    <blockquote>Received response<span
-                id="execution-response-status-PATCHapi-addresses--address_id--default"></span>:
-    </blockquote>
-    <pre class="json"><code id="execution-response-content-PATCHapi-addresses--address_id--default"
-      data-empty-response-text="<Empty response>" style="max-height: 400px;"></code></pre>
-</span>
-<span id="execution-error-PATCHapi-addresses--address_id--default" hidden>
-    <blockquote>Request failed with error:</blockquote>
-    <pre><code id="execution-error-message-PATCHapi-addresses--address_id--default">
-
-Tip: Check that you&#039;re properly connected to the network.
-If you&#039;re a maintainer of ths API, verify that your API is running and you&#039;ve enabled CORS.
-You can check the Dev Tools console for debugging information.</code></pre>
-</span>
-<form id="form-PATCHapi-addresses--address_id--default" data-method="PATCH"
-      data-path="api/addresses/{address_id}/default"
-      data-authed="0"
-      data-hasfiles="0"
-      data-isarraybody="0"
-      autocomplete="off"
-      onsubmit="event.preventDefault(); executeTryOut('PATCHapi-addresses--address_id--default', this);">
-    <h3>
-        Request&nbsp;&nbsp;&nbsp;
-                    <button type="button"
-                    style="background-color: #8fbcd4; padding: 5px 10px; border-radius: 5px; border-width: thin;"
-                    id="btn-tryout-PATCHapi-addresses--address_id--default"
-                    onclick="tryItOut('PATCHapi-addresses--address_id--default');">Try it out ⚡
-            </button>
-            <button type="button"
-                    style="background-color: #c97a7e; padding: 5px 10px; border-radius: 5px; border-width: thin;"
-                    id="btn-canceltryout-PATCHapi-addresses--address_id--default"
-                    onclick="cancelTryOut('PATCHapi-addresses--address_id--default');" hidden>Cancel 🛑
-            </button>&nbsp;&nbsp;
-            <button type="submit"
-                    style="background-color: #6ac174; padding: 5px 10px; border-radius: 5px; border-width: thin;"
-                    id="btn-executetryout-PATCHapi-addresses--address_id--default"
-                    data-initial-text="Send Request 💥"
-                    data-loading-text="⏱ Sending..."
-                    hidden>Send Request 💥
-            </button>
-            </h3>
-            <p>
-            <small class="badge badge-purple">PATCH</small>
-            <b><code>api/addresses/{address_id}/default</code></b>
-        </p>
-                <h4 class="fancy-heading-panel"><b>Headers</b></h4>
-                                <div style="padding-left: 28px; clear: unset;">
-                <b style="line-height: 2;"><code>Content-Type</code></b>&nbsp;&nbsp;
-&nbsp;
- &nbsp;
- &nbsp;
-                <input type="text" style="display: none"
-                              name="Content-Type"                data-endpoint="PATCHapi-addresses--address_id--default"
-               value="application/json"
-               data-component="header">
-    <br>
-<p>Example: <code>application/json</code></p>
-            </div>
-                                <div style="padding-left: 28px; clear: unset;">
-                <b style="line-height: 2;"><code>Accept</code></b>&nbsp;&nbsp;
-&nbsp;
- &nbsp;
- &nbsp;
-                <input type="text" style="display: none"
-                              name="Accept"                data-endpoint="PATCHapi-addresses--address_id--default"
-               value="application/json"
-               data-component="header">
-    <br>
-<p>Example: <code>application/json</code></p>
-            </div>
-                        <h4 class="fancy-heading-panel"><b>URL Parameters</b></h4>
-                    <div style="padding-left: 28px; clear: unset;">
-                <b style="line-height: 2;"><code>address_id</code></b>&nbsp;&nbsp;
-<small>integer</small>&nbsp;
- &nbsp;
- &nbsp;
-                <input type="number" style="display: none"
-               step="any"               name="address_id"                data-endpoint="PATCHapi-addresses--address_id--default"
-               value="16"
-               data-component="url">
-    <br>
-<p>The ID of the address. Example: <code>16</code></p>
-            </div>
-                    </form>
-
                     <h2 id="endpoints-GETapi-contact-inquiries">Display a listing of contact inquiries.</h2>
 
 <p>
@@ -8496,7 +9087,7 @@ print_r(json_decode((string) $body));</code></pre></div>
 content-type: application/json
 access-control-allow-origin: http://localhost:3000
 access-control-allow-credentials: true
-set-cookie: laravel-session=eyJpdiI6Ino1eGhLMWxXNnF1eDZRdklBR3NuMGc9PSIsInZhbHVlIjoicUFHSklhOEppcU9YSkdXSUpTS2tIbTBPODBvQ05hWmhNbTI2eWQzNUhXczh1b2xxbkkvWDY1WUVKWWVUMWg4aEY0S3BIazRCbGdLWlFGdzY2Zk1aTXRZdUpSL2libUsrYUR3NERDU091RjFxb01UOWQ2SEl2T3p5bk54cEVUeDciLCJtYWMiOiJiMmNlZjYwNTVlNzhkZmE5MmFjMTcwMmIwMWE1NjBhYWUxZGFhZDg5NTE1YjljZWNkZjFlZjk2ZTNlMzllOGU1IiwidGFnIjoiIn0%3D; expires=Wed, 21 Jan 2026 11:38:44 GMT; Max-Age=7200; path=/; httponly; samesite=lax
+set-cookie: laravel-session=eyJpdiI6IkUxOExzeHI5ZFlBUnVWeGZmbzc0S0E9PSIsInZhbHVlIjoiR1pvWEdOOW9FSVMrZjh4Z0EwRkhKVFpQOGlXdFpkdXpLVE9BeUQ5NkdPWTZHc0RUS2tKK2lDQ0lHcjFXT2oxMnNFZlpOS0Z0MFdBdVdLSWJQMEp2ck5DS2dmQzh4T1NGcG42b2pmVGNIY2s1OFNCNUVaN21SWFEwdC9pdDloOW4iLCJtYWMiOiIyN2M1ODNhMWUzYzJjN2RmZGQ3MDY5OTBkNzYxYjE3MmIxZDhiNTlkMGM0Nzk2OWUzZjAzYzM2OWFhMDJhZTNlIiwidGFnIjoiIn0%3D; expires=Wed, 21 Jan 2026 14:24:06 GMT; Max-Age=7200; path=/; httponly; samesite=lax
  </code></pre></details>         <pre>
 
 <code class="language-json" style="max-height: 300px;">{
@@ -8913,7 +9504,7 @@ print_r(json_decode((string) $body));</code></pre></div>
 content-type: application/json
 access-control-allow-origin: http://localhost:3000
 access-control-allow-credentials: true
-set-cookie: laravel-session=eyJpdiI6InRYY2hsQnFsY2JHQnFwYm9aRmNnU0E9PSIsInZhbHVlIjoiN0ovTHJGVFUrRnNReE83KzNSeDNJS2hiRmhyd1o5TFJjL3daeWRDS05rTTM0ZFdtaDBIU1FwZDlJT1VTYWJuZHpTc3BEOUI1Ym9OQ1ZXZlAzdHFBWEJoSnVNbVpUWXBuMGRBcm9GenFoOExpVXNjYjNhMlY0bGNacXMzRFZ4SmsiLCJtYWMiOiIwM2M0ZGQ5OGNmNTNiZDgwMmY3NmU1OGE5NDdlOTc2NjQ2ZGU3NWUzMzgzNmM1NjNmNmZmMzQzMmMyMDNjODA4IiwidGFnIjoiIn0%3D; expires=Wed, 21 Jan 2026 11:38:44 GMT; Max-Age=7200; path=/; httponly; samesite=lax
+set-cookie: laravel-session=eyJpdiI6InBNamtNbEF5UXI5VytQNTZ4NCtXYnc9PSIsInZhbHVlIjoiZ0U2UkM3UHlCSnhJV3AxK0kzZ0dkcVFGU04vWTFnZ3hmeTlidjlYVVpYcTZla0w2ZG9FVTE3ZE5RQldTRFJCZ254Rk1DdEk4bENYNy8yVFF1Zk90ajRwQm9QTXMzK01MVUQ2MFpHejZ0VzMxbDZWWkdMd2g3bGN3TUlIa3gwa3QiLCJtYWMiOiJkZWZlNTdkODM4MmJhZDI4NmYxZmZlNTk3MjBiY2NjMzI1YzE3MjQwMjYxYzExN2QzZWM2MzM4MjMwZjI3YTdkIiwidGFnIjoiIn0%3D; expires=Wed, 21 Jan 2026 14:24:06 GMT; Max-Age=7200; path=/; httponly; samesite=lax
  </code></pre></details>         <pre>
 
 <code class="language-json" style="max-height: 300px;">{
@@ -9030,7 +9621,7 @@ You can check the Dev Tools console for debugging information.</code></pre>
     \"company\": \"y\",
     \"service\": \"u\",
     \"message\": \"architecto\",
-    \"status\": \"replied\"
+    \"status\": \"pending\"
 }"
 </code></pre></div>
 
@@ -9052,7 +9643,7 @@ let body = {
     "company": "y",
     "service": "u",
     "message": "architecto",
-    "status": "replied"
+    "status": "pending"
 };
 
 fetch(url, {
@@ -9079,7 +9670,7 @@ $response = $client-&gt;put(
             'company' =&gt; 'y',
             'service' =&gt; 'u',
             'message' =&gt; 'architecto',
-            'status' =&gt; 'replied',
+            'status' =&gt; 'pending',
         ],
     ]
 );
@@ -9266,10 +9857,10 @@ You can check the Dev Tools console for debugging information.</code></pre>
  &nbsp;
                 <input type="text" style="display: none"
                               name="status"                data-endpoint="PUTapi-contact-inquiries--inquiry_id-"
-               value="replied"
+               value="pending"
                data-component="body">
     <br>
-<p>Example: <code>replied</code></p>
+<p>Example: <code>pending</code></p>
 Must be one of:
 <ul style="list-style-type: square;"><li><code>pending</code></li> <li><code>replied</code></li> <li><code>closed</code></li></ul>
         </div>
@@ -9896,26 +10487,32 @@ print_r(json_decode((string) $body));</code></pre></div>
 
 <span id="example-responses-GETapi-payment-callback">
             <blockquote>
-            <p>Example response (200):</p>
+            <p>Example response (302):</p>
         </blockquote>
                 <details class="annotation">
             <summary style="cursor: pointer;">
                 <small onclick="textContent = parentElement.parentElement.open ? 'Show headers' : 'Hide headers'">Show headers</small>
             </summary>
             <pre><code class="language-http">cache-control: no-cache, private
-content-type: application/json
+location: http://localhost:3000?payment_status=failed
+content-type: text/html; charset=utf-8
 access-control-allow-origin: http://localhost:3000
 access-control-allow-credentials: true
-set-cookie: laravel-session=eyJpdiI6IlRVRE1UUGNSWUp5WmZXRXpVcGcwZGc9PSIsInZhbHVlIjoicDRBT05EWDd5YTRVbkRsVnJDalhBOUN0VXdjSmZrWjNEeXA0dWx1LzBGeng3RTVwYkZpMWYvcjh0OEJ5c05leVkwTFhIbE4yN2xMSjJRZ25Icm1CNEZNeEJHelMyaGpPcWNhYWNHTlVuQzFyalhFOUdOZFZZemNZQWdHTnk4Q1ciLCJtYWMiOiI0M2RhYWI2ZGU3YWYwMDdmOTc0ZGQ1NTQ3NmQ2ODUxZGU2NTM5ZWVjNjRmZTk2NDNlZGExMjkyMjUxMTg0YmJkIiwidGFnIjoiIn0%3D; expires=Wed, 21 Jan 2026 11:38:44 GMT; Max-Age=7200; path=/; httponly; samesite=lax
+set-cookie: laravel-session=eyJpdiI6Imd1QTRGWm5teW9MYXp3QzA4eHRCeXc9PSIsInZhbHVlIjoiMjRkQWZPdkN3UGF5NFlZSDA1TnNVclNqYngzZUEzdExsNHlhalk5S3ZkbzA1TUFxVkdJaDVydXg5bjFoOVBFeTkzYVdmQVUxRWZDSEU4bGZveTlBNHpaMk1KWFBpVFpOVU4veVRKWUJBL3ByWm9Wd2c0akMwVHhTSDJIN2swZTkiLCJtYWMiOiI2NDkwMzc3NjJhZTQyZjA2OWU4YjI5NGFiNGE5NmRkOGIzODUyNjgxODk4ODAwZGIyMTgzYzdiOGJhOTg5ZmViIiwidGFnIjoiIn0%3D; expires=Wed, 21 Jan 2026 14:24:07 GMT; Max-Age=7200; path=/; httponly; samesite=lax
  </code></pre></details>         <pre>
 
-<code class="language-json" style="max-height: 300px;">{
-    &quot;success&quot;: false,
-    &quot;payment_status&quot;: &quot;failed&quot;,
-    &quot;order_id&quot;: null,
-    &quot;payment_id&quot;: null,
-    &quot;tracking_number&quot;: null
-}</code>
+<code class="language-json" style="max-height: 300px;">&lt;!DOCTYPE html&gt;
+&lt;html&gt;
+    &lt;head&gt;
+        &lt;meta charset=&quot;UTF-8&quot; /&gt;
+        &lt;meta http-equiv=&quot;refresh&quot; content=&quot;0;url=&#039;http://localhost:3000?payment_status=failed&#039;&quot; /&gt;
+
+        &lt;title&gt;Redirecting to http://localhost:3000?payment_status=failed&lt;/title&gt;
+    &lt;/head&gt;
+    &lt;body&gt;
+        Redirecting to &lt;a href=&quot;http://localhost:3000?payment_status=failed&quot;&gt;http://localhost:3000?payment_status=failed&lt;/a&gt;.
+    &lt;/body&gt;
+&lt;/html&gt;</code>
  </pre>
     </span>
 <span id="execution-results-GETapi-payment-callback" hidden>
@@ -10518,7 +11115,7 @@ print_r(json_decode((string) $body));</code></pre></div>
 content-type: application/json
 access-control-allow-origin: http://localhost:3000
 access-control-allow-credentials: true
-set-cookie: laravel-session=eyJpdiI6IlFNR2s3UXNLUHg0TWFkdmhsMng0MHc9PSIsInZhbHVlIjoicGtWbGt3NjdPWWRydU5Sd3RGdFloWHdpTExQQjVLdjI0Qis2RTROZ0piclQxbStRVnJtbHNEMUZicDNOYTJNNVF1Zy9VeUZsYjErRm9ybXJrTnZmZEhmQkhmRXN1L2tZOWJjVCtYOXliSmJ5SnE5VkI4L2FFYVduS2dWZFE4bTQiLCJtYWMiOiIzZjUyOGFiNDE1ZDBkNGVmOTBiNTA1ZTQ3YTFhYzU4ZGIxNWM1NmExZmZlMjkyNTc0MjRlN2QyMjNhMDg0ZTMyIiwidGFnIjoiIn0%3D; expires=Wed, 21 Jan 2026 11:38:45 GMT; Max-Age=7200; path=/; httponly; samesite=lax
+set-cookie: laravel-session=eyJpdiI6IkFWckFMRHhScEp6Q0xLOWoxRjBwT3c9PSIsInZhbHVlIjoid0o1TkZYYjU3OHdYS01kUUtORTRBNmkzbHRxcVliY2dXeCtUMEtsR3hkRHpKWFpJM0JNaGgrb25FR3lBbnJXd2I0NTZqcExEcjdEam4wRTdBZmp4dmdoTnl4TW1YVG1yYmxhNVNPRlJ1RWdRQnVHTUVWeFd6UHNXVnpNOG1sT0kiLCJtYWMiOiJhN2FjMDYxZTIyYWVhMDkwZDZhNzYyM2MzOTkyOWQ0NDJjOTlhOWVhNzQ1ZmRiOTQ3MTE2NTYzNTU1ZTI3MWM1IiwidGFnIjoiIn0%3D; expires=Wed, 21 Jan 2026 14:24:07 GMT; Max-Age=7200; path=/; httponly; samesite=lax
  </code></pre></details>         <pre>
 
 <code class="language-json" style="max-height: 300px;">{
@@ -10818,13 +11415,13 @@ You can check the Dev Tools console for debugging information.</code></pre>
     },
     \"notes\": \"architecto\",
     \"noOfPackages\": 22,
-    \"packageType\": \"Heavy Bulky\",
+    \"packageType\": \"Normal\",
     \"repeatedData\": {
-        \"repeatedType\": \"Weekly\",
+        \"repeatedType\": \"One Time\",
         \"days\": [
-            \"Monday\"
+            \"Tuesday\"
         ],
-        \"startDate\": \"2026-01-21T09:38:45\",
+        \"startDate\": \"2026-01-21T12:24:07\",
         \"endDate\": \"2052-02-14\"
     }
 }"
@@ -10852,13 +11449,13 @@ let body = {
     },
     "notes": "architecto",
     "noOfPackages": 22,
-    "packageType": "Heavy Bulky",
+    "packageType": "Normal",
     "repeatedData": {
-        "repeatedType": "Weekly",
+        "repeatedType": "One Time",
         "days": [
-            "Monday"
+            "Tuesday"
         ],
-        "startDate": "2026-01-21T09:38:45",
+        "startDate": "2026-01-21T12:24:07",
         "endDate": "2052-02-14"
     }
 };
@@ -10891,13 +11488,13 @@ $response = $client-&gt;post(
             ],
             'notes' =&gt; 'architecto',
             'noOfPackages' =&gt; 22,
-            'packageType' =&gt; 'Heavy Bulky',
+            'packageType' =&gt; 'Normal',
             'repeatedData' =&gt; [
-                'repeatedType' =&gt; 'Weekly',
+                'repeatedType' =&gt; 'One Time',
                 'days' =&gt; [
-                    'Monday',
+                    'Tuesday',
                 ],
-                'startDate' =&gt; '2026-01-21T09:38:45',
+                'startDate' =&gt; '2026-01-21T12:24:07',
                 'endDate' =&gt; '2052-02-14',
             ],
         ],
@@ -11097,10 +11694,10 @@ You can check the Dev Tools console for debugging information.</code></pre>
  &nbsp;
                 <input type="text" style="display: none"
                               name="packageType"                data-endpoint="POSTapi-pickups"
-               value="Heavy Bulky"
+               value="Normal"
                data-component="body">
     <br>
-<p>Example: <code>Heavy Bulky</code></p>
+<p>Example: <code>Normal</code></p>
 Must be one of:
 <ul style="list-style-type: square;"><li><code>Normal</code></li> <li><code>Light Bulky</code></li> <li><code>Heavy Bulky</code></li></ul>
         </div>
@@ -11121,10 +11718,10 @@ Must be one of:
  &nbsp;
                 <input type="text" style="display: none"
                               name="repeatedData.repeatedType"                data-endpoint="POSTapi-pickups"
-               value="Weekly"
+               value="One Time"
                data-component="body">
     <br>
-<p>Example: <code>Weekly</code></p>
+<p>Example: <code>One Time</code></p>
 Must be one of:
 <ul style="list-style-type: square;"><li><code>One Time</code></li> <li><code>Daily</code></li> <li><code>Weekly</code></li></ul>
                     </div>
@@ -11151,10 +11748,10 @@ Must be one of:
  &nbsp;
                 <input type="text" style="display: none"
                               name="repeatedData.startDate"                data-endpoint="POSTapi-pickups"
-               value="2026-01-21T09:38:45"
+               value="2026-01-21T12:24:07"
                data-component="body">
     <br>
-<p>Must be a valid date. Example: <code>2026-01-21T09:38:45</code></p>
+<p>Must be a valid date. Example: <code>2026-01-21T12:24:07</code></p>
                     </div>
                                                                 <div style="margin-left: 14px; clear: unset;">
                         <b style="line-height: 2;"><code>endDate</code></b>&nbsp;&nbsp;
@@ -11833,12 +12430,12 @@ print_r(json_decode((string) $body));</code></pre></div>
 content-type: application/json
 access-control-allow-origin: http://localhost:3000
 access-control-allow-credentials: true
-set-cookie: laravel-session=eyJpdiI6ImI4OFVTeGVnSk5GZW8yTHJKM0hxNWc9PSIsInZhbHVlIjoiSWZ5eFp1Mi9uRXRxSDA4Z0FWNnF1a0wyaFZPaEFud25rZ21uU21TWDZsNFYvdHRBelpYMm54bmpyMkcvY1dRZm96WklBbHZyOTJjVVB4Zmg1ejZhODI3SzU4d2M1Y213MjkzMVpiYnMvbVVnaDhPbzFpa2orbGpKUFJvOWtxR04iLCJtYWMiOiJmMzdiMWUwMGE3NzFkNjk3MjNiN2RjZDAwZTczZGUzY2QzMTIxYmYyMzY4OTU3NjNhYjk4MGQxZWE3NjA2YjBmIiwidGFnIjoiIn0%3D; expires=Wed, 21 Jan 2026 11:38:45 GMT; Max-Age=7200; path=/; httponly; samesite=lax
+set-cookie: laravel-session=eyJpdiI6IitoSzVla1ZwdEI5ajVWOXlCUHJLdmc9PSIsInZhbHVlIjoiNnExL3JWTWRxVTJWY3lwc3ZENEFVeXVYaHRXTkExQzFUMHdYcHVVZ1RmalZwN0QvT1Jaek1HWmNWdTlacHNlYWNKYVI5WCtmbWtzVVF1c1FHQUZIc1lsVnJDVXJUbG12RFhyNTI0MTN2WDJ0TlRSUDUxZU1oYkVtZ0hNbGQxVEsiLCJtYWMiOiI5N2U3OTNhYWIwZWM1MWIxOWZlZmZhYzA1NzBhNDA2MjI0NDJkNDY5OWIzN2VhZTYyMTlmNmFmNTMzMTFkZTVkIiwidGFnIjoiIn0%3D; expires=Wed, 21 Jan 2026 14:24:07 GMT; Max-Age=7200; path=/; httponly; samesite=lax
  </code></pre></details>         <pre>
 
 <code class="language-json" style="max-height: 300px;">{
     &quot;status&quot;: {
-        &quot;file_path&quot;: &quot;D:\\code\\ecommerce-api\\.env&quot;,
+        &quot;file_path&quot;: &quot;C:\\laragon\\www\\ecommerce-api\\.env&quot;,
         &quot;is_writable&quot;: true,
         &quot;config_cached&quot;: false
     },
