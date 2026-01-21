@@ -206,7 +206,8 @@ class CheckoutController extends Controller
             }
 
             // Calculate totals with Bosta shipping pricing
-            $summary = $this->cartService->getSummary($validated['shipping_address']['city']);
+            $shippingCity = $shippingAddress ? $shippingAddress->city : $validated['shipping_address']['city'];
+            $summary = $this->cartService->getSummary($shippingCity);
 
             // Create temporary order data (not saved to database yet)
             $orderData = [
@@ -303,7 +304,7 @@ class CheckoutController extends Controller
             $paymentData = [
                 'amount_cents' => intval($summary['total'] * 100), // Convert to cents
                 'currency' => 'EGP',
-                'order_id' => 'TEMP-' . time(), // Temporary order ID
+                'order_id' => 'TEMP-'.time(), // Temporary order ID
                 'billing_data' => $billingData,
             ];
 
