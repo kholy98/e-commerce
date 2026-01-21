@@ -71,4 +71,36 @@ class User extends Authenticatable
     {
         return $this->hasMany(Wishlist::class);
     }
+
+    /**
+     * Get the user's addresses
+     */
+    public function addresses()
+    {
+        return $this->hasMany(\App\Models\CustomerAddress::class);
+    }
+
+    /**
+     * Get the user's default address
+     */
+    public function defaultAddress()
+    {
+        return $this->hasOne(\App\Models\CustomerAddress::class)->where('is_default', true);
+    }
+
+    /**
+     * Get the user's billing addresses
+     */
+    public function billingAddresses()
+    {
+        return $this->hasMany(\App\Models\CustomerAddress::class)->where('is_billing', true);
+    }
+
+    /**
+     * Get the user's shipping addresses
+     */
+    public function shippingAddresses()
+    {
+        return $this->hasMany(\App\Models\CustomerAddress::class)->where('is_shipping', true);
+    }
 }
