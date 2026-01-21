@@ -1,0 +1,433 @@
+name: Wishlist
+description: |-
+
+  APIs for managing user wishlists.
+
+  All endpoints in this group require authentication via Laravel Sanctum.
+  Users can save products to their wishlist for later purchase.
+endpoints:
+  -
+    custom: []
+    httpMethods:
+      - GET
+    uri: api/wishlist
+    metadata:
+      custom: []
+      groupName: Wishlist
+      groupDescription: |-
+
+        APIs for managing user wishlists.
+
+        All endpoints in this group require authentication via Laravel Sanctum.
+        Users can save products to their wishlist for later purchase.
+      subgroup: ''
+      subgroupDescription: ''
+      title: 'List wishlist items'
+      description: |-
+        Get all products in the authenticated user's wishlist.
+        Returns product data in both English and Arabic.
+      authenticated: true
+      deprecated: false
+    headers:
+      Authorization: 'Bearer {YOUR_API_TOKEN}'
+      Content-Type: application/json
+      Accept: application/json
+    urlParameters: []
+    cleanUrlParameters: []
+    queryParameters: []
+    cleanQueryParameters: []
+    bodyParameters: []
+    cleanBodyParameters: []
+    fileParameters: []
+    responses:
+      -
+        custom: []
+        status: 200
+        content: |-
+          {
+            "en": {
+              "products": [
+                {
+                  "id": 1,
+                  "name": "Premium Coffee Beans",
+                  "description": "High-quality arabica coffee beans",
+                  "wishlist_item_id": 5,
+                  "added_at": "2024-01-15T10:00:00.000000Z",
+                  "slug": "premium-coffee-beans",
+                  "price": 25.00,
+                  "cost": 15.00,
+                  "stock": 100,
+                  "sku": "COF-001",
+                  "is_active": true,
+                  "category_id": 1,
+                  "grind_type": "whole_bean",
+                  "weight": 0.5,
+                  "product_details": [
+                    {"title": "Origin", "value": "Ethiopia"},
+                    {"title": "Roast Level", "value": "Medium"}
+                  ],
+                  "image": "https://example.com/images/coffee.jpg",
+                  "created_at": "2024-01-15T10:00:00.000000Z",
+                  "updated_at": "2024-01-15T10:00:00.000000Z"
+                }
+              ],
+              "count": 1
+            },
+            "ar": {
+              "products": [
+                {
+                  "id": 1,
+                  "name": "حبوب قهوة ممتازة",
+                  "description": "حبوب قهوة أرابيكا عالية الجودة",
+                  "wishlist_item_id": 5,
+                  "added_at": "2024-01-15T10:00:00.000000Z",
+                  "slug": "premium-coffee-beans",
+                  "price": 25.00,
+                  "cost": 15.00,
+                  "stock": 100,
+                  "sku": "COF-001",
+                  "is_active": true,
+                  "category_id": 1,
+                  "grind_type": "whole_bean",
+                  "weight": 0.5,
+                  "product_details": [
+                    {"title": "المنشأ", "value": "إثيوبيا"},
+                    {"title": "درجة التحميص", "value": "متوسط"}
+                  ],
+                  "image": "https://example.com/images/coffee.jpg",
+                  "created_at": "2024-01-15T10:00:00.000000Z",
+                  "updated_at": "2024-01-15T10:00:00.000000Z"
+                }
+              ],
+              "count": 1
+            }
+          }
+        headers: []
+        description: Success
+      -
+        custom: []
+        status: 401
+        content: |-
+          {
+            "message": "Unauthenticated."
+          }
+        headers: []
+        description: Unauthenticated
+    responseFields: []
+    auth:
+      - headers
+      - Authorization
+      - 'Bearer 6g43cv8PD1aE5beadkZfhV6'
+    controller: null
+    method: null
+    route: null
+  -
+    custom: []
+    httpMethods:
+      - POST
+    uri: api/wishlist
+    metadata:
+      custom: []
+      groupName: Wishlist
+      groupDescription: |-
+
+        APIs for managing user wishlists.
+
+        All endpoints in this group require authentication via Laravel Sanctum.
+        Users can save products to their wishlist for later purchase.
+      subgroup: ''
+      subgroupDescription: ''
+      title: 'Add to wishlist'
+      description: "Add a product to the authenticated user's wishlist."
+      authenticated: true
+      deprecated: false
+    headers:
+      Authorization: 'Bearer {YOUR_API_TOKEN}'
+      Content-Type: application/json
+      Accept: application/json
+    urlParameters: []
+    cleanUrlParameters: []
+    queryParameters: []
+    cleanQueryParameters: []
+    bodyParameters:
+      product_id:
+        custom: []
+        name: product_id
+        description: 'The ID of the product to add.'
+        required: true
+        example: 1
+        type: integer
+        enumValues: []
+        exampleWasSpecified: true
+        nullable: false
+        deprecated: false
+    cleanBodyParameters:
+      product_id: 1
+    fileParameters: []
+    responses:
+      -
+        custom: []
+        status: 201
+        content: |-
+          {
+            "message": "Product added to wishlist successfully",
+            "data": {
+              "id": 5,
+              "product_id": 1,
+              "created_at": "2024-01-15T10:00:00.000000Z"
+            }
+          }
+        headers: []
+        description: Success
+      -
+        custom: []
+        status: 401
+        content: |-
+          {
+            "message": "Unauthenticated."
+          }
+        headers: []
+        description: Unauthenticated
+      -
+        custom: []
+        status: 422
+        content: |-
+          {
+            "message": "Product is already in your wishlist"
+          }
+        headers: []
+        description: 'Already in Wishlist'
+      -
+        custom: []
+        status: 422
+        content: |-
+          {
+            "message": "Product is not available"
+          }
+        headers: []
+        description: 'Product Unavailable'
+    responseFields: []
+    auth:
+      - headers
+      - Authorization
+      - 'Bearer 6g43cv8PD1aE5beadkZfhV6'
+    controller: null
+    method: null
+    route: null
+  -
+    custom: []
+    httpMethods:
+      - DELETE
+    uri: 'api/wishlist/{productId}'
+    metadata:
+      custom: []
+      groupName: Wishlist
+      groupDescription: |-
+
+        APIs for managing user wishlists.
+
+        All endpoints in this group require authentication via Laravel Sanctum.
+        Users can save products to their wishlist for later purchase.
+      subgroup: ''
+      subgroupDescription: ''
+      title: 'Remove from wishlist'
+      description: "Remove a product from the authenticated user's wishlist."
+      authenticated: true
+      deprecated: false
+    headers:
+      Authorization: 'Bearer {YOUR_API_TOKEN}'
+      Content-Type: application/json
+      Accept: application/json
+    urlParameters:
+      productId:
+        custom: []
+        name: productId
+        description: 'The product ID to remove.'
+        required: true
+        example: 1
+        type: integer
+        enumValues: []
+        exampleWasSpecified: true
+        nullable: false
+        deprecated: false
+    cleanUrlParameters:
+      productId: 1
+    queryParameters: []
+    cleanQueryParameters: []
+    bodyParameters: []
+    cleanBodyParameters: []
+    fileParameters: []
+    responses:
+      -
+        custom: []
+        status: 200
+        content: |-
+          {
+            "message": "Product removed from wishlist successfully"
+          }
+        headers: []
+        description: Success
+      -
+        custom: []
+        status: 401
+        content: |-
+          {
+            "message": "Unauthenticated."
+          }
+        headers: []
+        description: Unauthenticated
+      -
+        custom: []
+        status: 404
+        content: |-
+          {
+            "message": "Product not found in your wishlist"
+          }
+        headers: []
+        description: 'Not Found'
+    responseFields: []
+    auth:
+      - headers
+      - Authorization
+      - 'Bearer 6g43cv8PD1aE5beadkZfhV6'
+    controller: null
+    method: null
+    route: null
+  -
+    custom: []
+    httpMethods:
+      - GET
+    uri: 'api/wishlist/check/{productId}'
+    metadata:
+      custom: []
+      groupName: Wishlist
+      groupDescription: |-
+
+        APIs for managing user wishlists.
+
+        All endpoints in this group require authentication via Laravel Sanctum.
+        Users can save products to their wishlist for later purchase.
+      subgroup: ''
+      subgroupDescription: ''
+      title: 'Check if in wishlist'
+      description: "Check if a specific product is in the authenticated user's wishlist."
+      authenticated: true
+      deprecated: false
+    headers:
+      Authorization: 'Bearer {YOUR_API_TOKEN}'
+      Content-Type: application/json
+      Accept: application/json
+    urlParameters:
+      productId:
+        custom: []
+        name: productId
+        description: 'The product ID to check.'
+        required: true
+        example: 1
+        type: integer
+        enumValues: []
+        exampleWasSpecified: true
+        nullable: false
+        deprecated: false
+    cleanUrlParameters:
+      productId: 1
+    queryParameters: []
+    cleanQueryParameters: []
+    bodyParameters: []
+    cleanBodyParameters: []
+    fileParameters: []
+    responses:
+      -
+        custom: []
+        status: 200
+        content: |-
+          {
+            "in_wishlist": true
+          }
+        headers: []
+        description: 'In Wishlist'
+      -
+        custom: []
+        status: 200
+        content: |-
+          {
+            "in_wishlist": false
+          }
+        headers: []
+        description: 'Not in Wishlist'
+      -
+        custom: []
+        status: 401
+        content: |-
+          {
+            "message": "Unauthenticated."
+          }
+        headers: []
+        description: Unauthenticated
+    responseFields: []
+    auth:
+      - headers
+      - Authorization
+      - 'Bearer 6g43cv8PD1aE5beadkZfhV6'
+    controller: null
+    method: null
+    route: null
+  -
+    custom: []
+    httpMethods:
+      - DELETE
+    uri: api/wishlist
+    metadata:
+      custom: []
+      groupName: Wishlist
+      groupDescription: |-
+
+        APIs for managing user wishlists.
+
+        All endpoints in this group require authentication via Laravel Sanctum.
+        Users can save products to their wishlist for later purchase.
+      subgroup: ''
+      subgroupDescription: ''
+      title: 'Clear wishlist'
+      description: "Remove all products from the authenticated user's wishlist."
+      authenticated: true
+      deprecated: false
+    headers:
+      Authorization: 'Bearer {YOUR_API_TOKEN}'
+      Content-Type: application/json
+      Accept: application/json
+    urlParameters: []
+    cleanUrlParameters: []
+    queryParameters: []
+    cleanQueryParameters: []
+    bodyParameters: []
+    cleanBodyParameters: []
+    fileParameters: []
+    responses:
+      -
+        custom: []
+        status: 200
+        content: |-
+          {
+            "message": "Wishlist cleared successfully",
+            "deleted_count": 5
+          }
+        headers: []
+        description: Success
+      -
+        custom: []
+        status: 401
+        content: |-
+          {
+            "message": "Unauthenticated."
+          }
+        headers: []
+        description: Unauthenticated
+    responseFields: []
+    auth:
+      - headers
+      - Authorization
+      - 'Bearer 6g43cv8PD1aE5beadkZfhV6'
+    controller: null
+    method: null
+    route: null

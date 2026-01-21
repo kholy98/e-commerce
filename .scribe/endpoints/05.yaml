@@ -1,0 +1,672 @@
+name: Checkout
+description: |-
+
+  APIs for the checkout process.
+
+  The checkout flow consists of:
+  1. Initiate checkout - validates cart, creates pending checkout, and returns payment URL
+  2. Payment processing - handled by payment gateway (Paymob)
+  3. Complete/Fail callbacks - finalize or cancel the order based on payment result
+
+  Supports both guest checkout and authenticated user checkout.
+endpoints:
+  -
+    custom: []
+    httpMethods:
+      - POST
+    uri: api/checkout/initiate
+    metadata:
+      custom: []
+      groupName: Checkout
+      groupDescription: |-
+
+        APIs for the checkout process.
+
+        The checkout flow consists of:
+        1. Initiate checkout - validates cart, creates pending checkout, and returns payment URL
+        2. Payment processing - handled by payment gateway (Paymob)
+        3. Complete/Fail callbacks - finalize or cancel the order based on payment result
+
+        Supports both guest checkout and authenticated user checkout.
+      subgroup: ''
+      subgroupDescription: ''
+      title: 'Initiate checkout'
+      description: |-
+        Start the checkout process by validating the cart, creating a pending checkout,
+        and returning a payment URL. Supports both guest and authenticated users.
+      authenticated: false
+      deprecated: false
+    headers:
+      Content-Type: application/json
+      Accept: application/json
+    urlParameters: []
+    cleanUrlParameters: []
+    queryParameters: []
+    cleanQueryParameters: []
+    bodyParameters:
+      shipping_address:
+        custom: []
+        name: shipping_address
+        description: 'The shipping address details.'
+        required: true
+        example: []
+        type: object
+        enumValues: []
+        exampleWasSpecified: false
+        nullable: false
+        deprecated: false
+      shipping_address.street:
+        custom: []
+        name: shipping_address.street
+        description: 'The street address.'
+        required: true
+        example: '123 Main St'
+        type: string
+        enumValues: []
+        exampleWasSpecified: true
+        nullable: false
+        deprecated: false
+      shipping_address.city:
+        custom: []
+        name: shipping_address.city
+        description: 'The city name.'
+        required: true
+        example: Cairo
+        type: string
+        enumValues: []
+        exampleWasSpecified: true
+        nullable: false
+        deprecated: false
+      shipping_address.zip_code:
+        custom: []
+        name: shipping_address.zip_code
+        description: 'The postal/zip code.'
+        required: true
+        example: '12345'
+        type: string
+        enumValues: []
+        exampleWasSpecified: true
+        nullable: false
+        deprecated: false
+      shipping_address.country:
+        custom: []
+        name: shipping_address.country
+        description: 'The country name.'
+        required: true
+        example: Egypt
+        type: string
+        enumValues: []
+        exampleWasSpecified: true
+        nullable: false
+        deprecated: false
+      shipping_address.building_number:
+        custom: []
+        name: shipping_address.building_number
+        description: 'The building number.'
+        required: true
+        example: '15'
+        type: string
+        enumValues: []
+        exampleWasSpecified: true
+        nullable: false
+        deprecated: false
+      shipping_address.floor:
+        custom: []
+        name: shipping_address.floor
+        description: 'The floor number.'
+        required: false
+        example: '3'
+        type: string
+        enumValues: []
+        exampleWasSpecified: true
+        nullable: true
+        deprecated: false
+      shipping_address.apartment:
+        custom: []
+        name: shipping_address.apartment
+        description: 'The apartment number.'
+        required: false
+        example: 5A
+        type: string
+        enumValues: []
+        exampleWasSpecified: true
+        nullable: true
+        deprecated: false
+      shipping_address.zone:
+        custom: []
+        name: shipping_address.zone
+        description: 'The zone/district.'
+        required: true
+        example: Maadi
+        type: string
+        enumValues: []
+        exampleWasSpecified: true
+        nullable: false
+        deprecated: false
+      billing_address:
+        custom: []
+        name: billing_address
+        description: 'The billing address and contact details.'
+        required: true
+        example: []
+        type: object
+        enumValues: []
+        exampleWasSpecified: false
+        nullable: false
+        deprecated: false
+      billing_address.first_name:
+        custom: []
+        name: billing_address.first_name
+        description: "Customer's first name."
+        required: true
+        example: John
+        type: string
+        enumValues: []
+        exampleWasSpecified: true
+        nullable: false
+        deprecated: false
+      billing_address.last_name:
+        custom: []
+        name: billing_address.last_name
+        description: "Customer's last name."
+        required: true
+        example: Doe
+        type: string
+        enumValues: []
+        exampleWasSpecified: true
+        nullable: false
+        deprecated: false
+      billing_address.email:
+        custom: []
+        name: billing_address.email
+        description: "Customer's email address."
+        required: true
+        example: john@example.com
+        type: string
+        enumValues: []
+        exampleWasSpecified: true
+        nullable: false
+        deprecated: false
+      billing_address.phone:
+        custom: []
+        name: billing_address.phone
+        description: "Customer's phone number."
+        required: true
+        example: '+201234567890'
+        type: string
+        enumValues: []
+        exampleWasSpecified: true
+        nullable: false
+        deprecated: false
+      billing_address.street:
+        custom: []
+        name: billing_address.street
+        description: 'The billing street address.'
+        required: true
+        example: '123 Main St'
+        type: string
+        enumValues: []
+        exampleWasSpecified: true
+        nullable: false
+        deprecated: false
+      billing_address.city:
+        custom: []
+        name: billing_address.city
+        description: 'The billing city.'
+        required: true
+        example: Cairo
+        type: string
+        enumValues: []
+        exampleWasSpecified: true
+        nullable: false
+        deprecated: false
+      billing_address.zip_code:
+        custom: []
+        name: billing_address.zip_code
+        description: 'The billing postal/zip code.'
+        required: true
+        example: '12345'
+        type: string
+        enumValues: []
+        exampleWasSpecified: true
+        nullable: false
+        deprecated: false
+      billing_address.country:
+        custom: []
+        name: billing_address.country
+        description: 'The billing country.'
+        required: true
+        example: Egypt
+        type: string
+        enumValues: []
+        exampleWasSpecified: true
+        nullable: false
+        deprecated: false
+      billing_address.floor:
+        custom: []
+        name: billing_address.floor
+        description: 'The floor number.'
+        required: false
+        example: '3'
+        type: string
+        enumValues: []
+        exampleWasSpecified: true
+        nullable: true
+        deprecated: false
+      billing_address.apartment:
+        custom: []
+        name: billing_address.apartment
+        description: 'The apartment number.'
+        required: false
+        example: 5A
+        type: string
+        enumValues: []
+        exampleWasSpecified: true
+        nullable: true
+        deprecated: false
+      notes:
+        custom: []
+        name: notes
+        description: 'Optional order notes.'
+        required: false
+        example: 'Please deliver in the morning'
+        type: string
+        enumValues: []
+        exampleWasSpecified: true
+        nullable: true
+        deprecated: false
+      user_id:
+        custom: []
+        name: user_id
+        description: 'Optional user ID for guest checkout with user creation.'
+        required: false
+        example: architecto
+        type: string
+        enumValues: []
+        exampleWasSpecified: false
+        nullable: true
+        deprecated: false
+    cleanBodyParameters:
+      shipping_address:
+        street: '123 Main St'
+        city: Cairo
+        zip_code: '12345'
+        country: Egypt
+        building_number: '15'
+        floor: '3'
+        apartment: 5A
+        zone: Maadi
+      billing_address:
+        first_name: John
+        last_name: Doe
+        email: john@example.com
+        phone: '+201234567890'
+        street: '123 Main St'
+        city: Cairo
+        zip_code: '12345'
+        country: Egypt
+        floor: '3'
+        apartment: 5A
+      notes: 'Please deliver in the morning'
+      user_id: architecto
+    fileParameters: []
+    responses:
+      -
+        custom: []
+        status: 200
+        content: |-
+          {
+            "success": true,
+            "message": "Checkout initiated successfully",
+            "data": {
+              "checkout_id": "chk_abc123",
+              "payment_url": "https://accept.paymob.com/api/acceptance/iframes/12345?payment_token=xyz",
+              "order_summary": {
+                "subtotal": 100.00,
+                "shipping": 50.00,
+                "tax": 14.00,
+                "total": 164.00,
+                "item_count": 3
+              },
+              "expires_at": "2024-01-15T11:00:00.000000Z"
+            }
+          }
+        headers: []
+        description: Success
+      -
+        custom: []
+        status: 422
+        content: |-
+          {
+            "success": false,
+            "message": "Cart is empty"
+          }
+        headers: []
+        description: 'Empty Cart'
+      -
+        custom: []
+        status: 422
+        content: |-
+          {
+            "message": "The shipping address.street field is required.",
+            "errors": {
+              "shipping_address.street": ["The shipping address.street field is required."]
+            }
+          }
+        headers: []
+        description: 'Validation Error'
+    responseFields: []
+    auth: []
+    controller: null
+    method: null
+    route: null
+  -
+    custom: []
+    httpMethods:
+      - GET
+      - POST
+    uri: api/checkout/complete
+    metadata:
+      custom: []
+      groupName: Checkout
+      groupDescription: |-
+
+        APIs for the checkout process.
+
+        The checkout flow consists of:
+        1. Initiate checkout - validates cart, creates pending checkout, and returns payment URL
+        2. Payment processing - handled by payment gateway (Paymob)
+        3. Complete/Fail callbacks - finalize or cancel the order based on payment result
+
+        Supports both guest checkout and authenticated user checkout.
+      subgroup: ''
+      subgroupDescription: ''
+      title: 'Complete checkout'
+      description: |-
+        Finalize the checkout process after successful payment.
+        This endpoint is called by the payment gateway callback or webhook.
+        It creates the final order, processes the shipment, and clears the cart.
+      authenticated: false
+      deprecated: false
+    headers:
+      Content-Type: application/json
+      Accept: application/json
+    urlParameters: []
+    cleanUrlParameters: []
+    queryParameters:
+      order_id:
+        custom: []
+        name: order_id
+        description: 'The temporary order ID from the checkout initiation.'
+        required: false
+        example: chk_abc123
+        type: string
+        enumValues: []
+        exampleWasSpecified: true
+        nullable: false
+        deprecated: false
+    cleanQueryParameters:
+      order_id: chk_abc123
+    bodyParameters: []
+    cleanBodyParameters: []
+    fileParameters: []
+    responses:
+      -
+        custom: []
+        status: 200
+        content: |-
+          {
+            "success": true,
+            "message": "Order created successfully",
+            "data": {
+              "order_id": 1,
+              "order_number": "ORD-2024-001",
+              "status": "processing",
+              "payment_status": "paid",
+              "total_amount": 164.00,
+              "tracking_number": "BOSTA123456"
+            }
+          }
+        headers: []
+        description: Success
+      -
+        custom: []
+        status: 400
+        content: |-
+          {
+            "success": false,
+            "message": "Order ID is required"
+          }
+        headers: []
+        description: 'Order ID Required'
+      -
+        custom: []
+        status: 404
+        content: |-
+          {
+            "success": false,
+            "message": "Checkout session not found or expired"
+          }
+        headers: []
+        description: 'Checkout Not Found'
+    responseFields: []
+    auth: []
+    controller: null
+    method: null
+    route: null
+  -
+    custom: []
+    httpMethods:
+      - GET
+      - POST
+    uri: api/checkout/fail
+    metadata:
+      custom: []
+      groupName: Checkout
+      groupDescription: |-
+
+        APIs for the checkout process.
+
+        The checkout flow consists of:
+        1. Initiate checkout - validates cart, creates pending checkout, and returns payment URL
+        2. Payment processing - handled by payment gateway (Paymob)
+        3. Complete/Fail callbacks - finalize or cancel the order based on payment result
+
+        Supports both guest checkout and authenticated user checkout.
+      subgroup: ''
+      subgroupDescription: ''
+      title: 'Handle checkout failure'
+      description: |-
+        Handle failed checkout due to payment or shipment failure.
+        Clears pending checkout data and redirects or returns error response.
+      authenticated: false
+      deprecated: false
+    headers:
+      Content-Type: application/json
+      Accept: application/json
+    urlParameters: []
+    cleanUrlParameters: []
+    queryParameters:
+      error:
+        custom: []
+        name: error
+        description: 'The error message from the payment gateway.'
+        required: false
+        example: 'Payment declined'
+        type: string
+        enumValues: []
+        exampleWasSpecified: true
+        nullable: false
+        deprecated: false
+    cleanQueryParameters:
+      error: 'Payment declined'
+    bodyParameters: []
+    cleanBodyParameters: []
+    fileParameters: []
+    responses:
+      -
+        custom: []
+        status: 200
+        content: |-
+          {
+            "success": false,
+            "message": "Checkout failed",
+            "error": "Payment declined"
+          }
+        headers: []
+        description: 'API Response'
+    responseFields: []
+    auth: []
+    controller: null
+    method: null
+    route: null
+  -
+    custom: []
+    httpMethods:
+      - GET
+    uri: api/checkout/status
+    metadata:
+      custom: []
+      groupName: Checkout
+      groupDescription: |-
+
+        APIs for the checkout process.
+
+        The checkout flow consists of:
+        1. Initiate checkout - validates cart, creates pending checkout, and returns payment URL
+        2. Payment processing - handled by payment gateway (Paymob)
+        3. Complete/Fail callbacks - finalize or cancel the order based on payment result
+
+        Supports both guest checkout and authenticated user checkout.
+      subgroup: ''
+      subgroupDescription: ''
+      title: 'Get checkout status'
+      description: |-
+        Check if there's a pending checkout session and get current cart summary.
+        Useful for resuming interrupted checkout flows.
+      authenticated: false
+      deprecated: false
+    headers:
+      Content-Type: application/json
+      Accept: application/json
+    urlParameters: []
+    cleanUrlParameters: []
+    queryParameters: []
+    cleanQueryParameters: []
+    bodyParameters: []
+    cleanBodyParameters: []
+    fileParameters: []
+    responses:
+      -
+        custom: []
+        status: 200
+        content: |-
+          {
+            "success": true,
+            "data": {
+              "has_pending_checkout": true,
+              "cart_summary": {
+                "subtotal": 100.00,
+                "tax": 14.00,
+                "shipping": 50.00,
+                "total": 164.00,
+                "item_count": 3
+              },
+              "cart_items_count": 3
+            }
+          }
+        headers: []
+        description: 'Has Pending Checkout'
+      -
+        custom: []
+        status: 200
+        content: |-
+          {
+            "success": true,
+            "data": {
+              "has_pending_checkout": false,
+              "cart_summary": {
+                "subtotal": 0.00,
+                "tax": 0.00,
+                "shipping": 0.00,
+                "total": 0.00,
+                "item_count": 0
+              },
+              "cart_items_count": 0
+            }
+          }
+        headers: []
+        description: 'No Pending Checkout'
+    responseFields: []
+    auth: []
+    controller: null
+    method: null
+    route: null
+  -
+    custom: []
+    httpMethods:
+      - POST
+    uri: api/checkout/test-complete
+    metadata:
+      custom: []
+      groupName: Checkout
+      groupDescription: |-
+
+        APIs for the checkout process.
+
+        The checkout flow consists of:
+        1. Initiate checkout - validates cart, creates pending checkout, and returns payment URL
+        2. Payment processing - handled by payment gateway (Paymob)
+        3. Complete/Fail callbacks - finalize or cancel the order based on payment result
+
+        Supports both guest checkout and authenticated user checkout.
+      subgroup: ''
+      subgroupDescription: ''
+      title: 'Test checkout completion'
+      description: |-
+        Test endpoint to complete checkout with real pending checkout data.
+        This is useful for testing the checkout flow without going through payment.
+      authenticated: false
+      deprecated: false
+    headers:
+      Content-Type: application/json
+      Accept: application/json
+    urlParameters: []
+    cleanUrlParameters: []
+    queryParameters: []
+    cleanQueryParameters: []
+    bodyParameters: []
+    cleanBodyParameters: []
+    fileParameters: []
+    responses:
+      -
+        custom: []
+        status: 200
+        content: |-
+          {
+            "success": true,
+            "message": "Test order created successfully",
+            "data": {
+              "id": 1,
+              "order_number": "ORD-2024-001",
+              "status": "processing",
+              "payment_status": "paid"
+            }
+          }
+        headers: []
+        description: Success
+      -
+        custom: []
+        status: 404
+        content: |-
+          {
+            "success": false,
+            "message": "No active pending checkout found for testing"
+          }
+        headers: []
+        description: 'No Pending Checkout'
+    responseFields: []
+    auth: []
+    controller: null
+    method: null
+    route: null

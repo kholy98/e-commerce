@@ -2,26 +2,38 @@
 
 namespace App\Http\Controllers;
 
+use App\Interfaces\PaymentGatewayInterface;
 use App\Models\Cart;
 use App\Models\Order;
-use App\Models\OrderItem;
 use App\Models\PendingCheckout;
-use App\Models\Product;
 use App\Models\Shipment;
-use App\Services\SessionCartService;
-use App\Services\OrderService;
 use App\Services\BostaApiService;
-use App\Interfaces\PaymentGatewayInterface;
-use Illuminate\Http\Request;
+use App\Services\OrderService;
+use App\Services\SessionCartService;
 use Illuminate\Http\JsonResponse;
-use Illuminate\Support\Facades\DB;
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
+/**
+ * @group Checkout
+ *
+ * APIs for the checkout process.
+ *
+ * The checkout flow consists of:
+ * 1. Initiate checkout - validates cart, creates pending checkout, and returns payment URL
+ * 2. Payment processing - handled by payment gateway (Paymob)
+ * 3. Complete/Fail callbacks - finalize or cancel the order based on payment result
+ *
+ * Supports both guest checkout and authenticated user checkout.
+ */
 class CheckoutController extends Controller
 {
     protected SessionCartService $cartService;
+
     protected OrderService $orderService;
+
     protected BostaApiService $bostaService;
+
     protected PaymentGatewayInterface $paymentGateway;
 
     public function __construct(
@@ -37,7 +49,62 @@ class CheckoutController extends Controller
     }
 
     /**
-     * Initiate checkout process - create shipment and payment
+     * Initiate checkout
+     *
+     * Start the checkout process by validating the cart, creating a pending checkout,
+     * and returning a payment URL. Supports both guest and authenticated users.
+     *
+     * @unauthenticated
+     *
+     * @bodyParam shipping_address object required The shipping address details.
+     * @bodyParam shipping_address.street string required The street address. Example: 123 Main St
+     * @bodyParam shipping_address.city string required The city name. Example: Cairo
+     * @bodyParam shipping_address.zip_code string required The postal/zip code. Example: 12345
+     * @bodyParam shipping_address.country string required The country name. Example: Egypt
+     * @bodyParam shipping_address.building_number string required The building number. Example: 15
+     * @bodyParam shipping_address.floor string The floor number. Example: 3
+     * @bodyParam shipping_address.apartment string The apartment number. Example: 5A
+     * @bodyParam shipping_address.zone string required The zone/district. Example: Maadi
+     * @bodyParam billing_address object required The billing address and contact details.
+     * @bodyParam billing_address.first_name string required Customer's first name. Example: John
+     * @bodyParam billing_address.last_name string required Customer's last name. Example: Doe
+     * @bodyParam billing_address.email string required Customer's email address. Example: john@example.com
+     * @bodyParam billing_address.phone string required Customer's phone number. Example: +201234567890
+     * @bodyParam billing_address.street string required The billing street address. Example: 123 Main St
+     * @bodyParam billing_address.city string required The billing city. Example: Cairo
+     * @bodyParam billing_address.zip_code string required The billing postal/zip code. Example: 12345
+     * @bodyParam billing_address.country string required The billing country. Example: Egypt
+     * @bodyParam billing_address.floor string The floor number. Example: 3
+     * @bodyParam billing_address.apartment string The apartment number. Example: 5A
+     * @bodyParam notes string Optional order notes. Example: Please deliver in the morning
+     * @bodyParam user_id string Optional user ID for guest checkout with user creation.
+     *
+     * @response 200 scenario="Success" {
+     *   "success": true,
+     *   "message": "Checkout initiated successfully",
+     *   "data": {
+     *     "checkout_id": "chk_abc123",
+     *     "payment_url": "https://accept.paymob.com/api/acceptance/iframes/12345?payment_token=xyz",
+     *     "order_summary": {
+     *       "subtotal": 100.00,
+     *       "shipping": 50.00,
+     *       "tax": 14.00,
+     *       "total": 164.00,
+     *       "item_count": 3
+     *     },
+     *     "expires_at": "2024-01-15T11:00:00.000000Z"
+     *   }
+     * }
+     * @response 422 scenario="Empty Cart" {
+     *   "success": false,
+     *   "message": "Cart is empty"
+     * }
+     * @response 422 scenario="Validation Error" {
+     *   "message": "The shipping address.street field is required.",
+     *   "errors": {
+     *     "shipping_address.street": ["The shipping address.street field is required."]
+     *   }
+     * }
      */
     public function initiate(Request $request): JsonResponse
     {
@@ -52,16 +119,16 @@ class CheckoutController extends Controller
             'shipping_address.apartment' => 'nullable|string',
             'shipping_address.zone' => 'required|string',
             'billing_address' => 'required|array',
-             'billing_address.first_name' => 'required|string',
-             'billing_address.last_name' => 'required|string',
-             'billing_address.email' => 'required|email',
-             'billing_address.phone' => 'required|string',
-             'billing_address.street' => 'required|string',
-             'billing_address.city' => 'required|string',
-             'billing_address.zip_code' => 'required|string',
-             'billing_address.country' => 'required|string',
-             'billing_address.floor' => 'nullable|string', // Optional for Paymob (defaults to NA)
-             'billing_address.apartment' => 'nullable|string', // Optional for Paymob (defaults to NA)
+            'billing_address.first_name' => 'required|string',
+            'billing_address.last_name' => 'required|string',
+            'billing_address.email' => 'required|email',
+            'billing_address.phone' => 'required|string',
+            'billing_address.street' => 'required|string',
+            'billing_address.city' => 'required|string',
+            'billing_address.zip_code' => 'required|string',
+            'billing_address.country' => 'required|string',
+            'billing_address.floor' => 'nullable|string', // Optional for Paymob (defaults to NA)
+            'billing_address.apartment' => 'nullable|string', // Optional for Paymob (defaults to NA)
             'notes' => 'nullable|string',
             'user_id' => 'nullable|exists:users,id', // For guest checkout with user creation
         ]);
@@ -116,7 +183,7 @@ class CheckoutController extends Controller
 
             $shipmentResponse = $this->bostaService->createDelivery($shipmentPayload);
 
-            if (!$shipmentResponse['success']) {
+            if (! $shipmentResponse['success']) {
                 return response()->json([
                     'success' => false,
                     'message' => 'Failed to create shipment',
@@ -134,7 +201,7 @@ class CheckoutController extends Controller
             $paymentData = [
                 'amount_cents' => intval($summary['total'] * 100), // Convert to cents
                 'currency' => 'EGP',
-                'order_id' => 'TEMP-' . time(), // Temporary order ID
+                'order_id' => 'TEMP-'.time(), // Temporary order ID
                 'billing_data' => [
                     'first_name' => $validated['billing_address']['first_name'],
                     'last_name' => $validated['billing_address']['last_name'],
@@ -154,14 +221,14 @@ class CheckoutController extends Controller
 
             \Log::info('Checkout: Initiating payment', [
                 'paymentData' => $paymentData,
-                'cart_summary' => $summary
+                'cart_summary' => $summary,
             ]);
 
             $paymentResponse = $this->paymentGateway->sendPayment(new Request($paymentData));
 
             \Log::info('Checkout: Payment response', ['response' => $paymentResponse]);
 
-            if (!$paymentResponse['success']) {
+            if (! $paymentResponse['success']) {
                 // Clean up shipment if payment fails
                 // Note: In a real implementation, you might want to cancel the shipment
                 return response()->json([
@@ -175,7 +242,7 @@ class CheckoutController extends Controller
             \Log::info('Storing pending checkout', [
                 'session_id' => session()->getId(),
                 'temp_order_id' => $paymentResponse['order_id'],
-                'payment_response' => $paymentResponse
+                'payment_response' => $paymentResponse,
             ]);
 
             PendingCheckout::create([
@@ -184,9 +251,9 @@ class CheckoutController extends Controller
                 'order_data' => $orderData,
                 'shipment_data' => [
                     'tracking_number' => $shipmentResponse['data']['trackingNumber'],
-                    'status' => $shipmentResponse['data']['state']['value'] ?? 'pending'
+                    'status' => $shipmentResponse['data']['state']['value'] ?? 'pending',
                 ],
-                'expires_at' => now()->addHours(24) // Expire after 24 hours for debugging
+                'expires_at' => now()->addHours(24), // Expire after 24 hours for debugging
             ]);
 
             return response()->json([
@@ -210,14 +277,42 @@ class CheckoutController extends Controller
         } catch (\Exception $e) {
             return response()->json([
                 'success' => false,
-                'message' => 'Checkout failed: ' . $e->getMessage(),
+                'message' => 'Checkout failed: '.$e->getMessage(),
             ], 500);
         }
     }
 
     /**
-     * Complete checkout after successful payment
-     * This is called by the payment webhook or callback
+     * Complete checkout
+     *
+     * Finalize the checkout process after successful payment.
+     * This endpoint is called by the payment gateway callback or webhook.
+     * It creates the final order, processes the shipment, and clears the cart.
+     *
+     * @unauthenticated
+     *
+     * @queryParam order_id string The temporary order ID from the checkout initiation. Example: chk_abc123
+     *
+     * @response 200 scenario="Success" {
+     *   "success": true,
+     *   "message": "Order created successfully",
+     *   "data": {
+     *     "order_id": 1,
+     *     "order_number": "ORD-2024-001",
+     *     "status": "processing",
+     *     "payment_status": "paid",
+     *     "total_amount": 164.00,
+     *     "tracking_number": "BOSTA123456"
+     *   }
+     * }
+     * @response 400 scenario="Order ID Required" {
+     *   "success": false,
+     *   "message": "Order ID is required"
+     * }
+     * @response 404 scenario="Checkout Not Found" {
+     *   "success": false,
+     *   "message": "Checkout session not found or expired"
+     * }
      */
     public function complete(Request $request): JsonResponse
     {
@@ -229,11 +324,11 @@ class CheckoutController extends Controller
             \Log::info('Checkout complete called', [
                 'method' => $request->method(),
                 'temp_order_id' => $tempOrderId,
-                'all_input' => $request->all()
+                'all_input' => $request->all(),
             ]);
 
             // If order_id is not provided, try to find the most recent pending checkout for this session
-            if (!$tempOrderId) {
+            if (! $tempOrderId) {
                 $sessionId = session()->getId();
                 $allPendingForSession = PendingCheckout::where('session_id', $sessionId)->get();
                 $activePendingForSession = PendingCheckout::where('session_id', $sessionId)->active()->get();
@@ -245,7 +340,7 @@ class CheckoutController extends Controller
                     'all_pending_ids' => $allPendingForSession->pluck('id'),
                     'active_pending_ids' => $activePendingForSession->pluck('id'),
                     'current_time' => now(),
-                    'expires_ats' => $allPendingForSession->pluck('expires_at')
+                    'expires_ats' => $allPendingForSession->pluck('expires_at'),
                 ]);
 
                 $pendingCheckout = PendingCheckout::where('session_id', $sessionId)
@@ -258,21 +353,22 @@ class CheckoutController extends Controller
                     \Log::info('Using fallback order_id from session', [
                         'fallback_order_id' => $tempOrderId,
                         'pending_checkout_id' => $pendingCheckout->id,
-                        'session_id' => $sessionId
+                        'session_id' => $sessionId,
                     ]);
                 } else {
                     \Log::error('Checkout complete: No order_id provided and no active pending checkout found', [
                         'session_id' => $sessionId,
-                        'all_pending_checkouts' => PendingCheckout::all()->map(function($pc) {
+                        'all_pending_checkouts' => PendingCheckout::all()->map(function ($pc) {
                             return [
                                 'id' => $pc->id,
                                 'session_id' => $pc->session_id,
                                 'temp_order_id' => $pc->temp_order_id,
                                 'expires_at' => $pc->expires_at,
-                                'is_active' => $pc->expires_at > now()
+                                'is_active' => $pc->expires_at > now(),
                             ];
-                        })
+                        }),
                     ]);
+
                     return response()->json([
                         'success' => false,
                         'message' => 'Order ID is required',
@@ -286,17 +382,18 @@ class CheckoutController extends Controller
 
             \Log::info('Pending checkout lookup result', [
                 'temp_order_id' => $tempOrderId,
-                'found' => !empty($pendingCheckout),
+                'found' => ! empty($pendingCheckout),
                 'checkout_id' => $pendingCheckout ? $pendingCheckout->id : null,
                 'expires_at' => $pendingCheckout ? $pendingCheckout->expires_at : null,
-                'total_pending_checkouts' => PendingCheckout::count()
+                'total_pending_checkouts' => PendingCheckout::count(),
             ]);
 
-            if (!$pendingCheckout) {
+            if (! $pendingCheckout) {
                 \Log::error('Checkout complete: No pending checkout found', [
                     'temp_order_id' => $tempOrderId,
-                    'all_pending_checkouts' => PendingCheckout::all()->pluck('temp_order_id')->toArray()
+                    'all_pending_checkouts' => PendingCheckout::all()->pluck('temp_order_id')->toArray(),
                 ]);
+
                 return response()->json([
                     'success' => false,
                     'message' => 'No pending checkout found',
@@ -314,7 +411,7 @@ class CheckoutController extends Controller
             if ($request->isMethod('post')) {
                 $paymentSuccess = $request->input('success', false);
 
-                if (!$paymentSuccess) {
+                if (! $paymentSuccess) {
                     return response()->json([
                         'success' => false,
                         'message' => 'Payment was not successful',
@@ -349,18 +446,31 @@ class CheckoutController extends Controller
                 'order_data_keys' => $pendingCheckout ? array_keys($pendingCheckout->order_data) : null,
                 'shipment_data_keys' => $pendingCheckout ? array_keys($pendingCheckout->shipment_data) : null,
                 'error' => $e->getMessage(),
-                'trace' => $e->getTraceAsString()
+                'trace' => $e->getTraceAsString(),
             ]);
 
             return response()->json([
                 'success' => false,
-                'message' => 'Order creation failed: ' . $e->getMessage(),
+                'message' => 'Order creation failed: '.$e->getMessage(),
             ], 500);
         }
     }
 
     /**
-     * Handle checkout failure (payment or shipment failure)
+     * Handle checkout failure
+     *
+     * Handle failed checkout due to payment or shipment failure.
+     * Clears pending checkout data and redirects or returns error response.
+     *
+     * @unauthenticated
+     *
+     * @queryParam error string The error message from the payment gateway. Example: Payment declined
+     *
+     * @response 200 scenario="API Response" {
+     *   "success": false,
+     *   "message": "Checkout failed",
+     *   "error": "Payment declined"
+     * }
      */
     public function fail(Request $request)
     {
@@ -371,7 +481,7 @@ class CheckoutController extends Controller
         PendingCheckout::where('session_id', session()->getId())->delete();
 
         // For web requests (redirects), redirect to payment failed page
-        if (!$request->expectsJson() || $request->isMethod('get')) {
+        if (! $request->expectsJson() || $request->isMethod('get')) {
             return redirect('/payment-failed');
         }
 
@@ -385,6 +495,40 @@ class CheckoutController extends Controller
 
     /**
      * Get checkout status
+     *
+     * Check if there's a pending checkout session and get current cart summary.
+     * Useful for resuming interrupted checkout flows.
+     *
+     * @unauthenticated
+     *
+     * @response 200 scenario="Has Pending Checkout" {
+     *   "success": true,
+     *   "data": {
+     *     "has_pending_checkout": true,
+     *     "cart_summary": {
+     *       "subtotal": 100.00,
+     *       "tax": 14.00,
+     *       "shipping": 50.00,
+     *       "total": 164.00,
+     *       "item_count": 3
+     *     },
+     *     "cart_items_count": 3
+     *   }
+     * }
+     * @response 200 scenario="No Pending Checkout" {
+     *   "success": true,
+     *   "data": {
+     *     "has_pending_checkout": false,
+     *     "cart_summary": {
+     *       "subtotal": 0.00,
+     *       "tax": 0.00,
+     *       "shipping": 0.00,
+     *       "total": 0.00,
+     *       "item_count": 0
+     *     },
+     *     "cart_items_count": 0
+     *   }
+     * }
      */
     public function status(Request $request): JsonResponse
     {
@@ -396,7 +540,7 @@ class CheckoutController extends Controller
             ->active()
             ->first();
 
-        $hasPendingCheckout = !empty($pendingOrderData) || !empty($pendingCheckout);
+        $hasPendingCheckout = ! empty($pendingOrderData) || ! empty($pendingCheckout);
 
         return response()->json([
             'success' => true,
@@ -409,7 +553,27 @@ class CheckoutController extends Controller
     }
 
     /**
-     * Test checkout completion with real data
+     * Test checkout completion
+     *
+     * Test endpoint to complete checkout with real pending checkout data.
+     * This is useful for testing the checkout flow without going through payment.
+     *
+     * @unauthenticated
+     *
+     * @response 200 scenario="Success" {
+     *   "success": true,
+     *   "message": "Test order created successfully",
+     *   "data": {
+     *     "id": 1,
+     *     "order_number": "ORD-2024-001",
+     *     "status": "processing",
+     *     "payment_status": "paid"
+     *   }
+     * }
+     * @response 404 scenario="No Pending Checkout" {
+     *   "success": false,
+     *   "message": "No active pending checkout found for testing"
+     * }
      */
     public function testComplete(Request $request): JsonResponse
     {
@@ -417,7 +581,7 @@ class CheckoutController extends Controller
             // Get the first pending checkout for testing
             $pendingCheckout = PendingCheckout::active()->first();
 
-            if (!$pendingCheckout) {
+            if (! $pendingCheckout) {
                 return response()->json([
                     'success' => false,
                     'message' => 'No active pending checkout found for testing',
@@ -430,13 +594,13 @@ class CheckoutController extends Controller
                 'order_data_keys' => array_keys($pendingCheckout->order_data),
                 'shipment_data_keys' => array_keys($pendingCheckout->shipment_data),
                 'order_data_sample' => array_slice($pendingCheckout->order_data, 0, 3),
-                'shipment_data_sample' => $pendingCheckout->shipment_data
+                'shipment_data_sample' => $pendingCheckout->shipment_data,
             ]);
 
             // Create a test request with the temp_order_id
             $testRequest = new Request([
                 'order_id' => $pendingCheckout->temp_order_id,
-                'payment_id' => 'TEST-PAYMENT-' . time()
+                'payment_id' => 'TEST-PAYMENT-'.time(),
             ]);
 
             // Call the actual complete method
@@ -445,7 +609,7 @@ class CheckoutController extends Controller
         } catch (\Exception $e) {
             return response()->json([
                 'success' => false,
-                'message' => 'Test failed: ' . $e->getMessage(),
+                'message' => 'Test failed: '.$e->getMessage(),
             ], 500);
         }
     }

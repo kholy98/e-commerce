@@ -6,10 +6,69 @@ use App\Models\Category;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 
+/**
+ * @group Categories
+ *
+ * APIs for browsing and managing product categories.
+ *
+ * Public endpoints for listing and viewing categories do not require authentication.
+ * Admin endpoints for creating, updating, and deleting categories require authentication.
+ */
 class CategoryController extends Controller
 {
     /**
-     * Get all categories with optional filtering
+     * List all categories (Admin)
+     *
+     * Get a paginated list of all categories with optional filtering and sorting.
+     * This endpoint is intended for admin use and returns all categories including inactive ones.
+     *
+     * @authenticated
+     *
+     * @queryParam search string Search categories by name or description. Example: coffee
+     * @queryParam is_active boolean Filter by active status. Example: true
+     * @queryParam sort_by string Sort field (name, created_at). Example: name
+     * @queryParam sort_direction string Sort direction (asc, desc). Default: asc. Example: desc
+     * @queryParam per_page integer Number of items per page. Default: 15. Example: 10
+     *
+     * @response 200 scenario="Success" {
+     *   "data": {
+     *     "success": true,
+     *     "en": [
+     *       {
+     *         "id": 1,
+     *         "name": "Coffee Beans",
+     *         "name_ar": "حبوب القهوة",
+     *         "description": "Premium coffee beans from around the world",
+     *         "description_ar": "حبوب قهوة ممتازة من جميع أنحاء العالم",
+     *         "slug": "coffee-beans",
+     *         "is_active": true,
+     *         "product_count": 15,
+     *         "created_at": "2024-01-15T10:00:00.000000Z",
+     *         "updated_at": "2024-01-15T10:00:00.000000Z"
+     *       }
+     *     ],
+     *     "ar": [
+     *       {
+     *         "id": 1,
+     *         "name": "حبوب القهوة",
+     *         "name_ar": "حبوب القهوة",
+     *         "description": "حبوب قهوة ممتازة من جميع أنحاء العالم",
+     *         "description_ar": "حبوب قهوة ممتازة من جميع أنحاء العالم",
+     *         "slug": "coffee-beans",
+     *         "is_active": true,
+     *         "product_count": 15,
+     *         "created_at": "2024-01-15T10:00:00.000000Z",
+     *         "updated_at": "2024-01-15T10:00:00.000000Z"
+     *       }
+     *     ],
+     *     "pagination": {
+     *       "current_page": 1,
+     *       "last_page": 3,
+     *       "per_page": 15,
+     *       "total": 45
+     *     }
+     *   }
+     * }
      */
     public function index(Request $request): JsonResponse
     {
@@ -88,7 +147,35 @@ class CategoryController extends Controller
     }
 
     /**
-     * Get a single category
+     * Get category details (Admin)
+     *
+     * Retrieve detailed information about a specific category including related products.
+     *
+     * @authenticated
+     *
+     * @urlParam category integer required The category ID. Example: 1
+     *
+     * @response 200 scenario="Success" {
+     *   "success": true,
+     *   "data": {
+     *     "id": 1,
+     *     "name": "Coffee Beans",
+     *     "name_ar": "حبوب القهوة",
+     *     "description": "Premium coffee beans from around the world",
+     *     "slug": "coffee-beans",
+     *     "is_active": true,
+     *     "products": [
+     *       {
+     *         "id": 1,
+     *         "name": "Premium Coffee Beans",
+     *         "slug": "premium-coffee-beans",
+     *         "price": 25.00,
+     *         "stock": 100,
+     *         "is_active": true
+     *       }
+     *     ]
+     *   }
+     * }
      */
     public function show(Category $category): JsonResponse
     {
@@ -101,7 +188,38 @@ class CategoryController extends Controller
     }
 
     /**
-     * Create a new category (Admin only)
+     * Create category
+     *
+     * Create a new product category. Requires admin authentication.
+     *
+     * @authenticated
+     *
+     * @bodyParam name string required The category name in English. Example: Coffee Beans
+     * @bodyParam name_ar string The category name in Arabic. Example: حبوب القهوة
+     * @bodyParam description string The category description in English. Example: Premium coffee beans from around the world
+     * @bodyParam description_ar string The category description in Arabic. Example: حبوب قهوة ممتازة من جميع أنحاء العالم
+     * @bodyParam is_active boolean Whether the category is active. Default: true. Example: true
+     * @bodyParam image file The category image (jpeg, png, jpg, gif, webp, max 2MB).
+     *
+     * @response 201 scenario="Success" {
+     *   "success": true,
+     *   "message": "Category created successfully",
+     *   "data": {
+     *     "id": 1,
+     *     "name": "Coffee Beans",
+     *     "name_ar": "حبوب القهوة",
+     *     "description": "Premium coffee beans from around the world",
+     *     "slug": "coffee-beans",
+     *     "is_active": true,
+     *     "created_at": "2024-01-15T10:00:00.000000Z"
+     *   }
+     * }
+     * @response 422 scenario="Validation Error" {
+     *   "message": "The name field is required.",
+     *   "errors": {
+     *     "name": ["The name field is required."]
+     *   }
+     * }
      */
     public function store(Request $request): JsonResponse
     {
@@ -130,7 +248,34 @@ class CategoryController extends Controller
     }
 
     /**
-     * Update a category (Admin only)
+     * Update category
+     *
+     * Update an existing product category. Requires admin authentication.
+     *
+     * @authenticated
+     *
+     * @urlParam category integer required The category ID. Example: 1
+     *
+     * @bodyParam name string The category name in English. Example: Coffee Beans
+     * @bodyParam name_ar string The category name in Arabic. Example: حبوب القهوة
+     * @bodyParam description string The category description in English. Example: Premium coffee beans
+     * @bodyParam description_ar string The category description in Arabic.
+     * @bodyParam is_active boolean Whether the category is active. Example: true
+     * @bodyParam image file The new category image (jpeg, png, jpg, gif, webp, max 2MB).
+     * @bodyParam remove_image boolean Set to true to remove the current image. Example: false
+     *
+     * @response 200 scenario="Success" {
+     *   "success": true,
+     *   "message": "Category updated successfully",
+     *   "data": {
+     *     "id": 1,
+     *     "name": "Coffee Beans",
+     *     "name_ar": "حبوب القهوة",
+     *     "description": "Premium coffee beans",
+     *     "slug": "coffee-beans",
+     *     "is_active": true
+     *   }
+     * }
      */
     public function update(Request $request, Category $category): JsonResponse
     {
@@ -166,7 +311,23 @@ class CategoryController extends Controller
     }
 
     /**
-     * Delete a category (Admin only)
+     * Delete category
+     *
+     * Delete a product category. Categories with existing products cannot be deleted.
+     * Requires admin authentication.
+     *
+     * @authenticated
+     *
+     * @urlParam category integer required The category ID. Example: 1
+     *
+     * @response 200 scenario="Success" {
+     *   "success": true,
+     *   "message": "Category deleted successfully"
+     * }
+     * @response 422 scenario="Has Products" {
+     *   "success": false,
+     *   "message": "Cannot delete category with existing products"
+     * }
      */
     public function destroy(Category $category): JsonResponse
     {
@@ -187,7 +348,55 @@ class CategoryController extends Controller
     }
 
     /**
-     * Get all categories (Public API for testing)
+     * List all categories
+     *
+     * Get a paginated list of all active categories with optional filtering and sorting.
+     * Returns category data in both English and Arabic.
+     *
+     * @unauthenticated
+     *
+     * @queryParam search string Search categories by name or description. Example: coffee
+     * @queryParam sort_by string Sort field (name, created_at). Example: name
+     * @queryParam sort_direction string Sort direction (asc, desc). Default: asc. Example: desc
+     * @queryParam per_page integer Number of items per page. Default: 15. Example: 10
+     *
+     * @response 200 scenario="Success" {
+     *   "success": true,
+     *   "data": {
+     *     "en": [
+     *       {
+     *         "id": 1,
+     *         "name": "Coffee Beans",
+     *         "description": "Premium coffee beans from around the world",
+     *         "slug": "coffee-beans",
+     *         "is_active": true,
+     *         "product_count": 15,
+     *         "image_url": "https://example.com/images/coffee-beans.jpg"
+     *       }
+     *     ],
+     *     "ar": [
+     *       {
+     *         "id": 1,
+     *         "name": "حبوب القهوة",
+     *         "description": "حبوب قهوة ممتازة من جميع أنحاء العالم",
+     *         "slug": "coffee-beans",
+     *         "is_active": true,
+     *         "product_count": 15,
+     *         "image_url": "https://example.com/images/coffee-beans.jpg"
+     *       }
+     *     ]
+     *   },
+     *   "pagination": {
+     *     "current_page": 1,
+     *     "last_page": 3,
+     *     "per_page": 15,
+     *     "total": 45
+     *   },
+     *   "meta": {
+     *     "total_categories": 45,
+     *     "active_categories": 42
+     *   }
+     * }
      */
     public function publicIndex(Request $request): JsonResponse
     {
@@ -262,7 +471,90 @@ class CategoryController extends Controller
     }
 
     /**
-     * Get a single category (Public API for testing)
+     * Get category details
+     *
+     * Retrieve detailed information about a specific active category including related products.
+     * Returns data in both English and Arabic.
+     *
+     * @unauthenticated
+     *
+     * @urlParam category integer required The category ID. Example: 1
+     *
+     * @response 200 scenario="Success" {
+     *   "success": true,
+     *   "data": {
+     *     "en": {
+     *       "id": 1,
+     *       "name": "Coffee Beans",
+     *       "description": "Premium coffee beans from around the world",
+     *       "slug": "coffee-beans",
+     *       "is_active": true,
+     *       "product_count": 15,
+     *       "image_url": "https://example.com/images/coffee-beans.jpg",
+     *       "products": [
+     *         {
+     *           "en": {
+     *             "id": 1,
+     *             "name": "Premium Coffee Beans",
+     *             "slug": "premium-coffee-beans",
+     *             "price": 25.00,
+     *             "stock": 100,
+     *             "sku": "COF-001",
+     *             "is_active": true,
+     *             "image_url": "https://example.com/images/product.jpg"
+     *           },
+     *           "ar": {
+     *             "id": 1,
+     *             "name": "حبوب قهوة ممتازة",
+     *             "slug": "premium-coffee-beans",
+     *             "price": 25.00,
+     *             "stock": 100,
+     *             "sku": "COF-001",
+     *             "is_active": true,
+     *             "image_url": "https://example.com/images/product.jpg"
+     *           }
+     *         }
+     *       ]
+     *     },
+     *     "ar": {
+     *       "id": 1,
+     *       "name": "حبوب القهوة",
+     *       "description": "حبوب قهوة ممتازة من جميع أنحاء العالم",
+     *       "slug": "coffee-beans",
+     *       "is_active": true,
+     *       "product_count": 15,
+     *       "image_url": "https://example.com/images/coffee-beans.jpg",
+     *       "products": [
+     *         {
+     *           "en": {
+     *             "id": 1,
+     *             "name": "Premium Coffee Beans",
+     *             "slug": "premium-coffee-beans",
+     *             "price": 25.00,
+     *             "stock": 100,
+     *             "sku": "COF-001",
+     *             "is_active": true,
+     *             "image_url": "https://example.com/images/product.jpg"
+     *           },
+     *           "ar": {
+     *             "id": 1,
+     *             "name": "حبوب قهوة ممتازة",
+     *             "slug": "premium-coffee-beans",
+     *             "price": 25.00,
+     *             "stock": 100,
+     *             "sku": "COF-001",
+     *             "is_active": true,
+     *             "image_url": "https://example.com/images/product.jpg"
+     *           }
+     *         }
+     *       ]
+     *     }
+     *   }
+     * }
+     * @response 404 scenario="Not Found" {
+     *   "success": false,
+     *   "message": "Category not found"
+     * }
      */
     public function publicShow(Category $category): JsonResponse
     {

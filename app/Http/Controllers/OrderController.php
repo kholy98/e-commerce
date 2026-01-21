@@ -2,18 +2,97 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Cart;
 use App\Models\Order;
-use App\Models\OrderItem;
 use App\Models\Product;
-use Illuminate\Http\Request;
 use Illuminate\Http\JsonResponse;
-use Illuminate\Support\Facades\DB;
+use Illuminate\Http\Request;
 
+/**
+ * @group Orders
+ *
+ * APIs for managing customer orders.
+ *
+ * All endpoints in this group require authentication via Laravel Sanctum.
+ */
 class OrderController extends Controller
 {
     /**
-     * Get all orders for authenticated user
+     * List all orders
+     *
+     * Get a paginated list of orders for the authenticated user.
+     *
+     * @authenticated
+     *
+     * @queryParam status string Filter by order status. Example: pending
+     * @queryParam payment_status string Filter by payment status. Example: paid
+     * @queryParam per_page integer Number of items per page. Default: 15. Example: 10
+     *
+     * @response 200 scenario="Success" {
+     *   "data": {
+     *     "success": true,
+     *     "en": [
+     *       {
+     *         "id": 1,
+     *         "order_number": "ORD-2024-001",
+     *         "user_id": 1,
+     *         "status": "pending",
+     *         "payment_status": "pending",
+     *         "subtotal": 100.00,
+     *         "tax": 10.00,
+     *         "shipping_cost": 15.00,
+     *         "total_amount": 125.00,
+     *         "shipping_address": {
+     *           "street": "123 Main St",
+     *           "city": "Cairo",
+     *           "zip_code": "12345",
+     *           "country": "Egypt",
+     *           "building_number": "15",
+     *           "floor": "3",
+     *           "apartment": "5A",
+     *           "zone": "Maadi"
+     *         },
+     *         "notes": "Please deliver in the morning",
+     *         "created_at": "2024-01-15T10:00:00.000000Z",
+     *         "updated_at": "2024-01-15T10:00:00.000000Z"
+     *       }
+     *     ],
+     *     "ar": [
+     *       {
+     *         "id": 1,
+     *         "order_number": "ORD-2024-001",
+     *         "user_id": 1,
+     *         "status": "قيد الانتظار",
+     *         "payment_status": "pending",
+     *         "subtotal": 100.00,
+     *         "tax": 10.00,
+     *         "shipping_cost": 15.00,
+     *         "total_amount": 125.00,
+     *         "shipping_address": {
+     *           "street": "123 الشارع الرئيسي",
+     *           "city": "القاهرة",
+     *           "zip_code": "12345",
+     *           "country": "مصر",
+     *           "building_number": "15",
+     *           "floor": "3",
+     *           "apartment": "5A",
+     *           "zone": "المعادي"
+     *         },
+     *         "notes": "يرجى التسليم في الصباح",
+     *         "created_at": "2024-01-15T10:00:00.000000Z",
+     *         "updated_at": "2024-01-15T10:00:00.000000Z"
+     *       }
+     *     ],
+     *     "pagination": {
+     *       "current_page": 1,
+     *       "last_page": 5,
+     *       "per_page": 15,
+     *       "total": 75
+     *     }
+     *   }
+     * }
+     * @response 401 scenario="Unauthenticated" {
+     *   "message": "Unauthenticated."
+     * }
      */
     public function index(Request $request): JsonResponse
     {
@@ -85,7 +164,43 @@ class OrderController extends Controller
     }
 
     /**
-     * Get a specific order
+     * Get order details
+     *
+     * Retrieve details of a specific order including all items.
+     *
+     * @authenticated
+     *
+     * @urlParam order integer required The order ID. Example: 1
+     *
+     * @response 200 scenario="Success" {
+     *   "success": true,
+     *   "data": {
+     *     "id": 1,
+     *     "order_number": "ORD-2024-001",
+     *     "user_id": 1,
+     *     "status": "pending",
+     *     "payment_status": "paid",
+     *     "subtotal": 100.00,
+     *     "tax": 10.00,
+     *     "shipping_cost": 15.00,
+     *     "total_amount": 125.00,
+     *     "items": [
+     *       {
+     *         "id": 1,
+     *         "product_id": 5,
+     *         "quantity": 2,
+     *         "price": 50.00,
+     *         "product": {"id": 5, "name": "Premium Coffee"}
+     *       }
+     *     ]
+     *   }
+     * }
+     * @response 403 scenario="Forbidden" {
+     *   "message": "This action is unauthorized."
+     * }
+     * @response 404 scenario="Not Found" {
+     *   "message": "Order not found."
+     * }
      */
     public function show(Order $order): JsonResponse
     {
@@ -100,8 +215,19 @@ class OrderController extends Controller
     }
 
     /**
-     * Create a new order from cart items (DEPRECATED - use checkout flow)
-     * Orders are now created only through checkout process after successful payment and shipment
+     * Create order (Deprecated)
+     *
+     * This endpoint is deprecated. Orders are now created only through the checkout flow after successful payment.
+     *
+     * @authenticated
+     *
+     * @response 422 scenario="Deprecated" {
+     *   "success": false,
+     *   "message": "Direct order creation is deprecated. Please use the checkout flow: POST /checkout/initiate",
+     *   "checkout_url": "/checkout/initiate"
+     * }
+     *
+     * @deprecated Use POST /api/checkout/initiate instead
      */
     public function store(Request $request): JsonResponse
     {
@@ -113,7 +239,32 @@ class OrderController extends Controller
     }
 
     /**
-     * Update order status (Admin only)
+     * Update order status
+     *
+     * Update the status of an order. This endpoint is typically used by administrators.
+     *
+     * @authenticated
+     *
+     * @urlParam order integer required The order ID. Example: 1
+     *
+     * @bodyParam status string required The new order status. Example: shipped
+     * @bodyParam status_ar string Optional Arabic status text. Example: تم الشحن
+     * @bodyParam payment_status string Optional payment status update. Example: paid
+     *
+     * @response 200 scenario="Success" {
+     *   "success": true,
+     *   "message": "Order status updated successfully",
+     *   "data": {
+     *     "id": 1,
+     *     "order_number": "ORD-2024-001",
+     *     "status": "shipped",
+     *     "payment_status": "paid"
+     *   }
+     * }
+     * @response 422 scenario="Validation Error" {
+     *   "message": "The status field is required.",
+     *   "errors": {"status": ["The status field is required."]}
+     * }
      */
     public function updateStatus(Request $request, Order $order): JsonResponse
     {
@@ -133,7 +284,30 @@ class OrderController extends Controller
     }
 
     /**
-     * Cancel an order
+     * Cancel order
+     *
+     * Cancel an existing order. Only orders that haven't been shipped can be cancelled.
+     *
+     * @authenticated
+     *
+     * @urlParam order integer required The order ID. Example: 1
+     *
+     * @response 200 scenario="Success" {
+     *   "success": true,
+     *   "message": "Order cancelled successfully",
+     *   "data": {
+     *     "id": 1,
+     *     "order_number": "ORD-2024-001",
+     *     "status": "cancelled"
+     *   }
+     * }
+     * @response 403 scenario="Forbidden" {
+     *   "message": "This action is unauthorized."
+     * }
+     * @response 422 scenario="Cannot Cancel" {
+     *   "success": false,
+     *   "message": "Order cannot be cancelled after shipping."
+     * }
      */
     public function cancel(Order $order): JsonResponse
     {
@@ -156,7 +330,25 @@ class OrderController extends Controller
     }
 
     /**
-     * Get order statistics (Admin only)
+     * Get order statistics
+     *
+     * Get aggregated order statistics. This endpoint is typically used by administrators for dashboard displays.
+     *
+     * @authenticated
+     *
+     * @response 200 scenario="Success" {
+     *   "success": true,
+     *   "data": {
+     *     "total_orders": 150,
+     *     "pending_orders": 25,
+     *     "processing_orders": 30,
+     *     "shipped_orders": 45,
+     *     "delivered_orders": 40,
+     *     "cancelled_orders": 10,
+     *     "total_revenue": 15000.00,
+     *     "pending_revenue": 2500.00
+     *   }
+     * }
      */
     public function statistics(): JsonResponse
     {

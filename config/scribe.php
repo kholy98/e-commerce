@@ -1,30 +1,44 @@
 <?php
 
-use Knuckles\Scribe\Extracting\Strategies;
-use Knuckles\Scribe\Config\Defaults;
 use Knuckles\Scribe\Config\AuthIn;
-use function Knuckles\Scribe\Config\{removeStrategies, configureStrategy};
+use Knuckles\Scribe\Config\Defaults;
+use Knuckles\Scribe\Extracting\Strategies;
+
+use function Knuckles\Scribe\Config\configureStrategy;
+use function Knuckles\Scribe\Config\removeStrategies;
 
 // Only the most common configs are shown. See the https://scribe.knuckles.wtf/laravel/reference/config for all.
 
 return [
     // The HTML <title> for the generated documentation.
-    'title' => config('app.name') . ' API Documentation',
+    'title' => config('app.name').' API Documentation',
 
     // A short description of your API. Will be included in the docs webpage, Postman collection and OpenAPI spec.
-    'description' => '',
+    'description' => 'E-commerce API for managing products, categories, cart, orders, and more.',
 
     // Text to place in the "Introduction" section, right after the `description`. Markdown and HTML are supported.
-    'intro_text' => <<<INTRO
+    'intro_text' => <<<'INTRO'
         This documentation aims to provide all the information you need to work with our API.
 
         <aside>As you scroll, you'll see code examples for working with the API in different programming languages in the dark area to the right (or as part of the content on mobile).
         You can switch the language used with the tabs at the top right (or from the nav menu at the top left on mobile).</aside>
+
+        ## Authentication
+
+        This API uses **Laravel Sanctum** for authentication. To authenticate, you need to:
+
+        1. Register or login to get an API token
+        2. Include the token in subsequent requests using the `Authorization` header:
+           ```
+           Authorization: Bearer {YOUR_API_TOKEN}
+           ```
+
+        Endpoints marked with a 🔒 require authentication.
     INTRO,
 
     // The base URL displayed in the docs.
     // If you're using `laravel` type, you can set this to a dynamic string, like '{{ config("app.tenant_url") }}' to get a dynamic base URL.
-    'base_url' => config("app.url"),
+    'base_url' => config('app.url'),
 
     // Routes to include in the docs
     'routes' => [
@@ -44,7 +58,7 @@ return [
 
             // Exclude these routes even if they matched the rules above.
             'exclude' => [
-                'api/admin/*'
+                'api/admin/*',
                 // 'GET /health', 'admin.*'
             ],
         ],
@@ -83,7 +97,7 @@ return [
     ],
 
     'external' => [
-        'html_attributes' => []
+        'html_attributes' => [],
     ],
 
     'try_it_out' => [
@@ -104,7 +118,7 @@ return [
     // How is your API authenticated? This information will be used in the displayed docs, generated examples and response calls.
     'auth' => [
         // Set this to true if ANY endpoints in your API use authentication.
-        'enabled' => false,
+        'enabled' => true,
 
         // Set this to true if your API should be authenticated by default. If so, you must also set `enabled` (above) to true.
         // You can then use @unauthenticated or @authenticated on individual endpoints to change their status from the default.
@@ -114,7 +128,7 @@ return [
         'in' => AuthIn::BEARER->value,
 
         // The name of the auth parameter (e.g. token, key, apiKey) or header (e.g. Authorization, Api-Key).
-        'name' => 'key',
+        'name' => 'Authorization',
 
         // The value of the parameter to be used by Scribe to authenticate response calls.
         // This will NOT be included in the generated documentation. If empty, Scribe will use a random value.
@@ -122,10 +136,10 @@ return [
 
         // Placeholder your users will see for the auth parameter in the example requests.
         // Set this to null if you want Scribe to use a random value as placeholder instead.
-        'placeholder' => '{YOUR_AUTH_KEY}',
+        'placeholder' => '{YOUR_API_TOKEN}',
 
         // Any extra authentication-related info for your users. Markdown and HTML are supported.
-        'extra_info' => 'You can retrieve your token by visiting your dashboard and clicking <b>Generate API token</b>.',
+        'extra_info' => 'You can retrieve your token by logging in via the <code>/api/login</code> endpoint. The token should be passed in the <code>Authorization</code> header as a Bearer token.',
     ],
 
     // Example requests for each endpoint will be shown in each of these languages.
@@ -135,6 +149,7 @@ return [
     'example_languages' => [
         'bash',
         'javascript',
+        'php',
     ],
 
     // Generate a Postman collection (v2.1.0) in addition to HTML docs.
@@ -162,7 +177,7 @@ return [
         'version' => '3.0.3',
 
         'overrides' => [
-            // 'info.version' => '2.0.0',
+            'info.version' => '1.0.0',
         ],
 
         // Additional generators to use when generating the OpenAPI spec.
@@ -178,7 +193,19 @@ return [
         // You can override this by listing the groups, subgroups and endpoints here in the order you want them.
         // See https://scribe.knuckles.wtf/blog/laravel-v4#easier-sorting and https://scribe.knuckles.wtf/laravel/reference/config#order for details
         // Note: does not work for `external` docs types
-        'order' => [],
+        'order' => [
+            'Authentication',
+            'Products',
+            'Categories',
+            'Cart',
+            'Checkout',
+            'Orders',
+            'Wishlist',
+            'Payments',
+            'Shipments',
+            'Contact',
+            'Settings',
+        ],
     ],
 
     // Custom logo path. This will be used as the value of the src attribute for the <img> tag,
@@ -243,7 +270,7 @@ return [
         ),
         'responseFields' => [
             ...Defaults::RESPONSE_FIELDS_STRATEGIES,
-        ]
+        ],
     ],
 
     // For response calls, API resource responses and transformer responses,

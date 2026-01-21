@@ -10,10 +10,107 @@ use App\Weight;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 
+/**
+ * @group Products
+ *
+ * APIs for browsing and managing products.
+ *
+ * Public endpoints for listing and viewing products do not require authentication.
+ * Admin endpoints for creating, updating, and deleting products require authentication.
+ */
 class ProductController extends Controller
 {
     /**
-     * Get all products with optional filtering
+     * List all products
+     *
+     * Get a paginated list of all active products with optional filtering, searching, and sorting.
+     * Returns product data in both English and Arabic.
+     *
+     * @unauthenticated
+     *
+     * @queryParam category_id integer Filter products by category ID. Example: 1
+     * @queryParam search string Search products by name or description. Example: coffee
+     * @queryParam sort_by string Sort field (price, name, created_at). Example: price
+     * @queryParam sort_direction string Sort direction (asc, desc). Default: asc. Example: desc
+     * @queryParam per_page integer Number of items per page. Default: 15. Example: 10
+     *
+     * @response 200 scenario="Success" {
+     *   "success": true,
+     *   "data": {
+     *     "en": [
+     *       {
+     *         "id": 1,
+     *         "name": "Premium Coffee Beans",
+     *         "description": "High-quality arabica coffee beans",
+     *         "price": 25.00,
+     *         "cost": 15.00,
+     *         "stock": 100,
+     *         "sku": "COF-001",
+     *         "category_id": 1,
+     *         "is_active": true,
+     *         "slug": "premium-coffee-beans",
+     *         "grind_type": {"en": "Whole Bean", "ar": "حبوب كاملة"},
+     *         "weight": 0.5,
+     *         "weight_label": "500g",
+     *         "product_details": [
+     *           {"title": "Origin", "value": "Ethiopia"},
+     *           {"title": "Roast Level", "value": "Medium"}
+     *         ],
+     *         "created_at": "2024-01-15T10:00:00.000000Z",
+     *         "updated_at": "2024-01-15T10:00:00.000000Z",
+     *         "images": [
+     *           {
+     *             "id": 1,
+     *             "name": "coffee-beans-front",
+     *             "file_name": "coffee-beans-front.jpg",
+     *             "mime_type": "image/jpeg",
+     *             "size": 102400,
+     *             "url": "https://example.com/storage/products/coffee-beans-front.jpg"
+     *           }
+     *         ]
+     *       }
+     *     ],
+     *     "ar": [
+     *       {
+     *         "id": 1,
+     *         "name": "حبوب قهوة ممتازة",
+     *         "description": "حبوب قهوة أرابيكا عالية الجودة",
+     *         "price": 25.00,
+     *         "cost": 15.00,
+     *         "stock": 100,
+     *         "sku": "COF-001",
+     *         "category_id": 1,
+     *         "is_active": true,
+     *         "slug": "premium-coffee-beans",
+     *         "grind_type": {"en": "Whole Bean", "ar": "حبوب كاملة"},
+     *         "weight": 0.5,
+     *         "weight_label": "500g",
+     *         "product_details": [
+     *           {"title": "المنشأ", "value": "إثيوبيا"},
+     *           {"title": "درجة التحميص", "value": "متوسط"}
+     *         ],
+     *         "created_at": "2024-01-15T10:00:00.000000Z",
+     *         "updated_at": "2024-01-15T10:00:00.000000Z",
+     *         "images": [
+     *           {
+     *             "id": 1,
+     *             "name": "coffee-beans-front",
+     *             "file_name": "coffee-beans-front.jpg",
+     *             "mime_type": "image/jpeg",
+     *             "size": 102400,
+     *             "url": "https://example.com/storage/products/coffee-beans-front.jpg"
+     *           }
+     *         ]
+     *       }
+     *     ],
+     *     "pagination": {
+     *       "current_page": 1,
+     *       "last_page": 5,
+     *       "per_page": 15,
+     *       "total": 75
+     *     }
+     *   }
+     * }
      */
     public function index(Request $request): JsonResponse
     {
@@ -142,7 +239,95 @@ class ProductController extends Controller
     }
 
     /**
-     * Get a single product
+     * Get product details
+     *
+     * Retrieve detailed information about a specific product.
+     * Returns product data in both English and Arabic.
+     *
+     * @unauthenticated
+     *
+     * @urlParam product integer required The product ID. Example: 1
+     *
+     * @response 200 scenario="Success" {
+     *   "success": true,
+     *   "data": {
+     *     "en": {
+     *       "id": 1,
+     *       "name": "Premium Coffee Beans",
+     *       "description": "High-quality arabica coffee beans",
+     *       "price": 25.00,
+     *       "cost": 15.00,
+     *       "stock": 100,
+     *       "sku": "COF-001",
+     *       "category_id": 1,
+     *       "is_active": true,
+     *       "grind_type": "whole_bean",
+     *       "grind_type_label": "Whole Bean",
+     *       "weight": 0.5,
+     *       "weight_label": "500g",
+     *       "product_details": [
+     *         {"title": "Origin", "value": "Ethiopia"},
+     *         {"title": "Roast Level", "value": "Medium"}
+     *       ],
+     *       "category": {
+     *         "id": 1,
+     *         "name": "Coffee Beans",
+     *         "slug": "coffee-beans"
+     *       },
+     *       "images": [
+     *         {
+     *           "id": 1,
+     *           "name": "coffee-beans-front",
+     *           "file_name": "coffee-beans-front.jpg",
+     *           "mime_type": "image/jpeg",
+     *           "size": 102400,
+     *           "url": "https://example.com/storage/products/coffee-beans-front.jpg"
+     *         }
+     *       ],
+     *       "created_at": "2024-01-15T10:00:00.000000Z",
+     *       "updated_at": "2024-01-15T10:00:00.000000Z"
+     *     },
+     *     "ar": {
+     *       "id": 1,
+     *       "name": "حبوب قهوة ممتازة",
+     *       "description": "حبوب قهوة أرابيكا عالية الجودة",
+     *       "price": 25.00,
+     *       "cost": 15.00,
+     *       "stock": 100,
+     *       "sku": "COF-001",
+     *       "category_id": 1,
+     *       "is_active": true,
+     *       "grind_type_label": "حبوب كاملة",
+     *       "weight": 0.5,
+     *       "weight_label": "500g",
+     *       "product_details": [
+     *         {"title": "المنشأ", "value": "إثيوبيا"},
+     *         {"title": "درجة التحميص", "value": "متوسط"}
+     *       ],
+     *       "category": {
+     *         "id": 1,
+     *         "name": "حبوب القهوة",
+     *         "slug": "coffee-beans"
+     *       },
+     *       "images": [
+     *         {
+     *           "id": 1,
+     *           "name": "coffee-beans-front",
+     *           "file_name": "coffee-beans-front.jpg",
+     *           "mime_type": "image/jpeg",
+     *           "size": 102400,
+     *           "url": "https://example.com/storage/products/coffee-beans-front.jpg"
+     *         }
+     *       ],
+     *       "created_at": "2024-01-15T10:00:00.000000Z",
+     *       "updated_at": "2024-01-15T10:00:00.000000Z"
+     *     }
+     *   }
+     * }
+     * @response 404 scenario="Not Found" {
+     *   "success": false,
+     *   "message": "Product not found"
+     * }
      */
     public function show(Product $product): JsonResponse
     {
@@ -202,7 +387,7 @@ class ProductController extends Controller
                     'sku' => $product->sku,
                     'category_id' => $product->category_id,
                     'is_active' => $product->is_active,
-                    //'grind_type' => $product->grind_type?->value,
+                    // 'grind_type' => $product->grind_type?->value,
                     'grind_type_label' => $product->grind_type?->labelAr(),
                     'weight' => (float) $product->weight,
                     'weight_label' => Weight::fromKg((float) $product->weight)?->label(),

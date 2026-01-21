@@ -19,11 +19,63 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Route;
 
+/**
+ * @group Authentication
+ *
+ * Get authenticated user
+ *
+ * Retrieve the currently authenticated user's information.
+ *
+ * @authenticated
+ *
+ * @response 200 scenario="Success" {
+ *   "id": 1,
+ *   "name": "John Doe",
+ *   "email": "john@example.com",
+ *   "email_verified_at": "2024-01-15T10:00:00.000000Z",
+ *   "created_at": "2024-01-15T10:00:00.000000Z",
+ *   "updated_at": "2024-01-15T10:00:00.000000Z"
+ * }
+ * @response 401 scenario="Unauthenticated" {
+ *   "message": "Unauthenticated."
+ * }
+ */
 Route::get('/user', function (Request $request) {
     return $request->user();
 })->middleware('auth:sanctum');
 
-// Authentication routes
+/**
+ * @group Authentication
+ *
+ * Register a new user
+ *
+ * Create a new user account and receive an API token.
+ * If the user has items in their guest cart, they will be migrated to the new account.
+ *
+ * @unauthenticated
+ *
+ * @bodyParam name string required The user's full name. Example: John Doe
+ * @bodyParam email string required The user's email address (must be unique). Example: john@example.com
+ * @bodyParam password string required The password (minimum 8 characters). Example: password123
+ * @bodyParam password_confirmation string required Password confirmation (must match password). Example: password123
+ *
+ * @response 200 scenario="Success" {
+ *   "user": {
+ *     "id": 1,
+ *     "name": "John Doe",
+ *     "email": "john@example.com",
+ *     "updated_at": "2024-01-15T10:00:00.000000Z",
+ *     "created_at": "2024-01-15T10:00:00.000000Z"
+ *   },
+ *   "token": "1|abc123def456..."
+ * }
+ * @response 422 scenario="Validation Error" {
+ *   "message": "The email has already been taken.",
+ *   "errors": {
+ *     "email": ["The email has already been taken."]
+ *   }
+ * }
+ */
 Route::post('/register', function (Request $request, SessionCartService $cartService) {
     $request->validate([
         'name' => 'required|string|max:255',
@@ -50,6 +102,40 @@ Route::post('/register', function (Request $request, SessionCartService $cartSer
     ]);
 });
 
+/**
+ * @group Authentication
+ *
+ * Login
+ *
+ * Authenticate a user and receive an API token.
+ * If the user has items in their guest cart, they will be migrated to their account.
+ *
+ * @unauthenticated
+ *
+ * @bodyParam email string required The user's email address. Example: john@example.com
+ * @bodyParam password string required The user's password. Example: password123
+ *
+ * @response 200 scenario="Success" {
+ *   "user": {
+ *     "id": 1,
+ *     "name": "John Doe",
+ *     "email": "john@example.com",
+ *     "email_verified_at": "2024-01-15T10:00:00.000000Z",
+ *     "created_at": "2024-01-15T10:00:00.000000Z",
+ *     "updated_at": "2024-01-15T10:00:00.000000Z"
+ *   },
+ *   "token": "1|abc123def456..."
+ * }
+ * @response 401 scenario="Invalid Credentials" {
+ *   "message": "Invalid credentials"
+ * }
+ * @response 422 scenario="Validation Error" {
+ *   "message": "The email field is required.",
+ *   "errors": {
+ *     "email": ["The email field is required."]
+ *   }
+ * }
+ */
 Route::post('/login', function (Request $request, SessionCartService $cartService) {
     $request->validate([
         'email' => 'required|string|email',
@@ -75,6 +161,22 @@ Route::post('/login', function (Request $request, SessionCartService $cartServic
     ]);
 });
 
+/**
+ * @group Authentication
+ *
+ * Logout
+ *
+ * Invalidate the current API token and log out the user.
+ *
+ * @authenticated
+ *
+ * @response 200 scenario="Success" {
+ *   "message": "Logged out successfully"
+ * }
+ * @response 401 scenario="Unauthenticated" {
+ *   "message": "Unauthenticated."
+ * }
+ */
 Route::post('/logout', function (Request $request) {
     $token = $request->user()->currentAccessToken();
 
