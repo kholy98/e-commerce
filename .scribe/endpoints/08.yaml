@@ -1,27 +1,31 @@
-name: 'Customer Addresses'
+name: Wishlist
 description: |-
 
-  APIs for managing customer addresses.
-  All endpoints require authentication.
+  APIs for managing user wishlists.
+
+  All endpoints in this group require authentication via Laravel Sanctum.
+  Users can save products to their wishlist for later purchase.
 endpoints:
   -
     custom: []
     httpMethods:
       - GET
-    uri: api/addresses
+    uri: api/wishlist
     metadata:
       custom: []
-      groupName: 'Customer Addresses'
+      groupName: Wishlist
       groupDescription: |-
 
-        APIs for managing customer addresses.
-        All endpoints require authentication.
+        APIs for managing user wishlists.
+
+        All endpoints in this group require authentication via Laravel Sanctum.
+        Users can save products to their wishlist for later purchase.
       subgroup: ''
       subgroupDescription: ''
-      title: 'List all customer addresses'
+      title: 'List wishlist items'
       description: |-
-        Get a paginated list of all addresses for the authenticated user.
-        Addresses are ordered by default status (default first) then by creation date.
+        Get all products in the authenticated user's wishlist.
+        Returns product data in both English and Arabic.
       authenticated: true
       deprecated: false
     headers:
@@ -41,53 +45,62 @@ endpoints:
         status: 200
         content: |-
           {
-            "success": true,
-            "data": [
-              {
-                "id": 1,
-                "user_id": 1,
-                "label": "Home",
-                "name": "John Doe",
-                "phone": "+201234567890",
-                "address": "123 Main St, Cairo, Egypt",
-                "street": "123 Main St",
-                "building_number": "15",
-                "floor": "3",
-                "apartment": "5A",
-                "zone": "Maadi",
-                "city": "Cairo",
-                "zip_code": "12345",
-                "country": "Egypt",
-                "state": "Cairo Governorate",
-                "is_default": true,
-                "is_billing": true,
-                "is_shipping": true,
-                "created_at": "2024-01-15T10:00:00.000000Z",
-                "updated_at": "2024-01-15T10:00:00.000000Z"
-              },
-              {
-                "id": 2,
-                "user_id": 1,
-                "label": "Work",
-                "name": "John Doe",
-                "phone": "+201234567891",
-                "address": "456 Business Ave, Cairo, Egypt",
-                "street": "456 Business Ave",
-                "building_number": "20",
-                "floor": "5",
-                "apartment": "10B",
-                "zone": "New Cairo",
-                "city": "Cairo",
-                "zip_code": "12346",
-                "country": "Egypt",
-                "state": "Cairo Governorate",
-                "is_default": false,
-                "is_billing": false,
-                "is_shipping": true,
-                "created_at": "2024-01-16T10:00:00.000000Z",
-                "updated_at": "2024-01-16T10:00:00.000000Z"
-              }
-            ]
+            "en": {
+              "products": [
+                {
+                  "id": 1,
+                  "name": "Premium Coffee Beans",
+                  "description": "High-quality arabica coffee beans",
+                  "wishlist_item_id": 5,
+                  "added_at": "2024-01-15T10:00:00.000000Z",
+                  "slug": "premium-coffee-beans",
+                  "price": 25.00,
+                  "cost": 15.00,
+                  "stock": 100,
+                  "sku": "COF-001",
+                  "is_active": true,
+                  "category_id": 1,
+                  "grind_type": "whole_bean",
+                  "weight": 0.5,
+                  "product_details": [
+                    {"title": "Origin", "value": "Ethiopia"},
+                    {"title": "Roast Level", "value": "Medium"}
+                  ],
+                  "image": "https://example.com/images/coffee.jpg",
+                  "created_at": "2024-01-15T10:00:00.000000Z",
+                  "updated_at": "2024-01-15T10:00:00.000000Z"
+                }
+              ],
+              "count": 1
+            },
+            "ar": {
+              "products": [
+                {
+                  "id": 1,
+                  "name": "حبوب قهوة ممتازة",
+                  "description": "حبوب قهوة أرابيكا عالية الجودة",
+                  "wishlist_item_id": 5,
+                  "added_at": "2024-01-15T10:00:00.000000Z",
+                  "slug": "premium-coffee-beans",
+                  "price": 25.00,
+                  "cost": 15.00,
+                  "stock": 100,
+                  "sku": "COF-001",
+                  "is_active": true,
+                  "category_id": 1,
+                  "grind_type": "whole_bean",
+                  "weight": 0.5,
+                  "product_details": [
+                    {"title": "المنشأ", "value": "إثيوبيا"},
+                    {"title": "درجة التحميص", "value": "متوسط"}
+                  ],
+                  "image": "https://example.com/images/coffee.jpg",
+                  "created_at": "2024-01-15T10:00:00.000000Z",
+                  "updated_at": "2024-01-15T10:00:00.000000Z"
+                }
+              ],
+              "count": 1
+            }
           }
         headers: []
         description: Success
@@ -112,20 +125,20 @@ endpoints:
     custom: []
     httpMethods:
       - POST
-    uri: api/addresses
+    uri: api/wishlist
     metadata:
       custom: []
-      groupName: 'Customer Addresses'
+      groupName: Wishlist
       groupDescription: |-
 
-        APIs for managing customer addresses.
-        All endpoints require authentication.
+        APIs for managing user wishlists.
+
+        All endpoints in this group require authentication via Laravel Sanctum.
+        Users can save products to their wishlist for later purchase.
       subgroup: ''
       subgroupDescription: ''
-      title: 'Create a new customer address'
-      description: |-
-        Create a new address for the authenticated user.
-        If is_default is set to true, all other addresses will be unset as default.
+      title: 'Add to wishlist'
+      description: "Add a product to the authenticated user's wishlist."
       authenticated: true
       deprecated: false
     headers:
@@ -137,199 +150,19 @@ endpoints:
     queryParameters: []
     cleanQueryParameters: []
     bodyParameters:
-      label:
+      product_id:
         custom: []
-        name: label
-        description: 'optional A custom label for the address (e.g., "Home", "Work").'
-        required: false
-        example: Home
-        type: string
-        enumValues: []
-        exampleWasSpecified: true
-        nullable: true
-        deprecated: false
-      name:
-        custom: []
-        name: name
-        description: 'The full name of the recipient.'
+        name: product_id
+        description: 'The ID of the product to add.'
         required: true
-        example: 'John Doe'
-        type: string
-        enumValues: []
-        exampleWasSpecified: true
-        nullable: false
-        deprecated: false
-      phone:
-        custom: []
-        name: phone
-        description: 'The phone number.'
-        required: true
-        example: '+201234567890'
-        type: string
-        enumValues: []
-        exampleWasSpecified: true
-        nullable: false
-        deprecated: false
-      address:
-        custom: []
-        name: address
-        description: 'The full address text.'
-        required: true
-        example: '123 Main St, Cairo, Egypt'
-        type: string
-        enumValues: []
-        exampleWasSpecified: true
-        nullable: false
-        deprecated: false
-      street:
-        custom: []
-        name: street
-        description: 'optional The street name.'
-        required: false
-        example: '123 Main St'
-        type: string
-        enumValues: []
-        exampleWasSpecified: true
-        nullable: true
-        deprecated: false
-      building_number:
-        custom: []
-        name: building_number
-        description: 'optional The building number.'
-        required: false
-        example: '15'
-        type: string
-        enumValues: []
-        exampleWasSpecified: true
-        nullable: true
-        deprecated: false
-      floor:
-        custom: []
-        name: floor
-        description: 'optional The floor number.'
-        required: false
-        example: '3'
-        type: string
-        enumValues: []
-        exampleWasSpecified: true
-        nullable: true
-        deprecated: false
-      apartment:
-        custom: []
-        name: apartment
-        description: 'optional The apartment number.'
-        required: false
-        example: 5A
-        type: string
-        enumValues: []
-        exampleWasSpecified: true
-        nullable: true
-        deprecated: false
-      zone:
-        custom: []
-        name: zone
-        description: 'optional The zone/area.'
-        required: false
-        example: Maadi
-        type: string
-        enumValues: []
-        exampleWasSpecified: true
-        nullable: true
-        deprecated: false
-      city:
-        custom: []
-        name: city
-        description: 'The city name.'
-        required: true
-        example: Cairo
-        type: string
-        enumValues: []
-        exampleWasSpecified: true
-        nullable: false
-        deprecated: false
-      zip_code:
-        custom: []
-        name: zip_code
-        description: 'The postal/ZIP code.'
-        required: true
-        example: '12345'
-        type: string
-        enumValues: []
-        exampleWasSpecified: true
-        nullable: false
-        deprecated: false
-      country:
-        custom: []
-        name: country
-        description: 'The country name.'
-        required: true
-        example: Egypt
-        type: string
-        enumValues: []
-        exampleWasSpecified: true
-        nullable: false
-        deprecated: false
-      state:
-        custom: []
-        name: state
-        description: 'optional The state/province.'
-        required: false
-        example: 'Cairo Governorate'
-        type: string
-        enumValues: []
-        exampleWasSpecified: true
-        nullable: true
-        deprecated: false
-      is_default:
-        custom: []
-        name: is_default
-        description: 'optional Whether this should be the default address. Default: false.'
-        required: false
-        example: true
-        type: boolean
-        enumValues: []
-        exampleWasSpecified: true
-        nullable: false
-        deprecated: false
-      is_billing:
-        custom: []
-        name: is_billing
-        description: 'optional Whether this can be used for billing. Default: false.'
-        required: false
-        example: true
-        type: boolean
-        enumValues: []
-        exampleWasSpecified: true
-        nullable: false
-        deprecated: false
-      is_shipping:
-        custom: []
-        name: is_shipping
-        description: 'optional Whether this can be used for shipping. Default: false.'
-        required: false
-        example: true
-        type: boolean
+        example: 1
+        type: integer
         enumValues: []
         exampleWasSpecified: true
         nullable: false
         deprecated: false
     cleanBodyParameters:
-      label: Home
-      name: 'John Doe'
-      phone: '+201234567890'
-      address: '123 Main St, Cairo, Egypt'
-      street: '123 Main St'
-      building_number: '15'
-      floor: '3'
-      apartment: 5A
-      zone: Maadi
-      city: Cairo
-      zip_code: '12345'
-      country: Egypt
-      state: 'Cairo Governorate'
-      is_default: true
-      is_billing: true
-      is_shipping: true
+      product_id: 1
     fileParameters: []
     responses:
       -
@@ -337,29 +170,11 @@ endpoints:
         status: 201
         content: |-
           {
-            "success": true,
-            "message": "Address created successfully",
+            "message": "Product added to wishlist successfully",
             "data": {
-              "id": 1,
-              "user_id": 1,
-              "label": "Home",
-              "name": "John Doe",
-              "phone": "+201234567890",
-              "address": "123 Main St, Cairo, Egypt",
-              "street": "123 Main St",
-              "building_number": "15",
-              "floor": "3",
-              "apartment": "5A",
-              "zone": "Maadi",
-              "city": "Cairo",
-              "zip_code": "12345",
-              "country": "Egypt",
-              "state": "Cairo Governorate",
-              "is_default": true,
-              "is_billing": true,
-              "is_shipping": true,
-              "created_at": "2024-01-15T10:00:00.000000Z",
-              "updated_at": "2024-01-15T10:00:00.000000Z"
+              "id": 5,
+              "product_id": 1,
+              "created_at": "2024-01-15T10:00:00.000000Z"
             }
           }
         headers: []
@@ -378,445 +193,19 @@ endpoints:
         status: 422
         content: |-
           {
-            "message": "The given data was invalid.",
-            "errors": {
-              "name": ["The name field is required."],
-              "city": ["The city field is required."]
-            }
+            "message": "Product is already in your wishlist"
           }
         headers: []
-        description: 'Validation Error'
-    responseFields: []
-    auth:
-      - headers
-      - Authorization
-      - 'Bearer 6g43cv8PD1aE5beadkZfhV6'
-    controller: null
-    method: null
-    route: null
-  -
-    custom: []
-    httpMethods:
-      - GET
-    uri: 'api/addresses/{address_id}'
-    metadata:
-      custom: []
-      groupName: 'Customer Addresses'
-      groupDescription: |-
-
-        APIs for managing customer addresses.
-        All endpoints require authentication.
-      subgroup: ''
-      subgroupDescription: ''
-      title: 'Get a specific customer address'
-      description: 'Retrieve details of a specific address belonging to the authenticated user.'
-      authenticated: true
-      deprecated: false
-    headers:
-      Authorization: 'Bearer {YOUR_API_TOKEN}'
-      Content-Type: application/json
-      Accept: application/json
-    urlParameters:
-      address_id:
-        custom: []
-        name: address_id
-        description: 'The ID of the address.'
-        required: true
-        example: 1
-        type: integer
-        enumValues: []
-        exampleWasSpecified: false
-        nullable: false
-        deprecated: false
-      address:
-        custom: []
-        name: address
-        description: 'The address ID.'
-        required: true
-        example: 1
-        type: integer
-        enumValues: []
-        exampleWasSpecified: true
-        nullable: false
-        deprecated: false
-    cleanUrlParameters:
-      address_id: 1
-      address: 1
-    queryParameters: []
-    cleanQueryParameters: []
-    bodyParameters: []
-    cleanBodyParameters: []
-    fileParameters: []
-    responses:
-      -
-        custom: []
-        status: 200
-        content: |-
-          {
-            "success": true,
-            "data": {
-              "id": 1,
-              "user_id": 1,
-              "label": "Home",
-              "name": "John Doe",
-              "phone": "+201234567890",
-              "address": "123 Main St, Cairo, Egypt",
-              "street": "123 Main St",
-              "building_number": "15",
-              "floor": "3",
-              "apartment": "5A",
-              "zone": "Maadi",
-              "city": "Cairo",
-              "zip_code": "12345",
-              "country": "Egypt",
-              "state": "Cairo Governorate",
-              "is_default": true,
-              "is_billing": true,
-              "is_shipping": true,
-              "created_at": "2024-01-15T10:00:00.000000Z",
-              "updated_at": "2024-01-15T10:00:00.000000Z"
-            }
-          }
-        headers: []
-        description: Success
-      -
-        custom: []
-        status: 401
-        content: |-
-          {
-            "message": "Unauthenticated."
-          }
-        headers: []
-        description: Unauthenticated
-      -
-        custom: []
-        status: 404
-        content: |-
-          {
-            "success": false,
-            "message": "Address not found"
-          }
-        headers: []
-        description: 'Not Found'
-    responseFields: []
-    auth:
-      - headers
-      - Authorization
-      - 'Bearer 6g43cv8PD1aE5beadkZfhV6'
-    controller: null
-    method: null
-    route: null
-  -
-    custom: []
-    httpMethods:
-      - PUT
-    uri: 'api/addresses/{address_id}'
-    metadata:
-      custom: []
-      groupName: 'Customer Addresses'
-      groupDescription: |-
-
-        APIs for managing customer addresses.
-        All endpoints require authentication.
-      subgroup: ''
-      subgroupDescription: ''
-      title: 'Update a customer address'
-      description: |-
-        Update an existing address belonging to the authenticated user.
-        If is_default is set to true, all other addresses will be unset as default.
-      authenticated: true
-      deprecated: false
-    headers:
-      Authorization: 'Bearer {YOUR_API_TOKEN}'
-      Content-Type: application/json
-      Accept: application/json
-    urlParameters:
-      address_id:
-        custom: []
-        name: address_id
-        description: 'The ID of the address.'
-        required: true
-        example: 1
-        type: integer
-        enumValues: []
-        exampleWasSpecified: false
-        nullable: false
-        deprecated: false
-      address:
-        custom: []
-        name: address
-        description: 'The address ID.'
-        required: true
-        example: 1
-        type: integer
-        enumValues: []
-        exampleWasSpecified: true
-        nullable: false
-        deprecated: false
-    cleanUrlParameters:
-      address_id: 1
-      address: 1
-    queryParameters: []
-    cleanQueryParameters: []
-    bodyParameters:
-      label:
-        custom: []
-        name: label
-        description: 'optional A custom label for the address (e.g., "Home", "Work").'
-        required: false
-        example: Home
-        type: string
-        enumValues: []
-        exampleWasSpecified: true
-        nullable: true
-        deprecated: false
-      name:
-        custom: []
-        name: name
-        description: 'The full name of the recipient.'
-        required: true
-        example: 'John Doe'
-        type: string
-        enumValues: []
-        exampleWasSpecified: true
-        nullable: false
-        deprecated: false
-      phone:
-        custom: []
-        name: phone
-        description: 'The phone number.'
-        required: true
-        example: '+201234567890'
-        type: string
-        enumValues: []
-        exampleWasSpecified: true
-        nullable: false
-        deprecated: false
-      address:
-        custom: []
-        name: address
-        description: 'The full address text.'
-        required: true
-        example: '123 Main St, Cairo, Egypt'
-        type: string
-        enumValues: []
-        exampleWasSpecified: true
-        nullable: false
-        deprecated: false
-      street:
-        custom: []
-        name: street
-        description: 'optional The street name.'
-        required: false
-        example: '123 Main St'
-        type: string
-        enumValues: []
-        exampleWasSpecified: true
-        nullable: true
-        deprecated: false
-      building_number:
-        custom: []
-        name: building_number
-        description: 'optional The building number.'
-        required: false
-        example: '15'
-        type: string
-        enumValues: []
-        exampleWasSpecified: true
-        nullable: true
-        deprecated: false
-      floor:
-        custom: []
-        name: floor
-        description: 'optional The floor number.'
-        required: false
-        example: '3'
-        type: string
-        enumValues: []
-        exampleWasSpecified: true
-        nullable: true
-        deprecated: false
-      apartment:
-        custom: []
-        name: apartment
-        description: 'optional The apartment number.'
-        required: false
-        example: 5A
-        type: string
-        enumValues: []
-        exampleWasSpecified: true
-        nullable: true
-        deprecated: false
-      zone:
-        custom: []
-        name: zone
-        description: 'optional The zone/area.'
-        required: false
-        example: Maadi
-        type: string
-        enumValues: []
-        exampleWasSpecified: true
-        nullable: true
-        deprecated: false
-      city:
-        custom: []
-        name: city
-        description: 'The city name.'
-        required: true
-        example: Cairo
-        type: string
-        enumValues: []
-        exampleWasSpecified: true
-        nullable: false
-        deprecated: false
-      zip_code:
-        custom: []
-        name: zip_code
-        description: 'The postal/ZIP code.'
-        required: true
-        example: '12345'
-        type: string
-        enumValues: []
-        exampleWasSpecified: true
-        nullable: false
-        deprecated: false
-      country:
-        custom: []
-        name: country
-        description: 'The country name.'
-        required: true
-        example: Egypt
-        type: string
-        enumValues: []
-        exampleWasSpecified: true
-        nullable: false
-        deprecated: false
-      state:
-        custom: []
-        name: state
-        description: 'optional The state/province.'
-        required: false
-        example: 'Cairo Governorate'
-        type: string
-        enumValues: []
-        exampleWasSpecified: true
-        nullable: true
-        deprecated: false
-      is_default:
-        custom: []
-        name: is_default
-        description: 'optional Whether this should be the default address.'
-        required: false
-        example: true
-        type: boolean
-        enumValues: []
-        exampleWasSpecified: true
-        nullable: false
-        deprecated: false
-      is_billing:
-        custom: []
-        name: is_billing
-        description: 'optional Whether this can be used for billing.'
-        required: false
-        example: true
-        type: boolean
-        enumValues: []
-        exampleWasSpecified: true
-        nullable: false
-        deprecated: false
-      is_shipping:
-        custom: []
-        name: is_shipping
-        description: 'optional Whether this can be used for shipping.'
-        required: false
-        example: true
-        type: boolean
-        enumValues: []
-        exampleWasSpecified: true
-        nullable: false
-        deprecated: false
-    cleanBodyParameters:
-      label: Home
-      name: 'John Doe'
-      phone: '+201234567890'
-      address: '123 Main St, Cairo, Egypt'
-      street: '123 Main St'
-      building_number: '15'
-      floor: '3'
-      apartment: 5A
-      zone: Maadi
-      city: Cairo
-      zip_code: '12345'
-      country: Egypt
-      state: 'Cairo Governorate'
-      is_default: true
-      is_billing: true
-      is_shipping: true
-    fileParameters: []
-    responses:
-      -
-        custom: []
-        status: 200
-        content: |-
-          {
-            "success": true,
-            "message": "Address updated successfully",
-            "data": {
-              "id": 1,
-              "user_id": 1,
-              "label": "Home Updated",
-              "name": "John Doe",
-              "phone": "+201234567890",
-              "address": "123 Main St, Cairo, Egypt",
-              "street": "123 Main St",
-              "building_number": "15",
-              "floor": "3",
-              "apartment": "5A",
-              "zone": "Maadi",
-              "city": "Cairo",
-              "zip_code": "12345",
-              "country": "Egypt",
-              "state": "Cairo Governorate",
-              "is_default": true,
-              "is_billing": true,
-              "is_shipping": true,
-              "created_at": "2024-01-15T10:00:00.000000Z",
-              "updated_at": "2024-01-15T11:00:00.000000Z"
-            }
-          }
-        headers: []
-        description: Success
-      -
-        custom: []
-        status: 401
-        content: |-
-          {
-            "message": "Unauthenticated."
-          }
-        headers: []
-        description: Unauthenticated
-      -
-        custom: []
-        status: 404
-        content: |-
-          {
-            "success": false,
-            "message": "Address not found"
-          }
-        headers: []
-        description: 'Not Found'
+        description: 'Already in Wishlist'
       -
         custom: []
         status: 422
         content: |-
           {
-            "message": "The given data was invalid.",
-            "errors": {
-              "name": ["The name field is required."]
-            }
+            "message": "Product is not available"
           }
         headers: []
-        description: 'Validation Error'
+        description: 'Product Unavailable'
     responseFields: []
     auth:
       - headers
@@ -829,18 +218,20 @@ endpoints:
     custom: []
     httpMethods:
       - DELETE
-    uri: 'api/addresses/{address_id}'
+    uri: 'api/wishlist/{productId}'
     metadata:
       custom: []
-      groupName: 'Customer Addresses'
+      groupName: Wishlist
       groupDescription: |-
 
-        APIs for managing customer addresses.
-        All endpoints require authentication.
+        APIs for managing user wishlists.
+
+        All endpoints in this group require authentication via Laravel Sanctum.
+        Users can save products to their wishlist for later purchase.
       subgroup: ''
       subgroupDescription: ''
-      title: 'Delete a customer address'
-      description: 'Delete an existing address belonging to the authenticated user.'
+      title: 'Remove from wishlist'
+      description: "Remove a product from the authenticated user's wishlist."
       authenticated: true
       deprecated: false
     headers:
@@ -848,21 +239,10 @@ endpoints:
       Content-Type: application/json
       Accept: application/json
     urlParameters:
-      address_id:
+      productId:
         custom: []
-        name: address_id
-        description: 'The ID of the address.'
-        required: true
-        example: 1
-        type: integer
-        enumValues: []
-        exampleWasSpecified: false
-        nullable: false
-        deprecated: false
-      address:
-        custom: []
-        name: address
-        description: 'The address ID.'
+        name: productId
+        description: 'The product ID to remove.'
         required: true
         example: 1
         type: integer
@@ -871,8 +251,7 @@ endpoints:
         nullable: false
         deprecated: false
     cleanUrlParameters:
-      address_id: 1
-      address: 1
+      productId: 1
     queryParameters: []
     cleanQueryParameters: []
     bodyParameters: []
@@ -884,8 +263,7 @@ endpoints:
         status: 200
         content: |-
           {
-            "success": true,
-            "message": "Address deleted successfully"
+            "message": "Product removed from wishlist successfully"
           }
         headers: []
         description: Success
@@ -903,8 +281,7 @@ endpoints:
         status: 404
         content: |-
           {
-            "success": false,
-            "message": "Address not found"
+            "message": "Product not found in your wishlist"
           }
         headers: []
         description: 'Not Found'
@@ -919,21 +296,21 @@ endpoints:
   -
     custom: []
     httpMethods:
-      - PATCH
-    uri: 'api/addresses/{address_id}/default'
+      - GET
+    uri: 'api/wishlist/check/{productId}'
     metadata:
       custom: []
-      groupName: 'Customer Addresses'
+      groupName: Wishlist
       groupDescription: |-
 
-        APIs for managing customer addresses.
-        All endpoints require authentication.
+        APIs for managing user wishlists.
+
+        All endpoints in this group require authentication via Laravel Sanctum.
+        Users can save products to their wishlist for later purchase.
       subgroup: ''
       subgroupDescription: ''
-      title: 'Set address as default'
-      description: |-
-        Set a specific address as the default address for the authenticated user.
-        All other addresses will be unset as default.
+      title: 'Check if in wishlist'
+      description: "Check if a specific product is in the authenticated user's wishlist."
       authenticated: true
       deprecated: false
     headers:
@@ -941,21 +318,10 @@ endpoints:
       Content-Type: application/json
       Accept: application/json
     urlParameters:
-      address_id:
+      productId:
         custom: []
-        name: address_id
-        description: 'The ID of the address.'
-        required: true
-        example: 1
-        type: integer
-        enumValues: []
-        exampleWasSpecified: false
-        nullable: false
-        deprecated: false
-      address:
-        custom: []
-        name: address
-        description: 'The address ID.'
+        name: productId
+        description: 'The product ID to check.'
         required: true
         example: 1
         type: integer
@@ -964,8 +330,7 @@ endpoints:
         nullable: false
         deprecated: false
     cleanUrlParameters:
-      address_id: 1
-      address: 1
+      productId: 1
     queryParameters: []
     cleanQueryParameters: []
     bodyParameters: []
@@ -977,30 +342,75 @@ endpoints:
         status: 200
         content: |-
           {
-            "success": true,
-            "message": "Address set as default successfully",
-            "data": {
-              "id": 1,
-              "user_id": 1,
-              "label": "Home",
-              "name": "John Doe",
-              "phone": "+201234567890",
-              "address": "123 Main St, Cairo, Egypt",
-              "street": "123 Main St",
-              "building_number": "15",
-              "floor": "3",
-              "apartment": "5A",
-              "zone": "Maadi",
-              "city": "Cairo",
-              "zip_code": "12345",
-              "country": "Egypt",
-              "state": "Cairo Governorate",
-              "is_default": true,
-              "is_billing": true,
-              "is_shipping": true,
-              "created_at": "2024-01-15T10:00:00.000000Z",
-              "updated_at": "2024-01-15T11:00:00.000000Z"
-            }
+            "in_wishlist": true
+          }
+        headers: []
+        description: 'In Wishlist'
+      -
+        custom: []
+        status: 200
+        content: |-
+          {
+            "in_wishlist": false
+          }
+        headers: []
+        description: 'Not in Wishlist'
+      -
+        custom: []
+        status: 401
+        content: |-
+          {
+            "message": "Unauthenticated."
+          }
+        headers: []
+        description: Unauthenticated
+    responseFields: []
+    auth:
+      - headers
+      - Authorization
+      - 'Bearer 6g43cv8PD1aE5beadkZfhV6'
+    controller: null
+    method: null
+    route: null
+  -
+    custom: []
+    httpMethods:
+      - DELETE
+    uri: api/wishlist
+    metadata:
+      custom: []
+      groupName: Wishlist
+      groupDescription: |-
+
+        APIs for managing user wishlists.
+
+        All endpoints in this group require authentication via Laravel Sanctum.
+        Users can save products to their wishlist for later purchase.
+      subgroup: ''
+      subgroupDescription: ''
+      title: 'Clear wishlist'
+      description: "Remove all products from the authenticated user's wishlist."
+      authenticated: true
+      deprecated: false
+    headers:
+      Authorization: 'Bearer {YOUR_API_TOKEN}'
+      Content-Type: application/json
+      Accept: application/json
+    urlParameters: []
+    cleanUrlParameters: []
+    queryParameters: []
+    cleanQueryParameters: []
+    bodyParameters: []
+    cleanBodyParameters: []
+    fileParameters: []
+    responses:
+      -
+        custom: []
+        status: 200
+        content: |-
+          {
+            "message": "Wishlist cleared successfully",
+            "deleted_count": 5
           }
         headers: []
         description: Success
@@ -1013,16 +423,6 @@ endpoints:
           }
         headers: []
         description: Unauthenticated
-      -
-        custom: []
-        status: 404
-        content: |-
-          {
-            "success": false,
-            "message": "Address not found"
-          }
-        headers: []
-        description: 'Not Found'
     responseFields: []
     auth:
       - headers

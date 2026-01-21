@@ -1,31 +1,23 @@
-name: Products
-description: |-
-
-  APIs for browsing and managing products.
-
-  Public endpoints for listing and viewing products do not require authentication.
-  Admin endpoints for creating, updating, and deleting products require authentication.
+name: Authentication
+description: ''
 endpoints:
   -
     custom: []
     httpMethods:
-      - GET
-    uri: api/products
+      - POST
+    uri: api/register
     metadata:
       custom: []
-      groupName: Products
-      groupDescription: |-
-
-        APIs for browsing and managing products.
-
-        Public endpoints for listing and viewing products do not require authentication.
-        Admin endpoints for creating, updating, and deleting products require authentication.
+      groupName: Authentication
+      groupDescription: ''
       subgroup: ''
       subgroupDescription: ''
-      title: 'List all products'
-      description: |-
-        Get a paginated list of all active products with optional filtering, searching, and sorting.
-        Returns product data in both English and Arabic.
+      title: |-
+        Register a new user
+
+        Create a new user account and receive an API token.
+        If the user has items in their guest cart, they will be migrated to the new account.
+      description: ''
       authenticated: false
       deprecated: false
     headers:
@@ -33,70 +25,58 @@ endpoints:
       Accept: application/json
     urlParameters: []
     cleanUrlParameters: []
-    queryParameters:
-      category_id:
+    queryParameters: []
+    cleanQueryParameters: []
+    bodyParameters:
+      name:
         custom: []
-        name: category_id
-        description: 'Filter products by category ID.'
-        required: false
-        example: 1
-        type: integer
-        enumValues: []
-        exampleWasSpecified: true
-        nullable: false
-        deprecated: false
-      search:
-        custom: []
-        name: search
-        description: 'Search products by name or description.'
-        required: false
-        example: coffee
+        name: name
+        description: "The user's full name."
+        required: true
+        example: 'John Doe'
         type: string
         enumValues: []
         exampleWasSpecified: true
         nullable: false
         deprecated: false
-      sort_by:
+      email:
         custom: []
-        name: sort_by
-        description: 'Sort field (price, name, created_at).'
-        required: false
-        example: price
+        name: email
+        description: "The user's email address (must be unique)."
+        required: true
+        example: john@example.com
         type: string
         enumValues: []
         exampleWasSpecified: true
         nullable: false
         deprecated: false
-      sort_direction:
+      password:
         custom: []
-        name: sort_direction
-        description: 'Sort direction (asc, desc). Default: asc.'
-        required: false
-        example: desc
+        name: password
+        description: 'The password (minimum 8 characters).'
+        required: true
+        example: password123
         type: string
         enumValues: []
         exampleWasSpecified: true
         nullable: false
         deprecated: false
-      per_page:
+      password_confirmation:
         custom: []
-        name: per_page
-        description: 'Number of items per page. Default: 15.'
-        required: false
-        example: 10
-        type: integer
+        name: password_confirmation
+        description: 'Password confirmation (must match password).'
+        required: true
+        example: password123
+        type: string
         enumValues: []
         exampleWasSpecified: true
         nullable: false
         deprecated: false
-    cleanQueryParameters:
-      category_id: 1
-      search: coffee
-      sort_by: price
-      sort_direction: desc
-      per_page: 10
-    bodyParameters: []
-    cleanBodyParameters: []
+    cleanBodyParameters:
+      name: 'John Doe'
+      email: john@example.com
+      password: password123
+      password_confirmation: password123
     fileParameters: []
     responses:
       -
@@ -104,84 +84,29 @@ endpoints:
         status: 200
         content: |-
           {
-            "success": true,
-            "data": {
-              "en": [
-                {
-                  "id": 1,
-                  "name": "Premium Coffee Beans",
-                  "description": "High-quality arabica coffee beans",
-                  "price": 25.00,
-                  "cost": 15.00,
-                  "stock": 100,
-                  "sku": "COF-001",
-                  "category_id": 1,
-                  "is_active": true,
-                  "slug": "premium-coffee-beans",
-                  "grind_type": {"en": "Whole Bean", "ar": "حبوب كاملة"},
-                  "weight": 0.5,
-                  "weight_label": "500g",
-                  "product_details": [
-                    {"title": "Origin", "value": "Ethiopia"},
-                    {"title": "Roast Level", "value": "Medium"}
-                  ],
-                  "created_at": "2024-01-15T10:00:00.000000Z",
-                  "updated_at": "2024-01-15T10:00:00.000000Z",
-                  "images": [
-                    {
-                      "id": 1,
-                      "name": "coffee-beans-front",
-                      "file_name": "coffee-beans-front.jpg",
-                      "mime_type": "image/jpeg",
-                      "size": 102400,
-                      "url": "https://example.com/storage/products/coffee-beans-front.jpg"
-                    }
-                  ]
-                }
-              ],
-              "ar": [
-                {
-                  "id": 1,
-                  "name": "حبوب قهوة ممتازة",
-                  "description": "حبوب قهوة أرابيكا عالية الجودة",
-                  "price": 25.00,
-                  "cost": 15.00,
-                  "stock": 100,
-                  "sku": "COF-001",
-                  "category_id": 1,
-                  "is_active": true,
-                  "slug": "premium-coffee-beans",
-                  "grind_type": {"en": "Whole Bean", "ar": "حبوب كاملة"},
-                  "weight": 0.5,
-                  "weight_label": "500g",
-                  "product_details": [
-                    {"title": "المنشأ", "value": "إثيوبيا"},
-                    {"title": "درجة التحميص", "value": "متوسط"}
-                  ],
-                  "created_at": "2024-01-15T10:00:00.000000Z",
-                  "updated_at": "2024-01-15T10:00:00.000000Z",
-                  "images": [
-                    {
-                      "id": 1,
-                      "name": "coffee-beans-front",
-                      "file_name": "coffee-beans-front.jpg",
-                      "mime_type": "image/jpeg",
-                      "size": 102400,
-                      "url": "https://example.com/storage/products/coffee-beans-front.jpg"
-                    }
-                  ]
-                }
-              ],
-              "pagination": {
-                "current_page": 1,
-                "last_page": 5,
-                "per_page": 15,
-                "total": 75
-              }
-            }
+            "user": {
+              "id": 1,
+              "name": "John Doe",
+              "email": "john@example.com",
+              "updated_at": "2024-01-15T10:00:00.000000Z",
+              "created_at": "2024-01-15T10:00:00.000000Z"
+            },
+            "token": "1|abc123def456..."
           }
         headers: []
         description: Success
+      -
+        custom: []
+        status: 422
+        content: |-
+          {
+            "message": "The email has already been taken.",
+            "errors": {
+              "email": ["The email has already been taken."]
+            }
+          }
+        headers: []
+        description: 'Validation Error'
     responseFields: []
     auth: []
     controller: null
@@ -190,54 +115,124 @@ endpoints:
   -
     custom: []
     httpMethods:
-      - GET
-    uri: 'api/products/{product_id}'
+      - POST
+    uri: api/login
     metadata:
       custom: []
-      groupName: Products
-      groupDescription: |-
-
-        APIs for browsing and managing products.
-
-        Public endpoints for listing and viewing products do not require authentication.
-        Admin endpoints for creating, updating, and deleting products require authentication.
+      groupName: Authentication
+      groupDescription: ''
       subgroup: ''
       subgroupDescription: ''
-      title: 'Get product details'
-      description: |-
-        Retrieve detailed information about a specific product.
-        Returns product data in both English and Arabic.
+      title: |-
+        Login
+
+        Authenticate a user and receive an API token.
+        If the user has items in their guest cart, they will be migrated to their account.
+      description: ''
       authenticated: false
       deprecated: false
     headers:
       Content-Type: application/json
       Accept: application/json
-    urlParameters:
-      product_id:
+    urlParameters: []
+    cleanUrlParameters: []
+    queryParameters: []
+    cleanQueryParameters: []
+    bodyParameters:
+      email:
         custom: []
-        name: product_id
-        description: 'The ID of the product.'
+        name: email
+        description: "The user's email address."
         required: true
-        example: 1
-        type: integer
-        enumValues: []
-        exampleWasSpecified: false
-        nullable: false
-        deprecated: false
-      product:
-        custom: []
-        name: product
-        description: 'The product ID.'
-        required: true
-        example: 1
-        type: integer
+        example: john@example.com
+        type: string
         enumValues: []
         exampleWasSpecified: true
         nullable: false
         deprecated: false
-    cleanUrlParameters:
-      product_id: 1
-      product: 1
+      password:
+        custom: []
+        name: password
+        description: "The user's password."
+        required: true
+        example: password123
+        type: string
+        enumValues: []
+        exampleWasSpecified: true
+        nullable: false
+        deprecated: false
+    cleanBodyParameters:
+      email: john@example.com
+      password: password123
+    fileParameters: []
+    responses:
+      -
+        custom: []
+        status: 200
+        content: |-
+          {
+            "user": {
+              "id": 1,
+              "name": "John Doe",
+              "email": "john@example.com",
+              "email_verified_at": "2024-01-15T10:00:00.000000Z",
+              "created_at": "2024-01-15T10:00:00.000000Z",
+              "updated_at": "2024-01-15T10:00:00.000000Z"
+            },
+            "token": "1|abc123def456..."
+          }
+        headers: []
+        description: Success
+      -
+        custom: []
+        status: 401
+        content: |-
+          {
+            "message": "Invalid credentials"
+          }
+        headers: []
+        description: 'Invalid Credentials'
+      -
+        custom: []
+        status: 422
+        content: |-
+          {
+            "message": "The email field is required.",
+            "errors": {
+              "email": ["The email field is required."]
+            }
+          }
+        headers: []
+        description: 'Validation Error'
+    responseFields: []
+    auth: []
+    controller: null
+    method: null
+    route: null
+  -
+    custom: []
+    httpMethods:
+      - POST
+    uri: api/logout
+    metadata:
+      custom: []
+      groupName: Authentication
+      groupDescription: ''
+      subgroup: ''
+      subgroupDescription: ''
+      title: |-
+        Logout
+
+        Invalidate the current API token and log out the user.
+      description: ''
+      authenticated: true
+      deprecated: false
+    headers:
+      Authorization: 'Bearer {YOUR_API_TOKEN}'
+      Content-Type: application/json
+      Accept: application/json
+    urlParameters: []
+    cleanUrlParameters: []
     queryParameters: []
     cleanQueryParameters: []
     bodyParameters: []
@@ -249,95 +244,24 @@ endpoints:
         status: 200
         content: |-
           {
-            "success": true,
-            "data": {
-              "en": {
-                "id": 1,
-                "name": "Premium Coffee Beans",
-                "description": "High-quality arabica coffee beans",
-                "price": 25.00,
-                "cost": 15.00,
-                "stock": 100,
-                "sku": "COF-001",
-                "category_id": 1,
-                "is_active": true,
-                "grind_type": "whole_bean",
-                "grind_type_label": "Whole Bean",
-                "weight": 0.5,
-                "weight_label": "500g",
-                "product_details": [
-                  {"title": "Origin", "value": "Ethiopia"},
-                  {"title": "Roast Level", "value": "Medium"}
-                ],
-                "category": {
-                  "id": 1,
-                  "name": "Coffee Beans",
-                  "slug": "coffee-beans"
-                },
-                "images": [
-                  {
-                    "id": 1,
-                    "name": "coffee-beans-front",
-                    "file_name": "coffee-beans-front.jpg",
-                    "mime_type": "image/jpeg",
-                    "size": 102400,
-                    "url": "https://example.com/storage/products/coffee-beans-front.jpg"
-                  }
-                ],
-                "created_at": "2024-01-15T10:00:00.000000Z",
-                "updated_at": "2024-01-15T10:00:00.000000Z"
-              },
-              "ar": {
-                "id": 1,
-                "name": "حبوب قهوة ممتازة",
-                "description": "حبوب قهوة أرابيكا عالية الجودة",
-                "price": 25.00,
-                "cost": 15.00,
-                "stock": 100,
-                "sku": "COF-001",
-                "category_id": 1,
-                "is_active": true,
-                "grind_type_label": "حبوب كاملة",
-                "weight": 0.5,
-                "weight_label": "500g",
-                "product_details": [
-                  {"title": "المنشأ", "value": "إثيوبيا"},
-                  {"title": "درجة التحميص", "value": "متوسط"}
-                ],
-                "category": {
-                  "id": 1,
-                  "name": "حبوب القهوة",
-                  "slug": "coffee-beans"
-                },
-                "images": [
-                  {
-                    "id": 1,
-                    "name": "coffee-beans-front",
-                    "file_name": "coffee-beans-front.jpg",
-                    "mime_type": "image/jpeg",
-                    "size": 102400,
-                    "url": "https://example.com/storage/products/coffee-beans-front.jpg"
-                  }
-                ],
-                "created_at": "2024-01-15T10:00:00.000000Z",
-                "updated_at": "2024-01-15T10:00:00.000000Z"
-              }
-            }
+            "message": "Logged out successfully"
           }
         headers: []
         description: Success
       -
         custom: []
-        status: 404
+        status: 401
         content: |-
           {
-            "success": false,
-            "message": "Product not found"
+            "message": "Unauthenticated."
           }
         headers: []
-        description: 'Not Found'
+        description: Unauthenticated
     responseFields: []
-    auth: []
+    auth:
+      - headers
+      - Authorization
+      - 'Bearer 6g43cv8PD1aE5beadkZfhV6'
     controller: null
     method: null
     route: null

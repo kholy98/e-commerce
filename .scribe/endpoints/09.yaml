@@ -1,0 +1,1033 @@
+name: 'Customer Addresses'
+description: |-
+
+  APIs for managing customer addresses.
+  All endpoints require authentication.
+endpoints:
+  -
+    custom: []
+    httpMethods:
+      - GET
+    uri: api/addresses
+    metadata:
+      custom: []
+      groupName: 'Customer Addresses'
+      groupDescription: |-
+
+        APIs for managing customer addresses.
+        All endpoints require authentication.
+      subgroup: ''
+      subgroupDescription: ''
+      title: 'List all customer addresses'
+      description: |-
+        Get a paginated list of all addresses for the authenticated user.
+        Addresses are ordered by default status (default first) then by creation date.
+      authenticated: true
+      deprecated: false
+    headers:
+      Authorization: 'Bearer {YOUR_API_TOKEN}'
+      Content-Type: application/json
+      Accept: application/json
+    urlParameters: []
+    cleanUrlParameters: []
+    queryParameters: []
+    cleanQueryParameters: []
+    bodyParameters: []
+    cleanBodyParameters: []
+    fileParameters: []
+    responses:
+      -
+        custom: []
+        status: 200
+        content: |-
+          {
+            "success": true,
+            "data": [
+              {
+                "id": 1,
+                "user_id": 1,
+                "label": "Home",
+                "name": "John Doe",
+                "phone": "+201234567890",
+                "address": "123 Main St, Cairo, Egypt",
+                "street": "123 Main St",
+                "building_number": "15",
+                "floor": "3",
+                "apartment": "5A",
+                "zone": "Maadi",
+                "city": "Cairo",
+                "zip_code": "12345",
+                "country": "Egypt",
+                "state": "Cairo Governorate",
+                "is_default": true,
+                "is_billing": true,
+                "is_shipping": true,
+                "created_at": "2024-01-15T10:00:00.000000Z",
+                "updated_at": "2024-01-15T10:00:00.000000Z"
+              },
+              {
+                "id": 2,
+                "user_id": 1,
+                "label": "Work",
+                "name": "John Doe",
+                "phone": "+201234567891",
+                "address": "456 Business Ave, Cairo, Egypt",
+                "street": "456 Business Ave",
+                "building_number": "20",
+                "floor": "5",
+                "apartment": "10B",
+                "zone": "New Cairo",
+                "city": "Cairo",
+                "zip_code": "12346",
+                "country": "Egypt",
+                "state": "Cairo Governorate",
+                "is_default": false,
+                "is_billing": false,
+                "is_shipping": true,
+                "created_at": "2024-01-16T10:00:00.000000Z",
+                "updated_at": "2024-01-16T10:00:00.000000Z"
+              }
+            ]
+          }
+        headers: []
+        description: Success
+      -
+        custom: []
+        status: 401
+        content: |-
+          {
+            "message": "Unauthenticated."
+          }
+        headers: []
+        description: Unauthenticated
+    responseFields: []
+    auth:
+      - headers
+      - Authorization
+      - 'Bearer 6g43cv8PD1aE5beadkZfhV6'
+    controller: null
+    method: null
+    route: null
+  -
+    custom: []
+    httpMethods:
+      - POST
+    uri: api/addresses
+    metadata:
+      custom: []
+      groupName: 'Customer Addresses'
+      groupDescription: |-
+
+        APIs for managing customer addresses.
+        All endpoints require authentication.
+      subgroup: ''
+      subgroupDescription: ''
+      title: 'Create a new customer address'
+      description: |-
+        Create a new address for the authenticated user.
+        If is_default is set to true, all other addresses will be unset as default.
+      authenticated: true
+      deprecated: false
+    headers:
+      Authorization: 'Bearer {YOUR_API_TOKEN}'
+      Content-Type: application/json
+      Accept: application/json
+    urlParameters: []
+    cleanUrlParameters: []
+    queryParameters: []
+    cleanQueryParameters: []
+    bodyParameters:
+      label:
+        custom: []
+        name: label
+        description: 'optional A custom label for the address (e.g., "Home", "Work").'
+        required: false
+        example: Home
+        type: string
+        enumValues: []
+        exampleWasSpecified: true
+        nullable: true
+        deprecated: false
+      name:
+        custom: []
+        name: name
+        description: 'The full name of the recipient.'
+        required: true
+        example: 'John Doe'
+        type: string
+        enumValues: []
+        exampleWasSpecified: true
+        nullable: false
+        deprecated: false
+      phone:
+        custom: []
+        name: phone
+        description: 'The phone number.'
+        required: true
+        example: '+201234567890'
+        type: string
+        enumValues: []
+        exampleWasSpecified: true
+        nullable: false
+        deprecated: false
+      address:
+        custom: []
+        name: address
+        description: 'The full address text.'
+        required: true
+        example: '123 Main St, Cairo, Egypt'
+        type: string
+        enumValues: []
+        exampleWasSpecified: true
+        nullable: false
+        deprecated: false
+      street:
+        custom: []
+        name: street
+        description: 'optional The street name.'
+        required: false
+        example: '123 Main St'
+        type: string
+        enumValues: []
+        exampleWasSpecified: true
+        nullable: true
+        deprecated: false
+      building_number:
+        custom: []
+        name: building_number
+        description: 'optional The building number.'
+        required: false
+        example: '15'
+        type: string
+        enumValues: []
+        exampleWasSpecified: true
+        nullable: true
+        deprecated: false
+      floor:
+        custom: []
+        name: floor
+        description: 'optional The floor number.'
+        required: false
+        example: '3'
+        type: string
+        enumValues: []
+        exampleWasSpecified: true
+        nullable: true
+        deprecated: false
+      apartment:
+        custom: []
+        name: apartment
+        description: 'optional The apartment number.'
+        required: false
+        example: 5A
+        type: string
+        enumValues: []
+        exampleWasSpecified: true
+        nullable: true
+        deprecated: false
+      zone:
+        custom: []
+        name: zone
+        description: 'optional The zone/area.'
+        required: false
+        example: Maadi
+        type: string
+        enumValues: []
+        exampleWasSpecified: true
+        nullable: true
+        deprecated: false
+      city:
+        custom: []
+        name: city
+        description: 'The city name.'
+        required: true
+        example: Cairo
+        type: string
+        enumValues: []
+        exampleWasSpecified: true
+        nullable: false
+        deprecated: false
+      zip_code:
+        custom: []
+        name: zip_code
+        description: 'The postal/ZIP code.'
+        required: true
+        example: '12345'
+        type: string
+        enumValues: []
+        exampleWasSpecified: true
+        nullable: false
+        deprecated: false
+      country:
+        custom: []
+        name: country
+        description: 'The country name.'
+        required: true
+        example: Egypt
+        type: string
+        enumValues: []
+        exampleWasSpecified: true
+        nullable: false
+        deprecated: false
+      state:
+        custom: []
+        name: state
+        description: 'optional The state/province.'
+        required: false
+        example: 'Cairo Governorate'
+        type: string
+        enumValues: []
+        exampleWasSpecified: true
+        nullable: true
+        deprecated: false
+      is_default:
+        custom: []
+        name: is_default
+        description: 'optional Whether this should be the default address. Default: false.'
+        required: false
+        example: true
+        type: boolean
+        enumValues: []
+        exampleWasSpecified: true
+        nullable: false
+        deprecated: false
+      is_billing:
+        custom: []
+        name: is_billing
+        description: 'optional Whether this can be used for billing. Default: false.'
+        required: false
+        example: true
+        type: boolean
+        enumValues: []
+        exampleWasSpecified: true
+        nullable: false
+        deprecated: false
+      is_shipping:
+        custom: []
+        name: is_shipping
+        description: 'optional Whether this can be used for shipping. Default: false.'
+        required: false
+        example: true
+        type: boolean
+        enumValues: []
+        exampleWasSpecified: true
+        nullable: false
+        deprecated: false
+    cleanBodyParameters:
+      label: Home
+      name: 'John Doe'
+      phone: '+201234567890'
+      address: '123 Main St, Cairo, Egypt'
+      street: '123 Main St'
+      building_number: '15'
+      floor: '3'
+      apartment: 5A
+      zone: Maadi
+      city: Cairo
+      zip_code: '12345'
+      country: Egypt
+      state: 'Cairo Governorate'
+      is_default: true
+      is_billing: true
+      is_shipping: true
+    fileParameters: []
+    responses:
+      -
+        custom: []
+        status: 201
+        content: |-
+          {
+            "success": true,
+            "message": "Address created successfully",
+            "data": {
+              "id": 1,
+              "user_id": 1,
+              "label": "Home",
+              "name": "John Doe",
+              "phone": "+201234567890",
+              "address": "123 Main St, Cairo, Egypt",
+              "street": "123 Main St",
+              "building_number": "15",
+              "floor": "3",
+              "apartment": "5A",
+              "zone": "Maadi",
+              "city": "Cairo",
+              "zip_code": "12345",
+              "country": "Egypt",
+              "state": "Cairo Governorate",
+              "is_default": true,
+              "is_billing": true,
+              "is_shipping": true,
+              "created_at": "2024-01-15T10:00:00.000000Z",
+              "updated_at": "2024-01-15T10:00:00.000000Z"
+            }
+          }
+        headers: []
+        description: Success
+      -
+        custom: []
+        status: 401
+        content: |-
+          {
+            "message": "Unauthenticated."
+          }
+        headers: []
+        description: Unauthenticated
+      -
+        custom: []
+        status: 422
+        content: |-
+          {
+            "message": "The given data was invalid.",
+            "errors": {
+              "name": ["The name field is required."],
+              "city": ["The city field is required."]
+            }
+          }
+        headers: []
+        description: 'Validation Error'
+    responseFields: []
+    auth:
+      - headers
+      - Authorization
+      - 'Bearer 6g43cv8PD1aE5beadkZfhV6'
+    controller: null
+    method: null
+    route: null
+  -
+    custom: []
+    httpMethods:
+      - GET
+    uri: 'api/addresses/{address_id}'
+    metadata:
+      custom: []
+      groupName: 'Customer Addresses'
+      groupDescription: |-
+
+        APIs for managing customer addresses.
+        All endpoints require authentication.
+      subgroup: ''
+      subgroupDescription: ''
+      title: 'Get a specific customer address'
+      description: 'Retrieve details of a specific address belonging to the authenticated user.'
+      authenticated: true
+      deprecated: false
+    headers:
+      Authorization: 'Bearer {YOUR_API_TOKEN}'
+      Content-Type: application/json
+      Accept: application/json
+    urlParameters:
+      address_id:
+        custom: []
+        name: address_id
+        description: 'The ID of the address.'
+        required: true
+        example: 1
+        type: integer
+        enumValues: []
+        exampleWasSpecified: false
+        nullable: false
+        deprecated: false
+      address:
+        custom: []
+        name: address
+        description: 'The address ID.'
+        required: true
+        example: 1
+        type: integer
+        enumValues: []
+        exampleWasSpecified: true
+        nullable: false
+        deprecated: false
+    cleanUrlParameters:
+      address_id: 1
+      address: 1
+    queryParameters: []
+    cleanQueryParameters: []
+    bodyParameters: []
+    cleanBodyParameters: []
+    fileParameters: []
+    responses:
+      -
+        custom: []
+        status: 200
+        content: |-
+          {
+            "success": true,
+            "data": {
+              "id": 1,
+              "user_id": 1,
+              "label": "Home",
+              "name": "John Doe",
+              "phone": "+201234567890",
+              "address": "123 Main St, Cairo, Egypt",
+              "street": "123 Main St",
+              "building_number": "15",
+              "floor": "3",
+              "apartment": "5A",
+              "zone": "Maadi",
+              "city": "Cairo",
+              "zip_code": "12345",
+              "country": "Egypt",
+              "state": "Cairo Governorate",
+              "is_default": true,
+              "is_billing": true,
+              "is_shipping": true,
+              "created_at": "2024-01-15T10:00:00.000000Z",
+              "updated_at": "2024-01-15T10:00:00.000000Z"
+            }
+          }
+        headers: []
+        description: Success
+      -
+        custom: []
+        status: 401
+        content: |-
+          {
+            "message": "Unauthenticated."
+          }
+        headers: []
+        description: Unauthenticated
+      -
+        custom: []
+        status: 404
+        content: |-
+          {
+            "success": false,
+            "message": "Address not found"
+          }
+        headers: []
+        description: 'Not Found'
+    responseFields: []
+    auth:
+      - headers
+      - Authorization
+      - 'Bearer 6g43cv8PD1aE5beadkZfhV6'
+    controller: null
+    method: null
+    route: null
+  -
+    custom: []
+    httpMethods:
+      - PUT
+    uri: 'api/addresses/{address_id}'
+    metadata:
+      custom: []
+      groupName: 'Customer Addresses'
+      groupDescription: |-
+
+        APIs for managing customer addresses.
+        All endpoints require authentication.
+      subgroup: ''
+      subgroupDescription: ''
+      title: 'Update a customer address'
+      description: |-
+        Update an existing address belonging to the authenticated user.
+        If is_default is set to true, all other addresses will be unset as default.
+      authenticated: true
+      deprecated: false
+    headers:
+      Authorization: 'Bearer {YOUR_API_TOKEN}'
+      Content-Type: application/json
+      Accept: application/json
+    urlParameters:
+      address_id:
+        custom: []
+        name: address_id
+        description: 'The ID of the address.'
+        required: true
+        example: 1
+        type: integer
+        enumValues: []
+        exampleWasSpecified: false
+        nullable: false
+        deprecated: false
+      address:
+        custom: []
+        name: address
+        description: 'The address ID.'
+        required: true
+        example: 1
+        type: integer
+        enumValues: []
+        exampleWasSpecified: true
+        nullable: false
+        deprecated: false
+    cleanUrlParameters:
+      address_id: 1
+      address: 1
+    queryParameters: []
+    cleanQueryParameters: []
+    bodyParameters:
+      label:
+        custom: []
+        name: label
+        description: 'optional A custom label for the address (e.g., "Home", "Work").'
+        required: false
+        example: Home
+        type: string
+        enumValues: []
+        exampleWasSpecified: true
+        nullable: true
+        deprecated: false
+      name:
+        custom: []
+        name: name
+        description: 'The full name of the recipient.'
+        required: true
+        example: 'John Doe'
+        type: string
+        enumValues: []
+        exampleWasSpecified: true
+        nullable: false
+        deprecated: false
+      phone:
+        custom: []
+        name: phone
+        description: 'The phone number.'
+        required: true
+        example: '+201234567890'
+        type: string
+        enumValues: []
+        exampleWasSpecified: true
+        nullable: false
+        deprecated: false
+      address:
+        custom: []
+        name: address
+        description: 'The full address text.'
+        required: true
+        example: '123 Main St, Cairo, Egypt'
+        type: string
+        enumValues: []
+        exampleWasSpecified: true
+        nullable: false
+        deprecated: false
+      street:
+        custom: []
+        name: street
+        description: 'optional The street name.'
+        required: false
+        example: '123 Main St'
+        type: string
+        enumValues: []
+        exampleWasSpecified: true
+        nullable: true
+        deprecated: false
+      building_number:
+        custom: []
+        name: building_number
+        description: 'optional The building number.'
+        required: false
+        example: '15'
+        type: string
+        enumValues: []
+        exampleWasSpecified: true
+        nullable: true
+        deprecated: false
+      floor:
+        custom: []
+        name: floor
+        description: 'optional The floor number.'
+        required: false
+        example: '3'
+        type: string
+        enumValues: []
+        exampleWasSpecified: true
+        nullable: true
+        deprecated: false
+      apartment:
+        custom: []
+        name: apartment
+        description: 'optional The apartment number.'
+        required: false
+        example: 5A
+        type: string
+        enumValues: []
+        exampleWasSpecified: true
+        nullable: true
+        deprecated: false
+      zone:
+        custom: []
+        name: zone
+        description: 'optional The zone/area.'
+        required: false
+        example: Maadi
+        type: string
+        enumValues: []
+        exampleWasSpecified: true
+        nullable: true
+        deprecated: false
+      city:
+        custom: []
+        name: city
+        description: 'The city name.'
+        required: true
+        example: Cairo
+        type: string
+        enumValues: []
+        exampleWasSpecified: true
+        nullable: false
+        deprecated: false
+      zip_code:
+        custom: []
+        name: zip_code
+        description: 'The postal/ZIP code.'
+        required: true
+        example: '12345'
+        type: string
+        enumValues: []
+        exampleWasSpecified: true
+        nullable: false
+        deprecated: false
+      country:
+        custom: []
+        name: country
+        description: 'The country name.'
+        required: true
+        example: Egypt
+        type: string
+        enumValues: []
+        exampleWasSpecified: true
+        nullable: false
+        deprecated: false
+      state:
+        custom: []
+        name: state
+        description: 'optional The state/province.'
+        required: false
+        example: 'Cairo Governorate'
+        type: string
+        enumValues: []
+        exampleWasSpecified: true
+        nullable: true
+        deprecated: false
+      is_default:
+        custom: []
+        name: is_default
+        description: 'optional Whether this should be the default address.'
+        required: false
+        example: true
+        type: boolean
+        enumValues: []
+        exampleWasSpecified: true
+        nullable: false
+        deprecated: false
+      is_billing:
+        custom: []
+        name: is_billing
+        description: 'optional Whether this can be used for billing.'
+        required: false
+        example: true
+        type: boolean
+        enumValues: []
+        exampleWasSpecified: true
+        nullable: false
+        deprecated: false
+      is_shipping:
+        custom: []
+        name: is_shipping
+        description: 'optional Whether this can be used for shipping.'
+        required: false
+        example: true
+        type: boolean
+        enumValues: []
+        exampleWasSpecified: true
+        nullable: false
+        deprecated: false
+    cleanBodyParameters:
+      label: Home
+      name: 'John Doe'
+      phone: '+201234567890'
+      address: '123 Main St, Cairo, Egypt'
+      street: '123 Main St'
+      building_number: '15'
+      floor: '3'
+      apartment: 5A
+      zone: Maadi
+      city: Cairo
+      zip_code: '12345'
+      country: Egypt
+      state: 'Cairo Governorate'
+      is_default: true
+      is_billing: true
+      is_shipping: true
+    fileParameters: []
+    responses:
+      -
+        custom: []
+        status: 200
+        content: |-
+          {
+            "success": true,
+            "message": "Address updated successfully",
+            "data": {
+              "id": 1,
+              "user_id": 1,
+              "label": "Home Updated",
+              "name": "John Doe",
+              "phone": "+201234567890",
+              "address": "123 Main St, Cairo, Egypt",
+              "street": "123 Main St",
+              "building_number": "15",
+              "floor": "3",
+              "apartment": "5A",
+              "zone": "Maadi",
+              "city": "Cairo",
+              "zip_code": "12345",
+              "country": "Egypt",
+              "state": "Cairo Governorate",
+              "is_default": true,
+              "is_billing": true,
+              "is_shipping": true,
+              "created_at": "2024-01-15T10:00:00.000000Z",
+              "updated_at": "2024-01-15T11:00:00.000000Z"
+            }
+          }
+        headers: []
+        description: Success
+      -
+        custom: []
+        status: 401
+        content: |-
+          {
+            "message": "Unauthenticated."
+          }
+        headers: []
+        description: Unauthenticated
+      -
+        custom: []
+        status: 404
+        content: |-
+          {
+            "success": false,
+            "message": "Address not found"
+          }
+        headers: []
+        description: 'Not Found'
+      -
+        custom: []
+        status: 422
+        content: |-
+          {
+            "message": "The given data was invalid.",
+            "errors": {
+              "name": ["The name field is required."]
+            }
+          }
+        headers: []
+        description: 'Validation Error'
+    responseFields: []
+    auth:
+      - headers
+      - Authorization
+      - 'Bearer 6g43cv8PD1aE5beadkZfhV6'
+    controller: null
+    method: null
+    route: null
+  -
+    custom: []
+    httpMethods:
+      - DELETE
+    uri: 'api/addresses/{address_id}'
+    metadata:
+      custom: []
+      groupName: 'Customer Addresses'
+      groupDescription: |-
+
+        APIs for managing customer addresses.
+        All endpoints require authentication.
+      subgroup: ''
+      subgroupDescription: ''
+      title: 'Delete a customer address'
+      description: 'Delete an existing address belonging to the authenticated user.'
+      authenticated: true
+      deprecated: false
+    headers:
+      Authorization: 'Bearer {YOUR_API_TOKEN}'
+      Content-Type: application/json
+      Accept: application/json
+    urlParameters:
+      address_id:
+        custom: []
+        name: address_id
+        description: 'The ID of the address.'
+        required: true
+        example: 1
+        type: integer
+        enumValues: []
+        exampleWasSpecified: false
+        nullable: false
+        deprecated: false
+      address:
+        custom: []
+        name: address
+        description: 'The address ID.'
+        required: true
+        example: 1
+        type: integer
+        enumValues: []
+        exampleWasSpecified: true
+        nullable: false
+        deprecated: false
+    cleanUrlParameters:
+      address_id: 1
+      address: 1
+    queryParameters: []
+    cleanQueryParameters: []
+    bodyParameters: []
+    cleanBodyParameters: []
+    fileParameters: []
+    responses:
+      -
+        custom: []
+        status: 200
+        content: |-
+          {
+            "success": true,
+            "message": "Address deleted successfully"
+          }
+        headers: []
+        description: Success
+      -
+        custom: []
+        status: 401
+        content: |-
+          {
+            "message": "Unauthenticated."
+          }
+        headers: []
+        description: Unauthenticated
+      -
+        custom: []
+        status: 404
+        content: |-
+          {
+            "success": false,
+            "message": "Address not found"
+          }
+        headers: []
+        description: 'Not Found'
+    responseFields: []
+    auth:
+      - headers
+      - Authorization
+      - 'Bearer 6g43cv8PD1aE5beadkZfhV6'
+    controller: null
+    method: null
+    route: null
+  -
+    custom: []
+    httpMethods:
+      - PATCH
+    uri: 'api/addresses/{address_id}/default'
+    metadata:
+      custom: []
+      groupName: 'Customer Addresses'
+      groupDescription: |-
+
+        APIs for managing customer addresses.
+        All endpoints require authentication.
+      subgroup: ''
+      subgroupDescription: ''
+      title: 'Set address as default'
+      description: |-
+        Set a specific address as the default address for the authenticated user.
+        All other addresses will be unset as default.
+      authenticated: true
+      deprecated: false
+    headers:
+      Authorization: 'Bearer {YOUR_API_TOKEN}'
+      Content-Type: application/json
+      Accept: application/json
+    urlParameters:
+      address_id:
+        custom: []
+        name: address_id
+        description: 'The ID of the address.'
+        required: true
+        example: 1
+        type: integer
+        enumValues: []
+        exampleWasSpecified: false
+        nullable: false
+        deprecated: false
+      address:
+        custom: []
+        name: address
+        description: 'The address ID.'
+        required: true
+        example: 1
+        type: integer
+        enumValues: []
+        exampleWasSpecified: true
+        nullable: false
+        deprecated: false
+    cleanUrlParameters:
+      address_id: 1
+      address: 1
+    queryParameters: []
+    cleanQueryParameters: []
+    bodyParameters: []
+    cleanBodyParameters: []
+    fileParameters: []
+    responses:
+      -
+        custom: []
+        status: 200
+        content: |-
+          {
+            "success": true,
+            "message": "Address set as default successfully",
+            "data": {
+              "id": 1,
+              "user_id": 1,
+              "label": "Home",
+              "name": "John Doe",
+              "phone": "+201234567890",
+              "address": "123 Main St, Cairo, Egypt",
+              "street": "123 Main St",
+              "building_number": "15",
+              "floor": "3",
+              "apartment": "5A",
+              "zone": "Maadi",
+              "city": "Cairo",
+              "zip_code": "12345",
+              "country": "Egypt",
+              "state": "Cairo Governorate",
+              "is_default": true,
+              "is_billing": true,
+              "is_shipping": true,
+              "created_at": "2024-01-15T10:00:00.000000Z",
+              "updated_at": "2024-01-15T11:00:00.000000Z"
+            }
+          }
+        headers: []
+        description: Success
+      -
+        custom: []
+        status: 401
+        content: |-
+          {
+            "message": "Unauthenticated."
+          }
+        headers: []
+        description: Unauthenticated
+      -
+        custom: []
+        status: 404
+        content: |-
+          {
+            "success": false,
+            "message": "Address not found"
+          }
+        headers: []
+        description: 'Not Found'
+    responseFields: []
+    auth:
+      - headers
+      - Authorization
+      - 'Bearer 6g43cv8PD1aE5beadkZfhV6'
+    controller: null
+    method: null
+    route: null

@@ -73,12 +73,7 @@
                     <a href="#authentication">Authentication</a>
                 </li>
                                     <ul id="tocify-subheader-authentication" class="tocify-subheader">
-                                                    <li class="tocify-item level-2" data-unique="authentication-GETapi-user">
-                                <a href="#authentication-GETapi-user">Get authenticated user
-
-Retrieve the currently authenticated user's information.</a>
-                            </li>
-                                                                                <li class="tocify-item level-2" data-unique="authentication-POSTapi-register">
+                                                    <li class="tocify-item level-2" data-unique="authentication-POSTapi-register">
                                 <a href="#authentication-POSTapi-register">Register a new user
 
 Create a new user account and receive an API token.
@@ -306,6 +301,19 @@ Invalidate the current API token and log out the user.</a>
                             </li>
                                                                         </ul>
                             </ul>
+                    <ul id="tocify-header-user-management" class="tocify-header">
+                <li class="tocify-item level-1" data-unique="user-management">
+                    <a href="#user-management">User Management</a>
+                </li>
+                                    <ul id="tocify-subheader-user-management" class="tocify-subheader">
+                                                    <li class="tocify-item level-2" data-unique="user-management-GETapi-user">
+                                <a href="#user-management-GETapi-user">Get authenticated user</a>
+                            </li>
+                                                                                <li class="tocify-item level-2" data-unique="user-management-PUTapi-user">
+                                <a href="#user-management-PUTapi-user">Update authenticated user</a>
+                            </li>
+                                                                        </ul>
+                            </ul>
             </div>
 
     <ul class="toc-footer" id="toc-footer">
@@ -353,174 +361,7 @@ Endpoints marked with a 🔒 require authentication.</code></pre>
 
     
 
-                                <h2 id="authentication-GETapi-user">Get authenticated user
-
-Retrieve the currently authenticated user&#039;s information.</h2>
-
-<p>
-<small class="badge badge-darkred">requires authentication</small>
-</p>
-
-
-
-<span id="example-requests-GETapi-user">
-<blockquote>Example request:</blockquote>
-
-
-<div class="bash-example">
-    <pre><code class="language-bash">curl --request GET \
-    --get "http://127.0.0.1:8000/api/user" \
-    --header "Authorization: Bearer {YOUR_API_TOKEN}" \
-    --header "Content-Type: application/json" \
-    --header "Accept: application/json"</code></pre></div>
-
-
-<div class="javascript-example">
-    <pre><code class="language-javascript">const url = new URL(
-    "http://127.0.0.1:8000/api/user"
-);
-
-const headers = {
-    "Authorization": "Bearer {YOUR_API_TOKEN}",
-    "Content-Type": "application/json",
-    "Accept": "application/json",
-};
-
-fetch(url, {
-    method: "GET",
-    headers,
-}).then(response =&gt; response.json());</code></pre></div>
-
-
-<div class="php-example">
-    <pre><code class="language-php">$client = new \GuzzleHttp\Client();
-$url = 'http://127.0.0.1:8000/api/user';
-$response = $client-&gt;get(
-    $url,
-    [
-        'headers' =&gt; [
-            'Authorization' =&gt; 'Bearer {YOUR_API_TOKEN}',
-            'Content-Type' =&gt; 'application/json',
-            'Accept' =&gt; 'application/json',
-        ],
-    ]
-);
-$body = $response-&gt;getBody();
-print_r(json_decode((string) $body));</code></pre></div>
-
-</span>
-
-<span id="example-responses-GETapi-user">
-            <blockquote>
-            <p>Example response (200, Success):</p>
-        </blockquote>
-                <pre>
-
-<code class="language-json" style="max-height: 300px;">{
-    &quot;id&quot;: 1,
-    &quot;name&quot;: &quot;John Doe&quot;,
-    &quot;email&quot;: &quot;john@example.com&quot;,
-    &quot;email_verified_at&quot;: &quot;2024-01-15T10:00:00.000000Z&quot;,
-    &quot;created_at&quot;: &quot;2024-01-15T10:00:00.000000Z&quot;,
-    &quot;updated_at&quot;: &quot;2024-01-15T10:00:00.000000Z&quot;
-}</code>
- </pre>
-            <blockquote>
-            <p>Example response (401, Unauthenticated):</p>
-        </blockquote>
-                <pre>
-
-<code class="language-json" style="max-height: 300px;">{
-    &quot;message&quot;: &quot;Unauthenticated.&quot;
-}</code>
- </pre>
-    </span>
-<span id="execution-results-GETapi-user" hidden>
-    <blockquote>Received response<span
-                id="execution-response-status-GETapi-user"></span>:
-    </blockquote>
-    <pre class="json"><code id="execution-response-content-GETapi-user"
-      data-empty-response-text="<Empty response>" style="max-height: 400px;"></code></pre>
-</span>
-<span id="execution-error-GETapi-user" hidden>
-    <blockquote>Request failed with error:</blockquote>
-    <pre><code id="execution-error-message-GETapi-user">
-
-Tip: Check that you&#039;re properly connected to the network.
-If you&#039;re a maintainer of ths API, verify that your API is running and you&#039;ve enabled CORS.
-You can check the Dev Tools console for debugging information.</code></pre>
-</span>
-<form id="form-GETapi-user" data-method="GET"
-      data-path="api/user"
-      data-authed="1"
-      data-hasfiles="0"
-      data-isarraybody="0"
-      autocomplete="off"
-      onsubmit="event.preventDefault(); executeTryOut('GETapi-user', this);">
-    <h3>
-        Request&nbsp;&nbsp;&nbsp;
-                    <button type="button"
-                    style="background-color: #8fbcd4; padding: 5px 10px; border-radius: 5px; border-width: thin;"
-                    id="btn-tryout-GETapi-user"
-                    onclick="tryItOut('GETapi-user');">Try it out ⚡
-            </button>
-            <button type="button"
-                    style="background-color: #c97a7e; padding: 5px 10px; border-radius: 5px; border-width: thin;"
-                    id="btn-canceltryout-GETapi-user"
-                    onclick="cancelTryOut('GETapi-user');" hidden>Cancel 🛑
-            </button>&nbsp;&nbsp;
-            <button type="submit"
-                    style="background-color: #6ac174; padding: 5px 10px; border-radius: 5px; border-width: thin;"
-                    id="btn-executetryout-GETapi-user"
-                    data-initial-text="Send Request 💥"
-                    data-loading-text="⏱ Sending..."
-                    hidden>Send Request 💥
-            </button>
-            </h3>
-            <p>
-            <small class="badge badge-green">GET</small>
-            <b><code>api/user</code></b>
-        </p>
-                <h4 class="fancy-heading-panel"><b>Headers</b></h4>
-                                <div style="padding-left: 28px; clear: unset;">
-                <b style="line-height: 2;"><code>Authorization</code></b>&nbsp;&nbsp;
-&nbsp;
- &nbsp;
- &nbsp;
-                <input type="text" style="display: none"
-                              name="Authorization" class="auth-value"               data-endpoint="GETapi-user"
-               value="Bearer {YOUR_API_TOKEN}"
-               data-component="header">
-    <br>
-<p>Example: <code>Bearer {YOUR_API_TOKEN}</code></p>
-            </div>
-                                <div style="padding-left: 28px; clear: unset;">
-                <b style="line-height: 2;"><code>Content-Type</code></b>&nbsp;&nbsp;
-&nbsp;
- &nbsp;
- &nbsp;
-                <input type="text" style="display: none"
-                              name="Content-Type"                data-endpoint="GETapi-user"
-               value="application/json"
-               data-component="header">
-    <br>
-<p>Example: <code>application/json</code></p>
-            </div>
-                                <div style="padding-left: 28px; clear: unset;">
-                <b style="line-height: 2;"><code>Accept</code></b>&nbsp;&nbsp;
-&nbsp;
- &nbsp;
- &nbsp;
-                <input type="text" style="display: none"
-                              name="Accept"                data-endpoint="GETapi-user"
-               value="application/json"
-               data-component="header">
-    <br>
-<p>Example: <code>application/json</code></p>
-            </div>
-                        </form>
-
-                    <h2 id="authentication-POSTapi-register">Register a new user
+                                <h2 id="authentication-POSTapi-register">Register a new user
 
 Create a new user account and receive an API token.
 If the user has items in their guest cart, they will be migrated to the new account.</h2>
@@ -8907,7 +8748,7 @@ print_r(json_decode((string) $body));</code></pre></div>
 content-type: application/json
 access-control-allow-origin: http://localhost:3000
 access-control-allow-credentials: true
-set-cookie: laravel-session=eyJpdiI6Imc5WnFWN2dZbGxCcW5xam5WV0dGQnc9PSIsInZhbHVlIjoia1hNWUdlNGY2eENZZGY5SWpZa1RhbjZIMVE1UmhCTVpDSWlabWhIeW9JMmlwalFWM2RYRTJ3eng4M2FkeEVFaU43ZEVsL084ZkFCenpvMEw3OUxibzU3RU44QzNjRy9rOUdKMnZhVktNeDFpRDNlTnJKQVJseUozbXJielZtS28iLCJtYWMiOiI4YTA5OTFkYzk2OGM0YmFhMzRlYzA4YmM4NTY4OTEwZDAwOTZjNzk1MjA3N2IwOWExNDk4ZDllZmIxNmUwODk4IiwidGFnIjoiIn0%3D; expires=Wed, 21 Jan 2026 14:24:05 GMT; Max-Age=7200; path=/; httponly; samesite=lax
+set-cookie: laravel-session=eyJpdiI6Ii9kWGh3MG1NTFFqOHYrMVZtV1psdHc9PSIsInZhbHVlIjoiUEVtd3poOFNWT2ZMamVrM01GVDhCNFQ2Y1oyRG05NGZUY1dCTzZEN1BNdU8vZVVlU0o2QmRPeCtIb0NGTWJ5N0MzNWZZdlpjcHk4bExGRVpYL21LWGFSemhBVzVUdGovMEwrZlRERUVjRkFQcm5xakIrUFVhRVd2VCs2S1JTOHAiLCJtYWMiOiIxZGMwZTNlMDhmNGQ0MzU0NmU3ZTUwMDE3YTE5ODAzOWJiYmQ4Yjk5YzU5YzEzYTZjOGZiZGRhYTMyZWI3OTFlIiwidGFnIjoiIn0%3D; expires=Wed, 21 Jan 2026 15:02:44 GMT; Max-Age=7200; path=/; httponly; samesite=lax
  </code></pre></details>         <pre>
 
 <code class="language-json" style="max-height: 300px;">{
@@ -9087,7 +8928,7 @@ print_r(json_decode((string) $body));</code></pre></div>
 content-type: application/json
 access-control-allow-origin: http://localhost:3000
 access-control-allow-credentials: true
-set-cookie: laravel-session=eyJpdiI6IkUxOExzeHI5ZFlBUnVWeGZmbzc0S0E9PSIsInZhbHVlIjoiR1pvWEdOOW9FSVMrZjh4Z0EwRkhKVFpQOGlXdFpkdXpLVE9BeUQ5NkdPWTZHc0RUS2tKK2lDQ0lHcjFXT2oxMnNFZlpOS0Z0MFdBdVdLSWJQMEp2ck5DS2dmQzh4T1NGcG42b2pmVGNIY2s1OFNCNUVaN21SWFEwdC9pdDloOW4iLCJtYWMiOiIyN2M1ODNhMWUzYzJjN2RmZGQ3MDY5OTBkNzYxYjE3MmIxZDhiNTlkMGM0Nzk2OWUzZjAzYzM2OWFhMDJhZTNlIiwidGFnIjoiIn0%3D; expires=Wed, 21 Jan 2026 14:24:06 GMT; Max-Age=7200; path=/; httponly; samesite=lax
+set-cookie: laravel-session=eyJpdiI6Ilk5bG9qYlBBVU5oaitGUFA5QmNGaFE9PSIsInZhbHVlIjoiN1B3R1FTejVOSmdGR0hQRmdmcmVleFIxTzZySVY3QnJYMCtBb1pCVmJ6eXdjQXh2K0ZMY2huYUxqTGxmQmxXSVptQ2FWVG84NVZER0lBZCthUTQrNysyZE1iYksxYS9tRTJjY3BoNGVlT2hPSXVWTmdpOG82ZEJUc3JYVVBSc0MiLCJtYWMiOiI2NmY0NDgxOWFhMTVjN2NkNWExNDVlM2FkYTdlMmM4NGFlYjRjZGJiMTI0MDRmYWNhOTUwYjExOGMxZjkyNjhlIiwidGFnIjoiIn0%3D; expires=Wed, 21 Jan 2026 15:02:44 GMT; Max-Age=7200; path=/; httponly; samesite=lax
  </code></pre></details>         <pre>
 
 <code class="language-json" style="max-height: 300px;">{
@@ -9504,7 +9345,7 @@ print_r(json_decode((string) $body));</code></pre></div>
 content-type: application/json
 access-control-allow-origin: http://localhost:3000
 access-control-allow-credentials: true
-set-cookie: laravel-session=eyJpdiI6InBNamtNbEF5UXI5VytQNTZ4NCtXYnc9PSIsInZhbHVlIjoiZ0U2UkM3UHlCSnhJV3AxK0kzZ0dkcVFGU04vWTFnZ3hmeTlidjlYVVpYcTZla0w2ZG9FVTE3ZE5RQldTRFJCZ254Rk1DdEk4bENYNy8yVFF1Zk90ajRwQm9QTXMzK01MVUQ2MFpHejZ0VzMxbDZWWkdMd2g3bGN3TUlIa3gwa3QiLCJtYWMiOiJkZWZlNTdkODM4MmJhZDI4NmYxZmZlNTk3MjBiY2NjMzI1YzE3MjQwMjYxYzExN2QzZWM2MzM4MjMwZjI3YTdkIiwidGFnIjoiIn0%3D; expires=Wed, 21 Jan 2026 14:24:06 GMT; Max-Age=7200; path=/; httponly; samesite=lax
+set-cookie: laravel-session=eyJpdiI6Im1JZlBVZVhMaXVpYXc3eCtUK2QyYWc9PSIsInZhbHVlIjoieFQzK3J3YlVtdmhEMi9Bbi9vM0Z5WVdtcmt0YVhUQitaUzFUbHNmdTZSa2NrT3RNOG0wOVN5eklKaGFxZVFjTTVhSGxObE9KalhpT1RFdk5LSG4wV1FWZW81WXEwbTEzazltd3VIWmtQOUtYSmlPN05Bdm14Ulh1dFpvU29EK3MiLCJtYWMiOiIzMjIyZDk1NDNlYTZkOWIxOWNhNzZmNWExMmIzOGJiYTJlNDI2YjJlOWJkYzRjZmQwNDFmMjI1MmQ2NTJjNTA3IiwidGFnIjoiIn0%3D; expires=Wed, 21 Jan 2026 15:02:44 GMT; Max-Age=7200; path=/; httponly; samesite=lax
  </code></pre></details>         <pre>
 
 <code class="language-json" style="max-height: 300px;">{
@@ -10498,7 +10339,7 @@ location: http://localhost:3000?payment_status=failed
 content-type: text/html; charset=utf-8
 access-control-allow-origin: http://localhost:3000
 access-control-allow-credentials: true
-set-cookie: laravel-session=eyJpdiI6Imd1QTRGWm5teW9MYXp3QzA4eHRCeXc9PSIsInZhbHVlIjoiMjRkQWZPdkN3UGF5NFlZSDA1TnNVclNqYngzZUEzdExsNHlhalk5S3ZkbzA1TUFxVkdJaDVydXg5bjFoOVBFeTkzYVdmQVUxRWZDSEU4bGZveTlBNHpaMk1KWFBpVFpOVU4veVRKWUJBL3ByWm9Wd2c0akMwVHhTSDJIN2swZTkiLCJtYWMiOiI2NDkwMzc3NjJhZTQyZjA2OWU4YjI5NGFiNGE5NmRkOGIzODUyNjgxODk4ODAwZGIyMTgzYzdiOGJhOTg5ZmViIiwidGFnIjoiIn0%3D; expires=Wed, 21 Jan 2026 14:24:07 GMT; Max-Age=7200; path=/; httponly; samesite=lax
+set-cookie: laravel-session=eyJpdiI6Im1NU2hZdTdNTWF6SmFhWkJESitDcWc9PSIsInZhbHVlIjoiVGlBWU1Zb1hNRjVWekZFM3ZWV0F0ZFRnRHNsaDFsc2l4MG1FRlFlMDg1S2pja2FXUFFYZlR6TjBZdnNoSVF5VU9VS3FDZWN5MHZIdXNmZFJYMEtkL1BzTnFwOFhsSW9XVEMrWmlCN1lRWE96Wk8vQ0tKNjc5U1luWjh0bldzQ0UiLCJtYWMiOiJlOWZmMzVlNWIzODE2NGE5ZDRmMDk3MDM3MjI5NmFmNWM5YjI3ZjdjZTVlNzM5YmU2YjZkY2RmMjI1N2JmNTJmIiwidGFnIjoiIn0%3D; expires=Wed, 21 Jan 2026 15:02:45 GMT; Max-Age=7200; path=/; httponly; samesite=lax
  </code></pre></details>         <pre>
 
 <code class="language-json" style="max-height: 300px;">&lt;!DOCTYPE html&gt;
@@ -11115,7 +10956,7 @@ print_r(json_decode((string) $body));</code></pre></div>
 content-type: application/json
 access-control-allow-origin: http://localhost:3000
 access-control-allow-credentials: true
-set-cookie: laravel-session=eyJpdiI6IkFWckFMRHhScEp6Q0xLOWoxRjBwT3c9PSIsInZhbHVlIjoid0o1TkZYYjU3OHdYS01kUUtORTRBNmkzbHRxcVliY2dXeCtUMEtsR3hkRHpKWFpJM0JNaGgrb25FR3lBbnJXd2I0NTZqcExEcjdEam4wRTdBZmp4dmdoTnl4TW1YVG1yYmxhNVNPRlJ1RWdRQnVHTUVWeFd6UHNXVnpNOG1sT0kiLCJtYWMiOiJhN2FjMDYxZTIyYWVhMDkwZDZhNzYyM2MzOTkyOWQ0NDJjOTlhOWVhNzQ1ZmRiOTQ3MTE2NTYzNTU1ZTI3MWM1IiwidGFnIjoiIn0%3D; expires=Wed, 21 Jan 2026 14:24:07 GMT; Max-Age=7200; path=/; httponly; samesite=lax
+set-cookie: laravel-session=eyJpdiI6IlJwWXByS2ZETGM5QUFITGIyem1sMUE9PSIsInZhbHVlIjoiVUs5OWhEdElpcUhIMkN3b3huaFErMzBKcHFOajBBRkxLODZyWTZXbWY0YTZaWHVQRkk0LzVmYnNPQ2hUL05vaGRNb0haSW5yNW1LQk5UeGVMU0wwQ2srZUZta3JadzJyUUg2VjJpaEMyZnBwenB5MHlDWExXU1dRYmJUYnRqeG8iLCJtYWMiOiI2ZjMyN2ZkMDA4Nzg3N2E0ZmE3MGJhYTc3ZTYyOTJiNjQxODM2ZjY4NWIyYTYxNDA3YjdhNGQxZWRmZTc1NWM2IiwidGFnIjoiIn0%3D; expires=Wed, 21 Jan 2026 15:02:45 GMT; Max-Age=7200; path=/; httponly; samesite=lax
  </code></pre></details>         <pre>
 
 <code class="language-json" style="max-height: 300px;">{
@@ -11417,11 +11258,11 @@ You can check the Dev Tools console for debugging information.</code></pre>
     \"noOfPackages\": 22,
     \"packageType\": \"Normal\",
     \"repeatedData\": {
-        \"repeatedType\": \"One Time\",
+        \"repeatedType\": \"Weekly\",
         \"days\": [
-            \"Tuesday\"
+            \"Thursday\"
         ],
-        \"startDate\": \"2026-01-21T12:24:07\",
+        \"startDate\": \"2026-01-21T13:02:45\",
         \"endDate\": \"2052-02-14\"
     }
 }"
@@ -11451,11 +11292,11 @@ let body = {
     "noOfPackages": 22,
     "packageType": "Normal",
     "repeatedData": {
-        "repeatedType": "One Time",
+        "repeatedType": "Weekly",
         "days": [
-            "Tuesday"
+            "Thursday"
         ],
-        "startDate": "2026-01-21T12:24:07",
+        "startDate": "2026-01-21T13:02:45",
         "endDate": "2052-02-14"
     }
 };
@@ -11490,11 +11331,11 @@ $response = $client-&gt;post(
             'noOfPackages' =&gt; 22,
             'packageType' =&gt; 'Normal',
             'repeatedData' =&gt; [
-                'repeatedType' =&gt; 'One Time',
+                'repeatedType' =&gt; 'Weekly',
                 'days' =&gt; [
-                    'Tuesday',
+                    'Thursday',
                 ],
-                'startDate' =&gt; '2026-01-21T12:24:07',
+                'startDate' =&gt; '2026-01-21T13:02:45',
                 'endDate' =&gt; '2052-02-14',
             ],
         ],
@@ -11718,10 +11559,10 @@ Must be one of:
  &nbsp;
                 <input type="text" style="display: none"
                               name="repeatedData.repeatedType"                data-endpoint="POSTapi-pickups"
-               value="One Time"
+               value="Weekly"
                data-component="body">
     <br>
-<p>Example: <code>One Time</code></p>
+<p>Example: <code>Weekly</code></p>
 Must be one of:
 <ul style="list-style-type: square;"><li><code>One Time</code></li> <li><code>Daily</code></li> <li><code>Weekly</code></li></ul>
                     </div>
@@ -11748,10 +11589,10 @@ Must be one of:
  &nbsp;
                 <input type="text" style="display: none"
                               name="repeatedData.startDate"                data-endpoint="POSTapi-pickups"
-               value="2026-01-21T12:24:07"
+               value="2026-01-21T13:02:45"
                data-component="body">
     <br>
-<p>Must be a valid date. Example: <code>2026-01-21T12:24:07</code></p>
+<p>Must be a valid date. Example: <code>2026-01-21T13:02:45</code></p>
                     </div>
                                                                 <div style="margin-left: 14px; clear: unset;">
                         <b style="line-height: 2;"><code>endDate</code></b>&nbsp;&nbsp;
@@ -12430,7 +12271,7 @@ print_r(json_decode((string) $body));</code></pre></div>
 content-type: application/json
 access-control-allow-origin: http://localhost:3000
 access-control-allow-credentials: true
-set-cookie: laravel-session=eyJpdiI6IitoSzVla1ZwdEI5ajVWOXlCUHJLdmc9PSIsInZhbHVlIjoiNnExL3JWTWRxVTJWY3lwc3ZENEFVeXVYaHRXTkExQzFUMHdYcHVVZ1RmalZwN0QvT1Jaek1HWmNWdTlacHNlYWNKYVI5WCtmbWtzVVF1c1FHQUZIc1lsVnJDVXJUbG12RFhyNTI0MTN2WDJ0TlRSUDUxZU1oYkVtZ0hNbGQxVEsiLCJtYWMiOiI5N2U3OTNhYWIwZWM1MWIxOWZlZmZhYzA1NzBhNDA2MjI0NDJkNDY5OWIzN2VhZTYyMTlmNmFmNTMzMTFkZTVkIiwidGFnIjoiIn0%3D; expires=Wed, 21 Jan 2026 14:24:07 GMT; Max-Age=7200; path=/; httponly; samesite=lax
+set-cookie: laravel-session=eyJpdiI6Imx2b29sTDlHOFduZ2tZUW9pdzJaNlE9PSIsInZhbHVlIjoidmpJaW1HdTNaTVFWbkFIa3p0eVZKbnRoZ0h0Z0ZNTVBBZ2VGdlM5aVNMT05xbnZvZDFLaDNFaHhkQVZRNDFEbUNUa0RhVmRhRG1aczViZ0QrQmJvMlc3NXBXYnZkcHlnK2pVWG5tQXk2S2E2TXU3VElIT0RNbG8zUXZZZWJJOEgiLCJtYWMiOiI3ZjUyMTBjNTY0YzMwMGU0YzVlZDlkZWI3YjVjZTJlNDg4Yzc0YjM1YWMyNTY4YWNjNzVkNTI4NTFkYmZhODBiIiwidGFnIjoiIn0%3D; expires=Wed, 21 Jan 2026 15:02:45 GMT; Max-Age=7200; path=/; httponly; samesite=lax
  </code></pre></details>         <pre>
 
 <code class="language-json" style="max-height: 300px;">{
@@ -12527,6 +12368,471 @@ You can check the Dev Tools console for debugging information.</code></pre>
 <p>Example: <code>application/json</code></p>
             </div>
                         </form>
+
+                <h1 id="user-management">User Management</h1>
+
+    <p>APIs for managing authenticated user data.</p>
+
+                                <h2 id="user-management-GETapi-user">Get authenticated user</h2>
+
+<p>
+<small class="badge badge-darkred">requires authentication</small>
+</p>
+
+<p>Retrieve the currently authenticated user's information including their addresses.</p>
+
+<span id="example-requests-GETapi-user">
+<blockquote>Example request:</blockquote>
+
+
+<div class="bash-example">
+    <pre><code class="language-bash">curl --request GET \
+    --get "http://127.0.0.1:8000/api/user" \
+    --header "Authorization: Bearer {YOUR_API_TOKEN}" \
+    --header "Content-Type: application/json" \
+    --header "Accept: application/json"</code></pre></div>
+
+
+<div class="javascript-example">
+    <pre><code class="language-javascript">const url = new URL(
+    "http://127.0.0.1:8000/api/user"
+);
+
+const headers = {
+    "Authorization": "Bearer {YOUR_API_TOKEN}",
+    "Content-Type": "application/json",
+    "Accept": "application/json",
+};
+
+fetch(url, {
+    method: "GET",
+    headers,
+}).then(response =&gt; response.json());</code></pre></div>
+
+
+<div class="php-example">
+    <pre><code class="language-php">$client = new \GuzzleHttp\Client();
+$url = 'http://127.0.0.1:8000/api/user';
+$response = $client-&gt;get(
+    $url,
+    [
+        'headers' =&gt; [
+            'Authorization' =&gt; 'Bearer {YOUR_API_TOKEN}',
+            'Content-Type' =&gt; 'application/json',
+            'Accept' =&gt; 'application/json',
+        ],
+    ]
+);
+$body = $response-&gt;getBody();
+print_r(json_decode((string) $body));</code></pre></div>
+
+</span>
+
+<span id="example-responses-GETapi-user">
+            <blockquote>
+            <p>Example response (200, Success):</p>
+        </blockquote>
+                <pre>
+
+<code class="language-json" style="max-height: 300px;">{
+    &quot;id&quot;: 1,
+    &quot;name&quot;: &quot;John Doe&quot;,
+    &quot;email&quot;: &quot;john@example.com&quot;,
+    &quot;phone&quot;: &quot;+201234567890&quot;,
+    &quot;email_verified_at&quot;: &quot;2024-01-15T10:00:00.000000Z&quot;,
+    &quot;created_at&quot;: &quot;2024-01-15T10:00:00.000000Z&quot;,
+    &quot;updated_at&quot;: &quot;2024-01-15T10:00:00.000000Z&quot;,
+    &quot;addresses&quot;: [
+        {
+            &quot;id&quot;: 1,
+            &quot;user_id&quot;: 1,
+            &quot;label&quot;: &quot;Home&quot;,
+            &quot;name&quot;: &quot;John Doe&quot;,
+            &quot;phone&quot;: &quot;+201234567890&quot;,
+            &quot;address&quot;: &quot;123 Main St, Cairo, Egypt&quot;,
+            &quot;city&quot;: &quot;Cairo&quot;,
+            &quot;country&quot;: &quot;Egypt&quot;,
+            &quot;is_default&quot;: true,
+            &quot;created_at&quot;: &quot;2024-01-15T10:00:00.000000Z&quot;,
+            &quot;updated_at&quot;: &quot;2024-01-15T10:00:00.000000Z&quot;
+        }
+    ]
+}</code>
+ </pre>
+            <blockquote>
+            <p>Example response (401, Unauthenticated):</p>
+        </blockquote>
+                <pre>
+
+<code class="language-json" style="max-height: 300px;">{
+    &quot;message&quot;: &quot;Unauthenticated.&quot;
+}</code>
+ </pre>
+    </span>
+<span id="execution-results-GETapi-user" hidden>
+    <blockquote>Received response<span
+                id="execution-response-status-GETapi-user"></span>:
+    </blockquote>
+    <pre class="json"><code id="execution-response-content-GETapi-user"
+      data-empty-response-text="<Empty response>" style="max-height: 400px;"></code></pre>
+</span>
+<span id="execution-error-GETapi-user" hidden>
+    <blockquote>Request failed with error:</blockquote>
+    <pre><code id="execution-error-message-GETapi-user">
+
+Tip: Check that you&#039;re properly connected to the network.
+If you&#039;re a maintainer of ths API, verify that your API is running and you&#039;ve enabled CORS.
+You can check the Dev Tools console for debugging information.</code></pre>
+</span>
+<form id="form-GETapi-user" data-method="GET"
+      data-path="api/user"
+      data-authed="1"
+      data-hasfiles="0"
+      data-isarraybody="0"
+      autocomplete="off"
+      onsubmit="event.preventDefault(); executeTryOut('GETapi-user', this);">
+    <h3>
+        Request&nbsp;&nbsp;&nbsp;
+                    <button type="button"
+                    style="background-color: #8fbcd4; padding: 5px 10px; border-radius: 5px; border-width: thin;"
+                    id="btn-tryout-GETapi-user"
+                    onclick="tryItOut('GETapi-user');">Try it out ⚡
+            </button>
+            <button type="button"
+                    style="background-color: #c97a7e; padding: 5px 10px; border-radius: 5px; border-width: thin;"
+                    id="btn-canceltryout-GETapi-user"
+                    onclick="cancelTryOut('GETapi-user');" hidden>Cancel 🛑
+            </button>&nbsp;&nbsp;
+            <button type="submit"
+                    style="background-color: #6ac174; padding: 5px 10px; border-radius: 5px; border-width: thin;"
+                    id="btn-executetryout-GETapi-user"
+                    data-initial-text="Send Request 💥"
+                    data-loading-text="⏱ Sending..."
+                    hidden>Send Request 💥
+            </button>
+            </h3>
+            <p>
+            <small class="badge badge-green">GET</small>
+            <b><code>api/user</code></b>
+        </p>
+                <h4 class="fancy-heading-panel"><b>Headers</b></h4>
+                                <div style="padding-left: 28px; clear: unset;">
+                <b style="line-height: 2;"><code>Authorization</code></b>&nbsp;&nbsp;
+&nbsp;
+ &nbsp;
+ &nbsp;
+                <input type="text" style="display: none"
+                              name="Authorization" class="auth-value"               data-endpoint="GETapi-user"
+               value="Bearer {YOUR_API_TOKEN}"
+               data-component="header">
+    <br>
+<p>Example: <code>Bearer {YOUR_API_TOKEN}</code></p>
+            </div>
+                                <div style="padding-left: 28px; clear: unset;">
+                <b style="line-height: 2;"><code>Content-Type</code></b>&nbsp;&nbsp;
+&nbsp;
+ &nbsp;
+ &nbsp;
+                <input type="text" style="display: none"
+                              name="Content-Type"                data-endpoint="GETapi-user"
+               value="application/json"
+               data-component="header">
+    <br>
+<p>Example: <code>application/json</code></p>
+            </div>
+                                <div style="padding-left: 28px; clear: unset;">
+                <b style="line-height: 2;"><code>Accept</code></b>&nbsp;&nbsp;
+&nbsp;
+ &nbsp;
+ &nbsp;
+                <input type="text" style="display: none"
+                              name="Accept"                data-endpoint="GETapi-user"
+               value="application/json"
+               data-component="header">
+    <br>
+<p>Example: <code>application/json</code></p>
+            </div>
+                        </form>
+
+                    <h2 id="user-management-PUTapi-user">Update authenticated user</h2>
+
+<p>
+<small class="badge badge-darkred">requires authentication</small>
+</p>
+
+<p>Update the authenticated user's profile information.</p>
+
+<span id="example-requests-PUTapi-user">
+<blockquote>Example request:</blockquote>
+
+
+<div class="bash-example">
+    <pre><code class="language-bash">curl --request PUT \
+    "http://127.0.0.1:8000/api/user" \
+    --header "Authorization: Bearer {YOUR_API_TOKEN}" \
+    --header "Content-Type: application/json" \
+    --header "Accept: application/json" \
+    --data "{
+    \"name\": \"John Doe Updated\",
+    \"email\": \"john.updated@example.com\",
+    \"phone\": \"+201234567891\",
+    \"password\": \"newpassword123\",
+    \"password_confirmation\": \"newpassword123\"
+}"
+</code></pre></div>
+
+
+<div class="javascript-example">
+    <pre><code class="language-javascript">const url = new URL(
+    "http://127.0.0.1:8000/api/user"
+);
+
+const headers = {
+    "Authorization": "Bearer {YOUR_API_TOKEN}",
+    "Content-Type": "application/json",
+    "Accept": "application/json",
+};
+
+let body = {
+    "name": "John Doe Updated",
+    "email": "john.updated@example.com",
+    "phone": "+201234567891",
+    "password": "newpassword123",
+    "password_confirmation": "newpassword123"
+};
+
+fetch(url, {
+    method: "PUT",
+    headers,
+    body: JSON.stringify(body),
+}).then(response =&gt; response.json());</code></pre></div>
+
+
+<div class="php-example">
+    <pre><code class="language-php">$client = new \GuzzleHttp\Client();
+$url = 'http://127.0.0.1:8000/api/user';
+$response = $client-&gt;put(
+    $url,
+    [
+        'headers' =&gt; [
+            'Authorization' =&gt; 'Bearer {YOUR_API_TOKEN}',
+            'Content-Type' =&gt; 'application/json',
+            'Accept' =&gt; 'application/json',
+        ],
+        'json' =&gt; [
+            'name' =&gt; 'John Doe Updated',
+            'email' =&gt; 'john.updated@example.com',
+            'phone' =&gt; '+201234567891',
+            'password' =&gt; 'newpassword123',
+            'password_confirmation' =&gt; 'newpassword123',
+        ],
+    ]
+);
+$body = $response-&gt;getBody();
+print_r(json_decode((string) $body));</code></pre></div>
+
+</span>
+
+<span id="example-responses-PUTapi-user">
+            <blockquote>
+            <p>Example response (200, Success):</p>
+        </blockquote>
+                <pre>
+
+<code class="language-json" style="max-height: 300px;">{
+    &quot;id&quot;: 1,
+    &quot;name&quot;: &quot;John Doe Updated&quot;,
+    &quot;email&quot;: &quot;john.updated@example.com&quot;,
+    &quot;phone&quot;: &quot;+201234567891&quot;,
+    &quot;email_verified_at&quot;: &quot;2024-01-15T10:00:00.000000Z&quot;,
+    &quot;created_at&quot;: &quot;2024-01-15T10:00:00.000000Z&quot;,
+    &quot;updated_at&quot;: &quot;2024-01-15T11:00:00.000000Z&quot;,
+    &quot;addresses&quot;: [
+        {
+            &quot;id&quot;: 1,
+            &quot;user_id&quot;: 1,
+            &quot;label&quot;: &quot;Home&quot;,
+            &quot;name&quot;: &quot;John Doe Updated&quot;,
+            &quot;phone&quot;: &quot;+201234567891&quot;,
+            &quot;address&quot;: &quot;123 Main St, Cairo, Egypt&quot;,
+            &quot;city&quot;: &quot;Cairo&quot;,
+            &quot;country&quot;: &quot;Egypt&quot;,
+            &quot;is_default&quot;: true,
+            &quot;created_at&quot;: &quot;2024-01-15T10:00:00.000000Z&quot;,
+            &quot;updated_at&quot;: &quot;2024-01-15T10:00:00.000000Z&quot;
+        }
+    ]
+}</code>
+ </pre>
+            <blockquote>
+            <p>Example response (401, Unauthenticated):</p>
+        </blockquote>
+                <pre>
+
+<code class="language-json" style="max-height: 300px;">{
+    &quot;message&quot;: &quot;Unauthenticated.&quot;
+}</code>
+ </pre>
+            <blockquote>
+            <p>Example response (422, Validation Error):</p>
+        </blockquote>
+                <pre>
+
+<code class="language-json" style="max-height: 300px;">{
+    &quot;message&quot;: &quot;The given data was invalid.&quot;,
+    &quot;errors&quot;: {
+        &quot;email&quot;: [
+            &quot;The email has already been taken.&quot;
+        ]
+    }
+}</code>
+ </pre>
+    </span>
+<span id="execution-results-PUTapi-user" hidden>
+    <blockquote>Received response<span
+                id="execution-response-status-PUTapi-user"></span>:
+    </blockquote>
+    <pre class="json"><code id="execution-response-content-PUTapi-user"
+      data-empty-response-text="<Empty response>" style="max-height: 400px;"></code></pre>
+</span>
+<span id="execution-error-PUTapi-user" hidden>
+    <blockquote>Request failed with error:</blockquote>
+    <pre><code id="execution-error-message-PUTapi-user">
+
+Tip: Check that you&#039;re properly connected to the network.
+If you&#039;re a maintainer of ths API, verify that your API is running and you&#039;ve enabled CORS.
+You can check the Dev Tools console for debugging information.</code></pre>
+</span>
+<form id="form-PUTapi-user" data-method="PUT"
+      data-path="api/user"
+      data-authed="1"
+      data-hasfiles="0"
+      data-isarraybody="0"
+      autocomplete="off"
+      onsubmit="event.preventDefault(); executeTryOut('PUTapi-user', this);">
+    <h3>
+        Request&nbsp;&nbsp;&nbsp;
+                    <button type="button"
+                    style="background-color: #8fbcd4; padding: 5px 10px; border-radius: 5px; border-width: thin;"
+                    id="btn-tryout-PUTapi-user"
+                    onclick="tryItOut('PUTapi-user');">Try it out ⚡
+            </button>
+            <button type="button"
+                    style="background-color: #c97a7e; padding: 5px 10px; border-radius: 5px; border-width: thin;"
+                    id="btn-canceltryout-PUTapi-user"
+                    onclick="cancelTryOut('PUTapi-user');" hidden>Cancel 🛑
+            </button>&nbsp;&nbsp;
+            <button type="submit"
+                    style="background-color: #6ac174; padding: 5px 10px; border-radius: 5px; border-width: thin;"
+                    id="btn-executetryout-PUTapi-user"
+                    data-initial-text="Send Request 💥"
+                    data-loading-text="⏱ Sending..."
+                    hidden>Send Request 💥
+            </button>
+            </h3>
+            <p>
+            <small class="badge badge-darkblue">PUT</small>
+            <b><code>api/user</code></b>
+        </p>
+                <h4 class="fancy-heading-panel"><b>Headers</b></h4>
+                                <div style="padding-left: 28px; clear: unset;">
+                <b style="line-height: 2;"><code>Authorization</code></b>&nbsp;&nbsp;
+&nbsp;
+ &nbsp;
+ &nbsp;
+                <input type="text" style="display: none"
+                              name="Authorization" class="auth-value"               data-endpoint="PUTapi-user"
+               value="Bearer {YOUR_API_TOKEN}"
+               data-component="header">
+    <br>
+<p>Example: <code>Bearer {YOUR_API_TOKEN}</code></p>
+            </div>
+                                <div style="padding-left: 28px; clear: unset;">
+                <b style="line-height: 2;"><code>Content-Type</code></b>&nbsp;&nbsp;
+&nbsp;
+ &nbsp;
+ &nbsp;
+                <input type="text" style="display: none"
+                              name="Content-Type"                data-endpoint="PUTapi-user"
+               value="application/json"
+               data-component="header">
+    <br>
+<p>Example: <code>application/json</code></p>
+            </div>
+                                <div style="padding-left: 28px; clear: unset;">
+                <b style="line-height: 2;"><code>Accept</code></b>&nbsp;&nbsp;
+&nbsp;
+ &nbsp;
+ &nbsp;
+                <input type="text" style="display: none"
+                              name="Accept"                data-endpoint="PUTapi-user"
+               value="application/json"
+               data-component="header">
+    <br>
+<p>Example: <code>application/json</code></p>
+            </div>
+                                <h4 class="fancy-heading-panel"><b>Body Parameters</b></h4>
+        <div style=" padding-left: 28px;  clear: unset;">
+            <b style="line-height: 2;"><code>name</code></b>&nbsp;&nbsp;
+<small>string</small>&nbsp;
+<i>optional</i> &nbsp;
+ &nbsp;
+                <input type="text" style="display: none"
+                              name="name"                data-endpoint="PUTapi-user"
+               value="John Doe Updated"
+               data-component="body">
+    <br>
+<p>optional The user's full name. Example: <code>John Doe Updated</code></p>
+        </div>
+                <div style=" padding-left: 28px;  clear: unset;">
+            <b style="line-height: 2;"><code>email</code></b>&nbsp;&nbsp;
+<small>string</small>&nbsp;
+<i>optional</i> &nbsp;
+ &nbsp;
+                <input type="text" style="display: none"
+                              name="email"                data-endpoint="PUTapi-user"
+               value="john.updated@example.com"
+               data-component="body">
+    <br>
+<p>optional The user's email address (must be unique). Example: <code>john.updated@example.com</code></p>
+        </div>
+                <div style=" padding-left: 28px;  clear: unset;">
+            <b style="line-height: 2;"><code>phone</code></b>&nbsp;&nbsp;
+<small>string</small>&nbsp;
+<i>optional</i> &nbsp;
+ &nbsp;
+                <input type="text" style="display: none"
+                              name="phone"                data-endpoint="PUTapi-user"
+               value="+201234567891"
+               data-component="body">
+    <br>
+<p>optional The user's phone number. Example: <code>+201234567891</code></p>
+        </div>
+                <div style=" padding-left: 28px;  clear: unset;">
+            <b style="line-height: 2;"><code>password</code></b>&nbsp;&nbsp;
+<small>string</small>&nbsp;
+<i>optional</i> &nbsp;
+ &nbsp;
+                <input type="text" style="display: none"
+                              name="password"                data-endpoint="PUTapi-user"
+               value="newpassword123"
+               data-component="body">
+    <br>
+<p>optional The new password (minimum 8 characters). Example: <code>newpassword123</code></p>
+        </div>
+                <div style=" padding-left: 28px;  clear: unset;">
+            <b style="line-height: 2;"><code>password_confirmation</code></b>&nbsp;&nbsp;
+<small>string</small>&nbsp;
+<i>optional</i> &nbsp;
+ &nbsp;
+                <input type="text" style="display: none"
+                              name="password_confirmation"                data-endpoint="PUTapi-user"
+               value="newpassword123"
+               data-component="body">
+    <br>
+<p>optional Password confirmation (must match password). Example: <code>newpassword123</code></p>
+        </div>
+        </form>
 
             
 

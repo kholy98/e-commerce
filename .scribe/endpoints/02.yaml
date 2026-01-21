@@ -1,31 +1,31 @@
-name: Categories
+name: Products
 description: |-
 
-  APIs for browsing and managing product categories.
+  APIs for browsing and managing products.
 
-  Public endpoints for listing and viewing categories do not require authentication.
-  Admin endpoints for creating, updating, and deleting categories require authentication.
+  Public endpoints for listing and viewing products do not require authentication.
+  Admin endpoints for creating, updating, and deleting products require authentication.
 endpoints:
   -
     custom: []
     httpMethods:
       - GET
-    uri: api/categories
+    uri: api/products
     metadata:
       custom: []
-      groupName: Categories
+      groupName: Products
       groupDescription: |-
 
-        APIs for browsing and managing product categories.
+        APIs for browsing and managing products.
 
-        Public endpoints for listing and viewing categories do not require authentication.
-        Admin endpoints for creating, updating, and deleting categories require authentication.
+        Public endpoints for listing and viewing products do not require authentication.
+        Admin endpoints for creating, updating, and deleting products require authentication.
       subgroup: ''
       subgroupDescription: ''
-      title: 'List all categories'
+      title: 'List all products'
       description: |-
-        Get a paginated list of all active categories with optional filtering and sorting.
-        Returns category data in both English and Arabic.
+        Get a paginated list of all active products with optional filtering, searching, and sorting.
+        Returns product data in both English and Arabic.
       authenticated: false
       deprecated: false
     headers:
@@ -34,10 +34,21 @@ endpoints:
     urlParameters: []
     cleanUrlParameters: []
     queryParameters:
+      category_id:
+        custom: []
+        name: category_id
+        description: 'Filter products by category ID.'
+        required: false
+        example: 1
+        type: integer
+        enumValues: []
+        exampleWasSpecified: true
+        nullable: false
+        deprecated: false
       search:
         custom: []
         name: search
-        description: 'Search categories by name or description.'
+        description: 'Search products by name or description.'
         required: false
         example: coffee
         type: string
@@ -48,9 +59,9 @@ endpoints:
       sort_by:
         custom: []
         name: sort_by
-        description: 'Sort field (name, created_at).'
+        description: 'Sort field (price, name, created_at).'
         required: false
-        example: name
+        example: price
         type: string
         enumValues: []
         exampleWasSpecified: true
@@ -79,8 +90,9 @@ endpoints:
         nullable: false
         deprecated: false
     cleanQueryParameters:
+      category_id: 1
       search: coffee
-      sort_by: name
+      sort_by: price
       sort_direction: desc
       per_page: 10
     bodyParameters: []
@@ -97,35 +109,75 @@ endpoints:
               "en": [
                 {
                   "id": 1,
-                  "name": "Coffee Beans",
-                  "description": "Premium coffee beans from around the world",
-                  "slug": "coffee-beans",
+                  "name": "Premium Coffee Beans",
+                  "description": "High-quality arabica coffee beans",
+                  "price": 25.00,
+                  "cost": 15.00,
+                  "stock": 100,
+                  "sku": "COF-001",
+                  "category_id": 1,
                   "is_active": true,
-                  "product_count": 15,
-                  "image_url": "https://example.com/images/coffee-beans.jpg"
+                  "slug": "premium-coffee-beans",
+                  "grind_type": {"en": "Whole Bean", "ar": "حبوب كاملة"},
+                  "weight": 0.5,
+                  "weight_label": "500g",
+                  "product_details": [
+                    {"title": "Origin", "value": "Ethiopia"},
+                    {"title": "Roast Level", "value": "Medium"}
+                  ],
+                  "created_at": "2024-01-15T10:00:00.000000Z",
+                  "updated_at": "2024-01-15T10:00:00.000000Z",
+                  "images": [
+                    {
+                      "id": 1,
+                      "name": "coffee-beans-front",
+                      "file_name": "coffee-beans-front.jpg",
+                      "mime_type": "image/jpeg",
+                      "size": 102400,
+                      "url": "https://example.com/storage/products/coffee-beans-front.jpg"
+                    }
+                  ]
                 }
               ],
               "ar": [
                 {
                   "id": 1,
-                  "name": "حبوب القهوة",
-                  "description": "حبوب قهوة ممتازة من جميع أنحاء العالم",
-                  "slug": "coffee-beans",
+                  "name": "حبوب قهوة ممتازة",
+                  "description": "حبوب قهوة أرابيكا عالية الجودة",
+                  "price": 25.00,
+                  "cost": 15.00,
+                  "stock": 100,
+                  "sku": "COF-001",
+                  "category_id": 1,
                   "is_active": true,
-                  "product_count": 15,
-                  "image_url": "https://example.com/images/coffee-beans.jpg"
+                  "slug": "premium-coffee-beans",
+                  "grind_type": {"en": "Whole Bean", "ar": "حبوب كاملة"},
+                  "weight": 0.5,
+                  "weight_label": "500g",
+                  "product_details": [
+                    {"title": "المنشأ", "value": "إثيوبيا"},
+                    {"title": "درجة التحميص", "value": "متوسط"}
+                  ],
+                  "created_at": "2024-01-15T10:00:00.000000Z",
+                  "updated_at": "2024-01-15T10:00:00.000000Z",
+                  "images": [
+                    {
+                      "id": 1,
+                      "name": "coffee-beans-front",
+                      "file_name": "coffee-beans-front.jpg",
+                      "mime_type": "image/jpeg",
+                      "size": 102400,
+                      "url": "https://example.com/storage/products/coffee-beans-front.jpg"
+                    }
+                  ]
                 }
-              ]
-            },
-            "pagination": {
-              "current_page": 1,
-              "last_page": 3,
-              "per_page": 15,
-              "total": 45
-            },
-            "meta": {
-              "total_categories": 45,
-              "active_categories": 42
+              ],
+              "pagination": {
+                "current_page": 1,
+                "last_page": 5,
+                "per_page": 15,
+                "total": 75
+              }
             }
           }
         headers: []
@@ -139,32 +191,32 @@ endpoints:
     custom: []
     httpMethods:
       - GET
-    uri: 'api/categories/{category_id}'
+    uri: 'api/products/{product_id}'
     metadata:
       custom: []
-      groupName: Categories
+      groupName: Products
       groupDescription: |-
 
-        APIs for browsing and managing product categories.
+        APIs for browsing and managing products.
 
-        Public endpoints for listing and viewing categories do not require authentication.
-        Admin endpoints for creating, updating, and deleting categories require authentication.
+        Public endpoints for listing and viewing products do not require authentication.
+        Admin endpoints for creating, updating, and deleting products require authentication.
       subgroup: ''
       subgroupDescription: ''
-      title: 'Get category details'
+      title: 'Get product details'
       description: |-
-        Retrieve detailed information about a specific active category including related products.
-        Returns data in both English and Arabic.
+        Retrieve detailed information about a specific product.
+        Returns product data in both English and Arabic.
       authenticated: false
       deprecated: false
     headers:
       Content-Type: application/json
       Accept: application/json
     urlParameters:
-      category_id:
+      product_id:
         custom: []
-        name: category_id
-        description: 'The ID of the category.'
+        name: product_id
+        description: 'The ID of the product.'
         required: true
         example: 1
         type: integer
@@ -172,10 +224,10 @@ endpoints:
         exampleWasSpecified: false
         nullable: false
         deprecated: false
-      category:
+      product:
         custom: []
-        name: category
-        description: 'The category ID.'
+        name: product
+        description: 'The product ID.'
         required: true
         example: 1
         type: integer
@@ -184,8 +236,8 @@ endpoints:
         nullable: false
         deprecated: false
     cleanUrlParameters:
-      category_id: 1
-      category: 1
+      product_id: 1
+      product: 1
     queryParameters: []
     cleanQueryParameters: []
     bodyParameters: []
@@ -201,69 +253,74 @@ endpoints:
             "data": {
               "en": {
                 "id": 1,
-                "name": "Coffee Beans",
-                "description": "Premium coffee beans from around the world",
-                "slug": "coffee-beans",
+                "name": "Premium Coffee Beans",
+                "description": "High-quality arabica coffee beans",
+                "price": 25.00,
+                "cost": 15.00,
+                "stock": 100,
+                "sku": "COF-001",
+                "category_id": 1,
                 "is_active": true,
-                "product_count": 15,
-                "image_url": "https://example.com/images/coffee-beans.jpg",
-                "products": [
+                "grind_type": "whole_bean",
+                "grind_type_label": "Whole Bean",
+                "weight": 0.5,
+                "weight_label": "500g",
+                "product_details": [
+                  {"title": "Origin", "value": "Ethiopia"},
+                  {"title": "Roast Level", "value": "Medium"}
+                ],
+                "category": {
+                  "id": 1,
+                  "name": "Coffee Beans",
+                  "slug": "coffee-beans"
+                },
+                "images": [
                   {
-                    "en": {
-                      "id": 1,
-                      "name": "Premium Coffee Beans",
-                      "slug": "premium-coffee-beans",
-                      "price": 25.00,
-                      "stock": 100,
-                      "sku": "COF-001",
-                      "is_active": true,
-                      "image_url": "https://example.com/images/product.jpg"
-                    },
-                    "ar": {
-                      "id": 1,
-                      "name": "حبوب قهوة ممتازة",
-                      "slug": "premium-coffee-beans",
-                      "price": 25.00,
-                      "stock": 100,
-                      "sku": "COF-001",
-                      "is_active": true,
-                      "image_url": "https://example.com/images/product.jpg"
-                    }
+                    "id": 1,
+                    "name": "coffee-beans-front",
+                    "file_name": "coffee-beans-front.jpg",
+                    "mime_type": "image/jpeg",
+                    "size": 102400,
+                    "url": "https://example.com/storage/products/coffee-beans-front.jpg"
                   }
-                ]
+                ],
+                "created_at": "2024-01-15T10:00:00.000000Z",
+                "updated_at": "2024-01-15T10:00:00.000000Z"
               },
               "ar": {
                 "id": 1,
-                "name": "حبوب القهوة",
-                "description": "حبوب قهوة ممتازة من جميع أنحاء العالم",
-                "slug": "coffee-beans",
+                "name": "حبوب قهوة ممتازة",
+                "description": "حبوب قهوة أرابيكا عالية الجودة",
+                "price": 25.00,
+                "cost": 15.00,
+                "stock": 100,
+                "sku": "COF-001",
+                "category_id": 1,
                 "is_active": true,
-                "product_count": 15,
-                "image_url": "https://example.com/images/coffee-beans.jpg",
-                "products": [
+                "grind_type_label": "حبوب كاملة",
+                "weight": 0.5,
+                "weight_label": "500g",
+                "product_details": [
+                  {"title": "المنشأ", "value": "إثيوبيا"},
+                  {"title": "درجة التحميص", "value": "متوسط"}
+                ],
+                "category": {
+                  "id": 1,
+                  "name": "حبوب القهوة",
+                  "slug": "coffee-beans"
+                },
+                "images": [
                   {
-                    "en": {
-                      "id": 1,
-                      "name": "Premium Coffee Beans",
-                      "slug": "premium-coffee-beans",
-                      "price": 25.00,
-                      "stock": 100,
-                      "sku": "COF-001",
-                      "is_active": true,
-                      "image_url": "https://example.com/images/product.jpg"
-                    },
-                    "ar": {
-                      "id": 1,
-                      "name": "حبوب قهوة ممتازة",
-                      "slug": "premium-coffee-beans",
-                      "price": 25.00,
-                      "stock": 100,
-                      "sku": "COF-001",
-                      "is_active": true,
-                      "image_url": "https://example.com/images/product.jpg"
-                    }
+                    "id": 1,
+                    "name": "coffee-beans-front",
+                    "file_name": "coffee-beans-front.jpg",
+                    "mime_type": "image/jpeg",
+                    "size": 102400,
+                    "url": "https://example.com/storage/products/coffee-beans-front.jpg"
                   }
-                ]
+                ],
+                "created_at": "2024-01-15T10:00:00.000000Z",
+                "updated_at": "2024-01-15T10:00:00.000000Z"
               }
             }
           }
@@ -275,7 +332,7 @@ endpoints:
         content: |-
           {
             "success": false,
-            "message": "Category not found"
+            "message": "Product not found"
           }
         headers: []
         description: 'Not Found'

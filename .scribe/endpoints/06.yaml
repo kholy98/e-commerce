@@ -1,266 +1,346 @@
-name: Orders
+name: Checkout
 description: |-
 
-  APIs for managing customer orders.
+  APIs for the checkout process.
 
-  All endpoints in this group require authentication via Laravel Sanctum.
+  The checkout flow consists of:
+  1. **Initiate checkout** - Validates cart, creates shipment with Bosta, initiates payment with Paymob, and returns payment URL
+  2. **Payment processing** - Customer completes payment on Paymob iframe
+  3. **Complete callback** - Called after successful payment to create the final order
+  4. **Fail callback** - Called if payment fails, cleans up pending data
+
+  Supports both guest checkout and authenticated user checkout.
+  Guest carts are session-based and migrate to user account upon login.
 endpoints:
   -
     custom: []
     httpMethods:
-      - GET
-    uri: api/orders
+      - POST
+    uri: api/checkout/initiate
     metadata:
       custom: []
-      groupName: Orders
+      groupName: Checkout
       groupDescription: |-
 
-        APIs for managing customer orders.
+        APIs for the checkout process.
 
-        All endpoints in this group require authentication via Laravel Sanctum.
+        The checkout flow consists of:
+        1. **Initiate checkout** - Validates cart, creates shipment with Bosta, initiates payment with Paymob, and returns payment URL
+        2. **Payment processing** - Customer completes payment on Paymob iframe
+        3. **Complete callback** - Called after successful payment to create the final order
+        4. **Fail callback** - Called if payment fails, cleans up pending data
+
+        Supports both guest checkout and authenticated user checkout.
+        Guest carts are session-based and migrate to user account upon login.
       subgroup: ''
       subgroupDescription: ''
-      title: 'List all orders'
-      description: 'Get a paginated list of orders for the authenticated user.'
-      authenticated: true
+      title: 'Initiate checkout'
+      description: |-
+        Start the checkout process by validating the cart, creating a shipment with Bosta,
+        initiating payment with Paymob, and returning the payment iframe URL.
+        Supports both guest and authenticated users.
+
+        The checkout creates a pending checkout record that expires after 24 hours.
+        Once payment is completed, the pending checkout is converted to a real order.
+      authenticated: false
       deprecated: false
     headers:
-      Authorization: 'Bearer {YOUR_API_TOKEN}'
-      Content-Type: application/json
-      Accept: application/json
-    urlParameters: []
-    cleanUrlParameters: []
-    queryParameters:
-      status:
-        custom: []
-        name: status
-        description: 'Filter by order status.'
-        required: false
-        example: pending
-        type: string
-        enumValues: []
-        exampleWasSpecified: true
-        nullable: false
-        deprecated: false
-      payment_status:
-        custom: []
-        name: payment_status
-        description: 'Filter by payment status.'
-        required: false
-        example: paid
-        type: string
-        enumValues: []
-        exampleWasSpecified: true
-        nullable: false
-        deprecated: false
-      per_page:
-        custom: []
-        name: per_page
-        description: 'Number of items per page. Default: 15.'
-        required: false
-        example: 10
-        type: integer
-        enumValues: []
-        exampleWasSpecified: true
-        nullable: false
-        deprecated: false
-    cleanQueryParameters:
-      status: pending
-      payment_status: paid
-      per_page: 10
-    bodyParameters: []
-    cleanBodyParameters: []
-    fileParameters: []
-    responses:
-      -
-        custom: []
-        status: 200
-        content: |-
-          {
-            "data": {
-              "success": true,
-              "en": [
-                {
-                  "id": 1,
-                  "order_number": "ORD-2024-001",
-                  "user_id": 1,
-                  "status": "pending",
-                  "payment_status": "pending",
-                  "subtotal": 100.00,
-                  "tax": 10.00,
-                  "shipping_cost": 15.00,
-                  "total_amount": 125.00,
-                  "shipping_address": {
-                    "street": "123 Main St",
-                    "city": "Cairo",
-                    "zip_code": "12345",
-                    "country": "Egypt",
-                    "building_number": "15",
-                    "floor": "3",
-                    "apartment": "5A",
-                    "zone": "Maadi"
-                  },
-                  "notes": "Please deliver in the morning",
-                  "created_at": "2024-01-15T10:00:00.000000Z",
-                  "updated_at": "2024-01-15T10:00:00.000000Z"
-                }
-              ],
-              "ar": [
-                {
-                  "id": 1,
-                  "order_number": "ORD-2024-001",
-                  "user_id": 1,
-                  "status": "قيد الانتظار",
-                  "payment_status": "pending",
-                  "subtotal": 100.00,
-                  "tax": 10.00,
-                  "shipping_cost": 15.00,
-                  "total_amount": 125.00,
-                  "shipping_address": {
-                    "street": "123 الشارع الرئيسي",
-                    "city": "القاهرة",
-                    "zip_code": "12345",
-                    "country": "مصر",
-                    "building_number": "15",
-                    "floor": "3",
-                    "apartment": "5A",
-                    "zone": "المعادي"
-                  },
-                  "notes": "يرجى التسليم في الصباح",
-                  "created_at": "2024-01-15T10:00:00.000000Z",
-                  "updated_at": "2024-01-15T10:00:00.000000Z"
-                }
-              ],
-              "pagination": {
-                "current_page": 1,
-                "last_page": 5,
-                "per_page": 15,
-                "total": 75
-              }
-            }
-          }
-        headers: []
-        description: Success
-      -
-        custom: []
-        status: 401
-        content: |-
-          {
-            "message": "Unauthenticated."
-          }
-        headers: []
-        description: Unauthenticated
-    responseFields: []
-    auth:
-      - headers
-      - Authorization
-      - 'Bearer 6g43cv8PD1aE5beadkZfhV6'
-    controller: null
-    method: null
-    route: null
-  -
-    custom: []
-    httpMethods:
-      - POST
-    uri: api/orders
-    metadata:
-      custom: []
-      groupName: Orders
-      groupDescription: |-
-
-        APIs for managing customer orders.
-
-        All endpoints in this group require authentication via Laravel Sanctum.
-      subgroup: ''
-      subgroupDescription: ''
-      title: 'Create order (Deprecated)'
-      description: 'This endpoint is deprecated. Orders are now created only through the checkout flow after successful payment.'
-      authenticated: true
-      deprecated: 'Use POST /api/checkout/initiate instead'
-    headers:
-      Authorization: 'Bearer {YOUR_API_TOKEN}'
       Content-Type: application/json
       Accept: application/json
     urlParameters: []
     cleanUrlParameters: []
     queryParameters: []
     cleanQueryParameters: []
-    bodyParameters: []
-    cleanBodyParameters: []
-    fileParameters: []
-    responses:
-      -
+    bodyParameters:
+      shipping_address_id:
         custom: []
-        status: 422
-        content: |-
-          {
-            "success": false,
-            "message": "Direct order creation is deprecated. Please use the checkout flow: POST /checkout/initiate",
-            "checkout_url": "/checkout/initiate"
-          }
-        headers: []
-        description: Deprecated
-    responseFields: []
-    auth:
-      - headers
-      - Authorization
-      - 'Bearer 6g43cv8PD1aE5beadkZfhV6'
-    controller: null
-    method: null
-    route: null
-  -
-    custom: []
-    httpMethods:
-      - GET
-    uri: 'api/orders/{order_id}'
-    metadata:
-      custom: []
-      groupName: Orders
-      groupDescription: |-
-
-        APIs for managing customer orders.
-
-        All endpoints in this group require authentication via Laravel Sanctum.
-      subgroup: ''
-      subgroupDescription: ''
-      title: 'Get order details'
-      description: 'Retrieve details of a specific order including all items.'
-      authenticated: true
-      deprecated: false
-    headers:
-      Authorization: 'Bearer {YOUR_API_TOKEN}'
-      Content-Type: application/json
-      Accept: application/json
-    urlParameters:
-      order_id:
-        custom: []
-        name: order_id
-        description: 'The ID of the order.'
-        required: true
+        name: shipping_address_id
+        description: 'Use a saved shipping address by ID (for authenticated users).'
+        required: false
         example: 1
         type: integer
+        enumValues: []
+        exampleWasSpecified: true
+        nullable: true
+        deprecated: false
+      billing_address_id:
+        custom: []
+        name: billing_address_id
+        description: 'Use a saved billing address by ID (for authenticated users).'
+        required: false
+        example: 1
+        type: integer
+        enumValues: []
+        exampleWasSpecified: true
+        nullable: true
+        deprecated: false
+      shipping_address:
+        custom: []
+        name: shipping_address
+        description: 'Required if shipping_address_id not provided. The shipping address details.'
+        required: true
+        example: []
+        type: object
         enumValues: []
         exampleWasSpecified: false
         nullable: false
         deprecated: false
-      order:
+      shipping_address.street:
         custom: []
-        name: order
-        description: 'The order ID.'
+        name: shipping_address.street
+        description: 'The street address.'
         required: true
-        example: 1
-        type: integer
+        example: '123 Main St'
+        type: string
         enumValues: []
         exampleWasSpecified: true
         nullable: false
         deprecated: false
-    cleanUrlParameters:
-      order_id: 1
-      order: 1
-    queryParameters: []
-    cleanQueryParameters: []
-    bodyParameters: []
-    cleanBodyParameters: []
+      shipping_address.city:
+        custom: []
+        name: shipping_address.city
+        description: 'The city name (used for shipping cost calculation).'
+        required: true
+        example: Cairo
+        type: string
+        enumValues: []
+        exampleWasSpecified: true
+        nullable: false
+        deprecated: false
+      shipping_address.zip_code:
+        custom: []
+        name: shipping_address.zip_code
+        description: 'The postal/zip code.'
+        required: true
+        example: '12345'
+        type: string
+        enumValues: []
+        exampleWasSpecified: true
+        nullable: false
+        deprecated: false
+      shipping_address.country:
+        custom: []
+        name: shipping_address.country
+        description: 'The country name.'
+        required: true
+        example: Egypt
+        type: string
+        enumValues: []
+        exampleWasSpecified: true
+        nullable: false
+        deprecated: false
+      shipping_address.building_number:
+        custom: []
+        name: shipping_address.building_number
+        description: 'The building number.'
+        required: true
+        example: '15'
+        type: string
+        enumValues: []
+        exampleWasSpecified: true
+        nullable: false
+        deprecated: false
+      shipping_address.floor:
+        custom: []
+        name: shipping_address.floor
+        description: 'The floor number (optional).'
+        required: false
+        example: '3'
+        type: string
+        enumValues: []
+        exampleWasSpecified: true
+        nullable: true
+        deprecated: false
+      shipping_address.apartment:
+        custom: []
+        name: shipping_address.apartment
+        description: 'The apartment number (optional).'
+        required: false
+        example: 5A
+        type: string
+        enumValues: []
+        exampleWasSpecified: true
+        nullable: true
+        deprecated: false
+      shipping_address.zone:
+        custom: []
+        name: shipping_address.zone
+        description: 'The zone/district for Bosta delivery.'
+        required: true
+        example: Maadi
+        type: string
+        enumValues: []
+        exampleWasSpecified: true
+        nullable: false
+        deprecated: false
+      billing_address:
+        custom: []
+        name: billing_address
+        description: 'Required if billing_address_id not provided. The billing and contact details for payment.'
+        required: true
+        example: []
+        type: object
+        enumValues: []
+        exampleWasSpecified: false
+        nullable: false
+        deprecated: false
+      billing_address.first_name:
+        custom: []
+        name: billing_address.first_name
+        description: "Customer's first name."
+        required: true
+        example: John
+        type: string
+        enumValues: []
+        exampleWasSpecified: true
+        nullable: false
+        deprecated: false
+      billing_address.last_name:
+        custom: []
+        name: billing_address.last_name
+        description: "Customer's last name."
+        required: true
+        example: Doe
+        type: string
+        enumValues: []
+        exampleWasSpecified: true
+        nullable: false
+        deprecated: false
+      billing_address.email:
+        custom: []
+        name: billing_address.email
+        description: "Customer's email for order confirmation."
+        required: true
+        example: john@example.com
+        type: string
+        enumValues: []
+        exampleWasSpecified: true
+        nullable: false
+        deprecated: false
+      billing_address.phone:
+        custom: []
+        name: billing_address.phone
+        description: "Customer's phone for delivery contact."
+        required: true
+        example: '+201234567890'
+        type: string
+        enumValues: []
+        exampleWasSpecified: true
+        nullable: false
+        deprecated: false
+      billing_address.street:
+        custom: []
+        name: billing_address.street
+        description: 'The billing street address.'
+        required: true
+        example: '123 Main St'
+        type: string
+        enumValues: []
+        exampleWasSpecified: true
+        nullable: false
+        deprecated: false
+      billing_address.city:
+        custom: []
+        name: billing_address.city
+        description: 'The billing city.'
+        required: true
+        example: Cairo
+        type: string
+        enumValues: []
+        exampleWasSpecified: true
+        nullable: false
+        deprecated: false
+      billing_address.zip_code:
+        custom: []
+        name: billing_address.zip_code
+        description: 'The billing postal/zip code.'
+        required: true
+        example: '12345'
+        type: string
+        enumValues: []
+        exampleWasSpecified: true
+        nullable: false
+        deprecated: false
+      billing_address.country:
+        custom: []
+        name: billing_address.country
+        description: 'The billing country.'
+        required: true
+        example: Egypt
+        type: string
+        enumValues: []
+        exampleWasSpecified: true
+        nullable: false
+        deprecated: false
+      billing_address.floor:
+        custom: []
+        name: billing_address.floor
+        description: 'The floor number (optional, defaults to NA for Paymob).'
+        required: false
+        example: '3'
+        type: string
+        enumValues: []
+        exampleWasSpecified: true
+        nullable: true
+        deprecated: false
+      billing_address.apartment:
+        custom: []
+        name: billing_address.apartment
+        description: 'The apartment number (optional, defaults to NA for Paymob).'
+        required: false
+        example: 5A
+        type: string
+        enumValues: []
+        exampleWasSpecified: true
+        nullable: true
+        deprecated: false
+      notes:
+        custom: []
+        name: notes
+        description: 'Optional order notes for delivery instructions.'
+        required: false
+        example: 'Please deliver in the morning'
+        type: string
+        enumValues: []
+        exampleWasSpecified: true
+        nullable: true
+        deprecated: false
+      user_id:
+        custom: []
+        name: user_id
+        description: 'Optional user ID for associating guest checkout with a user.'
+        required: false
+        example: 16
+        type: integer
+        enumValues: []
+        exampleWasSpecified: false
+        nullable: true
+        deprecated: false
+    cleanBodyParameters:
+      shipping_address_id: 1
+      billing_address_id: 1
+      shipping_address:
+        street: '123 Main St'
+        city: Cairo
+        zip_code: '12345'
+        country: Egypt
+        building_number: '15'
+        floor: '3'
+        apartment: 5A
+        zone: Maadi
+      billing_address:
+        first_name: John
+        last_name: Doe
+        email: john@example.com
+        phone: '+201234567890'
+        street: '123 Main St'
+        city: Cairo
+        zip_code: '12345'
+        country: Egypt
+        floor: '3'
+        apartment: 5A
+      notes: 'Please deliver in the morning'
+      user_id: 16
     fileParameters: []
     responses:
       -
@@ -269,23 +349,281 @@ endpoints:
         content: |-
           {
             "success": true,
+            "message": "Checkout initiated successfully",
             "data": {
-              "id": 1,
-              "order_number": "ORD-2024-001",
+              "payment_key": "ZXlKaGJHY2lPaUpJVXpVeE1pSXNJblI1Y0NJNklrcFhWQ0o5...",
+              "iframe_url": "https://accept.paymob.com/api/acceptance/iframes/123456?payment_token=ZXlKaGJHY2lPaUpJVXpVeE1pSXNJblI1Y0NJNklrcFhWQ0o5...",
+              "temp_order_id": "149823756",
+              "tracking_number": "BOSTA-123456789",
+              "cost_breakdown": {
+                "subtotal": 250.00,
+                "tax": 35.00,
+                "shipping": 80.00,
+                "total": 365.00,
+                "item_count": 3
+              }
+            }
+          }
+        headers: []
+        description: Success
+      -
+        custom: []
+        status: 404
+        content: |-
+          {
+            "success": false,
+            "message": "Shipping address not found"
+          }
+        headers: []
+        description: 'Saved Address Not Found'
+      -
+        custom: []
+        status: 422
+        content: |-
+          {
+            "success": false,
+            "message": "Cart is empty"
+          }
+        headers: []
+        description: 'Empty Cart'
+      -
+        custom: []
+        status: 422
+        content: |-
+          {
+            "success": false,
+            "message": "Failed to create shipment",
+            "error": "Invalid zone specified for delivery"
+          }
+        headers: []
+        description: 'Shipment Creation Failed'
+      -
+        custom: []
+        status: 422
+        content: |-
+          {
+            "success": false,
+            "message": "Payment initiation failed",
+            "error": "Invalid billing data"
+          }
+        headers: []
+        description: 'Payment Initiation Failed'
+      -
+        custom: []
+        status: 422
+        content: |-
+          {
+            "message": "The shipping address.street field is required.",
+            "errors": {
+              "shipping_address.street": ["The shipping address.street field is required."],
+              "shipping_address.city": ["The shipping address.city field is required."],
+              "billing_address.email": ["The billing address.email must be a valid email address."]
+            }
+          }
+        headers: []
+        description: 'Validation Error'
+      -
+        custom: []
+        status: 500
+        content: |-
+          {
+            "success": false,
+            "message": "Checkout failed: Connection to payment gateway timed out"
+          }
+        headers: []
+        description: 'Server Error'
+    responseFields: []
+    auth: []
+    controller: null
+    method: null
+    route: null
+  -
+    custom: []
+    httpMethods:
+      - GET
+      - POST
+    uri: api/checkout/complete
+    metadata:
+      custom: []
+      groupName: Checkout
+      groupDescription: |-
+
+        APIs for the checkout process.
+
+        The checkout flow consists of:
+        1. **Initiate checkout** - Validates cart, creates shipment with Bosta, initiates payment with Paymob, and returns payment URL
+        2. **Payment processing** - Customer completes payment on Paymob iframe
+        3. **Complete callback** - Called after successful payment to create the final order
+        4. **Fail callback** - Called if payment fails, cleans up pending data
+
+        Supports both guest checkout and authenticated user checkout.
+        Guest carts are session-based and migrate to user account upon login.
+      subgroup: ''
+      subgroupDescription: ''
+      title: 'Complete checkout'
+      description: |-
+        Finalize the checkout process after successful payment.
+        This endpoint is called by the Paymob payment gateway callback (redirect) or webhook.
+        It retrieves the pending checkout data, creates the final order, and clears the cart.
+
+        For GET requests (browser redirects from Paymob), the order_id can be retrieved from the session.
+        For POST requests (webhooks), the order_id must be provided in the request body.
+      authenticated: false
+      deprecated: false
+    headers:
+      Content-Type: application/json
+      Accept: application/json
+    urlParameters: []
+    cleanUrlParameters: []
+    queryParameters:
+      order_id:
+        custom: []
+        name: order_id
+        description: 'The temporary order ID from Paymob (returned during checkout initiation).'
+        required: false
+        example: '149823756'
+        type: string
+        enumValues: []
+        exampleWasSpecified: true
+        nullable: false
+        deprecated: false
+      payment_id:
+        custom: []
+        name: payment_id
+        description: 'The payment transaction ID from Paymob.'
+        required: false
+        example: '98765432'
+        type: string
+        enumValues: []
+        exampleWasSpecified: true
+        nullable: false
+        deprecated: false
+    cleanQueryParameters:
+      order_id: '149823756'
+      payment_id: '98765432'
+    bodyParameters:
+      order_id:
+        custom: []
+        name: order_id
+        description: 'The temporary order ID (for webhook POST requests).'
+        required: false
+        example: '149823756'
+        type: string
+        enumValues: []
+        exampleWasSpecified: true
+        nullable: false
+        deprecated: false
+      payment_id:
+        custom: []
+        name: payment_id
+        description: 'The payment transaction ID (for webhook POST requests).'
+        required: false
+        example: '98765432'
+        type: string
+        enumValues: []
+        exampleWasSpecified: true
+        nullable: false
+        deprecated: false
+      success:
+        custom: []
+        name: success
+        description: 'Payment success status (for webhook POST requests).'
+        required: false
+        example: true
+        type: boolean
+        enumValues: []
+        exampleWasSpecified: true
+        nullable: false
+        deprecated: false
+    cleanBodyParameters:
+      order_id: '149823756'
+      payment_id: '98765432'
+      success: true
+    fileParameters: []
+    responses:
+      -
+        custom: []
+        status: 200
+        content: |-
+          {
+            "success": true,
+            "message": "Order created successfully",
+            "data": {
+              "id": 42,
+              "order_number": "ORD-2024-00042",
               "user_id": 1,
-              "status": "pending",
+              "status": "processing",
+              "status_ar": "قيد المعالجة",
               "payment_status": "paid",
-              "subtotal": 100.00,
-              "tax": 10.00,
-              "shipping_cost": 15.00,
-              "total_amount": 125.00,
+              "subtotal": 250.00,
+              "tax": 35.00,
+              "shipping_cost": 80.00,
+              "total_amount": 365.00,
+              "shipping_address": {
+                "street": "123 Main St",
+                "city": "Cairo",
+                "zip_code": "12345",
+                "country": "Egypt",
+                "building_number": "15",
+                "floor": "3",
+                "apartment": "5A",
+                "zone": "Maadi"
+              },
+              "billing_address": {
+                "first_name": "John",
+                "last_name": "Doe",
+                "email": "john@example.com",
+                "phone": "+201234567890",
+                "street": "123 Main St",
+                "city": "Cairo",
+                "zip_code": "12345",
+                "country": "Egypt"
+              },
+              "notes": "Please deliver in the morning",
+              "created_at": "2024-01-15T10:30:00.000000Z",
+              "updated_at": "2024-01-15T10:30:00.000000Z",
               "items": [
                 {
-                  "id": 1,
+                  "id": 101,
+                  "order_id": 42,
                   "product_id": 5,
                   "quantity": 2,
-                  "price": 50.00,
-                  "product": {"id": 5, "name": "Premium Coffee"}
+                  "price": 75.00,
+                  "total": 150.00,
+                  "product": {
+                    "id": 5,
+                    "name": "Premium Coffee Beans",
+                    "slug": "premium-coffee-beans",
+                    "price": 75.00,
+                    "sku": "COF-005",
+                    "images": [
+                      {
+                        "id": 1,
+                        "url": "https://example.com/storage/products/coffee.jpg"
+                      }
+                    ]
+                  }
+                },
+                {
+                  "id": 102,
+                  "order_id": 42,
+                  "product_id": 8,
+                  "quantity": 1,
+                  "price": 100.00,
+                  "total": 100.00,
+                  "product": {
+                    "id": 8,
+                    "name": "Coffee Grinder",
+                    "slug": "coffee-grinder",
+                    "price": 100.00,
+                    "sku": "GRN-008",
+                    "images": [
+                      {
+                        "id": 3,
+                        "url": "https://example.com/storage/products/grinder.jpg"
+                      }
+                    ]
+                  }
                 }
               ]
             }
@@ -294,119 +632,126 @@ endpoints:
         description: Success
       -
         custom: []
-        status: 403
+        status: 400
         content: |-
           {
-            "message": "This action is unauthorized."
+            "success": false,
+            "message": "Order ID is required"
           }
         headers: []
-        description: Forbidden
+        description: 'Order ID Required'
       -
         custom: []
         status: 404
         content: |-
           {
-            "message": "Order not found."
+            "success": false,
+            "message": "No pending checkout found"
           }
         headers: []
-        description: 'Not Found'
+        description: 'Checkout Not Found or Expired'
+      -
+        custom: []
+        status: 422
+        content: |-
+          {
+            "success": false,
+            "message": "Payment was not successful"
+          }
+        headers: []
+        description: 'Payment Not Successful'
+      -
+        custom: []
+        status: 500
+        content: |-
+          {
+            "success": false,
+            "message": "Order creation failed: Database connection error"
+          }
+        headers: []
+        description: 'Order Creation Failed'
     responseFields: []
-    auth:
-      - headers
-      - Authorization
-      - 'Bearer 6g43cv8PD1aE5beadkZfhV6'
+    auth: []
     controller: null
     method: null
     route: null
   -
     custom: []
     httpMethods:
-      - PATCH
-    uri: 'api/orders/{order_id}/status'
+      - GET
+      - POST
+    uri: api/checkout/fail
     metadata:
       custom: []
-      groupName: Orders
+      groupName: Checkout
       groupDescription: |-
 
-        APIs for managing customer orders.
+        APIs for the checkout process.
 
-        All endpoints in this group require authentication via Laravel Sanctum.
+        The checkout flow consists of:
+        1. **Initiate checkout** - Validates cart, creates shipment with Bosta, initiates payment with Paymob, and returns payment URL
+        2. **Payment processing** - Customer completes payment on Paymob iframe
+        3. **Complete callback** - Called after successful payment to create the final order
+        4. **Fail callback** - Called if payment fails, cleans up pending data
+
+        Supports both guest checkout and authenticated user checkout.
+        Guest carts are session-based and migrate to user account upon login.
       subgroup: ''
       subgroupDescription: ''
-      title: 'Update order status'
-      description: 'Update the status of an order. This endpoint is typically used by administrators.'
-      authenticated: true
+      title: 'Handle checkout failure'
+      description: |-
+        Handle failed checkout due to payment decline, cancellation, or gateway error.
+        Clears all pending checkout data from both session and database.
+
+        For web requests (GET), redirects to the payment failed page.
+        For API requests (expects JSON), returns a JSON error response.
+      authenticated: false
       deprecated: false
     headers:
-      Authorization: 'Bearer {YOUR_API_TOKEN}'
       Content-Type: application/json
       Accept: application/json
-    urlParameters:
+    urlParameters: []
+    cleanUrlParameters: []
+    queryParameters:
+      error:
+        custom: []
+        name: error
+        description: 'The error message or code from the payment gateway.'
+        required: false
+        example: 'Payment declined by bank'
+        type: string
+        enumValues: []
+        exampleWasSpecified: true
+        nullable: false
+        deprecated: false
       order_id:
         custom: []
         name: order_id
-        description: 'The ID of the order.'
-        required: true
-        example: 1
-        type: integer
-        enumValues: []
-        exampleWasSpecified: false
-        nullable: false
-        deprecated: false
-      order:
-        custom: []
-        name: order
-        description: 'The order ID.'
-        required: true
-        example: 1
-        type: integer
-        enumValues: []
-        exampleWasSpecified: true
-        nullable: false
-        deprecated: false
-    cleanUrlParameters:
-      order_id: 1
-      order: 1
-    queryParameters: []
-    cleanQueryParameters: []
-    bodyParameters:
-      status:
-        custom: []
-        name: status
-        description: 'The new order status.'
-        required: true
-        example: shipped
-        type: string
-        enumValues: []
-        exampleWasSpecified: true
-        nullable: false
-        deprecated: false
-      status_ar:
-        custom: []
-        name: status_ar
-        description: 'Optional Arabic status text.'
+        description: 'The temporary order ID that failed.'
         required: false
-        example: 'تم الشحن'
-        type: string
-        enumValues: []
-        exampleWasSpecified: true
-        nullable: true
-        deprecated: false
-      payment_status:
-        custom: []
-        name: payment_status
-        description: 'Optional payment status update.'
-        required: false
-        example: paid
+        example: '149823756'
         type: string
         enumValues: []
         exampleWasSpecified: true
         nullable: false
         deprecated: false
-    cleanBodyParameters:
-      status: shipped
-      status_ar: 'تم الشحن'
-      payment_status: paid
+      txn_response_code:
+        custom: []
+        name: txn_response_code
+        description: 'Transaction response code from Paymob.'
+        required: false
+        example: DECLINED
+        type: string
+        enumValues: []
+        exampleWasSpecified: true
+        nullable: false
+        deprecated: false
+    cleanQueryParameters:
+      error: 'Payment declined by bank'
+      order_id: '149823756'
+      txn_response_code: DECLINED
+    bodyParameters: []
+    cleanBodyParameters: []
     fileParameters: []
     responses:
       -
@@ -414,84 +759,72 @@ endpoints:
         status: 200
         content: |-
           {
-            "success": true,
-            "message": "Order status updated successfully",
-            "data": {
-              "id": 1,
-              "order_number": "ORD-2024-001",
-              "status": "shipped",
-              "payment_status": "paid"
-            }
+            "success": false,
+            "message": "Checkout failed",
+            "error": "Payment declined by bank"
           }
         headers: []
-        description: Success
+        description: 'API Request'
       -
         custom: []
-        status: 422
+        status: 200
         content: |-
           {
-            "message": "The status field is required.",
-            "errors": {"status": ["The status field is required."]}
+            "success": false,
+            "message": "Checkout failed",
+            "error": "Unknown error"
           }
         headers: []
-        description: 'Validation Error'
+        description: 'Unknown Error'
+      -
+        custom: []
+        status: 302
+        content: 'Redirects to /payment-failed'
+        headers: []
+        description: 'Web Request'
     responseFields: []
-    auth:
-      - headers
-      - Authorization
-      - 'Bearer 6g43cv8PD1aE5beadkZfhV6'
+    auth: []
     controller: null
     method: null
     route: null
   -
     custom: []
     httpMethods:
-      - POST
-    uri: 'api/orders/{order_id}/cancel'
+      - GET
+    uri: api/checkout/status
     metadata:
       custom: []
-      groupName: Orders
+      groupName: Checkout
       groupDescription: |-
 
-        APIs for managing customer orders.
+        APIs for the checkout process.
 
-        All endpoints in this group require authentication via Laravel Sanctum.
+        The checkout flow consists of:
+        1. **Initiate checkout** - Validates cart, creates shipment with Bosta, initiates payment with Paymob, and returns payment URL
+        2. **Payment processing** - Customer completes payment on Paymob iframe
+        3. **Complete callback** - Called after successful payment to create the final order
+        4. **Fail callback** - Called if payment fails, cleans up pending data
+
+        Supports both guest checkout and authenticated user checkout.
+        Guest carts are session-based and migrate to user account upon login.
       subgroup: ''
       subgroupDescription: ''
-      title: 'Cancel order'
-      description: "Cancel an existing order. Only orders that haven't been shipped can be cancelled."
-      authenticated: true
+      title: 'Get checkout status'
+      description: |-
+        Check if there's a pending checkout session and get current cart summary.
+        Useful for:
+        - Resuming interrupted checkout flows
+        - Checking if user has abandoned checkout
+        - Displaying cart summary before checkout
+
+        Checks both session storage and database for pending checkouts.
+      authenticated: false
       deprecated: false
     headers:
-      Authorization: 'Bearer {YOUR_API_TOKEN}'
       Content-Type: application/json
       Accept: application/json
-    urlParameters:
-      order_id:
-        custom: []
-        name: order_id
-        description: 'The ID of the order.'
-        required: true
-        example: 1
-        type: integer
-        enumValues: []
-        exampleWasSpecified: false
-        nullable: false
-        deprecated: false
-      order:
-        custom: []
-        name: order
-        description: 'The order ID.'
-        required: true
-        example: 1
-        type: integer
-        enumValues: []
-        exampleWasSpecified: true
-        nullable: false
-        deprecated: false
-    cleanUrlParameters:
-      order_id: 1
-      order: 1
+    urlParameters: []
+    cleanUrlParameters: []
     queryParameters: []
     cleanQueryParameters: []
     bodyParameters: []
@@ -504,39 +837,184 @@ endpoints:
         content: |-
           {
             "success": true,
-            "message": "Order cancelled successfully",
             "data": {
-              "id": 1,
-              "order_number": "ORD-2024-001",
-              "status": "cancelled"
+              "has_pending_checkout": true,
+              "cart_summary": {
+                "subtotal": 250.00,
+                "tax": 35.00,
+                "shipping": 80.00,
+                "total": 365.00,
+                "item_count": 3,
+                "discount": 0.00
+              },
+              "cart_items_count": 3
+            }
+          }
+        headers: []
+        description: 'Has Pending Checkout'
+      -
+        custom: []
+        status: 200
+        content: |-
+          {
+            "success": true,
+            "data": {
+              "has_pending_checkout": false,
+              "cart_summary": {
+                "subtotal": 0.00,
+                "tax": 0.00,
+                "shipping": 0.00,
+                "total": 0.00,
+                "item_count": 0,
+                "discount": 0.00
+              },
+              "cart_items_count": 0
+            }
+          }
+        headers: []
+        description: 'No Pending Checkout'
+      -
+        custom: []
+        status: 200
+        content: |-
+          {
+            "success": true,
+            "data": {
+              "has_pending_checkout": false,
+              "cart_summary": {
+                "subtotal": 150.00,
+                "tax": 21.00,
+                "shipping": 80.00,
+                "total": 251.00,
+                "item_count": 2,
+                "discount": 0.00
+              },
+              "cart_items_count": 2
+            }
+          }
+        headers: []
+        description: 'Cart With Items But No Checkout Started'
+    responseFields: []
+    auth: []
+    controller: null
+    method: null
+    route: null
+  -
+    custom: []
+    httpMethods:
+      - POST
+    uri: api/checkout/test-complete
+    metadata:
+      custom: []
+      groupName: Checkout
+      groupDescription: |-
+
+        APIs for the checkout process.
+
+        The checkout flow consists of:
+        1. **Initiate checkout** - Validates cart, creates shipment with Bosta, initiates payment with Paymob, and returns payment URL
+        2. **Payment processing** - Customer completes payment on Paymob iframe
+        3. **Complete callback** - Called after successful payment to create the final order
+        4. **Fail callback** - Called if payment fails, cleans up pending data
+
+        Supports both guest checkout and authenticated user checkout.
+        Guest carts are session-based and migrate to user account upon login.
+      subgroup: ''
+      subgroupDescription: ''
+      title: 'Test checkout completion'
+      description: |-
+        Test endpoint to simulate completing a checkout with real pending checkout data.
+        This is useful for development and testing the checkout flow without going through
+        the actual Paymob payment process.
+
+        **Warning:** This endpoint should be disabled or protected in production environments.
+      authenticated: false
+      deprecated: false
+    headers:
+      Content-Type: application/json
+      Accept: application/json
+    urlParameters: []
+    cleanUrlParameters: []
+    queryParameters: []
+    cleanQueryParameters: []
+    bodyParameters: []
+    cleanBodyParameters: []
+    fileParameters: []
+    responses:
+      -
+        custom: []
+        status: 200
+        content: |-
+          {
+            "success": true,
+            "message": "Order created successfully",
+            "data": {
+              "id": 42,
+              "order_number": "ORD-2024-00042",
+              "user_id": 1,
+              "status": "processing",
+              "status_ar": "قيد المعالجة",
+              "payment_status": "paid",
+              "subtotal": 250.00,
+              "tax": 35.00,
+              "shipping_cost": 80.00,
+              "total_amount": 365.00,
+              "shipping_address": {
+                "street": "123 Main St",
+                "city": "Cairo",
+                "zip_code": "12345",
+                "country": "Egypt",
+                "building_number": "15",
+                "floor": "3",
+                "apartment": "5A",
+                "zone": "Maadi"
+              },
+              "notes": "Test order",
+              "created_at": "2024-01-15T10:30:00.000000Z",
+              "updated_at": "2024-01-15T10:30:00.000000Z",
+              "items": [
+                {
+                  "id": 101,
+                  "order_id": 42,
+                  "product_id": 5,
+                  "quantity": 2,
+                  "price": 75.00,
+                  "total": 150.00,
+                  "product": {
+                    "id": 5,
+                    "name": "Premium Coffee Beans",
+                    "slug": "premium-coffee-beans",
+                    "price": 75.00,
+                    "sku": "COF-005"
+                  }
+                }
+              ]
             }
           }
         headers: []
         description: Success
       -
         custom: []
-        status: 403
-        content: |-
-          {
-            "message": "This action is unauthorized."
-          }
-        headers: []
-        description: Forbidden
-      -
-        custom: []
-        status: 422
+        status: 404
         content: |-
           {
             "success": false,
-            "message": "Order cannot be cancelled after shipping."
+            "message": "No active pending checkout found for testing"
           }
         headers: []
-        description: 'Cannot Cancel'
+        description: 'No Pending Checkout'
+      -
+        custom: []
+        status: 500
+        content: |-
+          {
+            "success": false,
+            "message": "Test failed: Order creation error"
+          }
+        headers: []
+        description: 'Test Failed'
     responseFields: []
-    auth:
-      - headers
-      - Authorization
-      - 'Bearer 6g43cv8PD1aE5beadkZfhV6'
+    auth: []
     controller: null
     method: null
     route: null

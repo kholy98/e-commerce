@@ -12,6 +12,7 @@ use App\Http\Controllers\PaymentController;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\ShipmentController;
 use App\Http\Controllers\TeamMemberApiController;
+use App\Http\Controllers\UserController;
 use App\Http\Controllers\WishlistController;
 use App\Models\User;
 use App\Services\SessionCartService;
@@ -20,34 +21,12 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Cookie;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Route;
-use Laravel\Sanctum\PersonalAccessToken;
 
-/**
- * @group Authentication
- *
- * Get authenticated user
- *
- * Retrieve the currently authenticated user's information.
- *
- * @authenticated
- *
- * @response 200 scenario="Success" {
- *   "id": 1,
- *   "name": "John Doe",
- *   "email": "john@example.com",
- *   "email_verified_at": "2024-01-15T10:00:00.000000Z",
- *   "created_at": "2024-01-15T10:00:00.000000Z",
- *   "updated_at": "2024-01-15T10:00:00.000000Z"
- * }
- * @response 401 scenario="Unauthenticated" {
- *   "message": "Unauthenticated."
- * }
- */
-Route::get('/user', function (Request $request) {
-    return $request->user()->load(['addresses' => function ($query) {
-        $query->orderBy('is_default', 'desc')->orderBy('created_at', 'desc');
-    }]);
-})->middleware('auth:sanctum');
+// User management routes
+Route::middleware('auth:sanctum')->group(function () {
+    Route::get('/user', [UserController::class, 'show']);
+    Route::put('/user', [UserController::class, 'update']);
+});
 
 /**
  * @group Authentication
@@ -204,7 +183,7 @@ Route::post('/logout', function (Request $request) {
     $cookie = Cookie::forget('laravel_session');
 
     return response()->json([
-        'message' => 'Every token and session has been wiped.'
+        'message' => 'Every token and session has been wiped.',
     ], 200)->withCookie($cookie);
 })->middleware('auth:sanctum');
 

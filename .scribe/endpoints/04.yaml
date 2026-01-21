@@ -1,31 +1,19 @@
-name: Cart
-description: |-
-
-  APIs for managing the shopping cart.
-
-  The cart system supports both guest users (session-based) and authenticated users (database-based).
-  When a guest user logs in, their session cart is automatically migrated to their user account.
+name: Endpoints
+description: ''
 endpoints:
   -
     custom: []
     httpMethods:
       - GET
-    uri: api/cart
+    uri: api/contact-us
     metadata:
       custom: []
-      groupName: Cart
-      groupDescription: |-
-
-        APIs for managing the shopping cart.
-
-        The cart system supports both guest users (session-based) and authenticated users (database-based).
-        When a guest user logs in, their session cart is automatically migrated to their user account.
+      groupName: Endpoints
+      groupDescription: ''
       subgroup: ''
       subgroupDescription: ''
-      title: 'Get cart items'
-      description: |-
-        Retrieve all items in the user's cart with localized product information.
-        Works for both guest and authenticated users.
+      title: ''
+      description: ''
       authenticated: false
       deprecated: false
     headers:
@@ -42,47 +30,56 @@ endpoints:
       -
         custom: []
         status: 200
-        content: |-
-          {
-            "success": true,
-            "data": {
-              "en": {
-                "items": [
-                  {
-                    "product_id": 1,
-                    "name": "Premium Coffee",
-                    "price": 25.00,
-                    "quantity": 2,
-                    "subtotal": 50.00,
-                    "image_url": "https://example.com/images/coffee.jpg"
-                  }
-                ],
-                "count": 2
-              },
-              "ar": {
-                "items": [
-                  {
-                    "product_id": 1,
-                    "name": "قهوة ممتازة",
-                    "price": 25.00,
-                    "quantity": 2,
-                    "subtotal": 50.00,
-                    "image_url": "https://example.com/images/coffee.jpg"
-                  }
-                ],
-                "count": 2
-              },
-              "summary": {
-                "subtotal": 50.00,
-                "tax": 5.00,
-                "shipping": 10.00,
-                "total": 65.00
-              },
-              "is_guest": false
-            }
-          }
-        headers: []
-        description: Success
+        content: '{"success":true,"data":{"en":{"phones":["+1234567890","+0987654321"],"emails":["info@example.com","support@example.com"],"addresses":["123 Main St, City, Country"],"working_hours":["Mon-Fri: 9AM-6PM","Sat: 10AM-4PM"]},"ar":{"phones":["+1234567890","+0987654321"],"emails":["info@example.com","support@example.com"],"addresses":["123 \u0634\u0627\u0631\u0639 \u0627\u0644\u0631\u0626\u064a\u0633\u064a\u060c \u0627\u0644\u0645\u062f\u064a\u0646\u0629\u060c \u0627\u0644\u0628\u0644\u062f"],"working_hours":["\u0627\u0644\u0627\u062b\u0646\u064a\u0646-\u0627\u0644\u062c\u0645\u0639\u0629: 9\u0635-6\u0645","\u0627\u0644\u0633\u0628\u062a: 10\u0635-4\u0645"]}}}'
+        headers:
+          cache-control: 'no-cache, private'
+          content-type: application/json
+          access-control-allow-origin: 'http://localhost:3000'
+          access-control-allow-credentials: 'true'
+          set-cookie: 'laravel-session=eyJpdiI6Ii9kWGh3MG1NTFFqOHYrMVZtV1psdHc9PSIsInZhbHVlIjoiUEVtd3poOFNWT2ZMamVrM01GVDhCNFQ2Y1oyRG05NGZUY1dCTzZEN1BNdU8vZVVlU0o2QmRPeCtIb0NGTWJ5N0MzNWZZdlpjcHk4bExGRVpYL21LWGFSemhBVzVUdGovMEwrZlRERUVjRkFQcm5xakIrUFVhRVd2VCs2S1JTOHAiLCJtYWMiOiIxZGMwZTNlMDhmNGQ0MzU0NmU3ZTUwMDE3YTE5ODAzOWJiYmQ4Yjk5YzU5YzEzYTZjOGZiZGRhYTMyZWI3OTFlIiwidGFnIjoiIn0%3D; expires=Wed, 21 Jan 2026 15:02:44 GMT; Max-Age=7200; path=/; httponly; samesite=lax'
+        description: null
+    responseFields: []
+    auth: []
+    controller: null
+    method: null
+    route: null
+  -
+    custom: []
+    httpMethods:
+      - GET
+    uri: api/contact-inquiries
+    metadata:
+      custom: []
+      groupName: Endpoints
+      groupDescription: ''
+      subgroup: ''
+      subgroupDescription: ''
+      title: 'Display a listing of contact inquiries.'
+      description: ''
+      authenticated: false
+      deprecated: false
+    headers:
+      Content-Type: application/json
+      Accept: application/json
+    urlParameters: []
+    cleanUrlParameters: []
+    queryParameters: []
+    cleanQueryParameters: []
+    bodyParameters: []
+    cleanBodyParameters: []
+    fileParameters: []
+    responses:
+      -
+        custom: []
+        status: 200
+        content: '{"data":[],"links":{"first":"http:\/\/127.0.0.1:8000\/api\/contact-inquiries?page=1","last":"http:\/\/127.0.0.1:8000\/api\/contact-inquiries?page=1","prev":null,"next":null},"meta":{"current_page":1,"from":null,"last_page":1,"links":[{"url":null,"label":"&laquo; Previous","page":null,"active":false},{"url":"http:\/\/127.0.0.1:8000\/api\/contact-inquiries?page=1","label":"1","page":1,"active":true},{"url":null,"label":"Next &raquo;","page":null,"active":false}],"path":"http:\/\/127.0.0.1:8000\/api\/contact-inquiries","per_page":15,"to":null,"total":0}}'
+        headers:
+          cache-control: 'no-cache, private'
+          content-type: application/json
+          access-control-allow-origin: 'http://localhost:3000'
+          access-control-allow-credentials: 'true'
+          set-cookie: 'laravel-session=eyJpdiI6Ilk5bG9qYlBBVU5oaitGUFA5QmNGaFE9PSIsInZhbHVlIjoiN1B3R1FTejVOSmdGR0hQRmdmcmVleFIxTzZySVY3QnJYMCtBb1pCVmJ6eXdjQXh2K0ZMY2huYUxqTGxmQmxXSVptQ2FWVG84NVZER0lBZCthUTQrNysyZE1iYksxYS9tRTJjY3BoNGVlT2hPSXVWTmdpOG82ZEJUc3JYVVBSc0MiLCJtYWMiOiI2NmY0NDgxOWFhMTVjN2NkNWExNDVlM2FkYTdlMmM4NGFlYjRjZGJiMTI0MDRmYWNhOTUwYjExOGMxZjkyNjhlIiwidGFnIjoiIn0%3D; expires=Wed, 21 Jan 2026 15:02:44 GMT; Max-Age=7200; path=/; httponly; samesite=lax'
+        description: null
     responseFields: []
     auth: []
     controller: null
@@ -92,22 +89,15 @@ endpoints:
     custom: []
     httpMethods:
       - POST
-    uri: api/cart/add
+    uri: api/contact-inquiries
     metadata:
       custom: []
-      groupName: Cart
-      groupDescription: |-
-
-        APIs for managing the shopping cart.
-
-        The cart system supports both guest users (session-based) and authenticated users (database-based).
-        When a guest user logs in, their session cart is automatically migrated to their user account.
+      groupName: Endpoints
+      groupDescription: ''
       subgroup: ''
       subgroupDescription: ''
-      title: 'Add item to cart'
-      description: |-
-        Add a product to the shopping cart. If the product already exists in the cart,
-        the quantity will be increased. Works for both guest and authenticated users.
+      title: 'Store a newly created contact inquiry in storage.'
+      description: ''
       authenticated: false
       deprecated: false
     headers:
@@ -118,72 +108,149 @@ endpoints:
     queryParameters: []
     cleanQueryParameters: []
     bodyParameters:
-      product_id:
+      full_name:
         custom: []
-        name: product_id
-        description: 'The ID of the product to add.'
+        name: full_name
+        description: 'Must not be greater than 255 characters.'
         required: true
-        example: 1
-        type: integer
+        example: b
+        type: string
         enumValues: []
-        exampleWasSpecified: true
+        exampleWasSpecified: false
         nullable: false
         deprecated: false
-      quantity:
+      email:
         custom: []
-        name: quantity
-        description: 'The quantity to add (minimum 1).'
+        name: email
+        description: 'Must be a valid email address. Must not be greater than 255 characters.'
         required: true
-        example: 2
-        type: integer
+        example: zbailey@example.net
+        type: string
         enumValues: []
-        exampleWasSpecified: true
+        exampleWasSpecified: false
+        nullable: false
+        deprecated: false
+      phone:
+        custom: []
+        name: phone
+        description: 'Must not be greater than 20 characters.'
+        required: false
+        example: iyvdljnikhwaykcm
+        type: string
+        enumValues: []
+        exampleWasSpecified: false
+        nullable: true
+        deprecated: false
+      company:
+        custom: []
+        name: company
+        description: 'Must not be greater than 255 characters.'
+        required: false
+        example: 'y'
+        type: string
+        enumValues: []
+        exampleWasSpecified: false
+        nullable: true
+        deprecated: false
+      service_id:
+        custom: []
+        name: service_id
+        description: 'The <code>id</code> of an existing record in the services table.'
+        required: false
+        example: null
+        type: string
+        enumValues: []
+        exampleWasSpecified: false
+        nullable: true
+        deprecated: false
+      service:
+        custom: []
+        name: service
+        description: 'Must not be greater than 255 characters.'
+        required: false
+        example: u
+        type: string
+        enumValues: []
+        exampleWasSpecified: false
+        nullable: true
+        deprecated: false
+      message:
+        custom: []
+        name: message
+        description: 'Keep for backward compatibility.'
+        required: true
+        example: architecto
+        type: string
+        enumValues: []
+        exampleWasSpecified: false
         nullable: false
         deprecated: false
     cleanBodyParameters:
-      product_id: 1
-      quantity: 2
+      full_name: b
+      email: zbailey@example.net
+      phone: iyvdljnikhwaykcm
+      company: 'y'
+      service: u
+      message: architecto
+    fileParameters: []
+    responses: []
+    responseFields: []
+    auth: []
+    controller: null
+    method: null
+    route: null
+  -
+    custom: []
+    httpMethods:
+      - GET
+    uri: 'api/contact-inquiries/{inquiry_id}'
+    metadata:
+      custom: []
+      groupName: Endpoints
+      groupDescription: ''
+      subgroup: ''
+      subgroupDescription: ''
+      title: 'Display the specified contact inquiry.'
+      description: ''
+      authenticated: false
+      deprecated: false
+    headers:
+      Content-Type: application/json
+      Accept: application/json
+    urlParameters:
+      inquiry_id:
+        custom: []
+        name: inquiry_id
+        description: 'The ID of the inquiry.'
+        required: true
+        example: 16
+        type: integer
+        enumValues: []
+        exampleWasSpecified: false
+        nullable: false
+        deprecated: false
+    cleanUrlParameters:
+      inquiry_id: 16
+    queryParameters: []
+    cleanQueryParameters: []
+    bodyParameters: []
+    cleanBodyParameters: []
     fileParameters: []
     responses:
       -
         custom: []
-        status: 200
+        status: 404
         content: |-
           {
-            "success": true,
-            "message": "Item added to cart",
-            "cart_summary": {
-              "subtotal": 50.00,
-              "tax": 5.00,
-              "shipping": 10.00,
-              "total": 65.00,
-              "item_count": 2
-            }
+              "message": "No query results for model [App\\Models\\ContactInquiry] 16"
           }
-        headers: []
-        description: Success
-      -
-        custom: []
-        status: 422
-        content: |-
-          {
-            "message": "The product id field is required.",
-            "errors": {
-              "product_id": ["The product id field is required."]
-            }
-          }
-        headers: []
-        description: 'Validation Error'
-      -
-        custom: []
-        status: 422
-        content: |-
-          {
-            "success": false,
-            "message": "Product is out of stock."
-          }
-        headers: []
-        description: 'Out of Stock'
+        headers:
+          cache-control: 'no-cache, private'
+          content-type: application/json
+          access-control-allow-origin: 'http://localhost:3000'
+          access-control-allow-credentials: 'true'
+          set-cookie: 'laravel-session=eyJpdiI6Im1JZlBVZVhMaXVpYXc3eCtUK2QyYWc9PSIsInZhbHVlIjoieFQzK3J3YlVtdmhEMi9Bbi9vM0Z5WVdtcmt0YVhUQitaUzFUbHNmdTZSa2NrT3RNOG0wOVN5eklKaGFxZVFjTTVhSGxObE9KalhpT1RFdk5LSG4wV1FWZW81WXEwbTEzazltd3VIWmtQOUtYSmlPN05Bdm14Ulh1dFpvU29EK3MiLCJtYWMiOiIzMjIyZDk1NDNlYTZkOWIxOWNhNzZmNWExMmIzOGJiYTJlNDI2YjJlOWJkYzRjZmQwNDFmMjI1MmQ2NTJjNTA3IiwidGFnIjoiIn0%3D; expires=Wed, 21 Jan 2026 15:02:44 GMT; Max-Age=7200; path=/; httponly; samesite=lax'
+        description: null
     responseFields: []
     auth: []
     controller: null
@@ -193,97 +260,649 @@ endpoints:
     custom: []
     httpMethods:
       - PUT
-    uri: 'api/cart/{productId}'
+    uri: 'api/contact-inquiries/{inquiry_id}'
     metadata:
       custom: []
-      groupName: Cart
-      groupDescription: |-
-
-        APIs for managing the shopping cart.
-
-        The cart system supports both guest users (session-based) and authenticated users (database-based).
-        When a guest user logs in, their session cart is automatically migrated to their user account.
+      groupName: Endpoints
+      groupDescription: ''
       subgroup: ''
       subgroupDescription: ''
-      title: 'Update cart item quantity'
-      description: |-
-        Update the quantity of a specific item in the cart.
-        Setting quantity to 0 will remove the item from the cart.
-        Works for both guest and authenticated users.
+      title: 'Update the specified contact inquiry in storage.'
+      description: ''
       authenticated: false
       deprecated: false
     headers:
       Content-Type: application/json
       Accept: application/json
     urlParameters:
-      productId:
+      inquiry_id:
         custom: []
-        name: productId
-        description: 'The product ID to update.'
+        name: inquiry_id
+        description: 'The ID of the inquiry.'
         required: true
-        example: 1
+        example: 16
         type: integer
         enumValues: []
-        exampleWasSpecified: true
+        exampleWasSpecified: false
         nullable: false
         deprecated: false
     cleanUrlParameters:
-      productId: 1
+      inquiry_id: 16
     queryParameters: []
     cleanQueryParameters: []
     bodyParameters:
-      quantity:
+      full_name:
         custom: []
-        name: quantity
-        description: 'The new quantity (0 to remove).'
-        required: true
-        example: 3
-        type: integer
+        name: full_name
+        description: 'Must not be greater than 255 characters.'
+        required: false
+        example: b
+        type: string
         enumValues: []
-        exampleWasSpecified: true
+        exampleWasSpecified: false
+        nullable: false
+        deprecated: false
+      email:
+        custom: []
+        name: email
+        description: 'Must be a valid email address. Must not be greater than 255 characters.'
+        required: false
+        example: zbailey@example.net
+        type: string
+        enumValues: []
+        exampleWasSpecified: false
+        nullable: false
+        deprecated: false
+      phone:
+        custom: []
+        name: phone
+        description: 'Must not be greater than 20 characters.'
+        required: false
+        example: iyvdljnikhwaykcm
+        type: string
+        enumValues: []
+        exampleWasSpecified: false
+        nullable: true
+        deprecated: false
+      company:
+        custom: []
+        name: company
+        description: 'Must not be greater than 255 characters.'
+        required: false
+        example: 'y'
+        type: string
+        enumValues: []
+        exampleWasSpecified: false
+        nullable: true
+        deprecated: false
+      service_id:
+        custom: []
+        name: service_id
+        description: 'The <code>id</code> of an existing record in the services table.'
+        required: false
+        example: null
+        type: string
+        enumValues: []
+        exampleWasSpecified: false
+        nullable: true
+        deprecated: false
+      service:
+        custom: []
+        name: service
+        description: 'Must not be greater than 255 characters.'
+        required: false
+        example: u
+        type: string
+        enumValues: []
+        exampleWasSpecified: false
+        nullable: true
+        deprecated: false
+      message:
+        custom: []
+        name: message
+        description: ''
+        required: false
+        example: architecto
+        type: string
+        enumValues: []
+        exampleWasSpecified: false
+        nullable: false
+        deprecated: false
+      status:
+        custom: []
+        name: status
+        description: ''
+        required: false
+        example: pending
+        type: string
+        enumValues:
+          - pending
+          - replied
+          - closed
+        exampleWasSpecified: false
         nullable: false
         deprecated: false
     cleanBodyParameters:
-      quantity: 3
+      full_name: b
+      email: zbailey@example.net
+      phone: iyvdljnikhwaykcm
+      company: 'y'
+      service: u
+      message: architecto
+      status: pending
+    fileParameters: []
+    responses: []
+    responseFields: []
+    auth: []
+    controller: null
+    method: null
+    route: null
+  -
+    custom: []
+    httpMethods:
+      - PATCH
+    uri: 'api/contact-inquiries/{inquiry_id}'
+    metadata:
+      custom: []
+      groupName: Endpoints
+      groupDescription: ''
+      subgroup: ''
+      subgroupDescription: ''
+      title: 'Partially update the specified contact inquiry in storage.'
+      description: ''
+      authenticated: false
+      deprecated: false
+    headers:
+      Content-Type: application/json
+      Accept: application/json
+    urlParameters:
+      inquiry_id:
+        custom: []
+        name: inquiry_id
+        description: 'The ID of the inquiry.'
+        required: true
+        example: 16
+        type: integer
+        enumValues: []
+        exampleWasSpecified: false
+        nullable: false
+        deprecated: false
+    cleanUrlParameters:
+      inquiry_id: 16
+    queryParameters: []
+    cleanQueryParameters: []
+    bodyParameters: []
+    cleanBodyParameters: []
+    fileParameters: []
+    responses: []
+    responseFields: []
+    auth: []
+    controller: null
+    method: null
+    route: null
+  -
+    custom: []
+    httpMethods:
+      - POST
+    uri: 'api/contact-inquiries/{inquiry_id}/reply'
+    metadata:
+      custom: []
+      groupName: Endpoints
+      groupDescription: ''
+      subgroup: ''
+      subgroupDescription: ''
+      title: 'Reply to a contact inquiry.'
+      description: ''
+      authenticated: false
+      deprecated: false
+    headers:
+      Content-Type: application/json
+      Accept: application/json
+    urlParameters:
+      inquiry_id:
+        custom: []
+        name: inquiry_id
+        description: 'The ID of the inquiry.'
+        required: true
+        example: 16
+        type: integer
+        enumValues: []
+        exampleWasSpecified: false
+        nullable: false
+        deprecated: false
+    cleanUrlParameters:
+      inquiry_id: 16
+    queryParameters: []
+    cleanQueryParameters: []
+    bodyParameters:
+      reply_message:
+        custom: []
+        name: reply_message
+        description: ''
+        required: true
+        example: architecto
+        type: string
+        enumValues: []
+        exampleWasSpecified: false
+        nullable: false
+        deprecated: false
+    cleanBodyParameters:
+      reply_message: architecto
+    fileParameters: []
+    responses: []
+    responseFields: []
+    auth: []
+    controller: null
+    method: null
+    route: null
+  -
+    custom: []
+    httpMethods:
+      - DELETE
+    uri: 'api/contact-inquiries/{inquiry_id}'
+    metadata:
+      custom: []
+      groupName: Endpoints
+      groupDescription: ''
+      subgroup: ''
+      subgroupDescription: ''
+      title: 'Remove the specified contact inquiry from storage.'
+      description: ''
+      authenticated: false
+      deprecated: false
+    headers:
+      Content-Type: application/json
+      Accept: application/json
+    urlParameters:
+      inquiry_id:
+        custom: []
+        name: inquiry_id
+        description: 'The ID of the inquiry.'
+        required: true
+        example: 16
+        type: integer
+        enumValues: []
+        exampleWasSpecified: false
+        nullable: false
+        deprecated: false
+    cleanUrlParameters:
+      inquiry_id: 16
+    queryParameters: []
+    cleanQueryParameters: []
+    bodyParameters: []
+    cleanBodyParameters: []
+    fileParameters: []
+    responses: []
+    responseFields: []
+    auth: []
+    controller: null
+    method: null
+    route: null
+  -
+    custom: []
+    httpMethods:
+      - POST
+    uri: api/payment/process
+    metadata:
+      custom: []
+      groupName: Endpoints
+      groupDescription: ''
+      subgroup: ''
+      subgroupDescription: ''
+      title: 'Process payment and return payment key/iframe URL'
+      description: ''
+      authenticated: false
+      deprecated: false
+    headers:
+      Content-Type: application/json
+      Accept: application/json
+    urlParameters: []
+    cleanUrlParameters: []
+    queryParameters: []
+    cleanQueryParameters: []
+    bodyParameters: []
+    cleanBodyParameters: []
+    fileParameters: []
+    responses: []
+    responseFields: []
+    auth: []
+    controller: null
+    method: null
+    route: null
+  -
+    custom: []
+    httpMethods:
+      - GET
+      - POST
+    uri: api/payment/callback
+    metadata:
+      custom: []
+      groupName: Endpoints
+      groupDescription: ''
+      subgroup: ''
+      subgroupDescription: ''
+      title: 'Handle payment callback from Paymob'
+      description: ''
+      authenticated: false
+      deprecated: false
+    headers:
+      Content-Type: application/json
+      Accept: application/json
+    urlParameters: []
+    cleanUrlParameters: []
+    queryParameters: []
+    cleanQueryParameters: []
+    bodyParameters: []
+    cleanBodyParameters: []
     fileParameters: []
     responses:
       -
         custom: []
-        status: 200
+        status: 302
         content: |-
-          {
-            "success": true,
-            "message": "Cart updated",
-            "cart_summary": {
-              "subtotal": 75.00,
-              "tax": 7.50,
-              "shipping": 10.00,
-              "total": 92.50,
-              "item_count": 3
-            }
-          }
-        headers: []
-        description: Success
+          <!DOCTYPE html>
+          <html>
+              <head>
+                  <meta charset="UTF-8" />
+                  <meta http-equiv="refresh" content="0;url='http://localhost:3000?payment_status=failed'" />
+
+                  <title>Redirecting to http://localhost:3000?payment_status=failed</title>
+              </head>
+              <body>
+                  Redirecting to <a href="http://localhost:3000?payment_status=failed">http://localhost:3000?payment_status=failed</a>.
+              </body>
+          </html>
+        headers:
+          cache-control: 'no-cache, private'
+          location: 'http://localhost:3000?payment_status=failed'
+          content-type: 'text/html; charset=utf-8'
+          access-control-allow-origin: 'http://localhost:3000'
+          access-control-allow-credentials: 'true'
+          set-cookie: 'laravel-session=eyJpdiI6Im1NU2hZdTdNTWF6SmFhWkJESitDcWc9PSIsInZhbHVlIjoiVGlBWU1Zb1hNRjVWekZFM3ZWV0F0ZFRnRHNsaDFsc2l4MG1FRlFlMDg1S2pja2FXUFFYZlR6TjBZdnNoSVF5VU9VS3FDZWN5MHZIdXNmZFJYMEtkL1BzTnFwOFhsSW9XVEMrWmlCN1lRWE96Wk8vQ0tKNjc5U1luWjh0bldzQ0UiLCJtYWMiOiJlOWZmMzVlNWIzODE2NGE5ZDRmMDk3MDM3MjI5NmFmNWM5YjI3ZjdjZTVlNzM5YmU2YjZkY2RmMjI1N2JmNTJmIiwidGFnIjoiIn0%3D; expires=Wed, 21 Jan 2026 15:02:45 GMT; Max-Age=7200; path=/; httponly; samesite=lax'
+        description: null
+    responseFields: []
+    auth: []
+    controller: null
+    method: null
+    route: null
+  -
+    custom: []
+    httpMethods:
+      - POST
+    uri: api/payment/webhook
+    metadata:
+      custom: []
+      groupName: Endpoints
+      groupDescription: ''
+      subgroup: ''
+      subgroupDescription: ''
+      title: 'Handle payment webhook from Paymob'
+      description: ''
+      authenticated: false
+      deprecated: false
+    headers:
+      Content-Type: application/json
+      Accept: application/json
+    urlParameters: []
+    cleanUrlParameters: []
+    queryParameters: []
+    cleanQueryParameters: []
+    bodyParameters: []
+    cleanBodyParameters: []
+    fileParameters: []
+    responses: []
+    responseFields: []
+    auth: []
+    controller: null
+    method: null
+    route: null
+  -
+    custom: []
+    httpMethods:
+      - POST
+    uri: api/shipments
+    metadata:
+      custom: []
+      groupName: Endpoints
+      groupDescription: ''
+      subgroup: ''
+      subgroupDescription: ''
+      title: ''
+      description: ''
+      authenticated: false
+      deprecated: false
+    headers:
+      Content-Type: application/json
+      Accept: application/json
+    urlParameters: []
+    cleanUrlParameters: []
+    queryParameters: []
+    cleanQueryParameters: []
+    bodyParameters:
+      receiver_first_name:
+        custom: []
+        name: receiver_first_name
+        description: ''
+        required: true
+        example: architecto
+        type: string
+        enumValues: []
+        exampleWasSpecified: false
+        nullable: false
+        deprecated: false
+      receiver_last_name:
+        custom: []
+        name: receiver_last_name
+        description: ''
+        required: true
+        example: architecto
+        type: string
+        enumValues: []
+        exampleWasSpecified: false
+        nullable: false
+        deprecated: false
+      receiver_phone:
+        custom: []
+        name: receiver_phone
+        description: ''
+        required: true
+        example: architecto
+        type: string
+        enumValues: []
+        exampleWasSpecified: false
+        nullable: false
+        deprecated: false
+      receiver_email:
+        custom: []
+        name: receiver_email
+        description: 'Must be a valid email address.'
+        required: false
+        example: zbailey@example.net
+        type: string
+        enumValues: []
+        exampleWasSpecified: false
+        nullable: true
+        deprecated: false
+      building_number:
+        custom: []
+        name: building_number
+        description: ''
+        required: true
+        example: 16
+        type: integer
+        enumValues: []
+        exampleWasSpecified: false
+        nullable: false
+        deprecated: false
+      floor:
+        custom: []
+        name: floor
+        description: ''
+        required: false
+        example: null
+        type: string
+        enumValues: []
+        exampleWasSpecified: false
+        nullable: true
+        deprecated: false
+      apartment:
+        custom: []
+        name: apartment
+        description: ''
+        required: false
+        example: null
+        type: string
+        enumValues: []
+        exampleWasSpecified: false
+        nullable: true
+        deprecated: false
+      first_line:
+        custom: []
+        name: first_line
+        description: ''
+        required: true
+        example: architecto
+        type: string
+        enumValues: []
+        exampleWasSpecified: false
+        nullable: false
+        deprecated: false
+      city:
+        custom: []
+        name: city
+        description: ''
+        required: true
+        example: architecto
+        type: string
+        enumValues: []
+        exampleWasSpecified: false
+        nullable: false
+        deprecated: false
+      zone:
+        custom: []
+        name: zone
+        description: ''
+        required: true
+        example: architecto
+        type: string
+        enumValues: []
+        exampleWasSpecified: false
+        nullable: false
+        deprecated: false
+      notes:
+        custom: []
+        name: notes
+        description: ''
+        required: false
+        example: null
+        type: string
+        enumValues: []
+        exampleWasSpecified: false
+        nullable: true
+        deprecated: false
+      cod:
+        custom: []
+        name: cod
+        description: 'Must be at least 0.'
+        required: true
+        example: 39
+        type: number
+        enumValues: []
+        exampleWasSpecified: false
+        nullable: false
+        deprecated: false
+      business_reference:
+        custom: []
+        name: business_reference
+        description: ''
+        required: false
+        example: null
+        type: string
+        enumValues: []
+        exampleWasSpecified: false
+        nullable: true
+        deprecated: false
+      order_id:
+        custom: []
+        name: order_id
+        description: 'The <code>id</code> of an existing record in the orders table.'
+        required: true
+        example: architecto
+        type: string
+        enumValues: []
+        exampleWasSpecified: false
+        nullable: false
+        deprecated: false
+    cleanBodyParameters:
+      receiver_first_name: architecto
+      receiver_last_name: architecto
+      receiver_phone: architecto
+      receiver_email: zbailey@example.net
+      building_number: 16
+      first_line: architecto
+      city: architecto
+      zone: architecto
+      cod: 39
+      order_id: architecto
+    fileParameters: []
+    responses: []
+    responseFields: []
+    auth: []
+    controller: null
+    method: null
+    route: null
+  -
+    custom: []
+    httpMethods:
+      - GET
+    uri: 'api/shipments/{tracking_number}'
+    metadata:
+      custom: []
+      groupName: Endpoints
+      groupDescription: ''
+      subgroup: ''
+      subgroupDescription: ''
+      title: ''
+      description: ''
+      authenticated: false
+      deprecated: false
+    headers:
+      Content-Type: application/json
+      Accept: application/json
+    urlParameters:
+      tracking_number:
+        custom: []
+        name: tracking_number
+        description: ''
+        required: true
+        example: architecto
+        type: string
+        enumValues: []
+        exampleWasSpecified: false
+        nullable: false
+        deprecated: false
+    cleanUrlParameters:
+      tracking_number: architecto
+    queryParameters: []
+    cleanQueryParameters: []
+    bodyParameters: []
+    cleanBodyParameters: []
+    fileParameters: []
+    responses:
       -
         custom: []
         status: 404
         content: |-
           {
-            "success": false,
-            "message": "Product not found"
+              "message": "Tracking number not found"
           }
-        headers: []
-        description: 'Product Not Found'
-      -
-        custom: []
-        status: 422
-        content: |-
-          {
-            "success": false,
-            "message": "Requested quantity exceeds available stock."
-          }
-        headers: []
-        description: 'Insufficient Stock'
+        headers:
+          cache-control: 'no-cache, private'
+          content-type: application/json
+          access-control-allow-origin: 'http://localhost:3000'
+          access-control-allow-credentials: 'true'
+          set-cookie: 'laravel-session=eyJpdiI6IlJwWXByS2ZETGM5QUFITGIyem1sMUE9PSIsInZhbHVlIjoiVUs5OWhEdElpcUhIMkN3b3huaFErMzBKcHFOajBBRkxLODZyWTZXbWY0YTZaWHVQRkk0LzVmYnNPQ2hUL05vaGRNb0haSW5yNW1LQk5UeGVMU0wwQ2srZUZta3JadzJyUUg2VjJpaEMyZnBwenB5MHlDWExXU1dRYmJUYnRqeG8iLCJtYWMiOiI2ZjMyN2ZkMDA4Nzg3N2E0ZmE3MGJhYTc3ZTYyOTJiNjQxODM2ZjY4NWIyYTYxNDA3YjdhNGQxZWRmZTc1NWM2IiwidGFnIjoiIn0%3D; expires=Wed, 21 Jan 2026 15:02:45 GMT; Max-Age=7200; path=/; httponly; samesite=lax'
+        description: null
     responseFields: []
     auth: []
     controller: null
@@ -292,65 +911,65 @@ endpoints:
   -
     custom: []
     httpMethods:
-      - DELETE
-    uri: 'api/cart/{productId}'
+      - PUT
+    uri: 'api/shipments/{tracking_number}'
     metadata:
       custom: []
-      groupName: Cart
-      groupDescription: |-
-
-        APIs for managing the shopping cart.
-
-        The cart system supports both guest users (session-based) and authenticated users (database-based).
-        When a guest user logs in, their session cart is automatically migrated to their user account.
+      groupName: Endpoints
+      groupDescription: ''
       subgroup: ''
       subgroupDescription: ''
-      title: 'Remove item from cart'
-      description: |-
-        Remove a specific product from the shopping cart.
-        Works for both guest and authenticated users.
+      title: ''
+      description: ''
       authenticated: false
       deprecated: false
     headers:
       Content-Type: application/json
       Accept: application/json
     urlParameters:
-      productId:
+      tracking_number:
         custom: []
-        name: productId
-        description: 'The product ID to remove.'
+        name: tracking_number
+        description: ''
         required: true
-        example: 1
-        type: integer
+        example: architecto
+        type: string
         enumValues: []
-        exampleWasSpecified: true
+        exampleWasSpecified: false
         nullable: false
         deprecated: false
     cleanUrlParameters:
-      productId: 1
+      tracking_number: architecto
     queryParameters: []
     cleanQueryParameters: []
-    bodyParameters: []
-    cleanBodyParameters: []
-    fileParameters: []
-    responses:
-      -
+    bodyParameters:
+      status:
         custom: []
-        status: 200
-        content: |-
-          {
-            "success": true,
-            "message": "Item removed from cart",
-            "cart_summary": {
-              "subtotal": 25.00,
-              "tax": 2.50,
-              "shipping": 10.00,
-              "total": 37.50,
-              "item_count": 1
-            }
-          }
-        headers: []
-        description: Success
+        name: status
+        description: ''
+        required: false
+        example: architecto
+        type: string
+        enumValues: []
+        exampleWasSpecified: false
+        nullable: true
+        deprecated: false
+      notes:
+        custom: []
+        name: notes
+        description: ''
+        required: false
+        example: architecto
+        type: string
+        enumValues: []
+        exampleWasSpecified: false
+        nullable: true
+        deprecated: false
+    cleanBodyParameters:
+      status: architecto
+      notes: architecto
+    fileParameters: []
+    responses: []
     responseFields: []
     auth: []
     controller: null
@@ -359,23 +978,242 @@ endpoints:
   -
     custom: []
     httpMethods:
-      - DELETE
-    uri: api/cart
+      - POST
+    uri: api/pickups
     metadata:
       custom: []
-      groupName: Cart
-      groupDescription: |-
-
-        APIs for managing the shopping cart.
-
-        The cart system supports both guest users (session-based) and authenticated users (database-based).
-        When a guest user logs in, their session cart is automatically migrated to their user account.
+      groupName: Endpoints
+      groupDescription: ''
       subgroup: ''
       subgroupDescription: ''
-      title: 'Clear cart'
-      description: |-
-        Remove all items from the shopping cart.
-        Works for both guest and authenticated users.
+      title: ''
+      description: ''
+      authenticated: false
+      deprecated: false
+    headers:
+      Content-Type: application/json
+      Accept: application/json
+    urlParameters: []
+    cleanUrlParameters: []
+    queryParameters: []
+    cleanQueryParameters: []
+    bodyParameters:
+      scheduledDate:
+        custom: []
+        name: scheduledDate
+        description: 'Must be a valid date. Must be a date after <code>today</code>.'
+        required: true
+        example: '2052-02-14'
+        type: string
+        enumValues: []
+        exampleWasSpecified: false
+        nullable: false
+        deprecated: false
+      businessLocationId:
+        custom: []
+        name: businessLocationId
+        description: ''
+        required: false
+        example: architecto
+        type: string
+        enumValues: []
+        exampleWasSpecified: false
+        nullable: true
+        deprecated: false
+      contactPerson:
+        custom: []
+        name: contactPerson
+        description: ''
+        required: false
+        example: []
+        type: object
+        enumValues: []
+        exampleWasSpecified: false
+        nullable: false
+        deprecated: false
+      contactPerson.name:
+        custom: []
+        name: contactPerson.name
+        description: ''
+        required: true
+        example: architecto
+        type: string
+        enumValues: []
+        exampleWasSpecified: false
+        nullable: false
+        deprecated: false
+      contactPerson.phone:
+        custom: []
+        name: contactPerson.phone
+        description: ''
+        required: true
+        example: architecto
+        type: string
+        enumValues: []
+        exampleWasSpecified: false
+        nullable: false
+        deprecated: false
+      contactPerson.secPhone:
+        custom: []
+        name: contactPerson.secPhone
+        description: ''
+        required: false
+        example: architecto
+        type: string
+        enumValues: []
+        exampleWasSpecified: false
+        nullable: true
+        deprecated: false
+      contactPerson.email:
+        custom: []
+        name: contactPerson.email
+        description: 'Must be a valid email address.'
+        required: false
+        example: zbailey@example.net
+        type: string
+        enumValues: []
+        exampleWasSpecified: false
+        nullable: true
+        deprecated: false
+      notes:
+        custom: []
+        name: notes
+        description: ''
+        required: false
+        example: architecto
+        type: string
+        enumValues: []
+        exampleWasSpecified: false
+        nullable: true
+        deprecated: false
+      noOfPackages:
+        custom: []
+        name: noOfPackages
+        description: 'Must be at least 1.'
+        required: true
+        example: 22
+        type: integer
+        enumValues: []
+        exampleWasSpecified: false
+        nullable: false
+        deprecated: false
+      packageType:
+        custom: []
+        name: packageType
+        description: ''
+        required: false
+        example: Normal
+        type: string
+        enumValues:
+          - Normal
+          - 'Light Bulky'
+          - 'Heavy Bulky'
+        exampleWasSpecified: false
+        nullable: true
+        deprecated: false
+      repeatedData:
+        custom: []
+        name: repeatedData
+        description: ''
+        required: false
+        example: []
+        type: object
+        enumValues: []
+        exampleWasSpecified: false
+        nullable: false
+        deprecated: false
+      repeatedData.repeatedType:
+        custom: []
+        name: repeatedData.repeatedType
+        description: ''
+        required: false
+        example: Weekly
+        type: string
+        enumValues:
+          - 'One Time'
+          - Daily
+          - Weekly
+        exampleWasSpecified: false
+        nullable: true
+        deprecated: false
+      repeatedData.days:
+        custom: []
+        name: repeatedData.days
+        description: ''
+        required: false
+        example:
+          - Thursday
+        type: 'string[]'
+        enumValues:
+          - Sunday
+          - Monday
+          - Tuesday
+          - Wednesday
+          - Thursday
+          - Friday
+          - Saturday
+        exampleWasSpecified: false
+        nullable: false
+        deprecated: false
+      repeatedData.startDate:
+        custom: []
+        name: repeatedData.startDate
+        description: 'Must be a valid date.'
+        required: false
+        example: '2026-01-21T13:02:45'
+        type: string
+        enumValues: []
+        exampleWasSpecified: false
+        nullable: true
+        deprecated: false
+      repeatedData.endDate:
+        custom: []
+        name: repeatedData.endDate
+        description: 'Must be a valid date. Must be a date after <code>repeatedData.startDate</code>.'
+        required: false
+        example: '2052-02-14'
+        type: string
+        enumValues: []
+        exampleWasSpecified: false
+        nullable: true
+        deprecated: false
+    cleanBodyParameters:
+      scheduledDate: '2052-02-14'
+      businessLocationId: architecto
+      contactPerson:
+        name: architecto
+        phone: architecto
+        secPhone: architecto
+        email: zbailey@example.net
+      notes: architecto
+      noOfPackages: 22
+      packageType: Normal
+      repeatedData:
+        repeatedType: Weekly
+        days:
+          - Thursday
+        startDate: '2026-01-21T13:02:45'
+        endDate: '2052-02-14'
+    fileParameters: []
+    responses: []
+    responseFields: []
+    auth: []
+    controller: null
+    method: null
+    route: null
+  -
+    custom: []
+    httpMethods:
+      - POST
+    uri: api/webhook/bosta
+    metadata:
+      custom: []
+      groupName: Endpoints
+      groupDescription: ''
+      subgroup: ''
+      subgroupDescription: ''
+      title: ''
+      description: ''
       authenticated: false
       deprecated: false
     headers:
@@ -388,17 +1226,237 @@ endpoints:
     bodyParameters: []
     cleanBodyParameters: []
     fileParameters: []
-    responses:
-      -
+    responses: []
+    responseFields: []
+    auth: []
+    controller: null
+    method: null
+    route: null
+  -
+    custom: []
+    httpMethods:
+      - POST
+    uri: api/test/webhook/bosta
+    metadata:
+      custom: []
+      groupName: Endpoints
+      groupDescription: ''
+      subgroup: ''
+      subgroupDescription: ''
+      title: 'Test webhook endpoint for development'
+      description: ''
+      authenticated: false
+      deprecated: false
+    headers:
+      Content-Type: application/json
+      Accept: application/json
+    urlParameters: []
+    cleanUrlParameters: []
+    queryParameters: []
+    cleanQueryParameters: []
+    bodyParameters: []
+    cleanBodyParameters: []
+    fileParameters: []
+    responses: []
+    responseFields: []
+    auth: []
+    controller: null
+    method: null
+    route: null
+  -
+    custom: []
+    httpMethods:
+      - POST
+    uri: api/settings/env
+    metadata:
+      custom: []
+      groupName: Endpoints
+      groupDescription: ''
+      subgroup: ''
+      subgroupDescription: ''
+      title: ''
+      description: ''
+      authenticated: false
+      deprecated: false
+    headers:
+      Content-Type: application/json
+      Accept: application/json
+    urlParameters: []
+    cleanUrlParameters: []
+    queryParameters: []
+    cleanQueryParameters: []
+    bodyParameters:
+      PAYMOB_BASE_URL:
         custom: []
-        status: 200
-        content: |-
-          {
-            "success": true,
-            "message": "Cart cleared"
-          }
-        headers: []
-        description: Success
+        name: PAYMOB_BASE_URL
+        description: 'Must be a valid URL.'
+        required: false
+        example: 'http://www.bailey.biz/quos-velit-et-fugiat-sunt-nihil-accusantium-harum.html'
+        type: string
+        enumValues: []
+        exampleWasSpecified: false
+        nullable: false
+        deprecated: false
+      PAYMOB_API_KEY:
+        custom: []
+        name: PAYMOB_API_KEY
+        description: ''
+        required: false
+        example: architecto
+        type: string
+        enumValues: []
+        exampleWasSpecified: false
+        nullable: false
+        deprecated: false
+      PAYMOB_INTEGRATION_ID:
+        custom: []
+        name: PAYMOB_INTEGRATION_ID
+        description: ''
+        required: false
+        example: 4326.41688
+        type: number
+        enumValues: []
+        exampleWasSpecified: false
+        nullable: false
+        deprecated: false
+      PAYMOB_IFRAME_ID:
+        custom: []
+        name: PAYMOB_IFRAME_ID
+        description: ''
+        required: false
+        example: 4326.41688
+        type: number
+        enumValues: []
+        exampleWasSpecified: false
+        nullable: false
+        deprecated: false
+      BOSTA_API_KEY:
+        custom: []
+        name: BOSTA_API_KEY
+        description: ''
+        required: false
+        example: architecto
+        type: string
+        enumValues: []
+        exampleWasSpecified: false
+        nullable: false
+        deprecated: false
+      BOSTA_BASE_URL:
+        custom: []
+        name: BOSTA_BASE_URL
+        description: 'Must be a valid URL.'
+        required: false
+        example: 'http://bailey.com/'
+        type: string
+        enumValues: []
+        exampleWasSpecified: false
+        nullable: false
+        deprecated: false
+      MAIL_MAILER:
+        custom: []
+        name: MAIL_MAILER
+        description: ''
+        required: false
+        example: architecto
+        type: string
+        enumValues: []
+        exampleWasSpecified: false
+        nullable: false
+        deprecated: false
+      MAIL_SCHEME:
+        custom: []
+        name: MAIL_SCHEME
+        description: ''
+        required: false
+        example: architecto
+        type: string
+        enumValues: []
+        exampleWasSpecified: false
+        nullable: true
+        deprecated: false
+      MAIL_HOST:
+        custom: []
+        name: MAIL_HOST
+        description: ''
+        required: false
+        example: architecto
+        type: string
+        enumValues: []
+        exampleWasSpecified: false
+        nullable: false
+        deprecated: false
+      MAIL_PORT:
+        custom: []
+        name: MAIL_PORT
+        description: ''
+        required: false
+        example: 4326.41688
+        type: number
+        enumValues: []
+        exampleWasSpecified: false
+        nullable: false
+        deprecated: false
+      MAIL_USERNAME:
+        custom: []
+        name: MAIL_USERNAME
+        description: ''
+        required: false
+        example: architecto
+        type: string
+        enumValues: []
+        exampleWasSpecified: false
+        nullable: false
+        deprecated: false
+      MAIL_PASSWORD:
+        custom: []
+        name: MAIL_PASSWORD
+        description: ''
+        required: false
+        example: architecto
+        type: string
+        enumValues: []
+        exampleWasSpecified: false
+        nullable: false
+        deprecated: false
+      MAIL_FROM_ADDRESS:
+        custom: []
+        name: MAIL_FROM_ADDRESS
+        description: 'Must be a valid email address.'
+        required: false
+        example: zbailey@example.net
+        type: string
+        enumValues: []
+        exampleWasSpecified: false
+        nullable: false
+        deprecated: false
+      MAIL_FROM_NAME:
+        custom: []
+        name: MAIL_FROM_NAME
+        description: ''
+        required: false
+        example: architecto
+        type: string
+        enumValues: []
+        exampleWasSpecified: false
+        nullable: false
+        deprecated: false
+    cleanBodyParameters:
+      PAYMOB_BASE_URL: 'http://www.bailey.biz/quos-velit-et-fugiat-sunt-nihil-accusantium-harum.html'
+      PAYMOB_API_KEY: architecto
+      PAYMOB_INTEGRATION_ID: 4326.41688
+      PAYMOB_IFRAME_ID: 4326.41688
+      BOSTA_API_KEY: architecto
+      BOSTA_BASE_URL: 'http://bailey.com/'
+      MAIL_MAILER: architecto
+      MAIL_SCHEME: architecto
+      MAIL_HOST: architecto
+      MAIL_PORT: 4326.41688
+      MAIL_USERNAME: architecto
+      MAIL_PASSWORD: architecto
+      MAIL_FROM_ADDRESS: zbailey@example.net
+      MAIL_FROM_NAME: architecto
+    fileParameters: []
+    responses: []
     responseFields: []
     auth: []
     controller: null
@@ -408,22 +1466,15 @@ endpoints:
     custom: []
     httpMethods:
       - GET
-    uri: api/cart/summary
+    uri: api/settings/env/debug
     metadata:
       custom: []
-      groupName: Cart
-      groupDescription: |-
-
-        APIs for managing the shopping cart.
-
-        The cart system supports both guest users (session-based) and authenticated users (database-based).
-        When a guest user logs in, their session cart is automatically migrated to their user account.
+      groupName: Endpoints
+      groupDescription: ''
       subgroup: ''
       subgroupDescription: ''
-      title: 'Get cart summary'
-      description: |-
-        Get a summary of the cart including subtotal, tax, shipping, and total.
-        Works for both guest and authenticated users.
+      title: ''
+      description: ''
       authenticated: false
       deprecated: false
     headers:
@@ -440,87 +1491,14 @@ endpoints:
       -
         custom: []
         status: 200
-        content: |-
-          {
-            "success": true,
-            "data": {
-              "subtotal": 100.00,
-              "tax": 10.00,
-              "shipping": 15.00,
-              "total": 125.00,
-              "item_count": 4,
-              "discount": 0.00
-            }
-          }
-        headers: []
-        description: Success
-    responseFields: []
-    auth: []
-    controller: null
-    method: null
-    route: null
-  -
-    custom: []
-    httpMethods:
-      - GET
-    uri: api/cart/count
-    metadata:
-      custom: []
-      groupName: Cart
-      groupDescription: |-
-
-        APIs for managing the shopping cart.
-
-        The cart system supports both guest users (session-based) and authenticated users (database-based).
-        When a guest user logs in, their session cart is automatically migrated to their user account.
-      subgroup: ''
-      subgroupDescription: ''
-      title: 'Get cart item count'
-      description: |-
-        Get the total number of items in the cart and check if it's empty.
-        Useful for displaying cart badge counts in the UI.
-        Works for both guest and authenticated users.
-      authenticated: false
-      deprecated: false
-    headers:
-      Content-Type: application/json
-      Accept: application/json
-    urlParameters: []
-    cleanUrlParameters: []
-    queryParameters: []
-    cleanQueryParameters: []
-    bodyParameters: []
-    cleanBodyParameters: []
-    fileParameters: []
-    responses:
-      -
-        custom: []
-        status: 200
-        content: |-
-          {
-            "success": true,
-            "data": {
-              "item_count": 3,
-              "is_empty": false,
-              "is_guest": true
-            }
-          }
-        headers: []
-        description: Success
-      -
-        custom: []
-        status: 200
-        content: |-
-          {
-            "success": true,
-            "data": {
-              "item_count": 0,
-              "is_empty": true,
-              "is_guest": false
-            }
-          }
-        headers: []
-        description: 'Empty Cart'
+        content: '{"status":{"file_path":"C:\\laragon\\www\\ecommerce-api\\.env","is_writable":true,"config_cached":false},"laravel_active_values":{"PAYMOB_BASE_URL":"https:\/\/accept.paymob.com","PAYMOB_API_KEY":"ZXlKaGJHY2lPaUpJVXpVeE1pSXNJblI1Y0NJNklrcFhWQ0o5LmV5SmpiR0Z6Y3lJNklrMWxjbU5vWVc1MElpd2ljSEp2Wm1sc1pWOXdheUk2TVRFeE16STRPU3dpYm1GdFpTSTZJbWx1YVhScFlXd2lmUS5NSF96bVNyVWZDTDZFeURYNjdpREstY3pxUUF0MUJoZ1d1SmFEd2xpcGstLXN1MWJ6YkZPSTVTbC15VkFNWG5GbktpZi1NQ0w1QldyYV9xZEVSM0ZRUQ==","BOSTA_API_KEY":"b286cff91b7015a1ef89aea14d750f4f1e241fd3b96486a7d87a47d21ff4933f","MAIL_MAILER":"smtp","MAIL_SCHEME":null,"MAIL_HOST":"smtp.gmail.com","MAIL_PORT":"465","MAIL_USERNAME":"ahmadkholy98@gmail.com","MAIL_PASSWORD":"akcynlcfghdfxjrq","MAIL_FROM_ADDRESS":"ahmadkholy98@gmail.com","MAIL_FROM_NAME":"Laravel"}}'
+        headers:
+          cache-control: 'no-cache, private'
+          content-type: application/json
+          access-control-allow-origin: 'http://localhost:3000'
+          access-control-allow-credentials: 'true'
+          set-cookie: 'laravel-session=eyJpdiI6Imx2b29sTDlHOFduZ2tZUW9pdzJaNlE9PSIsInZhbHVlIjoidmpJaW1HdTNaTVFWbkFIa3p0eVZKbnRoZ0h0Z0ZNTVBBZ2VGdlM5aVNMT05xbnZvZDFLaDNFaHhkQVZRNDFEbUNUa0RhVmRhRG1aczViZ0QrQmJvMlc3NXBXYnZkcHlnK2pVWG5tQXk2S2E2TXU3VElIT0RNbG8zUXZZZWJJOEgiLCJtYWMiOiI3ZjUyMTBjNTY0YzMwMGU0YzVlZDlkZWI3YjVjZTJlNDg4Yzc0YjM1YWMyNTY4YWNjNzVkNTI4NTFkYmZhODBiIiwidGFnIjoiIn0%3D; expires=Wed, 21 Jan 2026 15:02:45 GMT; Max-Age=7200; path=/; httponly; samesite=lax'
+        description: null
     responseFields: []
     auth: []
     controller: null

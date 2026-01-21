@@ -1,5 +1,7 @@
-name: Authentication
-description: ''
+name: 'User Management'
+description: |-
+
+  APIs for managing authenticated user data.
 endpoints:
   -
     custom: []
@@ -8,15 +10,14 @@ endpoints:
     uri: api/user
     metadata:
       custom: []
-      groupName: Authentication
-      groupDescription: ''
+      groupName: 'User Management'
+      groupDescription: |-
+
+        APIs for managing authenticated user data.
       subgroup: ''
       subgroupDescription: ''
-      title: |-
-        Get authenticated user
-
-        Retrieve the currently authenticated user's information.
-      description: ''
+      title: 'Get authenticated user'
+      description: "Retrieve the currently authenticated user's information including their addresses."
       authenticated: true
       deprecated: false
     headers:
@@ -39,9 +40,25 @@ endpoints:
             "id": 1,
             "name": "John Doe",
             "email": "john@example.com",
+            "phone": "+201234567890",
             "email_verified_at": "2024-01-15T10:00:00.000000Z",
             "created_at": "2024-01-15T10:00:00.000000Z",
-            "updated_at": "2024-01-15T10:00:00.000000Z"
+            "updated_at": "2024-01-15T10:00:00.000000Z",
+            "addresses": [
+              {
+                "id": 1,
+                "user_id": 1,
+                "label": "Home",
+                "name": "John Doe",
+                "phone": "+201234567890",
+                "address": "123 Main St, Cairo, Egypt",
+                "city": "Cairo",
+                "country": "Egypt",
+                "is_default": true,
+                "created_at": "2024-01-15T10:00:00.000000Z",
+                "updated_at": "2024-01-15T10:00:00.000000Z"
+              }
+            ]
           }
         headers: []
         description: Success
@@ -65,227 +82,18 @@ endpoints:
   -
     custom: []
     httpMethods:
-      - POST
-    uri: api/register
+      - PUT
+    uri: api/user
     metadata:
       custom: []
-      groupName: Authentication
-      groupDescription: ''
+      groupName: 'User Management'
+      groupDescription: |-
+
+        APIs for managing authenticated user data.
       subgroup: ''
       subgroupDescription: ''
-      title: |-
-        Register a new user
-
-        Create a new user account and receive an API token.
-        If the user has items in their guest cart, they will be migrated to the new account.
-      description: ''
-      authenticated: false
-      deprecated: false
-    headers:
-      Content-Type: application/json
-      Accept: application/json
-    urlParameters: []
-    cleanUrlParameters: []
-    queryParameters: []
-    cleanQueryParameters: []
-    bodyParameters:
-      name:
-        custom: []
-        name: name
-        description: "The user's full name."
-        required: true
-        example: 'John Doe'
-        type: string
-        enumValues: []
-        exampleWasSpecified: true
-        nullable: false
-        deprecated: false
-      email:
-        custom: []
-        name: email
-        description: "The user's email address (must be unique)."
-        required: true
-        example: john@example.com
-        type: string
-        enumValues: []
-        exampleWasSpecified: true
-        nullable: false
-        deprecated: false
-      password:
-        custom: []
-        name: password
-        description: 'The password (minimum 8 characters).'
-        required: true
-        example: password123
-        type: string
-        enumValues: []
-        exampleWasSpecified: true
-        nullable: false
-        deprecated: false
-      password_confirmation:
-        custom: []
-        name: password_confirmation
-        description: 'Password confirmation (must match password).'
-        required: true
-        example: password123
-        type: string
-        enumValues: []
-        exampleWasSpecified: true
-        nullable: false
-        deprecated: false
-    cleanBodyParameters:
-      name: 'John Doe'
-      email: john@example.com
-      password: password123
-      password_confirmation: password123
-    fileParameters: []
-    responses:
-      -
-        custom: []
-        status: 200
-        content: |-
-          {
-            "user": {
-              "id": 1,
-              "name": "John Doe",
-              "email": "john@example.com",
-              "updated_at": "2024-01-15T10:00:00.000000Z",
-              "created_at": "2024-01-15T10:00:00.000000Z"
-            },
-            "token": "1|abc123def456..."
-          }
-        headers: []
-        description: Success
-      -
-        custom: []
-        status: 422
-        content: |-
-          {
-            "message": "The email has already been taken.",
-            "errors": {
-              "email": ["The email has already been taken."]
-            }
-          }
-        headers: []
-        description: 'Validation Error'
-    responseFields: []
-    auth: []
-    controller: null
-    method: null
-    route: null
-  -
-    custom: []
-    httpMethods:
-      - POST
-    uri: api/login
-    metadata:
-      custom: []
-      groupName: Authentication
-      groupDescription: ''
-      subgroup: ''
-      subgroupDescription: ''
-      title: |-
-        Login
-
-        Authenticate a user and receive an API token.
-        If the user has items in their guest cart, they will be migrated to their account.
-      description: ''
-      authenticated: false
-      deprecated: false
-    headers:
-      Content-Type: application/json
-      Accept: application/json
-    urlParameters: []
-    cleanUrlParameters: []
-    queryParameters: []
-    cleanQueryParameters: []
-    bodyParameters:
-      email:
-        custom: []
-        name: email
-        description: "The user's email address."
-        required: true
-        example: john@example.com
-        type: string
-        enumValues: []
-        exampleWasSpecified: true
-        nullable: false
-        deprecated: false
-      password:
-        custom: []
-        name: password
-        description: "The user's password."
-        required: true
-        example: password123
-        type: string
-        enumValues: []
-        exampleWasSpecified: true
-        nullable: false
-        deprecated: false
-    cleanBodyParameters:
-      email: john@example.com
-      password: password123
-    fileParameters: []
-    responses:
-      -
-        custom: []
-        status: 200
-        content: |-
-          {
-            "user": {
-              "id": 1,
-              "name": "John Doe",
-              "email": "john@example.com",
-              "email_verified_at": "2024-01-15T10:00:00.000000Z",
-              "created_at": "2024-01-15T10:00:00.000000Z",
-              "updated_at": "2024-01-15T10:00:00.000000Z"
-            },
-            "token": "1|abc123def456..."
-          }
-        headers: []
-        description: Success
-      -
-        custom: []
-        status: 401
-        content: |-
-          {
-            "message": "Invalid credentials"
-          }
-        headers: []
-        description: 'Invalid Credentials'
-      -
-        custom: []
-        status: 422
-        content: |-
-          {
-            "message": "The email field is required.",
-            "errors": {
-              "email": ["The email field is required."]
-            }
-          }
-        headers: []
-        description: 'Validation Error'
-    responseFields: []
-    auth: []
-    controller: null
-    method: null
-    route: null
-  -
-    custom: []
-    httpMethods:
-      - POST
-    uri: api/logout
-    metadata:
-      custom: []
-      groupName: Authentication
-      groupDescription: ''
-      subgroup: ''
-      subgroupDescription: ''
-      title: |-
-        Logout
-
-        Invalidate the current API token and log out the user.
-      description: ''
+      title: 'Update authenticated user'
+      description: "Update the authenticated user's profile information."
       authenticated: true
       deprecated: false
     headers:
@@ -296,8 +104,68 @@ endpoints:
     cleanUrlParameters: []
     queryParameters: []
     cleanQueryParameters: []
-    bodyParameters: []
-    cleanBodyParameters: []
+    bodyParameters:
+      name:
+        custom: []
+        name: name
+        description: "optional The user's full name."
+        required: false
+        example: 'John Doe Updated'
+        type: string
+        enumValues: []
+        exampleWasSpecified: true
+        nullable: false
+        deprecated: false
+      email:
+        custom: []
+        name: email
+        description: "optional The user's email address (must be unique)."
+        required: false
+        example: john.updated@example.com
+        type: string
+        enumValues: []
+        exampleWasSpecified: true
+        nullable: false
+        deprecated: false
+      phone:
+        custom: []
+        name: phone
+        description: "optional The user's phone number."
+        required: false
+        example: '+201234567891'
+        type: string
+        enumValues: []
+        exampleWasSpecified: true
+        nullable: false
+        deprecated: false
+      password:
+        custom: []
+        name: password
+        description: 'optional The new password (minimum 8 characters).'
+        required: false
+        example: newpassword123
+        type: string
+        enumValues: []
+        exampleWasSpecified: true
+        nullable: false
+        deprecated: false
+      password_confirmation:
+        custom: []
+        name: password_confirmation
+        description: 'optional Password confirmation (must match password).'
+        required: false
+        example: newpassword123
+        type: string
+        enumValues: []
+        exampleWasSpecified: true
+        nullable: false
+        deprecated: false
+    cleanBodyParameters:
+      name: 'John Doe Updated'
+      email: john.updated@example.com
+      phone: '+201234567891'
+      password: newpassword123
+      password_confirmation: newpassword123
     fileParameters: []
     responses:
       -
@@ -305,7 +173,28 @@ endpoints:
         status: 200
         content: |-
           {
-            "message": "Logged out successfully"
+            "id": 1,
+            "name": "John Doe Updated",
+            "email": "john.updated@example.com",
+            "phone": "+201234567891",
+            "email_verified_at": "2024-01-15T10:00:00.000000Z",
+            "created_at": "2024-01-15T10:00:00.000000Z",
+            "updated_at": "2024-01-15T11:00:00.000000Z",
+            "addresses": [
+              {
+                "id": 1,
+                "user_id": 1,
+                "label": "Home",
+                "name": "John Doe Updated",
+                "phone": "+201234567891",
+                "address": "123 Main St, Cairo, Egypt",
+                "city": "Cairo",
+                "country": "Egypt",
+                "is_default": true,
+                "created_at": "2024-01-15T10:00:00.000000Z",
+                "updated_at": "2024-01-15T10:00:00.000000Z"
+              }
+            ]
           }
         headers: []
         description: Success
@@ -318,6 +207,18 @@ endpoints:
           }
         headers: []
         description: Unauthenticated
+      -
+        custom: []
+        status: 422
+        content: |-
+          {
+            "message": "The given data was invalid.",
+            "errors": {
+              "email": ["The email has already been taken."]
+            }
+          }
+        headers: []
+        description: 'Validation Error'
     responseFields: []
     auth:
       - headers
