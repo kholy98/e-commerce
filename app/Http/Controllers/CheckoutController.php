@@ -497,7 +497,7 @@ class CheckoutController extends Controller
             // For POST requests (webhooks), get order_id from request
             $tempOrderId = $request->input('order_id');
 
-            dump('tempOrderId before fallback: '.$tempOrderId);
+            
 
             \Log::info('Checkout complete called', [
                 'method' => $request->method(),
@@ -558,7 +558,7 @@ class CheckoutController extends Controller
                 ->active() // Only non-expired
                 ->first();
 
-            dd($pendingCheckout);
+
 
             \Log::info('Pending checkout lookup result', [
                 'temp_order_id' => $tempOrderId,
