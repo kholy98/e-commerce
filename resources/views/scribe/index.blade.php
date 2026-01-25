@@ -155,10 +155,16 @@ Invalidate the current API token and log out the user.</a>
                                 <a href="#checkout-POSTapi-checkout-initiate">Initiate checkout</a>
                             </li>
                                                                                 <li class="tocify-item level-2" data-unique="checkout-GETapi-checkout-complete">
-                                <a href="#checkout-GETapi-checkout-complete">Complete checkout</a>
+                                <a href="#checkout-GETapi-checkout-complete">Complete checkout (Redirect)</a>
+                            </li>
+                                                                                <li class="tocify-item level-2" data-unique="checkout-POSTapi-checkout-complete">
+                                <a href="#checkout-POSTapi-checkout-complete">Complete checkout (Webhook)</a>
                             </li>
                                                                                 <li class="tocify-item level-2" data-unique="checkout-GETapi-checkout-fail">
-                                <a href="#checkout-GETapi-checkout-fail">Handle checkout failure</a>
+                                <a href="#checkout-GETapi-checkout-fail">Handle checkout failure (GET)</a>
+                            </li>
+                                                                                <li class="tocify-item level-2" data-unique="checkout-POSTapi-checkout-fail">
+                                <a href="#checkout-POSTapi-checkout-fail">Handle checkout failure (POST)</a>
                             </li>
                                                                                 <li class="tocify-item level-2" data-unique="checkout-GETapi-checkout-status">
                                 <a href="#checkout-GETapi-checkout-status">Get checkout status</a>
@@ -323,7 +329,7 @@ Invalidate the current API token and log out the user.</a>
     </ul>
 
     <ul class="toc-footer" id="last-updated">
-        <li>Last updated: January 21, 2026</li>
+        <li>Last updated: January 25, 2026</li>
     </ul>
 </div>
 
@@ -384,7 +390,8 @@ If the user has items in their guest cart, they will be migrated to the new acco
     \"name\": \"John Doe\",
     \"email\": \"john@example.com\",
     \"password\": \"password123\",
-    \"password_confirmation\": \"password123\"
+    \"password_confirmation\": \"password123\",
+    \"phone\": \"+1234567890\"
 }"
 </code></pre></div>
 
@@ -403,7 +410,8 @@ let body = {
     "name": "John Doe",
     "email": "john@example.com",
     "password": "password123",
-    "password_confirmation": "password123"
+    "password_confirmation": "password123",
+    "phone": "+1234567890"
 };
 
 fetch(url, {
@@ -428,6 +436,7 @@ $response = $client-&gt;post(
             'email' =&gt; 'john@example.com',
             'password' =&gt; 'password123',
             'password_confirmation' =&gt; 'password123',
+            'phone' =&gt; '+1234567890',
         ],
     ]
 );
@@ -448,7 +457,31 @@ print_r(json_decode((string) $body));</code></pre></div>
         &quot;name&quot;: &quot;John Doe&quot;,
         &quot;email&quot;: &quot;john@example.com&quot;,
         &quot;updated_at&quot;: &quot;2024-01-15T10:00:00.000000Z&quot;,
-        &quot;created_at&quot;: &quot;2024-01-15T10:00:00.000000Z&quot;
+        &quot;created_at&quot;: &quot;2024-01-15T10:00:00.000000Z&quot;,
+        &quot;addresses&quot;: [
+            {
+                &quot;id&quot;: 1,
+                &quot;user_id&quot;: 1,
+                &quot;label&quot;: &quot;Home&quot;,
+                &quot;name&quot;: &quot;John Doe&quot;,
+                &quot;phone&quot;: &quot;+1234567890&quot;,
+                &quot;address&quot;: &quot;123 Main St, Cairo, Egypt&quot;,
+                &quot;street&quot;: &quot;123 Main St&quot;,
+                &quot;building_number&quot;: &quot;15&quot;,
+                &quot;floor&quot;: &quot;3&quot;,
+                &quot;apartment&quot;: &quot;5A&quot;,
+                &quot;zone&quot;: &quot;Maadi&quot;,
+                &quot;city&quot;: &quot;Cairo&quot;,
+                &quot;zip_code&quot;: &quot;12345&quot;,
+                &quot;country&quot;: &quot;Egypt&quot;,
+                &quot;state&quot;: &quot;Cairo&quot;,
+                &quot;is_default&quot;: true,
+                &quot;is_billing&quot;: true,
+                &quot;is_shipping&quot;: true,
+                &quot;created_at&quot;: &quot;2024-01-15T10:00:00.000000Z&quot;,
+                &quot;updated_at&quot;: &quot;2024-01-15T10:00:00.000000Z&quot;
+            }
+        ]
     },
     &quot;token&quot;: &quot;1|abc123def456...&quot;
 }</code>
@@ -587,6 +620,18 @@ You can check the Dev Tools console for debugging information.</code></pre>
                data-component="body">
     <br>
 <p>Password confirmation (must match password). Example: <code>password123</code></p>
+        </div>
+                <div style=" padding-left: 28px;  clear: unset;">
+            <b style="line-height: 2;"><code>phone</code></b>&nbsp;&nbsp;
+<small>string</small>&nbsp;
+<i>optional</i> &nbsp;
+ &nbsp;
+                <input type="text" style="display: none"
+                              name="phone"                data-endpoint="POSTapi-register"
+               value="+1234567890"
+               data-component="body">
+    <br>
+<p>optional The user's phone number. Example: <code>+1234567890</code></p>
         </div>
         </form>
 
@@ -3804,16 +3849,13 @@ You can check the Dev Tools console for debugging information.</code></pre>
         </div>
         </form>
 
-                    <h2 id="checkout-GETapi-checkout-complete">Complete checkout</h2>
+                    <h2 id="checkout-GETapi-checkout-complete">Complete checkout (Redirect)</h2>
 
 <p>
 </p>
 
 <p>Finalize the checkout process after successful payment.
-This endpoint is called by the Paymob payment gateway callback (redirect) or webhook.
-It retrieves the pending checkout data, creates the final order, and clears the cart.</p>
-<p>For GET requests (browser redirects from Paymob), the order_id can be retrieved from the session.
-For POST requests (webhooks), the order_id must be provided in the request body.</p>
+This endpoint is intended to be called when the user is redirected back from the Paymob payment gateway.</p>
 
 <span id="example-requests-GETapi-checkout-complete">
 <blockquote>Example request:</blockquote>
@@ -3823,13 +3865,7 @@ For POST requests (webhooks), the order_id must be provided in the request body.
     <pre><code class="language-bash">curl --request GET \
     --get "http://127.0.0.1:8000/api/checkout/complete?order_id=149823756&amp;payment_id=98765432" \
     --header "Content-Type: application/json" \
-    --header "Accept: application/json" \
-    --data "{
-    \"order_id\": \"149823756\",
-    \"payment_id\": \"98765432\",
-    \"success\": true
-}"
-</code></pre></div>
+    --header "Accept: application/json"</code></pre></div>
 
 
 <div class="javascript-example">
@@ -3849,16 +3885,9 @@ const headers = {
     "Accept": "application/json",
 };
 
-let body = {
-    "order_id": "149823756",
-    "payment_id": "98765432",
-    "success": true
-};
-
 fetch(url, {
     method: "GET",
     headers,
-    body: JSON.stringify(body),
 }).then(response =&gt; response.json());</code></pre></div>
 
 
@@ -3875,11 +3904,6 @@ $response = $client-&gt;get(
         'query' =&gt; [
             'order_id' =&gt; '149823756',
             'payment_id' =&gt; '98765432',
-        ],
-        'json' =&gt; [
-            'order_id' =&gt; '149823756',
-            'payment_id' =&gt; '98765432',
-            'success' =&gt; true,
         ],
     ]
 );
@@ -4065,10 +4089,6 @@ You can check the Dev Tools console for debugging information.</code></pre>
             <small class="badge badge-green">GET</small>
             <b><code>api/checkout/complete</code></b>
         </p>
-            <p>
-            <small class="badge badge-black">POST</small>
-            <b><code>api/checkout/complete</code></b>
-        </p>
                 <h4 class="fancy-heading-panel"><b>Headers</b></h4>
                                 <div style="padding-left: 28px; clear: unset;">
                 <b style="line-height: 2;"><code>Content-Type</code></b>&nbsp;&nbsp;
@@ -4098,19 +4118,19 @@ You can check the Dev Tools console for debugging information.</code></pre>
                                     <div style="padding-left: 28px; clear: unset;">
                 <b style="line-height: 2;"><code>order_id</code></b>&nbsp;&nbsp;
 <small>string</small>&nbsp;
-<i>optional</i> &nbsp;
+ &nbsp;
  &nbsp;
                 <input type="text" style="display: none"
                               name="order_id"                data-endpoint="GETapi-checkout-complete"
                value="149823756"
                data-component="query">
     <br>
-<p>The temporary order ID from Paymob (returned during checkout initiation). Example: <code>149823756</code></p>
+<p>The temporary order ID from Paymob. Example: <code>149823756</code></p>
             </div>
                                     <div style="padding-left: 28px; clear: unset;">
                 <b style="line-height: 2;"><code>payment_id</code></b>&nbsp;&nbsp;
 <small>string</small>&nbsp;
-<i>optional</i> &nbsp;
+ &nbsp;
  &nbsp;
                 <input type="text" style="display: none"
                               name="payment_id"                data-endpoint="GETapi-checkout-complete"
@@ -4119,64 +4139,336 @@ You can check the Dev Tools console for debugging information.</code></pre>
     <br>
 <p>The payment transaction ID from Paymob. Example: <code>98765432</code></p>
             </div>
-                        <h4 class="fancy-heading-panel"><b>Body Parameters</b></h4>
-        <div style=" padding-left: 28px;  clear: unset;">
-            <b style="line-height: 2;"><code>order_id</code></b>&nbsp;&nbsp;
-<small>string</small>&nbsp;
-<i>optional</i> &nbsp;
- &nbsp;
-                <input type="text" style="display: none"
-                              name="order_id"                data-endpoint="GETapi-checkout-complete"
-               value="149823756"
-               data-component="body">
-    <br>
-<p>The temporary order ID (for webhook POST requests). Example: <code>149823756</code></p>
-        </div>
-                <div style=" padding-left: 28px;  clear: unset;">
-            <b style="line-height: 2;"><code>payment_id</code></b>&nbsp;&nbsp;
-<small>string</small>&nbsp;
-<i>optional</i> &nbsp;
- &nbsp;
-                <input type="text" style="display: none"
-                              name="payment_id"                data-endpoint="GETapi-checkout-complete"
-               value="98765432"
-               data-component="body">
-    <br>
-<p>The payment transaction ID (for webhook POST requests). Example: <code>98765432</code></p>
-        </div>
-                <div style=" padding-left: 28px;  clear: unset;">
-            <b style="line-height: 2;"><code>success</code></b>&nbsp;&nbsp;
-<small>boolean</small>&nbsp;
-<i>optional</i> &nbsp;
- &nbsp;
-                <label data-endpoint="GETapi-checkout-complete" style="display: none">
-            <input type="radio" name="success"
-                   value="true"
-                   data-endpoint="GETapi-checkout-complete"
-                   data-component="body"             >
-            <code>true</code>
-        </label>
-        <label data-endpoint="GETapi-checkout-complete" style="display: none">
-            <input type="radio" name="success"
-                   value="false"
-                   data-endpoint="GETapi-checkout-complete"
-                   data-component="body"             >
-            <code>false</code>
-        </label>
-    <br>
-<p>Payment success status (for webhook POST requests). Example: <code>true</code></p>
-        </div>
-        </form>
+                </form>
 
-                    <h2 id="checkout-GETapi-checkout-fail">Handle checkout failure</h2>
+                    <h2 id="checkout-POSTapi-checkout-complete">Complete checkout (Webhook)</h2>
 
 <p>
 </p>
 
-<p>Handle failed checkout due to payment decline, cancellation, or gateway error.
-Clears all pending checkout data from both session and database.</p>
-<p>For web requests (GET), redirects to the payment failed page.
-For API requests (expects JSON), returns a JSON error response.</p>
+<p>Finalize the checkout process after successful payment.
+This endpoint is intended to be called by the Paymob payment gateway webhook.</p>
+
+<span id="example-requests-POSTapi-checkout-complete">
+<blockquote>Example request:</blockquote>
+
+
+<div class="bash-example">
+    <pre><code class="language-bash">curl --request POST \
+    "http://127.0.0.1:8000/api/checkout/complete" \
+    --header "Content-Type: application/json" \
+    --header "Accept: application/json" \
+    --data "{
+    \"order_id\": \"149823756\",
+    \"payment_id\": \"98765432\",
+    \"success\": true
+}"
+</code></pre></div>
+
+
+<div class="javascript-example">
+    <pre><code class="language-javascript">const url = new URL(
+    "http://127.0.0.1:8000/api/checkout/complete"
+);
+
+const headers = {
+    "Content-Type": "application/json",
+    "Accept": "application/json",
+};
+
+let body = {
+    "order_id": "149823756",
+    "payment_id": "98765432",
+    "success": true
+};
+
+fetch(url, {
+    method: "POST",
+    headers,
+    body: JSON.stringify(body),
+}).then(response =&gt; response.json());</code></pre></div>
+
+
+<div class="php-example">
+    <pre><code class="language-php">$client = new \GuzzleHttp\Client();
+$url = 'http://127.0.0.1:8000/api/checkout/complete';
+$response = $client-&gt;post(
+    $url,
+    [
+        'headers' =&gt; [
+            'Content-Type' =&gt; 'application/json',
+            'Accept' =&gt; 'application/json',
+        ],
+        'json' =&gt; [
+            'order_id' =&gt; '149823756',
+            'payment_id' =&gt; '98765432',
+            'success' =&gt; true,
+        ],
+    ]
+);
+$body = $response-&gt;getBody();
+print_r(json_decode((string) $body));</code></pre></div>
+
+</span>
+
+<span id="example-responses-POSTapi-checkout-complete">
+            <blockquote>
+            <p>Example response (200, Success):</p>
+        </blockquote>
+                <pre>
+
+<code class="language-json" style="max-height: 300px;">{
+    &quot;success&quot;: true,
+    &quot;message&quot;: &quot;Order created successfully&quot;,
+    &quot;data&quot;: {
+        &quot;id&quot;: 42,
+        &quot;order_number&quot;: &quot;ORD-2024-00042&quot;,
+        &quot;user_id&quot;: 1,
+        &quot;status&quot;: &quot;processing&quot;,
+        &quot;status_ar&quot;: &quot;قيد المعالجة&quot;,
+        &quot;payment_status&quot;: &quot;paid&quot;,
+        &quot;subtotal&quot;: 250,
+        &quot;tax&quot;: 35,
+        &quot;shipping_cost&quot;: 80,
+        &quot;total_amount&quot;: 365,
+        &quot;shipping_address&quot;: {
+            &quot;street&quot;: &quot;123 Main St&quot;,
+            &quot;city&quot;: &quot;Cairo&quot;,
+            &quot;zip_code&quot;: &quot;12345&quot;,
+            &quot;country&quot;: &quot;Egypt&quot;,
+            &quot;building_number&quot;: &quot;15&quot;,
+            &quot;floor&quot;: &quot;3&quot;,
+            &quot;apartment&quot;: &quot;5A&quot;,
+            &quot;zone&quot;: &quot;Maadi&quot;
+        },
+        &quot;billing_address&quot;: {
+            &quot;first_name&quot;: &quot;John&quot;,
+            &quot;last_name&quot;: &quot;Doe&quot;,
+            &quot;email&quot;: &quot;john@example.com&quot;,
+            &quot;phone&quot;: &quot;+201234567890&quot;,
+            &quot;street&quot;: &quot;123 Main St&quot;,
+            &quot;city&quot;: &quot;Cairo&quot;,
+            &quot;zip_code&quot;: &quot;12345&quot;,
+            &quot;country&quot;: &quot;Egypt&quot;
+        },
+        &quot;notes&quot;: &quot;Please deliver in the morning&quot;,
+        &quot;created_at&quot;: &quot;2024-01-15T10:30:00.000000Z&quot;,
+        &quot;updated_at&quot;: &quot;2024-01-15T10:30:00.000000Z&quot;,
+        &quot;items&quot;: [
+            {
+                &quot;id&quot;: 101,
+                &quot;order_id&quot;: 42,
+                &quot;product_id&quot;: 5,
+                &quot;quantity&quot;: 2,
+                &quot;price&quot;: 75,
+                &quot;total&quot;: 150,
+                &quot;product&quot;: {
+                    &quot;id&quot;: 5,
+                    &quot;name&quot;: &quot;Premium Coffee Beans&quot;,
+                    &quot;slug&quot;: &quot;premium-coffee-beans&quot;,
+                    &quot;price&quot;: 75,
+                    &quot;sku&quot;: &quot;COF-005&quot;,
+                    &quot;images&quot;: [
+                        {
+                            &quot;id&quot;: 1,
+                            &quot;url&quot;: &quot;https://example.com/storage/products/coffee.jpg&quot;
+                        }
+                    ]
+                }
+            },
+            {
+                &quot;id&quot;: 102,
+                &quot;order_id&quot;: 42,
+                &quot;product_id&quot;: 8,
+                &quot;quantity&quot;: 1,
+                &quot;price&quot;: 100,
+                &quot;total&quot;: 100,
+                &quot;product&quot;: {
+                    &quot;id&quot;: 8,
+                    &quot;name&quot;: &quot;Coffee Grinder&quot;,
+                    &quot;slug&quot;: &quot;coffee-grinder&quot;,
+                    &quot;price&quot;: 100,
+                    &quot;sku&quot;: &quot;GRN-008&quot;,
+                    &quot;images&quot;: [
+                        {
+                            &quot;id&quot;: 3,
+                            &quot;url&quot;: &quot;https://example.com/storage/products/grinder.jpg&quot;
+                        }
+                    ]
+                }
+            }
+        ]
+    }
+}</code>
+ </pre>
+            <blockquote>
+            <p>Example response (400, Order ID Required):</p>
+        </blockquote>
+                <pre>
+
+<code class="language-json" style="max-height: 300px;">{
+    &quot;success&quot;: false,
+    &quot;message&quot;: &quot;Order ID is required&quot;
+}</code>
+ </pre>
+            <blockquote>
+            <p>Example response (404, Checkout Not Found or Expired):</p>
+        </blockquote>
+                <pre>
+
+<code class="language-json" style="max-height: 300px;">{
+    &quot;success&quot;: false,
+    &quot;message&quot;: &quot;No pending checkout found&quot;
+}</code>
+ </pre>
+            <blockquote>
+            <p>Example response (422, Payment Not Successful):</p>
+        </blockquote>
+                <pre>
+
+<code class="language-json" style="max-height: 300px;">{
+    &quot;success&quot;: false,
+    &quot;message&quot;: &quot;Payment was not successful&quot;
+}</code>
+ </pre>
+            <blockquote>
+            <p>Example response (500, Order Creation Failed):</p>
+        </blockquote>
+                <pre>
+
+<code class="language-json" style="max-height: 300px;">{
+    &quot;success&quot;: false,
+    &quot;message&quot;: &quot;Order creation failed: Database connection error&quot;
+}</code>
+ </pre>
+    </span>
+<span id="execution-results-POSTapi-checkout-complete" hidden>
+    <blockquote>Received response<span
+                id="execution-response-status-POSTapi-checkout-complete"></span>:
+    </blockquote>
+    <pre class="json"><code id="execution-response-content-POSTapi-checkout-complete"
+      data-empty-response-text="<Empty response>" style="max-height: 400px;"></code></pre>
+</span>
+<span id="execution-error-POSTapi-checkout-complete" hidden>
+    <blockquote>Request failed with error:</blockquote>
+    <pre><code id="execution-error-message-POSTapi-checkout-complete">
+
+Tip: Check that you&#039;re properly connected to the network.
+If you&#039;re a maintainer of ths API, verify that your API is running and you&#039;ve enabled CORS.
+You can check the Dev Tools console for debugging information.</code></pre>
+</span>
+<form id="form-POSTapi-checkout-complete" data-method="POST"
+      data-path="api/checkout/complete"
+      data-authed="0"
+      data-hasfiles="0"
+      data-isarraybody="0"
+      autocomplete="off"
+      onsubmit="event.preventDefault(); executeTryOut('POSTapi-checkout-complete', this);">
+    <h3>
+        Request&nbsp;&nbsp;&nbsp;
+                    <button type="button"
+                    style="background-color: #8fbcd4; padding: 5px 10px; border-radius: 5px; border-width: thin;"
+                    id="btn-tryout-POSTapi-checkout-complete"
+                    onclick="tryItOut('POSTapi-checkout-complete');">Try it out ⚡
+            </button>
+            <button type="button"
+                    style="background-color: #c97a7e; padding: 5px 10px; border-radius: 5px; border-width: thin;"
+                    id="btn-canceltryout-POSTapi-checkout-complete"
+                    onclick="cancelTryOut('POSTapi-checkout-complete');" hidden>Cancel 🛑
+            </button>&nbsp;&nbsp;
+            <button type="submit"
+                    style="background-color: #6ac174; padding: 5px 10px; border-radius: 5px; border-width: thin;"
+                    id="btn-executetryout-POSTapi-checkout-complete"
+                    data-initial-text="Send Request 💥"
+                    data-loading-text="⏱ Sending..."
+                    hidden>Send Request 💥
+            </button>
+            </h3>
+            <p>
+            <small class="badge badge-black">POST</small>
+            <b><code>api/checkout/complete</code></b>
+        </p>
+                <h4 class="fancy-heading-panel"><b>Headers</b></h4>
+                                <div style="padding-left: 28px; clear: unset;">
+                <b style="line-height: 2;"><code>Content-Type</code></b>&nbsp;&nbsp;
+&nbsp;
+ &nbsp;
+ &nbsp;
+                <input type="text" style="display: none"
+                              name="Content-Type"                data-endpoint="POSTapi-checkout-complete"
+               value="application/json"
+               data-component="header">
+    <br>
+<p>Example: <code>application/json</code></p>
+            </div>
+                                <div style="padding-left: 28px; clear: unset;">
+                <b style="line-height: 2;"><code>Accept</code></b>&nbsp;&nbsp;
+&nbsp;
+ &nbsp;
+ &nbsp;
+                <input type="text" style="display: none"
+                              name="Accept"                data-endpoint="POSTapi-checkout-complete"
+               value="application/json"
+               data-component="header">
+    <br>
+<p>Example: <code>application/json</code></p>
+            </div>
+                                <h4 class="fancy-heading-panel"><b>Body Parameters</b></h4>
+        <div style=" padding-left: 28px;  clear: unset;">
+            <b style="line-height: 2;"><code>order_id</code></b>&nbsp;&nbsp;
+<small>string</small>&nbsp;
+ &nbsp;
+ &nbsp;
+                <input type="text" style="display: none"
+                              name="order_id"                data-endpoint="POSTapi-checkout-complete"
+               value="149823756"
+               data-component="body">
+    <br>
+<p>The temporary order ID from Paymob. Example: <code>149823756</code></p>
+        </div>
+                <div style=" padding-left: 28px;  clear: unset;">
+            <b style="line-height: 2;"><code>payment_id</code></b>&nbsp;&nbsp;
+<small>string</small>&nbsp;
+ &nbsp;
+ &nbsp;
+                <input type="text" style="display: none"
+                              name="payment_id"                data-endpoint="POSTapi-checkout-complete"
+               value="98765432"
+               data-component="body">
+    <br>
+<p>The payment transaction ID from Paymob. Example: <code>98765432</code></p>
+        </div>
+                <div style=" padding-left: 28px;  clear: unset;">
+            <b style="line-height: 2;"><code>success</code></b>&nbsp;&nbsp;
+<small>boolean</small>&nbsp;
+ &nbsp;
+ &nbsp;
+                <label data-endpoint="POSTapi-checkout-complete" style="display: none">
+            <input type="radio" name="success"
+                   value="true"
+                   data-endpoint="POSTapi-checkout-complete"
+                   data-component="body"             >
+            <code>true</code>
+        </label>
+        <label data-endpoint="POSTapi-checkout-complete" style="display: none">
+            <input type="radio" name="success"
+                   value="false"
+                   data-endpoint="POSTapi-checkout-complete"
+                   data-component="body"             >
+            <code>false</code>
+        </label>
+    <br>
+<p>Whether the payment was successful. Example: <code>true</code></p>
+        </div>
+        </form>
+
+                    <h2 id="checkout-GETapi-checkout-fail">Handle checkout failure (GET)</h2>
+
+<p>
+</p>
+
+<p>Clears all pending checkout data after a failed payment attempt.
+Redirects to the payment failed page for browser requests, or returns JSON for API requests.</p>
 
 <span id="example-requests-GETapi-checkout-fail">
 <blockquote>Example request:</blockquote>
@@ -4184,7 +4476,7 @@ For API requests (expects JSON), returns a JSON error response.</p>
 
 <div class="bash-example">
     <pre><code class="language-bash">curl --request GET \
-    --get "http://127.0.0.1:8000/api/checkout/fail?error=Payment+declined+by+bank&amp;order_id=149823756&amp;txn_response_code=DECLINED" \
+    --get "http://127.0.0.1:8000/api/checkout/fail?error=Payment+declined&amp;order_id=149823756&amp;txn_response_code=DECLINED" \
     --header "Content-Type: application/json" \
     --header "Accept: application/json"</code></pre></div>
 
@@ -4195,7 +4487,7 @@ For API requests (expects JSON), returns a JSON error response.</p>
 );
 
 const params = {
-    "error": "Payment declined by bank",
+    "error": "Payment declined",
     "order_id": "149823756",
     "txn_response_code": "DECLINED",
 };
@@ -4224,7 +4516,7 @@ $response = $client-&gt;get(
             'Accept' =&gt; 'application/json',
         ],
         'query' =&gt; [
-            'error' =&gt; 'Payment declined by bank',
+            'error' =&gt; 'Payment declined',
             'order_id' =&gt; '149823756',
             'txn_response_code' =&gt; 'DECLINED',
         ],
@@ -4237,33 +4529,22 @@ print_r(json_decode((string) $body));</code></pre></div>
 
 <span id="example-responses-GETapi-checkout-fail">
             <blockquote>
-            <p>Example response (200, API Request):</p>
+            <p>Example response (200, Success):</p>
         </blockquote>
                 <pre>
 
 <code class="language-json" style="max-height: 300px;">{
     &quot;success&quot;: false,
     &quot;message&quot;: &quot;Checkout failed&quot;,
-    &quot;error&quot;: &quot;Payment declined by bank&quot;
+    &quot;error&quot;: &quot;Payment declined&quot;
 }</code>
  </pre>
             <blockquote>
-            <p>Example response (200, Unknown Error):</p>
+            <p>Example response (302, Redirect):</p>
         </blockquote>
                 <pre>
 
-<code class="language-json" style="max-height: 300px;">{
-    &quot;success&quot;: false,
-    &quot;message&quot;: &quot;Checkout failed&quot;,
-    &quot;error&quot;: &quot;Unknown error&quot;
-}</code>
- </pre>
-            <blockquote>
-            <p>Example response (302, Web Request):</p>
-        </blockquote>
-                <pre>
-
-<code class="language-json" style="max-height: 300px;">Redirects to /payment-failed</code>
+<code class="language-json" style="max-height: 300px;">&quot;Redirects to /payment-failed&quot;</code>
  </pre>
     </span>
 <span id="execution-results-GETapi-checkout-fail" hidden>
@@ -4312,10 +4593,6 @@ You can check the Dev Tools console for debugging information.</code></pre>
             <small class="badge badge-green">GET</small>
             <b><code>api/checkout/fail</code></b>
         </p>
-            <p>
-            <small class="badge badge-black">POST</small>
-            <b><code>api/checkout/fail</code></b>
-        </p>
                 <h4 class="fancy-heading-panel"><b>Headers</b></h4>
                                 <div style="padding-left: 28px; clear: unset;">
                 <b style="line-height: 2;"><code>Content-Type</code></b>&nbsp;&nbsp;
@@ -4349,10 +4626,10 @@ You can check the Dev Tools console for debugging information.</code></pre>
  &nbsp;
                 <input type="text" style="display: none"
                               name="error"                data-endpoint="GETapi-checkout-fail"
-               value="Payment declined by bank"
+               value="Payment declined"
                data-component="query">
     <br>
-<p>The error message or code from the payment gateway. Example: <code>Payment declined by bank</code></p>
+<p>Optional. Error message from the payment gateway. Example: <code>Payment declined</code></p>
             </div>
                                     <div style="padding-left: 28px; clear: unset;">
                 <b style="line-height: 2;"><code>order_id</code></b>&nbsp;&nbsp;
@@ -4364,7 +4641,7 @@ You can check the Dev Tools console for debugging information.</code></pre>
                value="149823756"
                data-component="query">
     <br>
-<p>The temporary order ID that failed. Example: <code>149823756</code></p>
+<p>Optional. The temporary order ID that failed. Example: <code>149823756</code></p>
             </div>
                                     <div style="padding-left: 28px; clear: unset;">
                 <b style="line-height: 2;"><code>txn_response_code</code></b>&nbsp;&nbsp;
@@ -4376,9 +4653,209 @@ You can check the Dev Tools console for debugging information.</code></pre>
                value="DECLINED"
                data-component="query">
     <br>
-<p>Transaction response code from Paymob. Example: <code>DECLINED</code></p>
+<p>Optional. Transaction response code from Paymob. Example: <code>DECLINED</code></p>
             </div>
                 </form>
+
+                    <h2 id="checkout-POSTapi-checkout-fail">Handle checkout failure (POST)</h2>
+
+<p>
+</p>
+
+<p>Clears all pending checkout data after a failed payment attempt.
+Redirects to the payment failed page for browser requests, or returns JSON for API requests.</p>
+
+<span id="example-requests-POSTapi-checkout-fail">
+<blockquote>Example request:</blockquote>
+
+
+<div class="bash-example">
+    <pre><code class="language-bash">curl --request POST \
+    "http://127.0.0.1:8000/api/checkout/fail" \
+    --header "Content-Type: application/json" \
+    --header "Accept: application/json" \
+    --data "{
+    \"error\": \"Payment declined\",
+    \"order_id\": \"149823756\",
+    \"txn_response_code\": \"DECLINED\"
+}"
+</code></pre></div>
+
+
+<div class="javascript-example">
+    <pre><code class="language-javascript">const url = new URL(
+    "http://127.0.0.1:8000/api/checkout/fail"
+);
+
+const headers = {
+    "Content-Type": "application/json",
+    "Accept": "application/json",
+};
+
+let body = {
+    "error": "Payment declined",
+    "order_id": "149823756",
+    "txn_response_code": "DECLINED"
+};
+
+fetch(url, {
+    method: "POST",
+    headers,
+    body: JSON.stringify(body),
+}).then(response =&gt; response.json());</code></pre></div>
+
+
+<div class="php-example">
+    <pre><code class="language-php">$client = new \GuzzleHttp\Client();
+$url = 'http://127.0.0.1:8000/api/checkout/fail';
+$response = $client-&gt;post(
+    $url,
+    [
+        'headers' =&gt; [
+            'Content-Type' =&gt; 'application/json',
+            'Accept' =&gt; 'application/json',
+        ],
+        'json' =&gt; [
+            'error' =&gt; 'Payment declined',
+            'order_id' =&gt; '149823756',
+            'txn_response_code' =&gt; 'DECLINED',
+        ],
+    ]
+);
+$body = $response-&gt;getBody();
+print_r(json_decode((string) $body));</code></pre></div>
+
+</span>
+
+<span id="example-responses-POSTapi-checkout-fail">
+            <blockquote>
+            <p>Example response (200, Success):</p>
+        </blockquote>
+                <pre>
+
+<code class="language-json" style="max-height: 300px;">{
+    &quot;success&quot;: false,
+    &quot;message&quot;: &quot;Checkout failed&quot;,
+    &quot;error&quot;: &quot;Payment declined&quot;
+}</code>
+ </pre>
+            <blockquote>
+            <p>Example response (302, Redirect):</p>
+        </blockquote>
+                <pre>
+
+<code class="language-json" style="max-height: 300px;">&quot;Redirects to /payment-failed&quot;</code>
+ </pre>
+    </span>
+<span id="execution-results-POSTapi-checkout-fail" hidden>
+    <blockquote>Received response<span
+                id="execution-response-status-POSTapi-checkout-fail"></span>:
+    </blockquote>
+    <pre class="json"><code id="execution-response-content-POSTapi-checkout-fail"
+      data-empty-response-text="<Empty response>" style="max-height: 400px;"></code></pre>
+</span>
+<span id="execution-error-POSTapi-checkout-fail" hidden>
+    <blockquote>Request failed with error:</blockquote>
+    <pre><code id="execution-error-message-POSTapi-checkout-fail">
+
+Tip: Check that you&#039;re properly connected to the network.
+If you&#039;re a maintainer of ths API, verify that your API is running and you&#039;ve enabled CORS.
+You can check the Dev Tools console for debugging information.</code></pre>
+</span>
+<form id="form-POSTapi-checkout-fail" data-method="POST"
+      data-path="api/checkout/fail"
+      data-authed="0"
+      data-hasfiles="0"
+      data-isarraybody="0"
+      autocomplete="off"
+      onsubmit="event.preventDefault(); executeTryOut('POSTapi-checkout-fail', this);">
+    <h3>
+        Request&nbsp;&nbsp;&nbsp;
+                    <button type="button"
+                    style="background-color: #8fbcd4; padding: 5px 10px; border-radius: 5px; border-width: thin;"
+                    id="btn-tryout-POSTapi-checkout-fail"
+                    onclick="tryItOut('POSTapi-checkout-fail');">Try it out ⚡
+            </button>
+            <button type="button"
+                    style="background-color: #c97a7e; padding: 5px 10px; border-radius: 5px; border-width: thin;"
+                    id="btn-canceltryout-POSTapi-checkout-fail"
+                    onclick="cancelTryOut('POSTapi-checkout-fail');" hidden>Cancel 🛑
+            </button>&nbsp;&nbsp;
+            <button type="submit"
+                    style="background-color: #6ac174; padding: 5px 10px; border-radius: 5px; border-width: thin;"
+                    id="btn-executetryout-POSTapi-checkout-fail"
+                    data-initial-text="Send Request 💥"
+                    data-loading-text="⏱ Sending..."
+                    hidden>Send Request 💥
+            </button>
+            </h3>
+            <p>
+            <small class="badge badge-black">POST</small>
+            <b><code>api/checkout/fail</code></b>
+        </p>
+                <h4 class="fancy-heading-panel"><b>Headers</b></h4>
+                                <div style="padding-left: 28px; clear: unset;">
+                <b style="line-height: 2;"><code>Content-Type</code></b>&nbsp;&nbsp;
+&nbsp;
+ &nbsp;
+ &nbsp;
+                <input type="text" style="display: none"
+                              name="Content-Type"                data-endpoint="POSTapi-checkout-fail"
+               value="application/json"
+               data-component="header">
+    <br>
+<p>Example: <code>application/json</code></p>
+            </div>
+                                <div style="padding-left: 28px; clear: unset;">
+                <b style="line-height: 2;"><code>Accept</code></b>&nbsp;&nbsp;
+&nbsp;
+ &nbsp;
+ &nbsp;
+                <input type="text" style="display: none"
+                              name="Accept"                data-endpoint="POSTapi-checkout-fail"
+               value="application/json"
+               data-component="header">
+    <br>
+<p>Example: <code>application/json</code></p>
+            </div>
+                                <h4 class="fancy-heading-panel"><b>Body Parameters</b></h4>
+        <div style=" padding-left: 28px;  clear: unset;">
+            <b style="line-height: 2;"><code>error</code></b>&nbsp;&nbsp;
+<small>string</small>&nbsp;
+<i>optional</i> &nbsp;
+ &nbsp;
+                <input type="text" style="display: none"
+                              name="error"                data-endpoint="POSTapi-checkout-fail"
+               value="Payment declined"
+               data-component="body">
+    <br>
+<p>Optional. Error message from the payment gateway. Example: <code>Payment declined</code></p>
+        </div>
+                <div style=" padding-left: 28px;  clear: unset;">
+            <b style="line-height: 2;"><code>order_id</code></b>&nbsp;&nbsp;
+<small>string</small>&nbsp;
+<i>optional</i> &nbsp;
+ &nbsp;
+                <input type="text" style="display: none"
+                              name="order_id"                data-endpoint="POSTapi-checkout-fail"
+               value="149823756"
+               data-component="body">
+    <br>
+<p>Optional. The temporary order ID that failed. Example: <code>149823756</code></p>
+        </div>
+                <div style=" padding-left: 28px;  clear: unset;">
+            <b style="line-height: 2;"><code>txn_response_code</code></b>&nbsp;&nbsp;
+<small>string</small>&nbsp;
+<i>optional</i> &nbsp;
+ &nbsp;
+                <input type="text" style="display: none"
+                              name="txn_response_code"                data-endpoint="POSTapi-checkout-fail"
+               value="DECLINED"
+               data-component="body">
+    <br>
+<p>Optional. Transaction response code from Paymob. Example: <code>DECLINED</code></p>
+        </div>
+        </form>
 
                     <h2 id="checkout-GETapi-checkout-status">Get checkout status</h2>
 
@@ -4581,10 +5058,9 @@ You can check the Dev Tools console for debugging information.</code></pre>
 <p>
 </p>
 
-<p>Test endpoint to simulate completing a checkout with real pending checkout data.
-This is useful for development and testing the checkout flow without going through
-the actual Paymob payment process.</p>
-<p><strong>Warning:</strong> This endpoint should be disabled or protected in production environments.</p>
+<p>Developer endpoint to simulate a successful payment for testing purposes.
+Uses the most recent active pending checkout to create an order.</p>
+<p><small class="badge badge-warning">Caution</small> Use only in development.</p>
 
 <span id="example-requests-POSTapi-checkout-test-complete">
 <blockquote>Example request:</blockquote>
@@ -4641,45 +5117,7 @@ print_r(json_decode((string) $body));</code></pre></div>
     &quot;message&quot;: &quot;Order created successfully&quot;,
     &quot;data&quot;: {
         &quot;id&quot;: 42,
-        &quot;order_number&quot;: &quot;ORD-2024-00042&quot;,
-        &quot;user_id&quot;: 1,
-        &quot;status&quot;: &quot;processing&quot;,
-        &quot;status_ar&quot;: &quot;قيد المعالجة&quot;,
-        &quot;payment_status&quot;: &quot;paid&quot;,
-        &quot;subtotal&quot;: 250,
-        &quot;tax&quot;: 35,
-        &quot;shipping_cost&quot;: 80,
-        &quot;total_amount&quot;: 365,
-        &quot;shipping_address&quot;: {
-            &quot;street&quot;: &quot;123 Main St&quot;,
-            &quot;city&quot;: &quot;Cairo&quot;,
-            &quot;zip_code&quot;: &quot;12345&quot;,
-            &quot;country&quot;: &quot;Egypt&quot;,
-            &quot;building_number&quot;: &quot;15&quot;,
-            &quot;floor&quot;: &quot;3&quot;,
-            &quot;apartment&quot;: &quot;5A&quot;,
-            &quot;zone&quot;: &quot;Maadi&quot;
-        },
-        &quot;notes&quot;: &quot;Test order&quot;,
-        &quot;created_at&quot;: &quot;2024-01-15T10:30:00.000000Z&quot;,
-        &quot;updated_at&quot;: &quot;2024-01-15T10:30:00.000000Z&quot;,
-        &quot;items&quot;: [
-            {
-                &quot;id&quot;: 101,
-                &quot;order_id&quot;: 42,
-                &quot;product_id&quot;: 5,
-                &quot;quantity&quot;: 2,
-                &quot;price&quot;: 75,
-                &quot;total&quot;: 150,
-                &quot;product&quot;: {
-                    &quot;id&quot;: 5,
-                    &quot;name&quot;: &quot;Premium Coffee Beans&quot;,
-                    &quot;slug&quot;: &quot;premium-coffee-beans&quot;,
-                    &quot;price&quot;: 75,
-                    &quot;sku&quot;: &quot;COF-005&quot;
-                }
-            }
-        ]
+        &quot;status&quot;: &quot;processing&quot;
     }
 }</code>
  </pre>
@@ -4691,16 +5129,6 @@ print_r(json_decode((string) $body));</code></pre></div>
 <code class="language-json" style="max-height: 300px;">{
     &quot;success&quot;: false,
     &quot;message&quot;: &quot;No active pending checkout found for testing&quot;
-}</code>
- </pre>
-            <blockquote>
-            <p>Example response (500, Test Failed):</p>
-        </blockquote>
-                <pre>
-
-<code class="language-json" style="max-height: 300px;">{
-    &quot;success&quot;: false,
-    &quot;message&quot;: &quot;Test failed: Order creation error&quot;
 }</code>
  </pre>
     </span>
@@ -7550,7 +7978,7 @@ You can check the Dev Tools console for debugging information.</code></pre>
 
 <div class="bash-example">
     <pre><code class="language-bash">curl --request GET \
-    --get "http://127.0.0.1:8000/api/addresses/1" \
+    --get "http://127.0.0.1:8000/api/addresses/3" \
     --header "Authorization: Bearer {YOUR_API_TOKEN}" \
     --header "Content-Type: application/json" \
     --header "Accept: application/json"</code></pre></div>
@@ -7558,7 +7986,7 @@ You can check the Dev Tools console for debugging information.</code></pre>
 
 <div class="javascript-example">
     <pre><code class="language-javascript">const url = new URL(
-    "http://127.0.0.1:8000/api/addresses/1"
+    "http://127.0.0.1:8000/api/addresses/3"
 );
 
 const headers = {
@@ -7575,7 +8003,7 @@ fetch(url, {
 
 <div class="php-example">
     <pre><code class="language-php">$client = new \GuzzleHttp\Client();
-$url = 'http://127.0.0.1:8000/api/addresses/1';
+$url = 'http://127.0.0.1:8000/api/addresses/3';
 $response = $client-&gt;get(
     $url,
     [
@@ -7734,10 +8162,10 @@ You can check the Dev Tools console for debugging information.</code></pre>
  &nbsp;
                 <input type="number" style="display: none"
                step="any"               name="address_id"                data-endpoint="GETapi-addresses--address_id-"
-               value="1"
+               value="3"
                data-component="url">
     <br>
-<p>The ID of the address. Example: <code>1</code></p>
+<p>The ID of the address. Example: <code>3</code></p>
             </div>
                     <div style="padding-left: 28px; clear: unset;">
                 <b style="line-height: 2;"><code>address</code></b>&nbsp;&nbsp;
@@ -7768,7 +8196,7 @@ If is_default is set to true, all other addresses will be unset as default.</p>
 
 <div class="bash-example">
     <pre><code class="language-bash">curl --request PUT \
-    "http://127.0.0.1:8000/api/addresses/1" \
+    "http://127.0.0.1:8000/api/addresses/3" \
     --header "Authorization: Bearer {YOUR_API_TOKEN}" \
     --header "Content-Type: application/json" \
     --header "Accept: application/json" \
@@ -7795,7 +8223,7 @@ If is_default is set to true, all other addresses will be unset as default.</p>
 
 <div class="javascript-example">
     <pre><code class="language-javascript">const url = new URL(
-    "http://127.0.0.1:8000/api/addresses/1"
+    "http://127.0.0.1:8000/api/addresses/3"
 );
 
 const headers = {
@@ -7832,7 +8260,7 @@ fetch(url, {
 
 <div class="php-example">
     <pre><code class="language-php">$client = new \GuzzleHttp\Client();
-$url = 'http://127.0.0.1:8000/api/addresses/1';
+$url = 'http://127.0.0.1:8000/api/addresses/3';
 $response = $client-&gt;put(
     $url,
     [
@@ -8024,10 +8452,10 @@ You can check the Dev Tools console for debugging information.</code></pre>
  &nbsp;
                 <input type="number" style="display: none"
                step="any"               name="address_id"                data-endpoint="PUTapi-addresses--address_id-"
-               value="1"
+               value="3"
                data-component="url">
     <br>
-<p>The ID of the address. Example: <code>1</code></p>
+<p>The ID of the address. Example: <code>3</code></p>
             </div>
                     <div style="padding-left: 28px; clear: unset;">
                 <b style="line-height: 2;"><code>address</code></b>&nbsp;&nbsp;
@@ -8280,7 +8708,7 @@ You can check the Dev Tools console for debugging information.</code></pre>
 
 <div class="bash-example">
     <pre><code class="language-bash">curl --request DELETE \
-    "http://127.0.0.1:8000/api/addresses/1" \
+    "http://127.0.0.1:8000/api/addresses/3" \
     --header "Authorization: Bearer {YOUR_API_TOKEN}" \
     --header "Content-Type: application/json" \
     --header "Accept: application/json"</code></pre></div>
@@ -8288,7 +8716,7 @@ You can check the Dev Tools console for debugging information.</code></pre>
 
 <div class="javascript-example">
     <pre><code class="language-javascript">const url = new URL(
-    "http://127.0.0.1:8000/api/addresses/1"
+    "http://127.0.0.1:8000/api/addresses/3"
 );
 
 const headers = {
@@ -8305,7 +8733,7 @@ fetch(url, {
 
 <div class="php-example">
     <pre><code class="language-php">$client = new \GuzzleHttp\Client();
-$url = 'http://127.0.0.1:8000/api/addresses/1';
+$url = 'http://127.0.0.1:8000/api/addresses/3';
 $response = $client-&gt;delete(
     $url,
     [
@@ -8443,10 +8871,10 @@ You can check the Dev Tools console for debugging information.</code></pre>
  &nbsp;
                 <input type="number" style="display: none"
                step="any"               name="address_id"                data-endpoint="DELETEapi-addresses--address_id-"
-               value="1"
+               value="3"
                data-component="url">
     <br>
-<p>The ID of the address. Example: <code>1</code></p>
+<p>The ID of the address. Example: <code>3</code></p>
             </div>
                     <div style="padding-left: 28px; clear: unset;">
                 <b style="line-height: 2;"><code>address</code></b>&nbsp;&nbsp;
@@ -8477,7 +8905,7 @@ All other addresses will be unset as default.</p>
 
 <div class="bash-example">
     <pre><code class="language-bash">curl --request PATCH \
-    "http://127.0.0.1:8000/api/addresses/1/default" \
+    "http://127.0.0.1:8000/api/addresses/3/default" \
     --header "Authorization: Bearer {YOUR_API_TOKEN}" \
     --header "Content-Type: application/json" \
     --header "Accept: application/json"</code></pre></div>
@@ -8485,7 +8913,7 @@ All other addresses will be unset as default.</p>
 
 <div class="javascript-example">
     <pre><code class="language-javascript">const url = new URL(
-    "http://127.0.0.1:8000/api/addresses/1/default"
+    "http://127.0.0.1:8000/api/addresses/3/default"
 );
 
 const headers = {
@@ -8502,7 +8930,7 @@ fetch(url, {
 
 <div class="php-example">
     <pre><code class="language-php">$client = new \GuzzleHttp\Client();
-$url = 'http://127.0.0.1:8000/api/addresses/1/default';
+$url = 'http://127.0.0.1:8000/api/addresses/3/default';
 $response = $client-&gt;patch(
     $url,
     [
@@ -8662,10 +9090,10 @@ You can check the Dev Tools console for debugging information.</code></pre>
  &nbsp;
                 <input type="number" style="display: none"
                step="any"               name="address_id"                data-endpoint="PATCHapi-addresses--address_id--default"
-               value="1"
+               value="3"
                data-component="url">
     <br>
-<p>The ID of the address. Example: <code>1</code></p>
+<p>The ID of the address. Example: <code>3</code></p>
             </div>
                     <div style="padding-left: 28px; clear: unset;">
                 <b style="line-height: 2;"><code>address</code></b>&nbsp;&nbsp;
@@ -8748,7 +9176,7 @@ print_r(json_decode((string) $body));</code></pre></div>
 content-type: application/json
 access-control-allow-origin: http://localhost:3000
 access-control-allow-credentials: true
-set-cookie: laravel-session=eyJpdiI6Ii9kWGh3MG1NTFFqOHYrMVZtV1psdHc9PSIsInZhbHVlIjoiUEVtd3poOFNWT2ZMamVrM01GVDhCNFQ2Y1oyRG05NGZUY1dCTzZEN1BNdU8vZVVlU0o2QmRPeCtIb0NGTWJ5N0MzNWZZdlpjcHk4bExGRVpYL21LWGFSemhBVzVUdGovMEwrZlRERUVjRkFQcm5xakIrUFVhRVd2VCs2S1JTOHAiLCJtYWMiOiIxZGMwZTNlMDhmNGQ0MzU0NmU3ZTUwMDE3YTE5ODAzOWJiYmQ4Yjk5YzU5YzEzYTZjOGZiZGRhYTMyZWI3OTFlIiwidGFnIjoiIn0%3D; expires=Wed, 21 Jan 2026 15:02:44 GMT; Max-Age=7200; path=/; httponly; samesite=lax
+set-cookie: laravel-session=eyJpdiI6IjJ6VEh1Nkg4RTdnSUJuNUxlWDlLSnc9PSIsInZhbHVlIjoiLzhSRTNudjFBN0xKQmtUbFV1bWRScS81YVJ0TUFGeHljUGF6WWRHM3VaUWJ2UFVhN1RjMVVNTGI0SnhiVHdXUGtPaHVFeWNJRXNsWkhYY052V1ZUZFprbUZhcVUwMzE0d2pIU1c5Tkdaemo1SmYvQUYyZnBOd1U2V1dPQ3psQkkiLCJtYWMiOiJhNTUwNDk3Y2QwNzE4Zjk4NzdkNDM1ZmE5NGY3NmFiOWYzZjdkYTE5Y2FhZjhjMTYzYmYyMDA5OTY1NzA0OWQ4IiwidGFnIjoiIn0%3D; expires=Sun, 25 Jan 2026 15:26:58 GMT; Max-Age=7200; path=/; httponly; samesite=lax
  </code></pre></details>         <pre>
 
 <code class="language-json" style="max-height: 300px;">{
@@ -8928,7 +9356,7 @@ print_r(json_decode((string) $body));</code></pre></div>
 content-type: application/json
 access-control-allow-origin: http://localhost:3000
 access-control-allow-credentials: true
-set-cookie: laravel-session=eyJpdiI6Ilk5bG9qYlBBVU5oaitGUFA5QmNGaFE9PSIsInZhbHVlIjoiN1B3R1FTejVOSmdGR0hQRmdmcmVleFIxTzZySVY3QnJYMCtBb1pCVmJ6eXdjQXh2K0ZMY2huYUxqTGxmQmxXSVptQ2FWVG84NVZER0lBZCthUTQrNysyZE1iYksxYS9tRTJjY3BoNGVlT2hPSXVWTmdpOG82ZEJUc3JYVVBSc0MiLCJtYWMiOiI2NmY0NDgxOWFhMTVjN2NkNWExNDVlM2FkYTdlMmM4NGFlYjRjZGJiMTI0MDRmYWNhOTUwYjExOGMxZjkyNjhlIiwidGFnIjoiIn0%3D; expires=Wed, 21 Jan 2026 15:02:44 GMT; Max-Age=7200; path=/; httponly; samesite=lax
+set-cookie: laravel-session=eyJpdiI6ImRTTUgrR3RzSVdVZ2VOektkWmpyVHc9PSIsInZhbHVlIjoiZlArSkU2TlQ5RURPVG1DZnVUSE8vRE1KSlEyVHZPUGZlSnV3YkpuZ3ZpTS9OV2xCcnB6ZUN3eHAyc2xwNHlTZTVleWdkZVUvb3Z2VjFSQXM5K3FmWGNIb2lheU9GZUp3SVVYd0xnUnRrcHhGUUJiSldITisrTUxkSzlGTzVid1kiLCJtYWMiOiIyOTA2ZmVmZGQzZjYxYmYwMTMyZmRhMDI4NGZmMDVjNDljMjc3MzliOGE2NDQxMzNhM2MwZGJlNjM3NjQ3MmM4IiwidGFnIjoiIn0%3D; expires=Sun, 25 Jan 2026 15:26:58 GMT; Max-Age=7200; path=/; httponly; samesite=lax
  </code></pre></details>         <pre>
 
 <code class="language-json" style="max-height: 300px;">{
@@ -9345,7 +9773,7 @@ print_r(json_decode((string) $body));</code></pre></div>
 content-type: application/json
 access-control-allow-origin: http://localhost:3000
 access-control-allow-credentials: true
-set-cookie: laravel-session=eyJpdiI6Im1JZlBVZVhMaXVpYXc3eCtUK2QyYWc9PSIsInZhbHVlIjoieFQzK3J3YlVtdmhEMi9Bbi9vM0Z5WVdtcmt0YVhUQitaUzFUbHNmdTZSa2NrT3RNOG0wOVN5eklKaGFxZVFjTTVhSGxObE9KalhpT1RFdk5LSG4wV1FWZW81WXEwbTEzazltd3VIWmtQOUtYSmlPN05Bdm14Ulh1dFpvU29EK3MiLCJtYWMiOiIzMjIyZDk1NDNlYTZkOWIxOWNhNzZmNWExMmIzOGJiYTJlNDI2YjJlOWJkYzRjZmQwNDFmMjI1MmQ2NTJjNTA3IiwidGFnIjoiIn0%3D; expires=Wed, 21 Jan 2026 15:02:44 GMT; Max-Age=7200; path=/; httponly; samesite=lax
+set-cookie: laravel-session=eyJpdiI6IkliT0Vra3I1azFVVVdWSFQ1QkZOYWc9PSIsInZhbHVlIjoiRkRNeFlNMzZWczhRY0s5M0k4VWJvVi9KRFEyWW9xdWNBcm5UOTNOaTJOTjk5U0hybEdmRU16bjgvZllVRUVaSnljTW1nRnphKzZqUzExTC9IcFU0WjVvUXhkMXpKQXFxaXFYd3RqVURiZzlNMDMxQ1hwL3RPUmlTOEtPOHVUQzEiLCJtYWMiOiI2MDU1ZTViYTAwMjIyMDBlODdhMzkxZGU4ZDBkOTQyYzVhNTYxYzQ0NDAyYjBjMzI1YjE2NWJiMmM5ZDI5NmNiIiwidGFnIjoiIn0%3D; expires=Sun, 25 Jan 2026 15:26:58 GMT; Max-Age=7200; path=/; httponly; samesite=lax
  </code></pre></details>         <pre>
 
 <code class="language-json" style="max-height: 300px;">{
@@ -10335,23 +10763,23 @@ print_r(json_decode((string) $body));</code></pre></div>
                 <small onclick="textContent = parentElement.parentElement.open ? 'Show headers' : 'Hide headers'">Show headers</small>
             </summary>
             <pre><code class="language-http">cache-control: no-cache, private
-location: http://localhost:3000?payment_status=failed
+location: http://localhost:3000/checkout_confirmation?payment_status=failed
 content-type: text/html; charset=utf-8
 access-control-allow-origin: http://localhost:3000
 access-control-allow-credentials: true
-set-cookie: laravel-session=eyJpdiI6Im1NU2hZdTdNTWF6SmFhWkJESitDcWc9PSIsInZhbHVlIjoiVGlBWU1Zb1hNRjVWekZFM3ZWV0F0ZFRnRHNsaDFsc2l4MG1FRlFlMDg1S2pja2FXUFFYZlR6TjBZdnNoSVF5VU9VS3FDZWN5MHZIdXNmZFJYMEtkL1BzTnFwOFhsSW9XVEMrWmlCN1lRWE96Wk8vQ0tKNjc5U1luWjh0bldzQ0UiLCJtYWMiOiJlOWZmMzVlNWIzODE2NGE5ZDRmMDk3MDM3MjI5NmFmNWM5YjI3ZjdjZTVlNzM5YmU2YjZkY2RmMjI1N2JmNTJmIiwidGFnIjoiIn0%3D; expires=Wed, 21 Jan 2026 15:02:45 GMT; Max-Age=7200; path=/; httponly; samesite=lax
+set-cookie: laravel-session=eyJpdiI6InRMb2s0dXRWMHl0RnRGenJQazRlUHc9PSIsInZhbHVlIjoic1BTdEcrYWF6cE9lcER2Zlp1dmRyVHlwMVQzMktWQTdoMG5NZEsvSGR1a2xiM0xpdVpxSk83RnpTUWxPdENvZlNrUUxiU3pyYVJRU0xZVWo2czRrV1NEK28rdzYvb2I4N01EeG16ZXB5dXF5OVJjMlhrZk5Xd2hVVU93TUVPVngiLCJtYWMiOiJkM2ZkN2E5NTUyYjYxNjAwZTMzOWM5Njk1MWRjNTgzMzFjZGRlY2I0ZTUyODJjOTc2MGM0YjcyNjczNDljZmMyIiwidGFnIjoiIn0%3D; expires=Sun, 25 Jan 2026 15:26:58 GMT; Max-Age=7200; path=/; httponly; samesite=lax
  </code></pre></details>         <pre>
 
 <code class="language-json" style="max-height: 300px;">&lt;!DOCTYPE html&gt;
 &lt;html&gt;
     &lt;head&gt;
         &lt;meta charset=&quot;UTF-8&quot; /&gt;
-        &lt;meta http-equiv=&quot;refresh&quot; content=&quot;0;url=&#039;http://localhost:3000?payment_status=failed&#039;&quot; /&gt;
+        &lt;meta http-equiv=&quot;refresh&quot; content=&quot;0;url=&#039;http://localhost:3000/checkout_confirmation?payment_status=failed&#039;&quot; /&gt;
 
-        &lt;title&gt;Redirecting to http://localhost:3000?payment_status=failed&lt;/title&gt;
+        &lt;title&gt;Redirecting to http://localhost:3000/checkout_confirmation?payment_status=failed&lt;/title&gt;
     &lt;/head&gt;
     &lt;body&gt;
-        Redirecting to &lt;a href=&quot;http://localhost:3000?payment_status=failed&quot;&gt;http://localhost:3000?payment_status=failed&lt;/a&gt;.
+        Redirecting to &lt;a href=&quot;http://localhost:3000/checkout_confirmation?payment_status=failed&quot;&gt;http://localhost:3000/checkout_confirmation?payment_status=failed&lt;/a&gt;.
     &lt;/body&gt;
 &lt;/html&gt;</code>
  </pre>
@@ -10956,7 +11384,7 @@ print_r(json_decode((string) $body));</code></pre></div>
 content-type: application/json
 access-control-allow-origin: http://localhost:3000
 access-control-allow-credentials: true
-set-cookie: laravel-session=eyJpdiI6IlJwWXByS2ZETGM5QUFITGIyem1sMUE9PSIsInZhbHVlIjoiVUs5OWhEdElpcUhIMkN3b3huaFErMzBKcHFOajBBRkxLODZyWTZXbWY0YTZaWHVQRkk0LzVmYnNPQ2hUL05vaGRNb0haSW5yNW1LQk5UeGVMU0wwQ2srZUZta3JadzJyUUg2VjJpaEMyZnBwenB5MHlDWExXU1dRYmJUYnRqeG8iLCJtYWMiOiI2ZjMyN2ZkMDA4Nzg3N2E0ZmE3MGJhYTc3ZTYyOTJiNjQxODM2ZjY4NWIyYTYxNDA3YjdhNGQxZWRmZTc1NWM2IiwidGFnIjoiIn0%3D; expires=Wed, 21 Jan 2026 15:02:45 GMT; Max-Age=7200; path=/; httponly; samesite=lax
+set-cookie: laravel-session=eyJpdiI6InVyRmplQkNta2RxMFdRYlNSczZCQUE9PSIsInZhbHVlIjoiZW5pYXhsakVLZC9QQjhiVDV5dVcreDZiOHJRYjF0eFhheW5TS2lyemF0clkrTk16S1l5eFZrcjZsbGN4djFUd0FWT01xU3NkSFMrYmFtR05RYlpXQWd3aGZpWVBSbXErQWJaYnY4Vm1xRStlZEtibHNkc3hjSTRNMjZqdGFmdlUiLCJtYWMiOiJhZDFiYWQ0Mzc4N2MyN2ViZjYzZDMyODk2OTdjNzE4YzNkYmM1OWFlNmRkYTdhMmQ5ZDYzZjE4MjcxMzMyYmY1IiwidGFnIjoiIn0%3D; expires=Sun, 25 Jan 2026 15:26:59 GMT; Max-Age=7200; path=/; httponly; samesite=lax
  </code></pre></details>         <pre>
 
 <code class="language-json" style="max-height: 300px;">{
@@ -11246,7 +11674,7 @@ You can check the Dev Tools console for debugging information.</code></pre>
     --header "Content-Type: application/json" \
     --header "Accept: application/json" \
     --data "{
-    \"scheduledDate\": \"2052-02-14\",
+    \"scheduledDate\": \"2052-02-18\",
     \"businessLocationId\": \"architecto\",
     \"contactPerson\": {
         \"name\": \"architecto\",
@@ -11256,14 +11684,14 @@ You can check the Dev Tools console for debugging information.</code></pre>
     },
     \"notes\": \"architecto\",
     \"noOfPackages\": 22,
-    \"packageType\": \"Normal\",
+    \"packageType\": \"Heavy Bulky\",
     \"repeatedData\": {
-        \"repeatedType\": \"Weekly\",
+        \"repeatedType\": \"Daily\",
         \"days\": [
-            \"Thursday\"
+            \"Saturday\"
         ],
-        \"startDate\": \"2026-01-21T13:02:45\",
-        \"endDate\": \"2052-02-14\"
+        \"startDate\": \"2026-01-25T13:26:59\",
+        \"endDate\": \"2052-02-18\"
     }
 }"
 </code></pre></div>
@@ -11280,7 +11708,7 @@ const headers = {
 };
 
 let body = {
-    "scheduledDate": "2052-02-14",
+    "scheduledDate": "2052-02-18",
     "businessLocationId": "architecto",
     "contactPerson": {
         "name": "architecto",
@@ -11290,14 +11718,14 @@ let body = {
     },
     "notes": "architecto",
     "noOfPackages": 22,
-    "packageType": "Normal",
+    "packageType": "Heavy Bulky",
     "repeatedData": {
-        "repeatedType": "Weekly",
+        "repeatedType": "Daily",
         "days": [
-            "Thursday"
+            "Saturday"
         ],
-        "startDate": "2026-01-21T13:02:45",
-        "endDate": "2052-02-14"
+        "startDate": "2026-01-25T13:26:59",
+        "endDate": "2052-02-18"
     }
 };
 
@@ -11319,7 +11747,7 @@ $response = $client-&gt;post(
             'Accept' =&gt; 'application/json',
         ],
         'json' =&gt; [
-            'scheduledDate' =&gt; '2052-02-14',
+            'scheduledDate' =&gt; '2052-02-18',
             'businessLocationId' =&gt; 'architecto',
             'contactPerson' =&gt; [
                 'name' =&gt; 'architecto',
@@ -11329,14 +11757,14 @@ $response = $client-&gt;post(
             ],
             'notes' =&gt; 'architecto',
             'noOfPackages' =&gt; 22,
-            'packageType' =&gt; 'Normal',
+            'packageType' =&gt; 'Heavy Bulky',
             'repeatedData' =&gt; [
-                'repeatedType' =&gt; 'Weekly',
+                'repeatedType' =&gt; 'Daily',
                 'days' =&gt; [
-                    'Thursday',
+                    'Saturday',
                 ],
-                'startDate' =&gt; '2026-01-21T13:02:45',
-                'endDate' =&gt; '2052-02-14',
+                'startDate' =&gt; '2026-01-25T13:26:59',
+                'endDate' =&gt; '2052-02-18',
             ],
         ],
     ]
@@ -11427,10 +11855,10 @@ You can check the Dev Tools console for debugging information.</code></pre>
  &nbsp;
                 <input type="text" style="display: none"
                               name="scheduledDate"                data-endpoint="POSTapi-pickups"
-               value="2052-02-14"
+               value="2052-02-18"
                data-component="body">
     <br>
-<p>Must be a valid date. Must be a date after <code>today</code>. Example: <code>2052-02-14</code></p>
+<p>Must be a valid date. Must be a date after <code>today</code>. Example: <code>2052-02-18</code></p>
         </div>
                 <div style=" padding-left: 28px;  clear: unset;">
             <b style="line-height: 2;"><code>businessLocationId</code></b>&nbsp;&nbsp;
@@ -11535,10 +11963,10 @@ You can check the Dev Tools console for debugging information.</code></pre>
  &nbsp;
                 <input type="text" style="display: none"
                               name="packageType"                data-endpoint="POSTapi-pickups"
-               value="Normal"
+               value="Heavy Bulky"
                data-component="body">
     <br>
-<p>Example: <code>Normal</code></p>
+<p>Example: <code>Heavy Bulky</code></p>
 Must be one of:
 <ul style="list-style-type: square;"><li><code>Normal</code></li> <li><code>Light Bulky</code></li> <li><code>Heavy Bulky</code></li></ul>
         </div>
@@ -11559,10 +11987,10 @@ Must be one of:
  &nbsp;
                 <input type="text" style="display: none"
                               name="repeatedData.repeatedType"                data-endpoint="POSTapi-pickups"
-               value="Weekly"
+               value="Daily"
                data-component="body">
     <br>
-<p>Example: <code>Weekly</code></p>
+<p>Example: <code>Daily</code></p>
 Must be one of:
 <ul style="list-style-type: square;"><li><code>One Time</code></li> <li><code>Daily</code></li> <li><code>Weekly</code></li></ul>
                     </div>
@@ -11589,10 +12017,10 @@ Must be one of:
  &nbsp;
                 <input type="text" style="display: none"
                               name="repeatedData.startDate"                data-endpoint="POSTapi-pickups"
-               value="2026-01-21T13:02:45"
+               value="2026-01-25T13:26:59"
                data-component="body">
     <br>
-<p>Must be a valid date. Example: <code>2026-01-21T13:02:45</code></p>
+<p>Must be a valid date. Example: <code>2026-01-25T13:26:59</code></p>
                     </div>
                                                                 <div style="margin-left: 14px; clear: unset;">
                         <b style="line-height: 2;"><code>endDate</code></b>&nbsp;&nbsp;
@@ -11601,10 +12029,10 @@ Must be one of:
  &nbsp;
                 <input type="text" style="display: none"
                               name="repeatedData.endDate"                data-endpoint="POSTapi-pickups"
-               value="2052-02-14"
+               value="2052-02-18"
                data-component="body">
     <br>
-<p>Must be a valid date. Must be a date after <code>repeatedData.startDate</code>. Example: <code>2052-02-14</code></p>
+<p>Must be a valid date. Must be a date after <code>repeatedData.startDate</code>. Example: <code>2052-02-18</code></p>
                     </div>
                                     </details>
         </div>
@@ -12271,12 +12699,12 @@ print_r(json_decode((string) $body));</code></pre></div>
 content-type: application/json
 access-control-allow-origin: http://localhost:3000
 access-control-allow-credentials: true
-set-cookie: laravel-session=eyJpdiI6Imx2b29sTDlHOFduZ2tZUW9pdzJaNlE9PSIsInZhbHVlIjoidmpJaW1HdTNaTVFWbkFIa3p0eVZKbnRoZ0h0Z0ZNTVBBZ2VGdlM5aVNMT05xbnZvZDFLaDNFaHhkQVZRNDFEbUNUa0RhVmRhRG1aczViZ0QrQmJvMlc3NXBXYnZkcHlnK2pVWG5tQXk2S2E2TXU3VElIT0RNbG8zUXZZZWJJOEgiLCJtYWMiOiI3ZjUyMTBjNTY0YzMwMGU0YzVlZDlkZWI3YjVjZTJlNDg4Yzc0YjM1YWMyNTY4YWNjNzVkNTI4NTFkYmZhODBiIiwidGFnIjoiIn0%3D; expires=Wed, 21 Jan 2026 15:02:45 GMT; Max-Age=7200; path=/; httponly; samesite=lax
+set-cookie: laravel-session=eyJpdiI6ImdialZEUFRtd3BvWHB1WC92UjY0Smc9PSIsInZhbHVlIjoiMERJTmdIcm1DNFV2UXlnZVZpR2w5MTNpY2lPVWZWOW90UDJBWVo0cjlqVkJja0IreVZVamRNdkVQZEJSckkrcW9pWG40NDM4UFVRVXdTaHZJeXdOU2V5M0xISWFNbGpaNFkvMHFaK2RTUkdPbTBMRlBGV3p5OVhBVXR4SnM3L0EiLCJtYWMiOiI4NTBmYzQwM2RiMmU1ZDA0MDA1NWVlYmM4ZDExNjQ1M2RiMWUxNjdlZGFjZDFmOTMyYzRmMTIxMGFlZjFjZjk2IiwidGFnIjoiIn0%3D; expires=Sun, 25 Jan 2026 15:26:59 GMT; Max-Age=7200; path=/; httponly; samesite=lax
  </code></pre></details>         <pre>
 
 <code class="language-json" style="max-height: 300px;">{
     &quot;status&quot;: {
-        &quot;file_path&quot;: &quot;C:\\laragon\\www\\ecommerce-api\\.env&quot;,
+        &quot;file_path&quot;: &quot;D:\\code\\ecommerce-api\\.env&quot;,
         &quot;is_writable&quot;: true,
         &quot;config_cached&quot;: false
     },

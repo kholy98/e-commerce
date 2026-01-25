@@ -372,23 +372,15 @@ class CheckoutController extends Controller
     }
 
     /**
-     * Complete checkout
+     * Complete checkout (Redirect)
      *
      * Finalize the checkout process after successful payment.
-     * This endpoint is called by the Paymob payment gateway callback (redirect) or webhook.
-     * It retrieves the pending checkout data, creates the final order, and clears the cart.
-     *
-     * For GET requests (browser redirects from Paymob), the order_id can be retrieved from the session.
-     * For POST requests (webhooks), the order_id must be provided in the request body.
+     * This endpoint is intended to be called when the user is redirected back from the Paymob payment gateway.
      *
      * @unauthenticated
      *
-     * @queryParam order_id string The temporary order ID from Paymob (returned during checkout initiation). Example: 149823756
-     * @queryParam payment_id string The payment transaction ID from Paymob. Example: 98765432
-     *
-     * @bodyParam order_id string The temporary order ID (for webhook POST requests). Example: 149823756
-     * @bodyParam payment_id string The payment transaction ID (for webhook POST requests). Example: 98765432
-     * @bodyParam success boolean Payment success status (for webhook POST requests). Example: true
+     * @queryParam order_id string required The temporary order ID from Paymob. Example: 149823756
+     * @queryParam payment_id string required The payment transaction ID from Paymob. Example: 98765432
      *
      * @response 200 scenario="Success" {
      *   "success": true,
@@ -490,6 +482,128 @@ class CheckoutController extends Controller
      *   "message": "Order creation failed: Database connection error"
      * }
      */
+    public function completeGet(Request $request): JsonResponse
+    {
+        return $this->complete($request);
+    }
+
+    /**
+     * Complete checkout (Webhook)
+     *
+     * Finalize the checkout process after successful payment.
+     * This endpoint is intended to be called by the Paymob payment gateway webhook.
+     *
+     * @unauthenticated
+     *
+     * @bodyParam order_id string required The temporary order ID from Paymob. Example: 149823756
+     * @bodyParam payment_id string required The payment transaction ID from Paymob. Example: 98765432
+     * @bodyParam success boolean required Whether the payment was successful. Example: true
+     *
+     * @response 200 scenario="Success" {
+     *   "success": true,
+     *   "message": "Order created successfully",
+     *   "data": {
+     *     "id": 42,
+     *     "order_number": "ORD-2024-00042",
+     *     "user_id": 1,
+     *     "status": "processing",
+     *     "status_ar": "قيد المعالجة",
+     *     "payment_status": "paid",
+     *     "subtotal": 250.00,
+     *     "tax": 35.00,
+     *     "shipping_cost": 80.00,
+     *     "total_amount": 365.00,
+     *     "shipping_address": {
+     *       "street": "123 Main St",
+     *       "city": "Cairo",
+     *       "zip_code": "12345",
+     *       "country": "Egypt",
+     *       "building_number": "15",
+     *       "floor": "3",
+     *       "apartment": "5A",
+     *       "zone": "Maadi"
+     *     },
+     *     "billing_address": {
+     *       "first_name": "John",
+     *       "last_name": "Doe",
+     *       "email": "john@example.com",
+     *       "phone": "+201234567890",
+     *       "street": "123 Main St",
+     *       "city": "Cairo",
+     *       "zip_code": "12345",
+     *       "country": "Egypt"
+     *     },
+     *     "notes": "Please deliver in the morning",
+     *     "created_at": "2024-01-15T10:30:00.000000Z",
+     *     "updated_at": "2024-01-15T10:30:00.000000Z",
+     *     "items": [
+     *       {
+     *         "id": 101,
+     *         "order_id": 42,
+     *         "product_id": 5,
+     *         "quantity": 2,
+     *         "price": 75.00,
+     *         "total": 150.00,
+     *         "product": {
+     *           "id": 5,
+     *           "name": "Premium Coffee Beans",
+     *           "slug": "premium-coffee-beans",
+     *           "price": 75.00,
+     *           "sku": "COF-005",
+     *           "images": [
+     *             {
+     *               "id": 1,
+     *               "url": "https://example.com/storage/products/coffee.jpg"
+     *             }
+     *           ]
+     *         }
+     *       },
+     *       {
+     *         "id": 102,
+     *         "order_id": 42,
+     *         "product_id": 8,
+     *         "quantity": 1,
+     *         "price": 100.00,
+     *         "total": 100.00,
+     *         "product": {
+     *           "id": 8,
+     *           "name": "Coffee Grinder",
+     *           "slug": "coffee-grinder",
+     *           "price": 100.00,
+     *           "sku": "GRN-008",
+     *           "images": [
+     *             {
+     *               "id": 3,
+     *               "url": "https://example.com/storage/products/grinder.jpg"
+     *             }
+     *           ]
+     *         }
+     *       }
+     *     ]
+     *   }
+     * }
+     * @response 400 scenario="Order ID Required" {
+     *   "success": false,
+     *   "message": "Order ID is required"
+     * }
+     * @response 404 scenario="Checkout Not Found or Expired" {
+     *   "success": false,
+     *   "message": "No pending checkout found"
+     * }
+     * @response 422 scenario="Payment Not Successful" {
+     *   "success": false,
+     *   "message": "Payment was not successful"
+     * }
+     * @response 500 scenario="Order Creation Failed" {
+     *   "success": false,
+     *   "message": "Order creation failed: Database connection error"
+     * }
+     */
+    public function completePost(Request $request): JsonResponse
+    {
+        return $this->complete($request);
+    }
+
     public function complete(Request $request): JsonResponse
     {
         try {
@@ -632,33 +746,7 @@ class CheckoutController extends Controller
         }
     }
 
-    /**
-     * Handle checkout failure
-     *
-     * Handle failed checkout due to payment decline, cancellation, or gateway error.
-     * Clears all pending checkout data from both session and database.
-     *
-     * For web requests (GET), redirects to the payment failed page.
-     * For API requests (expects JSON), returns a JSON error response.
-     *
-     * @unauthenticated
-     *
-     * @queryParam error string The error message or code from the payment gateway. Example: Payment declined by bank
-     * @queryParam order_id string The temporary order ID that failed. Example: 149823756
-     * @queryParam txn_response_code string Transaction response code from Paymob. Example: DECLINED
-     *
-     * @response 302 scenario="Web Request" Redirects to /payment-failed
-     * @response 200 scenario="API Request" {
-     *   "success": false,
-     *   "message": "Checkout failed",
-     *   "error": "Payment declined by bank"
-     * }
-     * @response 200 scenario="Unknown Error" {
-     *   "success": false,
-     *   "message": "Checkout failed",
-     *   "error": "Unknown error"
-     * }
-     */
+
     public function fail(Request $request)
     {
         // Clear session data
@@ -678,6 +766,52 @@ class CheckoutController extends Controller
             'message' => 'Checkout failed',
             'error' => $request->input('error', 'Unknown error'),
         ]);
+    }
+
+    /**
+     * Handle checkout failure (GET)
+     *
+     * Clears all pending checkout data after a failed payment attempt.
+     * Redirects to the payment failed page for browser requests, or returns JSON for API requests.
+     *
+     * @unauthenticated
+     *
+     * @queryParam error string Optional. Error message from the payment gateway. Example: Payment declined
+     * @queryParam order_id string Optional. The temporary order ID that failed. Example: 149823756
+     * @queryParam txn_response_code string Optional. Transaction response code from Paymob. Example: DECLINED
+     *
+     * @response 200 scenario="Success" {
+     *   "success": false,
+     *   "message": "Checkout failed",
+     *   "error": "Payment declined"
+     * }
+     * @response 302 scenario="Redirect" "Redirects to /payment-failed"
+     */
+    public function failGet(Request $request){
+        return $this->fail($request);
+    }
+
+    /**
+     * Handle checkout failure (POST)
+     *
+     * Clears all pending checkout data after a failed payment attempt.
+     * Redirects to the payment failed page for browser requests, or returns JSON for API requests.
+     *
+     * @unauthenticated
+     *
+     * @bodyParam error string Optional. Error message from the payment gateway. Example: Payment declined
+     * @bodyParam order_id string Optional. The temporary order ID that failed. Example: 149823756
+     * @bodyParam txn_response_code string Optional. Transaction response code from Paymob. Example: DECLINED
+     *
+     * @response 200 scenario="Success" {
+     *   "success": false,
+     *   "message": "Checkout failed",
+     *   "error": "Payment declined"
+     * }
+     * @response 302 scenario="Redirect" "Redirects to /payment-failed"
+     */
+    public function failPost(Request $request){
+        return $this->fail($request);
     }
 
     /**
@@ -764,67 +898,21 @@ class CheckoutController extends Controller
     /**
      * Test checkout completion
      *
-     * Test endpoint to simulate completing a checkout with real pending checkout data.
-     * This is useful for development and testing the checkout flow without going through
-     * the actual Paymob payment process.
+     * Developer endpoint to simulate a successful payment for testing purposes.
+     * Uses the most recent active pending checkout to create an order.
      *
-     * **Warning:** This endpoint should be disabled or protected in production environments.
+     * <small class="badge badge-warning">Caution</small> Use only in development.
      *
      * @unauthenticated
      *
      * @response 200 scenario="Success" {
      *   "success": true,
      *   "message": "Order created successfully",
-     *   "data": {
-     *     "id": 42,
-     *     "order_number": "ORD-2024-00042",
-     *     "user_id": 1,
-     *     "status": "processing",
-     *     "status_ar": "قيد المعالجة",
-     *     "payment_status": "paid",
-     *     "subtotal": 250.00,
-     *     "tax": 35.00,
-     *     "shipping_cost": 80.00,
-     *     "total_amount": 365.00,
-     *     "shipping_address": {
-     *       "street": "123 Main St",
-     *       "city": "Cairo",
-     *       "zip_code": "12345",
-     *       "country": "Egypt",
-     *       "building_number": "15",
-     *       "floor": "3",
-     *       "apartment": "5A",
-     *       "zone": "Maadi"
-     *     },
-     *     "notes": "Test order",
-     *     "created_at": "2024-01-15T10:30:00.000000Z",
-     *     "updated_at": "2024-01-15T10:30:00.000000Z",
-     *     "items": [
-     *       {
-     *         "id": 101,
-     *         "order_id": 42,
-     *         "product_id": 5,
-     *         "quantity": 2,
-     *         "price": 75.00,
-     *         "total": 150.00,
-     *         "product": {
-     *           "id": 5,
-     *           "name": "Premium Coffee Beans",
-     *           "slug": "premium-coffee-beans",
-     *           "price": 75.00,
-     *           "sku": "COF-005"
-     *         }
-     *       }
-     *     ]
-     *   }
+     *   "data": { "id": 42, "status": "processing" }
      * }
      * @response 404 scenario="No Pending Checkout" {
      *   "success": false,
      *   "message": "No active pending checkout found for testing"
-     * }
-     * @response 500 scenario="Test Failed" {
-     *   "success": false,
-     *   "message": "Test failed: Order creation error"
      * }
      */
     public function testComplete(Request $request): JsonResponse

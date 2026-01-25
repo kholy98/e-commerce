@@ -441,6 +441,202 @@ endpoints:
     custom: []
     httpMethods:
       - GET
+    uri: api/checkout/complete
+    metadata:
+      custom: []
+      groupName: Checkout
+      groupDescription: |-
+
+        APIs for the checkout process.
+
+        The checkout flow consists of:
+        1. **Initiate checkout** - Validates cart, creates shipment with Bosta, initiates payment with Paymob, and returns payment URL
+        2. **Payment processing** - Customer completes payment on Paymob iframe
+        3. **Complete callback** - Called after successful payment to create the final order
+        4. **Fail callback** - Called if payment fails, cleans up pending data
+
+        Supports both guest checkout and authenticated user checkout.
+        Guest carts are session-based and migrate to user account upon login.
+      subgroup: ''
+      subgroupDescription: ''
+      title: 'Complete checkout (Redirect)'
+      description: |-
+        Finalize the checkout process after successful payment.
+        This endpoint is intended to be called when the user is redirected back from the Paymob payment gateway.
+      authenticated: false
+      deprecated: false
+    headers:
+      Content-Type: application/json
+      Accept: application/json
+    urlParameters: []
+    cleanUrlParameters: []
+    queryParameters:
+      order_id:
+        custom: []
+        name: order_id
+        description: 'The temporary order ID from Paymob.'
+        required: true
+        example: '149823756'
+        type: string
+        enumValues: []
+        exampleWasSpecified: true
+        nullable: false
+        deprecated: false
+      payment_id:
+        custom: []
+        name: payment_id
+        description: 'The payment transaction ID from Paymob.'
+        required: true
+        example: '98765432'
+        type: string
+        enumValues: []
+        exampleWasSpecified: true
+        nullable: false
+        deprecated: false
+    cleanQueryParameters:
+      order_id: '149823756'
+      payment_id: '98765432'
+    bodyParameters: []
+    cleanBodyParameters: []
+    fileParameters: []
+    responses:
+      -
+        custom: []
+        status: 200
+        content: |-
+          {
+            "success": true,
+            "message": "Order created successfully",
+            "data": {
+              "id": 42,
+              "order_number": "ORD-2024-00042",
+              "user_id": 1,
+              "status": "processing",
+              "status_ar": "قيد المعالجة",
+              "payment_status": "paid",
+              "subtotal": 250.00,
+              "tax": 35.00,
+              "shipping_cost": 80.00,
+              "total_amount": 365.00,
+              "shipping_address": {
+                "street": "123 Main St",
+                "city": "Cairo",
+                "zip_code": "12345",
+                "country": "Egypt",
+                "building_number": "15",
+                "floor": "3",
+                "apartment": "5A",
+                "zone": "Maadi"
+              },
+              "billing_address": {
+                "first_name": "John",
+                "last_name": "Doe",
+                "email": "john@example.com",
+                "phone": "+201234567890",
+                "street": "123 Main St",
+                "city": "Cairo",
+                "zip_code": "12345",
+                "country": "Egypt"
+              },
+              "notes": "Please deliver in the morning",
+              "created_at": "2024-01-15T10:30:00.000000Z",
+              "updated_at": "2024-01-15T10:30:00.000000Z",
+              "items": [
+                {
+                  "id": 101,
+                  "order_id": 42,
+                  "product_id": 5,
+                  "quantity": 2,
+                  "price": 75.00,
+                  "total": 150.00,
+                  "product": {
+                    "id": 5,
+                    "name": "Premium Coffee Beans",
+                    "slug": "premium-coffee-beans",
+                    "price": 75.00,
+                    "sku": "COF-005",
+                    "images": [
+                      {
+                        "id": 1,
+                        "url": "https://example.com/storage/products/coffee.jpg"
+                      }
+                    ]
+                  }
+                },
+                {
+                  "id": 102,
+                  "order_id": 42,
+                  "product_id": 8,
+                  "quantity": 1,
+                  "price": 100.00,
+                  "total": 100.00,
+                  "product": {
+                    "id": 8,
+                    "name": "Coffee Grinder",
+                    "slug": "coffee-grinder",
+                    "price": 100.00,
+                    "sku": "GRN-008",
+                    "images": [
+                      {
+                        "id": 3,
+                        "url": "https://example.com/storage/products/grinder.jpg"
+                      }
+                    ]
+                  }
+                }
+              ]
+            }
+          }
+        headers: []
+        description: Success
+      -
+        custom: []
+        status: 400
+        content: |-
+          {
+            "success": false,
+            "message": "Order ID is required"
+          }
+        headers: []
+        description: 'Order ID Required'
+      -
+        custom: []
+        status: 404
+        content: |-
+          {
+            "success": false,
+            "message": "No pending checkout found"
+          }
+        headers: []
+        description: 'Checkout Not Found or Expired'
+      -
+        custom: []
+        status: 422
+        content: |-
+          {
+            "success": false,
+            "message": "Payment was not successful"
+          }
+        headers: []
+        description: 'Payment Not Successful'
+      -
+        custom: []
+        status: 500
+        content: |-
+          {
+            "success": false,
+            "message": "Order creation failed: Database connection error"
+          }
+        headers: []
+        description: 'Order Creation Failed'
+    responseFields: []
+    auth: []
+    controller: null
+    method: null
+    route: null
+  -
+    custom: []
+    httpMethods:
       - POST
     uri: api/checkout/complete
     metadata:
@@ -460,14 +656,10 @@ endpoints:
         Guest carts are session-based and migrate to user account upon login.
       subgroup: ''
       subgroupDescription: ''
-      title: 'Complete checkout'
+      title: 'Complete checkout (Webhook)'
       description: |-
         Finalize the checkout process after successful payment.
-        This endpoint is called by the Paymob payment gateway callback (redirect) or webhook.
-        It retrieves the pending checkout data, creates the final order, and clears the cart.
-
-        For GET requests (browser redirects from Paymob), the order_id can be retrieved from the session.
-        For POST requests (webhooks), the order_id must be provided in the request body.
+        This endpoint is intended to be called by the Paymob payment gateway webhook.
       authenticated: false
       deprecated: false
     headers:
@@ -475,12 +667,14 @@ endpoints:
       Accept: application/json
     urlParameters: []
     cleanUrlParameters: []
-    queryParameters:
+    queryParameters: []
+    cleanQueryParameters: []
+    bodyParameters:
       order_id:
         custom: []
         name: order_id
-        description: 'The temporary order ID from Paymob (returned during checkout initiation).'
-        required: false
+        description: 'The temporary order ID from Paymob.'
+        required: true
         example: '149823756'
         type: string
         enumValues: []
@@ -491,33 +685,7 @@ endpoints:
         custom: []
         name: payment_id
         description: 'The payment transaction ID from Paymob.'
-        required: false
-        example: '98765432'
-        type: string
-        enumValues: []
-        exampleWasSpecified: true
-        nullable: false
-        deprecated: false
-    cleanQueryParameters:
-      order_id: '149823756'
-      payment_id: '98765432'
-    bodyParameters:
-      order_id:
-        custom: []
-        name: order_id
-        description: 'The temporary order ID (for webhook POST requests).'
-        required: false
-        example: '149823756'
-        type: string
-        enumValues: []
-        exampleWasSpecified: true
-        nullable: false
-        deprecated: false
-      payment_id:
-        custom: []
-        name: payment_id
-        description: 'The payment transaction ID (for webhook POST requests).'
-        required: false
+        required: true
         example: '98765432'
         type: string
         enumValues: []
@@ -527,8 +695,8 @@ endpoints:
       success:
         custom: []
         name: success
-        description: 'Payment success status (for webhook POST requests).'
-        required: false
+        description: 'Whether the payment was successful.'
+        required: true
         example: true
         type: boolean
         enumValues: []
@@ -679,6 +847,102 @@ endpoints:
     custom: []
     httpMethods:
       - GET
+    uri: api/checkout/fail
+    metadata:
+      custom: []
+      groupName: Checkout
+      groupDescription: |-
+
+        APIs for the checkout process.
+
+        The checkout flow consists of:
+        1. **Initiate checkout** - Validates cart, creates shipment with Bosta, initiates payment with Paymob, and returns payment URL
+        2. **Payment processing** - Customer completes payment on Paymob iframe
+        3. **Complete callback** - Called after successful payment to create the final order
+        4. **Fail callback** - Called if payment fails, cleans up pending data
+
+        Supports both guest checkout and authenticated user checkout.
+        Guest carts are session-based and migrate to user account upon login.
+      subgroup: ''
+      subgroupDescription: ''
+      title: 'Handle checkout failure (GET)'
+      description: |-
+        Clears all pending checkout data after a failed payment attempt.
+        Redirects to the payment failed page for browser requests, or returns JSON for API requests.
+      authenticated: false
+      deprecated: false
+    headers:
+      Content-Type: application/json
+      Accept: application/json
+    urlParameters: []
+    cleanUrlParameters: []
+    queryParameters:
+      error:
+        custom: []
+        name: error
+        description: 'Optional. Error message from the payment gateway.'
+        required: false
+        example: 'Payment declined'
+        type: string
+        enumValues: []
+        exampleWasSpecified: true
+        nullable: false
+        deprecated: false
+      order_id:
+        custom: []
+        name: order_id
+        description: 'Optional. The temporary order ID that failed.'
+        required: false
+        example: '149823756'
+        type: string
+        enumValues: []
+        exampleWasSpecified: true
+        nullable: false
+        deprecated: false
+      txn_response_code:
+        custom: []
+        name: txn_response_code
+        description: 'Optional. Transaction response code from Paymob.'
+        required: false
+        example: DECLINED
+        type: string
+        enumValues: []
+        exampleWasSpecified: true
+        nullable: false
+        deprecated: false
+    cleanQueryParameters:
+      error: 'Payment declined'
+      order_id: '149823756'
+      txn_response_code: DECLINED
+    bodyParameters: []
+    cleanBodyParameters: []
+    fileParameters: []
+    responses:
+      -
+        custom: []
+        status: 200
+        content: |-
+          {
+            "success": false,
+            "message": "Checkout failed",
+            "error": "Payment declined"
+          }
+        headers: []
+        description: Success
+      -
+        custom: []
+        status: 302
+        content: '"Redirects to /payment-failed"'
+        headers: []
+        description: Redirect
+    responseFields: []
+    auth: []
+    controller: null
+    method: null
+    route: null
+  -
+    custom: []
+    httpMethods:
       - POST
     uri: api/checkout/fail
     metadata:
@@ -698,13 +962,10 @@ endpoints:
         Guest carts are session-based and migrate to user account upon login.
       subgroup: ''
       subgroupDescription: ''
-      title: 'Handle checkout failure'
+      title: 'Handle checkout failure (POST)'
       description: |-
-        Handle failed checkout due to payment decline, cancellation, or gateway error.
-        Clears all pending checkout data from both session and database.
-
-        For web requests (GET), redirects to the payment failed page.
-        For API requests (expects JSON), returns a JSON error response.
+        Clears all pending checkout data after a failed payment attempt.
+        Redirects to the payment failed page for browser requests, or returns JSON for API requests.
       authenticated: false
       deprecated: false
     headers:
@@ -712,13 +973,15 @@ endpoints:
       Accept: application/json
     urlParameters: []
     cleanUrlParameters: []
-    queryParameters:
+    queryParameters: []
+    cleanQueryParameters: []
+    bodyParameters:
       error:
         custom: []
         name: error
-        description: 'The error message or code from the payment gateway.'
+        description: 'Optional. Error message from the payment gateway.'
         required: false
-        example: 'Payment declined by bank'
+        example: 'Payment declined'
         type: string
         enumValues: []
         exampleWasSpecified: true
@@ -727,7 +990,7 @@ endpoints:
       order_id:
         custom: []
         name: order_id
-        description: 'The temporary order ID that failed.'
+        description: 'Optional. The temporary order ID that failed.'
         required: false
         example: '149823756'
         type: string
@@ -738,7 +1001,7 @@ endpoints:
       txn_response_code:
         custom: []
         name: txn_response_code
-        description: 'Transaction response code from Paymob.'
+        description: 'Optional. Transaction response code from Paymob.'
         required: false
         example: DECLINED
         type: string
@@ -746,12 +1009,10 @@ endpoints:
         exampleWasSpecified: true
         nullable: false
         deprecated: false
-    cleanQueryParameters:
-      error: 'Payment declined by bank'
+    cleanBodyParameters:
+      error: 'Payment declined'
       order_id: '149823756'
       txn_response_code: DECLINED
-    bodyParameters: []
-    cleanBodyParameters: []
     fileParameters: []
     responses:
       -
@@ -761,27 +1022,16 @@ endpoints:
           {
             "success": false,
             "message": "Checkout failed",
-            "error": "Payment declined by bank"
+            "error": "Payment declined"
           }
         headers: []
-        description: 'API Request'
-      -
-        custom: []
-        status: 200
-        content: |-
-          {
-            "success": false,
-            "message": "Checkout failed",
-            "error": "Unknown error"
-          }
-        headers: []
-        description: 'Unknown Error'
+        description: Success
       -
         custom: []
         status: 302
-        content: 'Redirects to /payment-failed'
+        content: '"Redirects to /payment-failed"'
         headers: []
-        description: 'Web Request'
+        description: Redirect
     responseFields: []
     auth: []
     controller: null
@@ -923,11 +1173,10 @@ endpoints:
       subgroupDescription: ''
       title: 'Test checkout completion'
       description: |-
-        Test endpoint to simulate completing a checkout with real pending checkout data.
-        This is useful for development and testing the checkout flow without going through
-        the actual Paymob payment process.
+        Developer endpoint to simulate a successful payment for testing purposes.
+        Uses the most recent active pending checkout to create an order.
 
-        **Warning:** This endpoint should be disabled or protected in production environments.
+        <small class="badge badge-warning">Caution</small> Use only in development.
       authenticated: false
       deprecated: false
     headers:
@@ -948,48 +1197,7 @@ endpoints:
           {
             "success": true,
             "message": "Order created successfully",
-            "data": {
-              "id": 42,
-              "order_number": "ORD-2024-00042",
-              "user_id": 1,
-              "status": "processing",
-              "status_ar": "قيد المعالجة",
-              "payment_status": "paid",
-              "subtotal": 250.00,
-              "tax": 35.00,
-              "shipping_cost": 80.00,
-              "total_amount": 365.00,
-              "shipping_address": {
-                "street": "123 Main St",
-                "city": "Cairo",
-                "zip_code": "12345",
-                "country": "Egypt",
-                "building_number": "15",
-                "floor": "3",
-                "apartment": "5A",
-                "zone": "Maadi"
-              },
-              "notes": "Test order",
-              "created_at": "2024-01-15T10:30:00.000000Z",
-              "updated_at": "2024-01-15T10:30:00.000000Z",
-              "items": [
-                {
-                  "id": 101,
-                  "order_id": 42,
-                  "product_id": 5,
-                  "quantity": 2,
-                  "price": 75.00,
-                  "total": 150.00,
-                  "product": {
-                    "id": 5,
-                    "name": "Premium Coffee Beans",
-                    "slug": "premium-coffee-beans",
-                    "price": 75.00,
-                    "sku": "COF-005"
-                  }
-                }
-              ]
-            }
+            "data": { "id": 42, "status": "processing" }
           }
         headers: []
         description: Success
@@ -1003,16 +1211,6 @@ endpoints:
           }
         headers: []
         description: 'No Pending Checkout'
-      -
-        custom: []
-        status: 500
-        content: |-
-          {
-            "success": false,
-            "message": "Test failed: Order creation error"
-          }
-        headers: []
-        description: 'Test Failed'
     responseFields: []
     auth: []
     controller: null

@@ -38,7 +38,7 @@ endpoints:
           content-type: application/json
           access-control-allow-origin: 'http://localhost:3000'
           access-control-allow-credentials: 'true'
-          set-cookie: 'laravel-session=eyJpdiI6Ii9kWGh3MG1NTFFqOHYrMVZtV1psdHc9PSIsInZhbHVlIjoiUEVtd3poOFNWT2ZMamVrM01GVDhCNFQ2Y1oyRG05NGZUY1dCTzZEN1BNdU8vZVVlU0o2QmRPeCtIb0NGTWJ5N0MzNWZZdlpjcHk4bExGRVpYL21LWGFSemhBVzVUdGovMEwrZlRERUVjRkFQcm5xakIrUFVhRVd2VCs2S1JTOHAiLCJtYWMiOiIxZGMwZTNlMDhmNGQ0MzU0NmU3ZTUwMDE3YTE5ODAzOWJiYmQ4Yjk5YzU5YzEzYTZjOGZiZGRhYTMyZWI3OTFlIiwidGFnIjoiIn0%3D; expires=Wed, 21 Jan 2026 15:02:44 GMT; Max-Age=7200; path=/; httponly; samesite=lax'
+          set-cookie: 'laravel-session=eyJpdiI6IjJ6VEh1Nkg4RTdnSUJuNUxlWDlLSnc9PSIsInZhbHVlIjoiLzhSRTNudjFBN0xKQmtUbFV1bWRScS81YVJ0TUFGeHljUGF6WWRHM3VaUWJ2UFVhN1RjMVVNTGI0SnhiVHdXUGtPaHVFeWNJRXNsWkhYY052V1ZUZFprbUZhcVUwMzE0d2pIU1c5Tkdaemo1SmYvQUYyZnBOd1U2V1dPQ3psQkkiLCJtYWMiOiJhNTUwNDk3Y2QwNzE4Zjk4NzdkNDM1ZmE5NGY3NmFiOWYzZjdkYTE5Y2FhZjhjMTYzYmYyMDA5OTY1NzA0OWQ4IiwidGFnIjoiIn0%3D; expires=Sun, 25 Jan 2026 15:26:58 GMT; Max-Age=7200; path=/; httponly; samesite=lax'
         description: null
     responseFields: []
     auth: []
@@ -80,7 +80,7 @@ endpoints:
           content-type: application/json
           access-control-allow-origin: 'http://localhost:3000'
           access-control-allow-credentials: 'true'
-          set-cookie: 'laravel-session=eyJpdiI6Ilk5bG9qYlBBVU5oaitGUFA5QmNGaFE9PSIsInZhbHVlIjoiN1B3R1FTejVOSmdGR0hQRmdmcmVleFIxTzZySVY3QnJYMCtBb1pCVmJ6eXdjQXh2K0ZMY2huYUxqTGxmQmxXSVptQ2FWVG84NVZER0lBZCthUTQrNysyZE1iYksxYS9tRTJjY3BoNGVlT2hPSXVWTmdpOG82ZEJUc3JYVVBSc0MiLCJtYWMiOiI2NmY0NDgxOWFhMTVjN2NkNWExNDVlM2FkYTdlMmM4NGFlYjRjZGJiMTI0MDRmYWNhOTUwYjExOGMxZjkyNjhlIiwidGFnIjoiIn0%3D; expires=Wed, 21 Jan 2026 15:02:44 GMT; Max-Age=7200; path=/; httponly; samesite=lax'
+          set-cookie: 'laravel-session=eyJpdiI6ImRTTUgrR3RzSVdVZ2VOektkWmpyVHc9PSIsInZhbHVlIjoiZlArSkU2TlQ5RURPVG1DZnVUSE8vRE1KSlEyVHZPUGZlSnV3YkpuZ3ZpTS9OV2xCcnB6ZUN3eHAyc2xwNHlTZTVleWdkZVUvb3Z2VjFSQXM5K3FmWGNIb2lheU9GZUp3SVVYd0xnUnRrcHhGUUJiSldITisrTUxkSzlGTzVid1kiLCJtYWMiOiIyOTA2ZmVmZGQzZjYxYmYwMTMyZmRhMDI4NGZmMDVjNDljMjc3MzliOGE2NDQxMzNhM2MwZGJlNjM3NjQ3MmM4IiwidGFnIjoiIn0%3D; expires=Sun, 25 Jan 2026 15:26:58 GMT; Max-Age=7200; path=/; httponly; samesite=lax'
         description: null
     responseFields: []
     auth: []
@@ -251,7 +251,7 @@ endpoints:
           content-type: application/json
           access-control-allow-origin: 'http://localhost:3000'
           access-control-allow-credentials: 'true'
-          set-cookie: 'laravel-session=eyJpdiI6Im1JZlBVZVhMaXVpYXc3eCtUK2QyYWc9PSIsInZhbHVlIjoieFQzK3J3YlVtdmhEMi9Bbi9vM0Z5WVdtcmt0YVhUQitaUzFUbHNmdTZSa2NrT3RNOG0wOVN5eklKaGFxZVFjTTVhSGxObE9KalhpT1RFdk5LSG4wV1FWZW81WXEwbTEzazltd3VIWmtQOUtYSmlPN05Bdm14Ulh1dFpvU29EK3MiLCJtYWMiOiIzMjIyZDk1NDNlYTZkOWIxOWNhNzZmNWExMmIzOGJiYTJlNDI2YjJlOWJkYzRjZmQwNDFmMjI1MmQ2NTJjNTA3IiwidGFnIjoiIn0%3D; expires=Wed, 21 Jan 2026 15:02:44 GMT; Max-Age=7200; path=/; httponly; samesite=lax'
+          set-cookie: 'laravel-session=eyJpdiI6IkliT0Vra3I1azFVVVdWSFQ1QkZOYWc9PSIsInZhbHVlIjoiRkRNeFlNMzZWczhRY0s5M0k4VWJvVi9KRFEyWW9xdWNBcm5UOTNOaTJOTjk5U0hybEdmRU16bjgvZllVRUVaSnljTW1nRnphKzZqUzExTC9IcFU0WjVvUXhkMXpKQXFxaXFYd3RqVURiZzlNMDMxQ1hwL3RPUmlTOEtPOHVUQzEiLCJtYWMiOiI2MDU1ZTViYTAwMjIyMDBlODdhMzkxZGU4ZDBkOTQyYzVhNTYxYzQ0NDAyYjBjMzI1YjE2NWJiMmM5ZDI5NmNiIiwidGFnIjoiIn0%3D; expires=Sun, 25 Jan 2026 15:26:58 GMT; Max-Age=7200; path=/; httponly; samesite=lax'
         description: null
     responseFields: []
     auth: []
@@ -606,21 +606,21 @@ endpoints:
           <html>
               <head>
                   <meta charset="UTF-8" />
-                  <meta http-equiv="refresh" content="0;url='http://localhost:3000?payment_status=failed'" />
+                  <meta http-equiv="refresh" content="0;url='http://localhost:3000/checkout_confirmation?payment_status=failed'" />
 
-                  <title>Redirecting to http://localhost:3000?payment_status=failed</title>
+                  <title>Redirecting to http://localhost:3000/checkout_confirmation?payment_status=failed</title>
               </head>
               <body>
-                  Redirecting to <a href="http://localhost:3000?payment_status=failed">http://localhost:3000?payment_status=failed</a>.
+                  Redirecting to <a href="http://localhost:3000/checkout_confirmation?payment_status=failed">http://localhost:3000/checkout_confirmation?payment_status=failed</a>.
               </body>
           </html>
         headers:
           cache-control: 'no-cache, private'
-          location: 'http://localhost:3000?payment_status=failed'
+          location: 'http://localhost:3000/checkout_confirmation?payment_status=failed'
           content-type: 'text/html; charset=utf-8'
           access-control-allow-origin: 'http://localhost:3000'
           access-control-allow-credentials: 'true'
-          set-cookie: 'laravel-session=eyJpdiI6Im1NU2hZdTdNTWF6SmFhWkJESitDcWc9PSIsInZhbHVlIjoiVGlBWU1Zb1hNRjVWekZFM3ZWV0F0ZFRnRHNsaDFsc2l4MG1FRlFlMDg1S2pja2FXUFFYZlR6TjBZdnNoSVF5VU9VS3FDZWN5MHZIdXNmZFJYMEtkL1BzTnFwOFhsSW9XVEMrWmlCN1lRWE96Wk8vQ0tKNjc5U1luWjh0bldzQ0UiLCJtYWMiOiJlOWZmMzVlNWIzODE2NGE5ZDRmMDk3MDM3MjI5NmFmNWM5YjI3ZjdjZTVlNzM5YmU2YjZkY2RmMjI1N2JmNTJmIiwidGFnIjoiIn0%3D; expires=Wed, 21 Jan 2026 15:02:45 GMT; Max-Age=7200; path=/; httponly; samesite=lax'
+          set-cookie: 'laravel-session=eyJpdiI6InRMb2s0dXRWMHl0RnRGenJQazRlUHc9PSIsInZhbHVlIjoic1BTdEcrYWF6cE9lcER2Zlp1dmRyVHlwMVQzMktWQTdoMG5NZEsvSGR1a2xiM0xpdVpxSk83RnpTUWxPdENvZlNrUUxiU3pyYVJRU0xZVWo2czRrV1NEK28rdzYvb2I4N01EeG16ZXB5dXF5OVJjMlhrZk5Xd2hVVU93TUVPVngiLCJtYWMiOiJkM2ZkN2E5NTUyYjYxNjAwZTMzOWM5Njk1MWRjNTgzMzFjZGRlY2I0ZTUyODJjOTc2MGM0YjcyNjczNDljZmMyIiwidGFnIjoiIn0%3D; expires=Sun, 25 Jan 2026 15:26:58 GMT; Max-Age=7200; path=/; httponly; samesite=lax'
         description: null
     responseFields: []
     auth: []
@@ -903,7 +903,7 @@ endpoints:
           content-type: application/json
           access-control-allow-origin: 'http://localhost:3000'
           access-control-allow-credentials: 'true'
-          set-cookie: 'laravel-session=eyJpdiI6IlJwWXByS2ZETGM5QUFITGIyem1sMUE9PSIsInZhbHVlIjoiVUs5OWhEdElpcUhIMkN3b3huaFErMzBKcHFOajBBRkxLODZyWTZXbWY0YTZaWHVQRkk0LzVmYnNPQ2hUL05vaGRNb0haSW5yNW1LQk5UeGVMU0wwQ2srZUZta3JadzJyUUg2VjJpaEMyZnBwenB5MHlDWExXU1dRYmJUYnRqeG8iLCJtYWMiOiI2ZjMyN2ZkMDA4Nzg3N2E0ZmE3MGJhYTc3ZTYyOTJiNjQxODM2ZjY4NWIyYTYxNDA3YjdhNGQxZWRmZTc1NWM2IiwidGFnIjoiIn0%3D; expires=Wed, 21 Jan 2026 15:02:45 GMT; Max-Age=7200; path=/; httponly; samesite=lax'
+          set-cookie: 'laravel-session=eyJpdiI6InVyRmplQkNta2RxMFdRYlNSczZCQUE9PSIsInZhbHVlIjoiZW5pYXhsakVLZC9QQjhiVDV5dVcreDZiOHJRYjF0eFhheW5TS2lyemF0clkrTk16S1l5eFZrcjZsbGN4djFUd0FWT01xU3NkSFMrYmFtR05RYlpXQWd3aGZpWVBSbXErQWJaYnY4Vm1xRStlZEtibHNkc3hjSTRNMjZqdGFmdlUiLCJtYWMiOiJhZDFiYWQ0Mzc4N2MyN2ViZjYzZDMyODk2OTdjNzE4YzNkYmM1OWFlNmRkYTdhMmQ5ZDYzZjE4MjcxMzMyYmY1IiwidGFnIjoiIn0%3D; expires=Sun, 25 Jan 2026 15:26:59 GMT; Max-Age=7200; path=/; httponly; samesite=lax'
         description: null
     responseFields: []
     auth: []
@@ -1005,7 +1005,7 @@ endpoints:
         name: scheduledDate
         description: 'Must be a valid date. Must be a date after <code>today</code>.'
         required: true
-        example: '2052-02-14'
+        example: '2052-02-18'
         type: string
         enumValues: []
         exampleWasSpecified: false
@@ -1104,7 +1104,7 @@ endpoints:
         name: packageType
         description: ''
         required: false
-        example: Normal
+        example: 'Heavy Bulky'
         type: string
         enumValues:
           - Normal
@@ -1129,7 +1129,7 @@ endpoints:
         name: repeatedData.repeatedType
         description: ''
         required: false
-        example: Weekly
+        example: Daily
         type: string
         enumValues:
           - 'One Time'
@@ -1144,7 +1144,7 @@ endpoints:
         description: ''
         required: false
         example:
-          - Thursday
+          - Saturday
         type: 'string[]'
         enumValues:
           - Sunday
@@ -1162,7 +1162,7 @@ endpoints:
         name: repeatedData.startDate
         description: 'Must be a valid date.'
         required: false
-        example: '2026-01-21T13:02:45'
+        example: '2026-01-25T13:26:59'
         type: string
         enumValues: []
         exampleWasSpecified: false
@@ -1173,14 +1173,14 @@ endpoints:
         name: repeatedData.endDate
         description: 'Must be a valid date. Must be a date after <code>repeatedData.startDate</code>.'
         required: false
-        example: '2052-02-14'
+        example: '2052-02-18'
         type: string
         enumValues: []
         exampleWasSpecified: false
         nullable: true
         deprecated: false
     cleanBodyParameters:
-      scheduledDate: '2052-02-14'
+      scheduledDate: '2052-02-18'
       businessLocationId: architecto
       contactPerson:
         name: architecto
@@ -1189,13 +1189,13 @@ endpoints:
         email: zbailey@example.net
       notes: architecto
       noOfPackages: 22
-      packageType: Normal
+      packageType: 'Heavy Bulky'
       repeatedData:
-        repeatedType: Weekly
+        repeatedType: Daily
         days:
-          - Thursday
-        startDate: '2026-01-21T13:02:45'
-        endDate: '2052-02-14'
+          - Saturday
+        startDate: '2026-01-25T13:26:59'
+        endDate: '2052-02-18'
     fileParameters: []
     responses: []
     responseFields: []
@@ -1493,13 +1493,13 @@ endpoints:
       -
         custom: []
         status: 200
-        content: '{"status":{"file_path":"C:\\laragon\\www\\ecommerce-api\\.env","is_writable":true,"config_cached":false},"laravel_active_values":{"PAYMOB_BASE_URL":"https:\/\/accept.paymob.com","PAYMOB_API_KEY":"ZXlKaGJHY2lPaUpJVXpVeE1pSXNJblI1Y0NJNklrcFhWQ0o5LmV5SmpiR0Z6Y3lJNklrMWxjbU5vWVc1MElpd2ljSEp2Wm1sc1pWOXdheUk2TVRFeE16STRPU3dpYm1GdFpTSTZJbWx1YVhScFlXd2lmUS5NSF96bVNyVWZDTDZFeURYNjdpREstY3pxUUF0MUJoZ1d1SmFEd2xpcGstLXN1MWJ6YkZPSTVTbC15VkFNWG5GbktpZi1NQ0w1QldyYV9xZEVSM0ZRUQ==","BOSTA_API_KEY":"b286cff91b7015a1ef89aea14d750f4f1e241fd3b96486a7d87a47d21ff4933f","MAIL_MAILER":"smtp","MAIL_SCHEME":null,"MAIL_HOST":"smtp.gmail.com","MAIL_PORT":"465","MAIL_USERNAME":"ahmadkholy98@gmail.com","MAIL_PASSWORD":"akcynlcfghdfxjrq","MAIL_FROM_ADDRESS":"ahmadkholy98@gmail.com","MAIL_FROM_NAME":"Laravel"}}'
+        content: '{"status":{"file_path":"D:\\code\\ecommerce-api\\.env","is_writable":true,"config_cached":false},"laravel_active_values":{"PAYMOB_BASE_URL":"https:\/\/accept.paymob.com","PAYMOB_API_KEY":"ZXlKaGJHY2lPaUpJVXpVeE1pSXNJblI1Y0NJNklrcFhWQ0o5LmV5SmpiR0Z6Y3lJNklrMWxjbU5vWVc1MElpd2ljSEp2Wm1sc1pWOXdheUk2TVRFeE16STRPU3dpYm1GdFpTSTZJbWx1YVhScFlXd2lmUS5NSF96bVNyVWZDTDZFeURYNjdpREstY3pxUUF0MUJoZ1d1SmFEd2xpcGstLXN1MWJ6YkZPSTVTbC15VkFNWG5GbktpZi1NQ0w1QldyYV9xZEVSM0ZRUQ==","BOSTA_API_KEY":"b286cff91b7015a1ef89aea14d750f4f1e241fd3b96486a7d87a47d21ff4933f","MAIL_MAILER":"smtp","MAIL_SCHEME":null,"MAIL_HOST":"smtp.gmail.com","MAIL_PORT":"465","MAIL_USERNAME":"ahmadkholy98@gmail.com","MAIL_PASSWORD":"akcynlcfghdfxjrq","MAIL_FROM_ADDRESS":"ahmadkholy98@gmail.com","MAIL_FROM_NAME":"Laravel"}}'
         headers:
           cache-control: 'no-cache, private'
           content-type: application/json
           access-control-allow-origin: 'http://localhost:3000'
           access-control-allow-credentials: 'true'
-          set-cookie: 'laravel-session=eyJpdiI6Imx2b29sTDlHOFduZ2tZUW9pdzJaNlE9PSIsInZhbHVlIjoidmpJaW1HdTNaTVFWbkFIa3p0eVZKbnRoZ0h0Z0ZNTVBBZ2VGdlM5aVNMT05xbnZvZDFLaDNFaHhkQVZRNDFEbUNUa0RhVmRhRG1aczViZ0QrQmJvMlc3NXBXYnZkcHlnK2pVWG5tQXk2S2E2TXU3VElIT0RNbG8zUXZZZWJJOEgiLCJtYWMiOiI3ZjUyMTBjNTY0YzMwMGU0YzVlZDlkZWI3YjVjZTJlNDg4Yzc0YjM1YWMyNTY4YWNjNzVkNTI4NTFkYmZhODBiIiwidGFnIjoiIn0%3D; expires=Wed, 21 Jan 2026 15:02:45 GMT; Max-Age=7200; path=/; httponly; samesite=lax'
+          set-cookie: 'laravel-session=eyJpdiI6ImdialZEUFRtd3BvWHB1WC92UjY0Smc9PSIsInZhbHVlIjoiMERJTmdIcm1DNFV2UXlnZVZpR2w5MTNpY2lPVWZWOW90UDJBWVo0cjlqVkJja0IreVZVamRNdkVQZEJSckkrcW9pWG40NDM4UFVRVXdTaHZJeXdOU2V5M0xISWFNbGpaNFkvMHFaK2RTUkdPbTBMRlBGV3p5OVhBVXR4SnM3L0EiLCJtYWMiOiI4NTBmYzQwM2RiMmU1ZDA0MDA1NWVlYmM4ZDExNjQ1M2RiMWUxNjdlZGFjZDFmOTMyYzRmMTIxMGFlZjFjZjk2IiwidGFnIjoiIn0%3D; expires=Sun, 25 Jan 2026 15:26:59 GMT; Max-Age=7200; path=/; httponly; samesite=lax'
         description: null
     responseFields: []
     auth: []

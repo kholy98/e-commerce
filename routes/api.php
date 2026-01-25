@@ -42,6 +42,7 @@ Route::middleware('auth:sanctum')->group(function () {
  * @bodyParam email string required The user's email address (must be unique). Example: john@example.com
  * @bodyParam password string required The password (minimum 8 characters). Example: password123
  * @bodyParam password_confirmation string required Password confirmation (must match password). Example: password123
+ * @bodyParam phone string optional The user's phone number. Example: +1234567890
  *
  * @response 200 scenario="Success" {
  *   "user": {
@@ -49,7 +50,31 @@ Route::middleware('auth:sanctum')->group(function () {
  *     "name": "John Doe",
  *     "email": "john@example.com",
  *     "updated_at": "2024-01-15T10:00:00.000000Z",
- *     "created_at": "2024-01-15T10:00:00.000000Z"
+ *     "created_at": "2024-01-15T10:00:00.000000Z",
+ *     "addresses": [
+ *       {
+ *         "id": 1,
+ *         "user_id": 1,
+ *         "label": "Home",
+ *         "name": "John Doe",
+ *         "phone": "+1234567890",
+ *         "address": "123 Main St, Cairo, Egypt",
+ *         "street": "123 Main St",
+ *         "building_number": "15",
+ *         "floor": "3",
+ *         "apartment": "5A",
+ *         "zone": "Maadi",
+ *         "city": "Cairo",
+ *         "zip_code": "12345",
+ *         "country": "Egypt",
+ *         "state": "Cairo",
+ *         "is_default": true,
+ *         "is_billing": true,
+ *         "is_shipping": true,
+ *         "created_at": "2024-01-15T10:00:00.000000Z",
+ *         "updated_at": "2024-01-15T10:00:00.000000Z"
+ *       }
+ *     ]
  *   },
  *   "token": "1|abc123def456..."
  * }
@@ -217,8 +242,11 @@ Route::prefix('cart')->group(function () {
 // Checkout routes - public for guest checkout, but can be used by authenticated users too
 Route::prefix('checkout')->group(function () {
     Route::post('/initiate', [CheckoutController::class, 'initiate']);
-    Route::match(['GET', 'POST'], '/complete', [CheckoutController::class, 'complete'])->name('checkout.complete');
-    Route::match(['GET', 'POST'], '/fail', [CheckoutController::class, 'fail'])->name('checkout.fail');
+    Route::get('/complete', [CheckoutController::class, 'completeGet'])->name('checkout.complete');
+    Route::post('/complete', [CheckoutController::class, 'completePost'])->name('checkout.complete.post');
+
+    Route::get('/fail', [CheckoutController::class, 'failGet'])->name('checkout.fail');
+    Route::post('/fail', [CheckoutController::class, 'failPost'])->name('checkout.fail.post');
     Route::get('/status', [CheckoutController::class, 'status']);
     Route::post('/test-complete', [CheckoutController::class, 'testComplete']);
 });
