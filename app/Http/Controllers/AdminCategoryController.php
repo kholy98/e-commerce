@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Category;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
+use Illuminate\Http\RedirectResponse;
 
 class AdminCategoryController extends Controller
 {
@@ -63,6 +64,7 @@ class AdminCategoryController extends Controller
         }
 
         return redirect()->route('admin.categories.index')->with('success', 'Category updated successfully');
+        // return RedirectResponse::class('admin.categories.index')->with('success', 'Category updated successfully');
     }
 
     /**
