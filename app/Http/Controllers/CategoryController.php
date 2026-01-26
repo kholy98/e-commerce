@@ -581,7 +581,7 @@ class CategoryController extends Controller
                     'is_active' => $product->is_active,
                     'created_at' => $product->created_at,
                     'updated_at' => $product->updated_at,
-                    'image_url' => $product->getFirstMediaUrl('images'),
+                    'image_url' => $product->getFirstMediaUrl('image'),
                 ];
 
                 return [
