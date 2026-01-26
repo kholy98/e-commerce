@@ -70,13 +70,13 @@ Route::middleware(['auth', 'verified'])->group(function () {
 
         Route::get('categories/{category}/edit', function (\App\Models\Category $category) {
             return Inertia::render('admin/categories/edit', [
-                'category' => $category,
+                'category' => $category->load('media'),
                 'categories' => \App\Models\Category::where('is_active', true)->get(),
             ]);
         })->name('categories.edit');
 
         Route::get('categories/{category}', function (\App\Models\Category $category) {
-            return Inertia::render('admin/categories/show', ['category' => $category]);
+            return Inertia::render('admin/categories/show', ['category' => $category->load('media')]);
         })->name('categories.show');
 
         // Category form handling

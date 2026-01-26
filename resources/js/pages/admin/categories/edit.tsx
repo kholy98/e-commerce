@@ -30,7 +30,7 @@ interface Category {
         file_name: string;
         mime_type: string;
         size: number;
-        url: string;
+        original_url: string;
     }>;
 }
 
@@ -101,6 +101,8 @@ export default function CategoriesEdit() {
             if (removeImage) {
                 formDataToSend.append('remove_image', '1');
             }
+
+            console.log(formDataToSend.get('image'));
 
             router.post(`/admin/categories/${category.id}`, formDataToSend, {
                 onSuccess: () => {
