@@ -114,7 +114,12 @@ class ProductController extends Controller
      */
     public function index(Request $request): JsonResponse
     {
-        $query = Product::query()->where('is_active', true);
+        $query = Product::query();
+
+        // Only enforce active status for non-admin routes
+        if (! $request->is('api/admin/*')) {
+            $query->where('is_active', true);
+        }
 
         // Filter by category
         if ($request->has('category_id')) {

@@ -24,6 +24,7 @@ class AdminProductController extends Controller
             'stock' => 'required|integer|min:0',
             'sku' => 'required|string|unique:products',
             'category_id' => 'required|exists:categories,id',
+            'is_active' => 'boolean',
             'grind_type' => 'nullable|in:whole_bean,coarse,medium,fine,extra_fine',
             'weight' => 'nullable|numeric|in:0.125,0.250,0.500,1.000',
             'product_details' => 'nullable|array',
