@@ -10,6 +10,7 @@ import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
 import { Textarea } from '@/components/ui/textarea';
 import AppLayout from '@/layouts/app-layout';
+import { formatDate } from '@/lib/utils';
 import { adminCategories } from '@/routes';
 import { type BreadcrumbItem, type SharedData } from '@/types';
 
@@ -332,9 +333,7 @@ export default function CategoriesEdit() {
                                             Created:
                                         </span>
                                         <span className="ml-2 font-medium">
-                                            {new Date(
-                                                category.created_at,
-                                            ).toLocaleDateString()}
+                                            {formatDate(category.created_at)}
                                         </span>
                                     </div>
                                 </div>
