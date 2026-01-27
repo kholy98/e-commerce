@@ -58,6 +58,7 @@
         "vite": "^7.0.4"
     },
     "dependencies": {
-        "react-dropzone": "^14.3.8"
+        "react-dropzone": "^14.3.8",
+        "recharts": "^3.7.0"
     }
 }
