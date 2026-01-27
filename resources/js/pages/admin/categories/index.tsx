@@ -23,6 +23,7 @@ import {
     adminCategoriesShow,
 } from '@/routes';
 import { type BreadcrumbItem, type SharedData } from '@/types';
+import { formatDate } from '@/lib/utils';
 
 const breadcrumbs: BreadcrumbItem[] = [
     {
@@ -237,7 +238,7 @@ export default function CategoriesIndex() {
                                             </Badge>
                                         </TableCell>
                                         <TableCell>
-                                            {category.created_at}
+                                            {formatDate(category.created_at)}
                                         </TableCell>
                                         <TableCell>
                                             <div className="flex items-center gap-2">

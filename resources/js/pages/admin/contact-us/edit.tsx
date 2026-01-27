@@ -1,9 +1,11 @@
+import { Plus, Trash2 } from 'lucide-react';
+import { useEffect, useState } from 'react';
+
 import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
-import { Plus, Trash2 } from 'lucide-react';
-import { useEffect, useState } from 'react';
+import AppLayout from '@/layouts/app-layout';
 
 interface ContactUsData {
     phones: string[];
@@ -88,7 +90,7 @@ export default function Edit() {
             } else {
                 alert('Error updating contact us');
             }
-        } catch (error) {
+        } catch (_error) {
             alert('Error updating contact us');
         } finally {
             setLoading(false);
@@ -99,7 +101,7 @@ export default function Edit() {
         <div className="space-y-2">
             <Label>{label}</Label>
             {data[field].map((item, index) => (
-                <div key={index} className="flex gap-2">
+                <div key={`${field}-${index}`} className="flex gap-2">
                     <Input
                         value={item}
                         onChange={(e) =>
@@ -130,77 +132,91 @@ export default function Edit() {
     );
 
     return (
-        <div className="container mx-auto p-6">
-            <Card>
-                <CardHeader>
-                    <CardTitle>Edit Contact Us</CardTitle>
-                </CardHeader>
-                <CardContent>
-                    <form onSubmit={handleSubmit} className="space-y-6">
-                        <div className="grid grid-cols-1 gap-6 md:grid-cols-2">
-                            <Card>
-                                <CardHeader>
-                                    <CardTitle>Common Information</CardTitle>
-                                </CardHeader>
-                                <CardContent className="space-y-4">
-                                    {renderField('phones', 'Phones')}
-                                    {renderField('emails', 'Emails')}
-                                </CardContent>
-                            </Card>
+        <AppLayout>
+            <div className="p-6">
+                <Card>
+                    <CardHeader>
+                        <CardTitle>Edit Contact Us</CardTitle>
+                    </CardHeader>
+                    <CardContent>
+                        <form onSubmit={handleSubmit} className="space-y-6">
+                            <div className="grid grid-cols-1 gap-6 md:grid-cols-2">
+                                <Card>
+                                    <CardHeader>
+                                        <CardTitle>
+                                            Common Information
+                                        </CardTitle>
+                                    </CardHeader>
+                                    <CardContent className="space-y-4">
+                                        {renderField('phones', 'Phones')}
+                                        {renderField('emails', 'Emails')}
+                                    </CardContent>
+                                </Card>
 
-                            <Card>
-                                <CardHeader>
-                                    <CardTitle>Addresses (English)</CardTitle>
-                                </CardHeader>
-                                <CardContent>
-                                    {renderField('addresses_en', 'Addresses')}
-                                </CardContent>
-                            </Card>
+                                <Card>
+                                    <CardHeader>
+                                        <CardTitle>
+                                            Addresses (English)
+                                        </CardTitle>
+                                    </CardHeader>
+                                    <CardContent>
+                                        {renderField(
+                                            'addresses_en',
+                                            'Addresses',
+                                        )}
+                                    </CardContent>
+                                </Card>
 
-                            <Card>
-                                <CardHeader>
-                                    <CardTitle>Addresses (Arabic)</CardTitle>
-                                </CardHeader>
-                                <CardContent>
-                                    {renderField('addresses_ar', 'Addresses')}
-                                </CardContent>
-                            </Card>
+                                <Card>
+                                    <CardHeader>
+                                        <CardTitle>
+                                            Addresses (Arabic)
+                                        </CardTitle>
+                                    </CardHeader>
+                                    <CardContent>
+                                        {renderField(
+                                            'addresses_ar',
+                                            'Addresses',
+                                        )}
+                                    </CardContent>
+                                </Card>
 
-                            <Card>
-                                <CardHeader>
-                                    <CardTitle>
-                                        Working Hours (English)
-                                    </CardTitle>
-                                </CardHeader>
-                                <CardContent>
-                                    {renderField(
-                                        'working_hours_en',
-                                        'Working Hours',
-                                    )}
-                                </CardContent>
-                            </Card>
+                                <Card>
+                                    <CardHeader>
+                                        <CardTitle>
+                                            Working Hours (English)
+                                        </CardTitle>
+                                    </CardHeader>
+                                    <CardContent>
+                                        {renderField(
+                                            'working_hours_en',
+                                            'Working Hours',
+                                        )}
+                                    </CardContent>
+                                </Card>
 
-                            <Card>
-                                <CardHeader>
-                                    <CardTitle>
-                                        Working Hours (Arabic)
-                                    </CardTitle>
-                                </CardHeader>
-                                <CardContent>
-                                    {renderField(
-                                        'working_hours_ar',
-                                        'Working Hours',
-                                    )}
-                                </CardContent>
-                            </Card>
-                        </div>
+                                <Card>
+                                    <CardHeader>
+                                        <CardTitle>
+                                            Working Hours (Arabic)
+                                        </CardTitle>
+                                    </CardHeader>
+                                    <CardContent>
+                                        {renderField(
+                                            'working_hours_ar',
+                                            'Working Hours',
+                                        )}
+                                    </CardContent>
+                                </Card>
+                            </div>
 
-                        <Button type="submit" disabled={loading}>
-                            {loading ? 'Saving...' : 'Save Changes'}
-                        </Button>
-                    </form>
-                </CardContent>
-            </Card>
-        </div>
+                            <Button type="submit" disabled={loading}>
+                                {loading ? 'Saving...' : 'Save Changes'}
+                            </Button>
+                        </form>
+                    </CardContent>
+                </Card>
+            </div>
+        </AppLayout>
     );
 }

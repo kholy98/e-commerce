@@ -289,6 +289,8 @@ Route::middleware(['web', 'auth'])->prefix('admin')->group(function () {
     Route::get('/dashboard/stats', [\App\Http\Controllers\DashboardController::class, 'stats']);
     Route::get('/dashboard/products', [\App\Http\Controllers\DashboardController::class, 'recentProducts']);
     Route::get('/dashboard/categories', [\App\Http\Controllers\DashboardController::class, 'categories']);
+    Route::get('/dashboard/revenue', [\App\Http\Controllers\DashboardController::class, 'revenueChart']);
+    Route::get('/dashboard/best-sellers', [\App\Http\Controllers\DashboardController::class, 'bestSellers']);
 
     // Product management
     Route::prefix('products')->group(function () {

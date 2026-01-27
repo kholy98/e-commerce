@@ -1,9 +1,8 @@
-import { Head, Link } from '@inertiajs/react';
+import { Head, Link, router } from '@inertiajs/react';
 import { Edit, Eye, Plus, Trash2 } from 'lucide-react';
 
 import { Badge } from '@/components/ui/badge';
 import { Button } from '@/components/ui/button';
-import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import {
     Table,
     TableBody,
@@ -13,6 +12,7 @@ import {
     TableRow,
 } from '@/components/ui/table';
 import AppLayout from '@/layouts/app-layout';
+import { formatDate } from '@/lib/utils';
 import {
     adminTeamMembers,
     adminTeamMembersCreate,
@@ -43,47 +43,27 @@ interface Props {
 }
 
 export default function TeamMembersIndex({ teamMembers }: Props) {
-    const handleDelete = async (teamMemberId: number) => {
-        if (!confirm('Are you sure you want to delete this team member?')) {
-            return;
-        }
-
-        const csrfToken = document
-            .querySelector('meta[name="csrf-token"]')
-            ?.getAttribute('content');
-
-        fetch(`/admin/team-members/${teamMemberId}`, {
-            method: 'DELETE',
-            headers: {
-                Accept: 'application/json',
-                'X-Requested-With': 'XMLHttpRequest',
-                'X-CSRF-TOKEN': csrfToken || '',
-            },
-            credentials: 'same-origin',
-        })
-            .then((response) => response.json())
-            .then((data) => {
-                if (data.success) {
-                    window.location.reload();
-                } else {
-                    alert(data.message || 'Failed to delete team member');
-                }
-            })
-            .catch((error) => {
-                console.error('Failed to delete team member:', error);
+    const handleDelete = (teamMemberId: number) => {
+        if (confirm('Are you sure you want to delete this team member?')) {
+            router.delete(`/admin/team-members/${teamMemberId}`, {
+                onSuccess: () => {
+                    // Success handling if needed
+                },
             });
+        }
     };
+    console.log(teamMembers);
 
     return (
         <AppLayout breadcrumbs={breadcrumbs}>
             <Head title="Team Members" />
 
-            <div className="flex h-full flex-1 flex-col gap-4 overflow-x-auto rounded-xl p-4">
+            <div className="flex h-full flex-1 flex-col gap-8 p-8">
                 <div className="flex items-center justify-between">
                     <div>
                         <h1 className="text-2xl font-bold">Team Members</h1>
                         <p className="text-muted-foreground">
-                            Manage your team members
+                            Manage your organizational team members
                         </p>
                     </div>
                     <Button asChild>
@@ -94,110 +74,108 @@ export default function TeamMembersIndex({ teamMembers }: Props) {
                     </Button>
                 </div>
 
-                <Card>
-                    <CardHeader>
-                        <CardTitle>All Team Members</CardTitle>
-                    </CardHeader>
-                    <CardContent>
-                        <Table>
-                            <TableHeader>
-                                <TableRow>
-                                    <TableHead>Full Name</TableHead>
-                                    <TableHead>Title</TableHead>
-                                    <TableHead>Email</TableHead>
-                                    <TableHead>Phone</TableHead>
-                                    <TableHead>Social Media</TableHead>
-                                    <TableHead>Created</TableHead>
-                                    <TableHead className="w-[100px]">
-                                        Actions
-                                    </TableHead>
+                <div className="overflow-hidden rounded-xl border-none shadow-none">
+                    <Table className="border-separate border-spacing-y-3">
+                        <TableHeader>
+                            <TableRow className="border-none">
+                                <TableHead className="rounded-l-lg font-semibold">
+                                    Full Name
+                                </TableHead>
+                                <TableHead className="font-semibold">
+                                    Title
+                                </TableHead>
+                                <TableHead className="font-semibold">
+                                    Email
+                                </TableHead>
+                                <TableHead className="font-semibold">
+                                    Phone
+                                </TableHead>
+                                <TableHead className="font-semibold">
+                                    Social Media
+                                </TableHead>
+                                <TableHead className="font-semibold">
+                                    Created
+                                </TableHead>
+                                <TableHead className="rounded-r-lg text-right font-semibold">
+                                    Actions
+                                </TableHead>
+                            </TableRow>
+                        </TableHeader>
+                        <TableBody>
+                            {teamMembers.map((teamMember) => (
+                                <TableRow
+                                    key={teamMember.id}
+                                    className="h-20 border-none shadow-sm ring-1 ring-sidebar-border/50"
+                                >
+                                    <TableCell className="rounded-l-lg font-medium">
+                                        {teamMember.fullname}
+                                    </TableCell>
+                                    <TableCell className="">
+                                        {teamMember.title}
+                                    </TableCell>
+                                    <TableCell className="">
+                                        {teamMember.email}
+                                    </TableCell>
+                                    <TableCell className="">
+                                        {teamMember.phone || 'N/A'}
+                                    </TableCell>
+                                    <TableCell>
+                                        {teamMember.social_media &&
+                                        teamMember.social_media.length > 0 ? (
+                                            <Badge
+                                                variant="secondary"
+                                                className="bg-[#F5EFEA] hover:bg-[#F5EFEA]"
+                                            >
+                                                {teamMember.social_media.length}{' '}
+                                                links
+                                            </Badge>
+                                        ) : (
+                                            <span className="text-muted-foreground italic">
+                                                N/A
+                                            </span>
+                                        )}
+                                    </TableCell>
+                                    <TableCell className="">
+                                        {formatDate(teamMember.created_at)}
+                                    </TableCell>
+                                    <TableCell className="rounded-r-lg">
+                                        <div className="flex items-center justify-end gap-2">
+                                            <Link
+                                                href={adminTeamMembersShow(
+                                                    teamMember.id,
+                                                )}
+                                                className="flex h-10 w-10 items-center justify-center rounded-full transition-colors hover:bg-muted"
+                                            >
+                                                <Eye className="h-5 w-5" />
+                                            </Link>
+                                            <Link
+                                                href={adminTeamMembersEdit(
+                                                    teamMember.id,
+                                                )}
+                                                className="flex h-10 w-10 items-center justify-center rounded-full transition-colors hover:bg-muted"
+                                            >
+                                                <Edit className="h-5 w-5" />
+                                            </Link>
+                                            <button
+                                                onClick={() =>
+                                                    handleDelete(teamMember.id)
+                                                }
+                                                className="flex h-10 w-10 items-center justify-center rounded-full text-red-600 transition-colors hover:bg-red-50"
+                                            >
+                                                <Trash2 className="h-5 w-5" />
+                                            </button>
+                                        </div>
+                                    </TableCell>
                                 </TableRow>
-                            </TableHeader>
-                            <TableBody>
-                                {teamMembers.map((teamMember) => (
-                                    <TableRow key={teamMember.id}>
-                                        <TableCell className="font-medium">
-                                            {teamMember.fullname}
-                                        </TableCell>
-                                        <TableCell>
-                                            {teamMember.title}
-                                        </TableCell>
-                                        <TableCell>
-                                            {teamMember.email}
-                                        </TableCell>
-                                        <TableCell>
-                                            {teamMember.phone || 'N/A'}
-                                        </TableCell>
-                                        <TableCell>
-                                            {teamMember.social_media &&
-                                            teamMember.social_media.length >
-                                                0 ? (
-                                                <Badge variant="secondary">
-                                                    {
-                                                        teamMember.social_media
-                                                            .length
-                                                    }{' '}
-                                                    links
-                                                </Badge>
-                                            ) : (
-                                                'N/A'
-                                            )}
-                                        </TableCell>
-                                        <TableCell>
-                                            {teamMember.created_at}
-                                        </TableCell>
-                                        <TableCell>
-                                            <div className="flex items-center gap-2">
-                                                <Button
-                                                    variant="ghost"
-                                                    size="sm"
-                                                    asChild
-                                                >
-                                                    <Link
-                                                        href={adminTeamMembersShow(
-                                                            teamMember.id,
-                                                        )}
-                                                    >
-                                                        <Eye className="h-4 w-4" />
-                                                    </Link>
-                                                </Button>
-                                                <Button
-                                                    variant="ghost"
-                                                    size="sm"
-                                                    asChild
-                                                >
-                                                    <Link
-                                                        href={adminTeamMembersEdit(
-                                                            teamMember.id,
-                                                        )}
-                                                    >
-                                                        <Edit className="h-4 w-4" />
-                                                    </Link>
-                                                </Button>
-                                                <Button
-                                                    variant="ghost"
-                                                    size="sm"
-                                                    onClick={() =>
-                                                        handleDelete(
-                                                            teamMember.id,
-                                                        )
-                                                    }
-                                                >
-                                                    <Trash2 className="h-4 w-4" />
-                                                </Button>
-                                            </div>
-                                        </TableCell>
-                                    </TableRow>
-                                ))}
-                            </TableBody>
-                        </Table>
-                        {teamMembers.length === 0 && (
-                            <p className="py-4 text-center text-muted-foreground">
-                                No team members found
-                            </p>
-                        )}
-                    </CardContent>
-                </Card>
+                            ))}
+                        </TableBody>
+                    </Table>
+                    {teamMembers.length === 0 && (
+                        <div className="flex h-32 flex-col items-center justify-center rounded-xl bg-white text-muted-foreground shadow-sm ring-1 ring-sidebar-border/50">
+                            <p>No team members found</p>
+                        </div>
+                    )}
+                </div>
             </div>
         </AppLayout>
     );

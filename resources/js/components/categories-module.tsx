@@ -8,6 +8,7 @@ import {
     TableHeader,
     TableRow,
 } from '@/components/ui/table';
+import { formatDate } from '@/lib/utils';
 
 interface Category {
     id: number;
@@ -51,7 +52,9 @@ export function CategoriesModule({ categories }: CategoriesModuleProps) {
                                         {category.product_count} products
                                     </Badge>
                                 </TableCell>
-                                <TableCell>{category.created_at}</TableCell>
+                                <TableCell>
+                                    {formatDate(category.created_at)}
+                                </TableCell>
                             </TableRow>
                         ))}
                     </TableBody>

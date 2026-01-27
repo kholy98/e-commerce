@@ -1,5 +1,5 @@
 import { Head } from '@inertiajs/react';
-import { AlertCircle, Loader2, Save } from 'lucide-react';
+import { AlertCircle, Loader2 } from 'lucide-react';
 import { FormEvent, useEffect, useState } from 'react';
 
 import { Alert, AlertDescription } from '@/components/ui/alert';
@@ -96,7 +96,8 @@ export default function EnvironmentSettings() {
             // Populate form with current values
             setFormData((prev) => ({
                 ...prev,
-                PAYMOB_BASE_URL: data.laravel_active_values.PAYMOB_BASE_URL || '',
+                PAYMOB_BASE_URL:
+                    data.laravel_active_values.PAYMOB_BASE_URL || '',
                 PAYMOB_API_KEY: data.laravel_active_values.PAYMOB_API_KEY || '',
                 BOSTA_API_KEY: data.laravel_active_values.BOSTA_API_KEY || '',
                 MAIL_MAILER: data.laravel_active_values.MAIL_MAILER || '',
@@ -105,7 +106,8 @@ export default function EnvironmentSettings() {
                 MAIL_PORT: data.laravel_active_values.MAIL_PORT || '',
                 MAIL_USERNAME: data.laravel_active_values.MAIL_USERNAME || '',
                 MAIL_PASSWORD: data.laravel_active_values.MAIL_PASSWORD || '',
-                MAIL_FROM_ADDRESS: data.laravel_active_values.MAIL_FROM_ADDRESS || '',
+                MAIL_FROM_ADDRESS:
+                    data.laravel_active_values.MAIL_FROM_ADDRESS || '',
                 MAIL_FROM_NAME: data.laravel_active_values.MAIL_FROM_NAME || '',
             }));
         } catch (error) {
@@ -154,7 +156,8 @@ export default function EnvironmentSettings() {
 
             setMessage({
                 type: 'success',
-                text: data.message || 'Environment settings updated successfully',
+                text:
+                    data.message || 'Environment settings updated successfully',
             });
 
             // Refresh status after successful save
@@ -241,7 +244,7 @@ export default function EnvironmentSettings() {
         <AppLayout breadcrumbs={breadcrumbs}>
             <Head title="Environment Settings" />
 
-            <div className="space-y-6">
+            <div className="space-y-6 p-6">
                 {/* Status Card */}
                 {envStatus && (
                     <Card>
@@ -300,7 +303,11 @@ export default function EnvironmentSettings() {
 
                 {/* Messages */}
                 {message && (
-                    <Alert variant={message.type === 'error' ? 'destructive' : 'default'}>
+                    <Alert
+                        variant={
+                            message.type === 'error' ? 'destructive' : 'default'
+                        }
+                    >
                         <AlertCircle className="h-4 w-4" />
                         <AlertDescription>{message.text}</AlertDescription>
                     </Alert>
@@ -311,7 +318,8 @@ export default function EnvironmentSettings() {
                     <CardHeader>
                         <CardTitle>Edit Environment Variables</CardTitle>
                         <CardDescription>
-                            Update your Paymob, Bosta, and Mail configuration settings
+                            Update your Paymob, Bosta, and Mail configuration
+                            settings
                         </CardDescription>
                     </CardHeader>
                     <CardContent>
@@ -335,7 +343,9 @@ export default function EnvironmentSettings() {
                                                     id="PAYMOB_BASE_URL"
                                                     type="url"
                                                     placeholder="https://api.paymob.com"
-                                                    value={formData.PAYMOB_BASE_URL}
+                                                    value={
+                                                        formData.PAYMOB_BASE_URL
+                                                    }
                                                     onChange={(e) =>
                                                         handleInputChange(
                                                             e,
@@ -374,7 +384,9 @@ export default function EnvironmentSettings() {
                                                     id="PAYMOB_API_KEY"
                                                     type="password"
                                                     placeholder="Your Paymob API Key"
-                                                    value={formData.PAYMOB_API_KEY}
+                                                    value={
+                                                        formData.PAYMOB_API_KEY
+                                                    }
                                                     onChange={(e) =>
                                                         handleInputChange(
                                                             e,
@@ -454,7 +466,9 @@ export default function EnvironmentSettings() {
                                                     id="PAYMOB_IFRAME_ID"
                                                     type="number"
                                                     placeholder="Your Iframe ID"
-                                                    value={formData.PAYMOB_IFRAME_ID}
+                                                    value={
+                                                        formData.PAYMOB_IFRAME_ID
+                                                    }
                                                     onChange={(e) =>
                                                         handleInputChange(
                                                             e,
@@ -503,7 +517,9 @@ export default function EnvironmentSettings() {
                                                     id="BOSTA_BASE_URL"
                                                     type="url"
                                                     placeholder="https://api.bosta.co"
-                                                    value={formData.BOSTA_BASE_URL}
+                                                    value={
+                                                        formData.BOSTA_BASE_URL
+                                                    }
                                                     onChange={(e) =>
                                                         handleInputChange(
                                                             e,
@@ -542,7 +558,9 @@ export default function EnvironmentSettings() {
                                                     id="BOSTA_API_KEY"
                                                     type="password"
                                                     placeholder="Your Bosta API Key"
-                                                    value={formData.BOSTA_API_KEY}
+                                                    value={
+                                                        formData.BOSTA_API_KEY
+                                                    }
                                                     onChange={(e) =>
                                                         handleInputChange(
                                                             e,
@@ -748,7 +766,9 @@ export default function EnvironmentSettings() {
                                                     id="MAIL_USERNAME"
                                                     type="email"
                                                     placeholder="your-email@gmail.com"
-                                                    value={formData.MAIL_USERNAME}
+                                                    value={
+                                                        formData.MAIL_USERNAME
+                                                    }
                                                     onChange={(e) =>
                                                         handleInputChange(
                                                             e,
@@ -787,7 +807,9 @@ export default function EnvironmentSettings() {
                                                     id="MAIL_PASSWORD"
                                                     type="password"
                                                     placeholder="Your app password"
-                                                    value={formData.MAIL_PASSWORD}
+                                                    value={
+                                                        formData.MAIL_PASSWORD
+                                                    }
                                                     onChange={(e) =>
                                                         handleInputChange(
                                                             e,
@@ -826,7 +848,9 @@ export default function EnvironmentSettings() {
                                                     id="MAIL_FROM_ADDRESS"
                                                     type="email"
                                                     placeholder="noreply@example.com"
-                                                    value={formData.MAIL_FROM_ADDRESS}
+                                                    value={
+                                                        formData.MAIL_FROM_ADDRESS
+                                                    }
                                                     onChange={(e) =>
                                                         handleInputChange(
                                                             e,
@@ -865,7 +889,9 @@ export default function EnvironmentSettings() {
                                                     id="MAIL_FROM_NAME"
                                                     type="text"
                                                     placeholder="Your App Name"
-                                                    value={formData.MAIL_FROM_NAME}
+                                                    value={
+                                                        formData.MAIL_FROM_NAME
+                                                    }
                                                     onChange={(e) =>
                                                         handleInputChange(
                                                             e,
@@ -905,9 +931,13 @@ export default function EnvironmentSettings() {
                 <Alert>
                     <AlertCircle className="h-4 w-4" />
                     <AlertDescription>
-                        Changes to environment variables are automatically reflected in your
-                        application. If changes don't take effect immediately, try clearing
-                        your cache with <code className="font-mono text-xs">php artisan config:clear</code>.
+                        Changes to environment variables are automatically
+                        reflected in your application. If changes don't take
+                        effect immediately, try clearing your cache with{' '}
+                        <code className="font-mono text-xs">
+                            php artisan config:clear
+                        </code>
+                        .
                     </AlertDescription>
                 </Alert>
             </div>

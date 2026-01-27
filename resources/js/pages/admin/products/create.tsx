@@ -1,11 +1,10 @@
-import { Head, Link, router, usePage } from '@inertiajs/react';
-import { ArrowLeft, Save } from 'lucide-react';
+import { Head, router, usePage } from '@inertiajs/react';
+import { Save } from 'lucide-react';
 import { useState } from 'react';
 
 import ImageUpload from '@/components/image-upload';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
-import { Checkbox } from '@/components/ui/checkbox';
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
 import {
@@ -17,6 +16,7 @@ import {
 } from '@/components/ui/select';
 import { Textarea } from '@/components/ui/textarea';
 import AppLayout from '@/layouts/app-layout';
+import { cn } from '@/lib/utils';
 import { adminProducts } from '@/routes';
 import { type BreadcrumbItem, type SharedData } from '@/types';
 
@@ -55,7 +55,6 @@ export default function ProductCreate({ categories }: Props) {
     const [stock, setStock] = useState('');
     const [sku, setSku] = useState('');
     const [categoryId, setCategoryId] = useState('');
-    const [isActive, setIsActive] = useState(true);
     const [grindType, setGrindType] = useState('');
     const [weight, setWeight] = useState('');
     const [productDetails, setProductDetails] = useState<
@@ -68,8 +67,7 @@ export default function ProductCreate({ categories }: Props) {
     >([]);
     const [images, setImages] = useState<File[]>([]);
 
-    const handleSubmit = async (e: React.FormEvent) => {
-        e.preventDefault();
+    const handleSubmit = async (status: 'draft' | 'published') => {
         setLoading(true);
 
         try {
@@ -83,7 +81,7 @@ export default function ProductCreate({ categories }: Props) {
             formData.append('stock', stock);
             formData.append('sku', sku);
             formData.append('category_id', categoryId);
-            formData.append('is_active', isActive ? '1' : '0');
+            formData.append('is_active', status === 'published' ? '1' : '0');
             if (grindType) formData.append('grind_type', grindType);
             if (weight) formData.append('weight', weight);
             productDetails.forEach((detail, index) => {
@@ -120,11 +118,11 @@ export default function ProductCreate({ categories }: Props) {
                         'Failed to create product. Please check the form data.',
                     );
                 },
+                onFinish: () => setLoading(false),
             });
         } catch (error) {
             console.error('Failed to create product:', error);
             alert('Failed to create product. Please try again.');
-        } finally {
             setLoading(false);
         }
     };
@@ -133,267 +131,236 @@ export default function ProductCreate({ categories }: Props) {
         <AppLayout breadcrumbs={breadcrumbs}>
             <Head title="Create Product" />
 
-            <div className="flex h-full flex-1 flex-col gap-4 overflow-x-auto rounded-xl p-4">
+            <div className="flex h-full flex-1 flex-col gap-6 overflow-x-auto p-4 md:p-8">
                 <div className="flex items-center justify-between">
                     <div>
-                        <h1 className="text-2xl font-bold">Create Product</h1>
-                        <p className="text-muted-foreground">
-                            Add a new product to your inventory
-                        </p>
+                        <h1 className="text-3xl font-bold tracking-tight text-[#4A3426]">
+                            Create Product
+                        </h1>
                     </div>
-                    <Button variant="outline" asChild>
-                        <Link href={adminProducts()}>
-                            <ArrowLeft className="mr-2 h-4 w-4" />
-                            Back to Products
-                        </Link>
-                    </Button>
                 </div>
 
-                <form onSubmit={handleSubmit}>
-                    <div className="grid gap-6 md:grid-cols-2">
-                        {/* Basic Information */}
-                        <Card>
-                            <CardHeader>
-                                <CardTitle>Basic Information</CardTitle>
-                            </CardHeader>
-                            <CardContent className="space-y-4">
-                                <div className="space-y-2">
-                                    <Label htmlFor="name">Name (English)</Label>
-                                    <Input
-                                        id="name"
-                                        value={name}
-                                        onChange={(e) =>
-                                            setName(e.target.value)
-                                        }
-                                        required
-                                    />
-                                </div>
+                <div className="grid grid-cols-1 gap-8 lg:grid-cols-3">
+                    {/* Left Column - Main Content */}
+                    <div className="space-y-8 lg:col-span-2">
+                        {/* Basic Details */}
+                        <div className="space-y-4">
+                            <h2 className="text-xl font-bold text-[#4A3426]">
+                                Basic Details
+                            </h2>
+                            <Card className="border-none shadow-sm">
+                                <CardContent className="space-y-6 pt-6">
+                                    <div className="grid gap-6 md:grid-cols-2">
+                                        <div className="space-y-2">
+                                            <Label
+                                                htmlFor="name"
+                                                className="text-base font-medium"
+                                            >
+                                                Product Name (English)*
+                                            </Label>
+                                            <Input
+                                                id="name"
+                                                value={name}
+                                                onChange={(e) =>
+                                                    setName(e.target.value)
+                                                }
+                                                required
+                                                className="bg-muted/30"
+                                                placeholder="e.g. iPhone 15"
+                                            />
+                                        </div>
+                                        <div className="space-y-2">
+                                            <Label
+                                                htmlFor="name_ar"
+                                                className="text-base font-medium"
+                                            >
+                                                Product Name (Arabic)*
+                                            </Label>
+                                            <Input
+                                                id="name_ar"
+                                                value={nameAr}
+                                                onChange={(e) =>
+                                                    setNameAr(e.target.value)
+                                                }
+                                                className="bg-muted/30"
+                                                placeholder="e.g. آيفون 15"
+                                            />
+                                        </div>
+                                    </div>
 
-                                <div className="space-y-2">
-                                    <Label htmlFor="name_ar">
-                                        Name (Arabic)
-                                    </Label>
-                                    <Input
-                                        id="name_ar"
-                                        value={nameAr}
-                                        onChange={(e) =>
-                                            setNameAr(e.target.value)
-                                        }
-                                    />
-                                </div>
+                                    <div className="space-y-2">
+                                        <Label
+                                            htmlFor="description"
+                                            className="text-base font-medium"
+                                        >
+                                            Product Description (English)*
+                                        </Label>
+                                        <Textarea
+                                            id="description"
+                                            value={description}
+                                            onChange={(e) =>
+                                                setDescription(e.target.value)
+                                            }
+                                            rows={4}
+                                            required
+                                            className="resize-none bg-muted/30"
+                                        />
+                                    </div>
 
-                                <div className="space-y-2">
-                                    <Label htmlFor="description">
-                                        Description (English)
-                                    </Label>
-                                    <Textarea
-                                        id="description"
-                                        value={description}
-                                        onChange={(e) =>
-                                            setDescription(e.target.value)
-                                        }
-                                        rows={3}
-                                        required
-                                    />
-                                </div>
+                                    <div className="space-y-2">
+                                        <Label
+                                            htmlFor="description_ar"
+                                            className="text-base font-medium"
+                                        >
+                                            Product Description (Arabic)*
+                                        </Label>
+                                        <Textarea
+                                            id="description_ar"
+                                            value={descriptionAr}
+                                            onChange={(e) =>
+                                                setDescriptionAr(e.target.value)
+                                            }
+                                            rows={4}
+                                            className="resize-none bg-muted/30"
+                                        />
+                                    </div>
+                                </CardContent>
+                            </Card>
+                        </div>
 
-                                <div className="space-y-2">
-                                    <Label htmlFor="description_ar">
-                                        Description (Arabic)
-                                    </Label>
-                                    <Textarea
-                                        id="description_ar"
-                                        value={descriptionAr}
-                                        onChange={(e) =>
-                                            setDescriptionAr(e.target.value)
-                                        }
-                                        rows={3}
-                                    />
-                                </div>
-
-                                <div className="space-y-2">
-                                    <Label htmlFor="sku">SKU</Label>
-                                    <Input
-                                        id="sku"
-                                        value={sku}
-                                        onChange={(e) => setSku(e.target.value)}
-                                        required
-                                    />
-                                </div>
-
-                                <div className="space-y-2">
-                                    <Label htmlFor="category">Category</Label>
-                                    <Select
-                                        value={categoryId}
-                                        onValueChange={setCategoryId}
-                                    >
-                                        <SelectTrigger>
-                                            <SelectValue placeholder="Select a category" />
-                                        </SelectTrigger>
-                                        <SelectContent>
-                                            {categories.map((category) => (
-                                                <SelectItem
-                                                    key={category.id}
-                                                    value={category.id.toString()}
-                                                >
-                                                    {category.name}
-                                                </SelectItem>
-                                            ))}
-                                        </SelectContent>
-                                    </Select>
-                                </div>
-
-                                <div className="space-y-2">
-                                    <Label htmlFor="grind_type">
-                                        Grind Type
-                                    </Label>
-                                    <Select
-                                        value={grindType}
-                                        onValueChange={setGrindType}
-                                    >
-                                        <SelectTrigger>
-                                            <SelectValue placeholder="Select grind type" />
-                                        </SelectTrigger>
-                                        <SelectContent>
-                                            <SelectItem value="whole_bean">
-                                                Whole Bean
-                                            </SelectItem>
-                                            <SelectItem value="coarse">
-                                                Coarse
-                                            </SelectItem>
-                                            <SelectItem value="medium">
-                                                Medium
-                                            </SelectItem>
-                                            <SelectItem value="fine">
-                                                Fine
-                                            </SelectItem>
-                                            <SelectItem value="extra_fine">
-                                                Extra Fine
-                                            </SelectItem>
-                                        </SelectContent>
-                                    </Select>
-                                </div>
-
-                                <div className="space-y-2">
-                                    <Label htmlFor="weight">Weight</Label>
-                                    <Select
-                                        value={weight}
-                                        onValueChange={setWeight}
-                                    >
-                                        <SelectTrigger>
-                                            <SelectValue placeholder="Select weight" />
-                                        </SelectTrigger>
-                                        <SelectContent>
-                                            <SelectItem value="0.125">
-                                                125g
-                                            </SelectItem>
-                                            <SelectItem value="0.250">
-                                                250g
-                                            </SelectItem>
-                                            <SelectItem value="0.500">
-                                                500g
-                                            </SelectItem>
-                                            <SelectItem value="1.000">
-                                                1kg
-                                            </SelectItem>
-                                        </SelectContent>
-                                    </Select>
-                                </div>
-
-                                <div className="space-y-2">
-                                    <Label>Product Details</Label>
+                        {/* Product Details (Specifications) */}
+                        <div className="space-y-4">
+                            <h2 className="text-xl font-bold text-[#4A3426]">
+                                Product Details (English)*
+                            </h2>
+                            <Card className="border-none shadow-sm">
+                                <CardHeader>
+                                    <CardTitle>Specifications</CardTitle>
+                                </CardHeader>
+                                <CardContent className="space-y-4">
                                     {productDetails.map((detail, index) => (
                                         <div
                                             key={index}
-                                            className="space-y-2 rounded border p-4"
+                                            className="rounded-lg border bg-muted/20 p-4"
                                         >
-                                            <div className="grid grid-cols-2 gap-2">
-                                                <Input
-                                                    placeholder="Title (EN)"
-                                                    value={detail.title_en}
-                                                    onChange={(e) => {
-                                                        const newDetails = [
-                                                            ...productDetails,
-                                                        ];
-                                                        newDetails[
-                                                            index
-                                                        ].title_en =
-                                                            e.target.value;
+                                            <div className="mb-2 flex items-center justify-between">
+                                                <h4 className="text-sm font-medium">
+                                                    Detail #{index + 1}
+                                                </h4>
+                                                <Button
+                                                    type="button"
+                                                    variant="ghost"
+                                                    size="sm"
+                                                    className="h-8 w-8 p-0 text-destructive hover:text-destructive/90"
+                                                    onClick={() => {
                                                         setProductDetails(
-                                                            newDetails,
+                                                            productDetails.filter(
+                                                                (_, i) =>
+                                                                    i !== index,
+                                                            ),
                                                         );
                                                     }}
-                                                />
-                                                <Input
-                                                    placeholder="Title (AR)"
-                                                    value={detail.title_ar}
-                                                    onChange={(e) => {
-                                                        const newDetails = [
-                                                            ...productDetails,
-                                                        ];
-                                                        newDetails[
-                                                            index
-                                                        ].title_ar =
-                                                            e.target.value;
-                                                        setProductDetails(
-                                                            newDetails,
-                                                        );
-                                                    }}
-                                                />
+                                                >
+                                                    <span className="sr-only">
+                                                        Remove
+                                                    </span>
+                                                    <svg
+                                                        xmlns="http://www.w3.org/2000/svg"
+                                                        viewBox="0 0 24 24"
+                                                        fill="none"
+                                                        stroke="currentColor"
+                                                        strokeWidth="2"
+                                                        strokeLinecap="round"
+                                                        strokeLinejoin="round"
+                                                        className="h-4 w-4"
+                                                    >
+                                                        <path d="M3 6h18" />
+                                                        <path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2" />
+                                                    </svg>
+                                                </Button>
                                             </div>
-                                            <div className="grid grid-cols-2 gap-2">
-                                                <Input
-                                                    placeholder="Value (EN)"
-                                                    value={detail.value_en}
-                                                    onChange={(e) => {
-                                                        const newDetails = [
-                                                            ...productDetails,
-                                                        ];
-                                                        newDetails[
-                                                            index
-                                                        ].value_en =
-                                                            e.target.value;
-                                                        setProductDetails(
-                                                            newDetails,
-                                                        );
-                                                    }}
-                                                />
-                                                <Input
-                                                    placeholder="Value (AR)"
-                                                    value={detail.value_ar}
-                                                    onChange={(e) => {
-                                                        const newDetails = [
-                                                            ...productDetails,
-                                                        ];
-                                                        newDetails[
-                                                            index
-                                                        ].value_ar =
-                                                            e.target.value;
-                                                        setProductDetails(
-                                                            newDetails,
-                                                        );
-                                                    }}
-                                                />
+                                            <div className="grid gap-4 md:grid-cols-2">
+                                                <div className="space-y-2">
+                                                    <Input
+                                                        placeholder="Title (e.g. Origin)"
+                                                        value={detail.title_en}
+                                                        onChange={(e) => {
+                                                            const newDetails = [
+                                                                ...productDetails,
+                                                            ];
+                                                            newDetails[
+                                                                index
+                                                            ].title_en =
+                                                                e.target.value;
+                                                            setProductDetails(
+                                                                newDetails,
+                                                            );
+                                                        }}
+                                                        className="bg-white"
+                                                    />
+                                                    <Input
+                                                        placeholder="Value (e.g. Ethiopia)"
+                                                        value={detail.value_en}
+                                                        onChange={(e) => {
+                                                            const newDetails = [
+                                                                ...productDetails,
+                                                            ];
+                                                            newDetails[
+                                                                index
+                                                            ].value_en =
+                                                                e.target.value;
+                                                            setProductDetails(
+                                                                newDetails,
+                                                            );
+                                                        }}
+                                                        className="bg-white"
+                                                    />
+                                                </div>
+                                                <div className="space-y-2">
+                                                    <Input
+                                                        placeholder="Title (Arabic)"
+                                                        value={detail.title_ar}
+                                                        onChange={(e) => {
+                                                            const newDetails = [
+                                                                ...productDetails,
+                                                            ];
+                                                            newDetails[
+                                                                index
+                                                            ].title_ar =
+                                                                e.target.value;
+                                                            setProductDetails(
+                                                                newDetails,
+                                                            );
+                                                        }}
+                                                        className="bg-white text-right"
+                                                        dir="rtl"
+                                                    />
+                                                    <Input
+                                                        placeholder="Value (Arabic)"
+                                                        value={detail.value_ar}
+                                                        onChange={(e) => {
+                                                            const newDetails = [
+                                                                ...productDetails,
+                                                            ];
+                                                            newDetails[
+                                                                index
+                                                            ].value_ar =
+                                                                e.target.value;
+                                                            setProductDetails(
+                                                                newDetails,
+                                                            );
+                                                        }}
+                                                        className="bg-white text-right"
+                                                        dir="rtl"
+                                                    />
+                                                </div>
                                             </div>
-                                            <Button
-                                                type="button"
-                                                variant="outline"
-                                                onClick={() => {
-                                                    setProductDetails(
-                                                        productDetails.filter(
-                                                            (_, i) =>
-                                                                i !== index,
-                                                        ),
-                                                    );
-                                                }}
-                                            >
-                                                Remove
-                                            </Button>
                                         </div>
                                     ))}
                                     <Button
                                         type="button"
                                         variant="outline"
+                                        className="w-full border-dashed"
                                         onClick={() => {
                                             setProductDetails([
                                                 ...productDetails,
@@ -406,106 +373,314 @@ export default function ProductCreate({ categories }: Props) {
                                             ]);
                                         }}
                                     >
-                                        Add Detail
+                                        + Add Specification
                                     </Button>
-                                </div>
+                                </CardContent>
+                            </Card>
+                        </div>
 
-                                <div className="flex items-center space-x-2">
-                                    <Checkbox
-                                        id="is_active"
-                                        checked={isActive}
-                                        onCheckedChange={(checked) =>
-                                            setIsActive(checked as boolean)
-                                        }
-                                    />
-                                    <Label htmlFor="is_active">Active</Label>
-                                </div>
-                            </CardContent>
-                        </Card>
+                        {/* Pricing */}
+                        <div className="space-y-4">
+                            <h2 className="text-xl font-bold text-[#4A3426]">
+                                Pricing
+                            </h2>
+                            <Card className="border-none shadow-sm">
+                                <CardContent className="space-y-4 pt-6">
+                                    <div className="space-y-2">
+                                        <Label
+                                            htmlFor="price"
+                                            className="text-base font-medium"
+                                        >
+                                            Product Price
+                                        </Label>
+                                        <div className="relative">
+                                            <Input
+                                                id="price"
+                                                type="number"
+                                                step="0.01"
+                                                min="0"
+                                                value={price}
+                                                onChange={(e) =>
+                                                    setPrice(e.target.value)
+                                                }
+                                                required
+                                                className="bg-muted/30 pl-8"
+                                            />
+                                            <span className="absolute top-2.5 left-3 text-muted-foreground">
+                                                $
+                                            </span>
+                                        </div>
+                                    </div>
+                                    <div className="space-y-2">
+                                        <Label
+                                            htmlFor="cost"
+                                            className="text-base font-medium"
+                                        >
+                                            Cost Price (Internal)
+                                        </Label>
+                                        <div className="relative">
+                                            <Input
+                                                id="cost"
+                                                type="number"
+                                                step="0.01"
+                                                min="0"
+                                                value={cost}
+                                                onChange={(e) =>
+                                                    setCost(e.target.value)
+                                                }
+                                                className="bg-muted/30 pl-8"
+                                            />
+                                            <span className="absolute top-2.5 left-3 text-muted-foreground">
+                                                $
+                                            </span>
+                                        </div>
+                                    </div>
+                                </CardContent>
+                            </Card>
+                        </div>
 
-                        {/* Pricing & Inventory */}
-                        <Card>
-                            <CardHeader>
-                                <CardTitle>Pricing & Inventory</CardTitle>
-                            </CardHeader>
-                            <CardContent className="space-y-4">
-                                <div className="space-y-2">
-                                    <Label htmlFor="price">Price ($)</Label>
-                                    <Input
-                                        id="price"
-                                        type="number"
-                                        step="0.01"
-                                        min="0"
-                                        value={price}
-                                        onChange={(e) =>
-                                            setPrice(e.target.value)
-                                        }
-                                        required
-                                    />
-                                </div>
+                        {/* Inventory */}
+                        <div className="space-y-4">
+                            <h2 className="text-xl font-bold text-[#4A3426]">
+                                Inventory
+                            </h2>
+                            <Card className="border-none shadow-sm">
+                                <CardContent className="space-y-4 pt-6">
+                                    <div className="space-y-2">
+                                        <Label
+                                            htmlFor="stock"
+                                            className="text-base font-medium"
+                                        >
+                                            Stock Quantity
+                                        </Label>
+                                        <Input
+                                            id="stock"
+                                            type="number"
+                                            min="0"
+                                            value={stock}
+                                            onChange={(e) =>
+                                                setStock(e.target.value)
+                                            }
+                                            required
+                                            className="bg-muted/30"
+                                            placeholder="Unlimited or number"
+                                        />
+                                    </div>
+                                    <div className="space-y-2">
+                                        <Label
+                                            htmlFor="sku"
+                                            className="text-base font-medium"
+                                        >
+                                            SKU
+                                        </Label>
+                                        <Input
+                                            id="sku"
+                                            value={sku}
+                                            onChange={(e) =>
+                                                setSku(e.target.value)
+                                            }
+                                            required
+                                            className="bg-muted/30"
+                                        />
+                                    </div>
+                                </CardContent>
+                            </Card>
+                        </div>
 
-                                <div className="space-y-2">
-                                    <Label htmlFor="cost">Cost ($)</Label>
-                                    <Input
-                                        id="cost"
-                                        type="number"
-                                        step="0.01"
-                                        min="0"
-                                        value={cost}
-                                        onChange={(e) =>
-                                            setCost(e.target.value)
-                                        }
-                                    />
-                                </div>
+                        {/* Action Buttons */}
+                        <div className="flex gap-4 pt-4">
+                            <Button
+                                type="button"
+                                variant="outline"
+                                className="h-12 flex-1 border-[#4A3426] text-base font-medium text-[#4A3426] hover:bg-[#4A3426]/10"
+                                onClick={() => handleSubmit('draft')}
+                                disabled={loading}
+                            >
+                                <Save className="mr-2 h-4 w-4" />
+                                Save to draft
+                            </Button>
+                            <Button
+                                type="button"
+                                className="h-12 flex-1 bg-[#4A3426] text-base font-medium text-white hover:bg-[#4A3426]/90"
+                                onClick={() => handleSubmit('published')}
+                                disabled={loading}
+                            >
+                                {loading ? 'Publishing...' : 'Publish Product'}
+                            </Button>
+                        </div>
+                    </div>
 
-                                <div className="space-y-2">
-                                    <Label htmlFor="stock">
-                                        Stock Quantity
+                    {/* Right Column - Sidebar */}
+                    <div className="space-y-8">
+                        {/* Image Upload */}
+                        <div className="space-y-4">
+                            <h2 className="text-xl font-bold text-[#4A3426]">
+                                Upload Product Image
+                            </h2>
+                            <Card className="border-none shadow-sm">
+                                <CardContent className="pt-6">
+                                    <Label className="mb-3 block text-base font-medium">
+                                        Product Image
                                     </Label>
-                                    <Input
-                                        id="stock"
-                                        type="number"
-                                        min="0"
-                                        value={stock}
-                                        onChange={(e) =>
-                                            setStock(e.target.value)
-                                        }
-                                        required
+                                    <ImageUpload
+                                        files={images}
+                                        existingImages={[]}
+                                        imagesToDelete={[]}
+                                        onFilesChange={setImages}
+                                        onRemoveExisting={() => {}}
+                                        onRemoveFile={(index) => {
+                                            const newImages = images.filter(
+                                                (_, i) => i !== index,
+                                            );
+                                            setImages(newImages);
+                                        }}
                                     />
-                                </div>
-                            </CardContent>
-                        </Card>
+                                </CardContent>
+                            </Card>
+                        </div>
 
-                        {/* Images */}
-                        <Card className="md:col-span-2">
-                            <CardHeader>
-                                <CardTitle>Product Images</CardTitle>
-                            </CardHeader>
-                            <CardContent>
-                                <ImageUpload
-                                    files={images}
-                                    existingImages={[]}
-                                    imagesToDelete={[]}
-                                    onFilesChange={setImages}
-                                    onRemoveExisting={() => {}}
-                                    onRemoveFile={(index) => {
-                                        const newImages = images.filter(
-                                            (_, i) => i !== index,
-                                        );
-                                        setImages(newImages);
-                                    }}
-                                />
-                            </CardContent>
-                        </Card>
-                    </div>
+                        {/* Categories */}
+                        <div className="space-y-4">
+                            <h2 className="text-xl font-bold text-[#4A3426]">
+                                Categories
+                            </h2>
+                            <Card className="border-none shadow-sm">
+                                <CardContent className="space-y-6 pt-6">
+                                    <div className="space-y-2">
+                                        <Label
+                                            htmlFor="category"
+                                            className="text-base font-medium"
+                                        >
+                                            Product Categories
+                                        </Label>
+                                        <Select
+                                            value={categoryId}
+                                            onValueChange={setCategoryId}
+                                        >
+                                            <SelectTrigger className="h-11 bg-muted/30">
+                                                <SelectValue placeholder="Select your product" />
+                                            </SelectTrigger>
+                                            <SelectContent>
+                                                {categories.map((category) => (
+                                                    <SelectItem
+                                                        key={category.id}
+                                                        value={category.id.toString()}
+                                                    >
+                                                        {category.name}
+                                                    </SelectItem>
+                                                ))}
+                                            </SelectContent>
+                                        </Select>
+                                    </div>
 
-                    <div className="mt-6 flex justify-end">
-                        <Button type="submit" disabled={loading}>
-                            <Save className="mr-2 h-4 w-4" />
-                            {loading ? 'Creating...' : 'Create Product'}
-                        </Button>
+                                    <div className="space-y-2">
+                                        <Label
+                                            htmlFor="grind_type"
+                                            className="text-base font-medium"
+                                        >
+                                            Grind Type
+                                        </Label>
+                                        <div className="flex flex-wrap gap-2">
+                                            {[
+                                                {
+                                                    label: 'Whole Bean',
+                                                    value: 'whole_bean',
+                                                },
+                                                {
+                                                    label: 'Coarse',
+                                                    value: 'coarse',
+                                                },
+                                                {
+                                                    label: 'Medium',
+                                                    value: 'medium',
+                                                },
+                                                {
+                                                    label: 'Fine',
+                                                    value: 'fine',
+                                                },
+                                                {
+                                                    label: 'Extra Fine',
+                                                    value: 'extra_fine',
+                                                },
+                                            ].map((type) => (
+                                                <Button
+                                                    key={type.value}
+                                                    type="button"
+                                                    variant={
+                                                        grindType === type.value
+                                                            ? 'default'
+                                                            : 'outline'
+                                                    }
+                                                    onClick={() =>
+                                                        setGrindType(type.value)
+                                                    }
+                                                    className={cn(
+                                                        'flex-1',
+                                                        grindType === type.value
+                                                            ? 'bg-[#4A3426] text-white hover:bg-[#4A3426]/90'
+                                                            : '',
+                                                    )}
+                                                >
+                                                    {type.label}
+                                                </Button>
+                                            ))}
+                                        </div>
+                                    </div>
+
+                                    <div className="space-y-2">
+                                        <Label
+                                            htmlFor="weight"
+                                            className="text-base font-medium"
+                                        >
+                                            Product size
+                                        </Label>
+                                        <div className="flex flex-wrap gap-2">
+                                            {[
+                                                {
+                                                    label: '125g',
+                                                    value: '0.125',
+                                                },
+                                                {
+                                                    label: '250g',
+                                                    value: '0.250',
+                                                },
+                                                {
+                                                    label: '500g',
+                                                    value: '0.500',
+                                                },
+                                                {
+                                                    label: '1kg',
+                                                    value: '1.000',
+                                                },
+                                            ].map((w) => (
+                                                <Button
+                                                    key={w.value}
+                                                    type="button"
+                                                    variant={
+                                                        weight === w.value
+                                                            ? 'default'
+                                                            : 'outline'
+                                                    }
+                                                    onClick={() =>
+                                                        setWeight(w.value)
+                                                    }
+                                                    className={cn(
+                                                        'flex-1',
+                                                        weight === w.value
+                                                            ? 'bg-[#4A3426] text-white hover:bg-[#4A3426]/90'
+                                                            : '',
+                                                    )}
+                                                >
+                                                    {w.label}
+                                                </Button>
+                                            ))}
+                                        </div>
+                                    </div>
+                                </CardContent>
+                            </Card>
+                        </div>
                     </div>
-                </form>
+                </div>
             </div>
         </AppLayout>
     );

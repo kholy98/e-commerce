@@ -15,6 +15,7 @@ import {
 import AppLayout from '@/layouts/app-layout';
 import { adminInquiries, adminInquiriesShow } from '@/routes';
 import { type BreadcrumbItem } from '@/types';
+import { formatDate } from '@/lib/utils';
 
 const breadcrumbs: BreadcrumbItem[] = [
     {
@@ -109,9 +110,7 @@ export default function InquiriesIndex({ inquiries }: Props) {
                                             </Badge>
                                         </TableCell>
                                         <TableCell>
-                                            {new Date(
-                                                inquiry.created_at,
-                                            ).toLocaleDateString()}
+                                            {formatDate(inquiry.created_at)}
                                         </TableCell>
                                         <TableCell>
                                             <Button

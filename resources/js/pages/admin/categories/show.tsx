@@ -13,6 +13,7 @@ import {
     TableRow,
 } from '@/components/ui/table';
 import AppLayout from '@/layouts/app-layout';
+import { formatDate } from '@/lib/utils';
 import {
     adminCategories,
     adminCategoriesEdit,
@@ -190,9 +191,7 @@ export default function CategoriesShow() {
                                         Created
                                     </Label>
                                     <p className="mt-1 text-sm">
-                                        {new Date(
-                                            category.created_at,
-                                        ).toLocaleDateString()}
+                                        {formatDate(category.created_at)}
                                     </p>
                                 </div>
 
@@ -201,9 +200,7 @@ export default function CategoriesShow() {
                                         Last Updated
                                     </Label>
                                     <p className="mt-1 text-sm">
-                                        {new Date(
-                                            category.updated_at,
-                                        ).toLocaleDateString()}
+                                        {formatDate(category.updated_at)}
                                     </p>
                                 </div>
                             </CardContent>
@@ -265,9 +262,9 @@ export default function CategoriesShow() {
                                                             </Badge>
                                                         </TableCell>
                                                         <TableCell>
-                                                            {new Date(
+                                                            {formatDate(
                                                                 product.created_at,
-                                                            ).toLocaleDateString()}
+                                                            )}
                                                         </TableCell>
                                                         <TableCell>
                                                             <Button

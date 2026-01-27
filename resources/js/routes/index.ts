@@ -257,6 +257,60 @@ dashboardCategories.get = (
 });
 
 /**
+ * Dashboard revenue API route
+ * @route '/api/admin/dashboard/revenue'
+ */
+export const dashboardRevenue = (
+    options?: RouteQueryOptions,
+): RouteDefinition<'get'> => ({
+    url: dashboardRevenue.url(options),
+    method: 'get',
+});
+
+dashboardRevenue.definition = {
+    methods: ['get'],
+    url: '/api/admin/dashboard/revenue',
+} satisfies RouteDefinition<['get']>;
+
+dashboardRevenue.url = (options?: RouteQueryOptions) => {
+    return dashboardRevenue.definition.url + queryParams(options);
+};
+
+dashboardRevenue.get = (
+    options?: RouteQueryOptions,
+): RouteDefinition<'get'> => ({
+    url: dashboardRevenue.url(options),
+    method: 'get',
+});
+
+/**
+ * Dashboard best sellers API route
+ * @route '/api/admin/dashboard/best-sellers'
+ */
+export const dashboardBestSellers = (
+    options?: RouteQueryOptions,
+): RouteDefinition<'get'> => ({
+    url: dashboardBestSellers.url(options),
+    method: 'get',
+});
+
+dashboardBestSellers.definition = {
+    methods: ['get'],
+    url: '/api/admin/dashboard/best-sellers',
+} satisfies RouteDefinition<['get']>;
+
+dashboardBestSellers.url = (options?: RouteQueryOptions) => {
+    return dashboardBestSellers.definition.url + queryParams(options);
+};
+
+dashboardBestSellers.get = (
+    options?: RouteQueryOptions,
+): RouteDefinition<'get'> => ({
+    url: dashboardBestSellers.url(options),
+    method: 'get',
+});
+
+/**
  * Admin products index route
  * @route '/admin/products'
  */
@@ -524,6 +578,52 @@ export const adminSettingsEnvironment = (
     options?: RouteQueryOptions,
 ): RouteDefinition<'get'> => ({
     url: '/admin/settings/environment' + queryParams(options),
+    method: 'get',
+});
+
+/**
+ * Admin orders index route
+ * @route '/admin/orders'
+ */
+export const adminOrders = (
+    options?: RouteQueryOptions,
+): RouteDefinition<'get'> => ({
+    url: '/admin/orders' + queryParams(options),
+    method: 'get',
+});
+
+/**
+ * Admin orders show route
+ * @route '/admin/orders/{order}'
+ */
+export const adminOrdersShow = (
+    order: string | number,
+    options?: RouteQueryOptions,
+): RouteDefinition<'get'> => ({
+    url: `/admin/orders/${order}` + queryParams(options),
+    method: 'get',
+});
+
+/**
+ * Admin users index route
+ * @route '/admin/users'
+ */
+export const adminUsers = (
+    options?: RouteQueryOptions,
+): RouteDefinition<'get'> => ({
+    url: '/admin/users' + queryParams(options),
+    method: 'get',
+});
+
+/**
+ * Admin users show route
+ * @route '/admin/users/{user}'
+ */
+export const adminUsersShow = (
+    user: string | number,
+    options?: RouteQueryOptions,
+): RouteDefinition<'get'> => ({
+    url: `/admin/users/${user}` + queryParams(options),
     method: 'get',
 });
 

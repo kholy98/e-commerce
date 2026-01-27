@@ -1,17 +1,18 @@
-import { Head, usePage } from '@inertiajs/react';
-import { useEffect, useState } from 'react';
-
-import { CategoriesModule } from '@/components/categories-module';
-import { DashboardStats } from '@/components/dashboard-stats';
-import { ProductsModule } from '@/components/products-module';
+import { BestSellerTable } from '@/components/dashboard/BestSellerTable';
+import { DonutCharts } from '@/components/dashboard/DonutCharts';
+import { RevenueChart } from '@/components/dashboard/RevenueChart';
+import { StatCard } from '@/components/dashboard/StatCard';
 import AppLayout from '@/layouts/app-layout';
 import {
     dashboard,
-    dashboardCategories,
-    dashboardProducts,
+    dashboardBestSellers,
+    dashboardRevenue,
     dashboardStats,
 } from '@/routes';
 import { type BreadcrumbItem, type SharedData } from '@/types';
+import { Head, usePage } from '@inertiajs/react';
+import { FileText, ShoppingBag, TrendingUp, Users } from 'lucide-react';
+import { useEffect, useState } from 'react';
 
 const breadcrumbs: BreadcrumbItem[] = [
     {
@@ -30,23 +31,20 @@ interface DashboardData {
         low_stock_products: number;
         pending_orders: number;
         total_revenue: number;
+        customer_stats: {
+            new: number;
+            active: number;
+            total: number;
+        };
+        order_stats: {
+            complete: number;
+            canceled: number;
+            pending: number;
+            total: number;
+        };
     };
-    products: Array<{
-        id: number;
-        name: string;
-        price: number;
-        stock: number;
-        is_active: boolean;
-        category: string | null;
-        created_at: string;
-    }>;
-    categories: Array<{
-        id: number;
-        name: string;
-        slug: string;
-        product_count: number;
-        created_at: string;
-    }>;
+    revenue: any[];
+    bestSellers: any[];
 }
 
 export default function Dashboard() {
@@ -57,42 +55,32 @@ export default function Dashboard() {
     useEffect(() => {
         const fetchDashboardData = async () => {
             try {
-                const [statsResponse, productsResponse, categoriesResponse] =
+                const fetchOptions = {
+                    headers: {
+                        Accept: 'application/json',
+                        'X-Requested-With': 'XMLHttpRequest',
+                    },
+                    credentials: 'same-origin' as const,
+                };
+
+                const [statsRes, revenueRes, bestSellersRes] =
                     await Promise.all([
-                        fetch(dashboardStats().url, {
-                            headers: {
-                                Accept: 'application/json',
-                                'X-Requested-With': 'XMLHttpRequest',
-                            },
-                            credentials: 'same-origin',
-                        }),
-                        fetch(dashboardProducts().url, {
-                            headers: {
-                                Accept: 'application/json',
-                                'X-Requested-With': 'XMLHttpRequest',
-                            },
-                            credentials: 'same-origin',
-                        }),
-                        fetch(dashboardCategories().url, {
-                            headers: {
-                                Accept: 'application/json',
-                                'X-Requested-With': 'XMLHttpRequest',
-                            },
-                            credentials: 'same-origin',
-                        }),
+                        fetch(dashboardStats().url, fetchOptions),
+                        fetch(dashboardRevenue().url, fetchOptions),
+                        fetch(dashboardBestSellers().url, fetchOptions),
                     ]);
 
-                const [statsData, productsData, categoriesData] =
+                const [statsData, revenueData, bestSellersData] =
                     await Promise.all([
-                        statsResponse.json(),
-                        productsResponse.json(),
-                        categoriesResponse.json(),
+                        statsRes.json(),
+                        revenueRes.json(),
+                        bestSellersRes.json(),
                     ]);
 
                 setData({
                     stats: statsData.data,
-                    products: productsData.data,
-                    categories: categoriesData.data,
+                    revenue: revenueData.data,
+                    bestSellers: bestSellersData.data,
                 });
             } catch (error) {
                 console.error('Failed to fetch dashboard data:', error);
@@ -108,49 +96,83 @@ export default function Dashboard() {
         return (
             <AppLayout breadcrumbs={breadcrumbs}>
                 <Head title="Dashboard" />
-                <div className="flex h-full flex-1 flex-col gap-4 overflow-x-auto rounded-xl p-4">
-                    <div className="grid auto-rows-min gap-4 md:grid-cols-3">
-                        {[...Array(8)].map((_, i) => (
+                <div className="flex h-full flex-1 flex-col gap-4 p-4 md:p-8">
+                    <div className="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-4">
+                        {[...Array(4)].map((_, i) => (
                             <div
                                 key={i}
-                                className="relative aspect-video animate-pulse overflow-hidden rounded-xl border border-sidebar-border/70 dark:border-sidebar-border"
-                            >
-                                <div className="absolute inset-0 bg-muted" />
-                            </div>
+                                className="h-40 animate-pulse rounded-lg bg-muted/50"
+                            />
                         ))}
-                    </div>
-                    <div className="relative min-h-[50vh] flex-1 animate-pulse overflow-hidden rounded-xl border border-sidebar-border/70 md:min-h-min dark:border-sidebar-border">
-                        <div className="absolute inset-0 bg-muted" />
                     </div>
                 </div>
             </AppLayout>
         );
     }
 
-    if (!data) {
-        return (
-            <AppLayout breadcrumbs={breadcrumbs}>
-                <Head title="Dashboard" />
-                <div className="flex h-full flex-1 flex-col gap-4 overflow-x-auto rounded-xl p-4">
-                    <div className="py-8 text-center">
-                        <p className="text-muted-foreground">
-                            Failed to load dashboard data
-                        </p>
-                    </div>
-                </div>
-            </AppLayout>
-        );
-    }
+    if (!data) return null;
 
     return (
         <AppLayout breadcrumbs={breadcrumbs}>
             <Head title="Dashboard" />
-            <div className="flex h-full flex-1 flex-col gap-4 overflow-x-auto rounded-xl p-4">
-                <DashboardStats stats={data.stats} />
 
-                <div className="grid gap-4 md:grid-cols-2">
-                    <ProductsModule products={data.products} />
-                    <CategoriesModule categories={data.categories} />
+            <div className="relative min-h-screen">
+                {/* Gradient Backdrop */}
+                <div className="pointer-events-none absolute top-0 right-0 left-0 h-[400px] bg-linear-to-b from-[#5D3E1D]/40 via-[#5D3E1D]/10 to-transparent" />
+
+                <div className="relative z-10 flex h-full flex-1 flex-col gap-8 p-4 md:p-8">
+                    {/* Stats Grid */}
+                    <div className="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-4">
+                        <StatCard
+                            title="All products"
+                            value={data.stats?.total_products ?? 0}
+                            icon={FileText}
+                        />
+                        <StatCard
+                            title="All revenue"
+                            value={`${(data.stats?.total_revenue ?? 0).toLocaleString()} EGP`}
+                            icon={TrendingUp}
+                        />
+                        <StatCard
+                            title="All customers"
+                            value={data.stats?.total_users ?? 0}
+                            icon={Users}
+                        />
+                        <StatCard
+                            title="All orders"
+                            value={data.stats?.total_orders ?? 0}
+                            icon={ShoppingBag}
+                        />
+                    </div>
+
+                    {/* Middle Charts Grid */}
+                    <div className="grid grid-cols-1 gap-6 lg:grid-cols-4">
+                        <div className="lg:col-span-3">
+                            <RevenueChart data={data.revenue ?? []} />
+                        </div>
+                        <div className="lg:col-span-1">
+                            <DonutCharts
+                                customerStats={
+                                    data.stats?.customer_stats ?? {
+                                        new: 0,
+                                        active: 0,
+                                        total: 0,
+                                    }
+                                }
+                                orderStats={
+                                    data.stats?.order_stats ?? {
+                                        complete: 0,
+                                        canceled: 0,
+                                        pending: 0,
+                                        total: 0,
+                                    }
+                                }
+                            />
+                        </div>
+                    </div>
+
+                    {/* Bottom Table */}
+                    <BestSellerTable products={data.bestSellers ?? []} />
                 </div>
             </div>
         </AppLayout>

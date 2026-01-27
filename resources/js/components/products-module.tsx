@@ -8,6 +8,7 @@ import {
     TableHeader,
     TableRow,
 } from '@/components/ui/table';
+import { formatDate } from '@/lib/utils';
 
 interface Product {
     id: number;
@@ -67,7 +68,9 @@ export function ProductsModule({ products }: ProductsModuleProps) {
                                 <TableCell>
                                     {product.category || 'N/A'}
                                 </TableCell>
-                                <TableCell>{product.created_at}</TableCell>
+                                <TableCell>
+                                    {formatDate(product.created_at)}
+                                </TableCell>
                             </TableRow>
                         ))}
                     </TableBody>

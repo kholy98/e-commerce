@@ -15,6 +15,7 @@ import {
     TableRow,
 } from '@/components/ui/table';
 import AppLayout from '@/layouts/app-layout';
+import { formatDate } from '@/lib/utils';
 import {
     adminProducts,
     adminProductsApi,
@@ -228,15 +229,15 @@ export default function ProductsIndex() {
                                                 }
                                             >
                                                 {product.is_active
-                                                    ? 'Active'
-                                                    : 'Inactive'}
+                                                    ? 'Published'
+                                                    : 'Draft'}
                                             </Badge>
                                         </TableCell>
                                         <TableCell>
                                             {product.category || 'N/A'}
                                         </TableCell>
                                         <TableCell>
-                                            {product.created_at}
+                                            {formatDate(product.created_at)}
                                         </TableCell>
                                         <TableCell>
                                             <div className="flex items-center gap-2">

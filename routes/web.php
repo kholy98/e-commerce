@@ -85,29 +85,10 @@ Route::middleware(['auth', 'verified'])->group(function () {
         Route::delete('categories/{category}', [\App\Http\Controllers\AdminCategoryController::class, 'destroy'])->name('categories.destroy');
 
         // Team Members
-        Route::get('team-members', function () {
-            return Inertia::render('admin/team-members/index', [
-                'teamMembers' => \App\Models\TeamMember::all(),
-            ]);
-        })->name('team-members.index');
-
-        Route::get('team-members/create', function () {
-            return Inertia::render('admin/team-members/create');
-        })->name('team-members.create');
-
-        Route::get('team-members/{teamMember}/edit', function (\App\Models\TeamMember $teamMember) {
-            return Inertia::render('admin/team-members/edit', [
-                'teamMember' => $teamMember->load('media'),
-            ]);
-        })->name('team-members.edit');
-
-        Route::get('team-members/{teamMember}', function (\App\Models\TeamMember $teamMember) {
-            return Inertia::render('admin/team-members/show', [
-                'teamMember' => $teamMember->load('media'),
-            ]);
-        })->name('team-members.show');
-
-        // Team Member form handling
+        Route::get('team-members', [\App\Http\Controllers\TeamMemberController::class, 'index'])->name('team-members.index');
+        Route::get('team-members/create', [\App\Http\Controllers\TeamMemberController::class, 'create'])->name('team-members.create');
+        Route::get('team-members/{teamMember}/edit', [\App\Http\Controllers\TeamMemberController::class, 'edit'])->name('team-members.edit');
+        Route::get('team-members/{teamMember}', [\App\Http\Controllers\TeamMemberController::class, 'show'])->name('team-members.show');
         Route::post('team-members', [\App\Http\Controllers\TeamMemberController::class, 'store'])->name('team-members.store');
         Route::post('team-members/{teamMember}', [\App\Http\Controllers\TeamMemberController::class, 'update'])->name('team-members.update');
         Route::delete('team-members/{teamMember}', [\App\Http\Controllers\TeamMemberController::class, 'destroy'])->name('team-members.destroy');
@@ -141,6 +122,14 @@ Route::middleware(['auth', 'verified'])->group(function () {
         Route::get('settings/environment', function () {
             return Inertia::render('admin/settings/environment');
         })->name('settings.environment');
+
+        // Orders
+        Route::get('orders', [\App\Http\Controllers\AdminOrderController::class, 'index'])->name('orders.index');
+        Route::get('orders/{order}', [\App\Http\Controllers\AdminOrderController::class, 'show'])->name('orders.show');
+
+        // Users (Customers)
+        Route::get('users', [\App\Http\Controllers\AdminUserController::class, 'index'])->name('users.index');
+        Route::get('users/{user}', [\App\Http\Controllers\AdminUserController::class, 'show'])->name('users.show');
     });
 });
 

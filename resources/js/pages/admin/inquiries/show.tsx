@@ -8,6 +8,7 @@ import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Label } from '@/components/ui/label';
 import { Textarea } from '@/components/ui/textarea';
 import AppLayout from '@/layouts/app-layout';
+import { formatDate } from '@/lib/utils';
 import { adminInquiries } from '@/routes';
 import { type BreadcrumbItem } from '@/types';
 
@@ -132,9 +133,7 @@ export default function InquiriesShow({ inquiry }: Props) {
                                     Created
                                 </Label>
                                 <p className="text-sm text-muted-foreground">
-                                    {new Date(
-                                        inquiry.created_at,
-                                    ).toLocaleString()}
+                                    {formatDate(inquiry.created_at)}
                                 </p>
                             </div>
 
