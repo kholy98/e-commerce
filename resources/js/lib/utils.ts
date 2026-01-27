@@ -9,3 +9,6 @@ export function cn(...inputs: ClassValue[]) {
 export function toUrl(url: NonNullable<InertiaLinkProps['href']>): string {
     return typeof url === 'string' ? url : url.url;
 }
+
+
+export const formatDate = (date: string | Date) =>  new Date(date).toLocaleDateString('ar-EG')
