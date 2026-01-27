@@ -9,6 +9,24 @@ use Illuminate\Http\Request;
 class TeamMemberController extends Controller
 {
     /**
+     * Display a listing of team members
+     */
+    public function index()
+    {
+        return inertia('admin/team-members/index', [
+            'teamMembers' => TeamMember::all(),
+        ]);
+    }
+
+    /**
+     * Show the form for creating a new team member
+     */
+    public function create()
+    {
+        return inertia('admin/team-members/create');
+    }
+
+    /**
      * Store a new team member
      */
     public function store(Request $request): RedirectResponse
@@ -35,6 +53,26 @@ class TeamMemberController extends Controller
         }
 
         return redirect()->route('admin.team-members.index')->with('success', 'Team member created successfully');
+    }
+
+    /**
+     * Display the specified team member
+     */
+    public function show(TeamMember $teamMember)
+    {
+        return inertia('admin/team-members/show', [
+            'teamMember' => $teamMember->load('media'),
+        ]);
+    }
+
+    /**
+     * Show the form for editing the specified team member
+     */
+    public function edit(TeamMember $teamMember)
+    {
+        return inertia('admin/team-members/edit', [
+            'teamMember' => $teamMember->load('media'),
+        ]);
     }
 
     /**
