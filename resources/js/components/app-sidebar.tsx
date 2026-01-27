@@ -1,17 +1,16 @@
 import { Link } from '@inertiajs/react';
 import {
-    BookOpen,
-    Folder,
     LayoutGrid,
     MessageSquare,
     Package,
     Phone,
     Settings,
+    ShoppingBag,
     Tag,
+    User2Icon,
     Users,
 } from 'lucide-react';
 
-import { NavFooter } from '@/components/nav-footer';
 import { NavMain } from '@/components/nav-main';
 import { NavUser } from '@/components/nav-user';
 import {
@@ -27,9 +26,11 @@ import {
     adminCategories,
     adminContactUs,
     adminInquiries,
+    adminOrders,
     adminProducts,
     adminSettingsEnvironment,
     adminTeamMembers,
+    adminUsers,
     dashboard,
 } from '@/routes';
 import { type NavItem } from '@/types';
@@ -43,6 +44,11 @@ const mainNavItems: NavItem[] = [
         icon: LayoutGrid,
     },
     {
+        title: 'Orders',
+        href: adminOrders(),
+        icon: ShoppingBag,
+    },
+    {
         title: 'Products',
         href: adminProducts(),
         icon: Package,
@@ -51,6 +57,11 @@ const mainNavItems: NavItem[] = [
         title: 'Categories',
         href: adminCategories(),
         icon: Tag,
+    },
+    {
+        title: 'Customers',
+        href: adminUsers(),
+        icon: User2Icon,
     },
     {
         title: 'Team Members',
@@ -74,26 +85,17 @@ const mainNavItems: NavItem[] = [
     },
 ];
 
-const footerNavItems: NavItem[] = [
-    {
-        title: 'Repository',
-        href: 'https://github.com/laravel/react-starter-kit',
-        icon: Folder,
-    },
-    {
-        title: 'Documentation',
-        href: 'https://laravel.com/docs/starter-kits#react',
-        icon: BookOpen,
-    },
-];
-
 export function AppSidebar() {
     return (
-        <Sidebar collapsible="icon" variant="inset">
-            <SidebarHeader>
+        <Sidebar collapsible="icon" variant="sidebar">
+            <SidebarHeader className="">
                 <SidebarMenu>
                     <SidebarMenuItem>
-                        <SidebarMenuButton size="lg" asChild>
+                        <SidebarMenuButton
+                            size="lg"
+                            asChild
+                            className="h-auto p-0 hover:bg-transparent active:bg-transparent"
+                        >
                             <Link href={dashboard()} prefetch>
                                 <AppLogo />
                             </Link>
@@ -107,7 +109,6 @@ export function AppSidebar() {
             </SidebarContent>
 
             <SidebarFooter>
-                <NavFooter items={footerNavItems} className="mt-auto" />
                 <NavUser />
             </SidebarFooter>
         </Sidebar>

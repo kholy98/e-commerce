@@ -1,16 +1,16 @@
-import AppLogoIcon from './app-logo-icon';
-
 export default function AppLogo() {
     return (
-        <>
-            <div className="flex aspect-square size-8 items-center justify-center rounded-md bg-sidebar-primary text-sidebar-primary-foreground">
-                <AppLogoIcon className="size-5 fill-current text-white dark:text-black" />
-            </div>
-            <div className="ml-1 grid flex-1 text-left text-sm">
-                <span className="mb-0.5 truncate leading-tight font-semibold">
-                    Laravel Starter Kit
-                </span>
-            </div>
-        </>
+        <div className="mb-2 flex max-h-16 w-full items-center justify-center gap-2">
+            <img
+                src="/atheer-logo-black.svg"
+                alt="Al-Ather"
+                className="max-h-16 object-cover dark:hidden"
+            />
+            <img
+                src="/atheer-logo-sandbeach.svg"
+                alt="Al-Ather"
+                className="hidden max-h-16 object-cover dark:block"
+            />
+        </div>
     );
 }
