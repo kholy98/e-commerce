@@ -234,7 +234,9 @@ class OrderController extends Controller
      */
     public function show(Order $order): JsonResponse
     {
-        $this->authorize('view', $order);
+        if ($order->user_id !== auth()->id() && !auth()->user()->is_admin) {
+            return response()->json(['error' => 'Unauthorized'], 403);
+        }
 
         $order->load('items.product', 'user');
 
