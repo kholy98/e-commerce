@@ -4,7 +4,6 @@ import { FormEventHandler } from 'react';
 
 import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
-import { Checkbox } from '@/components/ui/checkbox';
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
 import AppLayout from '@/layouts/app-layout';
@@ -13,11 +12,11 @@ import { type BreadcrumbItem } from '@/types';
 
 const breadcrumbs: BreadcrumbItem[] = [
     {
-        title: 'Customers Management',
+        title: 'Admins Management',
         href: index(),
     },
     {
-        title: 'Add Customer',
+        title: 'Add Admin',
         href: '/admin/users/create',
     },
 ];
@@ -28,7 +27,6 @@ export default function UsersCreate() {
         email: '',
         phone: '',
         password: '',
-        is_admin: false,
     });
 
     const submit: FormEventHandler = (e) => {
@@ -48,9 +46,9 @@ export default function UsersCreate() {
                         </Link>
                     </Button>
                     <div>
-                        <h1 className="text-2xl font-bold">Add Customer</h1>
+                        <h1 className="text-2xl font-bold">Add Admin</h1>
                         <p className="text-muted-foreground">
-                            Create a new customer or admin account
+                            Create a new admin account
                         </p>
                     </div>
                 </div>
@@ -161,30 +159,6 @@ export default function UsersCreate() {
                                         )}
                                     </div>
                                 </div>
-
-                                <div className="flex items-center space-x-2 border-t pt-4">
-                                    <Checkbox
-                                        id="is_admin"
-                                        checked={data.is_admin}
-                                        onCheckedChange={(checked) =>
-                                            setData('is_admin', !!checked)
-                                        }
-                                    />
-                                    <Label
-                                        htmlFor="is_admin"
-                                        className="font-medium"
-                                    >
-                                        Admin User
-                                    </Label>
-                                    <p className="ml-2 text-sm text-muted-foreground">
-                                        (Grants access to admin dashboard)
-                                    </p>
-                                </div>
-                                {errors.is_admin && (
-                                    <p className="text-sm text-red-600">
-                                        {errors.is_admin}
-                                    </p>
-                                )}
 
                                 <div className="flex justify-end gap-4 border-t pt-4">
                                     <Button variant="outline" asChild>

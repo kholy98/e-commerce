@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Hash;
 use Inertia\Inertia;
 
 class AdminUserController extends Controller
@@ -31,6 +32,31 @@ class AdminUserController extends Controller
         ]);
     }
 
+    public function create()
+    {
+        return Inertia::render('admin/users/create');
+    }
+
+    public function store(Request $request)
+    {
+        $validated = $request->validate([
+            'name' => 'required|string|max:255',
+            'email' => 'required|string|email|max:255|unique:users',
+            'phone' => 'nullable|string|max:20',
+            'password' => 'required|string|min:8',
+        ]);
+
+        User::create([
+            'name' => $validated['name'],
+            'email' => $validated['email'],
+            'phone' => $validated['phone'],
+            'password' => Hash::make($validated['password']),
+            'is_admin' => true,
+        ]);
+
+        return redirect()->route('admin.users.index')->with('success', 'Admin user created successfully');
+    }
+
     public function show(User $user)
     {
         return Inertia::render('admin/users/show', [
@@ -51,6 +77,7 @@ class AdminUserController extends Controller
             'name' => 'required|string|max:255',
             'email' => 'required|email|unique:users,email,' . $user->id,
             'phone' => 'nullable|string|max:20',
+            'is_admin' => 'sometimes|boolean',
         ]);
 
         $user->update($validated);

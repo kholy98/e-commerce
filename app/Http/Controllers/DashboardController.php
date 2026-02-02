@@ -37,6 +37,11 @@ class DashboardController extends Controller
             'total' => User::count(),
         ];
 
+        $user_stats = [
+            'admins' => User::where('is_admin', true)->count(),
+            'customers' => User::where('is_admin', false)->count(),
+        ];
+
         $order_stats = [
             'complete' => Order::where('status', Order::STATUS_DELIVERED)->count(),
             'canceled' => Order::where('status', Order::STATUS_CANCELLED)->count(),
@@ -48,6 +53,7 @@ class DashboardController extends Controller
             'success' => true,
             'data' => array_merge($stats, [
                 'customer_stats' => $customer_stats,
+                'user_stats' => $user_stats,
                 'order_stats' => $order_stats,
             ]),
         ]);

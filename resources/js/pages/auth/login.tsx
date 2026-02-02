@@ -1,4 +1,4 @@
-import { Form, Head } from '@inertiajs/react';
+import { Form, Head, usePage } from '@inertiajs/react';
 
 import InputError from '@/components/input-error';
 import TextLink from '@/components/text-link';
@@ -16,18 +16,28 @@ interface LoginProps {
     status?: string;
     canResetPassword: boolean;
     canRegister: boolean;
+    error?: string;
 }
 
 export default function Login({
     status,
     canResetPassword,
     canRegister,
+    error,
 }: LoginProps) {
+    const { flash = {} } = usePage().props as any;
     return (
+
+
         <AuthLayout
             title="Log in to your account"
             description="Enter your email and password below to log in"
         >
+            {error && (
+                <div className="mb-4 rounded-lg border border-red-200 bg-red-50 p-3 text-sm text-red-600 dark:border-red-800 dark:bg-red-900/20 dark:text-red-400">
+                    {error}
+                </div>
+            )}
             <Head title="Log in" />
 
             <Form
@@ -50,7 +60,7 @@ export default function Login({
                                     autoComplete="email"
                                     placeholder="email@example.com"
                                 />
-                                <InputError message={errors.email} />
+                                <InputError message={errors.email  || error} />
                             </div>
 
                             <div className="grid gap-2">
@@ -116,6 +126,13 @@ export default function Login({
                     {status}
                 </div>
             )}
+
+            {(flash.error || error) && (
+                <div className="mb-4 rounded-lg border border-red-200 bg-red-50 p-3 text-sm text-red-600 dark:border-red-800 dark:bg-red-900/20 dark:text-red-400">
+                    {flash.error || error}
+                </div>
+            )}
+
         </AuthLayout>
     );
 }

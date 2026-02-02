@@ -35,7 +35,7 @@ export default function UsersEdit({ user }: Props) {
 
     const breadcrumbs: BreadcrumbItem[] = [
         {
-            title: 'Customers Management',
+            title: 'Users Management',
             href: index(),
         },
         {
@@ -55,7 +55,7 @@ export default function UsersEdit({ user }: Props) {
 
     return (
         <AppLayout breadcrumbs={breadcrumbs}>
-            <Head title={`Edit Customer - ${user.name}`} />
+            <Head title={`Edit User - ${user.name}`} />
 
             <div className="flex h-full flex-1 flex-col gap-8 p-8">
                 <div className="flex items-center gap-4">
@@ -65,7 +65,7 @@ export default function UsersEdit({ user }: Props) {
                         </Link>
                     </Button>
                     <div>
-                        <h1 className="text-2xl font-bold">Edit Customer</h1>
+                        <h1 className="text-2xl font-bold">Edit User</h1>
                         <p className="text-muted-foreground">
                             Update account information for {user.name}
                         </p>

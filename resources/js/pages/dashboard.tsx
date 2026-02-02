@@ -32,6 +32,10 @@ interface DashboardData {
             active: number;
             total: number;
         };
+        user_stats: {
+            admins: number;
+            customers: number;
+        };
         order_stats: {
             complete: number;
             canceled: number;
@@ -170,6 +174,12 @@ export default function Dashboard() {
                                         new: 0,
                                         active: 0,
                                         total: 0,
+                                    }
+                                }
+                                userStats={
+                                    data.stats?.user_stats ?? {
+                                        admins: 0,
+                                        customers: 0,
                                     }
                                 }
                                 orderStats={
