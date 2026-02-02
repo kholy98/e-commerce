@@ -21,7 +21,7 @@ interface Props {
 export default function UserShow({ user }: Props) {
     const breadcrumbs: BreadcrumbItem[] = [
         {
-            title: 'Customers Management',
+            title: 'Users Management',
             href: index(),
         },
         {
@@ -32,7 +32,7 @@ export default function UserShow({ user }: Props) {
 
     return (
         <AppLayout breadcrumbs={breadcrumbs}>
-            <Head title={`Customer - ${user.name}`} />
+            <Head title={`User - ${user.name}`} />
 
             <div className="flex h-full flex-1 flex-col gap-8 p-8">
                 <div className="flex items-center gap-4">
@@ -42,7 +42,7 @@ export default function UserShow({ user }: Props) {
                     >
                         <ArrowLeft className="h-5 w-5" />
                     </Link>
-                    <h1 className="text-2xl font-bold">Customer Details</h1>
+                    <h1 className="text-2xl font-bold">User Details</h1>
                 </div>
 
                 <div className="grid gap-6 md:grid-cols-3">
@@ -174,7 +174,7 @@ export default function UserShow({ user }: Props) {
                                                     className="h-24 text-center text-muted-foreground"
                                                 >
                                                     No orders found for this
-                                                    customer.
+                                                    user.
                                                 </TableCell>
                                             </TableRow>
                                         )}

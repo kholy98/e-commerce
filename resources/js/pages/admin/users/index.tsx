@@ -50,7 +50,7 @@ interface Props {
 
 const breadcrumbs: BreadcrumbItem[] = [
     {
-        title: 'Customers Management',
+        title: 'Users Management',
         href: '/admin/users',
     },
 ];
@@ -83,11 +83,11 @@ export default function UsersIndex({ users, filters }: Props) {
 
             <div className="flex h-full flex-1 flex-col gap-8 p-8">
                 <div className="flex items-center justify-between">
-                    <h1 className="text-2xl font-bold">Customers Management</h1>
+                    <h1 className="text-2xl font-bold">Users Management</h1>
                     <Button asChild>
                         <Link href="/admin/users/create">
                             <Plus className="mr-2 h-4 w-4" />
-                            Add Customer
+                            Add Admin
                         </Link>
                     </Button>
                 </div>
@@ -100,7 +100,7 @@ export default function UsersIndex({ users, filters }: Props) {
                         >
                             <Search className="absolute top-1/2 left-3 h-4 w-4 -translate-y-1/2 text-muted-foreground" />
                             <Input
-                                placeholder="Search customers..."
+                                placeholder="Search users..."
                                 value={search}
                                 onChange={(e) => setSearch(e.target.value)}
                                 className="border-none pl-10 ring-1 ring-sidebar-border"
@@ -194,7 +194,7 @@ export default function UsersIndex({ users, filters }: Props) {
                                             colSpan={6}
                                             className="h-24 text-center text-muted-foreground"
                                         >
-                                            No customers found.
+                                            No users found.
                                         </TableCell>
                                     </TableRow>
                                 )}

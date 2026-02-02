@@ -34,6 +34,7 @@ return Application::configure(basePath: dirname(__DIR__))
         // Register middleware aliases
         $middleware->alias([
             'optional.sanctum' => \App\Http\Middleware\OptionalSanctumAuth::class,
+            'admin' => \App\Http\Middleware\AdminAuth::class,
         ]);
 
     })

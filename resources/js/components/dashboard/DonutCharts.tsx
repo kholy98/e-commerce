@@ -64,6 +64,10 @@ interface DonutChartsProps {
         active: number;
         total: number;
     };
+    userStats: {
+        admins: number;
+        customers: number;
+    };
     orderStats: {
         complete: number;
         canceled: number;
@@ -72,7 +76,11 @@ interface DonutChartsProps {
     };
 }
 
-export function DonutCharts({ customerStats, orderStats }: DonutChartsProps) {
+export function DonutCharts({
+    customerStats,
+    userStats,
+    orderStats,
+}: DonutChartsProps) {
     const calcPerc = (val: number, total: number) =>
         total > 0 ? Math.round((val / total) * 100) : 0;
 
@@ -97,6 +105,27 @@ export function DonutCharts({ customerStats, orderStats }: DonutChartsProps) {
                 customerStats.total,
             ),
             color: '#E5E5E5',
+        },
+    ];
+
+    const userTypeData = [
+        {
+            name: 'Admins',
+            value: userStats.admins,
+            percentage: calcPerc(
+                userStats.admins,
+                userStats.admins + userStats.customers,
+            ),
+            color: '#5D3E1D',
+        },
+        {
+            name: 'Customers',
+            value: userStats.customers,
+            percentage: calcPerc(
+                userStats.customers,
+                userStats.admins + userStats.customers,
+            ),
+            color: '#8B5E3C',
         },
     ];
 
@@ -127,6 +156,13 @@ export function DonutCharts({ customerStats, orderStats }: DonutChartsProps) {
                 title="Customers"
                 total={customerStats.total.toLocaleString()}
                 data={customerData}
+            />
+            <Donut
+                title="Users by Type"
+                total={(
+                    userStats.admins + userStats.customers
+                ).toLocaleString()}
+                data={userTypeData}
             />
             <Donut
                 title="Orders"

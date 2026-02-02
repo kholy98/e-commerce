@@ -11,17 +11,17 @@ Route::get('/', function () {
 })->name('home');
 
 // Authentication routes
-Route::get('/login', function () {
-    return Inertia::render('auth/login', [
-        'canRegister' => Features::enabled(Features::registration()),
-    ]);
-})->name('login')->middleware('guest');
+// Route::get('/login', function () {
+//     return Inertia::render('auth/login', [
+//         'canRegister' => Features::enabled(Features::registration()),
+//     ]);
+// })->name('login')->middleware('guest');
 
 Route::get('/register', function () {
     return Inertia::render('auth/register');
 })->name('register')->middleware('guest');
 
-Route::middleware(['auth', 'verified'])->group(function () {
+Route::middleware(['auth', 'verified', 'admin'])->group(function () {
     Route::get('dashboard', function () {
         return Inertia::render('dashboard');
     })->name('dashboard');
@@ -129,6 +129,8 @@ Route::middleware(['auth', 'verified'])->group(function () {
 
         // Users (Customers)
         Route::get('users', [\App\Http\Controllers\AdminUserController::class, 'index'])->name('users.index');
+        Route::get('users/create', [\App\Http\Controllers\AdminUserController::class, 'create'])->name('users.create');
+        Route::post('users', [\App\Http\Controllers\AdminUserController::class, 'store'])->name('users.store');
         Route::get('users/{user}', [\App\Http\Controllers\AdminUserController::class, 'show'])->name('users.show');
         Route::get('users/{user}/edit', [\App\Http\Controllers\AdminUserController::class, 'edit'])->name('users.edit');
         Route::post('users/{user}', [\App\Http\Controllers\AdminUserController::class, 'update'])->name('users.update');

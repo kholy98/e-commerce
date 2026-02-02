@@ -283,8 +283,8 @@ Route::middleware('auth:sanctum')->group(function () {
     });
 });
 
-// Admin routes - use session auth instead of Sanctum
-Route::middleware(['web', 'auth'])->prefix('admin')->group(function () {
+// Admin routes - use session auth instead of Sanctum, require admin
+Route::middleware(['web', 'auth', 'admin'])->prefix('admin')->group(function () {
     // Dashboard
     Route::get('/dashboard/stats', [\App\Http\Controllers\DashboardController::class, 'stats'])->name('dashboard.stats');
     Route::get('/dashboard/products', [\App\Http\Controllers\DashboardController::class, 'recentProducts'])->name('dashboard.products');
