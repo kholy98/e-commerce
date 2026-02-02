@@ -15,7 +15,8 @@ import {
 } from '@/components/ui/table';
 import AppLayout from '@/layouts/app-layout';
 import { formatDate } from '@/lib/utils';
-import { adminOrders, adminOrdersShow } from '@/routes';
+// import { adminOrders, adminOrdersShow } from '@/routes';
+import { index, show } from '@/routes/admin/orders';
 import { type BreadcrumbItem } from '@/types';
 
 interface OrderItem {
@@ -64,7 +65,7 @@ interface Props {
 const breadcrumbs: BreadcrumbItem[] = [
     {
         title: 'Order Management',
-        href: adminOrders(),
+        href: index(),
     },
 ];
 
@@ -75,7 +76,7 @@ export default function OrdersIndex({ stats, orders, filters }: Props) {
     const handleSearch = (e: React.FormEvent) => {
         e.preventDefault();
         router.get(
-            adminOrders(),
+            orders(),
             { ...filters, search, page: 1 },
             { preserveState: true },
         );
@@ -84,7 +85,7 @@ export default function OrdersIndex({ stats, orders, filters }: Props) {
     const handleTabChange = (status: string) => {
         const newFilters: any = { ...filters, status, page: 1 };
         if (status === 'all') delete newFilters.status;
-        router.get(adminOrders(), newFilters, { preserveState: true });
+        router.get(index(), newFilters, { preserveState: true });
     };
 
     const getStatusInfo = (status: string) => {
@@ -361,9 +362,7 @@ export default function OrdersIndex({ stats, orders, filters }: Props) {
                                                 </TableCell>
                                                 <TableCell>
                                                     <Link
-                                                        href={adminOrdersShow(
-                                                            order.id,
-                                                        )}
+                                                        href={show(order.id)}
                                                         className="flex h-8 w-8 items-center justify-center rounded-full bg-[#F5B575]/20 text-[#F5B575]"
                                                     >
                                                         <Info className="h-5 w-5" />

@@ -7,13 +7,13 @@ import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
 import AppLayout from '@/layouts/app-layout';
-import { adminTeamMembers } from '@/routes';
+import { index } from '@/routes/admin/team-members';
 import { type BreadcrumbItem } from '@/types';
 
 const breadcrumbs: BreadcrumbItem[] = [
     {
         title: 'Team Members',
-        href: adminTeamMembers(),
+        href: index(),
     },
     {
         title: 'Add Member',
@@ -68,7 +68,7 @@ export default function TeamMembersCreate() {
             <div className="flex h-full flex-1 flex-col gap-8 p-8">
                 <div className="flex items-center gap-4">
                     <Button variant="outline" size="icon" asChild>
-                        <Link href={adminTeamMembers()}>
+                        <Link href={index()}>
                             <ArrowLeft className="h-4 w-4" />
                         </Link>
                     </Button>

@@ -286,11 +286,11 @@ Route::middleware('auth:sanctum')->group(function () {
 // Admin routes - use session auth instead of Sanctum
 Route::middleware(['web', 'auth'])->prefix('admin')->group(function () {
     // Dashboard
-    Route::get('/dashboard/stats', [\App\Http\Controllers\DashboardController::class, 'stats']);
-    Route::get('/dashboard/products', [\App\Http\Controllers\DashboardController::class, 'recentProducts']);
-    Route::get('/dashboard/categories', [\App\Http\Controllers\DashboardController::class, 'categories']);
-    Route::get('/dashboard/revenue', [\App\Http\Controllers\DashboardController::class, 'revenueChart']);
-    Route::get('/dashboard/best-sellers', [\App\Http\Controllers\DashboardController::class, 'bestSellers']);
+    Route::get('/dashboard/stats', [\App\Http\Controllers\DashboardController::class, 'stats'])->name('dashboard.stats');
+    Route::get('/dashboard/products', [\App\Http\Controllers\DashboardController::class, 'recentProducts'])->name('dashboard.products');
+    Route::get('/dashboard/categories', [\App\Http\Controllers\DashboardController::class, 'categories'])->name('dashboard.categories');
+    Route::get('/dashboard/revenue', [\App\Http\Controllers\DashboardController::class, 'revenueChart'])->name('dashboard.revenue');
+    Route::get('/dashboard/best-sellers', [\App\Http\Controllers\DashboardController::class, 'bestSellers'])->name('dashboard.best-sellers');
 
     // Product management
     Route::prefix('products')->group(function () {

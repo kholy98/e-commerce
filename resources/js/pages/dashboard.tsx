@@ -3,12 +3,8 @@ import { DonutCharts } from '@/components/dashboard/DonutCharts';
 import { RevenueChart } from '@/components/dashboard/RevenueChart';
 import { StatCard } from '@/components/dashboard/StatCard';
 import AppLayout from '@/layouts/app-layout';
-import {
-    dashboard,
-    dashboardBestSellers,
-    dashboardRevenue,
-    dashboardStats,
-} from '@/routes';
+import { dashboard } from '@/routes';
+import { bestSellers, revenue, stats } from '@/routes/dashboard';
 import { type BreadcrumbItem, type SharedData } from '@/types';
 import { Head, usePage } from '@inertiajs/react';
 import { FileText, ShoppingBag, TrendingUp, Users } from 'lucide-react';
@@ -65,10 +61,27 @@ export default function Dashboard() {
 
                 const [statsRes, revenueRes, bestSellersRes] =
                     await Promise.all([
-                        fetch(dashboardStats().url, fetchOptions),
-                        fetch(dashboardRevenue().url, fetchOptions),
-                        fetch(dashboardBestSellers().url, fetchOptions),
+                        fetch(stats.url(), fetchOptions),
+                        fetch(revenue.url(), fetchOptions),
+                        fetch(bestSellers.url(), fetchOptions),
                     ]);
+
+                // Check if responses are OK before parsing JSON
+                if (!statsRes.ok || !revenueRes.ok || !bestSellersRes.ok) {
+                    if (
+                        statsRes.status === 403 ||
+                        revenueRes.status === 403 ||
+                        bestSellersRes.status === 403
+                    ) {
+                        console.error(
+                            'Access denied: Admin privileges required',
+                        );
+                        // Redirect to login if not authorized
+                        window.location.href = '/login';
+                        return;
+                    }
+                    throw new Error('Failed to fetch dashboard data');
+                }
 
                 const [statsData, revenueData, bestSellersData] =
                     await Promise.all([

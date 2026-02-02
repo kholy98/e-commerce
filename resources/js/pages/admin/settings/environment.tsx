@@ -14,7 +14,7 @@ import {
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
 import AppLayout from '@/layouts/app-layout';
-import { adminSettingsEnvironment } from '@/routes';
+import { environment } from '@/routes/admin/settings';
 import { type BreadcrumbItem } from '@/types';
 
 const breadcrumbs: BreadcrumbItem[] = [
@@ -24,7 +24,7 @@ const breadcrumbs: BreadcrumbItem[] = [
     },
     {
         title: 'Environment Settings',
-        href: adminSettingsEnvironment().url,
+        href: environment().url,
     },
 ];
 

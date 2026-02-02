@@ -17,13 +17,13 @@ import {
 import { Textarea } from '@/components/ui/textarea';
 import AppLayout from '@/layouts/app-layout';
 import { cn } from '@/lib/utils';
-import { adminProducts } from '@/routes';
+import { index } from '@/routes/admin/products';
 import { type BreadcrumbItem, type SharedData } from '@/types';
 
 const breadcrumbs: BreadcrumbItem[] = [
     {
         title: 'Products',
-        href: adminProducts(),
+        href: index(),
     },
     {
         title: 'Edit Product',
@@ -152,7 +152,7 @@ export default function ProductEdit({ product, categories }: Props) {
 
             router.post(`/admin/products/${product.id}`, formData, {
                 onSuccess: () => {
-                    router.visit(adminProducts());
+                    router.visit(index());
                 },
                 onError: (errors) => {
                     console.error('Failed to update product:', errors);
@@ -447,7 +447,7 @@ export default function ProductEdit({ product, categories }: Props) {
                                                 className="bg-muted/30 pl-8"
                                             />
                                             <span className="absolute top-2.5 left-3 text-muted-foreground">
-                                                $
+                                                EGP
                                             </span>
                                         </div>
                                     </div>
@@ -525,28 +525,6 @@ export default function ProductEdit({ product, categories }: Props) {
                                     </div>
                                 </CardContent>
                             </Card>
-                        </div>
-
-                        {/* Action Buttons */}
-                        <div className="flex gap-4 pt-4">
-                            <Button
-                                type="button"
-                                variant="outline"
-                                className="h-12 flex-1 border-[#4A3426] text-base font-medium text-[#4A3426] hover:bg-[#4A3426]/10"
-                                onClick={() => handleSubmit('draft')}
-                                disabled={loading}
-                            >
-                                <Save className="mr-2 h-4 w-4" />
-                                Save to draft
-                            </Button>
-                            <Button
-                                type="button"
-                                className="h-12 flex-1 bg-[#4A3426] text-base font-medium text-white hover:bg-[#4A3426]/90"
-                                onClick={() => handleSubmit('published')}
-                                disabled={loading}
-                            >
-                                {loading ? 'Updating...' : 'Update & Publish'}
-                            </Button>
                         </div>
                     </div>
 
@@ -715,7 +693,8 @@ export default function ProductEdit({ product, categories }: Props) {
                                                     }
                                                     className={cn(
                                                         'flex-1',
-                                                        weight === w.value
+                                                        Number(weight) ==
+                                                            Number(w.value)
                                                             ? 'bg-[#4A3426] text-white hover:bg-[#4A3426]/90'
                                                             : '',
                                                     )}
@@ -728,6 +707,27 @@ export default function ProductEdit({ product, categories }: Props) {
                                 </CardContent>
                             </Card>
                         </div>
+                    </div>
+                    {/* Action Buttons */}
+                    <div className="flex w-full gap-4 pt-4 lg:col-span-3">
+                        <Button
+                            type="button"
+                            variant="outline"
+                            className="h-12 flex-1 border-[#4A3426] text-base font-medium text-[#4A3426] hover:bg-[#4A3426]/10"
+                            onClick={() => handleSubmit('draft')}
+                            disabled={loading}
+                        >
+                            <Save className="mr-2 h-4 w-4" />
+                            Save to draft
+                        </Button>
+                        <Button
+                            type="button"
+                            className="h-12 flex-1 bg-[#4A3426] text-base font-medium text-white hover:bg-[#4A3426]/90"
+                            onClick={() => handleSubmit('published')}
+                            disabled={loading}
+                        >
+                            {loading ? 'Updating...' : 'Update & Publish'}
+                        </Button>
                     </div>
                 </div>
             </div>

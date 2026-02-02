@@ -15,20 +15,14 @@ import {
     TableRow,
 } from '@/components/ui/table';
 import AppLayout from '@/layouts/app-layout';
-import {
-    adminCategories,
-    adminCategoriesApi,
-    adminCategoriesCreate,
-    adminCategoriesEdit,
-    adminCategoriesShow,
-} from '@/routes';
-import { type BreadcrumbItem, type SharedData } from '@/types';
 import { formatDate } from '@/lib/utils';
+import { create, edit, index, show } from '@/routes/admin/categories';
+import { type BreadcrumbItem, type SharedData } from '@/types';
 
 const breadcrumbs: BreadcrumbItem[] = [
     {
         title: 'Categories',
-        href: adminCategories(),
+        href: index(),
     },
 ];
 
@@ -78,16 +72,13 @@ export default function CategoriesIndex() {
                 params.append('search', searchTerm);
             }
 
-            const response = await fetch(
-                `${adminCategoriesApi().url}?${params}`,
-                {
-                    headers: {
-                        Accept: 'application/json',
-                        'X-Requested-With': 'XMLHttpRequest',
-                    },
-                    credentials: 'same-origin',
+            const response = await fetch(`/api/admin/categories?${params}`, {
+                headers: {
+                    Accept: 'application/json',
+                    'X-Requested-With': 'XMLHttpRequest',
                 },
-            );
+                credentials: 'same-origin',
+            });
 
             const data: CategoriesResponse = await response.json();
             setCategories(data.data.en);
@@ -173,7 +164,7 @@ export default function CategoriesIndex() {
                         </p>
                     </div>
                     <Button asChild>
-                        <Link href={adminCategoriesCreate()}>
+                        <Link href={create()}>
                             <Plus className="mr-2 h-4 w-4" />
                             Add Category
                         </Link>
@@ -248,9 +239,7 @@ export default function CategoriesIndex() {
                                                     asChild
                                                 >
                                                     <Link
-                                                        href={adminCategoriesShow(
-                                                            category.id,
-                                                        )}
+                                                        href={show(category.id)}
                                                     >
                                                         <Eye className="h-4 w-4" />
                                                     </Link>
@@ -261,9 +250,7 @@ export default function CategoriesIndex() {
                                                     asChild
                                                 >
                                                     <Link
-                                                        href={adminCategoriesEdit(
-                                                            category.id,
-                                                        )}
+                                                        href={edit(category.id)}
                                                     >
                                                         <Edit className="h-4 w-4" />
                                                     </Link>

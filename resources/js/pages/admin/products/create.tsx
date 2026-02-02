@@ -17,13 +17,12 @@ import {
 import { Textarea } from '@/components/ui/textarea';
 import AppLayout from '@/layouts/app-layout';
 import { cn } from '@/lib/utils';
-import { adminProducts } from '@/routes';
 import { type BreadcrumbItem, type SharedData } from '@/types';
 
 const breadcrumbs: BreadcrumbItem[] = [
     {
         title: 'Products',
-        href: adminProducts(),
+        href: index(),
     },
     {
         title: 'Create Product',
@@ -110,7 +109,7 @@ export default function ProductCreate({ categories }: Props) {
 
             router.post('/admin/products', formData, {
                 onSuccess: () => {
-                    router.visit(adminProducts());
+                    router.visit(index());
                 },
                 onError: (errors) => {
                     console.error('Failed to create product:', errors);

@@ -11,7 +11,7 @@ import {
 } from '@/components/ui/table';
 import AppLayout from '@/layouts/app-layout';
 import { formatDate } from '@/lib/utils';
-import { adminUsers } from '@/routes';
+import { index } from '@/routes/admin/users';
 import { type BreadcrumbItem } from '@/types';
 
 interface Props {
@@ -22,7 +22,7 @@ export default function UserShow({ user }: Props) {
     const breadcrumbs: BreadcrumbItem[] = [
         {
             title: 'Customers Management',
-            href: adminUsers(),
+            href: index(),
         },
         {
             title: user.name,
@@ -37,7 +37,7 @@ export default function UserShow({ user }: Props) {
             <div className="flex h-full flex-1 flex-col gap-8 p-8">
                 <div className="flex items-center gap-4">
                     <Link
-                        href={adminUsers()}
+                        href={index()}
                         className="flex h-10 w-10 items-center justify-center rounded-full shadow-sm ring-1 ring-sidebar-border transition-colors hover:bg-muted"
                     >
                         <ArrowLeft className="h-5 w-5" />

@@ -13,14 +13,14 @@ import {
     TableRow,
 } from '@/components/ui/table';
 import AppLayout from '@/layouts/app-layout';
-import { adminInquiries, adminInquiriesShow } from '@/routes';
-import { type BreadcrumbItem } from '@/types';
 import { formatDate } from '@/lib/utils';
+import { index, show } from '@/routes/admin/inquiries';
+import { type BreadcrumbItem } from '@/types';
 
 const breadcrumbs: BreadcrumbItem[] = [
     {
         title: 'Inquiries',
-        href: adminInquiries(),
+        href: index(),
     },
 ];
 
@@ -118,11 +118,7 @@ export default function InquiriesIndex({ inquiries }: Props) {
                                                 size="sm"
                                                 asChild
                                             >
-                                                <Link
-                                                    href={adminInquiriesShow(
-                                                        inquiry.id,
-                                                    )}
-                                                >
+                                                <Link href={show(inquiry.id)}>
                                                     <Eye className="mr-1 h-4 w-4" />
                                                     View
                                                 </Link>
