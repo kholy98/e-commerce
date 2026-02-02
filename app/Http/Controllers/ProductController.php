@@ -28,6 +28,8 @@ class ProductController extends Controller
      *
      * @unauthenticated
      *
+     * @operationId listPublicProducts
+     *
      * @queryParam category_id integer Filter products by category ID. Example: 1
      * @queryParam search string Search products by name or description. Example: coffee
      * @queryParam sort_by string Sort field (price, name, created_at). Example: price
@@ -241,6 +243,106 @@ class ProductController extends Controller
                 ],
             ],
         ]);
+    }
+
+    /**
+     * List all products (Admin)
+     *
+     * Get a paginated list of all products (including inactive) for admin management.
+     * Same as public endpoint but shows all products regardless of active status.
+     *
+     * @authenticated
+     *
+     * @operationId listAdminProducts
+     *
+     * @queryParam category_id integer Filter products by category ID. Example: 1
+     * @queryParam search string Search products by name or description. Example: coffee
+     * @queryParam sort_by string Sort field (price, name, created_at). Example: price
+     * @queryParam sort_direction string Sort direction (asc, desc). Default: asc. Example: desc
+     * @queryParam per_page integer Number of items per page. Default: 15. Example: 10
+     *
+     * @response 200 scenario="Success" {
+     *   "success": true,
+     *   "data": {
+     *     "en": [
+     *       {
+     *         "id": 1,
+     *         "name": "Premium Coffee Beans",
+     *         "description": "High-quality arabica coffee beans",
+     *         "price": 25.00,
+     *         "cost": 15.00,
+     *         "stock": 100,
+     *         "sku": "COF-001",
+     *         "category_id": 1,
+     *         "is_active": true,
+     *         "slug": "premium-coffee-beans",
+     *         "grind_type": {"en": "Whole Bean", "ar": "حبوب كاملة"},
+     *         "weight": 0.5,
+     *         "weight_label": "500g",
+     *         "product_details": [
+     *           {"title": "Origin", "value": "Ethiopia"},
+     *           {"title": "Roast Level", "value": "Medium"}
+     *         ],
+     *         "created_at": "2024-01-15T10:00:00.000000Z",
+     *         "updated_at": "2024-01-15T10:00:00.000000Z",
+     *         "images": [
+     *           {
+     *             "id": 1,
+     *             "name": "coffee-beans-front",
+     *             "file_name": "coffee-beans-front.jpg",
+     *             "mime_type": "image/jpeg",
+     *             "size": 102400,
+     *             "url": "https://example.com/storage/products/coffee-beans-front.jpg"
+     *           }
+     *         ]
+     *       }
+     *     ],
+     *     "ar": [
+     *       {
+     *         "id": 1,
+     *         "name": "حبوب قهوة ممتازة",
+     *         "description": "حبوب قهوة أرابيكا عالية الجودة",
+     *         "price": 25.00,
+     *         "cost": 15.00,
+     *         "stock": 100,
+     *         "sku": "COF-001",
+     *         "category_id": 1,
+     *         "is_active": true,
+     *         "slug": "premium-coffee-beans",
+     *         "grind_type": {"en": "Whole Bean", "ar": "حبوب كاملة"},
+     *         "weight": 0.5,
+     *         "weight_label": "500g",
+     *         "product_details": [
+     *           {"title": "المنشأ", "value": "إثيوبيا"},
+     *           {"title": "درجة التحميص", "value": "متوسط"}
+     *         ],
+     *         "created_at": "2024-01-15T10:00:00.000000Z",
+     *         "updated_at": "2024-01-15T10:00:00.000000Z",
+     *         "images": [
+     *           {
+     *             "id": 1,
+     *             "name": "coffee-beans-front",
+     *             "file_name": "coffee-beans-front.jpg",
+     *             "mime_type": "image/jpeg",
+     *             "size": 102400,
+     *             "url": "https://example.com/storage/products/coffee-beans-front.jpg"
+     *           }
+     *         ]
+     *       }
+     *     ],
+     *     "pagination": {
+     *       "current_page": 1,
+     *       "last_page": 5,
+     *       "per_page": 15,
+     *       "total": 75
+     *     }
+     *   }
+     * }
+     */
+    public function indexAdmin(Request $request): JsonResponse
+    {
+        // Reuse the same logic as index() but without the active filter
+        return $this->index($request);
     }
 
     /**

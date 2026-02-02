@@ -4,7 +4,7 @@
     <meta charset="utf-8">
     <meta content="IE=edge,chrome=1" http-equiv="X-UA-Compatible">
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-    <title>Laravel API Documentation</title>
+    <title>laravel API Documentation</title>
 
     <link href="https://fonts.googleapis.com/css?family=Open+Sans&display=swap" rel="stylesheet">
 
@@ -103,6 +103,21 @@ Invalidate the current API token and log out the user.</a>
                                                                                 <li class="tocify-item level-2" data-unique="products-GETapi-products--product_id-">
                                 <a href="#products-GETapi-products--product_id-">Get product details</a>
                             </li>
+                                                                                <li class="tocify-item level-2" data-unique="products-GETapi-admin-products">
+                                <a href="#products-GETapi-admin-products">List all products (Admin)</a>
+                            </li>
+                                                                                <li class="tocify-item level-2" data-unique="products-POSTapi-admin-products">
+                                <a href="#products-POSTapi-admin-products">Create a new product (Admin only)</a>
+                            </li>
+                                                                                <li class="tocify-item level-2" data-unique="products-PUTapi-admin-products--product_id-">
+                                <a href="#products-PUTapi-admin-products--product_id-">Update a product (Admin only)</a>
+                            </li>
+                                                                                <li class="tocify-item level-2" data-unique="products-DELETEapi-admin-products--product_id-">
+                                <a href="#products-DELETEapi-admin-products--product_id-">Delete a product (Admin only)</a>
+                            </li>
+                                                                                <li class="tocify-item level-2" data-unique="products-GETapi-admin-products-low-stock">
+                                <a href="#products-GETapi-admin-products-low-stock">Get low stock products (Admin only)</a>
+                            </li>
                                                                         </ul>
                             </ul>
                     <ul id="tocify-header-categories" class="tocify-header">
@@ -115,6 +130,21 @@ Invalidate the current API token and log out the user.</a>
                             </li>
                                                                                 <li class="tocify-item level-2" data-unique="categories-GETapi-categories--category_id-">
                                 <a href="#categories-GETapi-categories--category_id-">Get category details</a>
+                            </li>
+                                                                                <li class="tocify-item level-2" data-unique="categories-GETapi-admin-categories">
+                                <a href="#categories-GETapi-admin-categories">List all categories (Admin)</a>
+                            </li>
+                                                                                <li class="tocify-item level-2" data-unique="categories-POSTapi-admin-categories">
+                                <a href="#categories-POSTapi-admin-categories">Create category</a>
+                            </li>
+                                                                                <li class="tocify-item level-2" data-unique="categories-GETapi-admin-categories--category_id-">
+                                <a href="#categories-GETapi-admin-categories--category_id-">Get category details (Admin)</a>
+                            </li>
+                                                                                <li class="tocify-item level-2" data-unique="categories-PUTapi-admin-categories--category_id-">
+                                <a href="#categories-PUTapi-admin-categories--category_id-">Update category</a>
+                            </li>
+                                                                                <li class="tocify-item level-2" data-unique="categories-DELETEapi-admin-categories--category_id-">
+                                <a href="#categories-DELETEapi-admin-categories--category_id-">Delete category</a>
                             </li>
                                                                         </ul>
                             </ul>
@@ -194,6 +224,9 @@ Invalidate the current API token and log out the user.</a>
                                                                                 <li class="tocify-item level-2" data-unique="orders-POSTapi-orders--order_id--cancel">
                                 <a href="#orders-POSTapi-orders--order_id--cancel">Cancel order</a>
                             </li>
+                                                                                <li class="tocify-item level-2" data-unique="orders-GETapi-admin-orders-statistics">
+                                <a href="#orders-GETapi-admin-orders-statistics">Get order statistics</a>
+                            </li>
                                                                         </ul>
                             </ul>
                     <ul id="tocify-header-wishlist" class="tocify-header">
@@ -215,6 +248,19 @@ Invalidate the current API token and log out the user.</a>
                             </li>
                                                                                 <li class="tocify-item level-2" data-unique="wishlist-DELETEapi-wishlist">
                                 <a href="#wishlist-DELETEapi-wishlist">Clear wishlist</a>
+                            </li>
+                                                                        </ul>
+                            </ul>
+                    <ul id="tocify-header-team-members" class="tocify-header">
+                <li class="tocify-item level-1" data-unique="team-members">
+                    <a href="#team-members">Team Members</a>
+                </li>
+                                    <ul id="tocify-subheader-team-members" class="tocify-subheader">
+                                                    <li class="tocify-item level-2" data-unique="team-members-GETapi-admin-team-members">
+                                <a href="#team-members-GETapi-admin-team-members">List all team members</a>
+                            </li>
+                                                                                <li class="tocify-item level-2" data-unique="team-members-GETapi-admin-team-members--teamMember_id-">
+                                <a href="#team-members-GETapi-admin-team-members--teamMember_id-">Get a single team member</a>
                             </li>
                                                                         </ul>
                             </ul>
@@ -250,6 +296,21 @@ Invalidate the current API token and log out the user.</a>
                                     <ul id="tocify-subheader-endpoints" class="tocify-subheader">
                                                     <li class="tocify-item level-2" data-unique="endpoints-GETapi-contact-us">
                                 <a href="#endpoints-GETapi-contact-us">GET api/contact-us</a>
+                            </li>
+                                                                                <li class="tocify-item level-2" data-unique="endpoints-GETapi-admin-dashboard-stats">
+                                <a href="#endpoints-GETapi-admin-dashboard-stats">Get dashboard statistics</a>
+                            </li>
+                                                                                <li class="tocify-item level-2" data-unique="endpoints-GETapi-admin-dashboard-products">
+                                <a href="#endpoints-GETapi-admin-dashboard-products">Get recent products</a>
+                            </li>
+                                                                                <li class="tocify-item level-2" data-unique="endpoints-GETapi-admin-dashboard-categories">
+                                <a href="#endpoints-GETapi-admin-dashboard-categories">Get all categories</a>
+                            </li>
+                                                                                <li class="tocify-item level-2" data-unique="endpoints-GETapi-admin-dashboard-revenue">
+                                <a href="#endpoints-GETapi-admin-dashboard-revenue">Get revenue chart data</a>
+                            </li>
+                                                                                <li class="tocify-item level-2" data-unique="endpoints-GETapi-admin-dashboard-best-sellers">
+                                <a href="#endpoints-GETapi-admin-dashboard-best-sellers">Get best selling products</a>
                             </li>
                                                                                 <li class="tocify-item level-2" data-unique="endpoints-GETapi-contact-inquiries">
                                 <a href="#endpoints-GETapi-contact-inquiries">Display a listing of contact inquiries.</a>
@@ -329,7 +390,7 @@ Invalidate the current API token and log out the user.</a>
     </ul>
 
     <ul class="toc-footer" id="last-updated">
-        <li>Last updated: January 25, 2026</li>
+        <li>Last updated: February 2, 2026</li>
     </ul>
 </div>
 
@@ -1574,6 +1635,1188 @@ You can check the Dev Tools console for debugging information.</code></pre>
             </div>
                     </form>
 
+                    <h2 id="products-GETapi-admin-products">List all products (Admin)</h2>
+
+<p>
+<small class="badge badge-darkred">requires authentication</small>
+</p>
+
+<p>Get a paginated list of all products (including inactive) for admin management.
+Same as public endpoint but shows all products regardless of active status.</p>
+
+<span id="example-requests-GETapi-admin-products">
+<blockquote>Example request:</blockquote>
+
+
+<div class="bash-example">
+    <pre><code class="language-bash">curl --request GET \
+    --get "http://127.0.0.1:8000/api/admin/products?category_id=1&amp;search=coffee&amp;sort_by=price&amp;sort_direction=desc&amp;per_page=10" \
+    --header "Authorization: Bearer {YOUR_API_TOKEN}" \
+    --header "Content-Type: application/json" \
+    --header "Accept: application/json"</code></pre></div>
+
+
+<div class="javascript-example">
+    <pre><code class="language-javascript">const url = new URL(
+    "http://127.0.0.1:8000/api/admin/products"
+);
+
+const params = {
+    "category_id": "1",
+    "search": "coffee",
+    "sort_by": "price",
+    "sort_direction": "desc",
+    "per_page": "10",
+};
+Object.keys(params)
+    .forEach(key =&gt; url.searchParams.append(key, params[key]));
+
+const headers = {
+    "Authorization": "Bearer {YOUR_API_TOKEN}",
+    "Content-Type": "application/json",
+    "Accept": "application/json",
+};
+
+fetch(url, {
+    method: "GET",
+    headers,
+}).then(response =&gt; response.json());</code></pre></div>
+
+
+<div class="php-example">
+    <pre><code class="language-php">$client = new \GuzzleHttp\Client();
+$url = 'http://127.0.0.1:8000/api/admin/products';
+$response = $client-&gt;get(
+    $url,
+    [
+        'headers' =&gt; [
+            'Authorization' =&gt; 'Bearer {YOUR_API_TOKEN}',
+            'Content-Type' =&gt; 'application/json',
+            'Accept' =&gt; 'application/json',
+        ],
+        'query' =&gt; [
+            'category_id' =&gt; '1',
+            'search' =&gt; 'coffee',
+            'sort_by' =&gt; 'price',
+            'sort_direction' =&gt; 'desc',
+            'per_page' =&gt; '10',
+        ],
+    ]
+);
+$body = $response-&gt;getBody();
+print_r(json_decode((string) $body));</code></pre></div>
+
+</span>
+
+<span id="example-responses-GETapi-admin-products">
+            <blockquote>
+            <p>Example response (200, Success):</p>
+        </blockquote>
+                <pre>
+
+<code class="language-json" style="max-height: 300px;">{
+    &quot;success&quot;: true,
+    &quot;data&quot;: {
+        &quot;en&quot;: [
+            {
+                &quot;id&quot;: 1,
+                &quot;name&quot;: &quot;Premium Coffee Beans&quot;,
+                &quot;description&quot;: &quot;High-quality arabica coffee beans&quot;,
+                &quot;price&quot;: 25,
+                &quot;cost&quot;: 15,
+                &quot;stock&quot;: 100,
+                &quot;sku&quot;: &quot;COF-001&quot;,
+                &quot;category_id&quot;: 1,
+                &quot;is_active&quot;: true,
+                &quot;slug&quot;: &quot;premium-coffee-beans&quot;,
+                &quot;grind_type&quot;: {
+                    &quot;en&quot;: &quot;Whole Bean&quot;,
+                    &quot;ar&quot;: &quot;حبوب كاملة&quot;
+                },
+                &quot;weight&quot;: 0.5,
+                &quot;weight_label&quot;: &quot;500g&quot;,
+                &quot;product_details&quot;: [
+                    {
+                        &quot;title&quot;: &quot;Origin&quot;,
+                        &quot;value&quot;: &quot;Ethiopia&quot;
+                    },
+                    {
+                        &quot;title&quot;: &quot;Roast Level&quot;,
+                        &quot;value&quot;: &quot;Medium&quot;
+                    }
+                ],
+                &quot;created_at&quot;: &quot;2024-01-15T10:00:00.000000Z&quot;,
+                &quot;updated_at&quot;: &quot;2024-01-15T10:00:00.000000Z&quot;,
+                &quot;images&quot;: [
+                    {
+                        &quot;id&quot;: 1,
+                        &quot;name&quot;: &quot;coffee-beans-front&quot;,
+                        &quot;file_name&quot;: &quot;coffee-beans-front.jpg&quot;,
+                        &quot;mime_type&quot;: &quot;image/jpeg&quot;,
+                        &quot;size&quot;: 102400,
+                        &quot;url&quot;: &quot;https://example.com/storage/products/coffee-beans-front.jpg&quot;
+                    }
+                ]
+            }
+        ],
+        &quot;ar&quot;: [
+            {
+                &quot;id&quot;: 1,
+                &quot;name&quot;: &quot;حبوب قهوة ممتازة&quot;,
+                &quot;description&quot;: &quot;حبوب قهوة أرابيكا عالية الجودة&quot;,
+                &quot;price&quot;: 25,
+                &quot;cost&quot;: 15,
+                &quot;stock&quot;: 100,
+                &quot;sku&quot;: &quot;COF-001&quot;,
+                &quot;category_id&quot;: 1,
+                &quot;is_active&quot;: true,
+                &quot;slug&quot;: &quot;premium-coffee-beans&quot;,
+                &quot;grind_type&quot;: {
+                    &quot;en&quot;: &quot;Whole Bean&quot;,
+                    &quot;ar&quot;: &quot;حبوب كاملة&quot;
+                },
+                &quot;weight&quot;: 0.5,
+                &quot;weight_label&quot;: &quot;500g&quot;,
+                &quot;product_details&quot;: [
+                    {
+                        &quot;title&quot;: &quot;المنشأ&quot;,
+                        &quot;value&quot;: &quot;إثيوبيا&quot;
+                    },
+                    {
+                        &quot;title&quot;: &quot;درجة التحميص&quot;,
+                        &quot;value&quot;: &quot;متوسط&quot;
+                    }
+                ],
+                &quot;created_at&quot;: &quot;2024-01-15T10:00:00.000000Z&quot;,
+                &quot;updated_at&quot;: &quot;2024-01-15T10:00:00.000000Z&quot;,
+                &quot;images&quot;: [
+                    {
+                        &quot;id&quot;: 1,
+                        &quot;name&quot;: &quot;coffee-beans-front&quot;,
+                        &quot;file_name&quot;: &quot;coffee-beans-front.jpg&quot;,
+                        &quot;mime_type&quot;: &quot;image/jpeg&quot;,
+                        &quot;size&quot;: 102400,
+                        &quot;url&quot;: &quot;https://example.com/storage/products/coffee-beans-front.jpg&quot;
+                    }
+                ]
+            }
+        ],
+        &quot;pagination&quot;: {
+            &quot;current_page&quot;: 1,
+            &quot;last_page&quot;: 5,
+            &quot;per_page&quot;: 15,
+            &quot;total&quot;: 75
+        }
+    }
+}</code>
+ </pre>
+    </span>
+<span id="execution-results-GETapi-admin-products" hidden>
+    <blockquote>Received response<span
+                id="execution-response-status-GETapi-admin-products"></span>:
+    </blockquote>
+    <pre class="json"><code id="execution-response-content-GETapi-admin-products"
+      data-empty-response-text="<Empty response>" style="max-height: 400px;"></code></pre>
+</span>
+<span id="execution-error-GETapi-admin-products" hidden>
+    <blockquote>Request failed with error:</blockquote>
+    <pre><code id="execution-error-message-GETapi-admin-products">
+
+Tip: Check that you&#039;re properly connected to the network.
+If you&#039;re a maintainer of ths API, verify that your API is running and you&#039;ve enabled CORS.
+You can check the Dev Tools console for debugging information.</code></pre>
+</span>
+<form id="form-GETapi-admin-products" data-method="GET"
+      data-path="api/admin/products"
+      data-authed="1"
+      data-hasfiles="0"
+      data-isarraybody="0"
+      autocomplete="off"
+      onsubmit="event.preventDefault(); executeTryOut('GETapi-admin-products', this);">
+    <h3>
+        Request&nbsp;&nbsp;&nbsp;
+                    <button type="button"
+                    style="background-color: #8fbcd4; padding: 5px 10px; border-radius: 5px; border-width: thin;"
+                    id="btn-tryout-GETapi-admin-products"
+                    onclick="tryItOut('GETapi-admin-products');">Try it out ⚡
+            </button>
+            <button type="button"
+                    style="background-color: #c97a7e; padding: 5px 10px; border-radius: 5px; border-width: thin;"
+                    id="btn-canceltryout-GETapi-admin-products"
+                    onclick="cancelTryOut('GETapi-admin-products');" hidden>Cancel 🛑
+            </button>&nbsp;&nbsp;
+            <button type="submit"
+                    style="background-color: #6ac174; padding: 5px 10px; border-radius: 5px; border-width: thin;"
+                    id="btn-executetryout-GETapi-admin-products"
+                    data-initial-text="Send Request 💥"
+                    data-loading-text="⏱ Sending..."
+                    hidden>Send Request 💥
+            </button>
+            </h3>
+            <p>
+            <small class="badge badge-green">GET</small>
+            <b><code>api/admin/products</code></b>
+        </p>
+                <h4 class="fancy-heading-panel"><b>Headers</b></h4>
+                                <div style="padding-left: 28px; clear: unset;">
+                <b style="line-height: 2;"><code>Authorization</code></b>&nbsp;&nbsp;
+&nbsp;
+ &nbsp;
+ &nbsp;
+                <input type="text" style="display: none"
+                              name="Authorization" class="auth-value"               data-endpoint="GETapi-admin-products"
+               value="Bearer {YOUR_API_TOKEN}"
+               data-component="header">
+    <br>
+<p>Example: <code>Bearer {YOUR_API_TOKEN}</code></p>
+            </div>
+                                <div style="padding-left: 28px; clear: unset;">
+                <b style="line-height: 2;"><code>Content-Type</code></b>&nbsp;&nbsp;
+&nbsp;
+ &nbsp;
+ &nbsp;
+                <input type="text" style="display: none"
+                              name="Content-Type"                data-endpoint="GETapi-admin-products"
+               value="application/json"
+               data-component="header">
+    <br>
+<p>Example: <code>application/json</code></p>
+            </div>
+                                <div style="padding-left: 28px; clear: unset;">
+                <b style="line-height: 2;"><code>Accept</code></b>&nbsp;&nbsp;
+&nbsp;
+ &nbsp;
+ &nbsp;
+                <input type="text" style="display: none"
+                              name="Accept"                data-endpoint="GETapi-admin-products"
+               value="application/json"
+               data-component="header">
+    <br>
+<p>Example: <code>application/json</code></p>
+            </div>
+                            <h4 class="fancy-heading-panel"><b>Query Parameters</b></h4>
+                                    <div style="padding-left: 28px; clear: unset;">
+                <b style="line-height: 2;"><code>category_id</code></b>&nbsp;&nbsp;
+<small>integer</small>&nbsp;
+<i>optional</i> &nbsp;
+ &nbsp;
+                <input type="number" style="display: none"
+               step="any"               name="category_id"                data-endpoint="GETapi-admin-products"
+               value="1"
+               data-component="query">
+    <br>
+<p>Filter products by category ID. Example: <code>1</code></p>
+            </div>
+                                    <div style="padding-left: 28px; clear: unset;">
+                <b style="line-height: 2;"><code>search</code></b>&nbsp;&nbsp;
+<small>string</small>&nbsp;
+<i>optional</i> &nbsp;
+ &nbsp;
+                <input type="text" style="display: none"
+                              name="search"                data-endpoint="GETapi-admin-products"
+               value="coffee"
+               data-component="query">
+    <br>
+<p>Search products by name or description. Example: <code>coffee</code></p>
+            </div>
+                                    <div style="padding-left: 28px; clear: unset;">
+                <b style="line-height: 2;"><code>sort_by</code></b>&nbsp;&nbsp;
+<small>string</small>&nbsp;
+<i>optional</i> &nbsp;
+ &nbsp;
+                <input type="text" style="display: none"
+                              name="sort_by"                data-endpoint="GETapi-admin-products"
+               value="price"
+               data-component="query">
+    <br>
+<p>Sort field (price, name, created_at). Example: <code>price</code></p>
+            </div>
+                                    <div style="padding-left: 28px; clear: unset;">
+                <b style="line-height: 2;"><code>sort_direction</code></b>&nbsp;&nbsp;
+<small>string</small>&nbsp;
+<i>optional</i> &nbsp;
+ &nbsp;
+                <input type="text" style="display: none"
+                              name="sort_direction"                data-endpoint="GETapi-admin-products"
+               value="desc"
+               data-component="query">
+    <br>
+<p>Sort direction (asc, desc). Default: asc. Example: <code>desc</code></p>
+            </div>
+                                    <div style="padding-left: 28px; clear: unset;">
+                <b style="line-height: 2;"><code>per_page</code></b>&nbsp;&nbsp;
+<small>integer</small>&nbsp;
+<i>optional</i> &nbsp;
+ &nbsp;
+                <input type="number" style="display: none"
+               step="any"               name="per_page"                data-endpoint="GETapi-admin-products"
+               value="10"
+               data-component="query">
+    <br>
+<p>Number of items per page. Default: 15. Example: <code>10</code></p>
+            </div>
+                </form>
+
+                    <h2 id="products-POSTapi-admin-products">Create a new product (Admin only)</h2>
+
+<p>
+</p>
+
+
+
+<span id="example-requests-POSTapi-admin-products">
+<blockquote>Example request:</blockquote>
+
+
+<div class="bash-example">
+    <pre><code class="language-bash">curl --request POST \
+    "http://127.0.0.1:8000/api/admin/products" \
+    --header "Content-Type: multipart/form-data" \
+    --header "Accept: application/json" \
+    --form "name=b"\
+    --form "name_ar=n"\
+    --form "description=Eius et animi quos velit et."\
+    --form "description_ar=architecto"\
+    --form "price=39"\
+    --form "cost=84"\
+    --form "stock=12"\
+    --form "sku=architecto"\
+    --form "category_id=architecto"\
+    --form "grind_type=extra_fine"\
+    --form "weight=1.000"\
+    --form "product_details[][title_en]=n"\
+    --form "product_details[][title_ar]=g"\
+    --form "product_details[][value_en]=z"\
+    --form "product_details[][value_ar]=m"\
+    --form "images[]=@C:\Users\adshift FrontEnd\AppData\Local\Temp\phpC986.tmp" </code></pre></div>
+
+
+<div class="javascript-example">
+    <pre><code class="language-javascript">const url = new URL(
+    "http://127.0.0.1:8000/api/admin/products"
+);
+
+const headers = {
+    "Content-Type": "multipart/form-data",
+    "Accept": "application/json",
+};
+
+const body = new FormData();
+body.append('name', 'b');
+body.append('name_ar', 'n');
+body.append('description', 'Eius et animi quos velit et.');
+body.append('description_ar', 'architecto');
+body.append('price', '39');
+body.append('cost', '84');
+body.append('stock', '12');
+body.append('sku', 'architecto');
+body.append('category_id', 'architecto');
+body.append('grind_type', 'extra_fine');
+body.append('weight', '1.000');
+body.append('product_details[][title_en]', 'n');
+body.append('product_details[][title_ar]', 'g');
+body.append('product_details[][value_en]', 'z');
+body.append('product_details[][value_ar]', 'm');
+body.append('images[]', document.querySelector('input[name="images[]"]').files[0]);
+
+fetch(url, {
+    method: "POST",
+    headers,
+    body,
+}).then(response =&gt; response.json());</code></pre></div>
+
+
+<div class="php-example">
+    <pre><code class="language-php">$client = new \GuzzleHttp\Client();
+$url = 'http://127.0.0.1:8000/api/admin/products';
+$response = $client-&gt;post(
+    $url,
+    [
+        'headers' =&gt; [
+            'Content-Type' =&gt; 'multipart/form-data',
+            'Accept' =&gt; 'application/json',
+        ],
+        'multipart' =&gt; [
+            [
+                'name' =&gt; 'name',
+                'contents' =&gt; 'b'
+            ],
+            [
+                'name' =&gt; 'name_ar',
+                'contents' =&gt; 'n'
+            ],
+            [
+                'name' =&gt; 'description',
+                'contents' =&gt; 'Eius et animi quos velit et.'
+            ],
+            [
+                'name' =&gt; 'description_ar',
+                'contents' =&gt; 'architecto'
+            ],
+            [
+                'name' =&gt; 'price',
+                'contents' =&gt; '39'
+            ],
+            [
+                'name' =&gt; 'cost',
+                'contents' =&gt; '84'
+            ],
+            [
+                'name' =&gt; 'stock',
+                'contents' =&gt; '12'
+            ],
+            [
+                'name' =&gt; 'sku',
+                'contents' =&gt; 'architecto'
+            ],
+            [
+                'name' =&gt; 'category_id',
+                'contents' =&gt; 'architecto'
+            ],
+            [
+                'name' =&gt; 'grind_type',
+                'contents' =&gt; 'extra_fine'
+            ],
+            [
+                'name' =&gt; 'weight',
+                'contents' =&gt; '1.000'
+            ],
+            [
+                'name' =&gt; 'product_details[][title_en]',
+                'contents' =&gt; 'n'
+            ],
+            [
+                'name' =&gt; 'product_details[][title_ar]',
+                'contents' =&gt; 'g'
+            ],
+            [
+                'name' =&gt; 'product_details[][value_en]',
+                'contents' =&gt; 'z'
+            ],
+            [
+                'name' =&gt; 'product_details[][value_ar]',
+                'contents' =&gt; 'm'
+            ],
+            [
+                'name' =&gt; 'images[]',
+                'contents' =&gt; fopen('C:\Users\adshift FrontEnd\AppData\Local\Temp\phpC986.tmp', 'r')
+            ],
+        ],
+    ]
+);
+$body = $response-&gt;getBody();
+print_r(json_decode((string) $body));</code></pre></div>
+
+</span>
+
+<span id="example-responses-POSTapi-admin-products">
+</span>
+<span id="execution-results-POSTapi-admin-products" hidden>
+    <blockquote>Received response<span
+                id="execution-response-status-POSTapi-admin-products"></span>:
+    </blockquote>
+    <pre class="json"><code id="execution-response-content-POSTapi-admin-products"
+      data-empty-response-text="<Empty response>" style="max-height: 400px;"></code></pre>
+</span>
+<span id="execution-error-POSTapi-admin-products" hidden>
+    <blockquote>Request failed with error:</blockquote>
+    <pre><code id="execution-error-message-POSTapi-admin-products">
+
+Tip: Check that you&#039;re properly connected to the network.
+If you&#039;re a maintainer of ths API, verify that your API is running and you&#039;ve enabled CORS.
+You can check the Dev Tools console for debugging information.</code></pre>
+</span>
+<form id="form-POSTapi-admin-products" data-method="POST"
+      data-path="api/admin/products"
+      data-authed="0"
+      data-hasfiles="1"
+      data-isarraybody="0"
+      autocomplete="off"
+      onsubmit="event.preventDefault(); executeTryOut('POSTapi-admin-products', this);">
+    <h3>
+        Request&nbsp;&nbsp;&nbsp;
+                    <button type="button"
+                    style="background-color: #8fbcd4; padding: 5px 10px; border-radius: 5px; border-width: thin;"
+                    id="btn-tryout-POSTapi-admin-products"
+                    onclick="tryItOut('POSTapi-admin-products');">Try it out ⚡
+            </button>
+            <button type="button"
+                    style="background-color: #c97a7e; padding: 5px 10px; border-radius: 5px; border-width: thin;"
+                    id="btn-canceltryout-POSTapi-admin-products"
+                    onclick="cancelTryOut('POSTapi-admin-products');" hidden>Cancel 🛑
+            </button>&nbsp;&nbsp;
+            <button type="submit"
+                    style="background-color: #6ac174; padding: 5px 10px; border-radius: 5px; border-width: thin;"
+                    id="btn-executetryout-POSTapi-admin-products"
+                    data-initial-text="Send Request 💥"
+                    data-loading-text="⏱ Sending..."
+                    hidden>Send Request 💥
+            </button>
+            </h3>
+            <p>
+            <small class="badge badge-black">POST</small>
+            <b><code>api/admin/products</code></b>
+        </p>
+                <h4 class="fancy-heading-panel"><b>Headers</b></h4>
+                                <div style="padding-left: 28px; clear: unset;">
+                <b style="line-height: 2;"><code>Content-Type</code></b>&nbsp;&nbsp;
+&nbsp;
+ &nbsp;
+ &nbsp;
+                <input type="text" style="display: none"
+                              name="Content-Type"                data-endpoint="POSTapi-admin-products"
+               value="multipart/form-data"
+               data-component="header">
+    <br>
+<p>Example: <code>multipart/form-data</code></p>
+            </div>
+                                <div style="padding-left: 28px; clear: unset;">
+                <b style="line-height: 2;"><code>Accept</code></b>&nbsp;&nbsp;
+&nbsp;
+ &nbsp;
+ &nbsp;
+                <input type="text" style="display: none"
+                              name="Accept"                data-endpoint="POSTapi-admin-products"
+               value="application/json"
+               data-component="header">
+    <br>
+<p>Example: <code>application/json</code></p>
+            </div>
+                                <h4 class="fancy-heading-panel"><b>Body Parameters</b></h4>
+        <div style=" padding-left: 28px;  clear: unset;">
+            <b style="line-height: 2;"><code>name</code></b>&nbsp;&nbsp;
+<small>string</small>&nbsp;
+ &nbsp;
+ &nbsp;
+                <input type="text" style="display: none"
+                              name="name"                data-endpoint="POSTapi-admin-products"
+               value="b"
+               data-component="body">
+    <br>
+<p>Must not be greater than 255 characters. Example: <code>b</code></p>
+        </div>
+                <div style=" padding-left: 28px;  clear: unset;">
+            <b style="line-height: 2;"><code>name_ar</code></b>&nbsp;&nbsp;
+<small>string</small>&nbsp;
+<i>optional</i> &nbsp;
+ &nbsp;
+                <input type="text" style="display: none"
+                              name="name_ar"                data-endpoint="POSTapi-admin-products"
+               value="n"
+               data-component="body">
+    <br>
+<p>Must not be greater than 255 characters. Example: <code>n</code></p>
+        </div>
+                <div style=" padding-left: 28px;  clear: unset;">
+            <b style="line-height: 2;"><code>description</code></b>&nbsp;&nbsp;
+<small>string</small>&nbsp;
+ &nbsp;
+ &nbsp;
+                <input type="text" style="display: none"
+                              name="description"                data-endpoint="POSTapi-admin-products"
+               value="Eius et animi quos velit et."
+               data-component="body">
+    <br>
+<p>Example: <code>Eius et animi quos velit et.</code></p>
+        </div>
+                <div style=" padding-left: 28px;  clear: unset;">
+            <b style="line-height: 2;"><code>description_ar</code></b>&nbsp;&nbsp;
+<small>string</small>&nbsp;
+<i>optional</i> &nbsp;
+ &nbsp;
+                <input type="text" style="display: none"
+                              name="description_ar"                data-endpoint="POSTapi-admin-products"
+               value="architecto"
+               data-component="body">
+    <br>
+<p>Example: <code>architecto</code></p>
+        </div>
+                <div style=" padding-left: 28px;  clear: unset;">
+            <b style="line-height: 2;"><code>price</code></b>&nbsp;&nbsp;
+<small>number</small>&nbsp;
+ &nbsp;
+ &nbsp;
+                <input type="number" style="display: none"
+               step="any"               name="price"                data-endpoint="POSTapi-admin-products"
+               value="39"
+               data-component="body">
+    <br>
+<p>Must be at least 0.01. Example: <code>39</code></p>
+        </div>
+                <div style=" padding-left: 28px;  clear: unset;">
+            <b style="line-height: 2;"><code>cost</code></b>&nbsp;&nbsp;
+<small>number</small>&nbsp;
+<i>optional</i> &nbsp;
+ &nbsp;
+                <input type="number" style="display: none"
+               step="any"               name="cost"                data-endpoint="POSTapi-admin-products"
+               value="84"
+               data-component="body">
+    <br>
+<p>Must be at least 0. Example: <code>84</code></p>
+        </div>
+                <div style=" padding-left: 28px;  clear: unset;">
+            <b style="line-height: 2;"><code>stock</code></b>&nbsp;&nbsp;
+<small>integer</small>&nbsp;
+ &nbsp;
+ &nbsp;
+                <input type="number" style="display: none"
+               step="any"               name="stock"                data-endpoint="POSTapi-admin-products"
+               value="12"
+               data-component="body">
+    <br>
+<p>Must be at least 0. Example: <code>12</code></p>
+        </div>
+                <div style=" padding-left: 28px;  clear: unset;">
+            <b style="line-height: 2;"><code>sku</code></b>&nbsp;&nbsp;
+<small>string</small>&nbsp;
+ &nbsp;
+ &nbsp;
+                <input type="text" style="display: none"
+                              name="sku"                data-endpoint="POSTapi-admin-products"
+               value="architecto"
+               data-component="body">
+    <br>
+<p>Example: <code>architecto</code></p>
+        </div>
+                <div style=" padding-left: 28px;  clear: unset;">
+            <b style="line-height: 2;"><code>category_id</code></b>&nbsp;&nbsp;
+<small>string</small>&nbsp;
+ &nbsp;
+ &nbsp;
+                <input type="text" style="display: none"
+                              name="category_id"                data-endpoint="POSTapi-admin-products"
+               value="architecto"
+               data-component="body">
+    <br>
+<p>The <code>id</code> of an existing record in the categories table. Example: <code>architecto</code></p>
+        </div>
+                <div style=" padding-left: 28px;  clear: unset;">
+            <b style="line-height: 2;"><code>grind_type</code></b>&nbsp;&nbsp;
+<small>string</small>&nbsp;
+<i>optional</i> &nbsp;
+ &nbsp;
+                <input type="text" style="display: none"
+                              name="grind_type"                data-endpoint="POSTapi-admin-products"
+               value="extra_fine"
+               data-component="body">
+    <br>
+<p>Example: <code>extra_fine</code></p>
+Must be one of:
+<ul style="list-style-type: square;"><li><code>whole_bean</code></li> <li><code>coarse</code></li> <li><code>medium</code></li> <li><code>fine</code></li> <li><code>extra_fine</code></li></ul>
+        </div>
+                <div style=" padding-left: 28px;  clear: unset;">
+            <b style="line-height: 2;"><code>weight</code></b>&nbsp;&nbsp;
+<small>number</small>&nbsp;
+<i>optional</i> &nbsp;
+ &nbsp;
+                <input type="number" style="display: none"
+               step="any"               name="weight"                data-endpoint="POSTapi-admin-products"
+               value="1.000"
+               data-component="body">
+    <br>
+<p>Example: <code>1.000</code></p>
+Must be one of:
+<ul style="list-style-type: square;"><li><code>0.125</code></li> <li><code>0.250</code></li> <li><code>0.500</code></li> <li><code>1.000</code></li></ul>
+        </div>
+                <div style=" padding-left: 28px;  clear: unset;">
+        <details>
+            <summary style="padding-bottom: 10px;">
+                <b style="line-height: 2;"><code>product_details</code></b>&nbsp;&nbsp;
+<small>object[]</small>&nbsp;
+<i>optional</i> &nbsp;
+ &nbsp;
+<br>
+
+            </summary>
+                                                <div style="margin-left: 14px; clear: unset;">
+                        <b style="line-height: 2;"><code>title_en</code></b>&nbsp;&nbsp;
+<small>string</small>&nbsp;
+ &nbsp;
+ &nbsp;
+                <input type="text" style="display: none"
+                              name="product_details.0.title_en"                data-endpoint="POSTapi-admin-products"
+               value="n"
+               data-component="body">
+    <br>
+<p>Must not be greater than 255 characters. Example: <code>n</code></p>
+                    </div>
+                                                                <div style="margin-left: 14px; clear: unset;">
+                        <b style="line-height: 2;"><code>title_ar</code></b>&nbsp;&nbsp;
+<small>string</small>&nbsp;
+ &nbsp;
+ &nbsp;
+                <input type="text" style="display: none"
+                              name="product_details.0.title_ar"                data-endpoint="POSTapi-admin-products"
+               value="g"
+               data-component="body">
+    <br>
+<p>Must not be greater than 255 characters. Example: <code>g</code></p>
+                    </div>
+                                                                <div style="margin-left: 14px; clear: unset;">
+                        <b style="line-height: 2;"><code>value_en</code></b>&nbsp;&nbsp;
+<small>string</small>&nbsp;
+ &nbsp;
+ &nbsp;
+                <input type="text" style="display: none"
+                              name="product_details.0.value_en"                data-endpoint="POSTapi-admin-products"
+               value="z"
+               data-component="body">
+    <br>
+<p>Must not be greater than 1000 characters. Example: <code>z</code></p>
+                    </div>
+                                                                <div style="margin-left: 14px; clear: unset;">
+                        <b style="line-height: 2;"><code>value_ar</code></b>&nbsp;&nbsp;
+<small>string</small>&nbsp;
+ &nbsp;
+ &nbsp;
+                <input type="text" style="display: none"
+                              name="product_details.0.value_ar"                data-endpoint="POSTapi-admin-products"
+               value="m"
+               data-component="body">
+    <br>
+<p>Must not be greater than 1000 characters. Example: <code>m</code></p>
+                    </div>
+                                    </details>
+        </div>
+                <div style=" padding-left: 28px;  clear: unset;">
+            <b style="line-height: 2;"><code>images</code></b>&nbsp;&nbsp;
+<small>file[]</small>&nbsp;
+<i>optional</i> &nbsp;
+ &nbsp;
+                <input type="file" style="display: none"
+                              name="images[0]"                data-endpoint="POSTapi-admin-products"
+               data-component="body">
+        <input type="file" style="display: none"
+               name="images[1]"                data-endpoint="POSTapi-admin-products"
+               data-component="body">
+    <br>
+<p>Must be an image. Must not be greater than 2048 kilobytes.</p>
+        </div>
+        </form>
+
+                    <h2 id="products-PUTapi-admin-products--product_id-">Update a product (Admin only)</h2>
+
+<p>
+</p>
+
+
+
+<span id="example-requests-PUTapi-admin-products--product_id-">
+<blockquote>Example request:</blockquote>
+
+
+<div class="bash-example">
+    <pre><code class="language-bash">curl --request PUT \
+    "http://127.0.0.1:8000/api/admin/products/1" \
+    --header "Content-Type: application/json" \
+    --header "Accept: application/json"</code></pre></div>
+
+
+<div class="javascript-example">
+    <pre><code class="language-javascript">const url = new URL(
+    "http://127.0.0.1:8000/api/admin/products/1"
+);
+
+const headers = {
+    "Content-Type": "application/json",
+    "Accept": "application/json",
+};
+
+fetch(url, {
+    method: "PUT",
+    headers,
+}).then(response =&gt; response.json());</code></pre></div>
+
+
+<div class="php-example">
+    <pre><code class="language-php">$client = new \GuzzleHttp\Client();
+$url = 'http://127.0.0.1:8000/api/admin/products/1';
+$response = $client-&gt;put(
+    $url,
+    [
+        'headers' =&gt; [
+            'Content-Type' =&gt; 'application/json',
+            'Accept' =&gt; 'application/json',
+        ],
+    ]
+);
+$body = $response-&gt;getBody();
+print_r(json_decode((string) $body));</code></pre></div>
+
+</span>
+
+<span id="example-responses-PUTapi-admin-products--product_id-">
+</span>
+<span id="execution-results-PUTapi-admin-products--product_id-" hidden>
+    <blockquote>Received response<span
+                id="execution-response-status-PUTapi-admin-products--product_id-"></span>:
+    </blockquote>
+    <pre class="json"><code id="execution-response-content-PUTapi-admin-products--product_id-"
+      data-empty-response-text="<Empty response>" style="max-height: 400px;"></code></pre>
+</span>
+<span id="execution-error-PUTapi-admin-products--product_id-" hidden>
+    <blockquote>Request failed with error:</blockquote>
+    <pre><code id="execution-error-message-PUTapi-admin-products--product_id-">
+
+Tip: Check that you&#039;re properly connected to the network.
+If you&#039;re a maintainer of ths API, verify that your API is running and you&#039;ve enabled CORS.
+You can check the Dev Tools console for debugging information.</code></pre>
+</span>
+<form id="form-PUTapi-admin-products--product_id-" data-method="PUT"
+      data-path="api/admin/products/{product_id}"
+      data-authed="0"
+      data-hasfiles="0"
+      data-isarraybody="0"
+      autocomplete="off"
+      onsubmit="event.preventDefault(); executeTryOut('PUTapi-admin-products--product_id-', this);">
+    <h3>
+        Request&nbsp;&nbsp;&nbsp;
+                    <button type="button"
+                    style="background-color: #8fbcd4; padding: 5px 10px; border-radius: 5px; border-width: thin;"
+                    id="btn-tryout-PUTapi-admin-products--product_id-"
+                    onclick="tryItOut('PUTapi-admin-products--product_id-');">Try it out ⚡
+            </button>
+            <button type="button"
+                    style="background-color: #c97a7e; padding: 5px 10px; border-radius: 5px; border-width: thin;"
+                    id="btn-canceltryout-PUTapi-admin-products--product_id-"
+                    onclick="cancelTryOut('PUTapi-admin-products--product_id-');" hidden>Cancel 🛑
+            </button>&nbsp;&nbsp;
+            <button type="submit"
+                    style="background-color: #6ac174; padding: 5px 10px; border-radius: 5px; border-width: thin;"
+                    id="btn-executetryout-PUTapi-admin-products--product_id-"
+                    data-initial-text="Send Request 💥"
+                    data-loading-text="⏱ Sending..."
+                    hidden>Send Request 💥
+            </button>
+            </h3>
+            <p>
+            <small class="badge badge-darkblue">PUT</small>
+            <b><code>api/admin/products/{product_id}</code></b>
+        </p>
+                <h4 class="fancy-heading-panel"><b>Headers</b></h4>
+                                <div style="padding-left: 28px; clear: unset;">
+                <b style="line-height: 2;"><code>Content-Type</code></b>&nbsp;&nbsp;
+&nbsp;
+ &nbsp;
+ &nbsp;
+                <input type="text" style="display: none"
+                              name="Content-Type"                data-endpoint="PUTapi-admin-products--product_id-"
+               value="application/json"
+               data-component="header">
+    <br>
+<p>Example: <code>application/json</code></p>
+            </div>
+                                <div style="padding-left: 28px; clear: unset;">
+                <b style="line-height: 2;"><code>Accept</code></b>&nbsp;&nbsp;
+&nbsp;
+ &nbsp;
+ &nbsp;
+                <input type="text" style="display: none"
+                              name="Accept"                data-endpoint="PUTapi-admin-products--product_id-"
+               value="application/json"
+               data-component="header">
+    <br>
+<p>Example: <code>application/json</code></p>
+            </div>
+                        <h4 class="fancy-heading-panel"><b>URL Parameters</b></h4>
+                    <div style="padding-left: 28px; clear: unset;">
+                <b style="line-height: 2;"><code>product_id</code></b>&nbsp;&nbsp;
+<small>integer</small>&nbsp;
+ &nbsp;
+ &nbsp;
+                <input type="number" style="display: none"
+               step="any"               name="product_id"                data-endpoint="PUTapi-admin-products--product_id-"
+               value="1"
+               data-component="url">
+    <br>
+<p>The ID of the product. Example: <code>1</code></p>
+            </div>
+                    </form>
+
+                    <h2 id="products-DELETEapi-admin-products--product_id-">Delete a product (Admin only)</h2>
+
+<p>
+</p>
+
+
+
+<span id="example-requests-DELETEapi-admin-products--product_id-">
+<blockquote>Example request:</blockquote>
+
+
+<div class="bash-example">
+    <pre><code class="language-bash">curl --request DELETE \
+    "http://127.0.0.1:8000/api/admin/products/1" \
+    --header "Content-Type: application/json" \
+    --header "Accept: application/json"</code></pre></div>
+
+
+<div class="javascript-example">
+    <pre><code class="language-javascript">const url = new URL(
+    "http://127.0.0.1:8000/api/admin/products/1"
+);
+
+const headers = {
+    "Content-Type": "application/json",
+    "Accept": "application/json",
+};
+
+fetch(url, {
+    method: "DELETE",
+    headers,
+}).then(response =&gt; response.json());</code></pre></div>
+
+
+<div class="php-example">
+    <pre><code class="language-php">$client = new \GuzzleHttp\Client();
+$url = 'http://127.0.0.1:8000/api/admin/products/1';
+$response = $client-&gt;delete(
+    $url,
+    [
+        'headers' =&gt; [
+            'Content-Type' =&gt; 'application/json',
+            'Accept' =&gt; 'application/json',
+        ],
+    ]
+);
+$body = $response-&gt;getBody();
+print_r(json_decode((string) $body));</code></pre></div>
+
+</span>
+
+<span id="example-responses-DELETEapi-admin-products--product_id-">
+</span>
+<span id="execution-results-DELETEapi-admin-products--product_id-" hidden>
+    <blockquote>Received response<span
+                id="execution-response-status-DELETEapi-admin-products--product_id-"></span>:
+    </blockquote>
+    <pre class="json"><code id="execution-response-content-DELETEapi-admin-products--product_id-"
+      data-empty-response-text="<Empty response>" style="max-height: 400px;"></code></pre>
+</span>
+<span id="execution-error-DELETEapi-admin-products--product_id-" hidden>
+    <blockquote>Request failed with error:</blockquote>
+    <pre><code id="execution-error-message-DELETEapi-admin-products--product_id-">
+
+Tip: Check that you&#039;re properly connected to the network.
+If you&#039;re a maintainer of ths API, verify that your API is running and you&#039;ve enabled CORS.
+You can check the Dev Tools console for debugging information.</code></pre>
+</span>
+<form id="form-DELETEapi-admin-products--product_id-" data-method="DELETE"
+      data-path="api/admin/products/{product_id}"
+      data-authed="0"
+      data-hasfiles="0"
+      data-isarraybody="0"
+      autocomplete="off"
+      onsubmit="event.preventDefault(); executeTryOut('DELETEapi-admin-products--product_id-', this);">
+    <h3>
+        Request&nbsp;&nbsp;&nbsp;
+                    <button type="button"
+                    style="background-color: #8fbcd4; padding: 5px 10px; border-radius: 5px; border-width: thin;"
+                    id="btn-tryout-DELETEapi-admin-products--product_id-"
+                    onclick="tryItOut('DELETEapi-admin-products--product_id-');">Try it out ⚡
+            </button>
+            <button type="button"
+                    style="background-color: #c97a7e; padding: 5px 10px; border-radius: 5px; border-width: thin;"
+                    id="btn-canceltryout-DELETEapi-admin-products--product_id-"
+                    onclick="cancelTryOut('DELETEapi-admin-products--product_id-');" hidden>Cancel 🛑
+            </button>&nbsp;&nbsp;
+            <button type="submit"
+                    style="background-color: #6ac174; padding: 5px 10px; border-radius: 5px; border-width: thin;"
+                    id="btn-executetryout-DELETEapi-admin-products--product_id-"
+                    data-initial-text="Send Request 💥"
+                    data-loading-text="⏱ Sending..."
+                    hidden>Send Request 💥
+            </button>
+            </h3>
+            <p>
+            <small class="badge badge-red">DELETE</small>
+            <b><code>api/admin/products/{product_id}</code></b>
+        </p>
+                <h4 class="fancy-heading-panel"><b>Headers</b></h4>
+                                <div style="padding-left: 28px; clear: unset;">
+                <b style="line-height: 2;"><code>Content-Type</code></b>&nbsp;&nbsp;
+&nbsp;
+ &nbsp;
+ &nbsp;
+                <input type="text" style="display: none"
+                              name="Content-Type"                data-endpoint="DELETEapi-admin-products--product_id-"
+               value="application/json"
+               data-component="header">
+    <br>
+<p>Example: <code>application/json</code></p>
+            </div>
+                                <div style="padding-left: 28px; clear: unset;">
+                <b style="line-height: 2;"><code>Accept</code></b>&nbsp;&nbsp;
+&nbsp;
+ &nbsp;
+ &nbsp;
+                <input type="text" style="display: none"
+                              name="Accept"                data-endpoint="DELETEapi-admin-products--product_id-"
+               value="application/json"
+               data-component="header">
+    <br>
+<p>Example: <code>application/json</code></p>
+            </div>
+                        <h4 class="fancy-heading-panel"><b>URL Parameters</b></h4>
+                    <div style="padding-left: 28px; clear: unset;">
+                <b style="line-height: 2;"><code>product_id</code></b>&nbsp;&nbsp;
+<small>integer</small>&nbsp;
+ &nbsp;
+ &nbsp;
+                <input type="number" style="display: none"
+               step="any"               name="product_id"                data-endpoint="DELETEapi-admin-products--product_id-"
+               value="1"
+               data-component="url">
+    <br>
+<p>The ID of the product. Example: <code>1</code></p>
+            </div>
+                    </form>
+
+                    <h2 id="products-GETapi-admin-products-low-stock">Get low stock products (Admin only)</h2>
+
+<p>
+</p>
+
+
+
+<span id="example-requests-GETapi-admin-products-low-stock">
+<blockquote>Example request:</blockquote>
+
+
+<div class="bash-example">
+    <pre><code class="language-bash">curl --request GET \
+    --get "http://127.0.0.1:8000/api/admin/products/low-stock" \
+    --header "Content-Type: application/json" \
+    --header "Accept: application/json"</code></pre></div>
+
+
+<div class="javascript-example">
+    <pre><code class="language-javascript">const url = new URL(
+    "http://127.0.0.1:8000/api/admin/products/low-stock"
+);
+
+const headers = {
+    "Content-Type": "application/json",
+    "Accept": "application/json",
+};
+
+fetch(url, {
+    method: "GET",
+    headers,
+}).then(response =&gt; response.json());</code></pre></div>
+
+
+<div class="php-example">
+    <pre><code class="language-php">$client = new \GuzzleHttp\Client();
+$url = 'http://127.0.0.1:8000/api/admin/products/low-stock';
+$response = $client-&gt;get(
+    $url,
+    [
+        'headers' =&gt; [
+            'Content-Type' =&gt; 'application/json',
+            'Accept' =&gt; 'application/json',
+        ],
+    ]
+);
+$body = $response-&gt;getBody();
+print_r(json_decode((string) $body));</code></pre></div>
+
+</span>
+
+<span id="example-responses-GETapi-admin-products-low-stock">
+            <blockquote>
+            <p>Example response (401):</p>
+        </blockquote>
+                <details class="annotation">
+            <summary style="cursor: pointer;">
+                <small onclick="textContent = parentElement.parentElement.open ? 'Show headers' : 'Hide headers'">Show headers</small>
+            </summary>
+            <pre><code class="language-http">cache-control: no-cache, private
+content-type: application/json
+access-control-allow-origin: http://localhost:3000
+access-control-allow-credentials: true
+set-cookie: laravel-session=eyJpdiI6IlozVGMvUnRPM09CTTNxaXRqc1pKSXc9PSIsInZhbHVlIjoiNHJUWW8xMGFVY3MrbGxocG5JWnU2U1V0UzdaaFgxSm9WV1FMWGkyV204cVRxSzZ3SHU0c0tkQ1hDdzBNWUdIMUNYVmJjY1NBZ3hQRnBqQW5PT1N3R1hIQjk5ZzBkMHJsTlNQNmp1OGUvbTB6REEyOCt5K0preU5PTXd3Y0pDNEEiLCJtYWMiOiJhYWQxZjM1ZjAyY2QxMjYyYmE4ZTg4ZGM0ZjM2NzhiOWUyMmU4M2Q3Y2NkNTA4N2NiZWJiYzYxYzJmYjM4NWM1IiwidGFnIjoiIn0%3D; expires=Mon, 02 Feb 2026 16:22:09 GMT; Max-Age=7200; path=/; secure; httponly; samesite=none
+ </code></pre></details>         <pre>
+
+<code class="language-json" style="max-height: 300px;">{
+    &quot;message&quot;: &quot;Unauthenticated.&quot;
+}</code>
+ </pre>
+    </span>
+<span id="execution-results-GETapi-admin-products-low-stock" hidden>
+    <blockquote>Received response<span
+                id="execution-response-status-GETapi-admin-products-low-stock"></span>:
+    </blockquote>
+    <pre class="json"><code id="execution-response-content-GETapi-admin-products-low-stock"
+      data-empty-response-text="<Empty response>" style="max-height: 400px;"></code></pre>
+</span>
+<span id="execution-error-GETapi-admin-products-low-stock" hidden>
+    <blockquote>Request failed with error:</blockquote>
+    <pre><code id="execution-error-message-GETapi-admin-products-low-stock">
+
+Tip: Check that you&#039;re properly connected to the network.
+If you&#039;re a maintainer of ths API, verify that your API is running and you&#039;ve enabled CORS.
+You can check the Dev Tools console for debugging information.</code></pre>
+</span>
+<form id="form-GETapi-admin-products-low-stock" data-method="GET"
+      data-path="api/admin/products/low-stock"
+      data-authed="0"
+      data-hasfiles="0"
+      data-isarraybody="0"
+      autocomplete="off"
+      onsubmit="event.preventDefault(); executeTryOut('GETapi-admin-products-low-stock', this);">
+    <h3>
+        Request&nbsp;&nbsp;&nbsp;
+                    <button type="button"
+                    style="background-color: #8fbcd4; padding: 5px 10px; border-radius: 5px; border-width: thin;"
+                    id="btn-tryout-GETapi-admin-products-low-stock"
+                    onclick="tryItOut('GETapi-admin-products-low-stock');">Try it out ⚡
+            </button>
+            <button type="button"
+                    style="background-color: #c97a7e; padding: 5px 10px; border-radius: 5px; border-width: thin;"
+                    id="btn-canceltryout-GETapi-admin-products-low-stock"
+                    onclick="cancelTryOut('GETapi-admin-products-low-stock');" hidden>Cancel 🛑
+            </button>&nbsp;&nbsp;
+            <button type="submit"
+                    style="background-color: #6ac174; padding: 5px 10px; border-radius: 5px; border-width: thin;"
+                    id="btn-executetryout-GETapi-admin-products-low-stock"
+                    data-initial-text="Send Request 💥"
+                    data-loading-text="⏱ Sending..."
+                    hidden>Send Request 💥
+            </button>
+            </h3>
+            <p>
+            <small class="badge badge-green">GET</small>
+            <b><code>api/admin/products/low-stock</code></b>
+        </p>
+                <h4 class="fancy-heading-panel"><b>Headers</b></h4>
+                                <div style="padding-left: 28px; clear: unset;">
+                <b style="line-height: 2;"><code>Content-Type</code></b>&nbsp;&nbsp;
+&nbsp;
+ &nbsp;
+ &nbsp;
+                <input type="text" style="display: none"
+                              name="Content-Type"                data-endpoint="GETapi-admin-products-low-stock"
+               value="application/json"
+               data-component="header">
+    <br>
+<p>Example: <code>application/json</code></p>
+            </div>
+                                <div style="padding-left: 28px; clear: unset;">
+                <b style="line-height: 2;"><code>Accept</code></b>&nbsp;&nbsp;
+&nbsp;
+ &nbsp;
+ &nbsp;
+                <input type="text" style="display: none"
+                              name="Accept"                data-endpoint="GETapi-admin-products-low-stock"
+               value="application/json"
+               data-component="header">
+    <br>
+<p>Example: <code>application/json</code></p>
+            </div>
+                        </form>
+
                 <h1 id="categories">Categories</h1>
 
     <p>APIs for browsing and managing product categories.</p>
@@ -2046,6 +3289,1300 @@ You can check the Dev Tools console for debugging information.</code></pre>
  &nbsp;
                 <input type="number" style="display: none"
                step="any"               name="category"                data-endpoint="GETapi-categories--category_id-"
+               value="1"
+               data-component="url">
+    <br>
+<p>The category ID. Example: <code>1</code></p>
+            </div>
+                    </form>
+
+                    <h2 id="categories-GETapi-admin-categories">List all categories (Admin)</h2>
+
+<p>
+<small class="badge badge-darkred">requires authentication</small>
+</p>
+
+<p>Get a paginated list of all categories with optional filtering and sorting.
+This endpoint is intended for admin use and returns all categories including inactive ones.</p>
+
+<span id="example-requests-GETapi-admin-categories">
+<blockquote>Example request:</blockquote>
+
+
+<div class="bash-example">
+    <pre><code class="language-bash">curl --request GET \
+    --get "http://127.0.0.1:8000/api/admin/categories?search=coffee&amp;is_active=1&amp;sort_by=name&amp;sort_direction=desc&amp;per_page=10" \
+    --header "Authorization: Bearer {YOUR_API_TOKEN}" \
+    --header "Content-Type: application/json" \
+    --header "Accept: application/json"</code></pre></div>
+
+
+<div class="javascript-example">
+    <pre><code class="language-javascript">const url = new URL(
+    "http://127.0.0.1:8000/api/admin/categories"
+);
+
+const params = {
+    "search": "coffee",
+    "is_active": "1",
+    "sort_by": "name",
+    "sort_direction": "desc",
+    "per_page": "10",
+};
+Object.keys(params)
+    .forEach(key =&gt; url.searchParams.append(key, params[key]));
+
+const headers = {
+    "Authorization": "Bearer {YOUR_API_TOKEN}",
+    "Content-Type": "application/json",
+    "Accept": "application/json",
+};
+
+fetch(url, {
+    method: "GET",
+    headers,
+}).then(response =&gt; response.json());</code></pre></div>
+
+
+<div class="php-example">
+    <pre><code class="language-php">$client = new \GuzzleHttp\Client();
+$url = 'http://127.0.0.1:8000/api/admin/categories';
+$response = $client-&gt;get(
+    $url,
+    [
+        'headers' =&gt; [
+            'Authorization' =&gt; 'Bearer {YOUR_API_TOKEN}',
+            'Content-Type' =&gt; 'application/json',
+            'Accept' =&gt; 'application/json',
+        ],
+        'query' =&gt; [
+            'search' =&gt; 'coffee',
+            'is_active' =&gt; '1',
+            'sort_by' =&gt; 'name',
+            'sort_direction' =&gt; 'desc',
+            'per_page' =&gt; '10',
+        ],
+    ]
+);
+$body = $response-&gt;getBody();
+print_r(json_decode((string) $body));</code></pre></div>
+
+</span>
+
+<span id="example-responses-GETapi-admin-categories">
+            <blockquote>
+            <p>Example response (200, Success):</p>
+        </blockquote>
+                <pre>
+
+<code class="language-json" style="max-height: 300px;">{
+    &quot;data&quot;: {
+        &quot;success&quot;: true,
+        &quot;en&quot;: [
+            {
+                &quot;id&quot;: 1,
+                &quot;name&quot;: &quot;Coffee Beans&quot;,
+                &quot;name_ar&quot;: &quot;حبوب القهوة&quot;,
+                &quot;description&quot;: &quot;Premium coffee beans from around the world&quot;,
+                &quot;description_ar&quot;: &quot;حبوب قهوة ممتازة من جميع أنحاء العالم&quot;,
+                &quot;slug&quot;: &quot;coffee-beans&quot;,
+                &quot;is_active&quot;: true,
+                &quot;product_count&quot;: 15,
+                &quot;created_at&quot;: &quot;2024-01-15T10:00:00.000000Z&quot;,
+                &quot;updated_at&quot;: &quot;2024-01-15T10:00:00.000000Z&quot;
+            }
+        ],
+        &quot;ar&quot;: [
+            {
+                &quot;id&quot;: 1,
+                &quot;name&quot;: &quot;حبوب القهوة&quot;,
+                &quot;name_ar&quot;: &quot;حبوب القهوة&quot;,
+                &quot;description&quot;: &quot;حبوب قهوة ممتازة من جميع أنحاء العالم&quot;,
+                &quot;description_ar&quot;: &quot;حبوب قهوة ممتازة من جميع أنحاء العالم&quot;,
+                &quot;slug&quot;: &quot;coffee-beans&quot;,
+                &quot;is_active&quot;: true,
+                &quot;product_count&quot;: 15,
+                &quot;created_at&quot;: &quot;2024-01-15T10:00:00.000000Z&quot;,
+                &quot;updated_at&quot;: &quot;2024-01-15T10:00:00.000000Z&quot;
+            }
+        ],
+        &quot;pagination&quot;: {
+            &quot;current_page&quot;: 1,
+            &quot;last_page&quot;: 3,
+            &quot;per_page&quot;: 15,
+            &quot;total&quot;: 45
+        }
+    }
+}</code>
+ </pre>
+    </span>
+<span id="execution-results-GETapi-admin-categories" hidden>
+    <blockquote>Received response<span
+                id="execution-response-status-GETapi-admin-categories"></span>:
+    </blockquote>
+    <pre class="json"><code id="execution-response-content-GETapi-admin-categories"
+      data-empty-response-text="<Empty response>" style="max-height: 400px;"></code></pre>
+</span>
+<span id="execution-error-GETapi-admin-categories" hidden>
+    <blockquote>Request failed with error:</blockquote>
+    <pre><code id="execution-error-message-GETapi-admin-categories">
+
+Tip: Check that you&#039;re properly connected to the network.
+If you&#039;re a maintainer of ths API, verify that your API is running and you&#039;ve enabled CORS.
+You can check the Dev Tools console for debugging information.</code></pre>
+</span>
+<form id="form-GETapi-admin-categories" data-method="GET"
+      data-path="api/admin/categories"
+      data-authed="1"
+      data-hasfiles="0"
+      data-isarraybody="0"
+      autocomplete="off"
+      onsubmit="event.preventDefault(); executeTryOut('GETapi-admin-categories', this);">
+    <h3>
+        Request&nbsp;&nbsp;&nbsp;
+                    <button type="button"
+                    style="background-color: #8fbcd4; padding: 5px 10px; border-radius: 5px; border-width: thin;"
+                    id="btn-tryout-GETapi-admin-categories"
+                    onclick="tryItOut('GETapi-admin-categories');">Try it out ⚡
+            </button>
+            <button type="button"
+                    style="background-color: #c97a7e; padding: 5px 10px; border-radius: 5px; border-width: thin;"
+                    id="btn-canceltryout-GETapi-admin-categories"
+                    onclick="cancelTryOut('GETapi-admin-categories');" hidden>Cancel 🛑
+            </button>&nbsp;&nbsp;
+            <button type="submit"
+                    style="background-color: #6ac174; padding: 5px 10px; border-radius: 5px; border-width: thin;"
+                    id="btn-executetryout-GETapi-admin-categories"
+                    data-initial-text="Send Request 💥"
+                    data-loading-text="⏱ Sending..."
+                    hidden>Send Request 💥
+            </button>
+            </h3>
+            <p>
+            <small class="badge badge-green">GET</small>
+            <b><code>api/admin/categories</code></b>
+        </p>
+                <h4 class="fancy-heading-panel"><b>Headers</b></h4>
+                                <div style="padding-left: 28px; clear: unset;">
+                <b style="line-height: 2;"><code>Authorization</code></b>&nbsp;&nbsp;
+&nbsp;
+ &nbsp;
+ &nbsp;
+                <input type="text" style="display: none"
+                              name="Authorization" class="auth-value"               data-endpoint="GETapi-admin-categories"
+               value="Bearer {YOUR_API_TOKEN}"
+               data-component="header">
+    <br>
+<p>Example: <code>Bearer {YOUR_API_TOKEN}</code></p>
+            </div>
+                                <div style="padding-left: 28px; clear: unset;">
+                <b style="line-height: 2;"><code>Content-Type</code></b>&nbsp;&nbsp;
+&nbsp;
+ &nbsp;
+ &nbsp;
+                <input type="text" style="display: none"
+                              name="Content-Type"                data-endpoint="GETapi-admin-categories"
+               value="application/json"
+               data-component="header">
+    <br>
+<p>Example: <code>application/json</code></p>
+            </div>
+                                <div style="padding-left: 28px; clear: unset;">
+                <b style="line-height: 2;"><code>Accept</code></b>&nbsp;&nbsp;
+&nbsp;
+ &nbsp;
+ &nbsp;
+                <input type="text" style="display: none"
+                              name="Accept"                data-endpoint="GETapi-admin-categories"
+               value="application/json"
+               data-component="header">
+    <br>
+<p>Example: <code>application/json</code></p>
+            </div>
+                            <h4 class="fancy-heading-panel"><b>Query Parameters</b></h4>
+                                    <div style="padding-left: 28px; clear: unset;">
+                <b style="line-height: 2;"><code>search</code></b>&nbsp;&nbsp;
+<small>string</small>&nbsp;
+<i>optional</i> &nbsp;
+ &nbsp;
+                <input type="text" style="display: none"
+                              name="search"                data-endpoint="GETapi-admin-categories"
+               value="coffee"
+               data-component="query">
+    <br>
+<p>Search categories by name or description. Example: <code>coffee</code></p>
+            </div>
+                                    <div style="padding-left: 28px; clear: unset;">
+                <b style="line-height: 2;"><code>is_active</code></b>&nbsp;&nbsp;
+<small>boolean</small>&nbsp;
+<i>optional</i> &nbsp;
+ &nbsp;
+                <label data-endpoint="GETapi-admin-categories" style="display: none">
+            <input type="radio" name="is_active"
+                   value="1"
+                   data-endpoint="GETapi-admin-categories"
+                   data-component="query"             >
+            <code>true</code>
+        </label>
+        <label data-endpoint="GETapi-admin-categories" style="display: none">
+            <input type="radio" name="is_active"
+                   value="0"
+                   data-endpoint="GETapi-admin-categories"
+                   data-component="query"             >
+            <code>false</code>
+        </label>
+    <br>
+<p>Filter by active status. Example: <code>true</code></p>
+            </div>
+                                    <div style="padding-left: 28px; clear: unset;">
+                <b style="line-height: 2;"><code>sort_by</code></b>&nbsp;&nbsp;
+<small>string</small>&nbsp;
+<i>optional</i> &nbsp;
+ &nbsp;
+                <input type="text" style="display: none"
+                              name="sort_by"                data-endpoint="GETapi-admin-categories"
+               value="name"
+               data-component="query">
+    <br>
+<p>Sort field (name, created_at). Example: <code>name</code></p>
+            </div>
+                                    <div style="padding-left: 28px; clear: unset;">
+                <b style="line-height: 2;"><code>sort_direction</code></b>&nbsp;&nbsp;
+<small>string</small>&nbsp;
+<i>optional</i> &nbsp;
+ &nbsp;
+                <input type="text" style="display: none"
+                              name="sort_direction"                data-endpoint="GETapi-admin-categories"
+               value="desc"
+               data-component="query">
+    <br>
+<p>Sort direction (asc, desc). Default: asc. Example: <code>desc</code></p>
+            </div>
+                                    <div style="padding-left: 28px; clear: unset;">
+                <b style="line-height: 2;"><code>per_page</code></b>&nbsp;&nbsp;
+<small>integer</small>&nbsp;
+<i>optional</i> &nbsp;
+ &nbsp;
+                <input type="number" style="display: none"
+               step="any"               name="per_page"                data-endpoint="GETapi-admin-categories"
+               value="10"
+               data-component="query">
+    <br>
+<p>Number of items per page. Default: 15. Example: <code>10</code></p>
+            </div>
+                </form>
+
+                    <h2 id="categories-POSTapi-admin-categories">Create category</h2>
+
+<p>
+<small class="badge badge-darkred">requires authentication</small>
+</p>
+
+<p>Create a new product category. Requires admin authentication.</p>
+
+<span id="example-requests-POSTapi-admin-categories">
+<blockquote>Example request:</blockquote>
+
+
+<div class="bash-example">
+    <pre><code class="language-bash">curl --request POST \
+    "http://127.0.0.1:8000/api/admin/categories" \
+    --header "Authorization: Bearer {YOUR_API_TOKEN}" \
+    --header "Content-Type: multipart/form-data" \
+    --header "Accept: application/json" \
+    --form "name=Coffee Beans"\
+    --form "name_ar=حبوب القهوة"\
+    --form "description=Premium coffee beans from around the world"\
+    --form "description_ar=حبوب قهوة ممتازة من جميع أنحاء العالم"\
+    --form "is_active=1"\
+    --form "image=@C:\Users\adshift FrontEnd\AppData\Local\Temp\phpC9C6.tmp" </code></pre></div>
+
+
+<div class="javascript-example">
+    <pre><code class="language-javascript">const url = new URL(
+    "http://127.0.0.1:8000/api/admin/categories"
+);
+
+const headers = {
+    "Authorization": "Bearer {YOUR_API_TOKEN}",
+    "Content-Type": "multipart/form-data",
+    "Accept": "application/json",
+};
+
+const body = new FormData();
+body.append('name', 'Coffee Beans');
+body.append('name_ar', 'حبوب القهوة');
+body.append('description', 'Premium coffee beans from around the world');
+body.append('description_ar', 'حبوب قهوة ممتازة من جميع أنحاء العالم');
+body.append('is_active', '1');
+body.append('image', document.querySelector('input[name="image"]').files[0]);
+
+fetch(url, {
+    method: "POST",
+    headers,
+    body,
+}).then(response =&gt; response.json());</code></pre></div>
+
+
+<div class="php-example">
+    <pre><code class="language-php">$client = new \GuzzleHttp\Client();
+$url = 'http://127.0.0.1:8000/api/admin/categories';
+$response = $client-&gt;post(
+    $url,
+    [
+        'headers' =&gt; [
+            'Authorization' =&gt; 'Bearer {YOUR_API_TOKEN}',
+            'Content-Type' =&gt; 'multipart/form-data',
+            'Accept' =&gt; 'application/json',
+        ],
+        'multipart' =&gt; [
+            [
+                'name' =&gt; 'name',
+                'contents' =&gt; 'Coffee Beans'
+            ],
+            [
+                'name' =&gt; 'name_ar',
+                'contents' =&gt; 'حبوب القهوة'
+            ],
+            [
+                'name' =&gt; 'description',
+                'contents' =&gt; 'Premium coffee beans from around the world'
+            ],
+            [
+                'name' =&gt; 'description_ar',
+                'contents' =&gt; 'حبوب قهوة ممتازة من جميع أنحاء العالم'
+            ],
+            [
+                'name' =&gt; 'is_active',
+                'contents' =&gt; '1'
+            ],
+            [
+                'name' =&gt; 'image',
+                'contents' =&gt; fopen('C:\Users\adshift FrontEnd\AppData\Local\Temp\phpC9C6.tmp', 'r')
+            ],
+        ],
+    ]
+);
+$body = $response-&gt;getBody();
+print_r(json_decode((string) $body));</code></pre></div>
+
+</span>
+
+<span id="example-responses-POSTapi-admin-categories">
+            <blockquote>
+            <p>Example response (201, Success):</p>
+        </blockquote>
+                <pre>
+
+<code class="language-json" style="max-height: 300px;">{
+    &quot;success&quot;: true,
+    &quot;message&quot;: &quot;Category created successfully&quot;,
+    &quot;data&quot;: {
+        &quot;id&quot;: 1,
+        &quot;name&quot;: &quot;Coffee Beans&quot;,
+        &quot;name_ar&quot;: &quot;حبوب القهوة&quot;,
+        &quot;description&quot;: &quot;Premium coffee beans from around the world&quot;,
+        &quot;slug&quot;: &quot;coffee-beans&quot;,
+        &quot;is_active&quot;: true,
+        &quot;created_at&quot;: &quot;2024-01-15T10:00:00.000000Z&quot;
+    }
+}</code>
+ </pre>
+            <blockquote>
+            <p>Example response (422, Validation Error):</p>
+        </blockquote>
+                <pre>
+
+<code class="language-json" style="max-height: 300px;">{
+    &quot;message&quot;: &quot;The name field is required.&quot;,
+    &quot;errors&quot;: {
+        &quot;name&quot;: [
+            &quot;The name field is required.&quot;
+        ]
+    }
+}</code>
+ </pre>
+    </span>
+<span id="execution-results-POSTapi-admin-categories" hidden>
+    <blockquote>Received response<span
+                id="execution-response-status-POSTapi-admin-categories"></span>:
+    </blockquote>
+    <pre class="json"><code id="execution-response-content-POSTapi-admin-categories"
+      data-empty-response-text="<Empty response>" style="max-height: 400px;"></code></pre>
+</span>
+<span id="execution-error-POSTapi-admin-categories" hidden>
+    <blockquote>Request failed with error:</blockquote>
+    <pre><code id="execution-error-message-POSTapi-admin-categories">
+
+Tip: Check that you&#039;re properly connected to the network.
+If you&#039;re a maintainer of ths API, verify that your API is running and you&#039;ve enabled CORS.
+You can check the Dev Tools console for debugging information.</code></pre>
+</span>
+<form id="form-POSTapi-admin-categories" data-method="POST"
+      data-path="api/admin/categories"
+      data-authed="1"
+      data-hasfiles="1"
+      data-isarraybody="0"
+      autocomplete="off"
+      onsubmit="event.preventDefault(); executeTryOut('POSTapi-admin-categories', this);">
+    <h3>
+        Request&nbsp;&nbsp;&nbsp;
+                    <button type="button"
+                    style="background-color: #8fbcd4; padding: 5px 10px; border-radius: 5px; border-width: thin;"
+                    id="btn-tryout-POSTapi-admin-categories"
+                    onclick="tryItOut('POSTapi-admin-categories');">Try it out ⚡
+            </button>
+            <button type="button"
+                    style="background-color: #c97a7e; padding: 5px 10px; border-radius: 5px; border-width: thin;"
+                    id="btn-canceltryout-POSTapi-admin-categories"
+                    onclick="cancelTryOut('POSTapi-admin-categories');" hidden>Cancel 🛑
+            </button>&nbsp;&nbsp;
+            <button type="submit"
+                    style="background-color: #6ac174; padding: 5px 10px; border-radius: 5px; border-width: thin;"
+                    id="btn-executetryout-POSTapi-admin-categories"
+                    data-initial-text="Send Request 💥"
+                    data-loading-text="⏱ Sending..."
+                    hidden>Send Request 💥
+            </button>
+            </h3>
+            <p>
+            <small class="badge badge-black">POST</small>
+            <b><code>api/admin/categories</code></b>
+        </p>
+                <h4 class="fancy-heading-panel"><b>Headers</b></h4>
+                                <div style="padding-left: 28px; clear: unset;">
+                <b style="line-height: 2;"><code>Authorization</code></b>&nbsp;&nbsp;
+&nbsp;
+ &nbsp;
+ &nbsp;
+                <input type="text" style="display: none"
+                              name="Authorization" class="auth-value"               data-endpoint="POSTapi-admin-categories"
+               value="Bearer {YOUR_API_TOKEN}"
+               data-component="header">
+    <br>
+<p>Example: <code>Bearer {YOUR_API_TOKEN}</code></p>
+            </div>
+                                <div style="padding-left: 28px; clear: unset;">
+                <b style="line-height: 2;"><code>Content-Type</code></b>&nbsp;&nbsp;
+&nbsp;
+ &nbsp;
+ &nbsp;
+                <input type="text" style="display: none"
+                              name="Content-Type"                data-endpoint="POSTapi-admin-categories"
+               value="multipart/form-data"
+               data-component="header">
+    <br>
+<p>Example: <code>multipart/form-data</code></p>
+            </div>
+                                <div style="padding-left: 28px; clear: unset;">
+                <b style="line-height: 2;"><code>Accept</code></b>&nbsp;&nbsp;
+&nbsp;
+ &nbsp;
+ &nbsp;
+                <input type="text" style="display: none"
+                              name="Accept"                data-endpoint="POSTapi-admin-categories"
+               value="application/json"
+               data-component="header">
+    <br>
+<p>Example: <code>application/json</code></p>
+            </div>
+                                <h4 class="fancy-heading-panel"><b>Body Parameters</b></h4>
+        <div style=" padding-left: 28px;  clear: unset;">
+            <b style="line-height: 2;"><code>name</code></b>&nbsp;&nbsp;
+<small>string</small>&nbsp;
+ &nbsp;
+ &nbsp;
+                <input type="text" style="display: none"
+                              name="name"                data-endpoint="POSTapi-admin-categories"
+               value="Coffee Beans"
+               data-component="body">
+    <br>
+<p>The category name in English. Example: <code>Coffee Beans</code></p>
+        </div>
+                <div style=" padding-left: 28px;  clear: unset;">
+            <b style="line-height: 2;"><code>name_ar</code></b>&nbsp;&nbsp;
+<small>string</small>&nbsp;
+<i>optional</i> &nbsp;
+ &nbsp;
+                <input type="text" style="display: none"
+                              name="name_ar"                data-endpoint="POSTapi-admin-categories"
+               value="حبوب القهوة"
+               data-component="body">
+    <br>
+<p>The category name in Arabic. Example: <code>حبوب القهوة</code></p>
+        </div>
+                <div style=" padding-left: 28px;  clear: unset;">
+            <b style="line-height: 2;"><code>description</code></b>&nbsp;&nbsp;
+<small>string</small>&nbsp;
+<i>optional</i> &nbsp;
+ &nbsp;
+                <input type="text" style="display: none"
+                              name="description"                data-endpoint="POSTapi-admin-categories"
+               value="Premium coffee beans from around the world"
+               data-component="body">
+    <br>
+<p>The category description in English. Example: <code>Premium coffee beans from around the world</code></p>
+        </div>
+                <div style=" padding-left: 28px;  clear: unset;">
+            <b style="line-height: 2;"><code>description_ar</code></b>&nbsp;&nbsp;
+<small>string</small>&nbsp;
+<i>optional</i> &nbsp;
+ &nbsp;
+                <input type="text" style="display: none"
+                              name="description_ar"                data-endpoint="POSTapi-admin-categories"
+               value="حبوب قهوة ممتازة من جميع أنحاء العالم"
+               data-component="body">
+    <br>
+<p>The category description in Arabic. Example: <code>حبوب قهوة ممتازة من جميع أنحاء العالم</code></p>
+        </div>
+                <div style=" padding-left: 28px;  clear: unset;">
+            <b style="line-height: 2;"><code>is_active</code></b>&nbsp;&nbsp;
+<small>boolean</small>&nbsp;
+<i>optional</i> &nbsp;
+ &nbsp;
+                <label data-endpoint="POSTapi-admin-categories" style="display: none">
+            <input type="radio" name="is_active"
+                   value="true"
+                   data-endpoint="POSTapi-admin-categories"
+                   data-component="body"             >
+            <code>true</code>
+        </label>
+        <label data-endpoint="POSTapi-admin-categories" style="display: none">
+            <input type="radio" name="is_active"
+                   value="false"
+                   data-endpoint="POSTapi-admin-categories"
+                   data-component="body"             >
+            <code>false</code>
+        </label>
+    <br>
+<p>Whether the category is active. Default: true. Example: <code>true</code></p>
+        </div>
+                <div style=" padding-left: 28px;  clear: unset;">
+            <b style="line-height: 2;"><code>image</code></b>&nbsp;&nbsp;
+<small>file</small>&nbsp;
+<i>optional</i> &nbsp;
+ &nbsp;
+                <input type="file" style="display: none"
+                              name="image"                data-endpoint="POSTapi-admin-categories"
+               value=""
+               data-component="body">
+    <br>
+<p>The category image (jpeg, png, jpg, gif, webp, max 2MB). Example: <code>C:\Users\adshift FrontEnd\AppData\Local\Temp\phpC9C6.tmp</code></p>
+        </div>
+        </form>
+
+                    <h2 id="categories-GETapi-admin-categories--category_id-">Get category details (Admin)</h2>
+
+<p>
+<small class="badge badge-darkred">requires authentication</small>
+</p>
+
+<p>Retrieve detailed information about a specific category including related products.</p>
+
+<span id="example-requests-GETapi-admin-categories--category_id-">
+<blockquote>Example request:</blockquote>
+
+
+<div class="bash-example">
+    <pre><code class="language-bash">curl --request GET \
+    --get "http://127.0.0.1:8000/api/admin/categories/1" \
+    --header "Authorization: Bearer {YOUR_API_TOKEN}" \
+    --header "Content-Type: application/json" \
+    --header "Accept: application/json"</code></pre></div>
+
+
+<div class="javascript-example">
+    <pre><code class="language-javascript">const url = new URL(
+    "http://127.0.0.1:8000/api/admin/categories/1"
+);
+
+const headers = {
+    "Authorization": "Bearer {YOUR_API_TOKEN}",
+    "Content-Type": "application/json",
+    "Accept": "application/json",
+};
+
+fetch(url, {
+    method: "GET",
+    headers,
+}).then(response =&gt; response.json());</code></pre></div>
+
+
+<div class="php-example">
+    <pre><code class="language-php">$client = new \GuzzleHttp\Client();
+$url = 'http://127.0.0.1:8000/api/admin/categories/1';
+$response = $client-&gt;get(
+    $url,
+    [
+        'headers' =&gt; [
+            'Authorization' =&gt; 'Bearer {YOUR_API_TOKEN}',
+            'Content-Type' =&gt; 'application/json',
+            'Accept' =&gt; 'application/json',
+        ],
+    ]
+);
+$body = $response-&gt;getBody();
+print_r(json_decode((string) $body));</code></pre></div>
+
+</span>
+
+<span id="example-responses-GETapi-admin-categories--category_id-">
+            <blockquote>
+            <p>Example response (200, Success):</p>
+        </blockquote>
+                <pre>
+
+<code class="language-json" style="max-height: 300px;">{
+    &quot;success&quot;: true,
+    &quot;data&quot;: {
+        &quot;id&quot;: 1,
+        &quot;name&quot;: &quot;Coffee Beans&quot;,
+        &quot;name_ar&quot;: &quot;حبوب القهوة&quot;,
+        &quot;description&quot;: &quot;Premium coffee beans from around the world&quot;,
+        &quot;slug&quot;: &quot;coffee-beans&quot;,
+        &quot;is_active&quot;: true,
+        &quot;products&quot;: [
+            {
+                &quot;id&quot;: 1,
+                &quot;name&quot;: &quot;Premium Coffee Beans&quot;,
+                &quot;slug&quot;: &quot;premium-coffee-beans&quot;,
+                &quot;price&quot;: 25,
+                &quot;stock&quot;: 100,
+                &quot;is_active&quot;: true
+            }
+        ]
+    }
+}</code>
+ </pre>
+    </span>
+<span id="execution-results-GETapi-admin-categories--category_id-" hidden>
+    <blockquote>Received response<span
+                id="execution-response-status-GETapi-admin-categories--category_id-"></span>:
+    </blockquote>
+    <pre class="json"><code id="execution-response-content-GETapi-admin-categories--category_id-"
+      data-empty-response-text="<Empty response>" style="max-height: 400px;"></code></pre>
+</span>
+<span id="execution-error-GETapi-admin-categories--category_id-" hidden>
+    <blockquote>Request failed with error:</blockquote>
+    <pre><code id="execution-error-message-GETapi-admin-categories--category_id-">
+
+Tip: Check that you&#039;re properly connected to the network.
+If you&#039;re a maintainer of ths API, verify that your API is running and you&#039;ve enabled CORS.
+You can check the Dev Tools console for debugging information.</code></pre>
+</span>
+<form id="form-GETapi-admin-categories--category_id-" data-method="GET"
+      data-path="api/admin/categories/{category_id}"
+      data-authed="1"
+      data-hasfiles="0"
+      data-isarraybody="0"
+      autocomplete="off"
+      onsubmit="event.preventDefault(); executeTryOut('GETapi-admin-categories--category_id-', this);">
+    <h3>
+        Request&nbsp;&nbsp;&nbsp;
+                    <button type="button"
+                    style="background-color: #8fbcd4; padding: 5px 10px; border-radius: 5px; border-width: thin;"
+                    id="btn-tryout-GETapi-admin-categories--category_id-"
+                    onclick="tryItOut('GETapi-admin-categories--category_id-');">Try it out ⚡
+            </button>
+            <button type="button"
+                    style="background-color: #c97a7e; padding: 5px 10px; border-radius: 5px; border-width: thin;"
+                    id="btn-canceltryout-GETapi-admin-categories--category_id-"
+                    onclick="cancelTryOut('GETapi-admin-categories--category_id-');" hidden>Cancel 🛑
+            </button>&nbsp;&nbsp;
+            <button type="submit"
+                    style="background-color: #6ac174; padding: 5px 10px; border-radius: 5px; border-width: thin;"
+                    id="btn-executetryout-GETapi-admin-categories--category_id-"
+                    data-initial-text="Send Request 💥"
+                    data-loading-text="⏱ Sending..."
+                    hidden>Send Request 💥
+            </button>
+            </h3>
+            <p>
+            <small class="badge badge-green">GET</small>
+            <b><code>api/admin/categories/{category_id}</code></b>
+        </p>
+                <h4 class="fancy-heading-panel"><b>Headers</b></h4>
+                                <div style="padding-left: 28px; clear: unset;">
+                <b style="line-height: 2;"><code>Authorization</code></b>&nbsp;&nbsp;
+&nbsp;
+ &nbsp;
+ &nbsp;
+                <input type="text" style="display: none"
+                              name="Authorization" class="auth-value"               data-endpoint="GETapi-admin-categories--category_id-"
+               value="Bearer {YOUR_API_TOKEN}"
+               data-component="header">
+    <br>
+<p>Example: <code>Bearer {YOUR_API_TOKEN}</code></p>
+            </div>
+                                <div style="padding-left: 28px; clear: unset;">
+                <b style="line-height: 2;"><code>Content-Type</code></b>&nbsp;&nbsp;
+&nbsp;
+ &nbsp;
+ &nbsp;
+                <input type="text" style="display: none"
+                              name="Content-Type"                data-endpoint="GETapi-admin-categories--category_id-"
+               value="application/json"
+               data-component="header">
+    <br>
+<p>Example: <code>application/json</code></p>
+            </div>
+                                <div style="padding-left: 28px; clear: unset;">
+                <b style="line-height: 2;"><code>Accept</code></b>&nbsp;&nbsp;
+&nbsp;
+ &nbsp;
+ &nbsp;
+                <input type="text" style="display: none"
+                              name="Accept"                data-endpoint="GETapi-admin-categories--category_id-"
+               value="application/json"
+               data-component="header">
+    <br>
+<p>Example: <code>application/json</code></p>
+            </div>
+                        <h4 class="fancy-heading-panel"><b>URL Parameters</b></h4>
+                    <div style="padding-left: 28px; clear: unset;">
+                <b style="line-height: 2;"><code>category_id</code></b>&nbsp;&nbsp;
+<small>integer</small>&nbsp;
+ &nbsp;
+ &nbsp;
+                <input type="number" style="display: none"
+               step="any"               name="category_id"                data-endpoint="GETapi-admin-categories--category_id-"
+               value="1"
+               data-component="url">
+    <br>
+<p>The ID of the category. Example: <code>1</code></p>
+            </div>
+                    <div style="padding-left: 28px; clear: unset;">
+                <b style="line-height: 2;"><code>category</code></b>&nbsp;&nbsp;
+<small>integer</small>&nbsp;
+ &nbsp;
+ &nbsp;
+                <input type="number" style="display: none"
+               step="any"               name="category"                data-endpoint="GETapi-admin-categories--category_id-"
+               value="1"
+               data-component="url">
+    <br>
+<p>The category ID. Example: <code>1</code></p>
+            </div>
+                    </form>
+
+                    <h2 id="categories-PUTapi-admin-categories--category_id-">Update category</h2>
+
+<p>
+<small class="badge badge-darkred">requires authentication</small>
+</p>
+
+<p>Update an existing product category. Requires admin authentication.</p>
+
+<span id="example-requests-PUTapi-admin-categories--category_id-">
+<blockquote>Example request:</blockquote>
+
+
+<div class="bash-example">
+    <pre><code class="language-bash">curl --request PUT \
+    "http://127.0.0.1:8000/api/admin/categories/1" \
+    --header "Authorization: Bearer {YOUR_API_TOKEN}" \
+    --header "Content-Type: multipart/form-data" \
+    --header "Accept: application/json" \
+    --form "name=Coffee Beans"\
+    --form "name_ar=حبوب القهوة"\
+    --form "description=Premium coffee beans"\
+    --form "description_ar=architecto"\
+    --form "is_active=1"\
+    --form "remove_image="\
+    --form "image=@C:\Users\adshift FrontEnd\AppData\Local\Temp\phpC9C8.tmp" </code></pre></div>
+
+
+<div class="javascript-example">
+    <pre><code class="language-javascript">const url = new URL(
+    "http://127.0.0.1:8000/api/admin/categories/1"
+);
+
+const headers = {
+    "Authorization": "Bearer {YOUR_API_TOKEN}",
+    "Content-Type": "multipart/form-data",
+    "Accept": "application/json",
+};
+
+const body = new FormData();
+body.append('name', 'Coffee Beans');
+body.append('name_ar', 'حبوب القهوة');
+body.append('description', 'Premium coffee beans');
+body.append('description_ar', 'architecto');
+body.append('is_active', '1');
+body.append('remove_image', '');
+body.append('image', document.querySelector('input[name="image"]').files[0]);
+
+fetch(url, {
+    method: "PUT",
+    headers,
+    body,
+}).then(response =&gt; response.json());</code></pre></div>
+
+
+<div class="php-example">
+    <pre><code class="language-php">$client = new \GuzzleHttp\Client();
+$url = 'http://127.0.0.1:8000/api/admin/categories/1';
+$response = $client-&gt;put(
+    $url,
+    [
+        'headers' =&gt; [
+            'Authorization' =&gt; 'Bearer {YOUR_API_TOKEN}',
+            'Content-Type' =&gt; 'multipart/form-data',
+            'Accept' =&gt; 'application/json',
+        ],
+        'multipart' =&gt; [
+            [
+                'name' =&gt; 'name',
+                'contents' =&gt; 'Coffee Beans'
+            ],
+            [
+                'name' =&gt; 'name_ar',
+                'contents' =&gt; 'حبوب القهوة'
+            ],
+            [
+                'name' =&gt; 'description',
+                'contents' =&gt; 'Premium coffee beans'
+            ],
+            [
+                'name' =&gt; 'description_ar',
+                'contents' =&gt; 'architecto'
+            ],
+            [
+                'name' =&gt; 'is_active',
+                'contents' =&gt; '1'
+            ],
+            [
+                'name' =&gt; 'remove_image',
+                'contents' =&gt; ''
+            ],
+            [
+                'name' =&gt; 'image',
+                'contents' =&gt; fopen('C:\Users\adshift FrontEnd\AppData\Local\Temp\phpC9C8.tmp', 'r')
+            ],
+        ],
+    ]
+);
+$body = $response-&gt;getBody();
+print_r(json_decode((string) $body));</code></pre></div>
+
+</span>
+
+<span id="example-responses-PUTapi-admin-categories--category_id-">
+            <blockquote>
+            <p>Example response (200, Success):</p>
+        </blockquote>
+                <pre>
+
+<code class="language-json" style="max-height: 300px;">{
+    &quot;success&quot;: true,
+    &quot;message&quot;: &quot;Category updated successfully&quot;,
+    &quot;data&quot;: {
+        &quot;id&quot;: 1,
+        &quot;name&quot;: &quot;Coffee Beans&quot;,
+        &quot;name_ar&quot;: &quot;حبوب القهوة&quot;,
+        &quot;description&quot;: &quot;Premium coffee beans&quot;,
+        &quot;slug&quot;: &quot;coffee-beans&quot;,
+        &quot;is_active&quot;: true
+    }
+}</code>
+ </pre>
+    </span>
+<span id="execution-results-PUTapi-admin-categories--category_id-" hidden>
+    <blockquote>Received response<span
+                id="execution-response-status-PUTapi-admin-categories--category_id-"></span>:
+    </blockquote>
+    <pre class="json"><code id="execution-response-content-PUTapi-admin-categories--category_id-"
+      data-empty-response-text="<Empty response>" style="max-height: 400px;"></code></pre>
+</span>
+<span id="execution-error-PUTapi-admin-categories--category_id-" hidden>
+    <blockquote>Request failed with error:</blockquote>
+    <pre><code id="execution-error-message-PUTapi-admin-categories--category_id-">
+
+Tip: Check that you&#039;re properly connected to the network.
+If you&#039;re a maintainer of ths API, verify that your API is running and you&#039;ve enabled CORS.
+You can check the Dev Tools console for debugging information.</code></pre>
+</span>
+<form id="form-PUTapi-admin-categories--category_id-" data-method="PUT"
+      data-path="api/admin/categories/{category_id}"
+      data-authed="1"
+      data-hasfiles="1"
+      data-isarraybody="0"
+      autocomplete="off"
+      onsubmit="event.preventDefault(); executeTryOut('PUTapi-admin-categories--category_id-', this);">
+    <h3>
+        Request&nbsp;&nbsp;&nbsp;
+                    <button type="button"
+                    style="background-color: #8fbcd4; padding: 5px 10px; border-radius: 5px; border-width: thin;"
+                    id="btn-tryout-PUTapi-admin-categories--category_id-"
+                    onclick="tryItOut('PUTapi-admin-categories--category_id-');">Try it out ⚡
+            </button>
+            <button type="button"
+                    style="background-color: #c97a7e; padding: 5px 10px; border-radius: 5px; border-width: thin;"
+                    id="btn-canceltryout-PUTapi-admin-categories--category_id-"
+                    onclick="cancelTryOut('PUTapi-admin-categories--category_id-');" hidden>Cancel 🛑
+            </button>&nbsp;&nbsp;
+            <button type="submit"
+                    style="background-color: #6ac174; padding: 5px 10px; border-radius: 5px; border-width: thin;"
+                    id="btn-executetryout-PUTapi-admin-categories--category_id-"
+                    data-initial-text="Send Request 💥"
+                    data-loading-text="⏱ Sending..."
+                    hidden>Send Request 💥
+            </button>
+            </h3>
+            <p>
+            <small class="badge badge-darkblue">PUT</small>
+            <b><code>api/admin/categories/{category_id}</code></b>
+        </p>
+                <h4 class="fancy-heading-panel"><b>Headers</b></h4>
+                                <div style="padding-left: 28px; clear: unset;">
+                <b style="line-height: 2;"><code>Authorization</code></b>&nbsp;&nbsp;
+&nbsp;
+ &nbsp;
+ &nbsp;
+                <input type="text" style="display: none"
+                              name="Authorization" class="auth-value"               data-endpoint="PUTapi-admin-categories--category_id-"
+               value="Bearer {YOUR_API_TOKEN}"
+               data-component="header">
+    <br>
+<p>Example: <code>Bearer {YOUR_API_TOKEN}</code></p>
+            </div>
+                                <div style="padding-left: 28px; clear: unset;">
+                <b style="line-height: 2;"><code>Content-Type</code></b>&nbsp;&nbsp;
+&nbsp;
+ &nbsp;
+ &nbsp;
+                <input type="text" style="display: none"
+                              name="Content-Type"                data-endpoint="PUTapi-admin-categories--category_id-"
+               value="multipart/form-data"
+               data-component="header">
+    <br>
+<p>Example: <code>multipart/form-data</code></p>
+            </div>
+                                <div style="padding-left: 28px; clear: unset;">
+                <b style="line-height: 2;"><code>Accept</code></b>&nbsp;&nbsp;
+&nbsp;
+ &nbsp;
+ &nbsp;
+                <input type="text" style="display: none"
+                              name="Accept"                data-endpoint="PUTapi-admin-categories--category_id-"
+               value="application/json"
+               data-component="header">
+    <br>
+<p>Example: <code>application/json</code></p>
+            </div>
+                        <h4 class="fancy-heading-panel"><b>URL Parameters</b></h4>
+                    <div style="padding-left: 28px; clear: unset;">
+                <b style="line-height: 2;"><code>category_id</code></b>&nbsp;&nbsp;
+<small>integer</small>&nbsp;
+ &nbsp;
+ &nbsp;
+                <input type="number" style="display: none"
+               step="any"               name="category_id"                data-endpoint="PUTapi-admin-categories--category_id-"
+               value="1"
+               data-component="url">
+    <br>
+<p>The ID of the category. Example: <code>1</code></p>
+            </div>
+                    <div style="padding-left: 28px; clear: unset;">
+                <b style="line-height: 2;"><code>category</code></b>&nbsp;&nbsp;
+<small>integer</small>&nbsp;
+ &nbsp;
+ &nbsp;
+                <input type="number" style="display: none"
+               step="any"               name="category"                data-endpoint="PUTapi-admin-categories--category_id-"
+               value="1"
+               data-component="url">
+    <br>
+<p>The category ID. Example: <code>1</code></p>
+            </div>
+                            <h4 class="fancy-heading-panel"><b>Body Parameters</b></h4>
+        <div style=" padding-left: 28px;  clear: unset;">
+            <b style="line-height: 2;"><code>name</code></b>&nbsp;&nbsp;
+<small>string</small>&nbsp;
+<i>optional</i> &nbsp;
+ &nbsp;
+                <input type="text" style="display: none"
+                              name="name"                data-endpoint="PUTapi-admin-categories--category_id-"
+               value="Coffee Beans"
+               data-component="body">
+    <br>
+<p>The category name in English. Example: <code>Coffee Beans</code></p>
+        </div>
+                <div style=" padding-left: 28px;  clear: unset;">
+            <b style="line-height: 2;"><code>name_ar</code></b>&nbsp;&nbsp;
+<small>string</small>&nbsp;
+<i>optional</i> &nbsp;
+ &nbsp;
+                <input type="text" style="display: none"
+                              name="name_ar"                data-endpoint="PUTapi-admin-categories--category_id-"
+               value="حبوب القهوة"
+               data-component="body">
+    <br>
+<p>The category name in Arabic. Example: <code>حبوب القهوة</code></p>
+        </div>
+                <div style=" padding-left: 28px;  clear: unset;">
+            <b style="line-height: 2;"><code>description</code></b>&nbsp;&nbsp;
+<small>string</small>&nbsp;
+<i>optional</i> &nbsp;
+ &nbsp;
+                <input type="text" style="display: none"
+                              name="description"                data-endpoint="PUTapi-admin-categories--category_id-"
+               value="Premium coffee beans"
+               data-component="body">
+    <br>
+<p>The category description in English. Example: <code>Premium coffee beans</code></p>
+        </div>
+                <div style=" padding-left: 28px;  clear: unset;">
+            <b style="line-height: 2;"><code>description_ar</code></b>&nbsp;&nbsp;
+<small>string</small>&nbsp;
+<i>optional</i> &nbsp;
+ &nbsp;
+                <input type="text" style="display: none"
+                              name="description_ar"                data-endpoint="PUTapi-admin-categories--category_id-"
+               value="architecto"
+               data-component="body">
+    <br>
+<p>The category description in Arabic. Example: <code>architecto</code></p>
+        </div>
+                <div style=" padding-left: 28px;  clear: unset;">
+            <b style="line-height: 2;"><code>is_active</code></b>&nbsp;&nbsp;
+<small>boolean</small>&nbsp;
+<i>optional</i> &nbsp;
+ &nbsp;
+                <label data-endpoint="PUTapi-admin-categories--category_id-" style="display: none">
+            <input type="radio" name="is_active"
+                   value="true"
+                   data-endpoint="PUTapi-admin-categories--category_id-"
+                   data-component="body"             >
+            <code>true</code>
+        </label>
+        <label data-endpoint="PUTapi-admin-categories--category_id-" style="display: none">
+            <input type="radio" name="is_active"
+                   value="false"
+                   data-endpoint="PUTapi-admin-categories--category_id-"
+                   data-component="body"             >
+            <code>false</code>
+        </label>
+    <br>
+<p>Whether the category is active. Example: <code>true</code></p>
+        </div>
+                <div style=" padding-left: 28px;  clear: unset;">
+            <b style="line-height: 2;"><code>image</code></b>&nbsp;&nbsp;
+<small>file</small>&nbsp;
+<i>optional</i> &nbsp;
+ &nbsp;
+                <input type="file" style="display: none"
+                              name="image"                data-endpoint="PUTapi-admin-categories--category_id-"
+               value=""
+               data-component="body">
+    <br>
+<p>The new category image (jpeg, png, jpg, gif, webp, max 2MB). Example: <code>C:\Users\adshift FrontEnd\AppData\Local\Temp\phpC9C8.tmp</code></p>
+        </div>
+                <div style=" padding-left: 28px;  clear: unset;">
+            <b style="line-height: 2;"><code>remove_image</code></b>&nbsp;&nbsp;
+<small>boolean</small>&nbsp;
+<i>optional</i> &nbsp;
+ &nbsp;
+                <label data-endpoint="PUTapi-admin-categories--category_id-" style="display: none">
+            <input type="radio" name="remove_image"
+                   value="true"
+                   data-endpoint="PUTapi-admin-categories--category_id-"
+                   data-component="body"             >
+            <code>true</code>
+        </label>
+        <label data-endpoint="PUTapi-admin-categories--category_id-" style="display: none">
+            <input type="radio" name="remove_image"
+                   value="false"
+                   data-endpoint="PUTapi-admin-categories--category_id-"
+                   data-component="body"             >
+            <code>false</code>
+        </label>
+    <br>
+<p>Set to true to remove the current image. Example: <code>false</code></p>
+        </div>
+        </form>
+
+                    <h2 id="categories-DELETEapi-admin-categories--category_id-">Delete category</h2>
+
+<p>
+<small class="badge badge-darkred">requires authentication</small>
+</p>
+
+<p>Delete a product category. Categories with existing products cannot be deleted.
+Requires admin authentication.</p>
+
+<span id="example-requests-DELETEapi-admin-categories--category_id-">
+<blockquote>Example request:</blockquote>
+
+
+<div class="bash-example">
+    <pre><code class="language-bash">curl --request DELETE \
+    "http://127.0.0.1:8000/api/admin/categories/1" \
+    --header "Authorization: Bearer {YOUR_API_TOKEN}" \
+    --header "Content-Type: application/json" \
+    --header "Accept: application/json"</code></pre></div>
+
+
+<div class="javascript-example">
+    <pre><code class="language-javascript">const url = new URL(
+    "http://127.0.0.1:8000/api/admin/categories/1"
+);
+
+const headers = {
+    "Authorization": "Bearer {YOUR_API_TOKEN}",
+    "Content-Type": "application/json",
+    "Accept": "application/json",
+};
+
+fetch(url, {
+    method: "DELETE",
+    headers,
+}).then(response =&gt; response.json());</code></pre></div>
+
+
+<div class="php-example">
+    <pre><code class="language-php">$client = new \GuzzleHttp\Client();
+$url = 'http://127.0.0.1:8000/api/admin/categories/1';
+$response = $client-&gt;delete(
+    $url,
+    [
+        'headers' =&gt; [
+            'Authorization' =&gt; 'Bearer {YOUR_API_TOKEN}',
+            'Content-Type' =&gt; 'application/json',
+            'Accept' =&gt; 'application/json',
+        ],
+    ]
+);
+$body = $response-&gt;getBody();
+print_r(json_decode((string) $body));</code></pre></div>
+
+</span>
+
+<span id="example-responses-DELETEapi-admin-categories--category_id-">
+            <blockquote>
+            <p>Example response (200, Success):</p>
+        </blockquote>
+                <pre>
+
+<code class="language-json" style="max-height: 300px;">{
+    &quot;success&quot;: true,
+    &quot;message&quot;: &quot;Category deleted successfully&quot;
+}</code>
+ </pre>
+            <blockquote>
+            <p>Example response (422, Has Products):</p>
+        </blockquote>
+                <pre>
+
+<code class="language-json" style="max-height: 300px;">{
+    &quot;success&quot;: false,
+    &quot;message&quot;: &quot;Cannot delete category with existing products&quot;
+}</code>
+ </pre>
+    </span>
+<span id="execution-results-DELETEapi-admin-categories--category_id-" hidden>
+    <blockquote>Received response<span
+                id="execution-response-status-DELETEapi-admin-categories--category_id-"></span>:
+    </blockquote>
+    <pre class="json"><code id="execution-response-content-DELETEapi-admin-categories--category_id-"
+      data-empty-response-text="<Empty response>" style="max-height: 400px;"></code></pre>
+</span>
+<span id="execution-error-DELETEapi-admin-categories--category_id-" hidden>
+    <blockquote>Request failed with error:</blockquote>
+    <pre><code id="execution-error-message-DELETEapi-admin-categories--category_id-">
+
+Tip: Check that you&#039;re properly connected to the network.
+If you&#039;re a maintainer of ths API, verify that your API is running and you&#039;ve enabled CORS.
+You can check the Dev Tools console for debugging information.</code></pre>
+</span>
+<form id="form-DELETEapi-admin-categories--category_id-" data-method="DELETE"
+      data-path="api/admin/categories/{category_id}"
+      data-authed="1"
+      data-hasfiles="0"
+      data-isarraybody="0"
+      autocomplete="off"
+      onsubmit="event.preventDefault(); executeTryOut('DELETEapi-admin-categories--category_id-', this);">
+    <h3>
+        Request&nbsp;&nbsp;&nbsp;
+                    <button type="button"
+                    style="background-color: #8fbcd4; padding: 5px 10px; border-radius: 5px; border-width: thin;"
+                    id="btn-tryout-DELETEapi-admin-categories--category_id-"
+                    onclick="tryItOut('DELETEapi-admin-categories--category_id-');">Try it out ⚡
+            </button>
+            <button type="button"
+                    style="background-color: #c97a7e; padding: 5px 10px; border-radius: 5px; border-width: thin;"
+                    id="btn-canceltryout-DELETEapi-admin-categories--category_id-"
+                    onclick="cancelTryOut('DELETEapi-admin-categories--category_id-');" hidden>Cancel 🛑
+            </button>&nbsp;&nbsp;
+            <button type="submit"
+                    style="background-color: #6ac174; padding: 5px 10px; border-radius: 5px; border-width: thin;"
+                    id="btn-executetryout-DELETEapi-admin-categories--category_id-"
+                    data-initial-text="Send Request 💥"
+                    data-loading-text="⏱ Sending..."
+                    hidden>Send Request 💥
+            </button>
+            </h3>
+            <p>
+            <small class="badge badge-red">DELETE</small>
+            <b><code>api/admin/categories/{category_id}</code></b>
+        </p>
+                <h4 class="fancy-heading-panel"><b>Headers</b></h4>
+                                <div style="padding-left: 28px; clear: unset;">
+                <b style="line-height: 2;"><code>Authorization</code></b>&nbsp;&nbsp;
+&nbsp;
+ &nbsp;
+ &nbsp;
+                <input type="text" style="display: none"
+                              name="Authorization" class="auth-value"               data-endpoint="DELETEapi-admin-categories--category_id-"
+               value="Bearer {YOUR_API_TOKEN}"
+               data-component="header">
+    <br>
+<p>Example: <code>Bearer {YOUR_API_TOKEN}</code></p>
+            </div>
+                                <div style="padding-left: 28px; clear: unset;">
+                <b style="line-height: 2;"><code>Content-Type</code></b>&nbsp;&nbsp;
+&nbsp;
+ &nbsp;
+ &nbsp;
+                <input type="text" style="display: none"
+                              name="Content-Type"                data-endpoint="DELETEapi-admin-categories--category_id-"
+               value="application/json"
+               data-component="header">
+    <br>
+<p>Example: <code>application/json</code></p>
+            </div>
+                                <div style="padding-left: 28px; clear: unset;">
+                <b style="line-height: 2;"><code>Accept</code></b>&nbsp;&nbsp;
+&nbsp;
+ &nbsp;
+ &nbsp;
+                <input type="text" style="display: none"
+                              name="Accept"                data-endpoint="DELETEapi-admin-categories--category_id-"
+               value="application/json"
+               data-component="header">
+    <br>
+<p>Example: <code>application/json</code></p>
+            </div>
+                        <h4 class="fancy-heading-panel"><b>URL Parameters</b></h4>
+                    <div style="padding-left: 28px; clear: unset;">
+                <b style="line-height: 2;"><code>category_id</code></b>&nbsp;&nbsp;
+<small>integer</small>&nbsp;
+ &nbsp;
+ &nbsp;
+                <input type="number" style="display: none"
+               step="any"               name="category_id"                data-endpoint="DELETEapi-admin-categories--category_id-"
+               value="1"
+               data-component="url">
+    <br>
+<p>The ID of the category. Example: <code>1</code></p>
+            </div>
+                    <div style="padding-left: 28px; clear: unset;">
+                <b style="line-height: 2;"><code>category</code></b>&nbsp;&nbsp;
+<small>integer</small>&nbsp;
+ &nbsp;
+ &nbsp;
+                <input type="number" style="display: none"
+               step="any"               name="category"                data-endpoint="DELETEapi-admin-categories--category_id-"
                value="1"
                data-component="url">
     <br>
@@ -6304,6 +8841,167 @@ You can check the Dev Tools console for debugging information.</code></pre>
             </div>
                     </form>
 
+                    <h2 id="orders-GETapi-admin-orders-statistics">Get order statistics</h2>
+
+<p>
+<small class="badge badge-darkred">requires authentication</small>
+</p>
+
+<p>Get aggregated order statistics. This endpoint is typically used by administrators for dashboard displays.</p>
+
+<span id="example-requests-GETapi-admin-orders-statistics">
+<blockquote>Example request:</blockquote>
+
+
+<div class="bash-example">
+    <pre><code class="language-bash">curl --request GET \
+    --get "http://127.0.0.1:8000/api/admin/orders/statistics" \
+    --header "Authorization: Bearer {YOUR_API_TOKEN}" \
+    --header "Content-Type: application/json" \
+    --header "Accept: application/json"</code></pre></div>
+
+
+<div class="javascript-example">
+    <pre><code class="language-javascript">const url = new URL(
+    "http://127.0.0.1:8000/api/admin/orders/statistics"
+);
+
+const headers = {
+    "Authorization": "Bearer {YOUR_API_TOKEN}",
+    "Content-Type": "application/json",
+    "Accept": "application/json",
+};
+
+fetch(url, {
+    method: "GET",
+    headers,
+}).then(response =&gt; response.json());</code></pre></div>
+
+
+<div class="php-example">
+    <pre><code class="language-php">$client = new \GuzzleHttp\Client();
+$url = 'http://127.0.0.1:8000/api/admin/orders/statistics';
+$response = $client-&gt;get(
+    $url,
+    [
+        'headers' =&gt; [
+            'Authorization' =&gt; 'Bearer {YOUR_API_TOKEN}',
+            'Content-Type' =&gt; 'application/json',
+            'Accept' =&gt; 'application/json',
+        ],
+    ]
+);
+$body = $response-&gt;getBody();
+print_r(json_decode((string) $body));</code></pre></div>
+
+</span>
+
+<span id="example-responses-GETapi-admin-orders-statistics">
+            <blockquote>
+            <p>Example response (200, Success):</p>
+        </blockquote>
+                <pre>
+
+<code class="language-json" style="max-height: 300px;">{
+    &quot;success&quot;: true,
+    &quot;data&quot;: {
+        &quot;total_orders&quot;: 150,
+        &quot;pending_orders&quot;: 25,
+        &quot;processing_orders&quot;: 30,
+        &quot;shipped_orders&quot;: 45,
+        &quot;delivered_orders&quot;: 40,
+        &quot;cancelled_orders&quot;: 10,
+        &quot;total_revenue&quot;: 15000,
+        &quot;pending_revenue&quot;: 2500
+    }
+}</code>
+ </pre>
+    </span>
+<span id="execution-results-GETapi-admin-orders-statistics" hidden>
+    <blockquote>Received response<span
+                id="execution-response-status-GETapi-admin-orders-statistics"></span>:
+    </blockquote>
+    <pre class="json"><code id="execution-response-content-GETapi-admin-orders-statistics"
+      data-empty-response-text="<Empty response>" style="max-height: 400px;"></code></pre>
+</span>
+<span id="execution-error-GETapi-admin-orders-statistics" hidden>
+    <blockquote>Request failed with error:</blockquote>
+    <pre><code id="execution-error-message-GETapi-admin-orders-statistics">
+
+Tip: Check that you&#039;re properly connected to the network.
+If you&#039;re a maintainer of ths API, verify that your API is running and you&#039;ve enabled CORS.
+You can check the Dev Tools console for debugging information.</code></pre>
+</span>
+<form id="form-GETapi-admin-orders-statistics" data-method="GET"
+      data-path="api/admin/orders/statistics"
+      data-authed="1"
+      data-hasfiles="0"
+      data-isarraybody="0"
+      autocomplete="off"
+      onsubmit="event.preventDefault(); executeTryOut('GETapi-admin-orders-statistics', this);">
+    <h3>
+        Request&nbsp;&nbsp;&nbsp;
+                    <button type="button"
+                    style="background-color: #8fbcd4; padding: 5px 10px; border-radius: 5px; border-width: thin;"
+                    id="btn-tryout-GETapi-admin-orders-statistics"
+                    onclick="tryItOut('GETapi-admin-orders-statistics');">Try it out ⚡
+            </button>
+            <button type="button"
+                    style="background-color: #c97a7e; padding: 5px 10px; border-radius: 5px; border-width: thin;"
+                    id="btn-canceltryout-GETapi-admin-orders-statistics"
+                    onclick="cancelTryOut('GETapi-admin-orders-statistics');" hidden>Cancel 🛑
+            </button>&nbsp;&nbsp;
+            <button type="submit"
+                    style="background-color: #6ac174; padding: 5px 10px; border-radius: 5px; border-width: thin;"
+                    id="btn-executetryout-GETapi-admin-orders-statistics"
+                    data-initial-text="Send Request 💥"
+                    data-loading-text="⏱ Sending..."
+                    hidden>Send Request 💥
+            </button>
+            </h3>
+            <p>
+            <small class="badge badge-green">GET</small>
+            <b><code>api/admin/orders/statistics</code></b>
+        </p>
+                <h4 class="fancy-heading-panel"><b>Headers</b></h4>
+                                <div style="padding-left: 28px; clear: unset;">
+                <b style="line-height: 2;"><code>Authorization</code></b>&nbsp;&nbsp;
+&nbsp;
+ &nbsp;
+ &nbsp;
+                <input type="text" style="display: none"
+                              name="Authorization" class="auth-value"               data-endpoint="GETapi-admin-orders-statistics"
+               value="Bearer {YOUR_API_TOKEN}"
+               data-component="header">
+    <br>
+<p>Example: <code>Bearer {YOUR_API_TOKEN}</code></p>
+            </div>
+                                <div style="padding-left: 28px; clear: unset;">
+                <b style="line-height: 2;"><code>Content-Type</code></b>&nbsp;&nbsp;
+&nbsp;
+ &nbsp;
+ &nbsp;
+                <input type="text" style="display: none"
+                              name="Content-Type"                data-endpoint="GETapi-admin-orders-statistics"
+               value="application/json"
+               data-component="header">
+    <br>
+<p>Example: <code>application/json</code></p>
+            </div>
+                                <div style="padding-left: 28px; clear: unset;">
+                <b style="line-height: 2;"><code>Accept</code></b>&nbsp;&nbsp;
+&nbsp;
+ &nbsp;
+ &nbsp;
+                <input type="text" style="display: none"
+                              name="Accept"                data-endpoint="GETapi-admin-orders-statistics"
+               value="application/json"
+               data-component="header">
+    <br>
+<p>Example: <code>application/json</code></p>
+            </div>
+                        </form>
+
                 <h1 id="wishlist">Wishlist</h1>
 
     <p>APIs for managing user wishlists.</p>
@@ -7271,7 +9969,587 @@ You can check the Dev Tools console for debugging information.</code></pre>
             </div>
                         </form>
 
-                <h1 id="customer-addresses">Customer Addresses</h1>
+                <h1 id="team-members">Team Members</h1>
+
+    <p>APIs for managing and retrieving team member information.</p>
+<p>These endpoints provide access to team member data including contact details,
+professional titles, social media links, and profile images.</p>
+
+                                <h2 id="team-members-GETapi-admin-team-members">List all team members</h2>
+
+<p>
+</p>
+
+<p>Get a paginated list of all team members with optional filtering and sorting.
+Returns team member details including contact information, images, and social media links.</p>
+
+<span id="example-requests-GETapi-admin-team-members">
+<blockquote>Example request:</blockquote>
+
+
+<div class="bash-example">
+    <pre><code class="language-bash">curl --request GET \
+    --get "http://127.0.0.1:8000/api/admin/team-members?search=john&amp;sort_by=fullname&amp;sort_direction=asc&amp;per_page=10" \
+    --header "Content-Type: application/json" \
+    --header "Accept: application/json"</code></pre></div>
+
+
+<div class="javascript-example">
+    <pre><code class="language-javascript">const url = new URL(
+    "http://127.0.0.1:8000/api/admin/team-members"
+);
+
+const params = {
+    "search": "john",
+    "sort_by": "fullname",
+    "sort_direction": "asc",
+    "per_page": "10",
+};
+Object.keys(params)
+    .forEach(key =&gt; url.searchParams.append(key, params[key]));
+
+const headers = {
+    "Content-Type": "application/json",
+    "Accept": "application/json",
+};
+
+fetch(url, {
+    method: "GET",
+    headers,
+}).then(response =&gt; response.json());</code></pre></div>
+
+
+<div class="php-example">
+    <pre><code class="language-php">$client = new \GuzzleHttp\Client();
+$url = 'http://127.0.0.1:8000/api/admin/team-members';
+$response = $client-&gt;get(
+    $url,
+    [
+        'headers' =&gt; [
+            'Content-Type' =&gt; 'application/json',
+            'Accept' =&gt; 'application/json',
+        ],
+        'query' =&gt; [
+            'search' =&gt; 'john',
+            'sort_by' =&gt; 'fullname',
+            'sort_direction' =&gt; 'asc',
+            'per_page' =&gt; '10',
+        ],
+    ]
+);
+$body = $response-&gt;getBody();
+print_r(json_decode((string) $body));</code></pre></div>
+
+</span>
+
+<span id="example-responses-GETapi-admin-team-members">
+            <blockquote>
+            <p>Example response (200, Success with results):</p>
+        </blockquote>
+                <pre>
+
+<code class="language-json" style="max-height: 300px;">{
+    &quot;success&quot;: true,
+    &quot;data&quot;: [
+        {
+            &quot;id&quot;: 1,
+            &quot;fullname&quot;: &quot;John Doe&quot;,
+            &quot;phone&quot;: &quot;+1 (555) 123-4567&quot;,
+            &quot;title&quot;: &quot;Senior Software Engineer&quot;,
+            &quot;email&quot;: &quot;john.doe@example.com&quot;,
+            &quot;social_media&quot;: [
+                &quot;https://twitter.com/johndoe&quot;,
+                &quot;https://linkedin.com/in/john-doe-profile&quot;,
+                &quot;https://github.com/johndoe&quot;
+            ],
+            &quot;images&quot;: [
+                {
+                    &quot;id&quot;: 1,
+                    &quot;name&quot;: &quot;john-profile&quot;,
+                    &quot;url&quot;: &quot;https://example.com/storage/media/1/john-profile.jpg&quot;,
+                    &quot;thumb_url&quot;: &quot;https://example.com/storage/media/1/conversions/john-profile-thumb.jpg&quot;
+                }
+            ],
+            &quot;created_at&quot;: &quot;2024-01-15T10:30:00.000000Z&quot;,
+            &quot;updated_at&quot;: &quot;2024-01-15T14:45:00.000000Z&quot;
+        },
+        {
+            &quot;id&quot;: 2,
+            &quot;fullname&quot;: &quot;Jane Smith&quot;,
+            &quot;phone&quot;: &quot;+1 (555) 987-6543&quot;,
+            &quot;title&quot;: &quot;Product Manager&quot;,
+            &quot;email&quot;: &quot;jane.smith@example.com&quot;,
+            &quot;social_media&quot;: [
+                &quot;https://twitter.com/janesmith&quot;,
+                &quot;https://linkedin.com/in/janesmith-pm&quot;,
+                &quot;https://github.com/janesmith&quot;
+            ],
+            &quot;images&quot;: [],
+            &quot;created_at&quot;: &quot;2024-01-10T08:00:00.000000Z&quot;,
+            &quot;updated_at&quot;: &quot;2024-01-12T16:20:00.000000Z&quot;
+        }
+    ],
+    &quot;pagination&quot;: {
+        &quot;current_page&quot;: 1,
+        &quot;last_page&quot;: 3,
+        &quot;per_page&quot;: 15,
+        &quot;total&quot;: 42
+    }
+}</code>
+ </pre>
+    </span>
+<span id="execution-results-GETapi-admin-team-members" hidden>
+    <blockquote>Received response<span
+                id="execution-response-status-GETapi-admin-team-members"></span>:
+    </blockquote>
+    <pre class="json"><code id="execution-response-content-GETapi-admin-team-members"
+      data-empty-response-text="<Empty response>" style="max-height: 400px;"></code></pre>
+</span>
+<span id="execution-error-GETapi-admin-team-members" hidden>
+    <blockquote>Request failed with error:</blockquote>
+    <pre><code id="execution-error-message-GETapi-admin-team-members">
+
+Tip: Check that you&#039;re properly connected to the network.
+If you&#039;re a maintainer of ths API, verify that your API is running and you&#039;ve enabled CORS.
+You can check the Dev Tools console for debugging information.</code></pre>
+</span>
+<form id="form-GETapi-admin-team-members" data-method="GET"
+      data-path="api/admin/team-members"
+      data-authed="0"
+      data-hasfiles="0"
+      data-isarraybody="0"
+      autocomplete="off"
+      onsubmit="event.preventDefault(); executeTryOut('GETapi-admin-team-members', this);">
+    <h3>
+        Request&nbsp;&nbsp;&nbsp;
+                    <button type="button"
+                    style="background-color: #8fbcd4; padding: 5px 10px; border-radius: 5px; border-width: thin;"
+                    id="btn-tryout-GETapi-admin-team-members"
+                    onclick="tryItOut('GETapi-admin-team-members');">Try it out ⚡
+            </button>
+            <button type="button"
+                    style="background-color: #c97a7e; padding: 5px 10px; border-radius: 5px; border-width: thin;"
+                    id="btn-canceltryout-GETapi-admin-team-members"
+                    onclick="cancelTryOut('GETapi-admin-team-members');" hidden>Cancel 🛑
+            </button>&nbsp;&nbsp;
+            <button type="submit"
+                    style="background-color: #6ac174; padding: 5px 10px; border-radius: 5px; border-width: thin;"
+                    id="btn-executetryout-GETapi-admin-team-members"
+                    data-initial-text="Send Request 💥"
+                    data-loading-text="⏱ Sending..."
+                    hidden>Send Request 💥
+            </button>
+            </h3>
+            <p>
+            <small class="badge badge-green">GET</small>
+            <b><code>api/admin/team-members</code></b>
+        </p>
+                <h4 class="fancy-heading-panel"><b>Headers</b></h4>
+                                <div style="padding-left: 28px; clear: unset;">
+                <b style="line-height: 2;"><code>Content-Type</code></b>&nbsp;&nbsp;
+&nbsp;
+ &nbsp;
+ &nbsp;
+                <input type="text" style="display: none"
+                              name="Content-Type"                data-endpoint="GETapi-admin-team-members"
+               value="application/json"
+               data-component="header">
+    <br>
+<p>Example: <code>application/json</code></p>
+            </div>
+                                <div style="padding-left: 28px; clear: unset;">
+                <b style="line-height: 2;"><code>Accept</code></b>&nbsp;&nbsp;
+&nbsp;
+ &nbsp;
+ &nbsp;
+                <input type="text" style="display: none"
+                              name="Accept"                data-endpoint="GETapi-admin-team-members"
+               value="application/json"
+               data-component="header">
+    <br>
+<p>Example: <code>application/json</code></p>
+            </div>
+                            <h4 class="fancy-heading-panel"><b>Query Parameters</b></h4>
+                                    <div style="padding-left: 28px; clear: unset;">
+                <b style="line-height: 2;"><code>search</code></b>&nbsp;&nbsp;
+<small>string</small>&nbsp;
+<i>optional</i> &nbsp;
+ &nbsp;
+                <input type="text" style="display: none"
+                              name="search"                data-endpoint="GETapi-admin-team-members"
+               value="john"
+               data-component="query">
+    <br>
+<p>Search by full name or email address. Example: <code>john</code></p>
+            </div>
+                                    <div style="padding-left: 28px; clear: unset;">
+                <b style="line-height: 2;"><code>sort_by</code></b>&nbsp;&nbsp;
+<small>string</small>&nbsp;
+<i>optional</i> &nbsp;
+ &nbsp;
+                <input type="text" style="display: none"
+                              name="sort_by"                data-endpoint="GETapi-admin-team-members"
+               value="fullname"
+               data-component="query">
+    <br>
+<p>Sort field - allowed values: <code>fullname</code>, <code>email</code>, <code>created_at</code>. Example: <code>fullname</code></p>
+            </div>
+                                    <div style="padding-left: 28px; clear: unset;">
+                <b style="line-height: 2;"><code>sort_direction</code></b>&nbsp;&nbsp;
+<small>string</small>&nbsp;
+<i>optional</i> &nbsp;
+ &nbsp;
+                <input type="text" style="display: none"
+                              name="sort_direction"                data-endpoint="GETapi-admin-team-members"
+               value="asc"
+               data-component="query">
+    <br>
+<p>Sort direction - allowed values: <code>asc</code>, <code>desc</code>. Default: <code>asc</code>. Example: <code>asc</code></p>
+            </div>
+                                    <div style="padding-left: 28px; clear: unset;">
+                <b style="line-height: 2;"><code>per_page</code></b>&nbsp;&nbsp;
+<small>integer</small>&nbsp;
+<i>optional</i> &nbsp;
+ &nbsp;
+                <input type="number" style="display: none"
+               step="any"               name="per_page"                data-endpoint="GETapi-admin-team-members"
+               value="10"
+               data-component="query">
+    <br>
+<p>Number of items per page. Default: 15. Example: <code>10</code></p>
+            </div>
+                </form>
+
+                    <h2 id="team-members-GETapi-admin-team-members--teamMember_id-">Get a single team member</h2>
+
+<p>
+</p>
+
+<p>Retrieve detailed information about a specific team member by their ID.
+Returns complete team member data including all images and social media links.</p>
+
+<span id="example-requests-GETapi-admin-team-members--teamMember_id-">
+<blockquote>Example request:</blockquote>
+
+
+<div class="bash-example">
+    <pre><code class="language-bash">curl --request GET \
+    --get "http://127.0.0.1:8000/api/admin/team-members/1" \
+    --header "Content-Type: application/json" \
+    --header "Accept: application/json"</code></pre></div>
+
+
+<div class="javascript-example">
+    <pre><code class="language-javascript">const url = new URL(
+    "http://127.0.0.1:8000/api/admin/team-members/1"
+);
+
+const headers = {
+    "Content-Type": "application/json",
+    "Accept": "application/json",
+};
+
+fetch(url, {
+    method: "GET",
+    headers,
+}).then(response =&gt; response.json());</code></pre></div>
+
+
+<div class="php-example">
+    <pre><code class="language-php">$client = new \GuzzleHttp\Client();
+$url = 'http://127.0.0.1:8000/api/admin/team-members/1';
+$response = $client-&gt;get(
+    $url,
+    [
+        'headers' =&gt; [
+            'Content-Type' =&gt; 'application/json',
+            'Accept' =&gt; 'application/json',
+        ],
+    ]
+);
+$body = $response-&gt;getBody();
+print_r(json_decode((string) $body));</code></pre></div>
+
+</span>
+
+<span id="example-responses-GETapi-admin-team-members--teamMember_id-">
+            <blockquote>
+            <p>Example response (200, Team member found):</p>
+        </blockquote>
+                <pre>
+
+<code class="language-json" style="max-height: 300px;">{
+    &quot;success&quot;: true,
+    &quot;data&quot;: {
+        &quot;id&quot;: 1,
+        &quot;fullname&quot;: &quot;John Doe&quot;,
+        &quot;phone&quot;: &quot;+1 (555) 123-4567&quot;,
+        &quot;title&quot;: &quot;Senior Software Engineer&quot;,
+        &quot;email&quot;: &quot;john.doe@example.com&quot;,
+        &quot;social_media&quot;: {
+            &quot;twitter&quot;: &quot;@johndoe&quot;,
+            &quot;linkedin&quot;: &quot;john-doe-profile&quot;,
+            &quot;github&quot;: &quot;johndoe&quot;,
+            &quot;website&quot;: &quot;https://johndoe.dev&quot;
+        },
+        &quot;images&quot;: [
+            {
+                &quot;id&quot;: 1,
+                &quot;name&quot;: &quot;john-profile-main&quot;,
+                &quot;url&quot;: &quot;https://example.com/storage/media/1/john-profile-main.jpg&quot;,
+                &quot;thumb_url&quot;: &quot;https://example.com/storage/media/1/conversions/john-profile-main-thumb.jpg&quot;
+            },
+            {
+                &quot;id&quot;: 2,
+                &quot;name&quot;: &quot;john-profile-alt&quot;,
+                &quot;url&quot;: &quot;https://example.com/storage/media/2/john-profile-alt.jpg&quot;,
+                &quot;thumb_url&quot;: &quot;https://example.com/storage/media/2/conversions/john-profile-alt-thumb.jpg&quot;
+            }
+        ],
+        &quot;created_at&quot;: &quot;2024-01-15T10:30:00.000000Z&quot;,
+        &quot;updated_at&quot;: &quot;2024-01-15T14:45:00.000000Z&quot;
+    }
+}</code>
+ </pre>
+            <blockquote>
+            <p>Example response (404, Team member not found):</p>
+        </blockquote>
+                <pre>
+
+<code class="language-json" style="max-height: 300px;">{
+    &quot;message&quot;: &quot;No query results for model [App\\Models\\TeamMember] 999&quot;
+}</code>
+ </pre>
+    </span>
+<span id="execution-results-GETapi-admin-team-members--teamMember_id-" hidden>
+    <blockquote>Received response<span
+                id="execution-response-status-GETapi-admin-team-members--teamMember_id-"></span>:
+    </blockquote>
+    <pre class="json"><code id="execution-response-content-GETapi-admin-team-members--teamMember_id-"
+      data-empty-response-text="<Empty response>" style="max-height: 400px;"></code></pre>
+</span>
+<span id="execution-error-GETapi-admin-team-members--teamMember_id-" hidden>
+    <blockquote>Request failed with error:</blockquote>
+    <pre><code id="execution-error-message-GETapi-admin-team-members--teamMember_id-">
+
+Tip: Check that you&#039;re properly connected to the network.
+If you&#039;re a maintainer of ths API, verify that your API is running and you&#039;ve enabled CORS.
+You can check the Dev Tools console for debugging information.</code></pre>
+</span>
+<form id="form-GETapi-admin-team-members--teamMember_id-" data-method="GET"
+      data-path="api/admin/team-members/{teamMember_id}"
+      data-authed="0"
+      data-hasfiles="0"
+      data-isarraybody="0"
+      autocomplete="off"
+      onsubmit="event.preventDefault(); executeTryOut('GETapi-admin-team-members--teamMember_id-', this);">
+    <h3>
+        Request&nbsp;&nbsp;&nbsp;
+                    <button type="button"
+                    style="background-color: #8fbcd4; padding: 5px 10px; border-radius: 5px; border-width: thin;"
+                    id="btn-tryout-GETapi-admin-team-members--teamMember_id-"
+                    onclick="tryItOut('GETapi-admin-team-members--teamMember_id-');">Try it out ⚡
+            </button>
+            <button type="button"
+                    style="background-color: #c97a7e; padding: 5px 10px; border-radius: 5px; border-width: thin;"
+                    id="btn-canceltryout-GETapi-admin-team-members--teamMember_id-"
+                    onclick="cancelTryOut('GETapi-admin-team-members--teamMember_id-');" hidden>Cancel 🛑
+            </button>&nbsp;&nbsp;
+            <button type="submit"
+                    style="background-color: #6ac174; padding: 5px 10px; border-radius: 5px; border-width: thin;"
+                    id="btn-executetryout-GETapi-admin-team-members--teamMember_id-"
+                    data-initial-text="Send Request 💥"
+                    data-loading-text="⏱ Sending..."
+                    hidden>Send Request 💥
+            </button>
+            </h3>
+            <p>
+            <small class="badge badge-green">GET</small>
+            <b><code>api/admin/team-members/{teamMember_id}</code></b>
+        </p>
+                <h4 class="fancy-heading-panel"><b>Headers</b></h4>
+                                <div style="padding-left: 28px; clear: unset;">
+                <b style="line-height: 2;"><code>Content-Type</code></b>&nbsp;&nbsp;
+&nbsp;
+ &nbsp;
+ &nbsp;
+                <input type="text" style="display: none"
+                              name="Content-Type"                data-endpoint="GETapi-admin-team-members--teamMember_id-"
+               value="application/json"
+               data-component="header">
+    <br>
+<p>Example: <code>application/json</code></p>
+            </div>
+                                <div style="padding-left: 28px; clear: unset;">
+                <b style="line-height: 2;"><code>Accept</code></b>&nbsp;&nbsp;
+&nbsp;
+ &nbsp;
+ &nbsp;
+                <input type="text" style="display: none"
+                              name="Accept"                data-endpoint="GETapi-admin-team-members--teamMember_id-"
+               value="application/json"
+               data-component="header">
+    <br>
+<p>Example: <code>application/json</code></p>
+            </div>
+                        <h4 class="fancy-heading-panel"><b>URL Parameters</b></h4>
+                    <div style="padding-left: 28px; clear: unset;">
+                <b style="line-height: 2;"><code>teamMember_id</code></b>&nbsp;&nbsp;
+<small>integer</small>&nbsp;
+ &nbsp;
+ &nbsp;
+                <input type="number" style="display: none"
+               step="any"               name="teamMember_id"                data-endpoint="GETapi-admin-team-members--teamMember_id-"
+               value="1"
+               data-component="url">
+    <br>
+<p>The ID of the teamMember. Example: <code>1</code></p>
+            </div>
+                    <div style="padding-left: 28px; clear: unset;">
+                <b style="line-height: 2;"><code>teamMember</code></b>&nbsp;&nbsp;
+<small>integer</small>&nbsp;
+ &nbsp;
+ &nbsp;
+                <input type="number" style="display: none"
+               step="any"               name="teamMember"                data-endpoint="GETapi-admin-team-members--teamMember_id-"
+               value="1"
+               data-component="url">
+    <br>
+<p>The ID of the team member. Example: <code>1</code></p>
+            </div>
+                    </form>
+
+    <h3>Response</h3>
+    <h4 class="fancy-heading-panel"><b>Response Fields</b></h4>
+    <div style=" padding-left: 28px;  clear: unset;">
+            <b style="line-height: 2;"><code>success</code></b>&nbsp;&nbsp;
+<small>boolean</small>&nbsp;
+ &nbsp;
+ &nbsp;
+<br>
+<p>Indicates if the request was successful</p>
+        </div>
+                <div style=" padding-left: 28px;  clear: unset;">
+        <details>
+            <summary style="padding-bottom: 10px;">
+                <b style="line-height: 2;"><code>data</code></b>&nbsp;&nbsp;
+<small>object</small>&nbsp;
+ &nbsp;
+ &nbsp;
+<br>
+<p>Team member details</p>
+            </summary>
+                                                <div style="margin-left: 14px; clear: unset;">
+                        <b style="line-height: 2;"><code>id</code></b>&nbsp;&nbsp;
+<small>integer</small>&nbsp;
+ &nbsp;
+ &nbsp;
+<br>
+<p>Team member ID</p>
+                    </div>
+                                                                <div style="margin-left: 14px; clear: unset;">
+                        <b style="line-height: 2;"><code>fullname</code></b>&nbsp;&nbsp;
+<small>string</small>&nbsp;
+ &nbsp;
+ &nbsp;
+<br>
+<p>Full name of the team member</p>
+                    </div>
+                                                                <div style="margin-left: 14px; clear: unset;">
+                        <b style="line-height: 2;"><code>phone</code></b>&nbsp;&nbsp;
+<small>string|null</small>&nbsp;
+ &nbsp;
+ &nbsp;
+<br>
+<p>Phone number</p>
+                    </div>
+                                                                <div style="margin-left: 14px; clear: unset;">
+                        <b style="line-height: 2;"><code>title</code></b>&nbsp;&nbsp;
+<small>string|null</small>&nbsp;
+ &nbsp;
+ &nbsp;
+<br>
+<p>Job title or position</p>
+                    </div>
+                                                                <div style="margin-left: 14px; clear: unset;">
+                        <b style="line-height: 2;"><code>email</code></b>&nbsp;&nbsp;
+<small>string</small>&nbsp;
+ &nbsp;
+ &nbsp;
+<br>
+<p>Email address</p>
+                    </div>
+                                                                <div style="margin-left: 14px; clear: unset;">
+                        <b style="line-height: 2;"><code>social_media</code></b>&nbsp;&nbsp;
+<small>object|null</small>&nbsp;
+ &nbsp;
+ &nbsp;
+<br>
+<p>Social media links</p>
+                    </div>
+                                                                <div style=" margin-left: 14px; clear: unset;">
+        <details>
+            <summary style="padding-bottom: 10px;">
+                <b style="line-height: 2;"><code>images</code></b>&nbsp;&nbsp;
+<small>string[]</small>&nbsp;
+ &nbsp;
+ &nbsp;
+<br>
+<p>Array of profile images</p>
+            </summary>
+                                                <div style="margin-left: 28px; clear: unset;">
+                        <b style="line-height: 2;"><code>id</code></b>&nbsp;&nbsp;
+<small>integer</small>&nbsp;
+ &nbsp;
+ &nbsp;
+<br>
+<p>Image ID</p>
+                    </div>
+                                                                <div style="margin-left: 28px; clear: unset;">
+                        <b style="line-height: 2;"><code>name</code></b>&nbsp;&nbsp;
+<small>string</small>&nbsp;
+ &nbsp;
+ &nbsp;
+<br>
+<p>Image file name</p>
+                    </div>
+                                                                <div style="margin-left: 28px; clear: unset;">
+                        <b style="line-height: 2;"><code>url</code></b>&nbsp;&nbsp;
+<small>string</small>&nbsp;
+ &nbsp;
+ &nbsp;
+<br>
+<p>Full-size image URL</p>
+                    </div>
+                                                                <div style="margin-left: 28px; clear: unset;">
+                        <b style="line-height: 2;"><code>thumb_url</code></b>&nbsp;&nbsp;
+<small>string</small>&nbsp;
+ &nbsp;
+ &nbsp;
+<br>
+<p>Thumbnail image URL</p>
+                    </div>
+                                    </details>
+        </div>
+                                                                    <div style="margin-left: 14px; clear: unset;">
+                        <b style="line-height: 2;"><code>created_at</code></b>&nbsp;&nbsp;
+<small>string</small>&nbsp;
+ &nbsp;
+ &nbsp;
+<br>
+<p>ISO 8601 datetime string</p>
+                    </div>
+                                                                <div style="margin-left: 14px; clear: unset;">
+                        <b style="line-height: 2;"><code>updated_at</code></b>&nbsp;&nbsp;
+<small>string</small>&nbsp;
+ &nbsp;
+ &nbsp;
+<br>
+<p>ISO 8601 datetime string</p>
+                    </div>
+                                    </details>
+        </div>
+                    <h1 id="customer-addresses">Customer Addresses</h1>
 
     <p>APIs for managing customer addresses.
 All endpoints require authentication.</p>
@@ -7978,7 +11256,7 @@ You can check the Dev Tools console for debugging information.</code></pre>
 
 <div class="bash-example">
     <pre><code class="language-bash">curl --request GET \
-    --get "http://127.0.0.1:8000/api/addresses/3" \
+    --get "http://127.0.0.1:8000/api/addresses/2" \
     --header "Authorization: Bearer {YOUR_API_TOKEN}" \
     --header "Content-Type: application/json" \
     --header "Accept: application/json"</code></pre></div>
@@ -7986,7 +11264,7 @@ You can check the Dev Tools console for debugging information.</code></pre>
 
 <div class="javascript-example">
     <pre><code class="language-javascript">const url = new URL(
-    "http://127.0.0.1:8000/api/addresses/3"
+    "http://127.0.0.1:8000/api/addresses/2"
 );
 
 const headers = {
@@ -8003,7 +11281,7 @@ fetch(url, {
 
 <div class="php-example">
     <pre><code class="language-php">$client = new \GuzzleHttp\Client();
-$url = 'http://127.0.0.1:8000/api/addresses/3';
+$url = 'http://127.0.0.1:8000/api/addresses/2';
 $response = $client-&gt;get(
     $url,
     [
@@ -8162,10 +11440,10 @@ You can check the Dev Tools console for debugging information.</code></pre>
  &nbsp;
                 <input type="number" style="display: none"
                step="any"               name="address_id"                data-endpoint="GETapi-addresses--address_id-"
-               value="3"
+               value="2"
                data-component="url">
     <br>
-<p>The ID of the address. Example: <code>3</code></p>
+<p>The ID of the address. Example: <code>2</code></p>
             </div>
                     <div style="padding-left: 28px; clear: unset;">
                 <b style="line-height: 2;"><code>address</code></b>&nbsp;&nbsp;
@@ -8196,7 +11474,7 @@ If is_default is set to true, all other addresses will be unset as default.</p>
 
 <div class="bash-example">
     <pre><code class="language-bash">curl --request PUT \
-    "http://127.0.0.1:8000/api/addresses/3" \
+    "http://127.0.0.1:8000/api/addresses/2" \
     --header "Authorization: Bearer {YOUR_API_TOKEN}" \
     --header "Content-Type: application/json" \
     --header "Accept: application/json" \
@@ -8223,7 +11501,7 @@ If is_default is set to true, all other addresses will be unset as default.</p>
 
 <div class="javascript-example">
     <pre><code class="language-javascript">const url = new URL(
-    "http://127.0.0.1:8000/api/addresses/3"
+    "http://127.0.0.1:8000/api/addresses/2"
 );
 
 const headers = {
@@ -8260,7 +11538,7 @@ fetch(url, {
 
 <div class="php-example">
     <pre><code class="language-php">$client = new \GuzzleHttp\Client();
-$url = 'http://127.0.0.1:8000/api/addresses/3';
+$url = 'http://127.0.0.1:8000/api/addresses/2';
 $response = $client-&gt;put(
     $url,
     [
@@ -8452,10 +11730,10 @@ You can check the Dev Tools console for debugging information.</code></pre>
  &nbsp;
                 <input type="number" style="display: none"
                step="any"               name="address_id"                data-endpoint="PUTapi-addresses--address_id-"
-               value="3"
+               value="2"
                data-component="url">
     <br>
-<p>The ID of the address. Example: <code>3</code></p>
+<p>The ID of the address. Example: <code>2</code></p>
             </div>
                     <div style="padding-left: 28px; clear: unset;">
                 <b style="line-height: 2;"><code>address</code></b>&nbsp;&nbsp;
@@ -8708,7 +11986,7 @@ You can check the Dev Tools console for debugging information.</code></pre>
 
 <div class="bash-example">
     <pre><code class="language-bash">curl --request DELETE \
-    "http://127.0.0.1:8000/api/addresses/3" \
+    "http://127.0.0.1:8000/api/addresses/2" \
     --header "Authorization: Bearer {YOUR_API_TOKEN}" \
     --header "Content-Type: application/json" \
     --header "Accept: application/json"</code></pre></div>
@@ -8716,7 +11994,7 @@ You can check the Dev Tools console for debugging information.</code></pre>
 
 <div class="javascript-example">
     <pre><code class="language-javascript">const url = new URL(
-    "http://127.0.0.1:8000/api/addresses/3"
+    "http://127.0.0.1:8000/api/addresses/2"
 );
 
 const headers = {
@@ -8733,7 +12011,7 @@ fetch(url, {
 
 <div class="php-example">
     <pre><code class="language-php">$client = new \GuzzleHttp\Client();
-$url = 'http://127.0.0.1:8000/api/addresses/3';
+$url = 'http://127.0.0.1:8000/api/addresses/2';
 $response = $client-&gt;delete(
     $url,
     [
@@ -8871,10 +12149,10 @@ You can check the Dev Tools console for debugging information.</code></pre>
  &nbsp;
                 <input type="number" style="display: none"
                step="any"               name="address_id"                data-endpoint="DELETEapi-addresses--address_id-"
-               value="3"
+               value="2"
                data-component="url">
     <br>
-<p>The ID of the address. Example: <code>3</code></p>
+<p>The ID of the address. Example: <code>2</code></p>
             </div>
                     <div style="padding-left: 28px; clear: unset;">
                 <b style="line-height: 2;"><code>address</code></b>&nbsp;&nbsp;
@@ -8905,7 +12183,7 @@ All other addresses will be unset as default.</p>
 
 <div class="bash-example">
     <pre><code class="language-bash">curl --request PATCH \
-    "http://127.0.0.1:8000/api/addresses/3/default" \
+    "http://127.0.0.1:8000/api/addresses/2/default" \
     --header "Authorization: Bearer {YOUR_API_TOKEN}" \
     --header "Content-Type: application/json" \
     --header "Accept: application/json"</code></pre></div>
@@ -8913,7 +12191,7 @@ All other addresses will be unset as default.</p>
 
 <div class="javascript-example">
     <pre><code class="language-javascript">const url = new URL(
-    "http://127.0.0.1:8000/api/addresses/3/default"
+    "http://127.0.0.1:8000/api/addresses/2/default"
 );
 
 const headers = {
@@ -8930,7 +12208,7 @@ fetch(url, {
 
 <div class="php-example">
     <pre><code class="language-php">$client = new \GuzzleHttp\Client();
-$url = 'http://127.0.0.1:8000/api/addresses/3/default';
+$url = 'http://127.0.0.1:8000/api/addresses/2/default';
 $response = $client-&gt;patch(
     $url,
     [
@@ -9090,10 +12368,10 @@ You can check the Dev Tools console for debugging information.</code></pre>
  &nbsp;
                 <input type="number" style="display: none"
                step="any"               name="address_id"                data-endpoint="PATCHapi-addresses--address_id--default"
-               value="3"
+               value="2"
                data-component="url">
     <br>
-<p>The ID of the address. Example: <code>3</code></p>
+<p>The ID of the address. Example: <code>2</code></p>
             </div>
                     <div style="padding-left: 28px; clear: unset;">
                 <b style="line-height: 2;"><code>address</code></b>&nbsp;&nbsp;
@@ -9176,7 +12454,7 @@ print_r(json_decode((string) $body));</code></pre></div>
 content-type: application/json
 access-control-allow-origin: http://localhost:3000
 access-control-allow-credentials: true
-set-cookie: laravel-session=eyJpdiI6IjJ6VEh1Nkg4RTdnSUJuNUxlWDlLSnc9PSIsInZhbHVlIjoiLzhSRTNudjFBN0xKQmtUbFV1bWRScS81YVJ0TUFGeHljUGF6WWRHM3VaUWJ2UFVhN1RjMVVNTGI0SnhiVHdXUGtPaHVFeWNJRXNsWkhYY052V1ZUZFprbUZhcVUwMzE0d2pIU1c5Tkdaemo1SmYvQUYyZnBOd1U2V1dPQ3psQkkiLCJtYWMiOiJhNTUwNDk3Y2QwNzE4Zjk4NzdkNDM1ZmE5NGY3NmFiOWYzZjdkYTE5Y2FhZjhjMTYzYmYyMDA5OTY1NzA0OWQ4IiwidGFnIjoiIn0%3D; expires=Sun, 25 Jan 2026 15:26:58 GMT; Max-Age=7200; path=/; httponly; samesite=lax
+set-cookie: laravel-session=eyJpdiI6Im1IRHRrYm9XbEdQUG5WRGVQbWZvb0E9PSIsInZhbHVlIjoiNENQVTZPc1JkR3oxRVdjNDlFc0wxenRpM01SUXoyYm1pUkNEaG1IdFg3eklVUHpDNk92TmpIODRPWTkxdXoxTUI1b3N0NG0vRDBGbzJNZE50bFdBZU9vbm9KQ0wrWG9JMmJMaTIvb0dBWnpvTmV1YjNPdWhqRmZqTjZPVW92cEciLCJtYWMiOiIzYmZjMzM2ODg4MjNhM2YzNjNmMjE1YWFlZTYzYTcwZjNkMjJkMDQ0MTk2YjJmNDVjMmU1NWU2MDY5YTI3Yzc5IiwidGFnIjoiIn0%3D; expires=Mon, 02 Feb 2026 16:22:08 GMT; Max-Age=7200; path=/; secure; httponly; samesite=none
  </code></pre></details>         <pre>
 
 <code class="language-json" style="max-height: 300px;">{
@@ -9293,6 +12571,726 @@ You can check the Dev Tools console for debugging information.</code></pre>
             </div>
                         </form>
 
+                    <h2 id="endpoints-GETapi-admin-dashboard-stats">Get dashboard statistics</h2>
+
+<p>
+</p>
+
+
+
+<span id="example-requests-GETapi-admin-dashboard-stats">
+<blockquote>Example request:</blockquote>
+
+
+<div class="bash-example">
+    <pre><code class="language-bash">curl --request GET \
+    --get "http://127.0.0.1:8000/api/admin/dashboard/stats" \
+    --header "Content-Type: application/json" \
+    --header "Accept: application/json"</code></pre></div>
+
+
+<div class="javascript-example">
+    <pre><code class="language-javascript">const url = new URL(
+    "http://127.0.0.1:8000/api/admin/dashboard/stats"
+);
+
+const headers = {
+    "Content-Type": "application/json",
+    "Accept": "application/json",
+};
+
+fetch(url, {
+    method: "GET",
+    headers,
+}).then(response =&gt; response.json());</code></pre></div>
+
+
+<div class="php-example">
+    <pre><code class="language-php">$client = new \GuzzleHttp\Client();
+$url = 'http://127.0.0.1:8000/api/admin/dashboard/stats';
+$response = $client-&gt;get(
+    $url,
+    [
+        'headers' =&gt; [
+            'Content-Type' =&gt; 'application/json',
+            'Accept' =&gt; 'application/json',
+        ],
+    ]
+);
+$body = $response-&gt;getBody();
+print_r(json_decode((string) $body));</code></pre></div>
+
+</span>
+
+<span id="example-responses-GETapi-admin-dashboard-stats">
+            <blockquote>
+            <p>Example response (401):</p>
+        </blockquote>
+                <details class="annotation">
+            <summary style="cursor: pointer;">
+                <small onclick="textContent = parentElement.parentElement.open ? 'Show headers' : 'Hide headers'">Show headers</small>
+            </summary>
+            <pre><code class="language-http">cache-control: no-cache, private
+content-type: application/json
+access-control-allow-origin: http://localhost:3000
+access-control-allow-credentials: true
+set-cookie: laravel-session=eyJpdiI6IjUyVkJ5akVjR2FzeU1PcnNwNHZuZ1E9PSIsInZhbHVlIjoiT1E1eVVkUnZjQ3dHcE9GM2ExbHN0MGI2WW0vNm9TYVhwdUxMS2w4Z0oyRlhacnlmRTB1V2hxdlVmVmdhdEhUZ3Z2VmFCenlSdkpFZlFESUoxRlZsMnlLUURKR2syOEd5SmJrNmtxa1FvSnhQVjJBaUlCcDlJRWRzaW9FdG5zZGgiLCJtYWMiOiI3MTUyMzRkYzg5MjI3YzNkY2VmMjZhYjAzNTkyOWJlOGQ2NTEyZmExYWI1OWQ0YWI4YTgwYTQ5ODYxNWYxODgyIiwidGFnIjoiIn0%3D; expires=Mon, 02 Feb 2026 16:22:09 GMT; Max-Age=7200; path=/; secure; httponly; samesite=none
+ </code></pre></details>         <pre>
+
+<code class="language-json" style="max-height: 300px;">{
+    &quot;message&quot;: &quot;Unauthenticated.&quot;
+}</code>
+ </pre>
+    </span>
+<span id="execution-results-GETapi-admin-dashboard-stats" hidden>
+    <blockquote>Received response<span
+                id="execution-response-status-GETapi-admin-dashboard-stats"></span>:
+    </blockquote>
+    <pre class="json"><code id="execution-response-content-GETapi-admin-dashboard-stats"
+      data-empty-response-text="<Empty response>" style="max-height: 400px;"></code></pre>
+</span>
+<span id="execution-error-GETapi-admin-dashboard-stats" hidden>
+    <blockquote>Request failed with error:</blockquote>
+    <pre><code id="execution-error-message-GETapi-admin-dashboard-stats">
+
+Tip: Check that you&#039;re properly connected to the network.
+If you&#039;re a maintainer of ths API, verify that your API is running and you&#039;ve enabled CORS.
+You can check the Dev Tools console for debugging information.</code></pre>
+</span>
+<form id="form-GETapi-admin-dashboard-stats" data-method="GET"
+      data-path="api/admin/dashboard/stats"
+      data-authed="0"
+      data-hasfiles="0"
+      data-isarraybody="0"
+      autocomplete="off"
+      onsubmit="event.preventDefault(); executeTryOut('GETapi-admin-dashboard-stats', this);">
+    <h3>
+        Request&nbsp;&nbsp;&nbsp;
+                    <button type="button"
+                    style="background-color: #8fbcd4; padding: 5px 10px; border-radius: 5px; border-width: thin;"
+                    id="btn-tryout-GETapi-admin-dashboard-stats"
+                    onclick="tryItOut('GETapi-admin-dashboard-stats');">Try it out ⚡
+            </button>
+            <button type="button"
+                    style="background-color: #c97a7e; padding: 5px 10px; border-radius: 5px; border-width: thin;"
+                    id="btn-canceltryout-GETapi-admin-dashboard-stats"
+                    onclick="cancelTryOut('GETapi-admin-dashboard-stats');" hidden>Cancel 🛑
+            </button>&nbsp;&nbsp;
+            <button type="submit"
+                    style="background-color: #6ac174; padding: 5px 10px; border-radius: 5px; border-width: thin;"
+                    id="btn-executetryout-GETapi-admin-dashboard-stats"
+                    data-initial-text="Send Request 💥"
+                    data-loading-text="⏱ Sending..."
+                    hidden>Send Request 💥
+            </button>
+            </h3>
+            <p>
+            <small class="badge badge-green">GET</small>
+            <b><code>api/admin/dashboard/stats</code></b>
+        </p>
+                <h4 class="fancy-heading-panel"><b>Headers</b></h4>
+                                <div style="padding-left: 28px; clear: unset;">
+                <b style="line-height: 2;"><code>Content-Type</code></b>&nbsp;&nbsp;
+&nbsp;
+ &nbsp;
+ &nbsp;
+                <input type="text" style="display: none"
+                              name="Content-Type"                data-endpoint="GETapi-admin-dashboard-stats"
+               value="application/json"
+               data-component="header">
+    <br>
+<p>Example: <code>application/json</code></p>
+            </div>
+                                <div style="padding-left: 28px; clear: unset;">
+                <b style="line-height: 2;"><code>Accept</code></b>&nbsp;&nbsp;
+&nbsp;
+ &nbsp;
+ &nbsp;
+                <input type="text" style="display: none"
+                              name="Accept"                data-endpoint="GETapi-admin-dashboard-stats"
+               value="application/json"
+               data-component="header">
+    <br>
+<p>Example: <code>application/json</code></p>
+            </div>
+                        </form>
+
+                    <h2 id="endpoints-GETapi-admin-dashboard-products">Get recent products</h2>
+
+<p>
+</p>
+
+
+
+<span id="example-requests-GETapi-admin-dashboard-products">
+<blockquote>Example request:</blockquote>
+
+
+<div class="bash-example">
+    <pre><code class="language-bash">curl --request GET \
+    --get "http://127.0.0.1:8000/api/admin/dashboard/products" \
+    --header "Content-Type: application/json" \
+    --header "Accept: application/json"</code></pre></div>
+
+
+<div class="javascript-example">
+    <pre><code class="language-javascript">const url = new URL(
+    "http://127.0.0.1:8000/api/admin/dashboard/products"
+);
+
+const headers = {
+    "Content-Type": "application/json",
+    "Accept": "application/json",
+};
+
+fetch(url, {
+    method: "GET",
+    headers,
+}).then(response =&gt; response.json());</code></pre></div>
+
+
+<div class="php-example">
+    <pre><code class="language-php">$client = new \GuzzleHttp\Client();
+$url = 'http://127.0.0.1:8000/api/admin/dashboard/products';
+$response = $client-&gt;get(
+    $url,
+    [
+        'headers' =&gt; [
+            'Content-Type' =&gt; 'application/json',
+            'Accept' =&gt; 'application/json',
+        ],
+    ]
+);
+$body = $response-&gt;getBody();
+print_r(json_decode((string) $body));</code></pre></div>
+
+</span>
+
+<span id="example-responses-GETapi-admin-dashboard-products">
+            <blockquote>
+            <p>Example response (401):</p>
+        </blockquote>
+                <details class="annotation">
+            <summary style="cursor: pointer;">
+                <small onclick="textContent = parentElement.parentElement.open ? 'Show headers' : 'Hide headers'">Show headers</small>
+            </summary>
+            <pre><code class="language-http">cache-control: no-cache, private
+content-type: application/json
+access-control-allow-origin: http://localhost:3000
+access-control-allow-credentials: true
+set-cookie: laravel-session=eyJpdiI6InFUWFVzbUxaM214Lzc2eGhjaWlGUVE9PSIsInZhbHVlIjoiVmNadzY0a2Rya1RKcW9NUk1zRmsyNDA2cHI4dlo3UWJzSmJkWVBLU2M1WUFFNFpPS0x0VXo0c3BwVnJsRExRYm9mbk54NWE3Z3lQaWcwUFJ3Wnc5OGVoZlNtekNpcjV1ZzgxaldSb2E4VVFyb2hVcTdyYjNBYzdodXVHdmFqVkwiLCJtYWMiOiI5MzI2NGFjMjE2NmM0NTU5MTQyZTdkMjI1NDU5MzBlNmY2ZGQzNzA4ZGFiNzZkMzBhOWY4YTljMTlhYzAyMzkxIiwidGFnIjoiIn0%3D; expires=Mon, 02 Feb 2026 16:22:09 GMT; Max-Age=7200; path=/; secure; httponly; samesite=none
+ </code></pre></details>         <pre>
+
+<code class="language-json" style="max-height: 300px;">{
+    &quot;message&quot;: &quot;Unauthenticated.&quot;
+}</code>
+ </pre>
+    </span>
+<span id="execution-results-GETapi-admin-dashboard-products" hidden>
+    <blockquote>Received response<span
+                id="execution-response-status-GETapi-admin-dashboard-products"></span>:
+    </blockquote>
+    <pre class="json"><code id="execution-response-content-GETapi-admin-dashboard-products"
+      data-empty-response-text="<Empty response>" style="max-height: 400px;"></code></pre>
+</span>
+<span id="execution-error-GETapi-admin-dashboard-products" hidden>
+    <blockquote>Request failed with error:</blockquote>
+    <pre><code id="execution-error-message-GETapi-admin-dashboard-products">
+
+Tip: Check that you&#039;re properly connected to the network.
+If you&#039;re a maintainer of ths API, verify that your API is running and you&#039;ve enabled CORS.
+You can check the Dev Tools console for debugging information.</code></pre>
+</span>
+<form id="form-GETapi-admin-dashboard-products" data-method="GET"
+      data-path="api/admin/dashboard/products"
+      data-authed="0"
+      data-hasfiles="0"
+      data-isarraybody="0"
+      autocomplete="off"
+      onsubmit="event.preventDefault(); executeTryOut('GETapi-admin-dashboard-products', this);">
+    <h3>
+        Request&nbsp;&nbsp;&nbsp;
+                    <button type="button"
+                    style="background-color: #8fbcd4; padding: 5px 10px; border-radius: 5px; border-width: thin;"
+                    id="btn-tryout-GETapi-admin-dashboard-products"
+                    onclick="tryItOut('GETapi-admin-dashboard-products');">Try it out ⚡
+            </button>
+            <button type="button"
+                    style="background-color: #c97a7e; padding: 5px 10px; border-radius: 5px; border-width: thin;"
+                    id="btn-canceltryout-GETapi-admin-dashboard-products"
+                    onclick="cancelTryOut('GETapi-admin-dashboard-products');" hidden>Cancel 🛑
+            </button>&nbsp;&nbsp;
+            <button type="submit"
+                    style="background-color: #6ac174; padding: 5px 10px; border-radius: 5px; border-width: thin;"
+                    id="btn-executetryout-GETapi-admin-dashboard-products"
+                    data-initial-text="Send Request 💥"
+                    data-loading-text="⏱ Sending..."
+                    hidden>Send Request 💥
+            </button>
+            </h3>
+            <p>
+            <small class="badge badge-green">GET</small>
+            <b><code>api/admin/dashboard/products</code></b>
+        </p>
+                <h4 class="fancy-heading-panel"><b>Headers</b></h4>
+                                <div style="padding-left: 28px; clear: unset;">
+                <b style="line-height: 2;"><code>Content-Type</code></b>&nbsp;&nbsp;
+&nbsp;
+ &nbsp;
+ &nbsp;
+                <input type="text" style="display: none"
+                              name="Content-Type"                data-endpoint="GETapi-admin-dashboard-products"
+               value="application/json"
+               data-component="header">
+    <br>
+<p>Example: <code>application/json</code></p>
+            </div>
+                                <div style="padding-left: 28px; clear: unset;">
+                <b style="line-height: 2;"><code>Accept</code></b>&nbsp;&nbsp;
+&nbsp;
+ &nbsp;
+ &nbsp;
+                <input type="text" style="display: none"
+                              name="Accept"                data-endpoint="GETapi-admin-dashboard-products"
+               value="application/json"
+               data-component="header">
+    <br>
+<p>Example: <code>application/json</code></p>
+            </div>
+                        </form>
+
+                    <h2 id="endpoints-GETapi-admin-dashboard-categories">Get all categories</h2>
+
+<p>
+</p>
+
+
+
+<span id="example-requests-GETapi-admin-dashboard-categories">
+<blockquote>Example request:</blockquote>
+
+
+<div class="bash-example">
+    <pre><code class="language-bash">curl --request GET \
+    --get "http://127.0.0.1:8000/api/admin/dashboard/categories" \
+    --header "Content-Type: application/json" \
+    --header "Accept: application/json"</code></pre></div>
+
+
+<div class="javascript-example">
+    <pre><code class="language-javascript">const url = new URL(
+    "http://127.0.0.1:8000/api/admin/dashboard/categories"
+);
+
+const headers = {
+    "Content-Type": "application/json",
+    "Accept": "application/json",
+};
+
+fetch(url, {
+    method: "GET",
+    headers,
+}).then(response =&gt; response.json());</code></pre></div>
+
+
+<div class="php-example">
+    <pre><code class="language-php">$client = new \GuzzleHttp\Client();
+$url = 'http://127.0.0.1:8000/api/admin/dashboard/categories';
+$response = $client-&gt;get(
+    $url,
+    [
+        'headers' =&gt; [
+            'Content-Type' =&gt; 'application/json',
+            'Accept' =&gt; 'application/json',
+        ],
+    ]
+);
+$body = $response-&gt;getBody();
+print_r(json_decode((string) $body));</code></pre></div>
+
+</span>
+
+<span id="example-responses-GETapi-admin-dashboard-categories">
+            <blockquote>
+            <p>Example response (401):</p>
+        </blockquote>
+                <details class="annotation">
+            <summary style="cursor: pointer;">
+                <small onclick="textContent = parentElement.parentElement.open ? 'Show headers' : 'Hide headers'">Show headers</small>
+            </summary>
+            <pre><code class="language-http">cache-control: no-cache, private
+content-type: application/json
+access-control-allow-origin: http://localhost:3000
+access-control-allow-credentials: true
+set-cookie: laravel-session=eyJpdiI6IkZod0gvdUNrSHVBcHlyNkUzR3gzNUE9PSIsInZhbHVlIjoiSmk2K1F2c1lTRHBsODZLZ2xtMVcyOGlXc01kNm9MRFpqMXJ6ZHFWeU9IQzNMZ1BBZGdWZ1NrY1phcjdXQkJ4a3VBUFNuOUU5VVp1b2ZKSW53YkxzUnFuL0puY2MrMnR2ekNuOXJpcW1WM0h4ek0vYWU0c2xxdDhLM2VQTm9iN2giLCJtYWMiOiJjZTg3MDc5ODQxOGM1YzdmZmUwNmIyMmEzN2I1YzY1OWE2ZDk3OGRmMDVhNzMyMjQyMjE4NWQ3N2FhZTkxZGVmIiwidGFnIjoiIn0%3D; expires=Mon, 02 Feb 2026 16:22:09 GMT; Max-Age=7200; path=/; secure; httponly; samesite=none
+ </code></pre></details>         <pre>
+
+<code class="language-json" style="max-height: 300px;">{
+    &quot;message&quot;: &quot;Unauthenticated.&quot;
+}</code>
+ </pre>
+    </span>
+<span id="execution-results-GETapi-admin-dashboard-categories" hidden>
+    <blockquote>Received response<span
+                id="execution-response-status-GETapi-admin-dashboard-categories"></span>:
+    </blockquote>
+    <pre class="json"><code id="execution-response-content-GETapi-admin-dashboard-categories"
+      data-empty-response-text="<Empty response>" style="max-height: 400px;"></code></pre>
+</span>
+<span id="execution-error-GETapi-admin-dashboard-categories" hidden>
+    <blockquote>Request failed with error:</blockquote>
+    <pre><code id="execution-error-message-GETapi-admin-dashboard-categories">
+
+Tip: Check that you&#039;re properly connected to the network.
+If you&#039;re a maintainer of ths API, verify that your API is running and you&#039;ve enabled CORS.
+You can check the Dev Tools console for debugging information.</code></pre>
+</span>
+<form id="form-GETapi-admin-dashboard-categories" data-method="GET"
+      data-path="api/admin/dashboard/categories"
+      data-authed="0"
+      data-hasfiles="0"
+      data-isarraybody="0"
+      autocomplete="off"
+      onsubmit="event.preventDefault(); executeTryOut('GETapi-admin-dashboard-categories', this);">
+    <h3>
+        Request&nbsp;&nbsp;&nbsp;
+                    <button type="button"
+                    style="background-color: #8fbcd4; padding: 5px 10px; border-radius: 5px; border-width: thin;"
+                    id="btn-tryout-GETapi-admin-dashboard-categories"
+                    onclick="tryItOut('GETapi-admin-dashboard-categories');">Try it out ⚡
+            </button>
+            <button type="button"
+                    style="background-color: #c97a7e; padding: 5px 10px; border-radius: 5px; border-width: thin;"
+                    id="btn-canceltryout-GETapi-admin-dashboard-categories"
+                    onclick="cancelTryOut('GETapi-admin-dashboard-categories');" hidden>Cancel 🛑
+            </button>&nbsp;&nbsp;
+            <button type="submit"
+                    style="background-color: #6ac174; padding: 5px 10px; border-radius: 5px; border-width: thin;"
+                    id="btn-executetryout-GETapi-admin-dashboard-categories"
+                    data-initial-text="Send Request 💥"
+                    data-loading-text="⏱ Sending..."
+                    hidden>Send Request 💥
+            </button>
+            </h3>
+            <p>
+            <small class="badge badge-green">GET</small>
+            <b><code>api/admin/dashboard/categories</code></b>
+        </p>
+                <h4 class="fancy-heading-panel"><b>Headers</b></h4>
+                                <div style="padding-left: 28px; clear: unset;">
+                <b style="line-height: 2;"><code>Content-Type</code></b>&nbsp;&nbsp;
+&nbsp;
+ &nbsp;
+ &nbsp;
+                <input type="text" style="display: none"
+                              name="Content-Type"                data-endpoint="GETapi-admin-dashboard-categories"
+               value="application/json"
+               data-component="header">
+    <br>
+<p>Example: <code>application/json</code></p>
+            </div>
+                                <div style="padding-left: 28px; clear: unset;">
+                <b style="line-height: 2;"><code>Accept</code></b>&nbsp;&nbsp;
+&nbsp;
+ &nbsp;
+ &nbsp;
+                <input type="text" style="display: none"
+                              name="Accept"                data-endpoint="GETapi-admin-dashboard-categories"
+               value="application/json"
+               data-component="header">
+    <br>
+<p>Example: <code>application/json</code></p>
+            </div>
+                        </form>
+
+                    <h2 id="endpoints-GETapi-admin-dashboard-revenue">Get revenue chart data</h2>
+
+<p>
+</p>
+
+
+
+<span id="example-requests-GETapi-admin-dashboard-revenue">
+<blockquote>Example request:</blockquote>
+
+
+<div class="bash-example">
+    <pre><code class="language-bash">curl --request GET \
+    --get "http://127.0.0.1:8000/api/admin/dashboard/revenue" \
+    --header "Content-Type: application/json" \
+    --header "Accept: application/json"</code></pre></div>
+
+
+<div class="javascript-example">
+    <pre><code class="language-javascript">const url = new URL(
+    "http://127.0.0.1:8000/api/admin/dashboard/revenue"
+);
+
+const headers = {
+    "Content-Type": "application/json",
+    "Accept": "application/json",
+};
+
+fetch(url, {
+    method: "GET",
+    headers,
+}).then(response =&gt; response.json());</code></pre></div>
+
+
+<div class="php-example">
+    <pre><code class="language-php">$client = new \GuzzleHttp\Client();
+$url = 'http://127.0.0.1:8000/api/admin/dashboard/revenue';
+$response = $client-&gt;get(
+    $url,
+    [
+        'headers' =&gt; [
+            'Content-Type' =&gt; 'application/json',
+            'Accept' =&gt; 'application/json',
+        ],
+    ]
+);
+$body = $response-&gt;getBody();
+print_r(json_decode((string) $body));</code></pre></div>
+
+</span>
+
+<span id="example-responses-GETapi-admin-dashboard-revenue">
+            <blockquote>
+            <p>Example response (401):</p>
+        </blockquote>
+                <details class="annotation">
+            <summary style="cursor: pointer;">
+                <small onclick="textContent = parentElement.parentElement.open ? 'Show headers' : 'Hide headers'">Show headers</small>
+            </summary>
+            <pre><code class="language-http">cache-control: no-cache, private
+content-type: application/json
+access-control-allow-origin: http://localhost:3000
+access-control-allow-credentials: true
+set-cookie: laravel-session=eyJpdiI6IkJ3RE1heUJ1czZtMFU0aUd2dU9zbmc9PSIsInZhbHVlIjoicXhtNUM0Zk9PKzlHMUxxNks1Q1Rid1hzQ01VSFFIR2VNK1lhQXV2c3gwcTZ4RG9kdTE5akJxbnczUC9BS0RoYnQ3Q2NVSHdEdlA5QjlLb1dFOHliZTVyUWpsTk1xbEQ5ZzJnYkVDZEROcnNGdktFcWN2KzB2akkrQTMwNDlpZ0giLCJtYWMiOiI5YTE0ZjdkNTk4ZWExYjkxZmUyYzExMWIxZjQwNDc5N2RkODExNDEzYzM3YjljYzc1YWZkY2E4MWY2MDc5NjMzIiwidGFnIjoiIn0%3D; expires=Mon, 02 Feb 2026 16:22:09 GMT; Max-Age=7200; path=/; secure; httponly; samesite=none
+ </code></pre></details>         <pre>
+
+<code class="language-json" style="max-height: 300px;">{
+    &quot;message&quot;: &quot;Unauthenticated.&quot;
+}</code>
+ </pre>
+    </span>
+<span id="execution-results-GETapi-admin-dashboard-revenue" hidden>
+    <blockquote>Received response<span
+                id="execution-response-status-GETapi-admin-dashboard-revenue"></span>:
+    </blockquote>
+    <pre class="json"><code id="execution-response-content-GETapi-admin-dashboard-revenue"
+      data-empty-response-text="<Empty response>" style="max-height: 400px;"></code></pre>
+</span>
+<span id="execution-error-GETapi-admin-dashboard-revenue" hidden>
+    <blockquote>Request failed with error:</blockquote>
+    <pre><code id="execution-error-message-GETapi-admin-dashboard-revenue">
+
+Tip: Check that you&#039;re properly connected to the network.
+If you&#039;re a maintainer of ths API, verify that your API is running and you&#039;ve enabled CORS.
+You can check the Dev Tools console for debugging information.</code></pre>
+</span>
+<form id="form-GETapi-admin-dashboard-revenue" data-method="GET"
+      data-path="api/admin/dashboard/revenue"
+      data-authed="0"
+      data-hasfiles="0"
+      data-isarraybody="0"
+      autocomplete="off"
+      onsubmit="event.preventDefault(); executeTryOut('GETapi-admin-dashboard-revenue', this);">
+    <h3>
+        Request&nbsp;&nbsp;&nbsp;
+                    <button type="button"
+                    style="background-color: #8fbcd4; padding: 5px 10px; border-radius: 5px; border-width: thin;"
+                    id="btn-tryout-GETapi-admin-dashboard-revenue"
+                    onclick="tryItOut('GETapi-admin-dashboard-revenue');">Try it out ⚡
+            </button>
+            <button type="button"
+                    style="background-color: #c97a7e; padding: 5px 10px; border-radius: 5px; border-width: thin;"
+                    id="btn-canceltryout-GETapi-admin-dashboard-revenue"
+                    onclick="cancelTryOut('GETapi-admin-dashboard-revenue');" hidden>Cancel 🛑
+            </button>&nbsp;&nbsp;
+            <button type="submit"
+                    style="background-color: #6ac174; padding: 5px 10px; border-radius: 5px; border-width: thin;"
+                    id="btn-executetryout-GETapi-admin-dashboard-revenue"
+                    data-initial-text="Send Request 💥"
+                    data-loading-text="⏱ Sending..."
+                    hidden>Send Request 💥
+            </button>
+            </h3>
+            <p>
+            <small class="badge badge-green">GET</small>
+            <b><code>api/admin/dashboard/revenue</code></b>
+        </p>
+                <h4 class="fancy-heading-panel"><b>Headers</b></h4>
+                                <div style="padding-left: 28px; clear: unset;">
+                <b style="line-height: 2;"><code>Content-Type</code></b>&nbsp;&nbsp;
+&nbsp;
+ &nbsp;
+ &nbsp;
+                <input type="text" style="display: none"
+                              name="Content-Type"                data-endpoint="GETapi-admin-dashboard-revenue"
+               value="application/json"
+               data-component="header">
+    <br>
+<p>Example: <code>application/json</code></p>
+            </div>
+                                <div style="padding-left: 28px; clear: unset;">
+                <b style="line-height: 2;"><code>Accept</code></b>&nbsp;&nbsp;
+&nbsp;
+ &nbsp;
+ &nbsp;
+                <input type="text" style="display: none"
+                              name="Accept"                data-endpoint="GETapi-admin-dashboard-revenue"
+               value="application/json"
+               data-component="header">
+    <br>
+<p>Example: <code>application/json</code></p>
+            </div>
+                        </form>
+
+                    <h2 id="endpoints-GETapi-admin-dashboard-best-sellers">Get best selling products</h2>
+
+<p>
+</p>
+
+
+
+<span id="example-requests-GETapi-admin-dashboard-best-sellers">
+<blockquote>Example request:</blockquote>
+
+
+<div class="bash-example">
+    <pre><code class="language-bash">curl --request GET \
+    --get "http://127.0.0.1:8000/api/admin/dashboard/best-sellers" \
+    --header "Content-Type: application/json" \
+    --header "Accept: application/json"</code></pre></div>
+
+
+<div class="javascript-example">
+    <pre><code class="language-javascript">const url = new URL(
+    "http://127.0.0.1:8000/api/admin/dashboard/best-sellers"
+);
+
+const headers = {
+    "Content-Type": "application/json",
+    "Accept": "application/json",
+};
+
+fetch(url, {
+    method: "GET",
+    headers,
+}).then(response =&gt; response.json());</code></pre></div>
+
+
+<div class="php-example">
+    <pre><code class="language-php">$client = new \GuzzleHttp\Client();
+$url = 'http://127.0.0.1:8000/api/admin/dashboard/best-sellers';
+$response = $client-&gt;get(
+    $url,
+    [
+        'headers' =&gt; [
+            'Content-Type' =&gt; 'application/json',
+            'Accept' =&gt; 'application/json',
+        ],
+    ]
+);
+$body = $response-&gt;getBody();
+print_r(json_decode((string) $body));</code></pre></div>
+
+</span>
+
+<span id="example-responses-GETapi-admin-dashboard-best-sellers">
+            <blockquote>
+            <p>Example response (401):</p>
+        </blockquote>
+                <details class="annotation">
+            <summary style="cursor: pointer;">
+                <small onclick="textContent = parentElement.parentElement.open ? 'Show headers' : 'Hide headers'">Show headers</small>
+            </summary>
+            <pre><code class="language-http">cache-control: no-cache, private
+content-type: application/json
+access-control-allow-origin: http://localhost:3000
+access-control-allow-credentials: true
+set-cookie: laravel-session=eyJpdiI6ImJ2TXYxRnpFSnl5YTdHQU9RYmNKOXc9PSIsInZhbHVlIjoiL0t4WUpmRjdTb3diOEhvUzYwUndwUTJUN1d2WWpDVVQwOXg2aUNYa0daTUt2UWVPTHd5N1ZLWEcrMVFTR0tmRTArVksxd1QxdVdxS01MY1VOL2k5NkQ0d244Z2VsQndtWE5lMU92Vkw3eFVvbktvdDZGQjE0OWdLUlgrc0lRalAiLCJtYWMiOiJjZDA2YzhmZDViZTBmMzNkZGY4OGExODNmYWRkYjhmOTAwOTA3YzFjMTRjNDJjNzllM2IzZGZhMzE0NDgwYjMyIiwidGFnIjoiIn0%3D; expires=Mon, 02 Feb 2026 16:22:09 GMT; Max-Age=7200; path=/; secure; httponly; samesite=none
+ </code></pre></details>         <pre>
+
+<code class="language-json" style="max-height: 300px;">{
+    &quot;message&quot;: &quot;Unauthenticated.&quot;
+}</code>
+ </pre>
+    </span>
+<span id="execution-results-GETapi-admin-dashboard-best-sellers" hidden>
+    <blockquote>Received response<span
+                id="execution-response-status-GETapi-admin-dashboard-best-sellers"></span>:
+    </blockquote>
+    <pre class="json"><code id="execution-response-content-GETapi-admin-dashboard-best-sellers"
+      data-empty-response-text="<Empty response>" style="max-height: 400px;"></code></pre>
+</span>
+<span id="execution-error-GETapi-admin-dashboard-best-sellers" hidden>
+    <blockquote>Request failed with error:</blockquote>
+    <pre><code id="execution-error-message-GETapi-admin-dashboard-best-sellers">
+
+Tip: Check that you&#039;re properly connected to the network.
+If you&#039;re a maintainer of ths API, verify that your API is running and you&#039;ve enabled CORS.
+You can check the Dev Tools console for debugging information.</code></pre>
+</span>
+<form id="form-GETapi-admin-dashboard-best-sellers" data-method="GET"
+      data-path="api/admin/dashboard/best-sellers"
+      data-authed="0"
+      data-hasfiles="0"
+      data-isarraybody="0"
+      autocomplete="off"
+      onsubmit="event.preventDefault(); executeTryOut('GETapi-admin-dashboard-best-sellers', this);">
+    <h3>
+        Request&nbsp;&nbsp;&nbsp;
+                    <button type="button"
+                    style="background-color: #8fbcd4; padding: 5px 10px; border-radius: 5px; border-width: thin;"
+                    id="btn-tryout-GETapi-admin-dashboard-best-sellers"
+                    onclick="tryItOut('GETapi-admin-dashboard-best-sellers');">Try it out ⚡
+            </button>
+            <button type="button"
+                    style="background-color: #c97a7e; padding: 5px 10px; border-radius: 5px; border-width: thin;"
+                    id="btn-canceltryout-GETapi-admin-dashboard-best-sellers"
+                    onclick="cancelTryOut('GETapi-admin-dashboard-best-sellers');" hidden>Cancel 🛑
+            </button>&nbsp;&nbsp;
+            <button type="submit"
+                    style="background-color: #6ac174; padding: 5px 10px; border-radius: 5px; border-width: thin;"
+                    id="btn-executetryout-GETapi-admin-dashboard-best-sellers"
+                    data-initial-text="Send Request 💥"
+                    data-loading-text="⏱ Sending..."
+                    hidden>Send Request 💥
+            </button>
+            </h3>
+            <p>
+            <small class="badge badge-green">GET</small>
+            <b><code>api/admin/dashboard/best-sellers</code></b>
+        </p>
+                <h4 class="fancy-heading-panel"><b>Headers</b></h4>
+                                <div style="padding-left: 28px; clear: unset;">
+                <b style="line-height: 2;"><code>Content-Type</code></b>&nbsp;&nbsp;
+&nbsp;
+ &nbsp;
+ &nbsp;
+                <input type="text" style="display: none"
+                              name="Content-Type"                data-endpoint="GETapi-admin-dashboard-best-sellers"
+               value="application/json"
+               data-component="header">
+    <br>
+<p>Example: <code>application/json</code></p>
+            </div>
+                                <div style="padding-left: 28px; clear: unset;">
+                <b style="line-height: 2;"><code>Accept</code></b>&nbsp;&nbsp;
+&nbsp;
+ &nbsp;
+ &nbsp;
+                <input type="text" style="display: none"
+                              name="Accept"                data-endpoint="GETapi-admin-dashboard-best-sellers"
+               value="application/json"
+               data-component="header">
+    <br>
+<p>Example: <code>application/json</code></p>
+            </div>
+                        </form>
+
                     <h2 id="endpoints-GETapi-contact-inquiries">Display a listing of contact inquiries.</h2>
 
 <p>
@@ -9356,7 +13354,7 @@ print_r(json_decode((string) $body));</code></pre></div>
 content-type: application/json
 access-control-allow-origin: http://localhost:3000
 access-control-allow-credentials: true
-set-cookie: laravel-session=eyJpdiI6ImRTTUgrR3RzSVdVZ2VOektkWmpyVHc9PSIsInZhbHVlIjoiZlArSkU2TlQ5RURPVG1DZnVUSE8vRE1KSlEyVHZPUGZlSnV3YkpuZ3ZpTS9OV2xCcnB6ZUN3eHAyc2xwNHlTZTVleWdkZVUvb3Z2VjFSQXM5K3FmWGNIb2lheU9GZUp3SVVYd0xnUnRrcHhGUUJiSldITisrTUxkSzlGTzVid1kiLCJtYWMiOiIyOTA2ZmVmZGQzZjYxYmYwMTMyZmRhMDI4NGZmMDVjNDljMjc3MzliOGE2NDQxMzNhM2MwZGJlNjM3NjQ3MmM4IiwidGFnIjoiIn0%3D; expires=Sun, 25 Jan 2026 15:26:58 GMT; Max-Age=7200; path=/; httponly; samesite=lax
+set-cookie: laravel-session=eyJpdiI6IkFGbUhNbTNOdjFoY29tZ1pyZkdCN1E9PSIsInZhbHVlIjoiMjloRldIWGpFQW9WMFZjclBTbnU2QnN4RHFESXRaTTVPVmZOcFZqMGRXOTdXTFJZdWJHZGVRNld5YlIxRUtzWDlFWDhyWlZpYWdKclcybEtucldCQnFRcmk2ckV3RmhFYnhRbHliRGNINlpKMzFNWi9GSytVM0E2MFdnVG1PRlIiLCJtYWMiOiJlM2E4MzA4NzM3ZTZiOTM0YWQwYjkzN2EwMWVlMDk4ZTJhY2IyOWNjOWQ4MzM0ZWM1MzZmMDdjNThlZDQ1MWVlIiwidGFnIjoiIn0%3D; expires=Mon, 02 Feb 2026 16:22:09 GMT; Max-Age=7200; path=/; secure; httponly; samesite=none
  </code></pre></details>         <pre>
 
 <code class="language-json" style="max-height: 300px;">{
@@ -9773,7 +13771,7 @@ print_r(json_decode((string) $body));</code></pre></div>
 content-type: application/json
 access-control-allow-origin: http://localhost:3000
 access-control-allow-credentials: true
-set-cookie: laravel-session=eyJpdiI6IkliT0Vra3I1azFVVVdWSFQ1QkZOYWc9PSIsInZhbHVlIjoiRkRNeFlNMzZWczhRY0s5M0k4VWJvVi9KRFEyWW9xdWNBcm5UOTNOaTJOTjk5U0hybEdmRU16bjgvZllVRUVaSnljTW1nRnphKzZqUzExTC9IcFU0WjVvUXhkMXpKQXFxaXFYd3RqVURiZzlNMDMxQ1hwL3RPUmlTOEtPOHVUQzEiLCJtYWMiOiI2MDU1ZTViYTAwMjIyMDBlODdhMzkxZGU4ZDBkOTQyYzVhNTYxYzQ0NDAyYjBjMzI1YjE2NWJiMmM5ZDI5NmNiIiwidGFnIjoiIn0%3D; expires=Sun, 25 Jan 2026 15:26:58 GMT; Max-Age=7200; path=/; httponly; samesite=lax
+set-cookie: laravel-session=eyJpdiI6InRSMnJITWJTYmhQOGhjUktOMnY1UEE9PSIsInZhbHVlIjoiMVpnU2NPZkViSGw0S3Bndzg4OGh5TXJxZTJnZHVPVDdNd0FBUzNTeENNRXR6U241RFpOb1k3YkwwTmpiN1pLWk9TbSt5c0JMeWtuK3YzOEFGUE5sdVA2bW1kMWlDZUtnb1JFeWN2Lzd4K0x1NzBKakF5YklXN0E2enh3dERXbzUiLCJtYWMiOiJhMjFmMDZhNjA0ODkwN2U2YTE4Y2M3ODBiMTg2YTM1MTE1NzJjMThhOTFiNjI5NTk3OTIxOGM2Zjg1MjY3MTI5IiwidGFnIjoiIn0%3D; expires=Mon, 02 Feb 2026 16:22:09 GMT; Max-Age=7200; path=/; secure; httponly; samesite=none
  </code></pre></details>         <pre>
 
 <code class="language-json" style="max-height: 300px;">{
@@ -9890,7 +13888,7 @@ You can check the Dev Tools console for debugging information.</code></pre>
     \"company\": \"y\",
     \"service\": \"u\",
     \"message\": \"architecto\",
-    \"status\": \"pending\"
+    \"status\": \"closed\"
 }"
 </code></pre></div>
 
@@ -9912,7 +13910,7 @@ let body = {
     "company": "y",
     "service": "u",
     "message": "architecto",
-    "status": "pending"
+    "status": "closed"
 };
 
 fetch(url, {
@@ -9939,7 +13937,7 @@ $response = $client-&gt;put(
             'company' =&gt; 'y',
             'service' =&gt; 'u',
             'message' =&gt; 'architecto',
-            'status' =&gt; 'pending',
+            'status' =&gt; 'closed',
         ],
     ]
 );
@@ -10126,10 +14124,10 @@ You can check the Dev Tools console for debugging information.</code></pre>
  &nbsp;
                 <input type="text" style="display: none"
                               name="status"                data-endpoint="PUTapi-contact-inquiries--inquiry_id-"
-               value="pending"
+               value="closed"
                data-component="body">
     <br>
-<p>Example: <code>pending</code></p>
+<p>Example: <code>closed</code></p>
 Must be one of:
 <ul style="list-style-type: square;"><li><code>pending</code></li> <li><code>replied</code></li> <li><code>closed</code></li></ul>
         </div>
@@ -10767,7 +14765,7 @@ location: http://localhost:3000/checkout_confirmation?payment_status=failed
 content-type: text/html; charset=utf-8
 access-control-allow-origin: http://localhost:3000
 access-control-allow-credentials: true
-set-cookie: laravel-session=eyJpdiI6InRMb2s0dXRWMHl0RnRGenJQazRlUHc9PSIsInZhbHVlIjoic1BTdEcrYWF6cE9lcER2Zlp1dmRyVHlwMVQzMktWQTdoMG5NZEsvSGR1a2xiM0xpdVpxSk83RnpTUWxPdENvZlNrUUxiU3pyYVJRU0xZVWo2czRrV1NEK28rdzYvb2I4N01EeG16ZXB5dXF5OVJjMlhrZk5Xd2hVVU93TUVPVngiLCJtYWMiOiJkM2ZkN2E5NTUyYjYxNjAwZTMzOWM5Njk1MWRjNTgzMzFjZGRlY2I0ZTUyODJjOTc2MGM0YjcyNjczNDljZmMyIiwidGFnIjoiIn0%3D; expires=Sun, 25 Jan 2026 15:26:58 GMT; Max-Age=7200; path=/; httponly; samesite=lax
+set-cookie: laravel-session=eyJpdiI6IlJCKzhmTlhXSEh3S1Jqa09QZ2NtTXc9PSIsInZhbHVlIjoiYjhhUWZaTFlSV3JhRnNnb0FFTkg0VWExMzNwRlBlR0hnVXp5MFBYdW9QUk1SUW4yekhmV3lXcXlxTFhJdEExWkU0VXpMWVpnQ1BqZmxFS05SZTlhYXR0U0FZSEI3UERURVY3VkNZcmJSdnR4SWpNRzd1eTY4VXRnNlNjMDJWOFIiLCJtYWMiOiIxNDU1OTEwOTQwNTg1MzRkMDhlNGYxM2NlYmUyZDhhYTYyN2IyNTc0MzA1MWI0ZTFhNjlkYjc0MjM1ZjAyMDg4IiwidGFnIjoiIn0%3D; expires=Mon, 02 Feb 2026 16:22:09 GMT; Max-Age=7200; path=/; secure; httponly; samesite=none
  </code></pre></details>         <pre>
 
 <code class="language-json" style="max-height: 300px;">&lt;!DOCTYPE html&gt;
@@ -11384,7 +15382,7 @@ print_r(json_decode((string) $body));</code></pre></div>
 content-type: application/json
 access-control-allow-origin: http://localhost:3000
 access-control-allow-credentials: true
-set-cookie: laravel-session=eyJpdiI6InVyRmplQkNta2RxMFdRYlNSczZCQUE9PSIsInZhbHVlIjoiZW5pYXhsakVLZC9QQjhiVDV5dVcreDZiOHJRYjF0eFhheW5TS2lyemF0clkrTk16S1l5eFZrcjZsbGN4djFUd0FWT01xU3NkSFMrYmFtR05RYlpXQWd3aGZpWVBSbXErQWJaYnY4Vm1xRStlZEtibHNkc3hjSTRNMjZqdGFmdlUiLCJtYWMiOiJhZDFiYWQ0Mzc4N2MyN2ViZjYzZDMyODk2OTdjNzE4YzNkYmM1OWFlNmRkYTdhMmQ5ZDYzZjE4MjcxMzMyYmY1IiwidGFnIjoiIn0%3D; expires=Sun, 25 Jan 2026 15:26:59 GMT; Max-Age=7200; path=/; httponly; samesite=lax
+set-cookie: laravel-session=eyJpdiI6ImtaaVhFcXJBREtvYjU5R3psdkJaTHc9PSIsInZhbHVlIjoiKzB0QjFsbEdHVFNyTmczek1YL05hUHI5R1dYVlhvREY1WTZKWlEyNTJOZVNGWWd2TUdadmxLY3YvODlHbjJaSFpKdjlFRDBYeTZ1VXdCdXlLMTFIT0x3dVU5VHd2cUlERlFJc3ROSk8yaUZtTzZFN2xNTFIrUnZMY1N4dHVHY0giLCJtYWMiOiIyMjUzYTExMzRhODFhYTc1MTY5Mjc5N2MyMjhhOGU2MzI3MDkzNGRlYzIwNzVjMmQzMWFjZmY5ZjUzODkxYTBlIiwidGFnIjoiIn0%3D; expires=Mon, 02 Feb 2026 16:22:10 GMT; Max-Age=7200; path=/; secure; httponly; samesite=none
  </code></pre></details>         <pre>
 
 <code class="language-json" style="max-height: 300px;">{
@@ -11674,7 +15672,7 @@ You can check the Dev Tools console for debugging information.</code></pre>
     --header "Content-Type: application/json" \
     --header "Accept: application/json" \
     --data "{
-    \"scheduledDate\": \"2052-02-18\",
+    \"scheduledDate\": \"2052-02-26\",
     \"businessLocationId\": \"architecto\",
     \"contactPerson\": {
         \"name\": \"architecto\",
@@ -11686,12 +15684,12 @@ You can check the Dev Tools console for debugging information.</code></pre>
     \"noOfPackages\": 22,
     \"packageType\": \"Heavy Bulky\",
     \"repeatedData\": {
-        \"repeatedType\": \"Daily\",
+        \"repeatedType\": \"Weekly\",
         \"days\": [
-            \"Saturday\"
+            \"Thursday\"
         ],
-        \"startDate\": \"2026-01-25T13:26:59\",
-        \"endDate\": \"2052-02-18\"
+        \"startDate\": \"2026-02-02T14:22:10\",
+        \"endDate\": \"2052-02-26\"
     }
 }"
 </code></pre></div>
@@ -11708,7 +15706,7 @@ const headers = {
 };
 
 let body = {
-    "scheduledDate": "2052-02-18",
+    "scheduledDate": "2052-02-26",
     "businessLocationId": "architecto",
     "contactPerson": {
         "name": "architecto",
@@ -11720,12 +15718,12 @@ let body = {
     "noOfPackages": 22,
     "packageType": "Heavy Bulky",
     "repeatedData": {
-        "repeatedType": "Daily",
+        "repeatedType": "Weekly",
         "days": [
-            "Saturday"
+            "Thursday"
         ],
-        "startDate": "2026-01-25T13:26:59",
-        "endDate": "2052-02-18"
+        "startDate": "2026-02-02T14:22:10",
+        "endDate": "2052-02-26"
     }
 };
 
@@ -11747,7 +15745,7 @@ $response = $client-&gt;post(
             'Accept' =&gt; 'application/json',
         ],
         'json' =&gt; [
-            'scheduledDate' =&gt; '2052-02-18',
+            'scheduledDate' =&gt; '2052-02-26',
             'businessLocationId' =&gt; 'architecto',
             'contactPerson' =&gt; [
                 'name' =&gt; 'architecto',
@@ -11759,12 +15757,12 @@ $response = $client-&gt;post(
             'noOfPackages' =&gt; 22,
             'packageType' =&gt; 'Heavy Bulky',
             'repeatedData' =&gt; [
-                'repeatedType' =&gt; 'Daily',
+                'repeatedType' =&gt; 'Weekly',
                 'days' =&gt; [
-                    'Saturday',
+                    'Thursday',
                 ],
-                'startDate' =&gt; '2026-01-25T13:26:59',
-                'endDate' =&gt; '2052-02-18',
+                'startDate' =&gt; '2026-02-02T14:22:10',
+                'endDate' =&gt; '2052-02-26',
             ],
         ],
     ]
@@ -11855,10 +15853,10 @@ You can check the Dev Tools console for debugging information.</code></pre>
  &nbsp;
                 <input type="text" style="display: none"
                               name="scheduledDate"                data-endpoint="POSTapi-pickups"
-               value="2052-02-18"
+               value="2052-02-26"
                data-component="body">
     <br>
-<p>Must be a valid date. Must be a date after <code>today</code>. Example: <code>2052-02-18</code></p>
+<p>Must be a valid date. Must be a date after <code>today</code>. Example: <code>2052-02-26</code></p>
         </div>
                 <div style=" padding-left: 28px;  clear: unset;">
             <b style="line-height: 2;"><code>businessLocationId</code></b>&nbsp;&nbsp;
@@ -11987,10 +15985,10 @@ Must be one of:
  &nbsp;
                 <input type="text" style="display: none"
                               name="repeatedData.repeatedType"                data-endpoint="POSTapi-pickups"
-               value="Daily"
+               value="Weekly"
                data-component="body">
     <br>
-<p>Example: <code>Daily</code></p>
+<p>Example: <code>Weekly</code></p>
 Must be one of:
 <ul style="list-style-type: square;"><li><code>One Time</code></li> <li><code>Daily</code></li> <li><code>Weekly</code></li></ul>
                     </div>
@@ -12017,10 +16015,10 @@ Must be one of:
  &nbsp;
                 <input type="text" style="display: none"
                               name="repeatedData.startDate"                data-endpoint="POSTapi-pickups"
-               value="2026-01-25T13:26:59"
+               value="2026-02-02T14:22:10"
                data-component="body">
     <br>
-<p>Must be a valid date. Example: <code>2026-01-25T13:26:59</code></p>
+<p>Must be a valid date. Example: <code>2026-02-02T14:22:10</code></p>
                     </div>
                                                                 <div style="margin-left: 14px; clear: unset;">
                         <b style="line-height: 2;"><code>endDate</code></b>&nbsp;&nbsp;
@@ -12029,10 +16027,10 @@ Must be one of:
  &nbsp;
                 <input type="text" style="display: none"
                               name="repeatedData.endDate"                data-endpoint="POSTapi-pickups"
-               value="2052-02-18"
+               value="2052-02-26"
                data-component="body">
     <br>
-<p>Must be a valid date. Must be a date after <code>repeatedData.startDate</code>. Example: <code>2052-02-18</code></p>
+<p>Must be a valid date. Must be a date after <code>repeatedData.startDate</code>. Example: <code>2052-02-26</code></p>
                     </div>
                                     </details>
         </div>
@@ -12699,7 +16697,7 @@ print_r(json_decode((string) $body));</code></pre></div>
 content-type: application/json
 access-control-allow-origin: http://localhost:3000
 access-control-allow-credentials: true
-set-cookie: laravel-session=eyJpdiI6ImdialZEUFRtd3BvWHB1WC92UjY0Smc9PSIsInZhbHVlIjoiMERJTmdIcm1DNFV2UXlnZVZpR2w5MTNpY2lPVWZWOW90UDJBWVo0cjlqVkJja0IreVZVamRNdkVQZEJSckkrcW9pWG40NDM4UFVRVXdTaHZJeXdOU2V5M0xISWFNbGpaNFkvMHFaK2RTUkdPbTBMRlBGV3p5OVhBVXR4SnM3L0EiLCJtYWMiOiI4NTBmYzQwM2RiMmU1ZDA0MDA1NWVlYmM4ZDExNjQ1M2RiMWUxNjdlZGFjZDFmOTMyYzRmMTIxMGFlZjFjZjk2IiwidGFnIjoiIn0%3D; expires=Sun, 25 Jan 2026 15:26:59 GMT; Max-Age=7200; path=/; httponly; samesite=lax
+set-cookie: laravel-session=eyJpdiI6ImorWk9zVGl1Rldka0NndVM0TmsvY1E9PSIsInZhbHVlIjoiYnN0SDBSZkRXRDF3ZXVFQWdwZXk4TXl2bnhlWldPUnpwcjg5M1pwcDBicUdPSVZNWkZsbWpPWjJ2eWFJWlQ1dTB6QWNrZHdGR3dqd0drQ0p1WWtKOElCWTRuUVhiRHh2NmljbzZvWFRhNjY5dk5lVGkzY1VEYUowbzh2Y3h4RkQiLCJtYWMiOiI4Y2NkYjI3ZTc0ZmU2MzUyMWY0MGYzNTcwNTNlMWZlMTc1YWJlYWI4NDlhMWJmYzZhOWZhN2U5ODcwM2MyYTI4IiwidGFnIjoiIn0%3D; expires=Mon, 02 Feb 2026 16:22:10 GMT; Max-Age=7200; path=/; secure; httponly; samesite=none
  </code></pre></details>         <pre>
 
 <code class="language-json" style="max-height: 300px;">{
@@ -12719,7 +16717,7 @@ set-cookie: laravel-session=eyJpdiI6ImdialZEUFRtd3BvWHB1WC92UjY0Smc9PSIsInZhbHVl
         &quot;MAIL_USERNAME&quot;: &quot;ahmadkholy98@gmail.com&quot;,
         &quot;MAIL_PASSWORD&quot;: &quot;akcynlcfghdfxjrq&quot;,
         &quot;MAIL_FROM_ADDRESS&quot;: &quot;ahmadkholy98@gmail.com&quot;,
-        &quot;MAIL_FROM_NAME&quot;: &quot;Laravel&quot;
+        &quot;MAIL_FROM_NAME&quot;: &quot;laravel&quot;
     }
 }</code>
  </pre>

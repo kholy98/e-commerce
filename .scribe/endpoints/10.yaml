@@ -1,0 +1,422 @@
+name: 'Team Members'
+description: |-
+
+  APIs for managing and retrieving team member information.
+
+  These endpoints provide access to team member data including contact details,
+  professional titles, social media links, and profile images.
+endpoints:
+  -
+    custom: []
+    httpMethods:
+      - GET
+    uri: api/admin/team-members
+    metadata:
+      custom: []
+      groupName: 'Team Members'
+      groupDescription: |-
+
+        APIs for managing and retrieving team member information.
+
+        These endpoints provide access to team member data including contact details,
+        professional titles, social media links, and profile images.
+      subgroup: ''
+      subgroupDescription: ''
+      title: 'List all team members'
+      description: |-
+        Get a paginated list of all team members with optional filtering and sorting.
+        Returns team member details including contact information, images, and social media links.
+      authenticated: false
+      deprecated: false
+    headers:
+      Content-Type: application/json
+      Accept: application/json
+    urlParameters: []
+    cleanUrlParameters: []
+    queryParameters:
+      search:
+        custom: []
+        name: search
+        description: 'Search by full name or email address.'
+        required: false
+        example: john
+        type: string
+        enumValues: []
+        exampleWasSpecified: true
+        nullable: false
+        deprecated: false
+      sort_by:
+        custom: []
+        name: sort_by
+        description: 'Sort field - allowed values: `fullname`, `email`, `created_at`.'
+        required: false
+        example: fullname
+        type: string
+        enumValues: []
+        exampleWasSpecified: true
+        nullable: false
+        deprecated: false
+      sort_direction:
+        custom: []
+        name: sort_direction
+        description: 'Sort direction - allowed values: `asc`, `desc`. Default: `asc`.'
+        required: false
+        example: asc
+        type: string
+        enumValues: []
+        exampleWasSpecified: true
+        nullable: false
+        deprecated: false
+      per_page:
+        custom: []
+        name: per_page
+        description: 'Number of items per page. Default: 15.'
+        required: false
+        example: 10
+        type: integer
+        enumValues: []
+        exampleWasSpecified: true
+        nullable: false
+        deprecated: false
+    cleanQueryParameters:
+      search: john
+      sort_by: fullname
+      sort_direction: asc
+      per_page: 10
+    bodyParameters: []
+    cleanBodyParameters: []
+    fileParameters: []
+    responses:
+      -
+        custom: []
+        status: 200
+        content: |-
+          {
+            "success": true,
+            "data": [
+              {
+                "id": 1,
+                "fullname": "John Doe",
+                "phone": "+1 (555) 123-4567",
+                "title": "Senior Software Engineer",
+                "email": "john.doe@example.com",
+                "social_media": [
+                  "https://twitter.com/johndoe",
+                  "https://linkedin.com/in/john-doe-profile",
+                  "https://github.com/johndoe"
+                ],
+                "images": [
+                  {
+                    "id": 1,
+                    "name": "john-profile",
+                    "url": "https://example.com/storage/media/1/john-profile.jpg",
+                    "thumb_url": "https://example.com/storage/media/1/conversions/john-profile-thumb.jpg"
+                  }
+                ],
+                "created_at": "2024-01-15T10:30:00.000000Z",
+                "updated_at": "2024-01-15T14:45:00.000000Z"
+              },
+              {
+                "id": 2,
+                "fullname": "Jane Smith",
+                "phone": "+1 (555) 987-6543",
+                "title": "Product Manager",
+                "email": "jane.smith@example.com",
+                "social_media": [
+                  "https://twitter.com/janesmith",
+                  "https://linkedin.com/in/janesmith-pm",
+                  "https://github.com/janesmith"
+                ],
+                "images": [],
+                "created_at": "2024-01-10T08:00:00.000000Z",
+                "updated_at": "2024-01-12T16:20:00.000000Z"
+              }
+            ],
+            "pagination": {
+              "current_page": 1,
+              "last_page": 3,
+              "per_page": 15,
+              "total": 42
+            }
+          }
+        headers: []
+        description: 'Success with results'
+    responseFields: []
+    auth: []
+    controller: null
+    method: null
+    route: null
+  -
+    custom: []
+    httpMethods:
+      - GET
+    uri: 'api/admin/team-members/{teamMember_id}'
+    metadata:
+      custom: []
+      groupName: 'Team Members'
+      groupDescription: |-
+
+        APIs for managing and retrieving team member information.
+
+        These endpoints provide access to team member data including contact details,
+        professional titles, social media links, and profile images.
+      subgroup: ''
+      subgroupDescription: ''
+      title: 'Get a single team member'
+      description: |-
+        Retrieve detailed information about a specific team member by their ID.
+        Returns complete team member data including all images and social media links.
+      authenticated: false
+      deprecated: false
+    headers:
+      Content-Type: application/json
+      Accept: application/json
+    urlParameters:
+      teamMember_id:
+        custom: []
+        name: teamMember_id
+        description: 'The ID of the teamMember.'
+        required: true
+        example: 1
+        type: integer
+        enumValues: []
+        exampleWasSpecified: false
+        nullable: false
+        deprecated: false
+      teamMember:
+        custom: []
+        name: teamMember
+        description: 'The ID of the team member.'
+        required: true
+        example: 1
+        type: integer
+        enumValues: []
+        exampleWasSpecified: true
+        nullable: false
+        deprecated: false
+    cleanUrlParameters:
+      teamMember_id: 1
+      teamMember: 1
+    queryParameters: []
+    cleanQueryParameters: []
+    bodyParameters: []
+    cleanBodyParameters: []
+    fileParameters: []
+    responses:
+      -
+        custom: []
+        status: 200
+        content: |-
+          {
+            "success": true,
+            "data": {
+              "id": 1,
+              "fullname": "John Doe",
+              "phone": "+1 (555) 123-4567",
+              "title": "Senior Software Engineer",
+              "email": "john.doe@example.com",
+              "social_media": {
+                "twitter": "@johndoe",
+                "linkedin": "john-doe-profile",
+                "github": "johndoe",
+                "website": "https://johndoe.dev"
+              },
+              "images": [
+                {
+                  "id": 1,
+                  "name": "john-profile-main",
+                  "url": "https://example.com/storage/media/1/john-profile-main.jpg",
+                  "thumb_url": "https://example.com/storage/media/1/conversions/john-profile-main-thumb.jpg"
+                },
+                {
+                  "id": 2,
+                  "name": "john-profile-alt",
+                  "url": "https://example.com/storage/media/2/john-profile-alt.jpg",
+                  "thumb_url": "https://example.com/storage/media/2/conversions/john-profile-alt-thumb.jpg"
+                }
+              ],
+              "created_at": "2024-01-15T10:30:00.000000Z",
+              "updated_at": "2024-01-15T14:45:00.000000Z"
+            }
+          }
+        headers: []
+        description: 'Team member found'
+      -
+        custom: []
+        status: 404
+        content: |-
+          {
+            "message": "No query results for model [App\\Models\\TeamMember] 999"
+          }
+        headers: []
+        description: 'Team member not found'
+    responseFields:
+      success:
+        custom: []
+        name: success
+        description: 'Indicates if the request was successful'
+        required: false
+        example: null
+        type: boolean
+        enumValues: []
+        exampleWasSpecified: false
+        nullable: false
+        deprecated: false
+      data:
+        custom: []
+        name: data
+        description: 'Team member details'
+        required: false
+        example: null
+        type: object
+        enumValues: []
+        exampleWasSpecified: false
+        nullable: false
+        deprecated: false
+      data.id:
+        custom: []
+        name: data.id
+        description: 'Team member ID'
+        required: false
+        example: null
+        type: integer
+        enumValues: []
+        exampleWasSpecified: false
+        nullable: false
+        deprecated: false
+      data.fullname:
+        custom: []
+        name: data.fullname
+        description: 'Full name of the team member'
+        required: false
+        example: null
+        type: string
+        enumValues: []
+        exampleWasSpecified: false
+        nullable: false
+        deprecated: false
+      data.phone:
+        custom: []
+        name: data.phone
+        description: 'Phone number'
+        required: false
+        example: null
+        type: string|null
+        enumValues: []
+        exampleWasSpecified: false
+        nullable: false
+        deprecated: false
+      data.title:
+        custom: []
+        name: data.title
+        description: 'Job title or position'
+        required: false
+        example: null
+        type: string|null
+        enumValues: []
+        exampleWasSpecified: false
+        nullable: false
+        deprecated: false
+      data.email:
+        custom: []
+        name: data.email
+        description: 'Email address'
+        required: false
+        example: null
+        type: string
+        enumValues: []
+        exampleWasSpecified: false
+        nullable: false
+        deprecated: false
+      data.social_media:
+        custom: []
+        name: data.social_media
+        description: 'Social media links'
+        required: false
+        example: null
+        type: object|null
+        enumValues: []
+        exampleWasSpecified: false
+        nullable: false
+        deprecated: false
+      data.images:
+        custom: []
+        name: data.images
+        description: 'Array of profile images'
+        required: false
+        example: null
+        type: 'string[]'
+        enumValues: []
+        exampleWasSpecified: false
+        nullable: false
+        deprecated: false
+      'data.images[].id':
+        custom: []
+        name: 'data.images[].id'
+        description: 'Image ID'
+        required: false
+        example: null
+        type: integer
+        enumValues: []
+        exampleWasSpecified: false
+        nullable: false
+        deprecated: false
+      'data.images[].name':
+        custom: []
+        name: 'data.images[].name'
+        description: 'Image file name'
+        required: false
+        example: null
+        type: string
+        enumValues: []
+        exampleWasSpecified: false
+        nullable: false
+        deprecated: false
+      'data.images[].url':
+        custom: []
+        name: 'data.images[].url'
+        description: 'Full-size image URL'
+        required: false
+        example: null
+        type: string
+        enumValues: []
+        exampleWasSpecified: false
+        nullable: false
+        deprecated: false
+      'data.images[].thumb_url':
+        custom: []
+        name: 'data.images[].thumb_url'
+        description: 'Thumbnail image URL'
+        required: false
+        example: null
+        type: string
+        enumValues: []
+        exampleWasSpecified: false
+        nullable: false
+        deprecated: false
+      data.created_at:
+        custom: []
+        name: data.created_at
+        description: 'ISO 8601 datetime string'
+        required: false
+        example: null
+        type: string
+        enumValues: []
+        exampleWasSpecified: false
+        nullable: false
+        deprecated: false
+      data.updated_at:
+        custom: []
+        name: data.updated_at
+        description: 'ISO 8601 datetime string'
+        required: false
+        example: null
+        type: string
+        enumValues: []
+        exampleWasSpecified: false
+        nullable: false
+        deprecated: false
+    auth: []
+    controller: null
+    method: null
+    route: null

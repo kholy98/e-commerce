@@ -294,7 +294,7 @@ Route::middleware(['web', 'auth'])->prefix('admin')->group(function () {
 
     // Product management
     Route::prefix('products')->group(function () {
-        Route::get('/', [ProductController::class, 'index']);
+        Route::get('/', [ProductController::class, 'indexAdmin']);
         Route::post('/', [ProductController::class, 'store']);
         Route::put('/{product}', [ProductController::class, 'update']);
         Route::delete('/{product}', [ProductController::class, 'destroy']);

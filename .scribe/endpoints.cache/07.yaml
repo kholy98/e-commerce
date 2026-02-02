@@ -542,3 +542,61 @@ endpoints:
     controller: null
     method: null
     route: null
+  -
+    custom: []
+    httpMethods:
+      - GET
+    uri: api/admin/orders/statistics
+    metadata:
+      custom: []
+      groupName: Orders
+      groupDescription: |-
+
+        APIs for managing customer orders.
+
+        All endpoints in this group require authentication via Laravel Sanctum.
+      subgroup: ''
+      subgroupDescription: ''
+      title: 'Get order statistics'
+      description: 'Get aggregated order statistics. This endpoint is typically used by administrators for dashboard displays.'
+      authenticated: true
+      deprecated: false
+    headers:
+      Authorization: 'Bearer {YOUR_API_TOKEN}'
+      Content-Type: application/json
+      Accept: application/json
+    urlParameters: []
+    cleanUrlParameters: []
+    queryParameters: []
+    cleanQueryParameters: []
+    bodyParameters: []
+    cleanBodyParameters: []
+    fileParameters: []
+    responses:
+      -
+        custom: []
+        status: 200
+        content: |-
+          {
+            "success": true,
+            "data": {
+              "total_orders": 150,
+              "pending_orders": 25,
+              "processing_orders": 30,
+              "shipped_orders": 45,
+              "delivered_orders": 40,
+              "cancelled_orders": 10,
+              "total_revenue": 15000.00,
+              "pending_revenue": 2500.00
+            }
+          }
+        headers: []
+        description: Success
+    responseFields: []
+    auth:
+      - headers
+      - Authorization
+      - 'Bearer 6g43cv8PD1aE5beadkZfhV6'
+    controller: null
+    method: null
+    route: null

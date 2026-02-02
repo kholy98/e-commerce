@@ -38,7 +38,217 @@ endpoints:
           content-type: application/json
           access-control-allow-origin: 'http://localhost:3000'
           access-control-allow-credentials: 'true'
-          set-cookie: 'laravel-session=eyJpdiI6IjJ6VEh1Nkg4RTdnSUJuNUxlWDlLSnc9PSIsInZhbHVlIjoiLzhSRTNudjFBN0xKQmtUbFV1bWRScS81YVJ0TUFGeHljUGF6WWRHM3VaUWJ2UFVhN1RjMVVNTGI0SnhiVHdXUGtPaHVFeWNJRXNsWkhYY052V1ZUZFprbUZhcVUwMzE0d2pIU1c5Tkdaemo1SmYvQUYyZnBOd1U2V1dPQ3psQkkiLCJtYWMiOiJhNTUwNDk3Y2QwNzE4Zjk4NzdkNDM1ZmE5NGY3NmFiOWYzZjdkYTE5Y2FhZjhjMTYzYmYyMDA5OTY1NzA0OWQ4IiwidGFnIjoiIn0%3D; expires=Sun, 25 Jan 2026 15:26:58 GMT; Max-Age=7200; path=/; httponly; samesite=lax'
+          set-cookie: 'laravel-session=eyJpdiI6Im1IRHRrYm9XbEdQUG5WRGVQbWZvb0E9PSIsInZhbHVlIjoiNENQVTZPc1JkR3oxRVdjNDlFc0wxenRpM01SUXoyYm1pUkNEaG1IdFg3eklVUHpDNk92TmpIODRPWTkxdXoxTUI1b3N0NG0vRDBGbzJNZE50bFdBZU9vbm9KQ0wrWG9JMmJMaTIvb0dBWnpvTmV1YjNPdWhqRmZqTjZPVW92cEciLCJtYWMiOiIzYmZjMzM2ODg4MjNhM2YzNjNmMjE1YWFlZTYzYTcwZjNkMjJkMDQ0MTk2YjJmNDVjMmU1NWU2MDY5YTI3Yzc5IiwidGFnIjoiIn0%3D; expires=Mon, 02 Feb 2026 16:22:08 GMT; Max-Age=7200; path=/; secure; httponly; samesite=none'
+        description: null
+    responseFields: []
+    auth: []
+    controller: null
+    method: null
+    route: null
+  -
+    custom: []
+    httpMethods:
+      - GET
+    uri: api/admin/dashboard/stats
+    metadata:
+      custom: []
+      groupName: Endpoints
+      groupDescription: ''
+      subgroup: ''
+      subgroupDescription: ''
+      title: 'Get dashboard statistics'
+      description: ''
+      authenticated: false
+      deprecated: false
+    headers:
+      Content-Type: application/json
+      Accept: application/json
+    urlParameters: []
+    cleanUrlParameters: []
+    queryParameters: []
+    cleanQueryParameters: []
+    bodyParameters: []
+    cleanBodyParameters: []
+    fileParameters: []
+    responses:
+      -
+        custom: []
+        status: 401
+        content: '{"message":"Unauthenticated."}'
+        headers:
+          cache-control: 'no-cache, private'
+          content-type: application/json
+          access-control-allow-origin: 'http://localhost:3000'
+          access-control-allow-credentials: 'true'
+          set-cookie: 'laravel-session=eyJpdiI6IjUyVkJ5akVjR2FzeU1PcnNwNHZuZ1E9PSIsInZhbHVlIjoiT1E1eVVkUnZjQ3dHcE9GM2ExbHN0MGI2WW0vNm9TYVhwdUxMS2w4Z0oyRlhacnlmRTB1V2hxdlVmVmdhdEhUZ3Z2VmFCenlSdkpFZlFESUoxRlZsMnlLUURKR2syOEd5SmJrNmtxa1FvSnhQVjJBaUlCcDlJRWRzaW9FdG5zZGgiLCJtYWMiOiI3MTUyMzRkYzg5MjI3YzNkY2VmMjZhYjAzNTkyOWJlOGQ2NTEyZmExYWI1OWQ0YWI4YTgwYTQ5ODYxNWYxODgyIiwidGFnIjoiIn0%3D; expires=Mon, 02 Feb 2026 16:22:09 GMT; Max-Age=7200; path=/; secure; httponly; samesite=none'
+        description: null
+    responseFields: []
+    auth: []
+    controller: null
+    method: null
+    route: null
+  -
+    custom: []
+    httpMethods:
+      - GET
+    uri: api/admin/dashboard/products
+    metadata:
+      custom: []
+      groupName: Endpoints
+      groupDescription: ''
+      subgroup: ''
+      subgroupDescription: ''
+      title: 'Get recent products'
+      description: ''
+      authenticated: false
+      deprecated: false
+    headers:
+      Content-Type: application/json
+      Accept: application/json
+    urlParameters: []
+    cleanUrlParameters: []
+    queryParameters: []
+    cleanQueryParameters: []
+    bodyParameters: []
+    cleanBodyParameters: []
+    fileParameters: []
+    responses:
+      -
+        custom: []
+        status: 401
+        content: '{"message":"Unauthenticated."}'
+        headers:
+          cache-control: 'no-cache, private'
+          content-type: application/json
+          access-control-allow-origin: 'http://localhost:3000'
+          access-control-allow-credentials: 'true'
+          set-cookie: 'laravel-session=eyJpdiI6InFUWFVzbUxaM214Lzc2eGhjaWlGUVE9PSIsInZhbHVlIjoiVmNadzY0a2Rya1RKcW9NUk1zRmsyNDA2cHI4dlo3UWJzSmJkWVBLU2M1WUFFNFpPS0x0VXo0c3BwVnJsRExRYm9mbk54NWE3Z3lQaWcwUFJ3Wnc5OGVoZlNtekNpcjV1ZzgxaldSb2E4VVFyb2hVcTdyYjNBYzdodXVHdmFqVkwiLCJtYWMiOiI5MzI2NGFjMjE2NmM0NTU5MTQyZTdkMjI1NDU5MzBlNmY2ZGQzNzA4ZGFiNzZkMzBhOWY4YTljMTlhYzAyMzkxIiwidGFnIjoiIn0%3D; expires=Mon, 02 Feb 2026 16:22:09 GMT; Max-Age=7200; path=/; secure; httponly; samesite=none'
+        description: null
+    responseFields: []
+    auth: []
+    controller: null
+    method: null
+    route: null
+  -
+    custom: []
+    httpMethods:
+      - GET
+    uri: api/admin/dashboard/categories
+    metadata:
+      custom: []
+      groupName: Endpoints
+      groupDescription: ''
+      subgroup: ''
+      subgroupDescription: ''
+      title: 'Get all categories'
+      description: ''
+      authenticated: false
+      deprecated: false
+    headers:
+      Content-Type: application/json
+      Accept: application/json
+    urlParameters: []
+    cleanUrlParameters: []
+    queryParameters: []
+    cleanQueryParameters: []
+    bodyParameters: []
+    cleanBodyParameters: []
+    fileParameters: []
+    responses:
+      -
+        custom: []
+        status: 401
+        content: '{"message":"Unauthenticated."}'
+        headers:
+          cache-control: 'no-cache, private'
+          content-type: application/json
+          access-control-allow-origin: 'http://localhost:3000'
+          access-control-allow-credentials: 'true'
+          set-cookie: 'laravel-session=eyJpdiI6IkZod0gvdUNrSHVBcHlyNkUzR3gzNUE9PSIsInZhbHVlIjoiSmk2K1F2c1lTRHBsODZLZ2xtMVcyOGlXc01kNm9MRFpqMXJ6ZHFWeU9IQzNMZ1BBZGdWZ1NrY1phcjdXQkJ4a3VBUFNuOUU5VVp1b2ZKSW53YkxzUnFuL0puY2MrMnR2ekNuOXJpcW1WM0h4ek0vYWU0c2xxdDhLM2VQTm9iN2giLCJtYWMiOiJjZTg3MDc5ODQxOGM1YzdmZmUwNmIyMmEzN2I1YzY1OWE2ZDk3OGRmMDVhNzMyMjQyMjE4NWQ3N2FhZTkxZGVmIiwidGFnIjoiIn0%3D; expires=Mon, 02 Feb 2026 16:22:09 GMT; Max-Age=7200; path=/; secure; httponly; samesite=none'
+        description: null
+    responseFields: []
+    auth: []
+    controller: null
+    method: null
+    route: null
+  -
+    custom: []
+    httpMethods:
+      - GET
+    uri: api/admin/dashboard/revenue
+    metadata:
+      custom: []
+      groupName: Endpoints
+      groupDescription: ''
+      subgroup: ''
+      subgroupDescription: ''
+      title: 'Get revenue chart data'
+      description: ''
+      authenticated: false
+      deprecated: false
+    headers:
+      Content-Type: application/json
+      Accept: application/json
+    urlParameters: []
+    cleanUrlParameters: []
+    queryParameters: []
+    cleanQueryParameters: []
+    bodyParameters: []
+    cleanBodyParameters: []
+    fileParameters: []
+    responses:
+      -
+        custom: []
+        status: 401
+        content: '{"message":"Unauthenticated."}'
+        headers:
+          cache-control: 'no-cache, private'
+          content-type: application/json
+          access-control-allow-origin: 'http://localhost:3000'
+          access-control-allow-credentials: 'true'
+          set-cookie: 'laravel-session=eyJpdiI6IkJ3RE1heUJ1czZtMFU0aUd2dU9zbmc9PSIsInZhbHVlIjoicXhtNUM0Zk9PKzlHMUxxNks1Q1Rid1hzQ01VSFFIR2VNK1lhQXV2c3gwcTZ4RG9kdTE5akJxbnczUC9BS0RoYnQ3Q2NVSHdEdlA5QjlLb1dFOHliZTVyUWpsTk1xbEQ5ZzJnYkVDZEROcnNGdktFcWN2KzB2akkrQTMwNDlpZ0giLCJtYWMiOiI5YTE0ZjdkNTk4ZWExYjkxZmUyYzExMWIxZjQwNDc5N2RkODExNDEzYzM3YjljYzc1YWZkY2E4MWY2MDc5NjMzIiwidGFnIjoiIn0%3D; expires=Mon, 02 Feb 2026 16:22:09 GMT; Max-Age=7200; path=/; secure; httponly; samesite=none'
+        description: null
+    responseFields: []
+    auth: []
+    controller: null
+    method: null
+    route: null
+  -
+    custom: []
+    httpMethods:
+      - GET
+    uri: api/admin/dashboard/best-sellers
+    metadata:
+      custom: []
+      groupName: Endpoints
+      groupDescription: ''
+      subgroup: ''
+      subgroupDescription: ''
+      title: 'Get best selling products'
+      description: ''
+      authenticated: false
+      deprecated: false
+    headers:
+      Content-Type: application/json
+      Accept: application/json
+    urlParameters: []
+    cleanUrlParameters: []
+    queryParameters: []
+    cleanQueryParameters: []
+    bodyParameters: []
+    cleanBodyParameters: []
+    fileParameters: []
+    responses:
+      -
+        custom: []
+        status: 401
+        content: '{"message":"Unauthenticated."}'
+        headers:
+          cache-control: 'no-cache, private'
+          content-type: application/json
+          access-control-allow-origin: 'http://localhost:3000'
+          access-control-allow-credentials: 'true'
+          set-cookie: 'laravel-session=eyJpdiI6ImJ2TXYxRnpFSnl5YTdHQU9RYmNKOXc9PSIsInZhbHVlIjoiL0t4WUpmRjdTb3diOEhvUzYwUndwUTJUN1d2WWpDVVQwOXg2aUNYa0daTUt2UWVPTHd5N1ZLWEcrMVFTR0tmRTArVksxd1QxdVdxS01MY1VOL2k5NkQ0d244Z2VsQndtWE5lMU92Vkw3eFVvbktvdDZGQjE0OWdLUlgrc0lRalAiLCJtYWMiOiJjZDA2YzhmZDViZTBmMzNkZGY4OGExODNmYWRkYjhmOTAwOTA3YzFjMTRjNDJjNzllM2IzZGZhMzE0NDgwYjMyIiwidGFnIjoiIn0%3D; expires=Mon, 02 Feb 2026 16:22:09 GMT; Max-Age=7200; path=/; secure; httponly; samesite=none'
         description: null
     responseFields: []
     auth: []
@@ -80,7 +290,7 @@ endpoints:
           content-type: application/json
           access-control-allow-origin: 'http://localhost:3000'
           access-control-allow-credentials: 'true'
-          set-cookie: 'laravel-session=eyJpdiI6ImRTTUgrR3RzSVdVZ2VOektkWmpyVHc9PSIsInZhbHVlIjoiZlArSkU2TlQ5RURPVG1DZnVUSE8vRE1KSlEyVHZPUGZlSnV3YkpuZ3ZpTS9OV2xCcnB6ZUN3eHAyc2xwNHlTZTVleWdkZVUvb3Z2VjFSQXM5K3FmWGNIb2lheU9GZUp3SVVYd0xnUnRrcHhGUUJiSldITisrTUxkSzlGTzVid1kiLCJtYWMiOiIyOTA2ZmVmZGQzZjYxYmYwMTMyZmRhMDI4NGZmMDVjNDljMjc3MzliOGE2NDQxMzNhM2MwZGJlNjM3NjQ3MmM4IiwidGFnIjoiIn0%3D; expires=Sun, 25 Jan 2026 15:26:58 GMT; Max-Age=7200; path=/; httponly; samesite=lax'
+          set-cookie: 'laravel-session=eyJpdiI6IkFGbUhNbTNOdjFoY29tZ1pyZkdCN1E9PSIsInZhbHVlIjoiMjloRldIWGpFQW9WMFZjclBTbnU2QnN4RHFESXRaTTVPVmZOcFZqMGRXOTdXTFJZdWJHZGVRNld5YlIxRUtzWDlFWDhyWlZpYWdKclcybEtucldCQnFRcmk2ckV3RmhFYnhRbHliRGNINlpKMzFNWi9GSytVM0E2MFdnVG1PRlIiLCJtYWMiOiJlM2E4MzA4NzM3ZTZiOTM0YWQwYjkzN2EwMWVlMDk4ZTJhY2IyOWNjOWQ4MzM0ZWM1MzZmMDdjNThlZDQ1MWVlIiwidGFnIjoiIn0%3D; expires=Mon, 02 Feb 2026 16:22:09 GMT; Max-Age=7200; path=/; secure; httponly; samesite=none'
         description: null
     responseFields: []
     auth: []
@@ -251,7 +461,7 @@ endpoints:
           content-type: application/json
           access-control-allow-origin: 'http://localhost:3000'
           access-control-allow-credentials: 'true'
-          set-cookie: 'laravel-session=eyJpdiI6IkliT0Vra3I1azFVVVdWSFQ1QkZOYWc9PSIsInZhbHVlIjoiRkRNeFlNMzZWczhRY0s5M0k4VWJvVi9KRFEyWW9xdWNBcm5UOTNOaTJOTjk5U0hybEdmRU16bjgvZllVRUVaSnljTW1nRnphKzZqUzExTC9IcFU0WjVvUXhkMXpKQXFxaXFYd3RqVURiZzlNMDMxQ1hwL3RPUmlTOEtPOHVUQzEiLCJtYWMiOiI2MDU1ZTViYTAwMjIyMDBlODdhMzkxZGU4ZDBkOTQyYzVhNTYxYzQ0NDAyYjBjMzI1YjE2NWJiMmM5ZDI5NmNiIiwidGFnIjoiIn0%3D; expires=Sun, 25 Jan 2026 15:26:58 GMT; Max-Age=7200; path=/; httponly; samesite=lax'
+          set-cookie: 'laravel-session=eyJpdiI6InRSMnJITWJTYmhQOGhjUktOMnY1UEE9PSIsInZhbHVlIjoiMVpnU2NPZkViSGw0S3Bndzg4OGh5TXJxZTJnZHVPVDdNd0FBUzNTeENNRXR6U241RFpOb1k3YkwwTmpiN1pLWk9TbSt5c0JMeWtuK3YzOEFGUE5sdVA2bW1kMWlDZUtnb1JFeWN2Lzd4K0x1NzBKakF5YklXN0E2enh3dERXbzUiLCJtYWMiOiJhMjFmMDZhNjA0ODkwN2U2YTE4Y2M3ODBiMTg2YTM1MTE1NzJjMThhOTFiNjI5NTk3OTIxOGM2Zjg1MjY3MTI5IiwidGFnIjoiIn0%3D; expires=Mon, 02 Feb 2026 16:22:09 GMT; Max-Age=7200; path=/; secure; httponly; samesite=none'
         description: null
     responseFields: []
     auth: []
@@ -375,7 +585,7 @@ endpoints:
         name: status
         description: ''
         required: false
-        example: pending
+        example: closed
         type: string
         enumValues:
           - pending
@@ -391,7 +601,7 @@ endpoints:
       company: 'y'
       service: u
       message: architecto
-      status: pending
+      status: closed
     fileParameters: []
     responses: []
     responseFields: []
@@ -620,7 +830,7 @@ endpoints:
           content-type: 'text/html; charset=utf-8'
           access-control-allow-origin: 'http://localhost:3000'
           access-control-allow-credentials: 'true'
-          set-cookie: 'laravel-session=eyJpdiI6InRMb2s0dXRWMHl0RnRGenJQazRlUHc9PSIsInZhbHVlIjoic1BTdEcrYWF6cE9lcER2Zlp1dmRyVHlwMVQzMktWQTdoMG5NZEsvSGR1a2xiM0xpdVpxSk83RnpTUWxPdENvZlNrUUxiU3pyYVJRU0xZVWo2czRrV1NEK28rdzYvb2I4N01EeG16ZXB5dXF5OVJjMlhrZk5Xd2hVVU93TUVPVngiLCJtYWMiOiJkM2ZkN2E5NTUyYjYxNjAwZTMzOWM5Njk1MWRjNTgzMzFjZGRlY2I0ZTUyODJjOTc2MGM0YjcyNjczNDljZmMyIiwidGFnIjoiIn0%3D; expires=Sun, 25 Jan 2026 15:26:58 GMT; Max-Age=7200; path=/; httponly; samesite=lax'
+          set-cookie: 'laravel-session=eyJpdiI6IlJCKzhmTlhXSEh3S1Jqa09QZ2NtTXc9PSIsInZhbHVlIjoiYjhhUWZaTFlSV3JhRnNnb0FFTkg0VWExMzNwRlBlR0hnVXp5MFBYdW9QUk1SUW4yekhmV3lXcXlxTFhJdEExWkU0VXpMWVpnQ1BqZmxFS05SZTlhYXR0U0FZSEI3UERURVY3VkNZcmJSdnR4SWpNRzd1eTY4VXRnNlNjMDJWOFIiLCJtYWMiOiIxNDU1OTEwOTQwNTg1MzRkMDhlNGYxM2NlYmUyZDhhYTYyN2IyNTc0MzA1MWI0ZTFhNjlkYjc0MjM1ZjAyMDg4IiwidGFnIjoiIn0%3D; expires=Mon, 02 Feb 2026 16:22:09 GMT; Max-Age=7200; path=/; secure; httponly; samesite=none'
         description: null
     responseFields: []
     auth: []
@@ -903,7 +1113,7 @@ endpoints:
           content-type: application/json
           access-control-allow-origin: 'http://localhost:3000'
           access-control-allow-credentials: 'true'
-          set-cookie: 'laravel-session=eyJpdiI6InVyRmplQkNta2RxMFdRYlNSczZCQUE9PSIsInZhbHVlIjoiZW5pYXhsakVLZC9QQjhiVDV5dVcreDZiOHJRYjF0eFhheW5TS2lyemF0clkrTk16S1l5eFZrcjZsbGN4djFUd0FWT01xU3NkSFMrYmFtR05RYlpXQWd3aGZpWVBSbXErQWJaYnY4Vm1xRStlZEtibHNkc3hjSTRNMjZqdGFmdlUiLCJtYWMiOiJhZDFiYWQ0Mzc4N2MyN2ViZjYzZDMyODk2OTdjNzE4YzNkYmM1OWFlNmRkYTdhMmQ5ZDYzZjE4MjcxMzMyYmY1IiwidGFnIjoiIn0%3D; expires=Sun, 25 Jan 2026 15:26:59 GMT; Max-Age=7200; path=/; httponly; samesite=lax'
+          set-cookie: 'laravel-session=eyJpdiI6ImtaaVhFcXJBREtvYjU5R3psdkJaTHc9PSIsInZhbHVlIjoiKzB0QjFsbEdHVFNyTmczek1YL05hUHI5R1dYVlhvREY1WTZKWlEyNTJOZVNGWWd2TUdadmxLY3YvODlHbjJaSFpKdjlFRDBYeTZ1VXdCdXlLMTFIT0x3dVU5VHd2cUlERlFJc3ROSk8yaUZtTzZFN2xNTFIrUnZMY1N4dHVHY0giLCJtYWMiOiIyMjUzYTExMzRhODFhYTc1MTY5Mjc5N2MyMjhhOGU2MzI3MDkzNGRlYzIwNzVjMmQzMWFjZmY5ZjUzODkxYTBlIiwidGFnIjoiIn0%3D; expires=Mon, 02 Feb 2026 16:22:10 GMT; Max-Age=7200; path=/; secure; httponly; samesite=none'
         description: null
     responseFields: []
     auth: []
@@ -1005,7 +1215,7 @@ endpoints:
         name: scheduledDate
         description: 'Must be a valid date. Must be a date after <code>today</code>.'
         required: true
-        example: '2052-02-18'
+        example: '2052-02-26'
         type: string
         enumValues: []
         exampleWasSpecified: false
@@ -1129,7 +1339,7 @@ endpoints:
         name: repeatedData.repeatedType
         description: ''
         required: false
-        example: Daily
+        example: Weekly
         type: string
         enumValues:
           - 'One Time'
@@ -1144,7 +1354,7 @@ endpoints:
         description: ''
         required: false
         example:
-          - Saturday
+          - Thursday
         type: 'string[]'
         enumValues:
           - Sunday
@@ -1162,7 +1372,7 @@ endpoints:
         name: repeatedData.startDate
         description: 'Must be a valid date.'
         required: false
-        example: '2026-01-25T13:26:59'
+        example: '2026-02-02T14:22:10'
         type: string
         enumValues: []
         exampleWasSpecified: false
@@ -1173,14 +1383,14 @@ endpoints:
         name: repeatedData.endDate
         description: 'Must be a valid date. Must be a date after <code>repeatedData.startDate</code>.'
         required: false
-        example: '2052-02-18'
+        example: '2052-02-26'
         type: string
         enumValues: []
         exampleWasSpecified: false
         nullable: true
         deprecated: false
     cleanBodyParameters:
-      scheduledDate: '2052-02-18'
+      scheduledDate: '2052-02-26'
       businessLocationId: architecto
       contactPerson:
         name: architecto
@@ -1191,11 +1401,11 @@ endpoints:
       noOfPackages: 22
       packageType: 'Heavy Bulky'
       repeatedData:
-        repeatedType: Daily
+        repeatedType: Weekly
         days:
-          - Saturday
-        startDate: '2026-01-25T13:26:59'
-        endDate: '2052-02-18'
+          - Thursday
+        startDate: '2026-02-02T14:22:10'
+        endDate: '2052-02-26'
     fileParameters: []
     responses: []
     responseFields: []
@@ -1493,13 +1703,13 @@ endpoints:
       -
         custom: []
         status: 200
-        content: '{"status":{"file_path":"D:\\code\\ecommerce-api\\.env","is_writable":true,"config_cached":false},"laravel_active_values":{"PAYMOB_BASE_URL":"https:\/\/accept.paymob.com","PAYMOB_API_KEY":"ZXlKaGJHY2lPaUpJVXpVeE1pSXNJblI1Y0NJNklrcFhWQ0o5LmV5SmpiR0Z6Y3lJNklrMWxjbU5vWVc1MElpd2ljSEp2Wm1sc1pWOXdheUk2TVRFeE16STRPU3dpYm1GdFpTSTZJbWx1YVhScFlXd2lmUS5NSF96bVNyVWZDTDZFeURYNjdpREstY3pxUUF0MUJoZ1d1SmFEd2xpcGstLXN1MWJ6YkZPSTVTbC15VkFNWG5GbktpZi1NQ0w1QldyYV9xZEVSM0ZRUQ==","BOSTA_API_KEY":"b286cff91b7015a1ef89aea14d750f4f1e241fd3b96486a7d87a47d21ff4933f","MAIL_MAILER":"smtp","MAIL_SCHEME":null,"MAIL_HOST":"smtp.gmail.com","MAIL_PORT":"465","MAIL_USERNAME":"ahmadkholy98@gmail.com","MAIL_PASSWORD":"akcynlcfghdfxjrq","MAIL_FROM_ADDRESS":"ahmadkholy98@gmail.com","MAIL_FROM_NAME":"Laravel"}}'
+        content: '{"status":{"file_path":"D:\\code\\ecommerce-api\\.env","is_writable":true,"config_cached":false},"laravel_active_values":{"PAYMOB_BASE_URL":"https:\/\/accept.paymob.com","PAYMOB_API_KEY":"ZXlKaGJHY2lPaUpJVXpVeE1pSXNJblI1Y0NJNklrcFhWQ0o5LmV5SmpiR0Z6Y3lJNklrMWxjbU5vWVc1MElpd2ljSEp2Wm1sc1pWOXdheUk2TVRFeE16STRPU3dpYm1GdFpTSTZJbWx1YVhScFlXd2lmUS5NSF96bVNyVWZDTDZFeURYNjdpREstY3pxUUF0MUJoZ1d1SmFEd2xpcGstLXN1MWJ6YkZPSTVTbC15VkFNWG5GbktpZi1NQ0w1QldyYV9xZEVSM0ZRUQ==","BOSTA_API_KEY":"b286cff91b7015a1ef89aea14d750f4f1e241fd3b96486a7d87a47d21ff4933f","MAIL_MAILER":"smtp","MAIL_SCHEME":null,"MAIL_HOST":"smtp.gmail.com","MAIL_PORT":"465","MAIL_USERNAME":"ahmadkholy98@gmail.com","MAIL_PASSWORD":"akcynlcfghdfxjrq","MAIL_FROM_ADDRESS":"ahmadkholy98@gmail.com","MAIL_FROM_NAME":"laravel"}}'
         headers:
           cache-control: 'no-cache, private'
           content-type: application/json
           access-control-allow-origin: 'http://localhost:3000'
           access-control-allow-credentials: 'true'
-          set-cookie: 'laravel-session=eyJpdiI6ImdialZEUFRtd3BvWHB1WC92UjY0Smc9PSIsInZhbHVlIjoiMERJTmdIcm1DNFV2UXlnZVZpR2w5MTNpY2lPVWZWOW90UDJBWVo0cjlqVkJja0IreVZVamRNdkVQZEJSckkrcW9pWG40NDM4UFVRVXdTaHZJeXdOU2V5M0xISWFNbGpaNFkvMHFaK2RTUkdPbTBMRlBGV3p5OVhBVXR4SnM3L0EiLCJtYWMiOiI4NTBmYzQwM2RiMmU1ZDA0MDA1NWVlYmM4ZDExNjQ1M2RiMWUxNjdlZGFjZDFmOTMyYzRmMTIxMGFlZjFjZjk2IiwidGFnIjoiIn0%3D; expires=Sun, 25 Jan 2026 15:26:59 GMT; Max-Age=7200; path=/; httponly; samesite=lax'
+          set-cookie: 'laravel-session=eyJpdiI6ImorWk9zVGl1Rldka0NndVM0TmsvY1E9PSIsInZhbHVlIjoiYnN0SDBSZkRXRDF3ZXVFQWdwZXk4TXl2bnhlWldPUnpwcjg5M1pwcDBicUdPSVZNWkZsbWpPWjJ2eWFJWlQ1dTB6QWNrZHdGR3dqd0drQ0p1WWtKOElCWTRuUVhiRHh2NmljbzZvWFRhNjY5dk5lVGkzY1VEYUowbzh2Y3h4RkQiLCJtYWMiOiI4Y2NkYjI3ZTc0ZmU2MzUyMWY0MGYzNTcwNTNlMWZlMTc1YWJlYWI4NDlhMWJmYzZhOWZhN2U5ODcwM2MyYTI4IiwidGFnIjoiIn0%3D; expires=Mon, 02 Feb 2026 16:22:10 GMT; Max-Age=7200; path=/; secure; httponly; samesite=none'
         description: null
     responseFields: []
     auth: []

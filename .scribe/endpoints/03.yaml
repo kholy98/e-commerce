@@ -284,3 +284,636 @@ endpoints:
     controller: null
     method: null
     route: null
+  -
+    custom: []
+    httpMethods:
+      - GET
+    uri: api/admin/categories
+    metadata:
+      custom: []
+      groupName: Categories
+      groupDescription: |-
+
+        APIs for browsing and managing product categories.
+
+        Public endpoints for listing and viewing categories do not require authentication.
+        Admin endpoints for creating, updating, and deleting categories require authentication.
+      subgroup: ''
+      subgroupDescription: ''
+      title: 'List all categories (Admin)'
+      description: |-
+        Get a paginated list of all categories with optional filtering and sorting.
+        This endpoint is intended for admin use and returns all categories including inactive ones.
+      authenticated: true
+      deprecated: false
+    headers:
+      Authorization: 'Bearer {YOUR_API_TOKEN}'
+      Content-Type: application/json
+      Accept: application/json
+    urlParameters: []
+    cleanUrlParameters: []
+    queryParameters:
+      search:
+        custom: []
+        name: search
+        description: 'Search categories by name or description.'
+        required: false
+        example: coffee
+        type: string
+        enumValues: []
+        exampleWasSpecified: true
+        nullable: false
+        deprecated: false
+      is_active:
+        custom: []
+        name: is_active
+        description: 'Filter by active status.'
+        required: false
+        example: true
+        type: boolean
+        enumValues: []
+        exampleWasSpecified: true
+        nullable: false
+        deprecated: false
+      sort_by:
+        custom: []
+        name: sort_by
+        description: 'Sort field (name, created_at).'
+        required: false
+        example: name
+        type: string
+        enumValues: []
+        exampleWasSpecified: true
+        nullable: false
+        deprecated: false
+      sort_direction:
+        custom: []
+        name: sort_direction
+        description: 'Sort direction (asc, desc). Default: asc.'
+        required: false
+        example: desc
+        type: string
+        enumValues: []
+        exampleWasSpecified: true
+        nullable: false
+        deprecated: false
+      per_page:
+        custom: []
+        name: per_page
+        description: 'Number of items per page. Default: 15.'
+        required: false
+        example: 10
+        type: integer
+        enumValues: []
+        exampleWasSpecified: true
+        nullable: false
+        deprecated: false
+    cleanQueryParameters:
+      search: coffee
+      is_active: true
+      sort_by: name
+      sort_direction: desc
+      per_page: 10
+    bodyParameters: []
+    cleanBodyParameters: []
+    fileParameters: []
+    responses:
+      -
+        custom: []
+        status: 200
+        content: |-
+          {
+            "data": {
+              "success": true,
+              "en": [
+                {
+                  "id": 1,
+                  "name": "Coffee Beans",
+                  "name_ar": "حبوب القهوة",
+                  "description": "Premium coffee beans from around the world",
+                  "description_ar": "حبوب قهوة ممتازة من جميع أنحاء العالم",
+                  "slug": "coffee-beans",
+                  "is_active": true,
+                  "product_count": 15,
+                  "created_at": "2024-01-15T10:00:00.000000Z",
+                  "updated_at": "2024-01-15T10:00:00.000000Z"
+                }
+              ],
+              "ar": [
+                {
+                  "id": 1,
+                  "name": "حبوب القهوة",
+                  "name_ar": "حبوب القهوة",
+                  "description": "حبوب قهوة ممتازة من جميع أنحاء العالم",
+                  "description_ar": "حبوب قهوة ممتازة من جميع أنحاء العالم",
+                  "slug": "coffee-beans",
+                  "is_active": true,
+                  "product_count": 15,
+                  "created_at": "2024-01-15T10:00:00.000000Z",
+                  "updated_at": "2024-01-15T10:00:00.000000Z"
+                }
+              ],
+              "pagination": {
+                "current_page": 1,
+                "last_page": 3,
+                "per_page": 15,
+                "total": 45
+              }
+            }
+          }
+        headers: []
+        description: Success
+    responseFields: []
+    auth:
+      - headers
+      - Authorization
+      - 'Bearer 6g43cv8PD1aE5beadkZfhV6'
+    controller: null
+    method: null
+    route: null
+  -
+    custom: []
+    httpMethods:
+      - POST
+    uri: api/admin/categories
+    metadata:
+      custom: []
+      groupName: Categories
+      groupDescription: |-
+
+        APIs for browsing and managing product categories.
+
+        Public endpoints for listing and viewing categories do not require authentication.
+        Admin endpoints for creating, updating, and deleting categories require authentication.
+      subgroup: ''
+      subgroupDescription: ''
+      title: 'Create category'
+      description: 'Create a new product category. Requires admin authentication.'
+      authenticated: true
+      deprecated: false
+    headers:
+      Authorization: 'Bearer {YOUR_API_TOKEN}'
+      Content-Type: multipart/form-data
+      Accept: application/json
+    urlParameters: []
+    cleanUrlParameters: []
+    queryParameters: []
+    cleanQueryParameters: []
+    bodyParameters:
+      name:
+        custom: []
+        name: name
+        description: 'The category name in English.'
+        required: true
+        example: 'Coffee Beans'
+        type: string
+        enumValues: []
+        exampleWasSpecified: true
+        nullable: false
+        deprecated: false
+      name_ar:
+        custom: []
+        name: name_ar
+        description: 'The category name in Arabic.'
+        required: false
+        example: 'حبوب القهوة'
+        type: string
+        enumValues: []
+        exampleWasSpecified: true
+        nullable: true
+        deprecated: false
+      description:
+        custom: []
+        name: description
+        description: 'The category description in English.'
+        required: false
+        example: 'Premium coffee beans from around the world'
+        type: string
+        enumValues: []
+        exampleWasSpecified: true
+        nullable: true
+        deprecated: false
+      description_ar:
+        custom: []
+        name: description_ar
+        description: 'The category description in Arabic.'
+        required: false
+        example: 'حبوب قهوة ممتازة من جميع أنحاء العالم'
+        type: string
+        enumValues: []
+        exampleWasSpecified: true
+        nullable: true
+        deprecated: false
+      is_active:
+        custom: []
+        name: is_active
+        description: 'Whether the category is active. Default: true.'
+        required: false
+        example: true
+        type: boolean
+        enumValues: []
+        exampleWasSpecified: true
+        nullable: false
+        deprecated: false
+      image:
+        custom: []
+        name: image
+        description: 'The category image (jpeg, png, jpg, gif, webp, max 2MB).'
+        required: false
+        example: null
+        type: file
+        enumValues: []
+        exampleWasSpecified: false
+        nullable: true
+        deprecated: false
+    cleanBodyParameters:
+      name: 'Coffee Beans'
+      name_ar: 'حبوب القهوة'
+      description: 'Premium coffee beans from around the world'
+      description_ar: 'حبوب قهوة ممتازة من جميع أنحاء العالم'
+      is_active: true
+    fileParameters:
+      image: null
+    responses:
+      -
+        custom: []
+        status: 201
+        content: |-
+          {
+            "success": true,
+            "message": "Category created successfully",
+            "data": {
+              "id": 1,
+              "name": "Coffee Beans",
+              "name_ar": "حبوب القهوة",
+              "description": "Premium coffee beans from around the world",
+              "slug": "coffee-beans",
+              "is_active": true,
+              "created_at": "2024-01-15T10:00:00.000000Z"
+            }
+          }
+        headers: []
+        description: Success
+      -
+        custom: []
+        status: 422
+        content: |-
+          {
+            "message": "The name field is required.",
+            "errors": {
+              "name": ["The name field is required."]
+            }
+          }
+        headers: []
+        description: 'Validation Error'
+    responseFields: []
+    auth:
+      - headers
+      - Authorization
+      - 'Bearer 6g43cv8PD1aE5beadkZfhV6'
+    controller: null
+    method: null
+    route: null
+  -
+    custom: []
+    httpMethods:
+      - GET
+    uri: 'api/admin/categories/{category_id}'
+    metadata:
+      custom: []
+      groupName: Categories
+      groupDescription: |-
+
+        APIs for browsing and managing product categories.
+
+        Public endpoints for listing and viewing categories do not require authentication.
+        Admin endpoints for creating, updating, and deleting categories require authentication.
+      subgroup: ''
+      subgroupDescription: ''
+      title: 'Get category details (Admin)'
+      description: 'Retrieve detailed information about a specific category including related products.'
+      authenticated: true
+      deprecated: false
+    headers:
+      Authorization: 'Bearer {YOUR_API_TOKEN}'
+      Content-Type: application/json
+      Accept: application/json
+    urlParameters:
+      category_id:
+        custom: []
+        name: category_id
+        description: 'The ID of the category.'
+        required: true
+        example: 1
+        type: integer
+        enumValues: []
+        exampleWasSpecified: false
+        nullable: false
+        deprecated: false
+      category:
+        custom: []
+        name: category
+        description: 'The category ID.'
+        required: true
+        example: 1
+        type: integer
+        enumValues: []
+        exampleWasSpecified: true
+        nullable: false
+        deprecated: false
+    cleanUrlParameters:
+      category_id: 1
+      category: 1
+    queryParameters: []
+    cleanQueryParameters: []
+    bodyParameters: []
+    cleanBodyParameters: []
+    fileParameters: []
+    responses:
+      -
+        custom: []
+        status: 200
+        content: |-
+          {
+            "success": true,
+            "data": {
+              "id": 1,
+              "name": "Coffee Beans",
+              "name_ar": "حبوب القهوة",
+              "description": "Premium coffee beans from around the world",
+              "slug": "coffee-beans",
+              "is_active": true,
+              "products": [
+                {
+                  "id": 1,
+                  "name": "Premium Coffee Beans",
+                  "slug": "premium-coffee-beans",
+                  "price": 25.00,
+                  "stock": 100,
+                  "is_active": true
+                }
+              ]
+            }
+          }
+        headers: []
+        description: Success
+    responseFields: []
+    auth:
+      - headers
+      - Authorization
+      - 'Bearer 6g43cv8PD1aE5beadkZfhV6'
+    controller: null
+    method: null
+    route: null
+  -
+    custom: []
+    httpMethods:
+      - PUT
+    uri: 'api/admin/categories/{category_id}'
+    metadata:
+      custom: []
+      groupName: Categories
+      groupDescription: |-
+
+        APIs for browsing and managing product categories.
+
+        Public endpoints for listing and viewing categories do not require authentication.
+        Admin endpoints for creating, updating, and deleting categories require authentication.
+      subgroup: ''
+      subgroupDescription: ''
+      title: 'Update category'
+      description: 'Update an existing product category. Requires admin authentication.'
+      authenticated: true
+      deprecated: false
+    headers:
+      Authorization: 'Bearer {YOUR_API_TOKEN}'
+      Content-Type: multipart/form-data
+      Accept: application/json
+    urlParameters:
+      category_id:
+        custom: []
+        name: category_id
+        description: 'The ID of the category.'
+        required: true
+        example: 1
+        type: integer
+        enumValues: []
+        exampleWasSpecified: false
+        nullable: false
+        deprecated: false
+      category:
+        custom: []
+        name: category
+        description: 'The category ID.'
+        required: true
+        example: 1
+        type: integer
+        enumValues: []
+        exampleWasSpecified: true
+        nullable: false
+        deprecated: false
+    cleanUrlParameters:
+      category_id: 1
+      category: 1
+    queryParameters: []
+    cleanQueryParameters: []
+    bodyParameters:
+      name:
+        custom: []
+        name: name
+        description: 'The category name in English.'
+        required: false
+        example: 'Coffee Beans'
+        type: string
+        enumValues: []
+        exampleWasSpecified: true
+        nullable: false
+        deprecated: false
+      name_ar:
+        custom: []
+        name: name_ar
+        description: 'The category name in Arabic.'
+        required: false
+        example: 'حبوب القهوة'
+        type: string
+        enumValues: []
+        exampleWasSpecified: true
+        nullable: true
+        deprecated: false
+      description:
+        custom: []
+        name: description
+        description: 'The category description in English.'
+        required: false
+        example: 'Premium coffee beans'
+        type: string
+        enumValues: []
+        exampleWasSpecified: true
+        nullable: false
+        deprecated: false
+      description_ar:
+        custom: []
+        name: description_ar
+        description: 'The category description in Arabic.'
+        required: false
+        example: architecto
+        type: string
+        enumValues: []
+        exampleWasSpecified: false
+        nullable: true
+        deprecated: false
+      is_active:
+        custom: []
+        name: is_active
+        description: 'Whether the category is active.'
+        required: false
+        example: true
+        type: boolean
+        enumValues: []
+        exampleWasSpecified: true
+        nullable: false
+        deprecated: false
+      image:
+        custom: []
+        name: image
+        description: 'The new category image (jpeg, png, jpg, gif, webp, max 2MB).'
+        required: false
+        example: null
+        type: file
+        enumValues: []
+        exampleWasSpecified: false
+        nullable: true
+        deprecated: false
+      remove_image:
+        custom: []
+        name: remove_image
+        description: 'Set to true to remove the current image.'
+        required: false
+        example: false
+        type: boolean
+        enumValues: []
+        exampleWasSpecified: true
+        nullable: true
+        deprecated: false
+    cleanBodyParameters:
+      name: 'Coffee Beans'
+      name_ar: 'حبوب القهوة'
+      description: 'Premium coffee beans'
+      description_ar: architecto
+      is_active: true
+      remove_image: false
+    fileParameters:
+      image: null
+    responses:
+      -
+        custom: []
+        status: 200
+        content: |-
+          {
+            "success": true,
+            "message": "Category updated successfully",
+            "data": {
+              "id": 1,
+              "name": "Coffee Beans",
+              "name_ar": "حبوب القهوة",
+              "description": "Premium coffee beans",
+              "slug": "coffee-beans",
+              "is_active": true
+            }
+          }
+        headers: []
+        description: Success
+    responseFields: []
+    auth:
+      - headers
+      - Authorization
+      - 'Bearer 6g43cv8PD1aE5beadkZfhV6'
+    controller: null
+    method: null
+    route: null
+  -
+    custom: []
+    httpMethods:
+      - DELETE
+    uri: 'api/admin/categories/{category_id}'
+    metadata:
+      custom: []
+      groupName: Categories
+      groupDescription: |-
+
+        APIs for browsing and managing product categories.
+
+        Public endpoints for listing and viewing categories do not require authentication.
+        Admin endpoints for creating, updating, and deleting categories require authentication.
+      subgroup: ''
+      subgroupDescription: ''
+      title: 'Delete category'
+      description: |-
+        Delete a product category. Categories with existing products cannot be deleted.
+        Requires admin authentication.
+      authenticated: true
+      deprecated: false
+    headers:
+      Authorization: 'Bearer {YOUR_API_TOKEN}'
+      Content-Type: application/json
+      Accept: application/json
+    urlParameters:
+      category_id:
+        custom: []
+        name: category_id
+        description: 'The ID of the category.'
+        required: true
+        example: 1
+        type: integer
+        enumValues: []
+        exampleWasSpecified: false
+        nullable: false
+        deprecated: false
+      category:
+        custom: []
+        name: category
+        description: 'The category ID.'
+        required: true
+        example: 1
+        type: integer
+        enumValues: []
+        exampleWasSpecified: true
+        nullable: false
+        deprecated: false
+    cleanUrlParameters:
+      category_id: 1
+      category: 1
+    queryParameters: []
+    cleanQueryParameters: []
+    bodyParameters: []
+    cleanBodyParameters: []
+    fileParameters: []
+    responses:
+      -
+        custom: []
+        status: 200
+        content: |-
+          {
+            "success": true,
+            "message": "Category deleted successfully"
+          }
+        headers: []
+        description: Success
+      -
+        custom: []
+        status: 422
+        content: |-
+          {
+            "success": false,
+            "message": "Cannot delete category with existing products"
+          }
+        headers: []
+        description: 'Has Products'
+    responseFields: []
+    auth:
+      - headers
+      - Authorization
+      - 'Bearer 6g43cv8PD1aE5beadkZfhV6'
+    controller: null
+    method: null
+    route: null

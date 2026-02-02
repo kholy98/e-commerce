@@ -58,7 +58,7 @@ return [
 
             // Exclude these routes even if they matched the rules above.
             'exclude' => [
-                'api/admin/*',
+                // 'api/admin/*',
                 // 'GET /health', 'admin.*'
             ],
         ],
@@ -205,6 +205,7 @@ return [
             'Shipments',
             'Contact',
             'Settings',
+            'Team Members',
         ],
     ],
 
