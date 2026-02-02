@@ -125,6 +125,21 @@ class OrderController extends Controller
                 'total_amount' => (float) $order->total_amount,
                 'shipping_address' => $order->shipping_address,
                 'notes' => $order->notes,
+                'items' => $order->items->map(function ($item) {
+                    return [
+                        'product_id' => $item->product_id,
+                        'quantity' => $item->quantity,
+                        'unit_price' => (float) $item->unit_price,
+                        'subtotal' => (float) $item->subtotal,
+                        'product' => $item->product ? [
+                            'id' => $item->product->id,
+                            'name' => $item->product->name,
+                            'slug' => $item->product->slug,
+                            'image' => $item->product->image,
+                            'price' => (float) $item->product->price,
+                        ] : null,
+                    ];
+                }),
                 'created_at' => $order->created_at,
                 'updated_at' => $order->updated_at,
             ];
@@ -143,6 +158,21 @@ class OrderController extends Controller
                 'total_amount' => (float) $order->total_amount,
                 'shipping_address' => $order->shipping_address,
                 'notes' => $order->notes_ar ?: $order->notes,
+                'items' => $order->items->map(function ($item) {
+                    return [
+                        'product_id' => $item->product_id,
+                        'quantity' => $item->quantity,
+                        'unit_price' => (float) $item->unit_price,
+                        'subtotal' => (float) $item->subtotal,
+                        'product' => $item->product ? [
+                            'id' => $item->product->id,
+                            'name' => $item->product->name_ar ?: $item->product->name,
+                            'slug' => $item->product->slug,
+                            'image' => $item->product->image,
+                            'price' => (float) $item->product->price,
+                        ] : null,
+                    ];
+                }),
                 'created_at' => $order->created_at,
                 'updated_at' => $order->updated_at,
             ];
