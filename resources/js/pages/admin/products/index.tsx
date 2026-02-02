@@ -16,19 +16,20 @@ import {
 } from '@/components/ui/table';
 import AppLayout from '@/layouts/app-layout';
 import { formatDate } from '@/lib/utils';
-import {
-    adminProducts,
-    adminProductsApi,
-    adminProductsCreate,
-    adminProductsEdit,
-    adminProductsShow,
-} from '@/routes';
+// import {
+//     adminProducts,
+//     adminProductsApi,
+//     adminProductsCreate,
+//     adminProductsEdit,
+//     adminProductsShow,
+// } from '@/routes';
+import { create, edit, index, show } from '@/routes/admin/products';
 import { type BreadcrumbItem, type SharedData } from '@/types';
 
 const breadcrumbs: BreadcrumbItem[] = [
     {
         title: 'Products',
-        href: adminProducts(),
+        href: index(),
     },
 ];
 
@@ -75,16 +76,13 @@ export default function ProductsIndex() {
                 params.append('search', searchTerm);
             }
 
-            const response = await fetch(
-                `${adminProductsApi().url}?${params}`,
-                {
-                    headers: {
-                        Accept: 'application/json',
-                        'X-Requested-With': 'XMLHttpRequest',
-                    },
-                    credentials: 'same-origin',
+            const response = await fetch(`/api/admin/products?${params}`, {
+                headers: {
+                    Accept: 'application/json',
+                    'X-Requested-With': 'XMLHttpRequest',
                 },
-            );
+                credentials: 'same-origin',
+            });
 
             const data: ProductsResponse = await response.json();
             setProducts(data.data.en);
@@ -170,7 +168,7 @@ export default function ProductsIndex() {
                         </p>
                     </div>
                     <Button asChild>
-                        <Link href={adminProductsCreate()}>
+                        <Link href={create()}>
                             <Plus className="mr-2 h-4 w-4" />
                             Add Product
                         </Link>
@@ -247,9 +245,7 @@ export default function ProductsIndex() {
                                                     asChild
                                                 >
                                                     <Link
-                                                        href={adminProductsShow(
-                                                            product.id,
-                                                        )}
+                                                        href={show(product.id)}
                                                     >
                                                         <Eye className="h-4 w-4" />
                                                     </Link>
@@ -260,9 +256,7 @@ export default function ProductsIndex() {
                                                     asChild
                                                 >
                                                     <Link
-                                                        href={adminProductsEdit(
-                                                            product.id,
-                                                        )}
+                                                        href={edit(product.id)}
                                                     >
                                                         <Edit className="h-4 w-4" />
                                                     </Link>
