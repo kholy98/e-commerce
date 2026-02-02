@@ -13,18 +13,13 @@ import {
 } from '@/components/ui/table';
 import AppLayout from '@/layouts/app-layout';
 import { formatDate } from '@/lib/utils';
-import {
-    adminTeamMembers,
-    adminTeamMembersCreate,
-    adminTeamMembersEdit,
-    adminTeamMembersShow,
-} from '@/routes';
+import { create, edit, index, show } from '@/routes/admin/team-members';
 import { type BreadcrumbItem } from '@/types';
 
 const breadcrumbs: BreadcrumbItem[] = [
     {
         title: 'Team Members',
-        href: adminTeamMembers(),
+        href: index(),
     },
 ];
 
@@ -52,7 +47,6 @@ export default function TeamMembersIndex({ teamMembers }: Props) {
             });
         }
     };
-    console.log(teamMembers);
 
     return (
         <AppLayout breadcrumbs={breadcrumbs}>
@@ -67,7 +61,7 @@ export default function TeamMembersIndex({ teamMembers }: Props) {
                         </p>
                     </div>
                     <Button asChild>
-                        <Link href={adminTeamMembersCreate()}>
+                        <Link href={create()}>
                             <Plus className="mr-2 h-4 w-4" />
                             Add Team Member
                         </Link>
@@ -141,22 +135,19 @@ export default function TeamMembersIndex({ teamMembers }: Props) {
                                     <TableCell className="rounded-r-lg">
                                         <div className="flex items-center justify-end gap-2">
                                             <Link
-                                                href={adminTeamMembersShow(
-                                                    teamMember.id,
-                                                )}
+                                                href={show(teamMember.id)}
                                                 className="flex h-10 w-10 items-center justify-center rounded-full transition-colors hover:bg-muted"
                                             >
                                                 <Eye className="h-5 w-5" />
                                             </Link>
                                             <Link
-                                                href={adminTeamMembersEdit(
-                                                    teamMember.id,
-                                                )}
+                                                href={edit(teamMember.id)}
                                                 className="flex h-10 w-10 items-center justify-center rounded-full transition-colors hover:bg-muted"
                                             >
                                                 <Edit className="h-5 w-5" />
                                             </Link>
                                             <button
+                                                type="button"
                                                 onClick={() =>
                                                     handleDelete(teamMember.id)
                                                 }

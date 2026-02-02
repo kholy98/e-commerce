@@ -5,7 +5,7 @@ import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import AppLayout from '@/layouts/app-layout';
 import { formatDate } from '@/lib/utils';
-import { adminTeamMembers, adminTeamMembersEdit } from '@/routes';
+import { edit, index } from '@/routes/admin/team-members';
 import { type BreadcrumbItem } from '@/types';
 
 interface TeamMember {
@@ -34,7 +34,7 @@ export default function TeamMemberShow({ teamMember }: Props) {
     const breadcrumbs: BreadcrumbItem[] = [
         {
             title: 'Team Members',
-            href: adminTeamMembers(),
+            href: index(),
         },
         {
             title: teamMember.fullname,
@@ -50,7 +50,7 @@ export default function TeamMemberShow({ teamMember }: Props) {
                 <div className="flex items-center justify-between">
                     <div className="flex items-center gap-4">
                         <Button variant="outline" size="icon" asChild>
-                            <Link href={adminTeamMembers()}>
+                            <Link href={index()}>
                                 <ArrowLeft className="h-4 w-4" />
                             </Link>
                         </Button>
@@ -64,7 +64,7 @@ export default function TeamMemberShow({ teamMember }: Props) {
                         </div>
                     </div>
                     <Button asChild>
-                        <Link href={adminTeamMembersEdit(teamMember.id)}>
+                        <Link href={edit(teamMember.id)}>
                             <Edit className="mr-2 h-4 w-4" />
                             Edit Member
                         </Link>

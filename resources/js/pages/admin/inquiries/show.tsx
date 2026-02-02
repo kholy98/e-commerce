@@ -9,13 +9,13 @@ import { Label } from '@/components/ui/label';
 import { Textarea } from '@/components/ui/textarea';
 import AppLayout from '@/layouts/app-layout';
 import { formatDate } from '@/lib/utils';
-import { adminInquiries } from '@/routes';
+import { index } from '@/routes/admin/inquiries';
 import { type BreadcrumbItem } from '@/types';
 
 const breadcrumbs: BreadcrumbItem[] = [
     {
         title: 'Inquiries',
-        href: adminInquiries(),
+        href: index(),
     },
     {
         title: 'View',
@@ -61,7 +61,7 @@ export default function InquiriesShow({ inquiry }: Props) {
             <div className="flex h-full flex-1 flex-col gap-4 overflow-x-auto rounded-xl p-4">
                 <div className="flex items-center gap-4">
                     <Button variant="outline" asChild>
-                        <Link href={adminInquiries()}>
+                        <Link href={index()}>
                             <ArrowLeft className="mr-2 h-4 w-4" />
                             Back to Inquiries
                         </Link>

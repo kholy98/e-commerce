@@ -14,11 +14,8 @@ import {
 } from '@/components/ui/table';
 import AppLayout from '@/layouts/app-layout';
 import { formatDate } from '@/lib/utils';
-import {
-    adminCategories,
-    adminCategoriesEdit,
-    adminProductsShow,
-} from '@/routes';
+import { edit, index } from '@/routes/admin/categories';
+import { show as adminProductsShow } from '@/routes/admin/products';
 import { type BreadcrumbItem, type SharedData } from '@/types';
 
 interface Product {
@@ -55,11 +52,11 @@ export default function CategoriesShow() {
     const breadcrumbs: BreadcrumbItem[] = [
         {
             title: 'Categories',
-            href: adminCategories(),
+            href: index(),
         },
         {
             title: category.name,
-            href: adminCategories(),
+            href: index(),
         },
     ];
 
@@ -71,7 +68,7 @@ export default function CategoriesShow() {
                 <div className="flex items-center justify-between">
                     <div className="flex items-center gap-4">
                         <Button variant="outline" size="sm" asChild>
-                            <Link href={adminCategories()}>
+                            <Link href={index()}>
                                 <ArrowLeft className="mr-2 h-4 w-4" />
                                 Back to Categories
                             </Link>
@@ -86,7 +83,7 @@ export default function CategoriesShow() {
                         </div>
                     </div>
                     <Button asChild>
-                        <Link href={adminCategoriesEdit(category.id)}>
+                        <Link href={edit(category.id)}>
                             <Edit className="mr-2 h-4 w-4" />
                             Edit Category
                         </Link>

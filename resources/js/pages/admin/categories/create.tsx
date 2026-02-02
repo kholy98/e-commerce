@@ -10,17 +10,17 @@ import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
 import { Textarea } from '@/components/ui/textarea';
 import AppLayout from '@/layouts/app-layout';
-import { adminCategories } from '@/routes';
+import { index } from '@/routes/admin/categories';
 import { type BreadcrumbItem, type SharedData } from '@/types';
 
 const breadcrumbs: BreadcrumbItem[] = [
     {
         title: 'Categories',
-        href: adminCategories(),
+        href: index(),
     },
     {
         title: 'Create Category',
-        href: adminCategories(),
+        href: index(),
     },
 ];
 
@@ -71,7 +71,7 @@ export default function CategoriesCreate() {
 
             router.post('/admin/categories', formDataToSend, {
                 onSuccess: () => {
-                    router.visit(adminCategories());
+                    router.visit(index());
                 },
                 onError: (errors) => {
                     setErrors(errors);
@@ -94,7 +94,7 @@ export default function CategoriesCreate() {
             <div className="flex h-full flex-1 flex-col gap-4 overflow-x-auto rounded-xl p-4">
                 <div className="flex items-center gap-4">
                     <Button variant="outline" size="sm" asChild>
-                        <Link href={adminCategories()}>
+                        <Link href={index()}>
                             <ArrowLeft className="mr-2 h-4 w-4" />
                             Back to Categories
                         </Link>
@@ -266,7 +266,7 @@ export default function CategoriesCreate() {
                                         : 'Create Category'}
                                 </Button>
                                 <Button type="button" variant="outline" asChild>
-                                    <Link href={adminCategories()}>Cancel</Link>
+                                    <Link href={index()}>Cancel</Link>
                                 </Button>
                             </div>
                         </form>

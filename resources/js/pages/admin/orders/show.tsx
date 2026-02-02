@@ -3,7 +3,8 @@ import { ArrowLeft } from 'lucide-react';
 
 import AppLayout from '@/layouts/app-layout';
 import { formatDate } from '@/lib/utils';
-import { adminOrders } from '@/routes';
+// import { adminOrders } from '@/routes';
+import orders from '@/routes/admin/orders';
 import { type BreadcrumbItem } from '@/types';
 
 interface Props {
@@ -14,7 +15,7 @@ export default function OrderShow({ order }: Props) {
     const breadcrumbs: BreadcrumbItem[] = [
         {
             title: 'Order Management',
-            href: adminOrders(),
+            href: orders.index(order.id),
         },
         {
             title: `#${order.order_number}`,
@@ -29,7 +30,7 @@ export default function OrderShow({ order }: Props) {
             <div className="flex h-full flex-1 flex-col gap-8 p-8">
                 <div className="flex items-center gap-4">
                     <Link
-                        href={adminOrders()}
+                        href={orders.index()}
                         className="flex h-10 w-10 items-center justify-center rounded-full shadow-sm ring-1 ring-sidebar-border transition-colors hover:bg-muted"
                     >
                         <ArrowLeft className="h-5 w-5" />

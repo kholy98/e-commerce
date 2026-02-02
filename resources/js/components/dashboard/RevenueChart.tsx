@@ -10,7 +10,7 @@ import {
 } from 'recharts';
 
 import { Card } from '@/components/ui/card';
-import { dashboardRevenue } from '@/routes';
+import { revenue } from '@/routes/dashboard';
 
 interface RevenueChartProps {
     data: Array<{ name: string; value: number }>;
@@ -29,7 +29,7 @@ export function RevenueChart({ data: initialData }: RevenueChartProps) {
             setLoading(true);
             try {
                 const res = await fetch(
-                    dashboardRevenue({ period: filter.toLowerCase() }).url,
+                    revenue.url({ query: { period: filter.toLowerCase() } }),
                     {
                         headers: {
                             Accept: 'application/json',
