@@ -22,17 +22,15 @@ import {
     SidebarMenuButton,
     SidebarMenuItem,
 } from '@/components/ui/sidebar';
-import {
-    adminCategories,
-    adminContactUs,
-    adminInquiries,
-    adminOrders,
-    adminProducts,
-    adminSettingsEnvironment,
-    adminTeamMembers,
-    adminUsers,
-    dashboard,
-} from '@/routes';
+import { dashboard } from '@/routes';
+import categories from '@/routes/admin/categories';
+import contactUs from '@/routes/admin/contact-us';
+import inquiries from '@/routes/admin/inquiries';
+import orders from '@/routes/admin/orders';
+import products from '@/routes/admin/products';
+import { environment } from '@/routes/admin/settings';
+import teamMembers from '@/routes/admin/team-members';
+import users from '@/routes/admin/users';
 import { type NavItem } from '@/types';
 
 import AppLogo from './app-logo';
@@ -45,42 +43,42 @@ const mainNavItems: NavItem[] = [
     },
     {
         title: 'Orders',
-        href: adminOrders(),
+        href: orders.index(),
         icon: ShoppingBag,
     },
     {
         title: 'Products',
-        href: adminProducts(),
+        href: products.index(),
         icon: Package,
     },
     {
         title: 'Categories',
-        href: adminCategories(),
+        href: categories.index(),
         icon: Tag,
     },
     {
         title: 'Customers',
-        href: adminUsers(),
+        href: users.index(),
         icon: User2Icon,
     },
     {
         title: 'Team Members',
-        href: adminTeamMembers(),
+        href: teamMembers.index(),
         icon: Users,
     },
     {
         title: 'Inquiries',
-        href: adminInquiries(),
+        href: inquiries.index(),
         icon: MessageSquare,
     },
     {
         title: 'Contact Us',
-        href: adminContactUs(),
+        href: contactUs.edit(),
         icon: Phone,
     },
     {
         title: 'Environment Settings',
-        href: adminSettingsEnvironment(),
+        href: environment(),
         icon: Settings,
     },
 ];
