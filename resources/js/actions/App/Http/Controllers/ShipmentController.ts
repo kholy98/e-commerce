@@ -1,4 +1,4 @@
-import { queryParams, type RouteQueryOptions, type RouteDefinition, applyUrlDefaults } from './../../../../wayfinder'
+import { queryParams, type RouteQueryOptions, type RouteDefinition, type RouteFormDefinition, applyUrlDefaults } from './../../../../wayfinder'
 /**
 * @see \App\Http\Controllers\ShipmentController::create
  * @see app/Http/Controllers/ShipmentController.php:11
@@ -33,6 +33,27 @@ create.post = (options?: RouteQueryOptions): RouteDefinition<'post'> => ({
     method: 'post',
 })
 
+    /**
+* @see \App\Http\Controllers\ShipmentController::create
+ * @see app/Http/Controllers/ShipmentController.php:11
+ * @route '/api/shipments'
+ */
+    const createForm = (options?: RouteQueryOptions): RouteFormDefinition<'post'> => ({
+        action: create.url(options),
+        method: 'post',
+    })
+
+            /**
+* @see \App\Http\Controllers\ShipmentController::create
+ * @see app/Http/Controllers/ShipmentController.php:11
+ * @route '/api/shipments'
+ */
+        createForm.post = (options?: RouteQueryOptions): RouteFormDefinition<'post'> => ({
+            action: create.url(options),
+            method: 'post',
+        })
+    
+    create.form = createForm
 /**
 * @see \App\Http\Controllers\ShipmentController::track
  * @see app/Http/Controllers/ShipmentController.php:77
@@ -95,6 +116,41 @@ track.head = (args: { tracking_number: string | number } | [tracking_number: str
     method: 'head',
 })
 
+    /**
+* @see \App\Http\Controllers\ShipmentController::track
+ * @see app/Http/Controllers/ShipmentController.php:77
+ * @route '/api/shipments/{tracking_number}'
+ */
+    const trackForm = (args: { tracking_number: string | number } | [tracking_number: string | number ] | string | number, options?: RouteQueryOptions): RouteFormDefinition<'get'> => ({
+        action: track.url(args, options),
+        method: 'get',
+    })
+
+            /**
+* @see \App\Http\Controllers\ShipmentController::track
+ * @see app/Http/Controllers/ShipmentController.php:77
+ * @route '/api/shipments/{tracking_number}'
+ */
+        trackForm.get = (args: { tracking_number: string | number } | [tracking_number: string | number ] | string | number, options?: RouteQueryOptions): RouteFormDefinition<'get'> => ({
+            action: track.url(args, options),
+            method: 'get',
+        })
+            /**
+* @see \App\Http\Controllers\ShipmentController::track
+ * @see app/Http/Controllers/ShipmentController.php:77
+ * @route '/api/shipments/{tracking_number}'
+ */
+        trackForm.head = (args: { tracking_number: string | number } | [tracking_number: string | number ] | string | number, options?: RouteQueryOptions): RouteFormDefinition<'get'> => ({
+            action: track.url(args, {
+                        [options?.mergeQuery ? 'mergeQuery' : 'query']: {
+                            _method: 'HEAD',
+                            ...(options?.query ?? options?.mergeQuery ?? {}),
+                        }
+                    }),
+            method: 'get',
+        })
+    
+    track.form = trackForm
 /**
 * @see \App\Http\Controllers\ShipmentController::update
  * @see app/Http/Controllers/ShipmentController.php:115
@@ -148,6 +204,37 @@ update.put = (args: { tracking_number: string | number } | [tracking_number: str
     method: 'put',
 })
 
+    /**
+* @see \App\Http\Controllers\ShipmentController::update
+ * @see app/Http/Controllers/ShipmentController.php:115
+ * @route '/api/shipments/{tracking_number}'
+ */
+    const updateForm = (args: { tracking_number: string | number } | [tracking_number: string | number ] | string | number, options?: RouteQueryOptions): RouteFormDefinition<'post'> => ({
+        action: update.url(args, {
+                    [options?.mergeQuery ? 'mergeQuery' : 'query']: {
+                        _method: 'PUT',
+                        ...(options?.query ?? options?.mergeQuery ?? {}),
+                    }
+                }),
+        method: 'post',
+    })
+
+            /**
+* @see \App\Http\Controllers\ShipmentController::update
+ * @see app/Http/Controllers/ShipmentController.php:115
+ * @route '/api/shipments/{tracking_number}'
+ */
+        updateForm.put = (args: { tracking_number: string | number } | [tracking_number: string | number ] | string | number, options?: RouteQueryOptions): RouteFormDefinition<'post'> => ({
+            action: update.url(args, {
+                        [options?.mergeQuery ? 'mergeQuery' : 'query']: {
+                            _method: 'PUT',
+                            ...(options?.query ?? options?.mergeQuery ?? {}),
+                        }
+                    }),
+            method: 'post',
+        })
+    
+    update.form = updateForm
 /**
 * @see \App\Http\Controllers\ShipmentController::createPickup
  * @see app/Http/Controllers/ShipmentController.php:146
@@ -181,6 +268,28 @@ createPickup.post = (options?: RouteQueryOptions): RouteDefinition<'post'> => ({
     url: createPickup.url(options),
     method: 'post',
 })
+
+    /**
+* @see \App\Http\Controllers\ShipmentController::createPickup
+ * @see app/Http/Controllers/ShipmentController.php:146
+ * @route '/api/pickups'
+ */
+    const createPickupForm = (options?: RouteQueryOptions): RouteFormDefinition<'post'> => ({
+        action: createPickup.url(options),
+        method: 'post',
+    })
+
+            /**
+* @see \App\Http\Controllers\ShipmentController::createPickup
+ * @see app/Http/Controllers/ShipmentController.php:146
+ * @route '/api/pickups'
+ */
+        createPickupForm.post = (options?: RouteQueryOptions): RouteFormDefinition<'post'> => ({
+            action: createPickup.url(options),
+            method: 'post',
+        })
+    
+    createPickup.form = createPickupForm
 const ShipmentController = { create, track, update, createPickup }
 
 export default ShipmentController

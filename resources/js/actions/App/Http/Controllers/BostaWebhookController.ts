@@ -1,4 +1,4 @@
-import { queryParams, type RouteQueryOptions, type RouteDefinition } from './../../../../wayfinder'
+import { queryParams, type RouteQueryOptions, type RouteDefinition, type RouteFormDefinition } from './../../../../wayfinder'
 /**
 * @see \App\Http\Controllers\BostaWebhookController::handle
  * @see app/Http/Controllers/BostaWebhookController.php:37
@@ -33,6 +33,27 @@ handle.post = (options?: RouteQueryOptions): RouteDefinition<'post'> => ({
     method: 'post',
 })
 
+    /**
+* @see \App\Http\Controllers\BostaWebhookController::handle
+ * @see app/Http/Controllers/BostaWebhookController.php:37
+ * @route '/api/webhook/bosta'
+ */
+    const handleForm = (options?: RouteQueryOptions): RouteFormDefinition<'post'> => ({
+        action: handle.url(options),
+        method: 'post',
+    })
+
+            /**
+* @see \App\Http\Controllers\BostaWebhookController::handle
+ * @see app/Http/Controllers/BostaWebhookController.php:37
+ * @route '/api/webhook/bosta'
+ */
+        handleForm.post = (options?: RouteQueryOptions): RouteFormDefinition<'post'> => ({
+            action: handle.url(options),
+            method: 'post',
+        })
+    
+    handle.form = handleForm
 /**
 * @see \App\Http\Controllers\BostaWebhookController::testWebhook
  * @see app/Http/Controllers/BostaWebhookController.php:126
@@ -66,6 +87,28 @@ testWebhook.post = (options?: RouteQueryOptions): RouteDefinition<'post'> => ({
     url: testWebhook.url(options),
     method: 'post',
 })
+
+    /**
+* @see \App\Http\Controllers\BostaWebhookController::testWebhook
+ * @see app/Http/Controllers/BostaWebhookController.php:126
+ * @route '/api/test/webhook/bosta'
+ */
+    const testWebhookForm = (options?: RouteQueryOptions): RouteFormDefinition<'post'> => ({
+        action: testWebhook.url(options),
+        method: 'post',
+    })
+
+            /**
+* @see \App\Http\Controllers\BostaWebhookController::testWebhook
+ * @see app/Http/Controllers/BostaWebhookController.php:126
+ * @route '/api/test/webhook/bosta'
+ */
+        testWebhookForm.post = (options?: RouteQueryOptions): RouteFormDefinition<'post'> => ({
+            action: testWebhook.url(options),
+            method: 'post',
+        })
+    
+    testWebhook.form = testWebhookForm
 const BostaWebhookController = { handle, testWebhook }
 
 export default BostaWebhookController

@@ -1,3 +1,4 @@
+import UserController from './UserController'
 import ProductController from './ProductController'
 import CategoryController from './CategoryController'
 import ContactUsController from './ContactUsController'
@@ -5,6 +6,7 @@ import CartController from './CartController'
 import CheckoutController from './CheckoutController'
 import OrderController from './OrderController'
 import WishlistController from './WishlistController'
+import CustomerAddressController from './CustomerAddressController'
 import DashboardController from './DashboardController'
 import TeamMemberApiController from './TeamMemberApiController'
 import ContactInquiryController from './ContactInquiryController'
@@ -17,15 +19,19 @@ import AdminCategoryController from './AdminCategoryController'
 import TeamMemberController from './TeamMemberController'
 import ContactInquiryAdminController from './ContactInquiryAdminController'
 import Admin from './Admin'
+import AdminOrderController from './AdminOrderController'
+import AdminUserController from './AdminUserController'
 import Settings from './Settings'
 const Controllers = {
-    ProductController: Object.assign(ProductController, ProductController),
+    UserController: Object.assign(UserController, UserController),
+ProductController: Object.assign(ProductController, ProductController),
 CategoryController: Object.assign(CategoryController, CategoryController),
 ContactUsController: Object.assign(ContactUsController, ContactUsController),
 CartController: Object.assign(CartController, CartController),
 CheckoutController: Object.assign(CheckoutController, CheckoutController),
 OrderController: Object.assign(OrderController, OrderController),
 WishlistController: Object.assign(WishlistController, WishlistController),
+CustomerAddressController: Object.assign(CustomerAddressController, CustomerAddressController),
 DashboardController: Object.assign(DashboardController, DashboardController),
 TeamMemberApiController: Object.assign(TeamMemberApiController, TeamMemberApiController),
 ContactInquiryController: Object.assign(ContactInquiryController, ContactInquiryController),
@@ -38,6 +44,8 @@ AdminCategoryController: Object.assign(AdminCategoryController, AdminCategoryCon
 TeamMemberController: Object.assign(TeamMemberController, TeamMemberController),
 ContactInquiryAdminController: Object.assign(ContactInquiryAdminController, ContactInquiryAdminController),
 Admin: Object.assign(Admin, Admin),
+AdminOrderController: Object.assign(AdminOrderController, AdminOrderController),
+AdminUserController: Object.assign(AdminUserController, AdminUserController),
 Settings: Object.assign(Settings, Settings),
 }
 
