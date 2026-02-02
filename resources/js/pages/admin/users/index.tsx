@@ -1,8 +1,16 @@
-import { Head, Link, router } from '@inertiajs/react';
-import { Eye, Search } from 'lucide-react';
+import { Head, Link, router, useForm } from '@inertiajs/react';
+import { Edit, Eye, Plus, Search, Trash2 } from 'lucide-react';
 import { useState } from 'react';
 
 import { Button } from '@/components/ui/button';
+import {
+    Dialog,
+    DialogContent,
+    DialogDescription,
+    DialogFooter,
+    DialogHeader,
+    DialogTitle,
+} from '@/components/ui/dialog';
 import { Input } from '@/components/ui/input';
 import {
     Table,
@@ -13,7 +21,7 @@ import {
     TableRow,
 } from '@/components/ui/table';
 import AppLayout from '@/layouts/app-layout';
-import { adminUsers, adminUsersShow } from '@/routes';
+import { edit } from '@/routes/admin/users';
 import { type BreadcrumbItem } from '@/types';
 
 interface User {
@@ -22,7 +30,7 @@ interface User {
     email: string;
     phone: string;
     orders_count: number;
-    status: string; // Add if you have it, else default to 'active'
+    is_admin: boolean;
 }
 
 interface Props {
@@ -43,20 +51,30 @@ interface Props {
 const breadcrumbs: BreadcrumbItem[] = [
     {
         title: 'Customers Management',
-        href: adminUsers(),
+        href: '/admin/users',
     },
 ];
 
 export default function UsersIndex({ users, filters }: Props) {
     const [search, setSearch] = useState(filters.search || '');
+    const [deleteUser, setDeleteUser] = useState<User | null>(null);
+    const { delete: destroy, processing } = useForm();
 
     const handleSearch = (e: React.FormEvent) => {
         e.preventDefault();
         router.get(
-            adminUsers(),
+            '/admin/users',
             { ...filters, search, page: 1 },
             { preserveState: true },
         );
+    };
+
+    const handleDelete = () => {
+        if (deleteUser) {
+            destroy(`/admin/users/${deleteUser.id}`, {
+                onSuccess: () => setDeleteUser(null),
+            });
+        }
     };
 
     return (
@@ -64,8 +82,14 @@ export default function UsersIndex({ users, filters }: Props) {
             <Head title="Customers Management" />
 
             <div className="flex h-full flex-1 flex-col gap-8 p-8">
-                <div>
+                <div className="flex items-center justify-between">
                     <h1 className="text-2xl font-bold">Customers Management</h1>
+                    <Button asChild>
+                        <Link href="/admin/users/create">
+                            <Plus className="mr-2 h-4 w-4" />
+                            Add Customer
+                        </Link>
+                    </Button>
                 </div>
 
                 <div className="flex flex-col gap-4">
@@ -101,7 +125,7 @@ export default function UsersIndex({ users, filters }: Props) {
                                         Orders
                                     </TableHead>
                                     <TableHead className="font-semibold">
-                                        Status
+                                        Type
                                     </TableHead>
                                     <TableHead className="rounded-r-lg font-semibold">
                                         Actions
@@ -124,18 +148,42 @@ export default function UsersIndex({ users, filters }: Props) {
                                             {user.orders_count}
                                         </TableCell>
                                         <TableCell className="">
-                                            {user.status || 'active'}
+                                            {user.is_admin ? (
+                                                <span className="inline-flex items-center rounded-full bg-blue-100 px-2 py-1 text-xs font-medium text-blue-800">
+                                                    Admin
+                                                </span>
+                                            ) : (
+                                                <span className="inline-flex items-center rounded-full bg-gray-100 px-2 py-1 text-xs font-medium text-gray-800">
+                                                    Customer
+                                                </span>
+                                            )}
                                         </TableCell>
                                         <TableCell className="rounded-r-lg">
                                             <div className="flex items-center gap-2">
                                                 <Link
-                                                    href={adminUsersShow(
-                                                        user.id,
-                                                    )}
+                                                    href={`/admin/users/${user.id}`}
                                                     className="flex h-10 w-10 items-center justify-center rounded-full transition-colors hover:bg-muted"
+                                                    title="View"
                                                 >
-                                                    <Eye className="h-6 w-6" />
+                                                    <Eye className="h-5 w-5" />
                                                 </Link>
+                                                <Link
+                                                    href={edit(user.id)}
+                                                    className="flex h-10 w-10 items-center justify-center rounded-full transition-colors hover:bg-muted"
+                                                    title="Edit"
+                                                >
+                                                    <Edit className="h-5 w-5" />
+                                                </Link>
+                                                <button
+                                                    type="button"
+                                                    onClick={() =>
+                                                        setDeleteUser(user)
+                                                    }
+                                                    className="flex h-10 w-10 items-center justify-center rounded-full transition-colors hover:bg-muted hover:text-red-600"
+                                                    title="Delete"
+                                                >
+                                                    <Trash2 className="h-5 w-5" />
+                                                </button>
                                             </div>
                                         </TableCell>
                                     </TableRow>
@@ -153,6 +201,38 @@ export default function UsersIndex({ users, filters }: Props) {
                             </TableBody>
                         </Table>
                     </div>
+
+                    {/* Delete Confirmation Dialog */}
+                    <Dialog
+                        open={!!deleteUser}
+                        onOpenChange={() => setDeleteUser(null)}
+                    >
+                        <DialogContent>
+                            <DialogHeader>
+                                <DialogTitle>Delete Customer</DialogTitle>
+                                <DialogDescription>
+                                    Are you sure you want to delete{' '}
+                                    <strong>{deleteUser?.name}</strong>? This
+                                    action cannot be undone.
+                                </DialogDescription>
+                            </DialogHeader>
+                            <DialogFooter>
+                                <Button
+                                    variant="outline"
+                                    onClick={() => setDeleteUser(null)}
+                                >
+                                    Cancel
+                                </Button>
+                                <Button
+                                    variant="destructive"
+                                    onClick={handleDelete}
+                                    disabled={processing}
+                                >
+                                    {processing ? 'Deleting...' : 'Delete'}
+                                </Button>
+                            </DialogFooter>
+                        </DialogContent>
+                    </Dialog>
 
                     {/* Pagination */}
                     {users.last_page > 1 && (

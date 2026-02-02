@@ -37,4 +37,24 @@ class AdminUserController extends Controller
             'user' => $user->load(['orders.items.product.media', 'addresses']),
         ]);
     }
+
+    public function edit(User $user)
+    {
+        return Inertia::render('admin/users/edit', [
+            'user' => $user,
+        ]);
+    }
+
+    public function update(Request $request, User $user)
+    {
+        $validated = $request->validate([
+            'name' => 'required|string|max:255',
+            'email' => 'required|email|unique:users,email,' . $user->id,
+            'phone' => 'nullable|string|max:20',
+        ]);
+
+        $user->update($validated);
+
+        return redirect()->route('admin.users.index')->with('success', 'User updated successfully');
+    }
 }

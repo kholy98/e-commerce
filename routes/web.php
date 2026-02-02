@@ -130,6 +130,8 @@ Route::middleware(['auth', 'verified'])->group(function () {
         // Users (Customers)
         Route::get('users', [\App\Http\Controllers\AdminUserController::class, 'index'])->name('users.index');
         Route::get('users/{user}', [\App\Http\Controllers\AdminUserController::class, 'show'])->name('users.show');
+        Route::get('users/{user}/edit', [\App\Http\Controllers\AdminUserController::class, 'edit'])->name('users.edit');
+        Route::post('users/{user}', [\App\Http\Controllers\AdminUserController::class, 'update'])->name('users.update');
     });
 });
 
