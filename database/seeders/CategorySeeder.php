@@ -13,31 +13,31 @@ class CategorySeeder extends Seeder
     public function run(): void
     {
         $categories = [
-            [
-                'name' => 'Electronics',
-                'description' => 'Electronic gadgets and devices',
-                'is_active' => true,
-            ],
-            [
-                'name' => 'Clothing',
-                'description' => 'Apparel and fashion items',
-                'is_active' => true,
-            ],
-            [
-                'name' => 'Books',
-                'description' => 'Books and educational materials',
-                'is_active' => true,
-            ],
-            [
-                'name' => 'Home & Garden',
-                'description' => 'Home and garden products',
-                'is_active' => true,
-            ],
-            [
-                'name' => 'Sports',
-                'description' => 'Sports and fitness equipment',
-                'is_active' => true,
-            ],
+            // [
+            //     'name' => 'Electronics',
+            //     'description' => 'Electronic gadgets and devices',
+            //     'is_active' => true,
+            // ],
+            // [
+            //     'name' => 'Clothing',
+            //     'description' => 'Apparel and fashion items',
+            //     'is_active' => true,
+            // ],
+            // [
+            //     'name' => 'Books',
+            //     'description' => 'Books and educational materials',
+            //     'is_active' => true,
+            // ],
+            // [
+            //     'name' => 'Home & Garden',
+            //     'description' => 'Home and garden products',
+            //     'is_active' => true,
+            // ],
+            // [
+            //     'name' => 'Sports',
+            //     'description' => 'Sports and fitness equipment',
+            //     'is_active' => true,
+            // ],
         ];
 
         foreach ($categories as $category) {
