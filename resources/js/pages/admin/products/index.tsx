@@ -33,13 +33,19 @@ const breadcrumbs: BreadcrumbItem[] = [
     },
 ];
 
+interface Category {
+    id: number;
+    name: string;
+    slug: string;
+}
+
 interface Product {
     id: number;
     name: string;
     price: number;
     stock: number;
     is_active: boolean;
-    category: string | null;
+    category: Category | null;
     created_at: string;
 }
 
@@ -232,7 +238,7 @@ export default function ProductsIndex() {
                                             </Badge>
                                         </TableCell>
                                         <TableCell>
-                                            {product.category || 'N/A'}
+                                            {product.category?.name || 'N/A'}
                                         </TableCell>
                                         <TableCell>
                                             {formatDate(product.created_at)}

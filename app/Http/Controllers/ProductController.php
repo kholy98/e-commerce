@@ -146,7 +146,7 @@ class ProductController extends Controller
             }
         }
 
-        $products = $query->with('media')->paginate($request->get('per_page', 15));
+        $products = $query->with(['media', 'category'])->paginate($request->get('per_page', 15));
 
         $enProducts = $products->getCollection()->map(function ($product) {
             return [
@@ -158,6 +158,11 @@ class ProductController extends Controller
                 'stock' => $product->stock,
                 'sku' => $product->sku,
                 'category_id' => $product->category_id,
+                'category' => $product->category ? [
+                    'id' => $product->category->id,
+                    'name' => $product->category->name,
+                    'slug' => $product->category->slug,
+                ] : null,
                 'is_active' => $product->is_active,
                 'slug' => $product->slug,
                 'grind_type' => $product->grind_type ? [
@@ -199,6 +204,11 @@ class ProductController extends Controller
                 'stock' => $product->stock,
                 'sku' => $product->sku,
                 'category_id' => $product->category_id,
+                'category' => $product->category ? [
+                    'id' => $product->category->id,
+                    'name' => $product->category->name,
+                    'slug' => $product->category->slug,
+                ] : null,
                 'is_active' => $product->is_active,
                 'slug' => $product->slug,
                 'grind_type' => $product->grind_type ? [
