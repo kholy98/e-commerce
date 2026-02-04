@@ -13,7 +13,7 @@ return new class extends Migration
     {
         Schema::table('products', function (Blueprint $table) {
             $table->enum('grind_type', ['whole_bean', 'coarse', 'medium', 'fine', 'extra_fine'])->nullable();
-            $table->decimal('weight', 8, 2)->nullable();
+            $table->decimal('weight', 8, 3)->nullable();
             $table->json('product_details')->nullable();
         });
     }

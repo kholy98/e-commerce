@@ -39,7 +39,7 @@ class Product extends Model implements HasMedia
         'stock' => 'integer',
         'is_active' => 'boolean',
         'grind_type' => GrindType::class,
-        'weight' => 'decimal:2',
+        'weight' => 'decimal:3',
         'product_details' => 'array',
     ];
 
