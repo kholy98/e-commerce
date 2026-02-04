@@ -2,87 +2,125 @@
 
 namespace Database\Seeders;
 
-use App\Models\Product;
-use App\Models\Category;
-use App\Weight;
 use App\GrindType;
+use App\Models\Category;
+use App\Models\Product;
+use App\Weight;
 use Illuminate\Database\Seeder;
 
 class ProductSeeder extends Seeder
 {
     public function run(): void
     {
-        $coffeeCategory = Category::firstOrCreate(
-            ['slug' => 'coffee'],
-            ['name' => 'Coffee', 'slug' => 'coffee', 'is_active' => true]
-        );
+        $categories = Category::all();
 
-        $products = [
-            'Light Coffee' => [
-                'description' => 'Light roast coffee with delicate flavor notes and mild acidity',
-                'description_ar' => 'قهوة التحميص الخفيف مع نكهات رقيقة وحموضة معتدلة',
-                'prices' => [
-                    '125gm' => 8.00,
-                    '250gm' => 14.00,
-                    '500gm' => 26.00,
-                    '1kg' => 48.00,
-                ],
-            ],
-            'Medium Coffee' => [
-                'description' => 'Medium roast coffee with balanced flavor and smooth finish',
-                'description_ar' => 'قهوة التحميص المتوسط مع نكهات متوازنة ونهاية ناعمة',
-                'prices' => [
-                    '125gm' => 9.00,
-                    '250gm' => 16.00,
-                    '500gm' => 29.00,
-                    '1kg' => 54.00,
-                ],
-            ],
-            'Dark Coffee' => [
-                'description' => 'Dark roast coffee with bold, rich flavor and low acidity',
-                'description_ar' => 'ق
+        if ($categories->isEmpty()) {
+            return;
+        }
 
-هوة التحميص الداكن مع نكهات جريئة وغنية وحموضة منخفضة',
-                'prices' => [
-                    '125gm' => 10.00,
-                    '250gm' => 18.00,
-                    '500gm' => 32.00,
-                    '1kg' => 60.00,
-                ],
+        $espressoCategory = $categories->where('slug', 'espresso')->first();
+        $coffeeCategories = $categories->whereIn('slug', ['plain-coffee', 'roast-coffee']);
+
+        $espressoBasePrices = [
+            'dark' => 400,
+        ];
+
+        $coffeeBasePrices = [
+            'plain-coffee' => [
+                'light' => 250,
+                'medium' => 275,
+                'dark' => 300,
             ],
-            'Espresso' => [
-                'description' => 'Premium espresso blend with intense flavor and perfect crema',
-                'description_ar' => 'مزيج إسبريسو متميز بنكهة مكثفة وكريما مثالية',
-                'prices' => [
-                    '125gm' => 11.00,
-                    '250gm' => 20.00,
-                    '500gm' => 36.00,
-                    '1kg' => 68.00,
-                ],
+            'roast-coffee' => [
+                'light' => 300,
+                'medium' => 325,
+                'dark' => 350,
             ],
         ];
 
-        foreach ($products as $productName => $productData) {
+        $descriptions = [
+            'plain-coffee' => [
+                'en' => 'Classic plain coffee beans for a pure and traditional taste',
+                'ar' => 'حبوب قهوة كلاسيكية بنكهة نقية وتقليدية',
+            ],
+            'roast-coffee' => [
+                'en' => 'Rich and aromatic roasted coffee beans with a deep flavor',
+                'ar' => 'حبوب قهوة محمصة غنية وعطرية بنكهة عميقة',
+            ],
+            'espresso' => [
+                'en' => 'Premium beans optimized for espresso extraction',
+                'ar' => 'حبوب مختارة خصيصاً لتحضير الإسبريسو',
+            ],
+        ];
+
+        if ($espressoCategory) {
+            $grindType = GrindType::DARK;
             foreach (Weight::cases() as $weight) {
-                $weightLabel = $weight->value;
-                $price = $productData['prices'][$weightLabel] ?? 0;
+                $weightKg = $weight->toKg();
+                $weightLabel = $weight->label();
 
-                $sku = 'COF-' . strtoupper(substr(str_replace(' ', '', $productName), 0, 3)) . '-' . strtoupper($weight->value);
+                $price = round($espressoBasePrices[$grindType->value] * $weightKg, 2);
+                $cost = round($price * 0.4, 2);
 
-                Product::firstOrCreate([
-                    'name' => $productName . ' ' . $weightLabel,
-                    'name_ar' => $productName . ' ' . $weightLabel,
-                    'description' => $productData['description'],
-                    'description_ar' => $productData['description_ar'],
-                    'price' => $price,
-                    'cost' => round($price * 0.4, 2),
-                    'stock' => 200,
-                    'sku' => $sku,
-                    'category_id' => $coffeeCategory->id,
-                    'is_active' => true,
-                    'grind_type' => GrindType::EXTRA_FINE->value,
-                    'weight' => $weight->toKg(),
-                ]);
+                $sku = 'ESP-DK-'.strtoupper(str_replace(['.', 'kg', 'g'], ['', '', ''], $weight->value));
+
+                Product::firstOrCreate(
+                    [
+                        'sku' => $sku,
+                    ],
+                    [
+                        'name' => 'Espresso '.$weightLabel,
+                        'name_ar' => 'إسبريسو '.$weightLabel,
+                        'description' => $descriptions['espresso']['en'].' Dark roast for a perfect espresso shot.',
+                        'description_ar' => $descriptions['espresso']['ar'].'. تحميص غامق لإسبريسو مثالي.',
+                        'price' => $price,
+                        'cost' => $cost,
+                        'stock' => 100,
+                        'category_id' => $espressoCategory->id,
+                        'is_active' => true,
+                        'grind_type' => $grindType->value,
+                        'weight' => $weightKg,
+                    ]
+                );
+            }
+        }
+
+        foreach ($coffeeCategories as $category) {
+            $categorySlug = $category->slug;
+            $categoryPrices = $coffeeBasePrices[$categorySlug] ?? $coffeeBasePrices['plain-coffee'];
+            $categoryDescriptions = $descriptions[$categorySlug] ?? $descriptions['plain-coffee'];
+
+            foreach (GrindType::cases() as $grindType) {
+                foreach (Weight::cases() as $weight) {
+                    $weightKg = $weight->toKg();
+                    $grindLabel = $grindType->label();
+                    $grindLabelAr = $grindType->labelAr();
+                    $weightLabel = $weight->label();
+
+                    $price = round($categoryPrices[$grindType->value] * $weightKg, 2);
+                    $cost = round($price * 0.4, 2);
+
+                    $sku = 'COF-'.strtoupper(substr($categorySlug, 0, 3)).'-'.strtoupper(substr($grindType->value, 0, 2)).'-'.strtoupper(str_replace(['.', 'kg', 'g'], ['', '', ''], $weight->value));
+
+                    Product::firstOrCreate(
+                        [
+                            'sku' => $sku,
+                        ],
+                        [
+                            'name' => $category->name.' '.$grindLabel.' '.$weightLabel,
+                            'name_ar' => $category->name_ar.' '.$grindLabelAr.' '.$weightLabel,
+                            'description' => $categoryDescriptions['en'].'. '.$grindLabel.' roast for a perfect cup.',
+                            'description_ar' => $categoryDescriptions['ar'].'. تحميص '.$grindLabelAr.' لتناول فنجان مثالي.',
+                            'price' => $price,
+                            'cost' => $cost,
+                            'stock' => 100,
+                            'category_id' => $category->id,
+                            'is_active' => true,
+                            'grind_type' => $grindType->value,
+                            'weight' => $weightKg,
+                        ]
+                    );
+                }
             }
         }
     }

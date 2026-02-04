@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\GrindType;
 use App\Http\Resources\CategoryResource;
 use App\Http\Resources\ProductResource;
 use App\Models\Category;
@@ -9,6 +10,7 @@ use App\Models\Product;
 use App\Weight;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Validator;
 
 /**
  * @group Products
@@ -537,6 +539,9 @@ class ProductController extends Controller
      */
     public function store(Request $request): JsonResponse
     {
+        $grindTypes = collect(GrindType::cases())->map(fn ($case) => $case->value)->toArray();
+        $weights = collect(Weight::cases())->map(fn ($case) => $case->toKg())->toArray();
+
         $validated = $request->validate([
             'name' => 'required|string|max:255',
             'name_ar' => 'nullable|string|max:255',
@@ -547,8 +552,8 @@ class ProductController extends Controller
             'stock' => 'required|integer|min:0',
             'sku' => 'required|string|unique:products',
             'category_id' => 'required|exists:categories,id',
-            'grind_type' => 'nullable|in:whole_bean,coarse,medium,fine,extra_fine',
-            'weight' => 'nullable|numeric|in:0.125,0.250,0.500,1.000',
+            'grind_type' => 'nullable|string|in:'.implode(',', $grindTypes),
+            'weight' => 'nullable|numeric|in:'.implode(',', $weights),
             'product_details' => 'nullable|array',
             'product_details.*.title_en' => 'required|string|max:255',
             'product_details.*.title_ar' => 'required|string|max:255',
@@ -587,6 +592,9 @@ class ProductController extends Controller
             'files' => $request->allFiles(),
         ]);
 
+        $grindTypes = collect(GrindType::cases())->map(fn ($case) => $case->value)->toArray();
+        $weights = collect(Weight::cases())->map(fn ($case) => $case->toKg())->toArray();
+
         try {
             $validated = $request->validate([
                 'name' => 'sometimes|string|max:255',
@@ -599,8 +607,8 @@ class ProductController extends Controller
                 'sku' => 'sometimes|string|unique:products,sku,'.$product->id,
                 'category_id' => 'sometimes|exists:categories,id',
                 'is_active' => 'sometimes|boolean',
-                'grind_type' => 'nullable|in:whole_bean,coarse,medium,fine,extra_fine',
-                'weight' => 'sometimes|numeric|in:0.125,0.250,0.500,1.000',
+                'grind_type' => 'nullable|string|in:'.implode(',', $grindTypes),
+                'weight' => 'nullable|numeric|in:'.implode(',', $weights),
                 'product_details' => 'nullable|array',
                 'product_details.*.title_en' => 'required|string|max:255',
                 'product_details.*.title_ar' => 'required|string|max:255',
@@ -733,6 +741,107 @@ class ProductController extends Controller
                 'success' => true,
                 'en' => $enCategories,
                 'ar' => $arCategories,
+            ],
+        ]);
+    }
+
+    /**
+     * Get product by category, weight, and grind type
+     */
+    public function getBySpecifications(Request $request): JsonResponse
+    {
+        $categoryNames = Category::where('is_active', true)->pluck('name')->toArray();
+        $categorySlugs = Category::where('is_active', true)->pluck('slug')->toArray();
+        $categoryNamesAr = Category::where('is_active', true)->pluck('name_ar')->filter()->toArray();
+        $validCategories = array_merge($categoryNames, $categorySlugs, $categoryNamesAr);
+
+        $grindTypes = collect(GrindType::cases())->map(fn ($case) => $case->value)->toArray();
+
+        $validator = Validator::make($request->all(), [
+            'category' => ['required', 'string', 'in:'.implode(',', $validCategories)],
+            'weight' => 'required|numeric|min:0.001',
+            'grind_type' => ['required', 'string', 'in:'.implode(',', $grindTypes)],
+        ], [
+            'category.in' => 'Invalid category. Valid categories are: '.implode(', ', $categoryNames),
+            'grind_type.in' => 'Invalid grind type. Valid types are: '.implode(', ', $grindTypes),
+        ]);
+
+        if ($validator->fails()) {
+            return response()->json([
+                'success' => false,
+                'message' => 'Validation failed',
+                'errors' => $validator->errors(),
+            ], 422);
+        }
+
+        $validated = $validator->validated();
+
+        $weightKg = (float) $validated['weight'];
+        $grindType = $validated['grind_type'];
+
+        $product = Product::with(['category', 'media'])
+            ->whereHas('category', function ($query) use ($validated) {
+                $query->where('name', $validated['category'])
+                    ->orWhere('slug', $validated['category'])
+                    ->orWhere('name_ar', $validated['category']);
+            })
+            ->where('weight', $weightKg)
+            ->where('grind_type', $grindType)
+            ->where('is_active', true)
+            ->first();
+
+        if (! $product) {
+            return response()->json([
+                'success' => false,
+                'message' => 'Product not found with these specifications',
+            ], 404);
+        }
+
+        return response()->json([
+            'success' => true,
+            'data' => [
+                'en' => [
+                    'name' => $product->name,
+                    'slug' => $product->slug,
+                    'description' => $product->description,
+                    'price' => (float) $product->price,
+                    'cost' => (float) $product->cost,
+                    'stock' => (float) $product->stock,
+                    'sku' => $product->sku,
+                    'is_active' => $product->is_active,
+                    'grind_type' => $product->grind_type?->value,
+                    'grind_type_label' => $product->grind_type?->label(),
+                    'weight' => (float) $product->weight,
+                    'weight_label' => Weight::fromKg((float) $product->weight)?->label(),
+                    'category' => [
+                        'name' => $product->category?->name,
+                        'slug' => $product->category?->slug,
+                    ],
+                    'images' => $product->getMedia('images')->map(function ($media) {
+                        return ['url' => $media->getUrl()];
+                    }),
+                ],
+                'ar' => [
+                    'name' => $product->name_ar ?: $product->name,
+                    'slug' => $product->slug,
+                    'description' => $product->description_ar ?: $product->description,
+                    'price' => (float) $product->price,
+                    'cost' => (float) $product->cost,
+                    'stock' => (float) $product->stock,
+                    'sku' => $product->sku,
+                    'is_active' => $product->is_active,
+                    'grind_type' => $product->grind_type?->value,
+                    'grind_type_label' => $product->grind_type?->labelAr(),
+                    'weight' => (float) $product->weight,
+                    'weight_label' => Weight::fromKg((float) $product->weight)?->label(),
+                    'category' => [
+                        'name' => $product->category?->name_ar ?: $product->category?->name,
+                        'slug' => $product->category?->slug,
+                    ],
+                    'images' => $product->getMedia('images')->map(function ($media) {
+                        return ['url' => $media->getUrl()];
+                    }),
+                ],
             ],
         ]);
     }

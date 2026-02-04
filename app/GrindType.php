@@ -4,11 +4,9 @@ namespace App;
 
 enum GrindType: string
 {
-    case WHOLE_BEAN = 'whole_bean';
-    case COARSE = 'coarse';
+    case LIGHT = 'light';
     case MEDIUM = 'medium';
-    case FINE = 'fine';
-    case EXTRA_FINE = 'extra_fine';
+    case DARK = 'dark';
 
     /**
      * Get the English label for the grind type
@@ -16,11 +14,9 @@ enum GrindType: string
     public function label(): string
     {
         return match ($this) {
-            self::WHOLE_BEAN => 'Whole Bean',
-            self::COARSE => 'Coarse',
+            self::LIGHT => 'Light',
             self::MEDIUM => 'Medium',
-            self::FINE => 'Fine',
-            self::EXTRA_FINE => 'Extra Fine',
+            self::DARK => 'Dark',
         };
     }
 
@@ -30,11 +26,9 @@ enum GrindType: string
     public function labelAr(): string
     {
         return match ($this) {
-            self::WHOLE_BEAN => 'حبة كاملة',
-            self::COARSE => 'خشن',
-            self::MEDIUM => 'متوسط',
-            self::FINE => 'ناعم',
-            self::EXTRA_FINE => 'ناعم جداً',
+            self::LIGHT => 'فاتح',
+            self::MEDIUM => 'وسط',
+            self::DARK => 'غامق',
         };
     }
 

@@ -215,6 +215,7 @@ Route::post('/logout', function (Request $request) {
 // Public routes
 Route::prefix('products')->group(function () {
     Route::get('/', [ProductController::class, 'index']);
+    Route::post('/find', [ProductController::class, 'getBySpecifications']);
     // Route::get('/categories', [ProductController::class, 'categories']);
     Route::get('/{product}', [ProductController::class, 'show']);
 });

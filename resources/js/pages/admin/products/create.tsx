@@ -583,24 +583,16 @@ export default function ProductCreate({ categories }: Props) {
                                         <div className="flex flex-wrap gap-2">
                                             {[
                                                 {
-                                                    label: 'Whole Bean',
-                                                    value: 'whole_bean',
-                                                },
-                                                {
-                                                    label: 'Coarse',
-                                                    value: 'coarse',
+                                                    label: 'Light',
+                                                    value: 'light',
                                                 },
                                                 {
                                                     label: 'Medium',
                                                     value: 'medium',
                                                 },
                                                 {
-                                                    label: 'Fine',
-                                                    value: 'fine',
-                                                },
-                                                {
-                                                    label: 'Extra Fine',
-                                                    value: 'extra_fine',
+                                                    label: 'Dark',
+                                                    value: 'dark',
                                                 },
                                             ].map((type) => (
                                                 <Button

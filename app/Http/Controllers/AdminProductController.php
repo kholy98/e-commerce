@@ -65,7 +65,6 @@ class AdminProductController extends Controller
             'sku' => 'sometimes|string|unique:products,sku,'.$product->id,
             'category_id' => 'sometimes|exists:categories,id',
             'is_active' => 'sometimes|boolean',
-            'grind_type' => 'nullable|in:whole_bean,coarse,medium,fine,extra_fine',
             'weight' => 'sometimes|numeric|in:0.125,0.250,0.500,1.000',
             'product_details' => 'nullable|array',
             'product_details.*.title_en' => 'required|string|max:255',
