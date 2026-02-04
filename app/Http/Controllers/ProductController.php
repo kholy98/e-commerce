@@ -801,6 +801,7 @@ class ProductController extends Controller
             'success' => true,
             'data' => [
                 'en' => [
+                    'id' => $product->id,
                     'name' => $product->name,
                     'slug' => $product->slug,
                     'description' => $product->description,
@@ -822,6 +823,7 @@ class ProductController extends Controller
                     }),
                 ],
                 'ar' => [
+                    'id' => $product->id,
                     'name' => $product->name_ar ?: $product->name,
                     'slug' => $product->slug,
                     'description' => $product->description_ar ?: $product->description,
