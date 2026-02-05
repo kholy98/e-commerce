@@ -746,7 +746,84 @@ class ProductController extends Controller
     }
 
     /**
-     * Get product by category, weight, and grind type
+     * Find product by specifications
+     *
+     * Retrieve a specific product by matching category, weight, and grind type.
+     * Useful for finding the exact product variant for shopping cart additions.
+     * Returns product data in both English and Arabic.
+     *
+     * @unauthenticated
+     *
+     * @operationId findProductBySpecifications
+     *
+     * @bodyParam category string required Category name, slug, or Arabic name. Example: "Coffee Beans"
+     * @bodyParam weight number required Product weight in kg. Example: 0.25
+     * @bodyParam grind_type string required Grind type (whole_bean, coarse, medium, fine, extra_fine). Example: "medium"
+     *
+     * @response 200 scenario="Success" {
+     *   "success": true,
+     *   "data": {
+     *     "en": {
+     *       "id": 1,
+     *       "name": "Premium Coffee Beans",
+     *       "slug": "premium-coffee-beans",
+     *       "description": "High-quality arabica coffee beans",
+     *       "price": 25.00,
+     *       "cost": 15.00,
+     *       "stock": 100,
+     *       "sku": "COF-001",
+     *       "is_active": true,
+     *       "grind_type": "medium",
+     *       "grind_type_label": "Medium Grind",
+     *       "weight": 0.25,
+     *       "weight_label": "250g",
+     *       "category": {
+     *         "name": "Coffee Beans",
+     *         "slug": "coffee-beans"
+     *       },
+     *       "images": [
+     *         {
+     *           "url": "https://example.com/storage/products/coffee-beans.jpg"
+     *         }
+     *       ]
+     *     },
+     *     "ar": {
+     *       "name": "حبوب قهوة ممتازة",
+     *       "slug": "premium-coffee-beans",
+     *       "description": "حبوب قهوة أرابيكا عالية الجودة",
+     *       "price": 25.00,
+     *       "cost": 15.00,
+     *       "stock": 100,
+     *       "sku": "COF-001",
+     *       "is_active": true,
+     *       "grind_type": "medium",
+     *       "grind_type_label": "طحن متوسط",
+     *       "weight": 0.25,
+     *       "weight_label": "250 غرام",
+     *       "category": {
+     *         "name": "حبوب القهوة",
+     *         "slug": "coffee-beans"
+     *       },
+     *       "images": [
+     *         {
+     *           "url": "https://example.com/storage/products/coffee-beans.jpg"
+     *         }
+     *       ]
+     *     }
+     *   }
+     * }
+     * @response 422 scenario="Validation Error" {
+     *   "success": false,
+     *   "message": "Validation failed",
+     *   "errors": {
+     *     "category": ["Invalid category. Valid categories are: Coffee Beans, Espresso, Tea"],
+     *     "grind_type": ["Invalid grind type. Valid types are: whole_bean, coarse, medium, fine, extra_fine"]
+     *   }
+     * }
+     * @response 404 scenario="Not Found" {
+     *   "success": false,
+     *   "message": "Product not found with these specifications"
+     * }
      */
     public function getBySpecifications(Request $request): JsonResponse
     {

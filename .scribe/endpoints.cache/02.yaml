@@ -192,6 +192,163 @@ endpoints:
   -
     custom: []
     httpMethods:
+      - POST
+    uri: api/products/find
+    metadata:
+      custom: []
+      groupName: Products
+      groupDescription: |-
+
+        APIs for browsing and managing products.
+
+        Public endpoints for listing and viewing products do not require authentication.
+        Admin endpoints for creating, updating, and deleting products require authentication.
+      subgroup: ''
+      subgroupDescription: ''
+      title: 'Find product by specifications'
+      description: |-
+        Retrieve a specific product by matching category, weight, and grind type.
+        Useful for finding the exact product variant for shopping cart additions.
+        Returns product data in both English and Arabic.
+      authenticated: false
+      deprecated: false
+    headers:
+      Content-Type: application/json
+      Accept: application/json
+    urlParameters: []
+    cleanUrlParameters: []
+    queryParameters: []
+    cleanQueryParameters: []
+    bodyParameters:
+      category:
+        custom: []
+        name: category
+        description: 'Category name, slug, or Arabic name.'
+        required: true
+        example: '"Coffee Beans"'
+        type: string
+        enumValues: []
+        exampleWasSpecified: true
+        nullable: false
+        deprecated: false
+      weight:
+        custom: []
+        name: weight
+        description: 'Product weight in kg.'
+        required: true
+        example: 0.25
+        type: number
+        enumValues: []
+        exampleWasSpecified: true
+        nullable: false
+        deprecated: false
+      grind_type:
+        custom: []
+        name: grind_type
+        description: 'Grind type (whole_bean, coarse, medium, fine, extra_fine).'
+        required: true
+        example: '"medium"'
+        type: string
+        enumValues: []
+        exampleWasSpecified: true
+        nullable: false
+        deprecated: false
+    cleanBodyParameters:
+      category: '"Coffee Beans"'
+      weight: 0.25
+      grind_type: '"medium"'
+    fileParameters: []
+    responses:
+      -
+        custom: []
+        status: 200
+        content: |-
+          {
+            "success": true,
+            "data": {
+              "en": {
+                "id": 1,
+                "name": "Premium Coffee Beans",
+                "slug": "premium-coffee-beans",
+                "description": "High-quality arabica coffee beans",
+                "price": 25.00,
+                "cost": 15.00,
+                "stock": 100,
+                "sku": "COF-001",
+                "is_active": true,
+                "grind_type": "medium",
+                "grind_type_label": "Medium Grind",
+                "weight": 0.25,
+                "weight_label": "250g",
+                "category": {
+                  "name": "Coffee Beans",
+                  "slug": "coffee-beans"
+                },
+                "images": [
+                  {
+                    "url": "https://example.com/storage/products/coffee-beans.jpg"
+                  }
+                ]
+              },
+              "ar": {
+                "name": "حبوب قهوة ممتازة",
+                "slug": "premium-coffee-beans",
+                "description": "حبوب قهوة أرابيكا عالية الجودة",
+                "price": 25.00,
+                "cost": 15.00,
+                "stock": 100,
+                "sku": "COF-001",
+                "is_active": true,
+                "grind_type": "medium",
+                "grind_type_label": "طحن متوسط",
+                "weight": 0.25,
+                "weight_label": "250 غرام",
+                "category": {
+                  "name": "حبوب القهوة",
+                  "slug": "coffee-beans"
+                },
+                "images": [
+                  {
+                    "url": "https://example.com/storage/products/coffee-beans.jpg"
+                  }
+                ]
+              }
+            }
+          }
+        headers: []
+        description: Success
+      -
+        custom: []
+        status: 404
+        content: |-
+          {
+            "success": false,
+            "message": "Product not found with these specifications"
+          }
+        headers: []
+        description: 'Not Found'
+      -
+        custom: []
+        status: 422
+        content: |-
+          {
+            "success": false,
+            "message": "Validation failed",
+            "errors": {
+              "category": ["Invalid category. Valid categories are: Coffee Beans, Espresso, Tea"],
+              "grind_type": ["Invalid grind type. Valid types are: whole_bean, coarse, medium, fine, extra_fine"]
+            }
+          }
+        headers: []
+        description: 'Validation Error'
+    responseFields: []
+    auth: []
+    controller: null
+    method: null
+    route: null
+  -
+    custom: []
+    httpMethods:
       - GET
     uri: 'api/products/{product_id}'
     metadata:
@@ -660,31 +817,22 @@ endpoints:
         name: grind_type
         description: ''
         required: false
-        example: extra_fine
+        example: null
         type: string
-        enumValues:
-          - whole_bean
-          - coarse
-          - medium
-          - fine
-          - extra_fine
+        enumValues: []
         exampleWasSpecified: false
-        nullable: true
+        nullable: false
         deprecated: false
       weight:
         custom: []
         name: weight
         description: ''
         required: false
-        example: '1.000'
-        type: number
-        enumValues:
-          - '0.125'
-          - '0.250'
-          - '0.500'
-          - '1.000'
+        example: null
+        type: string
+        enumValues: []
         exampleWasSpecified: false
-        nullable: true
+        nullable: false
         deprecated: false
       product_details:
         custom: []
@@ -763,8 +911,6 @@ endpoints:
       stock: 12
       sku: architecto
       category_id: architecto
-      grind_type: extra_fine
-      weight: '1.000'
       product_details:
         -
           title_en: 'n'
@@ -916,7 +1062,7 @@ endpoints:
           content-type: application/json
           access-control-allow-origin: 'http://localhost:3000'
           access-control-allow-credentials: 'true'
-          set-cookie: 'laravel-session=eyJpdiI6IlozVGMvUnRPM09CTTNxaXRqc1pKSXc9PSIsInZhbHVlIjoiNHJUWW8xMGFVY3MrbGxocG5JWnU2U1V0UzdaaFgxSm9WV1FMWGkyV204cVRxSzZ3SHU0c0tkQ1hDdzBNWUdIMUNYVmJjY1NBZ3hQRnBqQW5PT1N3R1hIQjk5ZzBkMHJsTlNQNmp1OGUvbTB6REEyOCt5K0preU5PTXd3Y0pDNEEiLCJtYWMiOiJhYWQxZjM1ZjAyY2QxMjYyYmE4ZTg4ZGM0ZjM2NzhiOWUyMmU4M2Q3Y2NkNTA4N2NiZWJiYzYxYzJmYjM4NWM1IiwidGFnIjoiIn0%3D; expires=Mon, 02 Feb 2026 16:22:09 GMT; Max-Age=7200; path=/; secure; httponly; samesite=none'
+          set-cookie: 'al-atheer-ecommerce-session=eyJpdiI6IlhHblpJTi9mSEFHc2JTRmx2Q2wranc9PSIsInZhbHVlIjoibGZ2QWVTUzdrQ2Q0ZXRZOWlQemdkUTEyY2NzcnNlbDRqWXc0WitTdzRUNExKcE9GSmJ5c0lSdUtlcy81bUFnNVRIS1ZQdGJVazlXdUwybTdMcmVZNVJsK1hmTUxxSFBJZzdkNG9ONUJwWklxeUpZcXRSODNZdkxWb0VEcHdYenkiLCJtYWMiOiJiZjg0MGZjNWZkMjczMDU0Mjc3MTJjYTliNzExMWE4MjFmN2YwMjU1MTYzODdkYmU5N2UxZDc3OTdkNTRkODc1IiwidGFnIjoiIn0%3D; expires=Wed, 04 Feb 2026 16:01:58 GMT; Max-Age=7200; path=/; secure; httponly; samesite=none'
         description: null
     responseFields: []
     auth: []

@@ -4,7 +4,7 @@
     <meta charset="utf-8">
     <meta content="IE=edge,chrome=1" http-equiv="X-UA-Compatible">
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-    <title>laravel API Documentation</title>
+    <title>Al-Atheer Ecommerce API Documentation</title>
 
     <link href="https://fonts.googleapis.com/css?family=Open+Sans&display=swap" rel="stylesheet">
 
@@ -99,6 +99,9 @@ Invalidate the current API token and log out the user.</a>
                                     <ul id="tocify-subheader-products" class="tocify-subheader">
                                                     <li class="tocify-item level-2" data-unique="products-GETapi-products">
                                 <a href="#products-GETapi-products">List all products</a>
+                            </li>
+                                                                                <li class="tocify-item level-2" data-unique="products-POSTapi-products-find">
+                                <a href="#products-POSTapi-products-find">Find product by specifications</a>
                             </li>
                                                                                 <li class="tocify-item level-2" data-unique="products-GETapi-products--product_id-">
                                 <a href="#products-GETapi-products--product_id-">Get product details</a>
@@ -390,7 +393,7 @@ Invalidate the current API token and log out the user.</a>
     </ul>
 
     <ul class="toc-footer" id="last-updated">
-        <li>Last updated: February 2, 2026</li>
+        <li>Last updated: February 4, 2026</li>
     </ul>
 </div>
 
@@ -1379,6 +1382,275 @@ You can check the Dev Tools console for debugging information.</code></pre>
             </div>
                 </form>
 
+                    <h2 id="products-POSTapi-products-find">Find product by specifications</h2>
+
+<p>
+</p>
+
+<p>Retrieve a specific product by matching category, weight, and grind type.
+Useful for finding the exact product variant for shopping cart additions.
+Returns product data in both English and Arabic.</p>
+
+<span id="example-requests-POSTapi-products-find">
+<blockquote>Example request:</blockquote>
+
+
+<div class="bash-example">
+    <pre><code class="language-bash">curl --request POST \
+    "http://127.0.0.1:8000/api/products/find" \
+    --header "Content-Type: application/json" \
+    --header "Accept: application/json" \
+    --data "{
+    \"category\": \"\\\"Coffee Beans\\\"\",
+    \"weight\": 0.25,
+    \"grind_type\": \"\\\"medium\\\"\"
+}"
+</code></pre></div>
+
+
+<div class="javascript-example">
+    <pre><code class="language-javascript">const url = new URL(
+    "http://127.0.0.1:8000/api/products/find"
+);
+
+const headers = {
+    "Content-Type": "application/json",
+    "Accept": "application/json",
+};
+
+let body = {
+    "category": "\"Coffee Beans\"",
+    "weight": 0.25,
+    "grind_type": "\"medium\""
+};
+
+fetch(url, {
+    method: "POST",
+    headers,
+    body: JSON.stringify(body),
+}).then(response =&gt; response.json());</code></pre></div>
+
+
+<div class="php-example">
+    <pre><code class="language-php">$client = new \GuzzleHttp\Client();
+$url = 'http://127.0.0.1:8000/api/products/find';
+$response = $client-&gt;post(
+    $url,
+    [
+        'headers' =&gt; [
+            'Content-Type' =&gt; 'application/json',
+            'Accept' =&gt; 'application/json',
+        ],
+        'json' =&gt; [
+            'category' =&gt; '"Coffee Beans"',
+            'weight' =&gt; 0.25,
+            'grind_type' =&gt; '"medium"',
+        ],
+    ]
+);
+$body = $response-&gt;getBody();
+print_r(json_decode((string) $body));</code></pre></div>
+
+</span>
+
+<span id="example-responses-POSTapi-products-find">
+            <blockquote>
+            <p>Example response (200, Success):</p>
+        </blockquote>
+                <pre>
+
+<code class="language-json" style="max-height: 300px;">{
+    &quot;success&quot;: true,
+    &quot;data&quot;: {
+        &quot;en&quot;: {
+            &quot;id&quot;: 1,
+            &quot;name&quot;: &quot;Premium Coffee Beans&quot;,
+            &quot;slug&quot;: &quot;premium-coffee-beans&quot;,
+            &quot;description&quot;: &quot;High-quality arabica coffee beans&quot;,
+            &quot;price&quot;: 25,
+            &quot;cost&quot;: 15,
+            &quot;stock&quot;: 100,
+            &quot;sku&quot;: &quot;COF-001&quot;,
+            &quot;is_active&quot;: true,
+            &quot;grind_type&quot;: &quot;medium&quot;,
+            &quot;grind_type_label&quot;: &quot;Medium Grind&quot;,
+            &quot;weight&quot;: 0.25,
+            &quot;weight_label&quot;: &quot;250g&quot;,
+            &quot;category&quot;: {
+                &quot;name&quot;: &quot;Coffee Beans&quot;,
+                &quot;slug&quot;: &quot;coffee-beans&quot;
+            },
+            &quot;images&quot;: [
+                {
+                    &quot;url&quot;: &quot;https://example.com/storage/products/coffee-beans.jpg&quot;
+                }
+            ]
+        },
+        &quot;ar&quot;: {
+            &quot;name&quot;: &quot;حبوب قهوة ممتازة&quot;,
+            &quot;slug&quot;: &quot;premium-coffee-beans&quot;,
+            &quot;description&quot;: &quot;حبوب قهوة أرابيكا عالية الجودة&quot;,
+            &quot;price&quot;: 25,
+            &quot;cost&quot;: 15,
+            &quot;stock&quot;: 100,
+            &quot;sku&quot;: &quot;COF-001&quot;,
+            &quot;is_active&quot;: true,
+            &quot;grind_type&quot;: &quot;medium&quot;,
+            &quot;grind_type_label&quot;: &quot;طحن متوسط&quot;,
+            &quot;weight&quot;: 0.25,
+            &quot;weight_label&quot;: &quot;250 غرام&quot;,
+            &quot;category&quot;: {
+                &quot;name&quot;: &quot;حبوب القهوة&quot;,
+                &quot;slug&quot;: &quot;coffee-beans&quot;
+            },
+            &quot;images&quot;: [
+                {
+                    &quot;url&quot;: &quot;https://example.com/storage/products/coffee-beans.jpg&quot;
+                }
+            ]
+        }
+    }
+}</code>
+ </pre>
+            <blockquote>
+            <p>Example response (404, Not Found):</p>
+        </blockquote>
+                <pre>
+
+<code class="language-json" style="max-height: 300px;">{
+    &quot;success&quot;: false,
+    &quot;message&quot;: &quot;Product not found with these specifications&quot;
+}</code>
+ </pre>
+            <blockquote>
+            <p>Example response (422, Validation Error):</p>
+        </blockquote>
+                <pre>
+
+<code class="language-json" style="max-height: 300px;">{
+    &quot;success&quot;: false,
+    &quot;message&quot;: &quot;Validation failed&quot;,
+    &quot;errors&quot;: {
+        &quot;category&quot;: [
+            &quot;Invalid category. Valid categories are: Coffee Beans, Espresso, Tea&quot;
+        ],
+        &quot;grind_type&quot;: [
+            &quot;Invalid grind type. Valid types are: whole_bean, coarse, medium, fine, extra_fine&quot;
+        ]
+    }
+}</code>
+ </pre>
+    </span>
+<span id="execution-results-POSTapi-products-find" hidden>
+    <blockquote>Received response<span
+                id="execution-response-status-POSTapi-products-find"></span>:
+    </blockquote>
+    <pre class="json"><code id="execution-response-content-POSTapi-products-find"
+      data-empty-response-text="<Empty response>" style="max-height: 400px;"></code></pre>
+</span>
+<span id="execution-error-POSTapi-products-find" hidden>
+    <blockquote>Request failed with error:</blockquote>
+    <pre><code id="execution-error-message-POSTapi-products-find">
+
+Tip: Check that you&#039;re properly connected to the network.
+If you&#039;re a maintainer of ths API, verify that your API is running and you&#039;ve enabled CORS.
+You can check the Dev Tools console for debugging information.</code></pre>
+</span>
+<form id="form-POSTapi-products-find" data-method="POST"
+      data-path="api/products/find"
+      data-authed="0"
+      data-hasfiles="0"
+      data-isarraybody="0"
+      autocomplete="off"
+      onsubmit="event.preventDefault(); executeTryOut('POSTapi-products-find', this);">
+    <h3>
+        Request&nbsp;&nbsp;&nbsp;
+                    <button type="button"
+                    style="background-color: #8fbcd4; padding: 5px 10px; border-radius: 5px; border-width: thin;"
+                    id="btn-tryout-POSTapi-products-find"
+                    onclick="tryItOut('POSTapi-products-find');">Try it out ⚡
+            </button>
+            <button type="button"
+                    style="background-color: #c97a7e; padding: 5px 10px; border-radius: 5px; border-width: thin;"
+                    id="btn-canceltryout-POSTapi-products-find"
+                    onclick="cancelTryOut('POSTapi-products-find');" hidden>Cancel 🛑
+            </button>&nbsp;&nbsp;
+            <button type="submit"
+                    style="background-color: #6ac174; padding: 5px 10px; border-radius: 5px; border-width: thin;"
+                    id="btn-executetryout-POSTapi-products-find"
+                    data-initial-text="Send Request 💥"
+                    data-loading-text="⏱ Sending..."
+                    hidden>Send Request 💥
+            </button>
+            </h3>
+            <p>
+            <small class="badge badge-black">POST</small>
+            <b><code>api/products/find</code></b>
+        </p>
+                <h4 class="fancy-heading-panel"><b>Headers</b></h4>
+                                <div style="padding-left: 28px; clear: unset;">
+                <b style="line-height: 2;"><code>Content-Type</code></b>&nbsp;&nbsp;
+&nbsp;
+ &nbsp;
+ &nbsp;
+                <input type="text" style="display: none"
+                              name="Content-Type"                data-endpoint="POSTapi-products-find"
+               value="application/json"
+               data-component="header">
+    <br>
+<p>Example: <code>application/json</code></p>
+            </div>
+                                <div style="padding-left: 28px; clear: unset;">
+                <b style="line-height: 2;"><code>Accept</code></b>&nbsp;&nbsp;
+&nbsp;
+ &nbsp;
+ &nbsp;
+                <input type="text" style="display: none"
+                              name="Accept"                data-endpoint="POSTapi-products-find"
+               value="application/json"
+               data-component="header">
+    <br>
+<p>Example: <code>application/json</code></p>
+            </div>
+                                <h4 class="fancy-heading-panel"><b>Body Parameters</b></h4>
+        <div style=" padding-left: 28px;  clear: unset;">
+            <b style="line-height: 2;"><code>category</code></b>&nbsp;&nbsp;
+<small>string</small>&nbsp;
+ &nbsp;
+ &nbsp;
+                <input type="text" style="display: none"
+                              name="category"                data-endpoint="POSTapi-products-find"
+               value=""Coffee Beans""
+               data-component="body">
+    <br>
+<p>Category name, slug, or Arabic name. Example: <code>"Coffee Beans"</code></p>
+        </div>
+                <div style=" padding-left: 28px;  clear: unset;">
+            <b style="line-height: 2;"><code>weight</code></b>&nbsp;&nbsp;
+<small>number</small>&nbsp;
+ &nbsp;
+ &nbsp;
+                <input type="number" style="display: none"
+               step="any"               name="weight"                data-endpoint="POSTapi-products-find"
+               value="0.25"
+               data-component="body">
+    <br>
+<p>Product weight in kg. Example: <code>0.25</code></p>
+        </div>
+                <div style=" padding-left: 28px;  clear: unset;">
+            <b style="line-height: 2;"><code>grind_type</code></b>&nbsp;&nbsp;
+<small>string</small>&nbsp;
+ &nbsp;
+ &nbsp;
+                <input type="text" style="display: none"
+                              name="grind_type"                data-endpoint="POSTapi-products-find"
+               value=""medium""
+               data-component="body">
+    <br>
+<p>Grind type (whole_bean, coarse, medium, fine, extra_fine). Example: <code>"medium"</code></p>
+        </div>
+        </form>
+
                     <h2 id="products-GETapi-products--product_id-">Get product details</h2>
 
 <p>
@@ -1982,13 +2254,11 @@ You can check the Dev Tools console for debugging information.</code></pre>
     --form "stock=12"\
     --form "sku=architecto"\
     --form "category_id=architecto"\
-    --form "grind_type=extra_fine"\
-    --form "weight=1.000"\
     --form "product_details[][title_en]=n"\
     --form "product_details[][title_ar]=g"\
     --form "product_details[][value_en]=z"\
     --form "product_details[][value_ar]=m"\
-    --form "images[]=@C:\Users\adshift FrontEnd\AppData\Local\Temp\phpC986.tmp" </code></pre></div>
+    --form "images[]=@C:\Users\adshift FrontEnd\AppData\Local\Temp\php6DF.tmp" </code></pre></div>
 
 
 <div class="javascript-example">
@@ -2011,8 +2281,6 @@ body.append('cost', '84');
 body.append('stock', '12');
 body.append('sku', 'architecto');
 body.append('category_id', 'architecto');
-body.append('grind_type', 'extra_fine');
-body.append('weight', '1.000');
 body.append('product_details[][title_en]', 'n');
 body.append('product_details[][title_ar]', 'g');
 body.append('product_details[][value_en]', 'z');
@@ -2074,14 +2342,6 @@ $response = $client-&gt;post(
                 'contents' =&gt; 'architecto'
             ],
             [
-                'name' =&gt; 'grind_type',
-                'contents' =&gt; 'extra_fine'
-            ],
-            [
-                'name' =&gt; 'weight',
-                'contents' =&gt; '1.000'
-            ],
-            [
                 'name' =&gt; 'product_details[][title_en]',
                 'contents' =&gt; 'n'
             ],
@@ -2099,7 +2359,7 @@ $response = $client-&gt;post(
             ],
             [
                 'name' =&gt; 'images[]',
-                'contents' =&gt; fopen('C:\Users\adshift FrontEnd\AppData\Local\Temp\phpC986.tmp', 'r')
+                'contents' =&gt; fopen('C:\Users\adshift FrontEnd\AppData\Local\Temp\php6DF.tmp', 'r')
             ],
         ],
     ]
@@ -2298,26 +2558,22 @@ You can check the Dev Tools console for debugging information.</code></pre>
  &nbsp;
                 <input type="text" style="display: none"
                               name="grind_type"                data-endpoint="POSTapi-admin-products"
-               value="extra_fine"
+               value=""
                data-component="body">
     <br>
-<p>Example: <code>extra_fine</code></p>
-Must be one of:
-<ul style="list-style-type: square;"><li><code>whole_bean</code></li> <li><code>coarse</code></li> <li><code>medium</code></li> <li><code>fine</code></li> <li><code>extra_fine</code></li></ul>
+
         </div>
                 <div style=" padding-left: 28px;  clear: unset;">
             <b style="line-height: 2;"><code>weight</code></b>&nbsp;&nbsp;
-<small>number</small>&nbsp;
+<small>string</small>&nbsp;
 <i>optional</i> &nbsp;
  &nbsp;
-                <input type="number" style="display: none"
-               step="any"               name="weight"                data-endpoint="POSTapi-admin-products"
-               value="1.000"
+                <input type="text" style="display: none"
+                              name="weight"                data-endpoint="POSTapi-admin-products"
+               value=""
                data-component="body">
     <br>
-<p>Example: <code>1.000</code></p>
-Must be one of:
-<ul style="list-style-type: square;"><li><code>0.125</code></li> <li><code>0.250</code></li> <li><code>0.500</code></li> <li><code>1.000</code></li></ul>
+
         </div>
                 <div style=" padding-left: 28px;  clear: unset;">
         <details>
@@ -2736,7 +2992,7 @@ print_r(json_decode((string) $body));</code></pre></div>
 content-type: application/json
 access-control-allow-origin: http://localhost:3000
 access-control-allow-credentials: true
-set-cookie: laravel-session=eyJpdiI6IlozVGMvUnRPM09CTTNxaXRqc1pKSXc9PSIsInZhbHVlIjoiNHJUWW8xMGFVY3MrbGxocG5JWnU2U1V0UzdaaFgxSm9WV1FMWGkyV204cVRxSzZ3SHU0c0tkQ1hDdzBNWUdIMUNYVmJjY1NBZ3hQRnBqQW5PT1N3R1hIQjk5ZzBkMHJsTlNQNmp1OGUvbTB6REEyOCt5K0preU5PTXd3Y0pDNEEiLCJtYWMiOiJhYWQxZjM1ZjAyY2QxMjYyYmE4ZTg4ZGM0ZjM2NzhiOWUyMmU4M2Q3Y2NkNTA4N2NiZWJiYzYxYzJmYjM4NWM1IiwidGFnIjoiIn0%3D; expires=Mon, 02 Feb 2026 16:22:09 GMT; Max-Age=7200; path=/; secure; httponly; samesite=none
+set-cookie: al-atheer-ecommerce-session=eyJpdiI6IlhHblpJTi9mSEFHc2JTRmx2Q2wranc9PSIsInZhbHVlIjoibGZ2QWVTUzdrQ2Q0ZXRZOWlQemdkUTEyY2NzcnNlbDRqWXc0WitTdzRUNExKcE9GSmJ5c0lSdUtlcy81bUFnNVRIS1ZQdGJVazlXdUwybTdMcmVZNVJsK1hmTUxxSFBJZzdkNG9ONUJwWklxeUpZcXRSODNZdkxWb0VEcHdYenkiLCJtYWMiOiJiZjg0MGZjNWZkMjczMDU0Mjc3MTJjYTliNzExMWE4MjFmN2YwMjU1MTYzODdkYmU5N2UxZDc3OTdkNTRkODc1IiwidGFnIjoiIn0%3D; expires=Wed, 04 Feb 2026 16:01:58 GMT; Max-Age=7200; path=/; secure; httponly; samesite=none
  </code></pre></details>         <pre>
 
 <code class="language-json" style="max-height: 300px;">{
@@ -3595,7 +3851,7 @@ You can check the Dev Tools console for debugging information.</code></pre>
     --form "description=Premium coffee beans from around the world"\
     --form "description_ar=حبوب قهوة ممتازة من جميع أنحاء العالم"\
     --form "is_active=1"\
-    --form "image=@C:\Users\adshift FrontEnd\AppData\Local\Temp\phpC9C6.tmp" </code></pre></div>
+    --form "image=@C:\Users\adshift FrontEnd\AppData\Local\Temp\php74E.tmp" </code></pre></div>
 
 
 <div class="javascript-example">
@@ -3658,7 +3914,7 @@ $response = $client-&gt;post(
             ],
             [
                 'name' =&gt; 'image',
-                'contents' =&gt; fopen('C:\Users\adshift FrontEnd\AppData\Local\Temp\phpC9C6.tmp', 'r')
+                'contents' =&gt; fopen('C:\Users\adshift FrontEnd\AppData\Local\Temp\php74E.tmp', 'r')
             ],
         ],
     ]
@@ -3867,7 +4123,7 @@ You can check the Dev Tools console for debugging information.</code></pre>
                value=""
                data-component="body">
     <br>
-<p>The category image (jpeg, png, jpg, gif, webp, max 2MB). Example: <code>C:\Users\adshift FrontEnd\AppData\Local\Temp\phpC9C6.tmp</code></p>
+<p>The category image (jpeg, png, jpg, gif, webp, max 2MB). Example: <code>C:\Users\adshift FrontEnd\AppData\Local\Temp\php74E.tmp</code></p>
         </div>
         </form>
 
@@ -4089,7 +4345,7 @@ You can check the Dev Tools console for debugging information.</code></pre>
     --form "description_ar=architecto"\
     --form "is_active=1"\
     --form "remove_image="\
-    --form "image=@C:\Users\adshift FrontEnd\AppData\Local\Temp\phpC9C8.tmp" </code></pre></div>
+    --form "image=@C:\Users\adshift FrontEnd\AppData\Local\Temp\php760.tmp" </code></pre></div>
 
 
 <div class="javascript-example">
@@ -4157,7 +4413,7 @@ $response = $client-&gt;put(
             ],
             [
                 'name' =&gt; 'image',
-                'contents' =&gt; fopen('C:\Users\adshift FrontEnd\AppData\Local\Temp\phpC9C8.tmp', 'r')
+                'contents' =&gt; fopen('C:\Users\adshift FrontEnd\AppData\Local\Temp\php760.tmp', 'r')
             ],
         ],
     ]
@@ -4376,7 +4632,7 @@ You can check the Dev Tools console for debugging information.</code></pre>
                value=""
                data-component="body">
     <br>
-<p>The new category image (jpeg, png, jpg, gif, webp, max 2MB). Example: <code>C:\Users\adshift FrontEnd\AppData\Local\Temp\phpC9C8.tmp</code></p>
+<p>The new category image (jpeg, png, jpg, gif, webp, max 2MB). Example: <code>C:\Users\adshift FrontEnd\AppData\Local\Temp\php760.tmp</code></p>
         </div>
                 <div style=" padding-left: 28px;  clear: unset;">
             <b style="line-height: 2;"><code>remove_image</code></b>&nbsp;&nbsp;
@@ -8185,7 +8441,7 @@ You can check the Dev Tools console for debugging information.</code></pre>
 
 <div class="bash-example">
     <pre><code class="language-bash">curl --request GET \
-    --get "http://127.0.0.1:8000/api/orders/1" \
+    --get "http://127.0.0.1:8000/api/orders/16" \
     --header "Authorization: Bearer {YOUR_API_TOKEN}" \
     --header "Content-Type: application/json" \
     --header "Accept: application/json"</code></pre></div>
@@ -8193,7 +8449,7 @@ You can check the Dev Tools console for debugging information.</code></pre>
 
 <div class="javascript-example">
     <pre><code class="language-javascript">const url = new URL(
-    "http://127.0.0.1:8000/api/orders/1"
+    "http://127.0.0.1:8000/api/orders/16"
 );
 
 const headers = {
@@ -8210,7 +8466,7 @@ fetch(url, {
 
 <div class="php-example">
     <pre><code class="language-php">$client = new \GuzzleHttp\Client();
-$url = 'http://127.0.0.1:8000/api/orders/1';
+$url = 'http://127.0.0.1:8000/api/orders/16';
 $response = $client-&gt;get(
     $url,
     [
@@ -8369,10 +8625,10 @@ You can check the Dev Tools console for debugging information.</code></pre>
  &nbsp;
                 <input type="number" style="display: none"
                step="any"               name="order_id"                data-endpoint="GETapi-orders--order_id-"
-               value="1"
+               value="16"
                data-component="url">
     <br>
-<p>The ID of the order. Example: <code>1</code></p>
+<p>The ID of the order. Example: <code>16</code></p>
             </div>
                     <div style="padding-left: 28px; clear: unset;">
                 <b style="line-height: 2;"><code>order</code></b>&nbsp;&nbsp;
@@ -8402,7 +8658,7 @@ You can check the Dev Tools console for debugging information.</code></pre>
 
 <div class="bash-example">
     <pre><code class="language-bash">curl --request PATCH \
-    "http://127.0.0.1:8000/api/orders/1/status" \
+    "http://127.0.0.1:8000/api/orders/16/status" \
     --header "Authorization: Bearer {YOUR_API_TOKEN}" \
     --header "Content-Type: application/json" \
     --header "Accept: application/json" \
@@ -8416,7 +8672,7 @@ You can check the Dev Tools console for debugging information.</code></pre>
 
 <div class="javascript-example">
     <pre><code class="language-javascript">const url = new URL(
-    "http://127.0.0.1:8000/api/orders/1/status"
+    "http://127.0.0.1:8000/api/orders/16/status"
 );
 
 const headers = {
@@ -8440,7 +8696,7 @@ fetch(url, {
 
 <div class="php-example">
     <pre><code class="language-php">$client = new \GuzzleHttp\Client();
-$url = 'http://127.0.0.1:8000/api/orders/1/status';
+$url = 'http://127.0.0.1:8000/api/orders/16/status';
 $response = $client-&gt;patch(
     $url,
     [
@@ -8584,10 +8840,10 @@ You can check the Dev Tools console for debugging information.</code></pre>
  &nbsp;
                 <input type="number" style="display: none"
                step="any"               name="order_id"                data-endpoint="PATCHapi-orders--order_id--status"
-               value="1"
+               value="16"
                data-component="url">
     <br>
-<p>The ID of the order. Example: <code>1</code></p>
+<p>The ID of the order. Example: <code>16</code></p>
             </div>
                     <div style="padding-left: 28px; clear: unset;">
                 <b style="line-height: 2;"><code>order</code></b>&nbsp;&nbsp;
@@ -8654,7 +8910,7 @@ You can check the Dev Tools console for debugging information.</code></pre>
 
 <div class="bash-example">
     <pre><code class="language-bash">curl --request POST \
-    "http://127.0.0.1:8000/api/orders/1/cancel" \
+    "http://127.0.0.1:8000/api/orders/16/cancel" \
     --header "Authorization: Bearer {YOUR_API_TOKEN}" \
     --header "Content-Type: application/json" \
     --header "Accept: application/json"</code></pre></div>
@@ -8662,7 +8918,7 @@ You can check the Dev Tools console for debugging information.</code></pre>
 
 <div class="javascript-example">
     <pre><code class="language-javascript">const url = new URL(
-    "http://127.0.0.1:8000/api/orders/1/cancel"
+    "http://127.0.0.1:8000/api/orders/16/cancel"
 );
 
 const headers = {
@@ -8679,7 +8935,7 @@ fetch(url, {
 
 <div class="php-example">
     <pre><code class="language-php">$client = new \GuzzleHttp\Client();
-$url = 'http://127.0.0.1:8000/api/orders/1/cancel';
+$url = 'http://127.0.0.1:8000/api/orders/16/cancel';
 $response = $client-&gt;post(
     $url,
     [
@@ -8822,10 +9078,10 @@ You can check the Dev Tools console for debugging information.</code></pre>
  &nbsp;
                 <input type="number" style="display: none"
                step="any"               name="order_id"                data-endpoint="POSTapi-orders--order_id--cancel"
-               value="1"
+               value="16"
                data-component="url">
     <br>
-<p>The ID of the order. Example: <code>1</code></p>
+<p>The ID of the order. Example: <code>16</code></p>
             </div>
                     <div style="padding-left: 28px; clear: unset;">
                 <b style="line-height: 2;"><code>order</code></b>&nbsp;&nbsp;
@@ -10234,14 +10490,14 @@ Returns complete team member data including all images and social media links.</
 
 <div class="bash-example">
     <pre><code class="language-bash">curl --request GET \
-    --get "http://127.0.0.1:8000/api/admin/team-members/1" \
+    --get "http://127.0.0.1:8000/api/admin/team-members/16" \
     --header "Content-Type: application/json" \
     --header "Accept: application/json"</code></pre></div>
 
 
 <div class="javascript-example">
     <pre><code class="language-javascript">const url = new URL(
-    "http://127.0.0.1:8000/api/admin/team-members/1"
+    "http://127.0.0.1:8000/api/admin/team-members/16"
 );
 
 const headers = {
@@ -10257,7 +10513,7 @@ fetch(url, {
 
 <div class="php-example">
     <pre><code class="language-php">$client = new \GuzzleHttp\Client();
-$url = 'http://127.0.0.1:8000/api/admin/team-members/1';
+$url = 'http://127.0.0.1:8000/api/admin/team-members/16';
 $response = $client-&gt;get(
     $url,
     [
@@ -10400,10 +10656,10 @@ You can check the Dev Tools console for debugging information.</code></pre>
  &nbsp;
                 <input type="number" style="display: none"
                step="any"               name="teamMember_id"                data-endpoint="GETapi-admin-team-members--teamMember_id-"
-               value="1"
+               value="16"
                data-component="url">
     <br>
-<p>The ID of the teamMember. Example: <code>1</code></p>
+<p>The ID of the teamMember. Example: <code>16</code></p>
             </div>
                     <div style="padding-left: 28px; clear: unset;">
                 <b style="line-height: 2;"><code>teamMember</code></b>&nbsp;&nbsp;
@@ -11256,7 +11512,7 @@ You can check the Dev Tools console for debugging information.</code></pre>
 
 <div class="bash-example">
     <pre><code class="language-bash">curl --request GET \
-    --get "http://127.0.0.1:8000/api/addresses/2" \
+    --get "http://127.0.0.1:8000/api/addresses/16" \
     --header "Authorization: Bearer {YOUR_API_TOKEN}" \
     --header "Content-Type: application/json" \
     --header "Accept: application/json"</code></pre></div>
@@ -11264,7 +11520,7 @@ You can check the Dev Tools console for debugging information.</code></pre>
 
 <div class="javascript-example">
     <pre><code class="language-javascript">const url = new URL(
-    "http://127.0.0.1:8000/api/addresses/2"
+    "http://127.0.0.1:8000/api/addresses/16"
 );
 
 const headers = {
@@ -11281,7 +11537,7 @@ fetch(url, {
 
 <div class="php-example">
     <pre><code class="language-php">$client = new \GuzzleHttp\Client();
-$url = 'http://127.0.0.1:8000/api/addresses/2';
+$url = 'http://127.0.0.1:8000/api/addresses/16';
 $response = $client-&gt;get(
     $url,
     [
@@ -11440,10 +11696,10 @@ You can check the Dev Tools console for debugging information.</code></pre>
  &nbsp;
                 <input type="number" style="display: none"
                step="any"               name="address_id"                data-endpoint="GETapi-addresses--address_id-"
-               value="2"
+               value="16"
                data-component="url">
     <br>
-<p>The ID of the address. Example: <code>2</code></p>
+<p>The ID of the address. Example: <code>16</code></p>
             </div>
                     <div style="padding-left: 28px; clear: unset;">
                 <b style="line-height: 2;"><code>address</code></b>&nbsp;&nbsp;
@@ -11474,7 +11730,7 @@ If is_default is set to true, all other addresses will be unset as default.</p>
 
 <div class="bash-example">
     <pre><code class="language-bash">curl --request PUT \
-    "http://127.0.0.1:8000/api/addresses/2" \
+    "http://127.0.0.1:8000/api/addresses/16" \
     --header "Authorization: Bearer {YOUR_API_TOKEN}" \
     --header "Content-Type: application/json" \
     --header "Accept: application/json" \
@@ -11501,7 +11757,7 @@ If is_default is set to true, all other addresses will be unset as default.</p>
 
 <div class="javascript-example">
     <pre><code class="language-javascript">const url = new URL(
-    "http://127.0.0.1:8000/api/addresses/2"
+    "http://127.0.0.1:8000/api/addresses/16"
 );
 
 const headers = {
@@ -11538,7 +11794,7 @@ fetch(url, {
 
 <div class="php-example">
     <pre><code class="language-php">$client = new \GuzzleHttp\Client();
-$url = 'http://127.0.0.1:8000/api/addresses/2';
+$url = 'http://127.0.0.1:8000/api/addresses/16';
 $response = $client-&gt;put(
     $url,
     [
@@ -11730,10 +11986,10 @@ You can check the Dev Tools console for debugging information.</code></pre>
  &nbsp;
                 <input type="number" style="display: none"
                step="any"               name="address_id"                data-endpoint="PUTapi-addresses--address_id-"
-               value="2"
+               value="16"
                data-component="url">
     <br>
-<p>The ID of the address. Example: <code>2</code></p>
+<p>The ID of the address. Example: <code>16</code></p>
             </div>
                     <div style="padding-left: 28px; clear: unset;">
                 <b style="line-height: 2;"><code>address</code></b>&nbsp;&nbsp;
@@ -11986,7 +12242,7 @@ You can check the Dev Tools console for debugging information.</code></pre>
 
 <div class="bash-example">
     <pre><code class="language-bash">curl --request DELETE \
-    "http://127.0.0.1:8000/api/addresses/2" \
+    "http://127.0.0.1:8000/api/addresses/16" \
     --header "Authorization: Bearer {YOUR_API_TOKEN}" \
     --header "Content-Type: application/json" \
     --header "Accept: application/json"</code></pre></div>
@@ -11994,7 +12250,7 @@ You can check the Dev Tools console for debugging information.</code></pre>
 
 <div class="javascript-example">
     <pre><code class="language-javascript">const url = new URL(
-    "http://127.0.0.1:8000/api/addresses/2"
+    "http://127.0.0.1:8000/api/addresses/16"
 );
 
 const headers = {
@@ -12011,7 +12267,7 @@ fetch(url, {
 
 <div class="php-example">
     <pre><code class="language-php">$client = new \GuzzleHttp\Client();
-$url = 'http://127.0.0.1:8000/api/addresses/2';
+$url = 'http://127.0.0.1:8000/api/addresses/16';
 $response = $client-&gt;delete(
     $url,
     [
@@ -12149,10 +12405,10 @@ You can check the Dev Tools console for debugging information.</code></pre>
  &nbsp;
                 <input type="number" style="display: none"
                step="any"               name="address_id"                data-endpoint="DELETEapi-addresses--address_id-"
-               value="2"
+               value="16"
                data-component="url">
     <br>
-<p>The ID of the address. Example: <code>2</code></p>
+<p>The ID of the address. Example: <code>16</code></p>
             </div>
                     <div style="padding-left: 28px; clear: unset;">
                 <b style="line-height: 2;"><code>address</code></b>&nbsp;&nbsp;
@@ -12183,7 +12439,7 @@ All other addresses will be unset as default.</p>
 
 <div class="bash-example">
     <pre><code class="language-bash">curl --request PATCH \
-    "http://127.0.0.1:8000/api/addresses/2/default" \
+    "http://127.0.0.1:8000/api/addresses/16/default" \
     --header "Authorization: Bearer {YOUR_API_TOKEN}" \
     --header "Content-Type: application/json" \
     --header "Accept: application/json"</code></pre></div>
@@ -12191,7 +12447,7 @@ All other addresses will be unset as default.</p>
 
 <div class="javascript-example">
     <pre><code class="language-javascript">const url = new URL(
-    "http://127.0.0.1:8000/api/addresses/2/default"
+    "http://127.0.0.1:8000/api/addresses/16/default"
 );
 
 const headers = {
@@ -12208,7 +12464,7 @@ fetch(url, {
 
 <div class="php-example">
     <pre><code class="language-php">$client = new \GuzzleHttp\Client();
-$url = 'http://127.0.0.1:8000/api/addresses/2/default';
+$url = 'http://127.0.0.1:8000/api/addresses/16/default';
 $response = $client-&gt;patch(
     $url,
     [
@@ -12368,10 +12624,10 @@ You can check the Dev Tools console for debugging information.</code></pre>
  &nbsp;
                 <input type="number" style="display: none"
                step="any"               name="address_id"                data-endpoint="PATCHapi-addresses--address_id--default"
-               value="2"
+               value="16"
                data-component="url">
     <br>
-<p>The ID of the address. Example: <code>2</code></p>
+<p>The ID of the address. Example: <code>16</code></p>
             </div>
                     <div style="padding-left: 28px; clear: unset;">
                 <b style="line-height: 2;"><code>address</code></b>&nbsp;&nbsp;
@@ -12454,7 +12710,7 @@ print_r(json_decode((string) $body));</code></pre></div>
 content-type: application/json
 access-control-allow-origin: http://localhost:3000
 access-control-allow-credentials: true
-set-cookie: laravel-session=eyJpdiI6Im1IRHRrYm9XbEdQUG5WRGVQbWZvb0E9PSIsInZhbHVlIjoiNENQVTZPc1JkR3oxRVdjNDlFc0wxenRpM01SUXoyYm1pUkNEaG1IdFg3eklVUHpDNk92TmpIODRPWTkxdXoxTUI1b3N0NG0vRDBGbzJNZE50bFdBZU9vbm9KQ0wrWG9JMmJMaTIvb0dBWnpvTmV1YjNPdWhqRmZqTjZPVW92cEciLCJtYWMiOiIzYmZjMzM2ODg4MjNhM2YzNjNmMjE1YWFlZTYzYTcwZjNkMjJkMDQ0MTk2YjJmNDVjMmU1NWU2MDY5YTI3Yzc5IiwidGFnIjoiIn0%3D; expires=Mon, 02 Feb 2026 16:22:08 GMT; Max-Age=7200; path=/; secure; httponly; samesite=none
+set-cookie: al-atheer-ecommerce-session=eyJpdiI6IkNlcDhqUDhsNnpiUmtGMW13dkZOaHc9PSIsInZhbHVlIjoiZ2tGbHpCcElrVlQrV2NRTUt5ZGpyWE9wRmx5dVRaT0cvdktIcG1lbmdCNjlVOWhwYjE4eVNmYU5ySFlyZitiRG1WaEpIK0ZVSFZOUDFEMDlQS2cxQUhYbGY0K3ozVmF3RmFYWmRqeXFNMjcrQk9oY0FIeFh2ZHlBN3UyRmdTWG4iLCJtYWMiOiIzNDYxYTlmNzNjZmY0ZjEyMWEyNzE1MWU1MzcwMmIxMWU1ZDdiOTJlZWIzZDRjZDk3NDE4YTljZmY4YjFjNTBiIiwidGFnIjoiIn0%3D; expires=Wed, 04 Feb 2026 16:01:57 GMT; Max-Age=7200; path=/; secure; httponly; samesite=none
  </code></pre></details>         <pre>
 
 <code class="language-json" style="max-height: 300px;">{
@@ -12634,7 +12890,7 @@ print_r(json_decode((string) $body));</code></pre></div>
 content-type: application/json
 access-control-allow-origin: http://localhost:3000
 access-control-allow-credentials: true
-set-cookie: laravel-session=eyJpdiI6IjUyVkJ5akVjR2FzeU1PcnNwNHZuZ1E9PSIsInZhbHVlIjoiT1E1eVVkUnZjQ3dHcE9GM2ExbHN0MGI2WW0vNm9TYVhwdUxMS2w4Z0oyRlhacnlmRTB1V2hxdlVmVmdhdEhUZ3Z2VmFCenlSdkpFZlFESUoxRlZsMnlLUURKR2syOEd5SmJrNmtxa1FvSnhQVjJBaUlCcDlJRWRzaW9FdG5zZGgiLCJtYWMiOiI3MTUyMzRkYzg5MjI3YzNkY2VmMjZhYjAzNTkyOWJlOGQ2NTEyZmExYWI1OWQ0YWI4YTgwYTQ5ODYxNWYxODgyIiwidGFnIjoiIn0%3D; expires=Mon, 02 Feb 2026 16:22:09 GMT; Max-Age=7200; path=/; secure; httponly; samesite=none
+set-cookie: al-atheer-ecommerce-session=eyJpdiI6InlvUU12M3J1MWpzUVVHb2tLV3RNTVE9PSIsInZhbHVlIjoiL0J5U2dYN1NiK0VBZGRLa0Zyc0Z1OVY3ek54MEZkMWk4eHRGT0tEbTBldEJVTXNKTFBRQjJpQjV3VmtUUHYyMDc4VTBzUlhIaThxL0pMVlVUaHRJZzNpYnVzTjBVc05xN3o0WG84QkpFdnhUWFRLNGl0cU5jdU1WZjE4UGJjaXEiLCJtYWMiOiJjYTE0MWFhMjQ4NDU4MWIxNmUxNjZlMTA5YjM2ZDBmZTU1MTA5YjNmN2IxMWM4MGYyNTdiYmQ2ZWFiMmZlMjY1IiwidGFnIjoiIn0%3D; expires=Wed, 04 Feb 2026 16:01:58 GMT; Max-Age=7200; path=/; secure; httponly; samesite=none
  </code></pre></details>         <pre>
 
 <code class="language-json" style="max-height: 300px;">{
@@ -12778,7 +13034,7 @@ print_r(json_decode((string) $body));</code></pre></div>
 content-type: application/json
 access-control-allow-origin: http://localhost:3000
 access-control-allow-credentials: true
-set-cookie: laravel-session=eyJpdiI6InFUWFVzbUxaM214Lzc2eGhjaWlGUVE9PSIsInZhbHVlIjoiVmNadzY0a2Rya1RKcW9NUk1zRmsyNDA2cHI4dlo3UWJzSmJkWVBLU2M1WUFFNFpPS0x0VXo0c3BwVnJsRExRYm9mbk54NWE3Z3lQaWcwUFJ3Wnc5OGVoZlNtekNpcjV1ZzgxaldSb2E4VVFyb2hVcTdyYjNBYzdodXVHdmFqVkwiLCJtYWMiOiI5MzI2NGFjMjE2NmM0NTU5MTQyZTdkMjI1NDU5MzBlNmY2ZGQzNzA4ZGFiNzZkMzBhOWY4YTljMTlhYzAyMzkxIiwidGFnIjoiIn0%3D; expires=Mon, 02 Feb 2026 16:22:09 GMT; Max-Age=7200; path=/; secure; httponly; samesite=none
+set-cookie: al-atheer-ecommerce-session=eyJpdiI6IjA2L0o3ayt1amkraTlBQmtVbk5SVFE9PSIsInZhbHVlIjoiK3UrbG5OOU5YNE5vQklrS2s2cVFZb2xZVytMMG5iZ1dEMCt5SVQwamRCNjI3MmVpVlM4RnFyMmFvNm02QWl4N1BzWVI2cUR6cTIwQStiajVjbHBGZmcyWEZiS3NlbCtQY1N5QTBqQzJnZXF4L2ZYUnhFL2M4RDQxcWpnSTJkS2oiLCJtYWMiOiJkMWJlNTA1YTYyMWMwNjIyYTZlMTE5ZGZkMTM5MmZlOTQzZDU5NGVjMmVlZGFmN2NkYmM1MzM3NWYwNTU4NjFmIiwidGFnIjoiIn0%3D; expires=Wed, 04 Feb 2026 16:01:58 GMT; Max-Age=7200; path=/; secure; httponly; samesite=none
  </code></pre></details>         <pre>
 
 <code class="language-json" style="max-height: 300px;">{
@@ -12922,7 +13178,7 @@ print_r(json_decode((string) $body));</code></pre></div>
 content-type: application/json
 access-control-allow-origin: http://localhost:3000
 access-control-allow-credentials: true
-set-cookie: laravel-session=eyJpdiI6IkZod0gvdUNrSHVBcHlyNkUzR3gzNUE9PSIsInZhbHVlIjoiSmk2K1F2c1lTRHBsODZLZ2xtMVcyOGlXc01kNm9MRFpqMXJ6ZHFWeU9IQzNMZ1BBZGdWZ1NrY1phcjdXQkJ4a3VBUFNuOUU5VVp1b2ZKSW53YkxzUnFuL0puY2MrMnR2ekNuOXJpcW1WM0h4ek0vYWU0c2xxdDhLM2VQTm9iN2giLCJtYWMiOiJjZTg3MDc5ODQxOGM1YzdmZmUwNmIyMmEzN2I1YzY1OWE2ZDk3OGRmMDVhNzMyMjQyMjE4NWQ3N2FhZTkxZGVmIiwidGFnIjoiIn0%3D; expires=Mon, 02 Feb 2026 16:22:09 GMT; Max-Age=7200; path=/; secure; httponly; samesite=none
+set-cookie: al-atheer-ecommerce-session=eyJpdiI6Im1kb1JIazhlL05nekI1MzhXUTI0b1E9PSIsInZhbHVlIjoiNFRJQkVZZHhtYzNCRzlJb3NQc3BMZTVZdjMrYm94ZE9Hb0FaR3U2N0tKK0RlSVZkK3hoaGxhZVJ1ZGdzUml4dnF2QUs0NXpnUjgrVjBkWVI3THlMeEU5c214YXlJV3NFS1dIN0poUVNXc3V4MFh3N3pnTDJZNVVCVmVQOVl4ZEQiLCJtYWMiOiJlMTY3NTMyODBkMDIyZjlkMWNlNDVmNDJhMTMyYmU2Y2JiOTY4MzAzYWQ3MGEwZDYyYWI5MGYzNjgyNWZhNjk5IiwidGFnIjoiIn0%3D; expires=Wed, 04 Feb 2026 16:01:58 GMT; Max-Age=7200; path=/; secure; httponly; samesite=none
  </code></pre></details>         <pre>
 
 <code class="language-json" style="max-height: 300px;">{
@@ -13066,7 +13322,7 @@ print_r(json_decode((string) $body));</code></pre></div>
 content-type: application/json
 access-control-allow-origin: http://localhost:3000
 access-control-allow-credentials: true
-set-cookie: laravel-session=eyJpdiI6IkJ3RE1heUJ1czZtMFU0aUd2dU9zbmc9PSIsInZhbHVlIjoicXhtNUM0Zk9PKzlHMUxxNks1Q1Rid1hzQ01VSFFIR2VNK1lhQXV2c3gwcTZ4RG9kdTE5akJxbnczUC9BS0RoYnQ3Q2NVSHdEdlA5QjlLb1dFOHliZTVyUWpsTk1xbEQ5ZzJnYkVDZEROcnNGdktFcWN2KzB2akkrQTMwNDlpZ0giLCJtYWMiOiI5YTE0ZjdkNTk4ZWExYjkxZmUyYzExMWIxZjQwNDc5N2RkODExNDEzYzM3YjljYzc1YWZkY2E4MWY2MDc5NjMzIiwidGFnIjoiIn0%3D; expires=Mon, 02 Feb 2026 16:22:09 GMT; Max-Age=7200; path=/; secure; httponly; samesite=none
+set-cookie: al-atheer-ecommerce-session=eyJpdiI6Ikp3dFRaOHdENGVFTFRta0hSZ3hiY3c9PSIsInZhbHVlIjoibFFsQkdjWE8xVVM1V240ajlFd29URENoUXVpWE1PVmFhbEVHTjk0WXhTeC92T3EvYmFUZXZOaks3WXRjS0ZIVTczb05Wd25paTIwTFI0dk15NUl3NkhTWCsveVZYOEV0djdnYzlGalRTc0dzd2FCY0hKSEg2ZEdDMVJiYUJrOTYiLCJtYWMiOiJmZGIzZmVlMDJjNTAxMGVjZTQ1YzVkOTk2NzUyOTAyYzJkMzIzNGM1MWVlNzU2MWFmZDk0YzVhZDEwZmE4YzFlIiwidGFnIjoiIn0%3D; expires=Wed, 04 Feb 2026 16:01:58 GMT; Max-Age=7200; path=/; secure; httponly; samesite=none
  </code></pre></details>         <pre>
 
 <code class="language-json" style="max-height: 300px;">{
@@ -13210,7 +13466,7 @@ print_r(json_decode((string) $body));</code></pre></div>
 content-type: application/json
 access-control-allow-origin: http://localhost:3000
 access-control-allow-credentials: true
-set-cookie: laravel-session=eyJpdiI6ImJ2TXYxRnpFSnl5YTdHQU9RYmNKOXc9PSIsInZhbHVlIjoiL0t4WUpmRjdTb3diOEhvUzYwUndwUTJUN1d2WWpDVVQwOXg2aUNYa0daTUt2UWVPTHd5N1ZLWEcrMVFTR0tmRTArVksxd1QxdVdxS01MY1VOL2k5NkQ0d244Z2VsQndtWE5lMU92Vkw3eFVvbktvdDZGQjE0OWdLUlgrc0lRalAiLCJtYWMiOiJjZDA2YzhmZDViZTBmMzNkZGY4OGExODNmYWRkYjhmOTAwOTA3YzFjMTRjNDJjNzllM2IzZGZhMzE0NDgwYjMyIiwidGFnIjoiIn0%3D; expires=Mon, 02 Feb 2026 16:22:09 GMT; Max-Age=7200; path=/; secure; httponly; samesite=none
+set-cookie: al-atheer-ecommerce-session=eyJpdiI6IjhRcjNJY1JwNTk1aUxXdXRkOEduRHc9PSIsInZhbHVlIjoiRytNU1ZuQm5iMGlLMi96bWRVUVdSenZaVGpzcEJQc3paYTN4cEFKKzJuYWFaejRweXNPRXY0Y1hXSmZWQkhRbDJ4NGJPaUtqNXl6R3FzQW92SjEzUVdKdXNDcmp3TG90VE5xUUR2Q09RQVgza2R2a0hsbTgvUXNpOUpPQjBiSEsiLCJtYWMiOiI1NTVlYTA2ZDM3NDY3NTRiZDUxNjk5MTBlODQzMWZhYjkxYmY1M2FhYzlmYzdlOWI1M2ExYTBmYjcxZjUyMmRhIiwidGFnIjoiIn0%3D; expires=Wed, 04 Feb 2026 16:01:58 GMT; Max-Age=7200; path=/; secure; httponly; samesite=none
  </code></pre></details>         <pre>
 
 <code class="language-json" style="max-height: 300px;">{
@@ -13354,7 +13610,7 @@ print_r(json_decode((string) $body));</code></pre></div>
 content-type: application/json
 access-control-allow-origin: http://localhost:3000
 access-control-allow-credentials: true
-set-cookie: laravel-session=eyJpdiI6IkFGbUhNbTNOdjFoY29tZ1pyZkdCN1E9PSIsInZhbHVlIjoiMjloRldIWGpFQW9WMFZjclBTbnU2QnN4RHFESXRaTTVPVmZOcFZqMGRXOTdXTFJZdWJHZGVRNld5YlIxRUtzWDlFWDhyWlZpYWdKclcybEtucldCQnFRcmk2ckV3RmhFYnhRbHliRGNINlpKMzFNWi9GSytVM0E2MFdnVG1PRlIiLCJtYWMiOiJlM2E4MzA4NzM3ZTZiOTM0YWQwYjkzN2EwMWVlMDk4ZTJhY2IyOWNjOWQ4MzM0ZWM1MzZmMDdjNThlZDQ1MWVlIiwidGFnIjoiIn0%3D; expires=Mon, 02 Feb 2026 16:22:09 GMT; Max-Age=7200; path=/; secure; httponly; samesite=none
+set-cookie: al-atheer-ecommerce-session=eyJpdiI6IjdiMXBPSkgzTWFrekMzUlpZQlVvOWc9PSIsInZhbHVlIjoiMHAvMU1Ddys4Q0RqbDNpdEVjRktabGI5clc3L3BqYVZLemlmZVJ2OXl0ODZEZGNNNHE4L3F2dHZiT24wQnowRHljeHJsYjJ5Rml4RTlLQ3FEbXBoS1A4Mi8rYlh3UWdrRDVvcWJIVnRnZi9kNTBRRmZYY29NY2tobll6TlpxbUYiLCJtYWMiOiIyMTc4MGI0Zjc4NjgzYmNiYTYxZjMzOGZmMGUxYzQ5MDZmNjRhNmFjNTQ5ZTkzODQ0MTIwYjkwMzFjZWI0MjZlIiwidGFnIjoiIn0%3D; expires=Wed, 04 Feb 2026 16:01:58 GMT; Max-Age=7200; path=/; secure; httponly; samesite=none
  </code></pre></details>         <pre>
 
 <code class="language-json" style="max-height: 300px;">{
@@ -13771,7 +14027,7 @@ print_r(json_decode((string) $body));</code></pre></div>
 content-type: application/json
 access-control-allow-origin: http://localhost:3000
 access-control-allow-credentials: true
-set-cookie: laravel-session=eyJpdiI6InRSMnJITWJTYmhQOGhjUktOMnY1UEE9PSIsInZhbHVlIjoiMVpnU2NPZkViSGw0S3Bndzg4OGh5TXJxZTJnZHVPVDdNd0FBUzNTeENNRXR6U241RFpOb1k3YkwwTmpiN1pLWk9TbSt5c0JMeWtuK3YzOEFGUE5sdVA2bW1kMWlDZUtnb1JFeWN2Lzd4K0x1NzBKakF5YklXN0E2enh3dERXbzUiLCJtYWMiOiJhMjFmMDZhNjA0ODkwN2U2YTE4Y2M3ODBiMTg2YTM1MTE1NzJjMThhOTFiNjI5NTk3OTIxOGM2Zjg1MjY3MTI5IiwidGFnIjoiIn0%3D; expires=Mon, 02 Feb 2026 16:22:09 GMT; Max-Age=7200; path=/; secure; httponly; samesite=none
+set-cookie: al-atheer-ecommerce-session=eyJpdiI6InVmTi9FUnJ6cFFORFZmMmF1NmJjTnc9PSIsInZhbHVlIjoiUEJCRHdWNEczc2ZnbVZoZ3ZDZlc0MXR2MzJpNUlhM0Iyb2g2UWU2S0krZkhrTUNEbXUxeVg5clBrY0s4alRTRDlSQkM4ckMraDZpTTRza0xRaEh3QTBTNmptWDdhRFF4TjdVa0prMG5WSTFMNkIwN0F5bUdNSFpYdzA2cFNmQ2MiLCJtYWMiOiI4NmVmMTQyZmVhOTNlYTUwYWUwZTJjZmM1ZjNkYWY4NmM2YWNjY2VkMWI3ZmRiZjRiMTgyMDMyMjFmMTI1MmY5IiwidGFnIjoiIn0%3D; expires=Wed, 04 Feb 2026 16:01:58 GMT; Max-Age=7200; path=/; secure; httponly; samesite=none
  </code></pre></details>         <pre>
 
 <code class="language-json" style="max-height: 300px;">{
@@ -13888,7 +14144,7 @@ You can check the Dev Tools console for debugging information.</code></pre>
     \"company\": \"y\",
     \"service\": \"u\",
     \"message\": \"architecto\",
-    \"status\": \"closed\"
+    \"status\": \"replied\"
 }"
 </code></pre></div>
 
@@ -13910,7 +14166,7 @@ let body = {
     "company": "y",
     "service": "u",
     "message": "architecto",
-    "status": "closed"
+    "status": "replied"
 };
 
 fetch(url, {
@@ -13937,7 +14193,7 @@ $response = $client-&gt;put(
             'company' =&gt; 'y',
             'service' =&gt; 'u',
             'message' =&gt; 'architecto',
-            'status' =&gt; 'closed',
+            'status' =&gt; 'replied',
         ],
     ]
 );
@@ -14124,10 +14380,10 @@ You can check the Dev Tools console for debugging information.</code></pre>
  &nbsp;
                 <input type="text" style="display: none"
                               name="status"                data-endpoint="PUTapi-contact-inquiries--inquiry_id-"
-               value="closed"
+               value="replied"
                data-component="body">
     <br>
-<p>Example: <code>closed</code></p>
+<p>Example: <code>replied</code></p>
 Must be one of:
 <ul style="list-style-type: square;"><li><code>pending</code></li> <li><code>replied</code></li> <li><code>closed</code></li></ul>
         </div>
@@ -14765,7 +15021,7 @@ location: http://localhost:3000/checkout_confirmation?payment_status=failed
 content-type: text/html; charset=utf-8
 access-control-allow-origin: http://localhost:3000
 access-control-allow-credentials: true
-set-cookie: laravel-session=eyJpdiI6IlJCKzhmTlhXSEh3S1Jqa09QZ2NtTXc9PSIsInZhbHVlIjoiYjhhUWZaTFlSV3JhRnNnb0FFTkg0VWExMzNwRlBlR0hnVXp5MFBYdW9QUk1SUW4yekhmV3lXcXlxTFhJdEExWkU0VXpMWVpnQ1BqZmxFS05SZTlhYXR0U0FZSEI3UERURVY3VkNZcmJSdnR4SWpNRzd1eTY4VXRnNlNjMDJWOFIiLCJtYWMiOiIxNDU1OTEwOTQwNTg1MzRkMDhlNGYxM2NlYmUyZDhhYTYyN2IyNTc0MzA1MWI0ZTFhNjlkYjc0MjM1ZjAyMDg4IiwidGFnIjoiIn0%3D; expires=Mon, 02 Feb 2026 16:22:09 GMT; Max-Age=7200; path=/; secure; httponly; samesite=none
+set-cookie: al-atheer-ecommerce-session=eyJpdiI6IkFqbHVqSjB3VWVBdk94TFlmOTBTOEE9PSIsInZhbHVlIjoibTFxK0FnZ1MvZHFMMVRKcitId2JIL0RWS0JtRDBMM2UrdkxqZ1k0YlpRenVBbDgzelh5SkRDa05HRVljTzR0bE9nWlQ5b3FlVlQrem1adWZmT01EQmEwL2E5dG5aMXpFcGkvT0huQmVpaWE0aC9VMWg1ZHJyTVdpMXpMd1BWY0MiLCJtYWMiOiIzNWU5Mzk5ZDhmM2NjODM0NGIwMDE3NjFiY2EyZmUyODQ4OTBjYTNjYTFmMWY1OTVkZmFlNjIyMTc4OWNiZjZhIiwidGFnIjoiIn0%3D; expires=Wed, 04 Feb 2026 16:01:59 GMT; Max-Age=7200; path=/; secure; httponly; samesite=none
  </code></pre></details>         <pre>
 
 <code class="language-json" style="max-height: 300px;">&lt;!DOCTYPE html&gt;
@@ -15382,7 +15638,7 @@ print_r(json_decode((string) $body));</code></pre></div>
 content-type: application/json
 access-control-allow-origin: http://localhost:3000
 access-control-allow-credentials: true
-set-cookie: laravel-session=eyJpdiI6ImtaaVhFcXJBREtvYjU5R3psdkJaTHc9PSIsInZhbHVlIjoiKzB0QjFsbEdHVFNyTmczek1YL05hUHI5R1dYVlhvREY1WTZKWlEyNTJOZVNGWWd2TUdadmxLY3YvODlHbjJaSFpKdjlFRDBYeTZ1VXdCdXlLMTFIT0x3dVU5VHd2cUlERlFJc3ROSk8yaUZtTzZFN2xNTFIrUnZMY1N4dHVHY0giLCJtYWMiOiIyMjUzYTExMzRhODFhYTc1MTY5Mjc5N2MyMjhhOGU2MzI3MDkzNGRlYzIwNzVjMmQzMWFjZmY5ZjUzODkxYTBlIiwidGFnIjoiIn0%3D; expires=Mon, 02 Feb 2026 16:22:10 GMT; Max-Age=7200; path=/; secure; httponly; samesite=none
+set-cookie: al-atheer-ecommerce-session=eyJpdiI6IjlFWldaZUJrMVN0bGNiMHVFS1ZjR1E9PSIsInZhbHVlIjoiU0lUUmpvbFh6c3FqRFJNcDlPMVAvZnNpV1pjRmNacnVnWjVzMHkzWTJ2ckgzYXpNZzRnQ3ptb0IxM2RRWG4vQ0FWOWJDQXNkTjNvYnRIbDU3Sy9BcVYrVk9zWnFWNFdkZG1tVCtDQThMZTZGSUtCRGNsYW1KS0ZnQWo2bjlMaEMiLCJtYWMiOiI5N2JiYzIwMTFlYTAyNjlmNjM5NjQ4ZWE1MTdmMzQxM2U4ZTRlY2U4MjI2MzMxMmI5MjhjOWQ5NDY0N2Q2YjAzIiwidGFnIjoiIn0%3D; expires=Wed, 04 Feb 2026 16:02:01 GMT; Max-Age=7200; path=/; secure; httponly; samesite=none
  </code></pre></details>         <pre>
 
 <code class="language-json" style="max-height: 300px;">{
@@ -15672,7 +15928,7 @@ You can check the Dev Tools console for debugging information.</code></pre>
     --header "Content-Type: application/json" \
     --header "Accept: application/json" \
     --data "{
-    \"scheduledDate\": \"2052-02-26\",
+    \"scheduledDate\": \"2052-02-28\",
     \"businessLocationId\": \"architecto\",
     \"contactPerson\": {
         \"name\": \"architecto\",
@@ -15682,14 +15938,14 @@ You can check the Dev Tools console for debugging information.</code></pre>
     },
     \"notes\": \"architecto\",
     \"noOfPackages\": 22,
-    \"packageType\": \"Heavy Bulky\",
+    \"packageType\": \"Normal\",
     \"repeatedData\": {
-        \"repeatedType\": \"Weekly\",
+        \"repeatedType\": \"Daily\",
         \"days\": [
-            \"Thursday\"
+            \"Tuesday\"
         ],
-        \"startDate\": \"2026-02-02T14:22:10\",
-        \"endDate\": \"2052-02-26\"
+        \"startDate\": \"2026-02-04T14:02:01\",
+        \"endDate\": \"2052-02-28\"
     }
 }"
 </code></pre></div>
@@ -15706,7 +15962,7 @@ const headers = {
 };
 
 let body = {
-    "scheduledDate": "2052-02-26",
+    "scheduledDate": "2052-02-28",
     "businessLocationId": "architecto",
     "contactPerson": {
         "name": "architecto",
@@ -15716,14 +15972,14 @@ let body = {
     },
     "notes": "architecto",
     "noOfPackages": 22,
-    "packageType": "Heavy Bulky",
+    "packageType": "Normal",
     "repeatedData": {
-        "repeatedType": "Weekly",
+        "repeatedType": "Daily",
         "days": [
-            "Thursday"
+            "Tuesday"
         ],
-        "startDate": "2026-02-02T14:22:10",
-        "endDate": "2052-02-26"
+        "startDate": "2026-02-04T14:02:01",
+        "endDate": "2052-02-28"
     }
 };
 
@@ -15745,7 +16001,7 @@ $response = $client-&gt;post(
             'Accept' =&gt; 'application/json',
         ],
         'json' =&gt; [
-            'scheduledDate' =&gt; '2052-02-26',
+            'scheduledDate' =&gt; '2052-02-28',
             'businessLocationId' =&gt; 'architecto',
             'contactPerson' =&gt; [
                 'name' =&gt; 'architecto',
@@ -15755,14 +16011,14 @@ $response = $client-&gt;post(
             ],
             'notes' =&gt; 'architecto',
             'noOfPackages' =&gt; 22,
-            'packageType' =&gt; 'Heavy Bulky',
+            'packageType' =&gt; 'Normal',
             'repeatedData' =&gt; [
-                'repeatedType' =&gt; 'Weekly',
+                'repeatedType' =&gt; 'Daily',
                 'days' =&gt; [
-                    'Thursday',
+                    'Tuesday',
                 ],
-                'startDate' =&gt; '2026-02-02T14:22:10',
-                'endDate' =&gt; '2052-02-26',
+                'startDate' =&gt; '2026-02-04T14:02:01',
+                'endDate' =&gt; '2052-02-28',
             ],
         ],
     ]
@@ -15853,10 +16109,10 @@ You can check the Dev Tools console for debugging information.</code></pre>
  &nbsp;
                 <input type="text" style="display: none"
                               name="scheduledDate"                data-endpoint="POSTapi-pickups"
-               value="2052-02-26"
+               value="2052-02-28"
                data-component="body">
     <br>
-<p>Must be a valid date. Must be a date after <code>today</code>. Example: <code>2052-02-26</code></p>
+<p>Must be a valid date. Must be a date after <code>today</code>. Example: <code>2052-02-28</code></p>
         </div>
                 <div style=" padding-left: 28px;  clear: unset;">
             <b style="line-height: 2;"><code>businessLocationId</code></b>&nbsp;&nbsp;
@@ -15961,10 +16217,10 @@ You can check the Dev Tools console for debugging information.</code></pre>
  &nbsp;
                 <input type="text" style="display: none"
                               name="packageType"                data-endpoint="POSTapi-pickups"
-               value="Heavy Bulky"
+               value="Normal"
                data-component="body">
     <br>
-<p>Example: <code>Heavy Bulky</code></p>
+<p>Example: <code>Normal</code></p>
 Must be one of:
 <ul style="list-style-type: square;"><li><code>Normal</code></li> <li><code>Light Bulky</code></li> <li><code>Heavy Bulky</code></li></ul>
         </div>
@@ -15985,10 +16241,10 @@ Must be one of:
  &nbsp;
                 <input type="text" style="display: none"
                               name="repeatedData.repeatedType"                data-endpoint="POSTapi-pickups"
-               value="Weekly"
+               value="Daily"
                data-component="body">
     <br>
-<p>Example: <code>Weekly</code></p>
+<p>Example: <code>Daily</code></p>
 Must be one of:
 <ul style="list-style-type: square;"><li><code>One Time</code></li> <li><code>Daily</code></li> <li><code>Weekly</code></li></ul>
                     </div>
@@ -16015,10 +16271,10 @@ Must be one of:
  &nbsp;
                 <input type="text" style="display: none"
                               name="repeatedData.startDate"                data-endpoint="POSTapi-pickups"
-               value="2026-02-02T14:22:10"
+               value="2026-02-04T14:02:01"
                data-component="body">
     <br>
-<p>Must be a valid date. Example: <code>2026-02-02T14:22:10</code></p>
+<p>Must be a valid date. Example: <code>2026-02-04T14:02:01</code></p>
                     </div>
                                                                 <div style="margin-left: 14px; clear: unset;">
                         <b style="line-height: 2;"><code>endDate</code></b>&nbsp;&nbsp;
@@ -16027,10 +16283,10 @@ Must be one of:
  &nbsp;
                 <input type="text" style="display: none"
                               name="repeatedData.endDate"                data-endpoint="POSTapi-pickups"
-               value="2052-02-26"
+               value="2052-02-28"
                data-component="body">
     <br>
-<p>Must be a valid date. Must be a date after <code>repeatedData.startDate</code>. Example: <code>2052-02-26</code></p>
+<p>Must be a valid date. Must be a date after <code>repeatedData.startDate</code>. Example: <code>2052-02-28</code></p>
                     </div>
                                     </details>
         </div>
@@ -16697,7 +16953,7 @@ print_r(json_decode((string) $body));</code></pre></div>
 content-type: application/json
 access-control-allow-origin: http://localhost:3000
 access-control-allow-credentials: true
-set-cookie: laravel-session=eyJpdiI6ImorWk9zVGl1Rldka0NndVM0TmsvY1E9PSIsInZhbHVlIjoiYnN0SDBSZkRXRDF3ZXVFQWdwZXk4TXl2bnhlWldPUnpwcjg5M1pwcDBicUdPSVZNWkZsbWpPWjJ2eWFJWlQ1dTB6QWNrZHdGR3dqd0drQ0p1WWtKOElCWTRuUVhiRHh2NmljbzZvWFRhNjY5dk5lVGkzY1VEYUowbzh2Y3h4RkQiLCJtYWMiOiI4Y2NkYjI3ZTc0ZmU2MzUyMWY0MGYzNTcwNTNlMWZlMTc1YWJlYWI4NDlhMWJmYzZhOWZhN2U5ODcwM2MyYTI4IiwidGFnIjoiIn0%3D; expires=Mon, 02 Feb 2026 16:22:10 GMT; Max-Age=7200; path=/; secure; httponly; samesite=none
+set-cookie: al-atheer-ecommerce-session=eyJpdiI6IlZQYThzVW0wSVZ2YzJMT2p4MzNtNnc9PSIsInZhbHVlIjoieUVSK1RzV1lMUXM3RWNkMG0zZDc0ckZ4VmlrU1RvLzlhelRPR2tuNVZxWlVIMVZJR1BrRC9oaFl3OEowODNqNFFYdDVDSUYyR2xwTzRwUUJBczVwRVNia1hvanNGYkpDdXdoRkFCR085ZWJVd2pZRGRGQjhPdXN0azVqZU5OVzQiLCJtYWMiOiI2OWUwNTFlNWYwMDFhNjVjMjUxOTNiNDY1NjdhN2M0ZGJmMjM4YWVhOWM4YWMyMTAzMjY2N2ViZWU0NzgxZDc2IiwidGFnIjoiIn0%3D; expires=Wed, 04 Feb 2026 16:02:01 GMT; Max-Age=7200; path=/; secure; httponly; samesite=none
  </code></pre></details>         <pre>
 
 <code class="language-json" style="max-height: 300px;">{
@@ -16717,7 +16973,7 @@ set-cookie: laravel-session=eyJpdiI6ImorWk9zVGl1Rldka0NndVM0TmsvY1E9PSIsInZhbHVl
         &quot;MAIL_USERNAME&quot;: &quot;ahmadkholy98@gmail.com&quot;,
         &quot;MAIL_PASSWORD&quot;: &quot;akcynlcfghdfxjrq&quot;,
         &quot;MAIL_FROM_ADDRESS&quot;: &quot;ahmadkholy98@gmail.com&quot;,
-        &quot;MAIL_FROM_NAME&quot;: &quot;laravel&quot;
+        &quot;MAIL_FROM_NAME&quot;: &quot;Al-Atheer Ecommerce&quot;
     }
 }</code>
  </pre>
