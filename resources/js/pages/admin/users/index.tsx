@@ -71,7 +71,7 @@ export default function UsersIndex({ users, filters }: Props) {
 
     const handleDelete = () => {
         if (deleteUser) {
-            destroy(deleteUser.id, {
+            destroy(`users/${deleteUser.id}`, {
                 onSuccess: () => setDeleteUser(null),
             });
         }

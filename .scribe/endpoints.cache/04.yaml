@@ -38,7 +38,7 @@ endpoints:
           content-type: application/json
           access-control-allow-origin: 'http://localhost:3000'
           access-control-allow-credentials: 'true'
-          set-cookie: 'laravel-session=eyJpdiI6Im1IRHRrYm9XbEdQUG5WRGVQbWZvb0E9PSIsInZhbHVlIjoiNENQVTZPc1JkR3oxRVdjNDlFc0wxenRpM01SUXoyYm1pUkNEaG1IdFg3eklVUHpDNk92TmpIODRPWTkxdXoxTUI1b3N0NG0vRDBGbzJNZE50bFdBZU9vbm9KQ0wrWG9JMmJMaTIvb0dBWnpvTmV1YjNPdWhqRmZqTjZPVW92cEciLCJtYWMiOiIzYmZjMzM2ODg4MjNhM2YzNjNmMjE1YWFlZTYzYTcwZjNkMjJkMDQ0MTk2YjJmNDVjMmU1NWU2MDY5YTI3Yzc5IiwidGFnIjoiIn0%3D; expires=Mon, 02 Feb 2026 16:22:08 GMT; Max-Age=7200; path=/; secure; httponly; samesite=none'
+          set-cookie: 'al-atheer-ecommerce-session=eyJpdiI6IldjYktrZ0tvd2Z3S1pkaDRGTzBOWHc9PSIsInZhbHVlIjoiUTQ5YkJNNTdWL29ZZ3YyTEQyQ2I0UFNIODRqcUdST2tIeTVsNys5YXdBVllTZm9Udmo5ZEEvUzhLL0c3YjJhN3dMMW1mVmVKYldUMWJPTzlFMEtEWUIyeHZpdGNiSjBBanBaUjJ3M2REa2R3OVc4ZGhNUXVvSmxUVStNeEc3OWIiLCJtYWMiOiI2ZTQ1Mjc5YmI3OTczNzMzNTIwZTgwNjM4Yzc1ODcwMzgxOTA3NzFjZGQzZjEwYTdlYmUxNTlmYmRkMWU1YWMzIiwidGFnIjoiIn0%3D; expires=Thu, 05 Feb 2026 13:29:08 GMT; Max-Age=7200; path=/; secure; httponly; samesite=none'
         description: null
     responseFields: []
     auth: []
@@ -80,7 +80,7 @@ endpoints:
           content-type: application/json
           access-control-allow-origin: 'http://localhost:3000'
           access-control-allow-credentials: 'true'
-          set-cookie: 'laravel-session=eyJpdiI6IjUyVkJ5akVjR2FzeU1PcnNwNHZuZ1E9PSIsInZhbHVlIjoiT1E1eVVkUnZjQ3dHcE9GM2ExbHN0MGI2WW0vNm9TYVhwdUxMS2w4Z0oyRlhacnlmRTB1V2hxdlVmVmdhdEhUZ3Z2VmFCenlSdkpFZlFESUoxRlZsMnlLUURKR2syOEd5SmJrNmtxa1FvSnhQVjJBaUlCcDlJRWRzaW9FdG5zZGgiLCJtYWMiOiI3MTUyMzRkYzg5MjI3YzNkY2VmMjZhYjAzNTkyOWJlOGQ2NTEyZmExYWI1OWQ0YWI4YTgwYTQ5ODYxNWYxODgyIiwidGFnIjoiIn0%3D; expires=Mon, 02 Feb 2026 16:22:09 GMT; Max-Age=7200; path=/; secure; httponly; samesite=none'
+          set-cookie: 'al-atheer-ecommerce-session=eyJpdiI6IkZWZ3kwWUdoU3Y1WTk5NlE2aWgxY2c9PSIsInZhbHVlIjoiWThMUk9PSlhNbUVGWHJITkVWc1NyWlM4dTB4ZExLZWYwSDFsNUh0Ujc3aFdKVEhlQTFSbjFRR0NzdFdMUTBpNVR5djdSc3VCcmdMNmxjTTlaNFFvTFJWU3EzK0pnV000UmhoZXRxZnVQRENOcUJTSzdkWklCeUJXK1h0TlV6dEwiLCJtYWMiOiI3NDc0MDRiOGEwMGM5ODhjNjI3MDkwOTJiOTRlZjFmYzcxMTAyNGVjOTEwYjEzNzgyMGIyYjNiZGZiNzM5OGU1IiwidGFnIjoiIn0%3D; expires=Thu, 05 Feb 2026 13:29:08 GMT; Max-Age=7200; path=/; secure; httponly; samesite=none'
         description: null
     responseFields: []
     auth: []
@@ -122,7 +122,7 @@ endpoints:
           content-type: application/json
           access-control-allow-origin: 'http://localhost:3000'
           access-control-allow-credentials: 'true'
-          set-cookie: 'laravel-session=eyJpdiI6InFUWFVzbUxaM214Lzc2eGhjaWlGUVE9PSIsInZhbHVlIjoiVmNadzY0a2Rya1RKcW9NUk1zRmsyNDA2cHI4dlo3UWJzSmJkWVBLU2M1WUFFNFpPS0x0VXo0c3BwVnJsRExRYm9mbk54NWE3Z3lQaWcwUFJ3Wnc5OGVoZlNtekNpcjV1ZzgxaldSb2E4VVFyb2hVcTdyYjNBYzdodXVHdmFqVkwiLCJtYWMiOiI5MzI2NGFjMjE2NmM0NTU5MTQyZTdkMjI1NDU5MzBlNmY2ZGQzNzA4ZGFiNzZkMzBhOWY4YTljMTlhYzAyMzkxIiwidGFnIjoiIn0%3D; expires=Mon, 02 Feb 2026 16:22:09 GMT; Max-Age=7200; path=/; secure; httponly; samesite=none'
+          set-cookie: 'al-atheer-ecommerce-session=eyJpdiI6Ijd5czNoUkxJZng0MWRLZFo3NmFqYWc9PSIsInZhbHVlIjoiczQ3TmFjT2hsa0FrVTBiU21xeFZWckJIMENicHZzbDArb3grdjE3UFZld3oyQmFrUDd4dEFyaHRxQlBkSEkrd203OUxrWTlTK0pHNzVwV1NhZTVZTSt5L0xBcTFDVFcxbWpyYXM4Z1lFYmlzY3I1SzZ5QW1ic211UWpRUlZpUFIiLCJtYWMiOiI0NGM1YTkzMjA5YmVhYWQ3MmY4MTFlYjBkMGJiNDhhOWRiNzY5NmViMzgzZWI0ODQwNzA1MWEyMDRmNzYwMzExIiwidGFnIjoiIn0%3D; expires=Thu, 05 Feb 2026 13:29:08 GMT; Max-Age=7200; path=/; secure; httponly; samesite=none'
         description: null
     responseFields: []
     auth: []
@@ -164,7 +164,7 @@ endpoints:
           content-type: application/json
           access-control-allow-origin: 'http://localhost:3000'
           access-control-allow-credentials: 'true'
-          set-cookie: 'laravel-session=eyJpdiI6IkZod0gvdUNrSHVBcHlyNkUzR3gzNUE9PSIsInZhbHVlIjoiSmk2K1F2c1lTRHBsODZLZ2xtMVcyOGlXc01kNm9MRFpqMXJ6ZHFWeU9IQzNMZ1BBZGdWZ1NrY1phcjdXQkJ4a3VBUFNuOUU5VVp1b2ZKSW53YkxzUnFuL0puY2MrMnR2ekNuOXJpcW1WM0h4ek0vYWU0c2xxdDhLM2VQTm9iN2giLCJtYWMiOiJjZTg3MDc5ODQxOGM1YzdmZmUwNmIyMmEzN2I1YzY1OWE2ZDk3OGRmMDVhNzMyMjQyMjE4NWQ3N2FhZTkxZGVmIiwidGFnIjoiIn0%3D; expires=Mon, 02 Feb 2026 16:22:09 GMT; Max-Age=7200; path=/; secure; httponly; samesite=none'
+          set-cookie: 'al-atheer-ecommerce-session=eyJpdiI6Im12T25uN3NMZjh6TlBqdzRLTmFNZFE9PSIsInZhbHVlIjoiTm5yei9MSlVEUVhHK3d2dkh4ZGpJaW1yZ3B0NDZjaEMwU0dRUkN6M1J2a3hUakVsb28zL2tsdXZNSTZyMXI3RExMRVZYL3hUOXVtOW1BdE45Q2Q0N2pseVo3SmRwekZRbFlYbGlUUFNVeHpxa1YxOER1Y05scWMzcHM1Yi9IWE8iLCJtYWMiOiI2NzliYTQwZDcwOTcyZWFjMTMyYTY0ODUwNzMwZjdkNDgxNTI2MGY3ZTE5NjA0NDMzNjQ2ODUwOWI1ZmMyMWRjIiwidGFnIjoiIn0%3D; expires=Thu, 05 Feb 2026 13:29:08 GMT; Max-Age=7200; path=/; secure; httponly; samesite=none'
         description: null
     responseFields: []
     auth: []
@@ -206,7 +206,7 @@ endpoints:
           content-type: application/json
           access-control-allow-origin: 'http://localhost:3000'
           access-control-allow-credentials: 'true'
-          set-cookie: 'laravel-session=eyJpdiI6IkJ3RE1heUJ1czZtMFU0aUd2dU9zbmc9PSIsInZhbHVlIjoicXhtNUM0Zk9PKzlHMUxxNks1Q1Rid1hzQ01VSFFIR2VNK1lhQXV2c3gwcTZ4RG9kdTE5akJxbnczUC9BS0RoYnQ3Q2NVSHdEdlA5QjlLb1dFOHliZTVyUWpsTk1xbEQ5ZzJnYkVDZEROcnNGdktFcWN2KzB2akkrQTMwNDlpZ0giLCJtYWMiOiI5YTE0ZjdkNTk4ZWExYjkxZmUyYzExMWIxZjQwNDc5N2RkODExNDEzYzM3YjljYzc1YWZkY2E4MWY2MDc5NjMzIiwidGFnIjoiIn0%3D; expires=Mon, 02 Feb 2026 16:22:09 GMT; Max-Age=7200; path=/; secure; httponly; samesite=none'
+          set-cookie: 'al-atheer-ecommerce-session=eyJpdiI6ImhCMW9MVi9JVjRKaGtIOCt1ck92eEE9PSIsInZhbHVlIjoieFVpV0RkMHY0V0Q4cnd0bkhwVjhXSHVMWGN4QXd3Y2JId1NvazJKUjd2aDgrTTFHVXFudnNkVHdjMlo2Nlh0WXlOM3owbzc1QVdRTWdZSWVwV2tMdWRXMzVQcHJXYU1iaGVRZXBuK1hRcThMUWVYOVlIMStGdy9MbE52U3dNN0IiLCJtYWMiOiIxNzA3OWRmOTI2ODJiNzdjZjViOGFlYmU5OGIxNWRmMTQzZjE2NzIyNjZlMDY2ZDhmNzU2YTRkNjk0MDFlZWFkIiwidGFnIjoiIn0%3D; expires=Thu, 05 Feb 2026 13:29:08 GMT; Max-Age=7200; path=/; secure; httponly; samesite=none'
         description: null
     responseFields: []
     auth: []
@@ -248,503 +248,8 @@ endpoints:
           content-type: application/json
           access-control-allow-origin: 'http://localhost:3000'
           access-control-allow-credentials: 'true'
-          set-cookie: 'laravel-session=eyJpdiI6ImJ2TXYxRnpFSnl5YTdHQU9RYmNKOXc9PSIsInZhbHVlIjoiL0t4WUpmRjdTb3diOEhvUzYwUndwUTJUN1d2WWpDVVQwOXg2aUNYa0daTUt2UWVPTHd5N1ZLWEcrMVFTR0tmRTArVksxd1QxdVdxS01MY1VOL2k5NkQ0d244Z2VsQndtWE5lMU92Vkw3eFVvbktvdDZGQjE0OWdLUlgrc0lRalAiLCJtYWMiOiJjZDA2YzhmZDViZTBmMzNkZGY4OGExODNmYWRkYjhmOTAwOTA3YzFjMTRjNDJjNzllM2IzZGZhMzE0NDgwYjMyIiwidGFnIjoiIn0%3D; expires=Mon, 02 Feb 2026 16:22:09 GMT; Max-Age=7200; path=/; secure; httponly; samesite=none'
+          set-cookie: 'al-atheer-ecommerce-session=eyJpdiI6InpWYmVsSGc0Sy8zUnB6MVZOTFoyVWc9PSIsInZhbHVlIjoiV2MyclArSTlody9aYWdFNlZuVmQwd3Z5VEx4WVZ4V1puTzgxdUVEU3c3cmQvSUkzTFNaTk82SEQ1TENkamo4Y04vQ09EYmlZcnZCdWV5QVJ0ZmQ0VlRyOGVNTzRWdE9nOEIwQkVEeDhlaUQwdmNxRkpGVG9aSkVHdCtNcTlWZkkiLCJtYWMiOiIwN2JlMDQ1YTUyN2Q3NjY1Y2ExNDNlMjQ4NjRmNWVhOTYyNGM1NTFjNTZlOTQ0M2ZjN2FkMTNlNGVkYTQ4ZjhkIiwidGFnIjoiIn0%3D; expires=Thu, 05 Feb 2026 13:29:08 GMT; Max-Age=7200; path=/; secure; httponly; samesite=none'
         description: null
-    responseFields: []
-    auth: []
-    controller: null
-    method: null
-    route: null
-  -
-    custom: []
-    httpMethods:
-      - GET
-    uri: api/contact-inquiries
-    metadata:
-      custom: []
-      groupName: Endpoints
-      groupDescription: ''
-      subgroup: ''
-      subgroupDescription: ''
-      title: 'Display a listing of contact inquiries.'
-      description: ''
-      authenticated: false
-      deprecated: false
-    headers:
-      Content-Type: application/json
-      Accept: application/json
-    urlParameters: []
-    cleanUrlParameters: []
-    queryParameters: []
-    cleanQueryParameters: []
-    bodyParameters: []
-    cleanBodyParameters: []
-    fileParameters: []
-    responses:
-      -
-        custom: []
-        status: 200
-        content: '{"data":[],"links":{"first":"http:\/\/127.0.0.1:8000\/api\/contact-inquiries?page=1","last":"http:\/\/127.0.0.1:8000\/api\/contact-inquiries?page=1","prev":null,"next":null},"meta":{"current_page":1,"from":null,"last_page":1,"links":[{"url":null,"label":"&laquo; Previous","page":null,"active":false},{"url":"http:\/\/127.0.0.1:8000\/api\/contact-inquiries?page=1","label":"1","page":1,"active":true},{"url":null,"label":"Next &raquo;","page":null,"active":false}],"path":"http:\/\/127.0.0.1:8000\/api\/contact-inquiries","per_page":15,"to":null,"total":0}}'
-        headers:
-          cache-control: 'no-cache, private'
-          content-type: application/json
-          access-control-allow-origin: 'http://localhost:3000'
-          access-control-allow-credentials: 'true'
-          set-cookie: 'laravel-session=eyJpdiI6IkFGbUhNbTNOdjFoY29tZ1pyZkdCN1E9PSIsInZhbHVlIjoiMjloRldIWGpFQW9WMFZjclBTbnU2QnN4RHFESXRaTTVPVmZOcFZqMGRXOTdXTFJZdWJHZGVRNld5YlIxRUtzWDlFWDhyWlZpYWdKclcybEtucldCQnFRcmk2ckV3RmhFYnhRbHliRGNINlpKMzFNWi9GSytVM0E2MFdnVG1PRlIiLCJtYWMiOiJlM2E4MzA4NzM3ZTZiOTM0YWQwYjkzN2EwMWVlMDk4ZTJhY2IyOWNjOWQ4MzM0ZWM1MzZmMDdjNThlZDQ1MWVlIiwidGFnIjoiIn0%3D; expires=Mon, 02 Feb 2026 16:22:09 GMT; Max-Age=7200; path=/; secure; httponly; samesite=none'
-        description: null
-    responseFields: []
-    auth: []
-    controller: null
-    method: null
-    route: null
-  -
-    custom: []
-    httpMethods:
-      - POST
-    uri: api/contact-inquiries
-    metadata:
-      custom: []
-      groupName: Endpoints
-      groupDescription: ''
-      subgroup: ''
-      subgroupDescription: ''
-      title: 'Store a newly created contact inquiry in storage.'
-      description: ''
-      authenticated: false
-      deprecated: false
-    headers:
-      Content-Type: application/json
-      Accept: application/json
-    urlParameters: []
-    cleanUrlParameters: []
-    queryParameters: []
-    cleanQueryParameters: []
-    bodyParameters:
-      full_name:
-        custom: []
-        name: full_name
-        description: 'Must not be greater than 255 characters.'
-        required: true
-        example: b
-        type: string
-        enumValues: []
-        exampleWasSpecified: false
-        nullable: false
-        deprecated: false
-      email:
-        custom: []
-        name: email
-        description: 'Must be a valid email address. Must not be greater than 255 characters.'
-        required: true
-        example: zbailey@example.net
-        type: string
-        enumValues: []
-        exampleWasSpecified: false
-        nullable: false
-        deprecated: false
-      phone:
-        custom: []
-        name: phone
-        description: 'Must not be greater than 20 characters.'
-        required: false
-        example: iyvdljnikhwaykcm
-        type: string
-        enumValues: []
-        exampleWasSpecified: false
-        nullable: true
-        deprecated: false
-      company:
-        custom: []
-        name: company
-        description: 'Must not be greater than 255 characters.'
-        required: false
-        example: 'y'
-        type: string
-        enumValues: []
-        exampleWasSpecified: false
-        nullable: true
-        deprecated: false
-      service_id:
-        custom: []
-        name: service_id
-        description: 'The <code>id</code> of an existing record in the services table.'
-        required: false
-        example: null
-        type: string
-        enumValues: []
-        exampleWasSpecified: false
-        nullable: true
-        deprecated: false
-      service:
-        custom: []
-        name: service
-        description: 'Must not be greater than 255 characters.'
-        required: false
-        example: u
-        type: string
-        enumValues: []
-        exampleWasSpecified: false
-        nullable: true
-        deprecated: false
-      message:
-        custom: []
-        name: message
-        description: 'Keep for backward compatibility.'
-        required: true
-        example: architecto
-        type: string
-        enumValues: []
-        exampleWasSpecified: false
-        nullable: false
-        deprecated: false
-    cleanBodyParameters:
-      full_name: b
-      email: zbailey@example.net
-      phone: iyvdljnikhwaykcm
-      company: 'y'
-      service: u
-      message: architecto
-    fileParameters: []
-    responses: []
-    responseFields: []
-    auth: []
-    controller: null
-    method: null
-    route: null
-  -
-    custom: []
-    httpMethods:
-      - GET
-    uri: 'api/contact-inquiries/{inquiry_id}'
-    metadata:
-      custom: []
-      groupName: Endpoints
-      groupDescription: ''
-      subgroup: ''
-      subgroupDescription: ''
-      title: 'Display the specified contact inquiry.'
-      description: ''
-      authenticated: false
-      deprecated: false
-    headers:
-      Content-Type: application/json
-      Accept: application/json
-    urlParameters:
-      inquiry_id:
-        custom: []
-        name: inquiry_id
-        description: 'The ID of the inquiry.'
-        required: true
-        example: 16
-        type: integer
-        enumValues: []
-        exampleWasSpecified: false
-        nullable: false
-        deprecated: false
-    cleanUrlParameters:
-      inquiry_id: 16
-    queryParameters: []
-    cleanQueryParameters: []
-    bodyParameters: []
-    cleanBodyParameters: []
-    fileParameters: []
-    responses:
-      -
-        custom: []
-        status: 404
-        content: |-
-          {
-              "message": "No query results for model [App\\Models\\ContactInquiry] 16"
-          }
-        headers:
-          cache-control: 'no-cache, private'
-          content-type: application/json
-          access-control-allow-origin: 'http://localhost:3000'
-          access-control-allow-credentials: 'true'
-          set-cookie: 'laravel-session=eyJpdiI6InRSMnJITWJTYmhQOGhjUktOMnY1UEE9PSIsInZhbHVlIjoiMVpnU2NPZkViSGw0S3Bndzg4OGh5TXJxZTJnZHVPVDdNd0FBUzNTeENNRXR6U241RFpOb1k3YkwwTmpiN1pLWk9TbSt5c0JMeWtuK3YzOEFGUE5sdVA2bW1kMWlDZUtnb1JFeWN2Lzd4K0x1NzBKakF5YklXN0E2enh3dERXbzUiLCJtYWMiOiJhMjFmMDZhNjA0ODkwN2U2YTE4Y2M3ODBiMTg2YTM1MTE1NzJjMThhOTFiNjI5NTk3OTIxOGM2Zjg1MjY3MTI5IiwidGFnIjoiIn0%3D; expires=Mon, 02 Feb 2026 16:22:09 GMT; Max-Age=7200; path=/; secure; httponly; samesite=none'
-        description: null
-    responseFields: []
-    auth: []
-    controller: null
-    method: null
-    route: null
-  -
-    custom: []
-    httpMethods:
-      - PUT
-    uri: 'api/contact-inquiries/{inquiry_id}'
-    metadata:
-      custom: []
-      groupName: Endpoints
-      groupDescription: ''
-      subgroup: ''
-      subgroupDescription: ''
-      title: 'Update the specified contact inquiry in storage.'
-      description: ''
-      authenticated: false
-      deprecated: false
-    headers:
-      Content-Type: application/json
-      Accept: application/json
-    urlParameters:
-      inquiry_id:
-        custom: []
-        name: inquiry_id
-        description: 'The ID of the inquiry.'
-        required: true
-        example: 16
-        type: integer
-        enumValues: []
-        exampleWasSpecified: false
-        nullable: false
-        deprecated: false
-    cleanUrlParameters:
-      inquiry_id: 16
-    queryParameters: []
-    cleanQueryParameters: []
-    bodyParameters:
-      full_name:
-        custom: []
-        name: full_name
-        description: 'Must not be greater than 255 characters.'
-        required: false
-        example: b
-        type: string
-        enumValues: []
-        exampleWasSpecified: false
-        nullable: false
-        deprecated: false
-      email:
-        custom: []
-        name: email
-        description: 'Must be a valid email address. Must not be greater than 255 characters.'
-        required: false
-        example: zbailey@example.net
-        type: string
-        enumValues: []
-        exampleWasSpecified: false
-        nullable: false
-        deprecated: false
-      phone:
-        custom: []
-        name: phone
-        description: 'Must not be greater than 20 characters.'
-        required: false
-        example: iyvdljnikhwaykcm
-        type: string
-        enumValues: []
-        exampleWasSpecified: false
-        nullable: true
-        deprecated: false
-      company:
-        custom: []
-        name: company
-        description: 'Must not be greater than 255 characters.'
-        required: false
-        example: 'y'
-        type: string
-        enumValues: []
-        exampleWasSpecified: false
-        nullable: true
-        deprecated: false
-      service_id:
-        custom: []
-        name: service_id
-        description: 'The <code>id</code> of an existing record in the services table.'
-        required: false
-        example: null
-        type: string
-        enumValues: []
-        exampleWasSpecified: false
-        nullable: true
-        deprecated: false
-      service:
-        custom: []
-        name: service
-        description: 'Must not be greater than 255 characters.'
-        required: false
-        example: u
-        type: string
-        enumValues: []
-        exampleWasSpecified: false
-        nullable: true
-        deprecated: false
-      message:
-        custom: []
-        name: message
-        description: ''
-        required: false
-        example: architecto
-        type: string
-        enumValues: []
-        exampleWasSpecified: false
-        nullable: false
-        deprecated: false
-      status:
-        custom: []
-        name: status
-        description: ''
-        required: false
-        example: closed
-        type: string
-        enumValues:
-          - pending
-          - replied
-          - closed
-        exampleWasSpecified: false
-        nullable: false
-        deprecated: false
-    cleanBodyParameters:
-      full_name: b
-      email: zbailey@example.net
-      phone: iyvdljnikhwaykcm
-      company: 'y'
-      service: u
-      message: architecto
-      status: closed
-    fileParameters: []
-    responses: []
-    responseFields: []
-    auth: []
-    controller: null
-    method: null
-    route: null
-  -
-    custom: []
-    httpMethods:
-      - PATCH
-    uri: 'api/contact-inquiries/{inquiry_id}'
-    metadata:
-      custom: []
-      groupName: Endpoints
-      groupDescription: ''
-      subgroup: ''
-      subgroupDescription: ''
-      title: 'Partially update the specified contact inquiry in storage.'
-      description: ''
-      authenticated: false
-      deprecated: false
-    headers:
-      Content-Type: application/json
-      Accept: application/json
-    urlParameters:
-      inquiry_id:
-        custom: []
-        name: inquiry_id
-        description: 'The ID of the inquiry.'
-        required: true
-        example: 16
-        type: integer
-        enumValues: []
-        exampleWasSpecified: false
-        nullable: false
-        deprecated: false
-    cleanUrlParameters:
-      inquiry_id: 16
-    queryParameters: []
-    cleanQueryParameters: []
-    bodyParameters: []
-    cleanBodyParameters: []
-    fileParameters: []
-    responses: []
-    responseFields: []
-    auth: []
-    controller: null
-    method: null
-    route: null
-  -
-    custom: []
-    httpMethods:
-      - POST
-    uri: 'api/contact-inquiries/{inquiry_id}/reply'
-    metadata:
-      custom: []
-      groupName: Endpoints
-      groupDescription: ''
-      subgroup: ''
-      subgroupDescription: ''
-      title: 'Reply to a contact inquiry.'
-      description: ''
-      authenticated: false
-      deprecated: false
-    headers:
-      Content-Type: application/json
-      Accept: application/json
-    urlParameters:
-      inquiry_id:
-        custom: []
-        name: inquiry_id
-        description: 'The ID of the inquiry.'
-        required: true
-        example: 16
-        type: integer
-        enumValues: []
-        exampleWasSpecified: false
-        nullable: false
-        deprecated: false
-    cleanUrlParameters:
-      inquiry_id: 16
-    queryParameters: []
-    cleanQueryParameters: []
-    bodyParameters:
-      reply_message:
-        custom: []
-        name: reply_message
-        description: ''
-        required: true
-        example: architecto
-        type: string
-        enumValues: []
-        exampleWasSpecified: false
-        nullable: false
-        deprecated: false
-    cleanBodyParameters:
-      reply_message: architecto
-    fileParameters: []
-    responses: []
-    responseFields: []
-    auth: []
-    controller: null
-    method: null
-    route: null
-  -
-    custom: []
-    httpMethods:
-      - DELETE
-    uri: 'api/contact-inquiries/{inquiry_id}'
-    metadata:
-      custom: []
-      groupName: Endpoints
-      groupDescription: ''
-      subgroup: ''
-      subgroupDescription: ''
-      title: 'Remove the specified contact inquiry from storage.'
-      description: ''
-      authenticated: false
-      deprecated: false
-    headers:
-      Content-Type: application/json
-      Accept: application/json
-    urlParameters:
-      inquiry_id:
-        custom: []
-        name: inquiry_id
-        description: 'The ID of the inquiry.'
-        required: true
-        example: 16
-        type: integer
-        enumValues: []
-        exampleWasSpecified: false
-        nullable: false
-        deprecated: false
-    cleanUrlParameters:
-      inquiry_id: 16
-    queryParameters: []
-    cleanQueryParameters: []
-    bodyParameters: []
-    cleanBodyParameters: []
-    fileParameters: []
-    responses: []
     responseFields: []
     auth: []
     controller: null
@@ -830,7 +335,7 @@ endpoints:
           content-type: 'text/html; charset=utf-8'
           access-control-allow-origin: 'http://localhost:3000'
           access-control-allow-credentials: 'true'
-          set-cookie: 'laravel-session=eyJpdiI6IlJCKzhmTlhXSEh3S1Jqa09QZ2NtTXc9PSIsInZhbHVlIjoiYjhhUWZaTFlSV3JhRnNnb0FFTkg0VWExMzNwRlBlR0hnVXp5MFBYdW9QUk1SUW4yekhmV3lXcXlxTFhJdEExWkU0VXpMWVpnQ1BqZmxFS05SZTlhYXR0U0FZSEI3UERURVY3VkNZcmJSdnR4SWpNRzd1eTY4VXRnNlNjMDJWOFIiLCJtYWMiOiIxNDU1OTEwOTQwNTg1MzRkMDhlNGYxM2NlYmUyZDhhYTYyN2IyNTc0MzA1MWI0ZTFhNjlkYjc0MjM1ZjAyMDg4IiwidGFnIjoiIn0%3D; expires=Mon, 02 Feb 2026 16:22:09 GMT; Max-Age=7200; path=/; secure; httponly; samesite=none'
+          set-cookie: 'al-atheer-ecommerce-session=eyJpdiI6Im5mTkRHandjUklmTlI3aHV5K3BiYlE9PSIsInZhbHVlIjoiVjNIYTNpOEd5QmsrejkrejZXWkJKNkp3Nklwc2RBMi9pM0FLZ0RUcFhBN1RJejg1cU1rdVJkYVlEdU1lbEFiL0VHUGNuaWxnTTRPUk5rSGZvTllqVW16T0lFMVRodDdDWTBmRU92MkhqdW1ZL3pZN2dEZ3dMKzNrWlhyUzZ0RmoiLCJtYWMiOiI0YjExYWM0NjNjMTdkYTgzMTg5YjNiM2Y4ZTViM2RiZGM4NTViY2RkMDRjMGIyMmI1MGQwNzI3OWQxN2ZmYzExIiwidGFnIjoiIn0%3D; expires=Thu, 05 Feb 2026 13:29:08 GMT; Max-Age=7200; path=/; secure; httponly; samesite=none'
         description: null
     responseFields: []
     auth: []
@@ -1113,7 +618,7 @@ endpoints:
           content-type: application/json
           access-control-allow-origin: 'http://localhost:3000'
           access-control-allow-credentials: 'true'
-          set-cookie: 'laravel-session=eyJpdiI6ImtaaVhFcXJBREtvYjU5R3psdkJaTHc9PSIsInZhbHVlIjoiKzB0QjFsbEdHVFNyTmczek1YL05hUHI5R1dYVlhvREY1WTZKWlEyNTJOZVNGWWd2TUdadmxLY3YvODlHbjJaSFpKdjlFRDBYeTZ1VXdCdXlLMTFIT0x3dVU5VHd2cUlERlFJc3ROSk8yaUZtTzZFN2xNTFIrUnZMY1N4dHVHY0giLCJtYWMiOiIyMjUzYTExMzRhODFhYTc1MTY5Mjc5N2MyMjhhOGU2MzI3MDkzNGRlYzIwNzVjMmQzMWFjZmY5ZjUzODkxYTBlIiwidGFnIjoiIn0%3D; expires=Mon, 02 Feb 2026 16:22:10 GMT; Max-Age=7200; path=/; secure; httponly; samesite=none'
+          set-cookie: 'al-atheer-ecommerce-session=eyJpdiI6Im9tQ1MvNWdkN1g0MEFLbk1lWDBtN2c9PSIsInZhbHVlIjoiMGszNTFOeDdtOUkwMHNOR2doN3pDT2Q4TzRGRTRoZlAxNkt0UUhVbmcvbDdRZmZOWTZQVkM1d3p0Z250RjYzcFNmVXdXT3dXVmpyTldTangyckVPTW45Ti9YR2NBbkJicUVFVjJNTkNJcUViRnRPVWU2TWV0RjRnaWNNMW40MDQiLCJtYWMiOiIyZmRiMTAxZDQ1MmI2NmQ2NjEwZmQ3ZDkxN2Y4MjU5MmVjZWY3ZjlkNDEyZDMyMzA3OTQwNTY4Zjg4YjcxZTAxIiwidGFnIjoiIn0%3D; expires=Thu, 05 Feb 2026 13:29:09 GMT; Max-Age=7200; path=/; secure; httponly; samesite=none'
         description: null
     responseFields: []
     auth: []
@@ -1215,7 +720,7 @@ endpoints:
         name: scheduledDate
         description: 'Must be a valid date. Must be a date after <code>today</code>.'
         required: true
-        example: '2052-02-26'
+        example: '2052-02-29'
         type: string
         enumValues: []
         exampleWasSpecified: false
@@ -1314,7 +819,7 @@ endpoints:
         name: packageType
         description: ''
         required: false
-        example: 'Heavy Bulky'
+        example: 'Light Bulky'
         type: string
         enumValues:
           - Normal
@@ -1339,7 +844,7 @@ endpoints:
         name: repeatedData.repeatedType
         description: ''
         required: false
-        example: Weekly
+        example: Daily
         type: string
         enumValues:
           - 'One Time'
@@ -1354,7 +859,7 @@ endpoints:
         description: ''
         required: false
         example:
-          - Thursday
+          - Monday
         type: 'string[]'
         enumValues:
           - Sunday
@@ -1372,7 +877,7 @@ endpoints:
         name: repeatedData.startDate
         description: 'Must be a valid date.'
         required: false
-        example: '2026-02-02T14:22:10'
+        example: '2026-02-05T11:29:09'
         type: string
         enumValues: []
         exampleWasSpecified: false
@@ -1383,14 +888,14 @@ endpoints:
         name: repeatedData.endDate
         description: 'Must be a valid date. Must be a date after <code>repeatedData.startDate</code>.'
         required: false
-        example: '2052-02-26'
+        example: '2052-02-29'
         type: string
         enumValues: []
         exampleWasSpecified: false
         nullable: true
         deprecated: false
     cleanBodyParameters:
-      scheduledDate: '2052-02-26'
+      scheduledDate: '2052-02-29'
       businessLocationId: architecto
       contactPerson:
         name: architecto
@@ -1399,13 +904,13 @@ endpoints:
         email: zbailey@example.net
       notes: architecto
       noOfPackages: 22
-      packageType: 'Heavy Bulky'
+      packageType: 'Light Bulky'
       repeatedData:
-        repeatedType: Weekly
+        repeatedType: Daily
         days:
-          - Thursday
-        startDate: '2026-02-02T14:22:10'
-        endDate: '2052-02-26'
+          - Monday
+        startDate: '2026-02-05T11:29:09'
+        endDate: '2052-02-29'
     fileParameters: []
     responses: []
     responseFields: []
@@ -1703,13 +1208,13 @@ endpoints:
       -
         custom: []
         status: 200
-        content: '{"status":{"file_path":"D:\\code\\ecommerce-api\\.env","is_writable":true,"config_cached":false},"laravel_active_values":{"PAYMOB_BASE_URL":"https:\/\/accept.paymob.com","PAYMOB_API_KEY":"ZXlKaGJHY2lPaUpJVXpVeE1pSXNJblI1Y0NJNklrcFhWQ0o5LmV5SmpiR0Z6Y3lJNklrMWxjbU5vWVc1MElpd2ljSEp2Wm1sc1pWOXdheUk2TVRFeE16STRPU3dpYm1GdFpTSTZJbWx1YVhScFlXd2lmUS5NSF96bVNyVWZDTDZFeURYNjdpREstY3pxUUF0MUJoZ1d1SmFEd2xpcGstLXN1MWJ6YkZPSTVTbC15VkFNWG5GbktpZi1NQ0w1QldyYV9xZEVSM0ZRUQ==","BOSTA_API_KEY":"b286cff91b7015a1ef89aea14d750f4f1e241fd3b96486a7d87a47d21ff4933f","MAIL_MAILER":"smtp","MAIL_SCHEME":null,"MAIL_HOST":"smtp.gmail.com","MAIL_PORT":"465","MAIL_USERNAME":"ahmadkholy98@gmail.com","MAIL_PASSWORD":"akcynlcfghdfxjrq","MAIL_FROM_ADDRESS":"ahmadkholy98@gmail.com","MAIL_FROM_NAME":"laravel"}}'
+        content: '{"status":{"file_path":"D:\\code\\ecommerce-api\\.env","is_writable":true,"config_cached":false},"laravel_active_values":{"PAYMOB_BASE_URL":"https:\/\/accept.paymob.com","PAYMOB_API_KEY":"ZXlKaGJHY2lPaUpJVXpVeE1pSXNJblI1Y0NJNklrcFhWQ0o5LmV5SmpiR0Z6Y3lJNklrMWxjbU5vWVc1MElpd2ljSEp2Wm1sc1pWOXdheUk2TVRFeE16STRPU3dpYm1GdFpTSTZJbWx1YVhScFlXd2lmUS5NSF96bVNyVWZDTDZFeURYNjdpREstY3pxUUF0MUJoZ1d1SmFEd2xpcGstLXN1MWJ6YkZPSTVTbC15VkFNWG5GbktpZi1NQ0w1QldyYV9xZEVSM0ZRUQ==","BOSTA_API_KEY":"b286cff91b7015a1ef89aea14d750f4f1e241fd3b96486a7d87a47d21ff4933f","MAIL_MAILER":"smtp","MAIL_SCHEME":null,"MAIL_HOST":"smtp.gmail.com","MAIL_PORT":"465","MAIL_USERNAME":"ahmadkholy98@gmail.com","MAIL_PASSWORD":"akcynlcfghdfxjrq","MAIL_FROM_ADDRESS":"ahmadkholy98@gmail.com","MAIL_FROM_NAME":"Al-Atheer Ecommerce"}}'
         headers:
           cache-control: 'no-cache, private'
           content-type: application/json
           access-control-allow-origin: 'http://localhost:3000'
           access-control-allow-credentials: 'true'
-          set-cookie: 'laravel-session=eyJpdiI6ImorWk9zVGl1Rldka0NndVM0TmsvY1E9PSIsInZhbHVlIjoiYnN0SDBSZkRXRDF3ZXVFQWdwZXk4TXl2bnhlWldPUnpwcjg5M1pwcDBicUdPSVZNWkZsbWpPWjJ2eWFJWlQ1dTB6QWNrZHdGR3dqd0drQ0p1WWtKOElCWTRuUVhiRHh2NmljbzZvWFRhNjY5dk5lVGkzY1VEYUowbzh2Y3h4RkQiLCJtYWMiOiI4Y2NkYjI3ZTc0ZmU2MzUyMWY0MGYzNTcwNTNlMWZlMTc1YWJlYWI4NDlhMWJmYzZhOWZhN2U5ODcwM2MyYTI4IiwidGFnIjoiIn0%3D; expires=Mon, 02 Feb 2026 16:22:10 GMT; Max-Age=7200; path=/; secure; httponly; samesite=none'
+          set-cookie: 'al-atheer-ecommerce-session=eyJpdiI6InRISHY5bXVXYWROVWNOUHZITW5KTmc9PSIsInZhbHVlIjoiOWYyL1ZSUjd5djF3cS9JczRIU2d3NWNvZmNkc214NzYvMitKdkhSZ0RRdHpZZEFkU0ZRK29XdlBlZWVDQ1g4cmk3R1BsRUNHZHBmckg0UDNEWmt1UlBnYlhrMlFXby9GcnZVdnZONFlYcWE5RXBWUEw0U1VLa2kvVjFTQWdDN0oiLCJtYWMiOiIxMWVhMDAxM2MwNWMzOGU4MjkzODI5OWQxNTAyMDdmZjBmNGYwOTIwZWZkMGQ2MGZlY2I4YjhhYjhhYTRiYmZiIiwidGFnIjoiIn0%3D; expires=Thu, 05 Feb 2026 13:29:09 GMT; Max-Age=7200; path=/; secure; httponly; samesite=none'
         description: null
     responseFields: []
     auth: []

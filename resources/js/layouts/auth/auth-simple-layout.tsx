@@ -1,7 +1,6 @@
 import { Link } from '@inertiajs/react';
-import { type PropsWithChildren } from 'react';
+import type { PropsWithChildren } from 'react';
 
-import AppLogoIcon from '@/components/app-logo-icon';
 import { home } from '@/routes';
 
 interface AuthLayoutProps {
@@ -24,14 +23,25 @@ export default function AuthSimpleLayout({
                             href={home()}
                             className="flex flex-col items-center gap-2 font-medium"
                         >
-                            <div className="mb-1 flex h-9 w-9 items-center justify-center rounded-md">
-                                <AppLogoIcon className="size-9 fill-current text-[var(--foreground)] dark:text-white" />
+                            <div className="mb-1 flex size-30 items-center justify-center rounded-md">
+                                <img
+                                    src="/atheer-logo-black.svg"
+                                    alt="Al-Atheer"
+                                    className="max-h-full min-w-max object-cover dark:hidden"
+                                />
+                                <img
+                                    src="/atheer-logo-sandbeach.svg"
+                                    alt="Al-Atheer"
+                                    className="hidden max-h-full min-w-max object-cover dark:block"
+                                />
                             </div>
                             <span className="sr-only">{title}</span>
                         </Link>
 
                         <div className="space-y-2 text-center">
-                            <h1 className="text-xl font-medium">{title}</h1>
+                            <h1 className="text-2xl font-semibold tracking-tight">
+                                {title}
+                            </h1>
                             <p className="text-center text-sm text-muted-foreground">
                                 {description}
                             </p>

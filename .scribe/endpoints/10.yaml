@@ -177,7 +177,7 @@ endpoints:
         name: teamMember_id
         description: 'The ID of the teamMember.'
         required: true
-        example: 1
+        example: 16
         type: integer
         enumValues: []
         exampleWasSpecified: false
@@ -195,7 +195,7 @@ endpoints:
         nullable: false
         deprecated: false
     cleanUrlParameters:
-      teamMember_id: 1
+      teamMember_id: 16
       teamMember: 1
     queryParameters: []
     cleanQueryParameters: []

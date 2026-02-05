@@ -239,7 +239,7 @@ endpoints:
         name: order_id
         description: 'The ID of the order.'
         required: true
-        example: 1
+        example: 16
         type: integer
         enumValues: []
         exampleWasSpecified: false
@@ -257,7 +257,7 @@ endpoints:
         nullable: false
         deprecated: false
     cleanUrlParameters:
-      order_id: 1
+      order_id: 16
       order: 1
     queryParameters: []
     cleanQueryParameters: []
@@ -349,7 +349,7 @@ endpoints:
         name: order_id
         description: 'The ID of the order.'
         required: true
-        example: 1
+        example: 16
         type: integer
         enumValues: []
         exampleWasSpecified: false
@@ -367,7 +367,7 @@ endpoints:
         nullable: false
         deprecated: false
     cleanUrlParameters:
-      order_id: 1
+      order_id: 16
       order: 1
     queryParameters: []
     cleanQueryParameters: []
@@ -474,7 +474,7 @@ endpoints:
         name: order_id
         description: 'The ID of the order.'
         required: true
-        example: 1
+        example: 16
         type: integer
         enumValues: []
         exampleWasSpecified: false
@@ -492,7 +492,7 @@ endpoints:
         nullable: false
         deprecated: false
     cleanUrlParameters:
-      order_id: 1
+      order_id: 16
       order: 1
     queryParameters: []
     cleanQueryParameters: []

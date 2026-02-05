@@ -33,6 +33,7 @@ interface ContactInquiry {
     status: 'pending' | 'replied' | 'closed';
     replied_at: string | null;
     reply_message: string | null;
+    is_published?: boolean;
     created_at: string;
     service?: {
         id: number;
@@ -201,6 +202,53 @@ export default function InquiriesShow({ inquiry }: Props) {
                                     <Button type="submit" disabled={processing}>
                                         <Send className="mr-2 h-4 w-4" />
                                         Send Reply
+                                    </Button>
+                                </form>
+                            </CardContent>
+                        </Card>
+                    )}
+
+                    {inquiry.status === 'replied' && (
+                        <Card>
+                            <CardHeader>
+                                <CardTitle>
+                                    {inquiry.is_published
+                                        ? 'Published'
+                                        : 'Publish Inquiry'}
+                                </CardTitle>
+                            </CardHeader>
+                            <CardContent>
+                                <p className="mb-4 text-sm text-muted-foreground">
+                                    {inquiry.is_published
+                                        ? 'This inquiry is currently visible on the testimonials page.'
+                                        : 'Make this inquiry visible as a testimonial on the public site.'}
+                                </p>
+                                <form
+                                    action={`/admin/inquiries/${inquiry.id}/publish`}
+                                    method="post"
+                                >
+                                    <input
+                                        type="hidden"
+                                        name="_token"
+                                        value={
+                                            document
+                                                .querySelector(
+                                                    'meta[name="csrf-token"]',
+                                                )
+                                                ?.getAttribute('content') || ''
+                                        }
+                                    />
+                                    <Button
+                                        type="submit"
+                                        variant={
+                                            inquiry.is_published
+                                                ? 'destructive'
+                                                : 'default'
+                                        }
+                                    >
+                                        {inquiry.is_published
+                                            ? 'Unpublish'
+                                            : 'Publish'}
                                     </Button>
                                 </form>
                             </CardContent>

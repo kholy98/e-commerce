@@ -324,6 +324,168 @@ Route::prefix('admin/team-members')->group(function () {
 });
 
 // Contact Inquiries API routes
+
+/**
+ * @group Contact Inquiries
+ *
+ * Public endpoints for viewing published contact inquiries (testimonials)
+ *
+ * @unauthenticated
+ */
+
+/**
+ * List published inquiries
+ *
+ * Get a paginated list of published contact inquiries.
+ * Only inquiries that have been replied to and marked as published are returned.
+ * Sensitive fields like email and phone are excluded from the response.
+ *
+ * @queryParam per_page integer Items per page. Default: 10. Example: 15
+ *
+ * @response 200 scenario="Success" {
+ *   "data": [
+ *     {
+ *       "full_name": "John Doe",
+ *       "company": "Acme Inc",
+ *       "message": "Great service! Very satisfied with the quality.",
+ *       "reply_message": "Thank you for your feedback! We're glad you're happy.",
+ *       "created_at": "2024-01-15T10:00:00.000000Z"
+ *     }
+ *   ],
+ *   "meta": {
+ *     "current_page": 1,
+ *     "last_page": 5,
+ *     "per_page": 10,
+ *     "total": 50
+ *   }
+ * }
+ */
+Route::get('contact-inquiries/published', [ContactInquiryController::class, 'published'])->name('api.contact-inquiries.published');
+
+/**
+ * @group Contact Inquiries
+ *
+ * Admin endpoints for managing all contact inquiries
+ *
+ * @authenticated
+ */
+
+/**
+ * List all inquiries
+ *
+ * Get a paginated list of all contact inquiries (including unpublished).
+ * Supports filtering by status.
+ *
+ * @authenticated
+ * @queryParam per_page integer Items per page. Default: 15. Example: 10
+ * @queryParam status string Filter by status (pending, replied, closed). Example: pending
+ *
+ * @response 200 scenario="Success" {
+ *   "data": [
+ *     {
+ *       "id": 1,
+ *       "full_name": "John Doe",
+ *       "email": "john@example.com",
+ *       "phone": "+1234567890",
+ *       "company": "Acme Inc",
+ *       "message": "Interested in your products",
+ *       "status": "pending",
+ *       "status_label": "Pending",
+ *       "status_color": "yellow",
+ *       "replied_at": null,
+ *       "reply_message": null,
+ *       "created_at": "2024-01-15T10:00:00.000000Z",
+ *       "updated_at": "2024-01-15T10:00:00.000000Z"
+ *     }
+ *   ]
+ * }
+ * @response 401 scenario="Unauthenticated" {
+ *   "message": "Unauthenticated."
+ * }
+ */
+Route::get('admin/inquiries', [ContactInquiryController::class, 'adminIndex'])->name('api.admin.inquiries.index')->middleware(['auth:sanctum', 'admin']);
+
+/**
+ * Publish an inquiry
+ *
+ * Mark a contact inquiry as published.
+ * Only inquiries that have been replied to can be published.
+ *
+ * @authenticated
+ * @urlParam inquiry integer required The inquiry ID. Example: 1
+ *
+ * @response 200 scenario="Success" {
+ *   "message": "Inquiry published successfully.",
+ *   "data": {
+ *     "id": 1,
+ *     "full_name": "John Doe",
+ *     "email": "john@example.com",
+ *     "phone": "+1234567890",
+ *     "company": "Acme Inc",
+ *     "message": "Great service!",
+ *     "status": "replied",
+ *     "status_label": "Replied",
+ *     "status_color": "green",
+ *     "replied_at": "2024-01-15T10:30:00.000000Z",
+ *     "reply_message": "Thank you for your feedback!",
+ *     "created_at": "2024-01-15T10:00:00.000000Z",
+ *     "updated_at": "2024-01-15T10:30:00.000000Z"
+ *   }
+ * }
+ * @response 403 scenario="Not Replied" {
+ *   "message": "Only replied inquiries can be published."
+ * }
+ * @response 404 scenario="Not Found" {
+ *   "message": "Resource not found."
+ * }
+ * @response 401 scenario="Unauthenticated" {
+ *   "message": "Unauthenticated."
+ * }
+ */
+Route::post('admin/inquiries/{inquiry}/publish', [ContactInquiryController::class, 'publish'])->name('api.admin.inquiries.publish')->middleware(['auth:sanctum', 'admin']);
+
+/**
+ * Unpublish an inquiry
+ *
+ * Mark a published contact inquiry as unpublished.
+ *
+ * @authenticated
+ * @urlParam inquiry integer required The inquiry ID. Example: 1
+ *
+ * @response 200 scenario="Success" {
+ *   "message": "Inquiry unpublished successfully.",
+ *   "data": {
+ *     "id": 1,
+ *     "full_name": "John Doe",
+ *     "email": "john@example.com",
+ *     "phone": "+1234567890",
+ *     "company": "Acme Inc",
+ *     "message": "Great service!",
+ *     "status": "replied",
+ *     "status_label": "Replied",
+ *     "status_color": "green",
+ *     "replied_at": "2024-01-15T10:30:00.000000Z",
+ *     "reply_message": "Thank you for your feedback!",
+ *     "created_at": "2024-01-15T10:00:00.000000Z",
+ *     "updated_at": "2024-01-15T10:35:00.000000Z"
+ *   }
+ * }
+ * @response 404 scenario="Not Found" {
+ *   "message": "Resource not found."
+ * }
+ * @response 401 scenario="Unauthenticated" {
+ *   "message": "Unauthenticated."
+ * }
+ */
+Route::post('admin/inquiries/{inquiry}/unpublish', [ContactInquiryController::class, 'unpublish'])->name('api.admin.inquiries.unpublish')->middleware(['auth:sanctum', 'admin']);
+
+/**
+ * @group Contact Inquiries
+ *
+ * General inquiry management
+ *
+ * @authenticated
+ */
 Route::get('contact-inquiries', [ContactInquiryController::class, 'index'])->name('api.contact-inquiries.index');
 Route::post('contact-inquiries', [ContactInquiryController::class, 'store'])->name('api.contact-inquiries.store');
 Route::get('contact-inquiries/{inquiry}', [ContactInquiryController::class, 'show'])->name('api.contact-inquiries.show');

@@ -4,7 +4,7 @@
     <meta charset="utf-8">
     <meta content="IE=edge,chrome=1" http-equiv="X-UA-Compatible">
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-    <title>laravel API Documentation</title>
+    <title>Al-Atheer Ecommerce API Documentation</title>
 
     <link href="https://fonts.googleapis.com/css?family=Open+Sans&display=swap" rel="stylesheet">
 
@@ -99,6 +99,9 @@ Invalidate the current API token and log out the user.</a>
                                     <ul id="tocify-subheader-products" class="tocify-subheader">
                                                     <li class="tocify-item level-2" data-unique="products-GETapi-products">
                                 <a href="#products-GETapi-products">List all products</a>
+                            </li>
+                                                                                <li class="tocify-item level-2" data-unique="products-POSTapi-products-find">
+                                <a href="#products-POSTapi-products-find">Find product by specifications</a>
                             </li>
                                                                                 <li class="tocify-item level-2" data-unique="products-GETapi-products--product_id-">
                                 <a href="#products-GETapi-products--product_id-">Get product details</a>
@@ -264,6 +267,51 @@ Invalidate the current API token and log out the user.</a>
                             </li>
                                                                         </ul>
                             </ul>
+                    <ul id="tocify-header-contact-inquiries" class="tocify-header">
+                <li class="tocify-item level-1" data-unique="contact-inquiries">
+                    <a href="#contact-inquiries">Contact Inquiries</a>
+                </li>
+                                    <ul id="tocify-subheader-contact-inquiries" class="tocify-subheader">
+                                                    <li class="tocify-item level-2" data-unique="contact-inquiries-GETapi-contact-inquiries-published">
+                                <a href="#contact-inquiries-GETapi-contact-inquiries-published">Display a listing of published inquiries (for testimonials).</a>
+                            </li>
+                                                                                <li class="tocify-item level-2" data-unique="contact-inquiries-GETapi-contact-inquiries">
+                                <a href="#contact-inquiries-GETapi-contact-inquiries">Display a listing of contact inquiries.</a>
+                            </li>
+                                                                                <li class="tocify-item level-2" data-unique="contact-inquiries-POSTapi-contact-inquiries">
+                                <a href="#contact-inquiries-POSTapi-contact-inquiries">Store a newly created contact inquiry in storage.</a>
+                            </li>
+                                                                                <li class="tocify-item level-2" data-unique="contact-inquiries-GETapi-contact-inquiries--inquiry_id-">
+                                <a href="#contact-inquiries-GETapi-contact-inquiries--inquiry_id-">Display the specified contact inquiry.</a>
+                            </li>
+                                                                                <li class="tocify-item level-2" data-unique="contact-inquiries-PUTapi-contact-inquiries--inquiry_id-">
+                                <a href="#contact-inquiries-PUTapi-contact-inquiries--inquiry_id-">Update the specified contact inquiry in storage.</a>
+                            </li>
+                                                                                <li class="tocify-item level-2" data-unique="contact-inquiries-PATCHapi-contact-inquiries--inquiry_id-">
+                                <a href="#contact-inquiries-PATCHapi-contact-inquiries--inquiry_id-">Partially update the specified contact inquiry in storage.</a>
+                            </li>
+                                                                                <li class="tocify-item level-2" data-unique="contact-inquiries-POSTapi-contact-inquiries--inquiry_id--reply">
+                                <a href="#contact-inquiries-POSTapi-contact-inquiries--inquiry_id--reply">Reply to a contact inquiry.</a>
+                            </li>
+                                                                                <li class="tocify-item level-2" data-unique="contact-inquiries-DELETEapi-contact-inquiries--inquiry_id-">
+                                <a href="#contact-inquiries-DELETEapi-contact-inquiries--inquiry_id-">Remove the specified contact inquiry from storage.</a>
+                            </li>
+                                                                                <li class="tocify-item level-2" data-unique="contact-inquiries-admin-management">
+                                <a href="#contact-inquiries-admin-management">Admin Management</a>
+                            </li>
+                                                            <ul id="tocify-subheader-contact-inquiries-admin-management" class="tocify-subheader">
+                                                                            <li class="tocify-item level-3" data-unique="contact-inquiries-GETapi-admin-inquiries">
+                                            <a href="#contact-inquiries-GETapi-admin-inquiries">Display a listing of all inquiries (admin view).</a>
+                                        </li>
+                                                                            <li class="tocify-item level-3" data-unique="contact-inquiries-POSTapi-admin-inquiries--inquiry_id--publish">
+                                            <a href="#contact-inquiries-POSTapi-admin-inquiries--inquiry_id--publish">Publish a contact inquiry.</a>
+                                        </li>
+                                                                            <li class="tocify-item level-3" data-unique="contact-inquiries-POSTapi-admin-inquiries--inquiry_id--unpublish">
+                                            <a href="#contact-inquiries-POSTapi-admin-inquiries--inquiry_id--unpublish">Unpublish a contact inquiry.</a>
+                                        </li>
+                                                                    </ul>
+                                                                        </ul>
+                            </ul>
                     <ul id="tocify-header-customer-addresses" class="tocify-header">
                 <li class="tocify-item level-1" data-unique="customer-addresses">
                     <a href="#customer-addresses">Customer Addresses</a>
@@ -311,27 +359,6 @@ Invalidate the current API token and log out the user.</a>
                             </li>
                                                                                 <li class="tocify-item level-2" data-unique="endpoints-GETapi-admin-dashboard-best-sellers">
                                 <a href="#endpoints-GETapi-admin-dashboard-best-sellers">Get best selling products</a>
-                            </li>
-                                                                                <li class="tocify-item level-2" data-unique="endpoints-GETapi-contact-inquiries">
-                                <a href="#endpoints-GETapi-contact-inquiries">Display a listing of contact inquiries.</a>
-                            </li>
-                                                                                <li class="tocify-item level-2" data-unique="endpoints-POSTapi-contact-inquiries">
-                                <a href="#endpoints-POSTapi-contact-inquiries">Store a newly created contact inquiry in storage.</a>
-                            </li>
-                                                                                <li class="tocify-item level-2" data-unique="endpoints-GETapi-contact-inquiries--inquiry_id-">
-                                <a href="#endpoints-GETapi-contact-inquiries--inquiry_id-">Display the specified contact inquiry.</a>
-                            </li>
-                                                                                <li class="tocify-item level-2" data-unique="endpoints-PUTapi-contact-inquiries--inquiry_id-">
-                                <a href="#endpoints-PUTapi-contact-inquiries--inquiry_id-">Update the specified contact inquiry in storage.</a>
-                            </li>
-                                                                                <li class="tocify-item level-2" data-unique="endpoints-PATCHapi-contact-inquiries--inquiry_id-">
-                                <a href="#endpoints-PATCHapi-contact-inquiries--inquiry_id-">Partially update the specified contact inquiry in storage.</a>
-                            </li>
-                                                                                <li class="tocify-item level-2" data-unique="endpoints-POSTapi-contact-inquiries--inquiry_id--reply">
-                                <a href="#endpoints-POSTapi-contact-inquiries--inquiry_id--reply">Reply to a contact inquiry.</a>
-                            </li>
-                                                                                <li class="tocify-item level-2" data-unique="endpoints-DELETEapi-contact-inquiries--inquiry_id-">
-                                <a href="#endpoints-DELETEapi-contact-inquiries--inquiry_id-">Remove the specified contact inquiry from storage.</a>
                             </li>
                                                                                 <li class="tocify-item level-2" data-unique="endpoints-POSTapi-payment-process">
                                 <a href="#endpoints-POSTapi-payment-process">Process payment and return payment key/iframe URL</a>
@@ -390,7 +417,7 @@ Invalidate the current API token and log out the user.</a>
     </ul>
 
     <ul class="toc-footer" id="last-updated">
-        <li>Last updated: February 2, 2026</li>
+        <li>Last updated: February 5, 2026</li>
     </ul>
 </div>
 
@@ -1379,6 +1406,275 @@ You can check the Dev Tools console for debugging information.</code></pre>
             </div>
                 </form>
 
+                    <h2 id="products-POSTapi-products-find">Find product by specifications</h2>
+
+<p>
+</p>
+
+<p>Retrieve a specific product by matching category, weight, and grind type.
+Useful for finding the exact product variant for shopping cart additions.
+Returns product data in both English and Arabic.</p>
+
+<span id="example-requests-POSTapi-products-find">
+<blockquote>Example request:</blockquote>
+
+
+<div class="bash-example">
+    <pre><code class="language-bash">curl --request POST \
+    "http://127.0.0.1:8000/api/products/find" \
+    --header "Content-Type: application/json" \
+    --header "Accept: application/json" \
+    --data "{
+    \"category\": \"\\\"Coffee Beans\\\"\",
+    \"weight\": 0.25,
+    \"grind_type\": \"\\\"medium\\\"\"
+}"
+</code></pre></div>
+
+
+<div class="javascript-example">
+    <pre><code class="language-javascript">const url = new URL(
+    "http://127.0.0.1:8000/api/products/find"
+);
+
+const headers = {
+    "Content-Type": "application/json",
+    "Accept": "application/json",
+};
+
+let body = {
+    "category": "\"Coffee Beans\"",
+    "weight": 0.25,
+    "grind_type": "\"medium\""
+};
+
+fetch(url, {
+    method: "POST",
+    headers,
+    body: JSON.stringify(body),
+}).then(response =&gt; response.json());</code></pre></div>
+
+
+<div class="php-example">
+    <pre><code class="language-php">$client = new \GuzzleHttp\Client();
+$url = 'http://127.0.0.1:8000/api/products/find';
+$response = $client-&gt;post(
+    $url,
+    [
+        'headers' =&gt; [
+            'Content-Type' =&gt; 'application/json',
+            'Accept' =&gt; 'application/json',
+        ],
+        'json' =&gt; [
+            'category' =&gt; '"Coffee Beans"',
+            'weight' =&gt; 0.25,
+            'grind_type' =&gt; '"medium"',
+        ],
+    ]
+);
+$body = $response-&gt;getBody();
+print_r(json_decode((string) $body));</code></pre></div>
+
+</span>
+
+<span id="example-responses-POSTapi-products-find">
+            <blockquote>
+            <p>Example response (200, Success):</p>
+        </blockquote>
+                <pre>
+
+<code class="language-json" style="max-height: 300px;">{
+    &quot;success&quot;: true,
+    &quot;data&quot;: {
+        &quot;en&quot;: {
+            &quot;id&quot;: 1,
+            &quot;name&quot;: &quot;Premium Coffee Beans&quot;,
+            &quot;slug&quot;: &quot;premium-coffee-beans&quot;,
+            &quot;description&quot;: &quot;High-quality arabica coffee beans&quot;,
+            &quot;price&quot;: 25,
+            &quot;cost&quot;: 15,
+            &quot;stock&quot;: 100,
+            &quot;sku&quot;: &quot;COF-001&quot;,
+            &quot;is_active&quot;: true,
+            &quot;grind_type&quot;: &quot;medium&quot;,
+            &quot;grind_type_label&quot;: &quot;Medium Grind&quot;,
+            &quot;weight&quot;: 0.25,
+            &quot;weight_label&quot;: &quot;250g&quot;,
+            &quot;category&quot;: {
+                &quot;name&quot;: &quot;Coffee Beans&quot;,
+                &quot;slug&quot;: &quot;coffee-beans&quot;
+            },
+            &quot;images&quot;: [
+                {
+                    &quot;url&quot;: &quot;https://example.com/storage/products/coffee-beans.jpg&quot;
+                }
+            ]
+        },
+        &quot;ar&quot;: {
+            &quot;name&quot;: &quot;حبوب قهوة ممتازة&quot;,
+            &quot;slug&quot;: &quot;premium-coffee-beans&quot;,
+            &quot;description&quot;: &quot;حبوب قهوة أرابيكا عالية الجودة&quot;,
+            &quot;price&quot;: 25,
+            &quot;cost&quot;: 15,
+            &quot;stock&quot;: 100,
+            &quot;sku&quot;: &quot;COF-001&quot;,
+            &quot;is_active&quot;: true,
+            &quot;grind_type&quot;: &quot;medium&quot;,
+            &quot;grind_type_label&quot;: &quot;طحن متوسط&quot;,
+            &quot;weight&quot;: 0.25,
+            &quot;weight_label&quot;: &quot;250 غرام&quot;,
+            &quot;category&quot;: {
+                &quot;name&quot;: &quot;حبوب القهوة&quot;,
+                &quot;slug&quot;: &quot;coffee-beans&quot;
+            },
+            &quot;images&quot;: [
+                {
+                    &quot;url&quot;: &quot;https://example.com/storage/products/coffee-beans.jpg&quot;
+                }
+            ]
+        }
+    }
+}</code>
+ </pre>
+            <blockquote>
+            <p>Example response (404, Not Found):</p>
+        </blockquote>
+                <pre>
+
+<code class="language-json" style="max-height: 300px;">{
+    &quot;success&quot;: false,
+    &quot;message&quot;: &quot;Product not found with these specifications&quot;
+}</code>
+ </pre>
+            <blockquote>
+            <p>Example response (422, Validation Error):</p>
+        </blockquote>
+                <pre>
+
+<code class="language-json" style="max-height: 300px;">{
+    &quot;success&quot;: false,
+    &quot;message&quot;: &quot;Validation failed&quot;,
+    &quot;errors&quot;: {
+        &quot;category&quot;: [
+            &quot;Invalid category. Valid categories are: Coffee Beans, Espresso, Tea&quot;
+        ],
+        &quot;grind_type&quot;: [
+            &quot;Invalid grind type. Valid types are: whole_bean, coarse, medium, fine, extra_fine&quot;
+        ]
+    }
+}</code>
+ </pre>
+    </span>
+<span id="execution-results-POSTapi-products-find" hidden>
+    <blockquote>Received response<span
+                id="execution-response-status-POSTapi-products-find"></span>:
+    </blockquote>
+    <pre class="json"><code id="execution-response-content-POSTapi-products-find"
+      data-empty-response-text="<Empty response>" style="max-height: 400px;"></code></pre>
+</span>
+<span id="execution-error-POSTapi-products-find" hidden>
+    <blockquote>Request failed with error:</blockquote>
+    <pre><code id="execution-error-message-POSTapi-products-find">
+
+Tip: Check that you&#039;re properly connected to the network.
+If you&#039;re a maintainer of ths API, verify that your API is running and you&#039;ve enabled CORS.
+You can check the Dev Tools console for debugging information.</code></pre>
+</span>
+<form id="form-POSTapi-products-find" data-method="POST"
+      data-path="api/products/find"
+      data-authed="0"
+      data-hasfiles="0"
+      data-isarraybody="0"
+      autocomplete="off"
+      onsubmit="event.preventDefault(); executeTryOut('POSTapi-products-find', this);">
+    <h3>
+        Request&nbsp;&nbsp;&nbsp;
+                    <button type="button"
+                    style="background-color: #8fbcd4; padding: 5px 10px; border-radius: 5px; border-width: thin;"
+                    id="btn-tryout-POSTapi-products-find"
+                    onclick="tryItOut('POSTapi-products-find');">Try it out ⚡
+            </button>
+            <button type="button"
+                    style="background-color: #c97a7e; padding: 5px 10px; border-radius: 5px; border-width: thin;"
+                    id="btn-canceltryout-POSTapi-products-find"
+                    onclick="cancelTryOut('POSTapi-products-find');" hidden>Cancel 🛑
+            </button>&nbsp;&nbsp;
+            <button type="submit"
+                    style="background-color: #6ac174; padding: 5px 10px; border-radius: 5px; border-width: thin;"
+                    id="btn-executetryout-POSTapi-products-find"
+                    data-initial-text="Send Request 💥"
+                    data-loading-text="⏱ Sending..."
+                    hidden>Send Request 💥
+            </button>
+            </h3>
+            <p>
+            <small class="badge badge-black">POST</small>
+            <b><code>api/products/find</code></b>
+        </p>
+                <h4 class="fancy-heading-panel"><b>Headers</b></h4>
+                                <div style="padding-left: 28px; clear: unset;">
+                <b style="line-height: 2;"><code>Content-Type</code></b>&nbsp;&nbsp;
+&nbsp;
+ &nbsp;
+ &nbsp;
+                <input type="text" style="display: none"
+                              name="Content-Type"                data-endpoint="POSTapi-products-find"
+               value="application/json"
+               data-component="header">
+    <br>
+<p>Example: <code>application/json</code></p>
+            </div>
+                                <div style="padding-left: 28px; clear: unset;">
+                <b style="line-height: 2;"><code>Accept</code></b>&nbsp;&nbsp;
+&nbsp;
+ &nbsp;
+ &nbsp;
+                <input type="text" style="display: none"
+                              name="Accept"                data-endpoint="POSTapi-products-find"
+               value="application/json"
+               data-component="header">
+    <br>
+<p>Example: <code>application/json</code></p>
+            </div>
+                                <h4 class="fancy-heading-panel"><b>Body Parameters</b></h4>
+        <div style=" padding-left: 28px;  clear: unset;">
+            <b style="line-height: 2;"><code>category</code></b>&nbsp;&nbsp;
+<small>string</small>&nbsp;
+ &nbsp;
+ &nbsp;
+                <input type="text" style="display: none"
+                              name="category"                data-endpoint="POSTapi-products-find"
+               value=""Coffee Beans""
+               data-component="body">
+    <br>
+<p>Category name, slug, or Arabic name. Example: <code>"Coffee Beans"</code></p>
+        </div>
+                <div style=" padding-left: 28px;  clear: unset;">
+            <b style="line-height: 2;"><code>weight</code></b>&nbsp;&nbsp;
+<small>number</small>&nbsp;
+ &nbsp;
+ &nbsp;
+                <input type="number" style="display: none"
+               step="any"               name="weight"                data-endpoint="POSTapi-products-find"
+               value="0.25"
+               data-component="body">
+    <br>
+<p>Product weight in kg. Example: <code>0.25</code></p>
+        </div>
+                <div style=" padding-left: 28px;  clear: unset;">
+            <b style="line-height: 2;"><code>grind_type</code></b>&nbsp;&nbsp;
+<small>string</small>&nbsp;
+ &nbsp;
+ &nbsp;
+                <input type="text" style="display: none"
+                              name="grind_type"                data-endpoint="POSTapi-products-find"
+               value=""medium""
+               data-component="body">
+    <br>
+<p>Grind type (whole_bean, coarse, medium, fine, extra_fine). Example: <code>"medium"</code></p>
+        </div>
+        </form>
+
                     <h2 id="products-GETapi-products--product_id-">Get product details</h2>
 
 <p>
@@ -1982,13 +2278,11 @@ You can check the Dev Tools console for debugging information.</code></pre>
     --form "stock=12"\
     --form "sku=architecto"\
     --form "category_id=architecto"\
-    --form "grind_type=extra_fine"\
-    --form "weight=1.000"\
     --form "product_details[][title_en]=n"\
     --form "product_details[][title_ar]=g"\
     --form "product_details[][value_en]=z"\
     --form "product_details[][value_ar]=m"\
-    --form "images[]=@C:\Users\adshift FrontEnd\AppData\Local\Temp\phpC986.tmp" </code></pre></div>
+    --form "images[]=@C:\Users\adshift FrontEnd\AppData\Local\Temp\php76DD.tmp" </code></pre></div>
 
 
 <div class="javascript-example">
@@ -2011,8 +2305,6 @@ body.append('cost', '84');
 body.append('stock', '12');
 body.append('sku', 'architecto');
 body.append('category_id', 'architecto');
-body.append('grind_type', 'extra_fine');
-body.append('weight', '1.000');
 body.append('product_details[][title_en]', 'n');
 body.append('product_details[][title_ar]', 'g');
 body.append('product_details[][value_en]', 'z');
@@ -2074,14 +2366,6 @@ $response = $client-&gt;post(
                 'contents' =&gt; 'architecto'
             ],
             [
-                'name' =&gt; 'grind_type',
-                'contents' =&gt; 'extra_fine'
-            ],
-            [
-                'name' =&gt; 'weight',
-                'contents' =&gt; '1.000'
-            ],
-            [
                 'name' =&gt; 'product_details[][title_en]',
                 'contents' =&gt; 'n'
             ],
@@ -2099,7 +2383,7 @@ $response = $client-&gt;post(
             ],
             [
                 'name' =&gt; 'images[]',
-                'contents' =&gt; fopen('C:\Users\adshift FrontEnd\AppData\Local\Temp\phpC986.tmp', 'r')
+                'contents' =&gt; fopen('C:\Users\adshift FrontEnd\AppData\Local\Temp\php76DD.tmp', 'r')
             ],
         ],
     ]
@@ -2298,26 +2582,22 @@ You can check the Dev Tools console for debugging information.</code></pre>
  &nbsp;
                 <input type="text" style="display: none"
                               name="grind_type"                data-endpoint="POSTapi-admin-products"
-               value="extra_fine"
+               value=""
                data-component="body">
     <br>
-<p>Example: <code>extra_fine</code></p>
-Must be one of:
-<ul style="list-style-type: square;"><li><code>whole_bean</code></li> <li><code>coarse</code></li> <li><code>medium</code></li> <li><code>fine</code></li> <li><code>extra_fine</code></li></ul>
+
         </div>
                 <div style=" padding-left: 28px;  clear: unset;">
             <b style="line-height: 2;"><code>weight</code></b>&nbsp;&nbsp;
-<small>number</small>&nbsp;
+<small>string</small>&nbsp;
 <i>optional</i> &nbsp;
  &nbsp;
-                <input type="number" style="display: none"
-               step="any"               name="weight"                data-endpoint="POSTapi-admin-products"
-               value="1.000"
+                <input type="text" style="display: none"
+                              name="weight"                data-endpoint="POSTapi-admin-products"
+               value=""
                data-component="body">
     <br>
-<p>Example: <code>1.000</code></p>
-Must be one of:
-<ul style="list-style-type: square;"><li><code>0.125</code></li> <li><code>0.250</code></li> <li><code>0.500</code></li> <li><code>1.000</code></li></ul>
+
         </div>
                 <div style=" padding-left: 28px;  clear: unset;">
         <details>
@@ -2736,7 +3016,7 @@ print_r(json_decode((string) $body));</code></pre></div>
 content-type: application/json
 access-control-allow-origin: http://localhost:3000
 access-control-allow-credentials: true
-set-cookie: laravel-session=eyJpdiI6IlozVGMvUnRPM09CTTNxaXRqc1pKSXc9PSIsInZhbHVlIjoiNHJUWW8xMGFVY3MrbGxocG5JWnU2U1V0UzdaaFgxSm9WV1FMWGkyV204cVRxSzZ3SHU0c0tkQ1hDdzBNWUdIMUNYVmJjY1NBZ3hQRnBqQW5PT1N3R1hIQjk5ZzBkMHJsTlNQNmp1OGUvbTB6REEyOCt5K0preU5PTXd3Y0pDNEEiLCJtYWMiOiJhYWQxZjM1ZjAyY2QxMjYyYmE4ZTg4ZGM0ZjM2NzhiOWUyMmU4M2Q3Y2NkNTA4N2NiZWJiYzYxYzJmYjM4NWM1IiwidGFnIjoiIn0%3D; expires=Mon, 02 Feb 2026 16:22:09 GMT; Max-Age=7200; path=/; secure; httponly; samesite=none
+set-cookie: al-atheer-ecommerce-session=eyJpdiI6Im5BTjlNSUVEN1lhQkZFUFYzcm4rMXc9PSIsInZhbHVlIjoiVDJHSjZUNXg3KzhrSFhLQkZPbjZLWktRcjAvcmwzUVVtZE9Bc0dvcFZpYWh2bFlMY25tODFqblptK2kyblppVFZ6MzdYY0g3MkRnbUlkVHdDRFkwMUpLaEVoNVpQaXhYN1dTclJsWWZyTjBVU004TnZwcS9SQzFicnRnL243bzIiLCJtYWMiOiI0ZmIwODQ5MjkxZWU3ZGNjZDE3NDBkYzA2NGQwNzlhYWVkYzM3NWZiY2NjNWM1ZjhkOTI3NThlNTQ5ZjkzNjc5IiwidGFnIjoiIn0%3D; expires=Thu, 05 Feb 2026 13:29:08 GMT; Max-Age=7200; path=/; secure; httponly; samesite=none
  </code></pre></details>         <pre>
 
 <code class="language-json" style="max-height: 300px;">{
@@ -3595,7 +3875,7 @@ You can check the Dev Tools console for debugging information.</code></pre>
     --form "description=Premium coffee beans from around the world"\
     --form "description_ar=حبوب قهوة ممتازة من جميع أنحاء العالم"\
     --form "is_active=1"\
-    --form "image=@C:\Users\adshift FrontEnd\AppData\Local\Temp\phpC9C6.tmp" </code></pre></div>
+    --form "image=@C:\Users\adshift FrontEnd\AppData\Local\Temp\php770E.tmp" </code></pre></div>
 
 
 <div class="javascript-example">
@@ -3658,7 +3938,7 @@ $response = $client-&gt;post(
             ],
             [
                 'name' =&gt; 'image',
-                'contents' =&gt; fopen('C:\Users\adshift FrontEnd\AppData\Local\Temp\phpC9C6.tmp', 'r')
+                'contents' =&gt; fopen('C:\Users\adshift FrontEnd\AppData\Local\Temp\php770E.tmp', 'r')
             ],
         ],
     ]
@@ -3867,7 +4147,7 @@ You can check the Dev Tools console for debugging information.</code></pre>
                value=""
                data-component="body">
     <br>
-<p>The category image (jpeg, png, jpg, gif, webp, max 2MB). Example: <code>C:\Users\adshift FrontEnd\AppData\Local\Temp\phpC9C6.tmp</code></p>
+<p>The category image (jpeg, png, jpg, gif, webp, max 2MB). Example: <code>C:\Users\adshift FrontEnd\AppData\Local\Temp\php770E.tmp</code></p>
         </div>
         </form>
 
@@ -4089,7 +4369,7 @@ You can check the Dev Tools console for debugging information.</code></pre>
     --form "description_ar=architecto"\
     --form "is_active=1"\
     --form "remove_image="\
-    --form "image=@C:\Users\adshift FrontEnd\AppData\Local\Temp\phpC9C8.tmp" </code></pre></div>
+    --form "image=@C:\Users\adshift FrontEnd\AppData\Local\Temp\php771F.tmp" </code></pre></div>
 
 
 <div class="javascript-example">
@@ -4157,7 +4437,7 @@ $response = $client-&gt;put(
             ],
             [
                 'name' =&gt; 'image',
-                'contents' =&gt; fopen('C:\Users\adshift FrontEnd\AppData\Local\Temp\phpC9C8.tmp', 'r')
+                'contents' =&gt; fopen('C:\Users\adshift FrontEnd\AppData\Local\Temp\php771F.tmp', 'r')
             ],
         ],
     ]
@@ -4376,7 +4656,7 @@ You can check the Dev Tools console for debugging information.</code></pre>
                value=""
                data-component="body">
     <br>
-<p>The new category image (jpeg, png, jpg, gif, webp, max 2MB). Example: <code>C:\Users\adshift FrontEnd\AppData\Local\Temp\phpC9C8.tmp</code></p>
+<p>The new category image (jpeg, png, jpg, gif, webp, max 2MB). Example: <code>C:\Users\adshift FrontEnd\AppData\Local\Temp\php771F.tmp</code></p>
         </div>
                 <div style=" padding-left: 28px;  clear: unset;">
             <b style="line-height: 2;"><code>remove_image</code></b>&nbsp;&nbsp;
@@ -8185,7 +8465,7 @@ You can check the Dev Tools console for debugging information.</code></pre>
 
 <div class="bash-example">
     <pre><code class="language-bash">curl --request GET \
-    --get "http://127.0.0.1:8000/api/orders/1" \
+    --get "http://127.0.0.1:8000/api/orders/16" \
     --header "Authorization: Bearer {YOUR_API_TOKEN}" \
     --header "Content-Type: application/json" \
     --header "Accept: application/json"</code></pre></div>
@@ -8193,7 +8473,7 @@ You can check the Dev Tools console for debugging information.</code></pre>
 
 <div class="javascript-example">
     <pre><code class="language-javascript">const url = new URL(
-    "http://127.0.0.1:8000/api/orders/1"
+    "http://127.0.0.1:8000/api/orders/16"
 );
 
 const headers = {
@@ -8210,7 +8490,7 @@ fetch(url, {
 
 <div class="php-example">
     <pre><code class="language-php">$client = new \GuzzleHttp\Client();
-$url = 'http://127.0.0.1:8000/api/orders/1';
+$url = 'http://127.0.0.1:8000/api/orders/16';
 $response = $client-&gt;get(
     $url,
     [
@@ -8369,10 +8649,10 @@ You can check the Dev Tools console for debugging information.</code></pre>
  &nbsp;
                 <input type="number" style="display: none"
                step="any"               name="order_id"                data-endpoint="GETapi-orders--order_id-"
-               value="1"
+               value="16"
                data-component="url">
     <br>
-<p>The ID of the order. Example: <code>1</code></p>
+<p>The ID of the order. Example: <code>16</code></p>
             </div>
                     <div style="padding-left: 28px; clear: unset;">
                 <b style="line-height: 2;"><code>order</code></b>&nbsp;&nbsp;
@@ -8402,7 +8682,7 @@ You can check the Dev Tools console for debugging information.</code></pre>
 
 <div class="bash-example">
     <pre><code class="language-bash">curl --request PATCH \
-    "http://127.0.0.1:8000/api/orders/1/status" \
+    "http://127.0.0.1:8000/api/orders/16/status" \
     --header "Authorization: Bearer {YOUR_API_TOKEN}" \
     --header "Content-Type: application/json" \
     --header "Accept: application/json" \
@@ -8416,7 +8696,7 @@ You can check the Dev Tools console for debugging information.</code></pre>
 
 <div class="javascript-example">
     <pre><code class="language-javascript">const url = new URL(
-    "http://127.0.0.1:8000/api/orders/1/status"
+    "http://127.0.0.1:8000/api/orders/16/status"
 );
 
 const headers = {
@@ -8440,7 +8720,7 @@ fetch(url, {
 
 <div class="php-example">
     <pre><code class="language-php">$client = new \GuzzleHttp\Client();
-$url = 'http://127.0.0.1:8000/api/orders/1/status';
+$url = 'http://127.0.0.1:8000/api/orders/16/status';
 $response = $client-&gt;patch(
     $url,
     [
@@ -8584,10 +8864,10 @@ You can check the Dev Tools console for debugging information.</code></pre>
  &nbsp;
                 <input type="number" style="display: none"
                step="any"               name="order_id"                data-endpoint="PATCHapi-orders--order_id--status"
-               value="1"
+               value="16"
                data-component="url">
     <br>
-<p>The ID of the order. Example: <code>1</code></p>
+<p>The ID of the order. Example: <code>16</code></p>
             </div>
                     <div style="padding-left: 28px; clear: unset;">
                 <b style="line-height: 2;"><code>order</code></b>&nbsp;&nbsp;
@@ -8654,7 +8934,7 @@ You can check the Dev Tools console for debugging information.</code></pre>
 
 <div class="bash-example">
     <pre><code class="language-bash">curl --request POST \
-    "http://127.0.0.1:8000/api/orders/1/cancel" \
+    "http://127.0.0.1:8000/api/orders/16/cancel" \
     --header "Authorization: Bearer {YOUR_API_TOKEN}" \
     --header "Content-Type: application/json" \
     --header "Accept: application/json"</code></pre></div>
@@ -8662,7 +8942,7 @@ You can check the Dev Tools console for debugging information.</code></pre>
 
 <div class="javascript-example">
     <pre><code class="language-javascript">const url = new URL(
-    "http://127.0.0.1:8000/api/orders/1/cancel"
+    "http://127.0.0.1:8000/api/orders/16/cancel"
 );
 
 const headers = {
@@ -8679,7 +8959,7 @@ fetch(url, {
 
 <div class="php-example">
     <pre><code class="language-php">$client = new \GuzzleHttp\Client();
-$url = 'http://127.0.0.1:8000/api/orders/1/cancel';
+$url = 'http://127.0.0.1:8000/api/orders/16/cancel';
 $response = $client-&gt;post(
     $url,
     [
@@ -8822,10 +9102,10 @@ You can check the Dev Tools console for debugging information.</code></pre>
  &nbsp;
                 <input type="number" style="display: none"
                step="any"               name="order_id"                data-endpoint="POSTapi-orders--order_id--cancel"
-               value="1"
+               value="16"
                data-component="url">
     <br>
-<p>The ID of the order. Example: <code>1</code></p>
+<p>The ID of the order. Example: <code>16</code></p>
             </div>
                     <div style="padding-left: 28px; clear: unset;">
                 <b style="line-height: 2;"><code>order</code></b>&nbsp;&nbsp;
@@ -10234,14 +10514,14 @@ Returns complete team member data including all images and social media links.</
 
 <div class="bash-example">
     <pre><code class="language-bash">curl --request GET \
-    --get "http://127.0.0.1:8000/api/admin/team-members/1" \
+    --get "http://127.0.0.1:8000/api/admin/team-members/16" \
     --header "Content-Type: application/json" \
     --header "Accept: application/json"</code></pre></div>
 
 
 <div class="javascript-example">
     <pre><code class="language-javascript">const url = new URL(
-    "http://127.0.0.1:8000/api/admin/team-members/1"
+    "http://127.0.0.1:8000/api/admin/team-members/16"
 );
 
 const headers = {
@@ -10257,7 +10537,7 @@ fetch(url, {
 
 <div class="php-example">
     <pre><code class="language-php">$client = new \GuzzleHttp\Client();
-$url = 'http://127.0.0.1:8000/api/admin/team-members/1';
+$url = 'http://127.0.0.1:8000/api/admin/team-members/16';
 $response = $client-&gt;get(
     $url,
     [
@@ -10400,10 +10680,10 @@ You can check the Dev Tools console for debugging information.</code></pre>
  &nbsp;
                 <input type="number" style="display: none"
                step="any"               name="teamMember_id"                data-endpoint="GETapi-admin-team-members--teamMember_id-"
-               value="1"
+               value="16"
                data-component="url">
     <br>
-<p>The ID of the teamMember. Example: <code>1</code></p>
+<p>The ID of the teamMember. Example: <code>16</code></p>
             </div>
                     <div style="padding-left: 28px; clear: unset;">
                 <b style="line-height: 2;"><code>teamMember</code></b>&nbsp;&nbsp;
@@ -10549,7 +10829,2465 @@ You can check the Dev Tools console for debugging information.</code></pre>
                     </div>
                                     </details>
         </div>
-                    <h1 id="customer-addresses">Customer Addresses</h1>
+                    <h1 id="contact-inquiries">Contact Inquiries</h1>
+
+    <p>APIs for managing contact inquiries and customer testimonials.</p>
+
+                                <h2 id="contact-inquiries-GETapi-contact-inquiries-published">Display a listing of published inquiries (for testimonials).</h2>
+
+<p>
+</p>
+
+<p>Get a paginated list of published contact inquiries.
+Only inquiries that have been replied to and marked as published are returned.
+Sensitive fields like email and phone are excluded from the response.</p>
+
+<span id="example-requests-GETapi-contact-inquiries-published">
+<blockquote>Example request:</blockquote>
+
+
+<div class="bash-example">
+    <pre><code class="language-bash">curl --request GET \
+    --get "http://127.0.0.1:8000/api/contact-inquiries/published?per_page=15" \
+    --header "Content-Type: application/json" \
+    --header "Accept: application/json"</code></pre></div>
+
+
+<div class="javascript-example">
+    <pre><code class="language-javascript">const url = new URL(
+    "http://127.0.0.1:8000/api/contact-inquiries/published"
+);
+
+const params = {
+    "per_page": "15",
+};
+Object.keys(params)
+    .forEach(key =&gt; url.searchParams.append(key, params[key]));
+
+const headers = {
+    "Content-Type": "application/json",
+    "Accept": "application/json",
+};
+
+fetch(url, {
+    method: "GET",
+    headers,
+}).then(response =&gt; response.json());</code></pre></div>
+
+
+<div class="php-example">
+    <pre><code class="language-php">$client = new \GuzzleHttp\Client();
+$url = 'http://127.0.0.1:8000/api/contact-inquiries/published';
+$response = $client-&gt;get(
+    $url,
+    [
+        'headers' =&gt; [
+            'Content-Type' =&gt; 'application/json',
+            'Accept' =&gt; 'application/json',
+        ],
+        'query' =&gt; [
+            'per_page' =&gt; '15',
+        ],
+    ]
+);
+$body = $response-&gt;getBody();
+print_r(json_decode((string) $body));</code></pre></div>
+
+</span>
+
+<span id="example-responses-GETapi-contact-inquiries-published">
+            <blockquote>
+            <p>Example response (200, Success):</p>
+        </blockquote>
+                <pre>
+
+<code class="language-json" style="max-height: 300px;">{
+    &quot;data&quot;: [
+        {
+            &quot;full_name&quot;: &quot;John Doe&quot;,
+            &quot;company&quot;: &quot;Acme Inc&quot;,
+            &quot;message&quot;: &quot;Great service! Very satisfied with the quality.&quot;,
+            &quot;reply_message&quot;: &quot;Thank you for your feedback! We&#039;re glad you&#039;re happy.&quot;,
+            &quot;created_at&quot;: &quot;2024-01-15T10:00:00.000000Z&quot;
+        }
+    ],
+    &quot;meta&quot;: {
+        &quot;current_page&quot;: 1,
+        &quot;last_page&quot;: 5,
+        &quot;per_page&quot;: 10,
+        &quot;total&quot;: 50
+    }
+}</code>
+ </pre>
+    </span>
+<span id="execution-results-GETapi-contact-inquiries-published" hidden>
+    <blockquote>Received response<span
+                id="execution-response-status-GETapi-contact-inquiries-published"></span>:
+    </blockquote>
+    <pre class="json"><code id="execution-response-content-GETapi-contact-inquiries-published"
+      data-empty-response-text="<Empty response>" style="max-height: 400px;"></code></pre>
+</span>
+<span id="execution-error-GETapi-contact-inquiries-published" hidden>
+    <blockquote>Request failed with error:</blockquote>
+    <pre><code id="execution-error-message-GETapi-contact-inquiries-published">
+
+Tip: Check that you&#039;re properly connected to the network.
+If you&#039;re a maintainer of ths API, verify that your API is running and you&#039;ve enabled CORS.
+You can check the Dev Tools console for debugging information.</code></pre>
+</span>
+<form id="form-GETapi-contact-inquiries-published" data-method="GET"
+      data-path="api/contact-inquiries/published"
+      data-authed="0"
+      data-hasfiles="0"
+      data-isarraybody="0"
+      autocomplete="off"
+      onsubmit="event.preventDefault(); executeTryOut('GETapi-contact-inquiries-published', this);">
+    <h3>
+        Request&nbsp;&nbsp;&nbsp;
+                    <button type="button"
+                    style="background-color: #8fbcd4; padding: 5px 10px; border-radius: 5px; border-width: thin;"
+                    id="btn-tryout-GETapi-contact-inquiries-published"
+                    onclick="tryItOut('GETapi-contact-inquiries-published');">Try it out ⚡
+            </button>
+            <button type="button"
+                    style="background-color: #c97a7e; padding: 5px 10px; border-radius: 5px; border-width: thin;"
+                    id="btn-canceltryout-GETapi-contact-inquiries-published"
+                    onclick="cancelTryOut('GETapi-contact-inquiries-published');" hidden>Cancel 🛑
+            </button>&nbsp;&nbsp;
+            <button type="submit"
+                    style="background-color: #6ac174; padding: 5px 10px; border-radius: 5px; border-width: thin;"
+                    id="btn-executetryout-GETapi-contact-inquiries-published"
+                    data-initial-text="Send Request 💥"
+                    data-loading-text="⏱ Sending..."
+                    hidden>Send Request 💥
+            </button>
+            </h3>
+            <p>
+            <small class="badge badge-green">GET</small>
+            <b><code>api/contact-inquiries/published</code></b>
+        </p>
+                <h4 class="fancy-heading-panel"><b>Headers</b></h4>
+                                <div style="padding-left: 28px; clear: unset;">
+                <b style="line-height: 2;"><code>Content-Type</code></b>&nbsp;&nbsp;
+&nbsp;
+ &nbsp;
+ &nbsp;
+                <input type="text" style="display: none"
+                              name="Content-Type"                data-endpoint="GETapi-contact-inquiries-published"
+               value="application/json"
+               data-component="header">
+    <br>
+<p>Example: <code>application/json</code></p>
+            </div>
+                                <div style="padding-left: 28px; clear: unset;">
+                <b style="line-height: 2;"><code>Accept</code></b>&nbsp;&nbsp;
+&nbsp;
+ &nbsp;
+ &nbsp;
+                <input type="text" style="display: none"
+                              name="Accept"                data-endpoint="GETapi-contact-inquiries-published"
+               value="application/json"
+               data-component="header">
+    <br>
+<p>Example: <code>application/json</code></p>
+            </div>
+                            <h4 class="fancy-heading-panel"><b>Query Parameters</b></h4>
+                                    <div style="padding-left: 28px; clear: unset;">
+                <b style="line-height: 2;"><code>per_page</code></b>&nbsp;&nbsp;
+<small>integer</small>&nbsp;
+<i>optional</i> &nbsp;
+ &nbsp;
+                <input type="number" style="display: none"
+               step="any"               name="per_page"                data-endpoint="GETapi-contact-inquiries-published"
+               value="15"
+               data-component="query">
+    <br>
+<p>Items per page. Default: 10. Example: <code>15</code></p>
+            </div>
+                </form>
+
+                    <h2 id="contact-inquiries-GETapi-contact-inquiries">Display a listing of contact inquiries.</h2>
+
+<p>
+<small class="badge badge-darkred">requires authentication</small>
+</p>
+
+<p>Get a paginated list of all contact inquiries.</p>
+
+<span id="example-requests-GETapi-contact-inquiries">
+<blockquote>Example request:</blockquote>
+
+
+<div class="bash-example">
+    <pre><code class="language-bash">curl --request GET \
+    --get "http://127.0.0.1:8000/api/contact-inquiries?per_page=10&amp;status=pending" \
+    --header "Authorization: Bearer {YOUR_API_TOKEN}" \
+    --header "Content-Type: application/json" \
+    --header "Accept: application/json"</code></pre></div>
+
+
+<div class="javascript-example">
+    <pre><code class="language-javascript">const url = new URL(
+    "http://127.0.0.1:8000/api/contact-inquiries"
+);
+
+const params = {
+    "per_page": "10",
+    "status": "pending",
+};
+Object.keys(params)
+    .forEach(key =&gt; url.searchParams.append(key, params[key]));
+
+const headers = {
+    "Authorization": "Bearer {YOUR_API_TOKEN}",
+    "Content-Type": "application/json",
+    "Accept": "application/json",
+};
+
+fetch(url, {
+    method: "GET",
+    headers,
+}).then(response =&gt; response.json());</code></pre></div>
+
+
+<div class="php-example">
+    <pre><code class="language-php">$client = new \GuzzleHttp\Client();
+$url = 'http://127.0.0.1:8000/api/contact-inquiries';
+$response = $client-&gt;get(
+    $url,
+    [
+        'headers' =&gt; [
+            'Authorization' =&gt; 'Bearer {YOUR_API_TOKEN}',
+            'Content-Type' =&gt; 'application/json',
+            'Accept' =&gt; 'application/json',
+        ],
+        'query' =&gt; [
+            'per_page' =&gt; '10',
+            'status' =&gt; 'pending',
+        ],
+    ]
+);
+$body = $response-&gt;getBody();
+print_r(json_decode((string) $body));</code></pre></div>
+
+</span>
+
+<span id="example-responses-GETapi-contact-inquiries">
+            <blockquote>
+            <p>Example response (200, Success):</p>
+        </blockquote>
+                <pre>
+
+<code class="language-json" style="max-height: 300px;">{
+    &quot;data&quot;: [
+        {
+            &quot;id&quot;: 1,
+            &quot;full_name&quot;: &quot;John Doe&quot;,
+            &quot;email&quot;: &quot;john@example.com&quot;,
+            &quot;phone&quot;: &quot;+1234567890&quot;,
+            &quot;company&quot;: &quot;Acme Inc&quot;,
+            &quot;message&quot;: &quot;Interested in your products&quot;,
+            &quot;status&quot;: &quot;pending&quot;,
+            &quot;status_label&quot;: &quot;Pending&quot;,
+            &quot;status_color&quot;: &quot;yellow&quot;,
+            &quot;replied_at&quot;: null,
+            &quot;reply_message&quot;: null,
+            &quot;created_at&quot;: &quot;2024-01-15T10:00:00.000000Z&quot;,
+            &quot;updated_at&quot;: &quot;2024-01-15T10:00:00.000000Z&quot;
+        }
+    ]
+}</code>
+ </pre>
+            <blockquote>
+            <p>Example response (401, Unauthenticated):</p>
+        </blockquote>
+                <pre>
+
+<code class="language-json" style="max-height: 300px;">{
+    &quot;message&quot;: &quot;Unauthenticated.&quot;
+}</code>
+ </pre>
+    </span>
+<span id="execution-results-GETapi-contact-inquiries" hidden>
+    <blockquote>Received response<span
+                id="execution-response-status-GETapi-contact-inquiries"></span>:
+    </blockquote>
+    <pre class="json"><code id="execution-response-content-GETapi-contact-inquiries"
+      data-empty-response-text="<Empty response>" style="max-height: 400px;"></code></pre>
+</span>
+<span id="execution-error-GETapi-contact-inquiries" hidden>
+    <blockquote>Request failed with error:</blockquote>
+    <pre><code id="execution-error-message-GETapi-contact-inquiries">
+
+Tip: Check that you&#039;re properly connected to the network.
+If you&#039;re a maintainer of ths API, verify that your API is running and you&#039;ve enabled CORS.
+You can check the Dev Tools console for debugging information.</code></pre>
+</span>
+<form id="form-GETapi-contact-inquiries" data-method="GET"
+      data-path="api/contact-inquiries"
+      data-authed="1"
+      data-hasfiles="0"
+      data-isarraybody="0"
+      autocomplete="off"
+      onsubmit="event.preventDefault(); executeTryOut('GETapi-contact-inquiries', this);">
+    <h3>
+        Request&nbsp;&nbsp;&nbsp;
+                    <button type="button"
+                    style="background-color: #8fbcd4; padding: 5px 10px; border-radius: 5px; border-width: thin;"
+                    id="btn-tryout-GETapi-contact-inquiries"
+                    onclick="tryItOut('GETapi-contact-inquiries');">Try it out ⚡
+            </button>
+            <button type="button"
+                    style="background-color: #c97a7e; padding: 5px 10px; border-radius: 5px; border-width: thin;"
+                    id="btn-canceltryout-GETapi-contact-inquiries"
+                    onclick="cancelTryOut('GETapi-contact-inquiries');" hidden>Cancel 🛑
+            </button>&nbsp;&nbsp;
+            <button type="submit"
+                    style="background-color: #6ac174; padding: 5px 10px; border-radius: 5px; border-width: thin;"
+                    id="btn-executetryout-GETapi-contact-inquiries"
+                    data-initial-text="Send Request 💥"
+                    data-loading-text="⏱ Sending..."
+                    hidden>Send Request 💥
+            </button>
+            </h3>
+            <p>
+            <small class="badge badge-green">GET</small>
+            <b><code>api/contact-inquiries</code></b>
+        </p>
+                <h4 class="fancy-heading-panel"><b>Headers</b></h4>
+                                <div style="padding-left: 28px; clear: unset;">
+                <b style="line-height: 2;"><code>Authorization</code></b>&nbsp;&nbsp;
+&nbsp;
+ &nbsp;
+ &nbsp;
+                <input type="text" style="display: none"
+                              name="Authorization" class="auth-value"               data-endpoint="GETapi-contact-inquiries"
+               value="Bearer {YOUR_API_TOKEN}"
+               data-component="header">
+    <br>
+<p>Example: <code>Bearer {YOUR_API_TOKEN}</code></p>
+            </div>
+                                <div style="padding-left: 28px; clear: unset;">
+                <b style="line-height: 2;"><code>Content-Type</code></b>&nbsp;&nbsp;
+&nbsp;
+ &nbsp;
+ &nbsp;
+                <input type="text" style="display: none"
+                              name="Content-Type"                data-endpoint="GETapi-contact-inquiries"
+               value="application/json"
+               data-component="header">
+    <br>
+<p>Example: <code>application/json</code></p>
+            </div>
+                                <div style="padding-left: 28px; clear: unset;">
+                <b style="line-height: 2;"><code>Accept</code></b>&nbsp;&nbsp;
+&nbsp;
+ &nbsp;
+ &nbsp;
+                <input type="text" style="display: none"
+                              name="Accept"                data-endpoint="GETapi-contact-inquiries"
+               value="application/json"
+               data-component="header">
+    <br>
+<p>Example: <code>application/json</code></p>
+            </div>
+                            <h4 class="fancy-heading-panel"><b>Query Parameters</b></h4>
+                                    <div style="padding-left: 28px; clear: unset;">
+                <b style="line-height: 2;"><code>per_page</code></b>&nbsp;&nbsp;
+<small>integer</small>&nbsp;
+<i>optional</i> &nbsp;
+ &nbsp;
+                <input type="number" style="display: none"
+               step="any"               name="per_page"                data-endpoint="GETapi-contact-inquiries"
+               value="10"
+               data-component="query">
+    <br>
+<p>Items per page. Default: 15. Example: <code>10</code></p>
+            </div>
+                                    <div style="padding-left: 28px; clear: unset;">
+                <b style="line-height: 2;"><code>status</code></b>&nbsp;&nbsp;
+<small>string</small>&nbsp;
+<i>optional</i> &nbsp;
+ &nbsp;
+                <input type="text" style="display: none"
+                              name="status"                data-endpoint="GETapi-contact-inquiries"
+               value="pending"
+               data-component="query">
+    <br>
+<p>Filter by status (pending, replied, closed). Example: <code>pending</code></p>
+            </div>
+                </form>
+
+                    <h2 id="contact-inquiries-POSTapi-contact-inquiries">Store a newly created contact inquiry in storage.</h2>
+
+<p>
+</p>
+
+<p>Create a new contact inquiry from customer submission.</p>
+
+<span id="example-requests-POSTapi-contact-inquiries">
+<blockquote>Example request:</blockquote>
+
+
+<div class="bash-example">
+    <pre><code class="language-bash">curl --request POST \
+    "http://127.0.0.1:8000/api/contact-inquiries" \
+    --header "Content-Type: application/json" \
+    --header "Accept: application/json" \
+    --data "{
+    \"full_name\": \"John Doe\",
+    \"email\": \"john@example.com\",
+    \"phone\": \"+1234567890\",
+    \"company\": \"Acme Inc\",
+    \"service_id\": 1,
+    \"service\": \"Product Inquiry\",
+    \"message\": \"I\'m interested in your products.\"
+}"
+</code></pre></div>
+
+
+<div class="javascript-example">
+    <pre><code class="language-javascript">const url = new URL(
+    "http://127.0.0.1:8000/api/contact-inquiries"
+);
+
+const headers = {
+    "Content-Type": "application/json",
+    "Accept": "application/json",
+};
+
+let body = {
+    "full_name": "John Doe",
+    "email": "john@example.com",
+    "phone": "+1234567890",
+    "company": "Acme Inc",
+    "service_id": 1,
+    "service": "Product Inquiry",
+    "message": "I'm interested in your products."
+};
+
+fetch(url, {
+    method: "POST",
+    headers,
+    body: JSON.stringify(body),
+}).then(response =&gt; response.json());</code></pre></div>
+
+
+<div class="php-example">
+    <pre><code class="language-php">$client = new \GuzzleHttp\Client();
+$url = 'http://127.0.0.1:8000/api/contact-inquiries';
+$response = $client-&gt;post(
+    $url,
+    [
+        'headers' =&gt; [
+            'Content-Type' =&gt; 'application/json',
+            'Accept' =&gt; 'application/json',
+        ],
+        'json' =&gt; [
+            'full_name' =&gt; 'John Doe',
+            'email' =&gt; 'john@example.com',
+            'phone' =&gt; '+1234567890',
+            'company' =&gt; 'Acme Inc',
+            'service_id' =&gt; 1,
+            'service' =&gt; 'Product Inquiry',
+            'message' =&gt; 'I\'m interested in your products.',
+        ],
+    ]
+);
+$body = $response-&gt;getBody();
+print_r(json_decode((string) $body));</code></pre></div>
+
+</span>
+
+<span id="example-responses-POSTapi-contact-inquiries">
+            <blockquote>
+            <p>Example response (201, Created):</p>
+        </blockquote>
+                <pre>
+
+<code class="language-json" style="max-height: 300px;">{
+    &quot;id&quot;: 1,
+    &quot;full_name&quot;: &quot;John Doe&quot;,
+    &quot;email&quot;: &quot;john@example.com&quot;,
+    &quot;phone&quot;: &quot;+1234567890&quot;,
+    &quot;company&quot;: &quot;Acme Inc&quot;,
+    &quot;message&quot;: &quot;I&#039;m interested in your products.&quot;,
+    &quot;status&quot;: &quot;pending&quot;,
+    &quot;status_label&quot;: &quot;Pending&quot;,
+    &quot;status_color&quot;: &quot;yellow&quot;,
+    &quot;replied_at&quot;: null,
+    &quot;reply_message&quot;: null,
+    &quot;created_at&quot;: &quot;2024-01-15T10:00:00.000000Z&quot;,
+    &quot;updated_at&quot;: &quot;2024-01-15T10:00:00.000000Z&quot;
+}</code>
+ </pre>
+            <blockquote>
+            <p>Example response (422, Validation Error):</p>
+        </blockquote>
+                <pre>
+
+<code class="language-json" style="max-height: 300px;">{
+    &quot;message&quot;: &quot;The full name field is required.&quot;,
+    &quot;errors&quot;: {
+        &quot;full_name&quot;: [
+            &quot;The full name field is required.&quot;
+        ]
+    }
+}</code>
+ </pre>
+    </span>
+<span id="execution-results-POSTapi-contact-inquiries" hidden>
+    <blockquote>Received response<span
+                id="execution-response-status-POSTapi-contact-inquiries"></span>:
+    </blockquote>
+    <pre class="json"><code id="execution-response-content-POSTapi-contact-inquiries"
+      data-empty-response-text="<Empty response>" style="max-height: 400px;"></code></pre>
+</span>
+<span id="execution-error-POSTapi-contact-inquiries" hidden>
+    <blockquote>Request failed with error:</blockquote>
+    <pre><code id="execution-error-message-POSTapi-contact-inquiries">
+
+Tip: Check that you&#039;re properly connected to the network.
+If you&#039;re a maintainer of ths API, verify that your API is running and you&#039;ve enabled CORS.
+You can check the Dev Tools console for debugging information.</code></pre>
+</span>
+<form id="form-POSTapi-contact-inquiries" data-method="POST"
+      data-path="api/contact-inquiries"
+      data-authed="0"
+      data-hasfiles="0"
+      data-isarraybody="0"
+      autocomplete="off"
+      onsubmit="event.preventDefault(); executeTryOut('POSTapi-contact-inquiries', this);">
+    <h3>
+        Request&nbsp;&nbsp;&nbsp;
+                    <button type="button"
+                    style="background-color: #8fbcd4; padding: 5px 10px; border-radius: 5px; border-width: thin;"
+                    id="btn-tryout-POSTapi-contact-inquiries"
+                    onclick="tryItOut('POSTapi-contact-inquiries');">Try it out ⚡
+            </button>
+            <button type="button"
+                    style="background-color: #c97a7e; padding: 5px 10px; border-radius: 5px; border-width: thin;"
+                    id="btn-canceltryout-POSTapi-contact-inquiries"
+                    onclick="cancelTryOut('POSTapi-contact-inquiries');" hidden>Cancel 🛑
+            </button>&nbsp;&nbsp;
+            <button type="submit"
+                    style="background-color: #6ac174; padding: 5px 10px; border-radius: 5px; border-width: thin;"
+                    id="btn-executetryout-POSTapi-contact-inquiries"
+                    data-initial-text="Send Request 💥"
+                    data-loading-text="⏱ Sending..."
+                    hidden>Send Request 💥
+            </button>
+            </h3>
+            <p>
+            <small class="badge badge-black">POST</small>
+            <b><code>api/contact-inquiries</code></b>
+        </p>
+                <h4 class="fancy-heading-panel"><b>Headers</b></h4>
+                                <div style="padding-left: 28px; clear: unset;">
+                <b style="line-height: 2;"><code>Content-Type</code></b>&nbsp;&nbsp;
+&nbsp;
+ &nbsp;
+ &nbsp;
+                <input type="text" style="display: none"
+                              name="Content-Type"                data-endpoint="POSTapi-contact-inquiries"
+               value="application/json"
+               data-component="header">
+    <br>
+<p>Example: <code>application/json</code></p>
+            </div>
+                                <div style="padding-left: 28px; clear: unset;">
+                <b style="line-height: 2;"><code>Accept</code></b>&nbsp;&nbsp;
+&nbsp;
+ &nbsp;
+ &nbsp;
+                <input type="text" style="display: none"
+                              name="Accept"                data-endpoint="POSTapi-contact-inquiries"
+               value="application/json"
+               data-component="header">
+    <br>
+<p>Example: <code>application/json</code></p>
+            </div>
+                                <h4 class="fancy-heading-panel"><b>Body Parameters</b></h4>
+        <div style=" padding-left: 28px;  clear: unset;">
+            <b style="line-height: 2;"><code>full_name</code></b>&nbsp;&nbsp;
+<small>string</small>&nbsp;
+ &nbsp;
+ &nbsp;
+                <input type="text" style="display: none"
+                              name="full_name"                data-endpoint="POSTapi-contact-inquiries"
+               value="John Doe"
+               data-component="body">
+    <br>
+<p>The full name of the contact. Example: <code>John Doe</code></p>
+        </div>
+                <div style=" padding-left: 28px;  clear: unset;">
+            <b style="line-height: 2;"><code>email</code></b>&nbsp;&nbsp;
+<small>string</small>&nbsp;
+ &nbsp;
+ &nbsp;
+                <input type="text" style="display: none"
+                              name="email"                data-endpoint="POSTapi-contact-inquiries"
+               value="john@example.com"
+               data-component="body">
+    <br>
+<p>The email address. Example: <code>john@example.com</code></p>
+        </div>
+                <div style=" padding-left: 28px;  clear: unset;">
+            <b style="line-height: 2;"><code>phone</code></b>&nbsp;&nbsp;
+<small>string</small>&nbsp;
+<i>optional</i> &nbsp;
+ &nbsp;
+                <input type="text" style="display: none"
+                              name="phone"                data-endpoint="POSTapi-contact-inquiries"
+               value="+1234567890"
+               data-component="body">
+    <br>
+<p>optional The phone number. Example: <code>+1234567890</code></p>
+        </div>
+                <div style=" padding-left: 28px;  clear: unset;">
+            <b style="line-height: 2;"><code>company</code></b>&nbsp;&nbsp;
+<small>string</small>&nbsp;
+<i>optional</i> &nbsp;
+ &nbsp;
+                <input type="text" style="display: none"
+                              name="company"                data-endpoint="POSTapi-contact-inquiries"
+               value="Acme Inc"
+               data-component="body">
+    <br>
+<p>optional The company name. Example: <code>Acme Inc</code></p>
+        </div>
+                <div style=" padding-left: 28px;  clear: unset;">
+            <b style="line-height: 2;"><code>service_id</code></b>&nbsp;&nbsp;
+<small>integer</small>&nbsp;
+<i>optional</i> &nbsp;
+ &nbsp;
+                <input type="number" style="display: none"
+               step="any"               name="service_id"                data-endpoint="POSTapi-contact-inquiries"
+               value="1"
+               data-component="body">
+    <br>
+<p>optional The service ID if applicable. Example: <code>1</code></p>
+        </div>
+                <div style=" padding-left: 28px;  clear: unset;">
+            <b style="line-height: 2;"><code>service</code></b>&nbsp;&nbsp;
+<small>string</small>&nbsp;
+<i>optional</i> &nbsp;
+ &nbsp;
+                <input type="text" style="display: none"
+                              name="service"                data-endpoint="POSTapi-contact-inquiries"
+               value="Product Inquiry"
+               data-component="body">
+    <br>
+<p>optional The service name (legacy). Example: <code>Product Inquiry</code></p>
+        </div>
+                <div style=" padding-left: 28px;  clear: unset;">
+            <b style="line-height: 2;"><code>message</code></b>&nbsp;&nbsp;
+<small>string</small>&nbsp;
+ &nbsp;
+ &nbsp;
+                <input type="text" style="display: none"
+                              name="message"                data-endpoint="POSTapi-contact-inquiries"
+               value="I'm interested in your products."
+               data-component="body">
+    <br>
+<p>The inquiry message. Example: <code>I'm interested in your products.</code></p>
+        </div>
+        </form>
+
+                    <h2 id="contact-inquiries-GETapi-contact-inquiries--inquiry_id-">Display the specified contact inquiry.</h2>
+
+<p>
+<small class="badge badge-darkred">requires authentication</small>
+</p>
+
+<p>Get details of a specific contact inquiry.</p>
+
+<span id="example-requests-GETapi-contact-inquiries--inquiry_id-">
+<blockquote>Example request:</blockquote>
+
+
+<div class="bash-example">
+    <pre><code class="language-bash">curl --request GET \
+    --get "http://127.0.0.1:8000/api/contact-inquiries/1" \
+    --header "Authorization: Bearer {YOUR_API_TOKEN}" \
+    --header "Content-Type: application/json" \
+    --header "Accept: application/json"</code></pre></div>
+
+
+<div class="javascript-example">
+    <pre><code class="language-javascript">const url = new URL(
+    "http://127.0.0.1:8000/api/contact-inquiries/1"
+);
+
+const headers = {
+    "Authorization": "Bearer {YOUR_API_TOKEN}",
+    "Content-Type": "application/json",
+    "Accept": "application/json",
+};
+
+fetch(url, {
+    method: "GET",
+    headers,
+}).then(response =&gt; response.json());</code></pre></div>
+
+
+<div class="php-example">
+    <pre><code class="language-php">$client = new \GuzzleHttp\Client();
+$url = 'http://127.0.0.1:8000/api/contact-inquiries/1';
+$response = $client-&gt;get(
+    $url,
+    [
+        'headers' =&gt; [
+            'Authorization' =&gt; 'Bearer {YOUR_API_TOKEN}',
+            'Content-Type' =&gt; 'application/json',
+            'Accept' =&gt; 'application/json',
+        ],
+    ]
+);
+$body = $response-&gt;getBody();
+print_r(json_decode((string) $body));</code></pre></div>
+
+</span>
+
+<span id="example-responses-GETapi-contact-inquiries--inquiry_id-">
+            <blockquote>
+            <p>Example response (200, Success):</p>
+        </blockquote>
+                <pre>
+
+<code class="language-json" style="max-height: 300px;">{
+    &quot;id&quot;: 1,
+    &quot;full_name&quot;: &quot;John Doe&quot;,
+    &quot;email&quot;: &quot;john@example.com&quot;,
+    &quot;phone&quot;: &quot;+1234567890&quot;,
+    &quot;company&quot;: &quot;Acme Inc&quot;,
+    &quot;message&quot;: &quot;Interested in your products&quot;,
+    &quot;status&quot;: &quot;pending&quot;,
+    &quot;status_label&quot;: &quot;Pending&quot;,
+    &quot;status_color&quot;: &quot;yellow&quot;,
+    &quot;replied_at&quot;: null,
+    &quot;reply_message&quot;: null,
+    &quot;created_at&quot;: &quot;2024-01-15T10:00:00.000000Z&quot;,
+    &quot;updated_at&quot;: &quot;2024-01-15T10:00:00.000000Z&quot;
+}</code>
+ </pre>
+            <blockquote>
+            <p>Example response (401, Unauthenticated):</p>
+        </blockquote>
+                <pre>
+
+<code class="language-json" style="max-height: 300px;">{
+    &quot;message&quot;: &quot;Unauthenticated.&quot;
+}</code>
+ </pre>
+            <blockquote>
+            <p>Example response (404, Not Found):</p>
+        </blockquote>
+                <pre>
+
+<code class="language-json" style="max-height: 300px;">{
+    &quot;message&quot;: &quot;Resource not found.&quot;
+}</code>
+ </pre>
+    </span>
+<span id="execution-results-GETapi-contact-inquiries--inquiry_id-" hidden>
+    <blockquote>Received response<span
+                id="execution-response-status-GETapi-contact-inquiries--inquiry_id-"></span>:
+    </blockquote>
+    <pre class="json"><code id="execution-response-content-GETapi-contact-inquiries--inquiry_id-"
+      data-empty-response-text="<Empty response>" style="max-height: 400px;"></code></pre>
+</span>
+<span id="execution-error-GETapi-contact-inquiries--inquiry_id-" hidden>
+    <blockquote>Request failed with error:</blockquote>
+    <pre><code id="execution-error-message-GETapi-contact-inquiries--inquiry_id-">
+
+Tip: Check that you&#039;re properly connected to the network.
+If you&#039;re a maintainer of ths API, verify that your API is running and you&#039;ve enabled CORS.
+You can check the Dev Tools console for debugging information.</code></pre>
+</span>
+<form id="form-GETapi-contact-inquiries--inquiry_id-" data-method="GET"
+      data-path="api/contact-inquiries/{inquiry_id}"
+      data-authed="1"
+      data-hasfiles="0"
+      data-isarraybody="0"
+      autocomplete="off"
+      onsubmit="event.preventDefault(); executeTryOut('GETapi-contact-inquiries--inquiry_id-', this);">
+    <h3>
+        Request&nbsp;&nbsp;&nbsp;
+                    <button type="button"
+                    style="background-color: #8fbcd4; padding: 5px 10px; border-radius: 5px; border-width: thin;"
+                    id="btn-tryout-GETapi-contact-inquiries--inquiry_id-"
+                    onclick="tryItOut('GETapi-contact-inquiries--inquiry_id-');">Try it out ⚡
+            </button>
+            <button type="button"
+                    style="background-color: #c97a7e; padding: 5px 10px; border-radius: 5px; border-width: thin;"
+                    id="btn-canceltryout-GETapi-contact-inquiries--inquiry_id-"
+                    onclick="cancelTryOut('GETapi-contact-inquiries--inquiry_id-');" hidden>Cancel 🛑
+            </button>&nbsp;&nbsp;
+            <button type="submit"
+                    style="background-color: #6ac174; padding: 5px 10px; border-radius: 5px; border-width: thin;"
+                    id="btn-executetryout-GETapi-contact-inquiries--inquiry_id-"
+                    data-initial-text="Send Request 💥"
+                    data-loading-text="⏱ Sending..."
+                    hidden>Send Request 💥
+            </button>
+            </h3>
+            <p>
+            <small class="badge badge-green">GET</small>
+            <b><code>api/contact-inquiries/{inquiry_id}</code></b>
+        </p>
+                <h4 class="fancy-heading-panel"><b>Headers</b></h4>
+                                <div style="padding-left: 28px; clear: unset;">
+                <b style="line-height: 2;"><code>Authorization</code></b>&nbsp;&nbsp;
+&nbsp;
+ &nbsp;
+ &nbsp;
+                <input type="text" style="display: none"
+                              name="Authorization" class="auth-value"               data-endpoint="GETapi-contact-inquiries--inquiry_id-"
+               value="Bearer {YOUR_API_TOKEN}"
+               data-component="header">
+    <br>
+<p>Example: <code>Bearer {YOUR_API_TOKEN}</code></p>
+            </div>
+                                <div style="padding-left: 28px; clear: unset;">
+                <b style="line-height: 2;"><code>Content-Type</code></b>&nbsp;&nbsp;
+&nbsp;
+ &nbsp;
+ &nbsp;
+                <input type="text" style="display: none"
+                              name="Content-Type"                data-endpoint="GETapi-contact-inquiries--inquiry_id-"
+               value="application/json"
+               data-component="header">
+    <br>
+<p>Example: <code>application/json</code></p>
+            </div>
+                                <div style="padding-left: 28px; clear: unset;">
+                <b style="line-height: 2;"><code>Accept</code></b>&nbsp;&nbsp;
+&nbsp;
+ &nbsp;
+ &nbsp;
+                <input type="text" style="display: none"
+                              name="Accept"                data-endpoint="GETapi-contact-inquiries--inquiry_id-"
+               value="application/json"
+               data-component="header">
+    <br>
+<p>Example: <code>application/json</code></p>
+            </div>
+                        <h4 class="fancy-heading-panel"><b>URL Parameters</b></h4>
+                    <div style="padding-left: 28px; clear: unset;">
+                <b style="line-height: 2;"><code>inquiry_id</code></b>&nbsp;&nbsp;
+<small>integer</small>&nbsp;
+ &nbsp;
+ &nbsp;
+                <input type="number" style="display: none"
+               step="any"               name="inquiry_id"                data-endpoint="GETapi-contact-inquiries--inquiry_id-"
+               value="1"
+               data-component="url">
+    <br>
+<p>The ID of the inquiry. Example: <code>1</code></p>
+            </div>
+                    <div style="padding-left: 28px; clear: unset;">
+                <b style="line-height: 2;"><code>inquiry</code></b>&nbsp;&nbsp;
+<small>integer</small>&nbsp;
+ &nbsp;
+ &nbsp;
+                <input type="number" style="display: none"
+               step="any"               name="inquiry"                data-endpoint="GETapi-contact-inquiries--inquiry_id-"
+               value="1"
+               data-component="url">
+    <br>
+<p>The inquiry ID. Example: <code>1</code></p>
+            </div>
+                    </form>
+
+                    <h2 id="contact-inquiries-PUTapi-contact-inquiries--inquiry_id-">Update the specified contact inquiry in storage.</h2>
+
+<p>
+<small class="badge badge-darkred">requires authentication</small>
+</p>
+
+
+
+<span id="example-requests-PUTapi-contact-inquiries--inquiry_id-">
+<blockquote>Example request:</blockquote>
+
+
+<div class="bash-example">
+    <pre><code class="language-bash">curl --request PUT \
+    "http://127.0.0.1:8000/api/contact-inquiries/1" \
+    --header "Authorization: Bearer {YOUR_API_TOKEN}" \
+    --header "Content-Type: application/json" \
+    --header "Accept: application/json" \
+    --data "{
+    \"full_name\": \"Jane Doe\",
+    \"email\": \"jane@example.com\",
+    \"phone\": \"+9876543210\",
+    \"company\": \"XYZ Corp\",
+    \"service_id\": 2,
+    \"service\": \"Support\",
+    \"message\": \"Updated message.\",
+    \"status\": \"replied\"
+}"
+</code></pre></div>
+
+
+<div class="javascript-example">
+    <pre><code class="language-javascript">const url = new URL(
+    "http://127.0.0.1:8000/api/contact-inquiries/1"
+);
+
+const headers = {
+    "Authorization": "Bearer {YOUR_API_TOKEN}",
+    "Content-Type": "application/json",
+    "Accept": "application/json",
+};
+
+let body = {
+    "full_name": "Jane Doe",
+    "email": "jane@example.com",
+    "phone": "+9876543210",
+    "company": "XYZ Corp",
+    "service_id": 2,
+    "service": "Support",
+    "message": "Updated message.",
+    "status": "replied"
+};
+
+fetch(url, {
+    method: "PUT",
+    headers,
+    body: JSON.stringify(body),
+}).then(response =&gt; response.json());</code></pre></div>
+
+
+<div class="php-example">
+    <pre><code class="language-php">$client = new \GuzzleHttp\Client();
+$url = 'http://127.0.0.1:8000/api/contact-inquiries/1';
+$response = $client-&gt;put(
+    $url,
+    [
+        'headers' =&gt; [
+            'Authorization' =&gt; 'Bearer {YOUR_API_TOKEN}',
+            'Content-Type' =&gt; 'application/json',
+            'Accept' =&gt; 'application/json',
+        ],
+        'json' =&gt; [
+            'full_name' =&gt; 'Jane Doe',
+            'email' =&gt; 'jane@example.com',
+            'phone' =&gt; '+9876543210',
+            'company' =&gt; 'XYZ Corp',
+            'service_id' =&gt; 2,
+            'service' =&gt; 'Support',
+            'message' =&gt; 'Updated message.',
+            'status' =&gt; 'replied',
+        ],
+    ]
+);
+$body = $response-&gt;getBody();
+print_r(json_decode((string) $body));</code></pre></div>
+
+</span>
+
+<span id="example-responses-PUTapi-contact-inquiries--inquiry_id-">
+            <blockquote>
+            <p>Example response (200, Success):</p>
+        </blockquote>
+                <pre>
+
+<code class="language-json" style="max-height: 300px;">{
+    &quot;id&quot;: 1,
+    &quot;full_name&quot;: &quot;Jane Doe&quot;,
+    &quot;email&quot;: &quot;jane@example.com&quot;,
+    &quot;phone&quot;: &quot;+9876543210&quot;,
+    &quot;company&quot;: &quot;XYZ Corp&quot;,
+    &quot;message&quot;: &quot;Updated message.&quot;,
+    &quot;status&quot;: &quot;replied&quot;,
+    &quot;status_label&quot;: &quot;Replied&quot;,
+    &quot;status_color&quot;: &quot;green&quot;,
+    &quot;replied_at&quot;: &quot;2024-01-15T10:30:00.000000Z&quot;,
+    &quot;reply_message&quot;: null,
+    &quot;created_at&quot;: &quot;2024-01-15T10:00:00.000000Z&quot;,
+    &quot;updated_at&quot;: &quot;2024-01-15T10:30:00.000000Z&quot;
+}</code>
+ </pre>
+            <blockquote>
+            <p>Example response (401, Unauthenticated):</p>
+        </blockquote>
+                <pre>
+
+<code class="language-json" style="max-height: 300px;">{
+    &quot;message&quot;: &quot;Unauthenticated.&quot;
+}</code>
+ </pre>
+            <blockquote>
+            <p>Example response (404, Not Found):</p>
+        </blockquote>
+                <pre>
+
+<code class="language-json" style="max-height: 300px;">{
+    &quot;message&quot;: &quot;Resource not found.&quot;
+}</code>
+ </pre>
+            <blockquote>
+            <p>Example response (422, Validation Error):</p>
+        </blockquote>
+                <pre>
+
+<code class="language-json" style="max-height: 300px;">{
+    &quot;message&quot;: &quot;The status must be one of: pending, replied, closed.&quot;,
+    &quot;errors&quot;: {
+        &quot;status&quot;: [
+            &quot;The status must be one of: pending, replied, closed.&quot;
+        ]
+    }
+}</code>
+ </pre>
+    </span>
+<span id="execution-results-PUTapi-contact-inquiries--inquiry_id-" hidden>
+    <blockquote>Received response<span
+                id="execution-response-status-PUTapi-contact-inquiries--inquiry_id-"></span>:
+    </blockquote>
+    <pre class="json"><code id="execution-response-content-PUTapi-contact-inquiries--inquiry_id-"
+      data-empty-response-text="<Empty response>" style="max-height: 400px;"></code></pre>
+</span>
+<span id="execution-error-PUTapi-contact-inquiries--inquiry_id-" hidden>
+    <blockquote>Request failed with error:</blockquote>
+    <pre><code id="execution-error-message-PUTapi-contact-inquiries--inquiry_id-">
+
+Tip: Check that you&#039;re properly connected to the network.
+If you&#039;re a maintainer of ths API, verify that your API is running and you&#039;ve enabled CORS.
+You can check the Dev Tools console for debugging information.</code></pre>
+</span>
+<form id="form-PUTapi-contact-inquiries--inquiry_id-" data-method="PUT"
+      data-path="api/contact-inquiries/{inquiry_id}"
+      data-authed="1"
+      data-hasfiles="0"
+      data-isarraybody="0"
+      autocomplete="off"
+      onsubmit="event.preventDefault(); executeTryOut('PUTapi-contact-inquiries--inquiry_id-', this);">
+    <h3>
+        Request&nbsp;&nbsp;&nbsp;
+                    <button type="button"
+                    style="background-color: #8fbcd4; padding: 5px 10px; border-radius: 5px; border-width: thin;"
+                    id="btn-tryout-PUTapi-contact-inquiries--inquiry_id-"
+                    onclick="tryItOut('PUTapi-contact-inquiries--inquiry_id-');">Try it out ⚡
+            </button>
+            <button type="button"
+                    style="background-color: #c97a7e; padding: 5px 10px; border-radius: 5px; border-width: thin;"
+                    id="btn-canceltryout-PUTapi-contact-inquiries--inquiry_id-"
+                    onclick="cancelTryOut('PUTapi-contact-inquiries--inquiry_id-');" hidden>Cancel 🛑
+            </button>&nbsp;&nbsp;
+            <button type="submit"
+                    style="background-color: #6ac174; padding: 5px 10px; border-radius: 5px; border-width: thin;"
+                    id="btn-executetryout-PUTapi-contact-inquiries--inquiry_id-"
+                    data-initial-text="Send Request 💥"
+                    data-loading-text="⏱ Sending..."
+                    hidden>Send Request 💥
+            </button>
+            </h3>
+            <p>
+            <small class="badge badge-darkblue">PUT</small>
+            <b><code>api/contact-inquiries/{inquiry_id}</code></b>
+        </p>
+                <h4 class="fancy-heading-panel"><b>Headers</b></h4>
+                                <div style="padding-left: 28px; clear: unset;">
+                <b style="line-height: 2;"><code>Authorization</code></b>&nbsp;&nbsp;
+&nbsp;
+ &nbsp;
+ &nbsp;
+                <input type="text" style="display: none"
+                              name="Authorization" class="auth-value"               data-endpoint="PUTapi-contact-inquiries--inquiry_id-"
+               value="Bearer {YOUR_API_TOKEN}"
+               data-component="header">
+    <br>
+<p>Example: <code>Bearer {YOUR_API_TOKEN}</code></p>
+            </div>
+                                <div style="padding-left: 28px; clear: unset;">
+                <b style="line-height: 2;"><code>Content-Type</code></b>&nbsp;&nbsp;
+&nbsp;
+ &nbsp;
+ &nbsp;
+                <input type="text" style="display: none"
+                              name="Content-Type"                data-endpoint="PUTapi-contact-inquiries--inquiry_id-"
+               value="application/json"
+               data-component="header">
+    <br>
+<p>Example: <code>application/json</code></p>
+            </div>
+                                <div style="padding-left: 28px; clear: unset;">
+                <b style="line-height: 2;"><code>Accept</code></b>&nbsp;&nbsp;
+&nbsp;
+ &nbsp;
+ &nbsp;
+                <input type="text" style="display: none"
+                              name="Accept"                data-endpoint="PUTapi-contact-inquiries--inquiry_id-"
+               value="application/json"
+               data-component="header">
+    <br>
+<p>Example: <code>application/json</code></p>
+            </div>
+                        <h4 class="fancy-heading-panel"><b>URL Parameters</b></h4>
+                    <div style="padding-left: 28px; clear: unset;">
+                <b style="line-height: 2;"><code>inquiry_id</code></b>&nbsp;&nbsp;
+<small>integer</small>&nbsp;
+ &nbsp;
+ &nbsp;
+                <input type="number" style="display: none"
+               step="any"               name="inquiry_id"                data-endpoint="PUTapi-contact-inquiries--inquiry_id-"
+               value="1"
+               data-component="url">
+    <br>
+<p>The ID of the inquiry. Example: <code>1</code></p>
+            </div>
+                    <div style="padding-left: 28px; clear: unset;">
+                <b style="line-height: 2;"><code>inquiry</code></b>&nbsp;&nbsp;
+<small>integer</small>&nbsp;
+ &nbsp;
+ &nbsp;
+                <input type="number" style="display: none"
+               step="any"               name="inquiry"                data-endpoint="PUTapi-contact-inquiries--inquiry_id-"
+               value="1"
+               data-component="url">
+    <br>
+<p>The inquiry ID. Example: <code>1</code></p>
+            </div>
+                            <h4 class="fancy-heading-panel"><b>Body Parameters</b></h4>
+        <div style=" padding-left: 28px;  clear: unset;">
+            <b style="line-height: 2;"><code>full_name</code></b>&nbsp;&nbsp;
+<small>string</small>&nbsp;
+<i>optional</i> &nbsp;
+ &nbsp;
+                <input type="text" style="display: none"
+                              name="full_name"                data-endpoint="PUTapi-contact-inquiries--inquiry_id-"
+               value="Jane Doe"
+               data-component="body">
+    <br>
+<p>optional The full name. Example: <code>Jane Doe</code></p>
+        </div>
+                <div style=" padding-left: 28px;  clear: unset;">
+            <b style="line-height: 2;"><code>email</code></b>&nbsp;&nbsp;
+<small>string</small>&nbsp;
+<i>optional</i> &nbsp;
+ &nbsp;
+                <input type="text" style="display: none"
+                              name="email"                data-endpoint="PUTapi-contact-inquiries--inquiry_id-"
+               value="jane@example.com"
+               data-component="body">
+    <br>
+<p>optional The email address. Example: <code>jane@example.com</code></p>
+        </div>
+                <div style=" padding-left: 28px;  clear: unset;">
+            <b style="line-height: 2;"><code>phone</code></b>&nbsp;&nbsp;
+<small>string</small>&nbsp;
+<i>optional</i> &nbsp;
+ &nbsp;
+                <input type="text" style="display: none"
+                              name="phone"                data-endpoint="PUTapi-contact-inquiries--inquiry_id-"
+               value="+9876543210"
+               data-component="body">
+    <br>
+<p>optional The phone number. Example: <code>+9876543210</code></p>
+        </div>
+                <div style=" padding-left: 28px;  clear: unset;">
+            <b style="line-height: 2;"><code>company</code></b>&nbsp;&nbsp;
+<small>string</small>&nbsp;
+<i>optional</i> &nbsp;
+ &nbsp;
+                <input type="text" style="display: none"
+                              name="company"                data-endpoint="PUTapi-contact-inquiries--inquiry_id-"
+               value="XYZ Corp"
+               data-component="body">
+    <br>
+<p>optional The company name. Example: <code>XYZ Corp</code></p>
+        </div>
+                <div style=" padding-left: 28px;  clear: unset;">
+            <b style="line-height: 2;"><code>service_id</code></b>&nbsp;&nbsp;
+<small>integer</small>&nbsp;
+<i>optional</i> &nbsp;
+ &nbsp;
+                <input type="number" style="display: none"
+               step="any"               name="service_id"                data-endpoint="PUTapi-contact-inquiries--inquiry_id-"
+               value="2"
+               data-component="body">
+    <br>
+<p>nullable optional The service ID. Example: <code>2</code></p>
+        </div>
+                <div style=" padding-left: 28px;  clear: unset;">
+            <b style="line-height: 2;"><code>service</code></b>&nbsp;&nbsp;
+<small>string</small>&nbsp;
+<i>optional</i> &nbsp;
+ &nbsp;
+                <input type="text" style="display: none"
+                              name="service"                data-endpoint="PUTapi-contact-inquiries--inquiry_id-"
+               value="Support"
+               data-component="body">
+    <br>
+<p>nullable optional The service name. Example: <code>Support</code></p>
+        </div>
+                <div style=" padding-left: 28px;  clear: unset;">
+            <b style="line-height: 2;"><code>message</code></b>&nbsp;&nbsp;
+<small>string</small>&nbsp;
+<i>optional</i> &nbsp;
+ &nbsp;
+                <input type="text" style="display: none"
+                              name="message"                data-endpoint="PUTapi-contact-inquiries--inquiry_id-"
+               value="Updated message."
+               data-component="body">
+    <br>
+<p>optional The inquiry message. Example: <code>Updated message.</code></p>
+        </div>
+                <div style=" padding-left: 28px;  clear: unset;">
+            <b style="line-height: 2;"><code>status</code></b>&nbsp;&nbsp;
+<small>string</small>&nbsp;
+<i>optional</i> &nbsp;
+ &nbsp;
+                <input type="text" style="display: none"
+                              name="status"                data-endpoint="PUTapi-contact-inquiries--inquiry_id-"
+               value="replied"
+               data-component="body">
+    <br>
+<p>optional The status (pending, replied, closed). Example: <code>replied</code></p>
+        </div>
+        </form>
+
+                    <h2 id="contact-inquiries-PATCHapi-contact-inquiries--inquiry_id-">Partially update the specified contact inquiry in storage.</h2>
+
+<p>
+</p>
+
+
+
+<span id="example-requests-PATCHapi-contact-inquiries--inquiry_id-">
+<blockquote>Example request:</blockquote>
+
+
+<div class="bash-example">
+    <pre><code class="language-bash">curl --request PATCH \
+    "http://127.0.0.1:8000/api/contact-inquiries/1" \
+    --header "Content-Type: application/json" \
+    --header "Accept: application/json"</code></pre></div>
+
+
+<div class="javascript-example">
+    <pre><code class="language-javascript">const url = new URL(
+    "http://127.0.0.1:8000/api/contact-inquiries/1"
+);
+
+const headers = {
+    "Content-Type": "application/json",
+    "Accept": "application/json",
+};
+
+fetch(url, {
+    method: "PATCH",
+    headers,
+}).then(response =&gt; response.json());</code></pre></div>
+
+
+<div class="php-example">
+    <pre><code class="language-php">$client = new \GuzzleHttp\Client();
+$url = 'http://127.0.0.1:8000/api/contact-inquiries/1';
+$response = $client-&gt;patch(
+    $url,
+    [
+        'headers' =&gt; [
+            'Content-Type' =&gt; 'application/json',
+            'Accept' =&gt; 'application/json',
+        ],
+    ]
+);
+$body = $response-&gt;getBody();
+print_r(json_decode((string) $body));</code></pre></div>
+
+</span>
+
+<span id="example-responses-PATCHapi-contact-inquiries--inquiry_id-">
+</span>
+<span id="execution-results-PATCHapi-contact-inquiries--inquiry_id-" hidden>
+    <blockquote>Received response<span
+                id="execution-response-status-PATCHapi-contact-inquiries--inquiry_id-"></span>:
+    </blockquote>
+    <pre class="json"><code id="execution-response-content-PATCHapi-contact-inquiries--inquiry_id-"
+      data-empty-response-text="<Empty response>" style="max-height: 400px;"></code></pre>
+</span>
+<span id="execution-error-PATCHapi-contact-inquiries--inquiry_id-" hidden>
+    <blockquote>Request failed with error:</blockquote>
+    <pre><code id="execution-error-message-PATCHapi-contact-inquiries--inquiry_id-">
+
+Tip: Check that you&#039;re properly connected to the network.
+If you&#039;re a maintainer of ths API, verify that your API is running and you&#039;ve enabled CORS.
+You can check the Dev Tools console for debugging information.</code></pre>
+</span>
+<form id="form-PATCHapi-contact-inquiries--inquiry_id-" data-method="PATCH"
+      data-path="api/contact-inquiries/{inquiry_id}"
+      data-authed="0"
+      data-hasfiles="0"
+      data-isarraybody="0"
+      autocomplete="off"
+      onsubmit="event.preventDefault(); executeTryOut('PATCHapi-contact-inquiries--inquiry_id-', this);">
+    <h3>
+        Request&nbsp;&nbsp;&nbsp;
+                    <button type="button"
+                    style="background-color: #8fbcd4; padding: 5px 10px; border-radius: 5px; border-width: thin;"
+                    id="btn-tryout-PATCHapi-contact-inquiries--inquiry_id-"
+                    onclick="tryItOut('PATCHapi-contact-inquiries--inquiry_id-');">Try it out ⚡
+            </button>
+            <button type="button"
+                    style="background-color: #c97a7e; padding: 5px 10px; border-radius: 5px; border-width: thin;"
+                    id="btn-canceltryout-PATCHapi-contact-inquiries--inquiry_id-"
+                    onclick="cancelTryOut('PATCHapi-contact-inquiries--inquiry_id-');" hidden>Cancel 🛑
+            </button>&nbsp;&nbsp;
+            <button type="submit"
+                    style="background-color: #6ac174; padding: 5px 10px; border-radius: 5px; border-width: thin;"
+                    id="btn-executetryout-PATCHapi-contact-inquiries--inquiry_id-"
+                    data-initial-text="Send Request 💥"
+                    data-loading-text="⏱ Sending..."
+                    hidden>Send Request 💥
+            </button>
+            </h3>
+            <p>
+            <small class="badge badge-purple">PATCH</small>
+            <b><code>api/contact-inquiries/{inquiry_id}</code></b>
+        </p>
+                <h4 class="fancy-heading-panel"><b>Headers</b></h4>
+                                <div style="padding-left: 28px; clear: unset;">
+                <b style="line-height: 2;"><code>Content-Type</code></b>&nbsp;&nbsp;
+&nbsp;
+ &nbsp;
+ &nbsp;
+                <input type="text" style="display: none"
+                              name="Content-Type"                data-endpoint="PATCHapi-contact-inquiries--inquiry_id-"
+               value="application/json"
+               data-component="header">
+    <br>
+<p>Example: <code>application/json</code></p>
+            </div>
+                                <div style="padding-left: 28px; clear: unset;">
+                <b style="line-height: 2;"><code>Accept</code></b>&nbsp;&nbsp;
+&nbsp;
+ &nbsp;
+ &nbsp;
+                <input type="text" style="display: none"
+                              name="Accept"                data-endpoint="PATCHapi-contact-inquiries--inquiry_id-"
+               value="application/json"
+               data-component="header">
+    <br>
+<p>Example: <code>application/json</code></p>
+            </div>
+                        <h4 class="fancy-heading-panel"><b>URL Parameters</b></h4>
+                    <div style="padding-left: 28px; clear: unset;">
+                <b style="line-height: 2;"><code>inquiry_id</code></b>&nbsp;&nbsp;
+<small>integer</small>&nbsp;
+ &nbsp;
+ &nbsp;
+                <input type="number" style="display: none"
+               step="any"               name="inquiry_id"                data-endpoint="PATCHapi-contact-inquiries--inquiry_id-"
+               value="1"
+               data-component="url">
+    <br>
+<p>The ID of the inquiry. Example: <code>1</code></p>
+            </div>
+                    </form>
+
+                    <h2 id="contact-inquiries-POSTapi-contact-inquiries--inquiry_id--reply">Reply to a contact inquiry.</h2>
+
+<p>
+<small class="badge badge-darkred">requires authentication</small>
+</p>
+
+<p>Send a reply email to the inquiry sender and update the inquiry status.</p>
+
+<span id="example-requests-POSTapi-contact-inquiries--inquiry_id--reply">
+<blockquote>Example request:</blockquote>
+
+
+<div class="bash-example">
+    <pre><code class="language-bash">curl --request POST \
+    "http://127.0.0.1:8000/api/contact-inquiries/1/reply" \
+    --header "Authorization: Bearer {YOUR_API_TOKEN}" \
+    --header "Content-Type: application/json" \
+    --header "Accept: application/json" \
+    --data "{
+    \"reply_message\": \"Thank you for your inquiry. We will get back to you shortly.\"
+}"
+</code></pre></div>
+
+
+<div class="javascript-example">
+    <pre><code class="language-javascript">const url = new URL(
+    "http://127.0.0.1:8000/api/contact-inquiries/1/reply"
+);
+
+const headers = {
+    "Authorization": "Bearer {YOUR_API_TOKEN}",
+    "Content-Type": "application/json",
+    "Accept": "application/json",
+};
+
+let body = {
+    "reply_message": "Thank you for your inquiry. We will get back to you shortly."
+};
+
+fetch(url, {
+    method: "POST",
+    headers,
+    body: JSON.stringify(body),
+}).then(response =&gt; response.json());</code></pre></div>
+
+
+<div class="php-example">
+    <pre><code class="language-php">$client = new \GuzzleHttp\Client();
+$url = 'http://127.0.0.1:8000/api/contact-inquiries/1/reply';
+$response = $client-&gt;post(
+    $url,
+    [
+        'headers' =&gt; [
+            'Authorization' =&gt; 'Bearer {YOUR_API_TOKEN}',
+            'Content-Type' =&gt; 'application/json',
+            'Accept' =&gt; 'application/json',
+        ],
+        'json' =&gt; [
+            'reply_message' =&gt; 'Thank you for your inquiry. We will get back to you shortly.',
+        ],
+    ]
+);
+$body = $response-&gt;getBody();
+print_r(json_decode((string) $body));</code></pre></div>
+
+</span>
+
+<span id="example-responses-POSTapi-contact-inquiries--inquiry_id--reply">
+            <blockquote>
+            <p>Example response (200, Success):</p>
+        </blockquote>
+                <pre>
+
+<code class="language-json" style="max-height: 300px;">{
+    &quot;id&quot;: 1,
+    &quot;full_name&quot;: &quot;John Doe&quot;,
+    &quot;email&quot;: &quot;john@example.com&quot;,
+    &quot;phone&quot;: &quot;+1234567890&quot;,
+    &quot;company&quot;: &quot;Acme Inc&quot;,
+    &quot;message&quot;: &quot;Interested in your products&quot;,
+    &quot;status&quot;: &quot;replied&quot;,
+    &quot;status_label&quot;: &quot;Replied&quot;,
+    &quot;status_color&quot;: &quot;green&quot;,
+    &quot;replied_at&quot;: &quot;2024-01-15T10:30:00.000000Z&quot;,
+    &quot;reply_message&quot;: &quot;Thank you for your inquiry. We will get back to you shortly.&quot;,
+    &quot;created_at&quot;: &quot;2024-01-15T10:00:00.000000Z&quot;,
+    &quot;updated_at&quot;: &quot;2024-01-15T10:30:00.000000Z&quot;
+}</code>
+ </pre>
+            <blockquote>
+            <p>Example response (400, Already Replied):</p>
+        </blockquote>
+                <pre>
+
+<code class="language-json" style="max-height: 300px;">{
+    &quot;message&quot;: &quot;This inquiry has already been replied to.&quot;
+}</code>
+ </pre>
+            <blockquote>
+            <p>Example response (401, Unauthenticated):</p>
+        </blockquote>
+                <pre>
+
+<code class="language-json" style="max-height: 300px;">{
+    &quot;message&quot;: &quot;Unauthenticated.&quot;
+}</code>
+ </pre>
+            <blockquote>
+            <p>Example response (404, Not Found):</p>
+        </blockquote>
+                <pre>
+
+<code class="language-json" style="max-height: 300px;">{
+    &quot;message&quot;: &quot;Resource not found.&quot;
+}</code>
+ </pre>
+            <blockquote>
+            <p>Example response (422, Validation Error):</p>
+        </blockquote>
+                <pre>
+
+<code class="language-json" style="max-height: 300px;">{
+    &quot;message&quot;: &quot;The reply message field is required.&quot;,
+    &quot;errors&quot;: {
+        &quot;reply_message&quot;: [
+            &quot;The reply message field is required.&quot;
+        ]
+    }
+}</code>
+ </pre>
+    </span>
+<span id="execution-results-POSTapi-contact-inquiries--inquiry_id--reply" hidden>
+    <blockquote>Received response<span
+                id="execution-response-status-POSTapi-contact-inquiries--inquiry_id--reply"></span>:
+    </blockquote>
+    <pre class="json"><code id="execution-response-content-POSTapi-contact-inquiries--inquiry_id--reply"
+      data-empty-response-text="<Empty response>" style="max-height: 400px;"></code></pre>
+</span>
+<span id="execution-error-POSTapi-contact-inquiries--inquiry_id--reply" hidden>
+    <blockquote>Request failed with error:</blockquote>
+    <pre><code id="execution-error-message-POSTapi-contact-inquiries--inquiry_id--reply">
+
+Tip: Check that you&#039;re properly connected to the network.
+If you&#039;re a maintainer of ths API, verify that your API is running and you&#039;ve enabled CORS.
+You can check the Dev Tools console for debugging information.</code></pre>
+</span>
+<form id="form-POSTapi-contact-inquiries--inquiry_id--reply" data-method="POST"
+      data-path="api/contact-inquiries/{inquiry_id}/reply"
+      data-authed="1"
+      data-hasfiles="0"
+      data-isarraybody="0"
+      autocomplete="off"
+      onsubmit="event.preventDefault(); executeTryOut('POSTapi-contact-inquiries--inquiry_id--reply', this);">
+    <h3>
+        Request&nbsp;&nbsp;&nbsp;
+                    <button type="button"
+                    style="background-color: #8fbcd4; padding: 5px 10px; border-radius: 5px; border-width: thin;"
+                    id="btn-tryout-POSTapi-contact-inquiries--inquiry_id--reply"
+                    onclick="tryItOut('POSTapi-contact-inquiries--inquiry_id--reply');">Try it out ⚡
+            </button>
+            <button type="button"
+                    style="background-color: #c97a7e; padding: 5px 10px; border-radius: 5px; border-width: thin;"
+                    id="btn-canceltryout-POSTapi-contact-inquiries--inquiry_id--reply"
+                    onclick="cancelTryOut('POSTapi-contact-inquiries--inquiry_id--reply');" hidden>Cancel 🛑
+            </button>&nbsp;&nbsp;
+            <button type="submit"
+                    style="background-color: #6ac174; padding: 5px 10px; border-radius: 5px; border-width: thin;"
+                    id="btn-executetryout-POSTapi-contact-inquiries--inquiry_id--reply"
+                    data-initial-text="Send Request 💥"
+                    data-loading-text="⏱ Sending..."
+                    hidden>Send Request 💥
+            </button>
+            </h3>
+            <p>
+            <small class="badge badge-black">POST</small>
+            <b><code>api/contact-inquiries/{inquiry_id}/reply</code></b>
+        </p>
+                <h4 class="fancy-heading-panel"><b>Headers</b></h4>
+                                <div style="padding-left: 28px; clear: unset;">
+                <b style="line-height: 2;"><code>Authorization</code></b>&nbsp;&nbsp;
+&nbsp;
+ &nbsp;
+ &nbsp;
+                <input type="text" style="display: none"
+                              name="Authorization" class="auth-value"               data-endpoint="POSTapi-contact-inquiries--inquiry_id--reply"
+               value="Bearer {YOUR_API_TOKEN}"
+               data-component="header">
+    <br>
+<p>Example: <code>Bearer {YOUR_API_TOKEN}</code></p>
+            </div>
+                                <div style="padding-left: 28px; clear: unset;">
+                <b style="line-height: 2;"><code>Content-Type</code></b>&nbsp;&nbsp;
+&nbsp;
+ &nbsp;
+ &nbsp;
+                <input type="text" style="display: none"
+                              name="Content-Type"                data-endpoint="POSTapi-contact-inquiries--inquiry_id--reply"
+               value="application/json"
+               data-component="header">
+    <br>
+<p>Example: <code>application/json</code></p>
+            </div>
+                                <div style="padding-left: 28px; clear: unset;">
+                <b style="line-height: 2;"><code>Accept</code></b>&nbsp;&nbsp;
+&nbsp;
+ &nbsp;
+ &nbsp;
+                <input type="text" style="display: none"
+                              name="Accept"                data-endpoint="POSTapi-contact-inquiries--inquiry_id--reply"
+               value="application/json"
+               data-component="header">
+    <br>
+<p>Example: <code>application/json</code></p>
+            </div>
+                        <h4 class="fancy-heading-panel"><b>URL Parameters</b></h4>
+                    <div style="padding-left: 28px; clear: unset;">
+                <b style="line-height: 2;"><code>inquiry_id</code></b>&nbsp;&nbsp;
+<small>integer</small>&nbsp;
+ &nbsp;
+ &nbsp;
+                <input type="number" style="display: none"
+               step="any"               name="inquiry_id"                data-endpoint="POSTapi-contact-inquiries--inquiry_id--reply"
+               value="1"
+               data-component="url">
+    <br>
+<p>The ID of the inquiry. Example: <code>1</code></p>
+            </div>
+                    <div style="padding-left: 28px; clear: unset;">
+                <b style="line-height: 2;"><code>inquiry</code></b>&nbsp;&nbsp;
+<small>integer</small>&nbsp;
+ &nbsp;
+ &nbsp;
+                <input type="number" style="display: none"
+               step="any"               name="inquiry"                data-endpoint="POSTapi-contact-inquiries--inquiry_id--reply"
+               value="1"
+               data-component="url">
+    <br>
+<p>The inquiry ID. Example: <code>1</code></p>
+            </div>
+                            <h4 class="fancy-heading-panel"><b>Body Parameters</b></h4>
+        <div style=" padding-left: 28px;  clear: unset;">
+            <b style="line-height: 2;"><code>reply_message</code></b>&nbsp;&nbsp;
+<small>string</small>&nbsp;
+ &nbsp;
+ &nbsp;
+                <input type="text" style="display: none"
+                              name="reply_message"                data-endpoint="POSTapi-contact-inquiries--inquiry_id--reply"
+               value="Thank you for your inquiry. We will get back to you shortly."
+               data-component="body">
+    <br>
+<p>The reply message to send. Example: <code>Thank you for your inquiry. We will get back to you shortly.</code></p>
+        </div>
+        </form>
+
+                    <h2 id="contact-inquiries-DELETEapi-contact-inquiries--inquiry_id-">Remove the specified contact inquiry from storage.</h2>
+
+<p>
+<small class="badge badge-darkred">requires authentication</small>
+</p>
+
+
+
+<span id="example-requests-DELETEapi-contact-inquiries--inquiry_id-">
+<blockquote>Example request:</blockquote>
+
+
+<div class="bash-example">
+    <pre><code class="language-bash">curl --request DELETE \
+    "http://127.0.0.1:8000/api/contact-inquiries/1" \
+    --header "Authorization: Bearer {YOUR_API_TOKEN}" \
+    --header "Content-Type: application/json" \
+    --header "Accept: application/json"</code></pre></div>
+
+
+<div class="javascript-example">
+    <pre><code class="language-javascript">const url = new URL(
+    "http://127.0.0.1:8000/api/contact-inquiries/1"
+);
+
+const headers = {
+    "Authorization": "Bearer {YOUR_API_TOKEN}",
+    "Content-Type": "application/json",
+    "Accept": "application/json",
+};
+
+fetch(url, {
+    method: "DELETE",
+    headers,
+}).then(response =&gt; response.json());</code></pre></div>
+
+
+<div class="php-example">
+    <pre><code class="language-php">$client = new \GuzzleHttp\Client();
+$url = 'http://127.0.0.1:8000/api/contact-inquiries/1';
+$response = $client-&gt;delete(
+    $url,
+    [
+        'headers' =&gt; [
+            'Authorization' =&gt; 'Bearer {YOUR_API_TOKEN}',
+            'Content-Type' =&gt; 'application/json',
+            'Accept' =&gt; 'application/json',
+        ],
+    ]
+);
+$body = $response-&gt;getBody();
+print_r(json_decode((string) $body));</code></pre></div>
+
+</span>
+
+<span id="example-responses-DELETEapi-contact-inquiries--inquiry_id-">
+            <blockquote>
+            <p>Example response (200, Success):</p>
+        </blockquote>
+                <pre>
+
+<code class="language-json" style="max-height: 300px;">{
+    &quot;message&quot;: &quot;Inquiry deleted successfully&quot;
+}</code>
+ </pre>
+            <blockquote>
+            <p>Example response (401, Unauthenticated):</p>
+        </blockquote>
+                <pre>
+
+<code class="language-json" style="max-height: 300px;">{
+    &quot;message&quot;: &quot;Unauthenticated.&quot;
+}</code>
+ </pre>
+            <blockquote>
+            <p>Example response (404, Not Found):</p>
+        </blockquote>
+                <pre>
+
+<code class="language-json" style="max-height: 300px;">{
+    &quot;message&quot;: &quot;Resource not found.&quot;
+}</code>
+ </pre>
+    </span>
+<span id="execution-results-DELETEapi-contact-inquiries--inquiry_id-" hidden>
+    <blockquote>Received response<span
+                id="execution-response-status-DELETEapi-contact-inquiries--inquiry_id-"></span>:
+    </blockquote>
+    <pre class="json"><code id="execution-response-content-DELETEapi-contact-inquiries--inquiry_id-"
+      data-empty-response-text="<Empty response>" style="max-height: 400px;"></code></pre>
+</span>
+<span id="execution-error-DELETEapi-contact-inquiries--inquiry_id-" hidden>
+    <blockquote>Request failed with error:</blockquote>
+    <pre><code id="execution-error-message-DELETEapi-contact-inquiries--inquiry_id-">
+
+Tip: Check that you&#039;re properly connected to the network.
+If you&#039;re a maintainer of ths API, verify that your API is running and you&#039;ve enabled CORS.
+You can check the Dev Tools console for debugging information.</code></pre>
+</span>
+<form id="form-DELETEapi-contact-inquiries--inquiry_id-" data-method="DELETE"
+      data-path="api/contact-inquiries/{inquiry_id}"
+      data-authed="1"
+      data-hasfiles="0"
+      data-isarraybody="0"
+      autocomplete="off"
+      onsubmit="event.preventDefault(); executeTryOut('DELETEapi-contact-inquiries--inquiry_id-', this);">
+    <h3>
+        Request&nbsp;&nbsp;&nbsp;
+                    <button type="button"
+                    style="background-color: #8fbcd4; padding: 5px 10px; border-radius: 5px; border-width: thin;"
+                    id="btn-tryout-DELETEapi-contact-inquiries--inquiry_id-"
+                    onclick="tryItOut('DELETEapi-contact-inquiries--inquiry_id-');">Try it out ⚡
+            </button>
+            <button type="button"
+                    style="background-color: #c97a7e; padding: 5px 10px; border-radius: 5px; border-width: thin;"
+                    id="btn-canceltryout-DELETEapi-contact-inquiries--inquiry_id-"
+                    onclick="cancelTryOut('DELETEapi-contact-inquiries--inquiry_id-');" hidden>Cancel 🛑
+            </button>&nbsp;&nbsp;
+            <button type="submit"
+                    style="background-color: #6ac174; padding: 5px 10px; border-radius: 5px; border-width: thin;"
+                    id="btn-executetryout-DELETEapi-contact-inquiries--inquiry_id-"
+                    data-initial-text="Send Request 💥"
+                    data-loading-text="⏱ Sending..."
+                    hidden>Send Request 💥
+            </button>
+            </h3>
+            <p>
+            <small class="badge badge-red">DELETE</small>
+            <b><code>api/contact-inquiries/{inquiry_id}</code></b>
+        </p>
+                <h4 class="fancy-heading-panel"><b>Headers</b></h4>
+                                <div style="padding-left: 28px; clear: unset;">
+                <b style="line-height: 2;"><code>Authorization</code></b>&nbsp;&nbsp;
+&nbsp;
+ &nbsp;
+ &nbsp;
+                <input type="text" style="display: none"
+                              name="Authorization" class="auth-value"               data-endpoint="DELETEapi-contact-inquiries--inquiry_id-"
+               value="Bearer {YOUR_API_TOKEN}"
+               data-component="header">
+    <br>
+<p>Example: <code>Bearer {YOUR_API_TOKEN}</code></p>
+            </div>
+                                <div style="padding-left: 28px; clear: unset;">
+                <b style="line-height: 2;"><code>Content-Type</code></b>&nbsp;&nbsp;
+&nbsp;
+ &nbsp;
+ &nbsp;
+                <input type="text" style="display: none"
+                              name="Content-Type"                data-endpoint="DELETEapi-contact-inquiries--inquiry_id-"
+               value="application/json"
+               data-component="header">
+    <br>
+<p>Example: <code>application/json</code></p>
+            </div>
+                                <div style="padding-left: 28px; clear: unset;">
+                <b style="line-height: 2;"><code>Accept</code></b>&nbsp;&nbsp;
+&nbsp;
+ &nbsp;
+ &nbsp;
+                <input type="text" style="display: none"
+                              name="Accept"                data-endpoint="DELETEapi-contact-inquiries--inquiry_id-"
+               value="application/json"
+               data-component="header">
+    <br>
+<p>Example: <code>application/json</code></p>
+            </div>
+                        <h4 class="fancy-heading-panel"><b>URL Parameters</b></h4>
+                    <div style="padding-left: 28px; clear: unset;">
+                <b style="line-height: 2;"><code>inquiry_id</code></b>&nbsp;&nbsp;
+<small>integer</small>&nbsp;
+ &nbsp;
+ &nbsp;
+                <input type="number" style="display: none"
+               step="any"               name="inquiry_id"                data-endpoint="DELETEapi-contact-inquiries--inquiry_id-"
+               value="1"
+               data-component="url">
+    <br>
+<p>The ID of the inquiry. Example: <code>1</code></p>
+            </div>
+                    <div style="padding-left: 28px; clear: unset;">
+                <b style="line-height: 2;"><code>inquiry</code></b>&nbsp;&nbsp;
+<small>integer</small>&nbsp;
+ &nbsp;
+ &nbsp;
+                <input type="number" style="display: none"
+               step="any"               name="inquiry"                data-endpoint="DELETEapi-contact-inquiries--inquiry_id-"
+               value="1"
+               data-component="url">
+    <br>
+<p>The inquiry ID. Example: <code>1</code></p>
+            </div>
+                    </form>
+
+                                <h2 id="contact-inquiries-admin-management">Admin Management</h2>
+                                                    <h2 id="contact-inquiries-GETapi-admin-inquiries">Display a listing of all inquiries (admin view).</h2>
+
+<p>
+<small class="badge badge-darkred">requires authentication</small>
+</p>
+
+<p>Get a paginated list of all contact inquiries including unpublished ones.</p>
+
+<span id="example-requests-GETapi-admin-inquiries">
+<blockquote>Example request:</blockquote>
+
+
+<div class="bash-example">
+    <pre><code class="language-bash">curl --request GET \
+    --get "http://127.0.0.1:8000/api/admin/inquiries?per_page=10&amp;status=pending" \
+    --header "Authorization: Bearer {YOUR_API_TOKEN}" \
+    --header "Content-Type: application/json" \
+    --header "Accept: application/json"</code></pre></div>
+
+
+<div class="javascript-example">
+    <pre><code class="language-javascript">const url = new URL(
+    "http://127.0.0.1:8000/api/admin/inquiries"
+);
+
+const params = {
+    "per_page": "10",
+    "status": "pending",
+};
+Object.keys(params)
+    .forEach(key =&gt; url.searchParams.append(key, params[key]));
+
+const headers = {
+    "Authorization": "Bearer {YOUR_API_TOKEN}",
+    "Content-Type": "application/json",
+    "Accept": "application/json",
+};
+
+fetch(url, {
+    method: "GET",
+    headers,
+}).then(response =&gt; response.json());</code></pre></div>
+
+
+<div class="php-example">
+    <pre><code class="language-php">$client = new \GuzzleHttp\Client();
+$url = 'http://127.0.0.1:8000/api/admin/inquiries';
+$response = $client-&gt;get(
+    $url,
+    [
+        'headers' =&gt; [
+            'Authorization' =&gt; 'Bearer {YOUR_API_TOKEN}',
+            'Content-Type' =&gt; 'application/json',
+            'Accept' =&gt; 'application/json',
+        ],
+        'query' =&gt; [
+            'per_page' =&gt; '10',
+            'status' =&gt; 'pending',
+        ],
+    ]
+);
+$body = $response-&gt;getBody();
+print_r(json_decode((string) $body));</code></pre></div>
+
+</span>
+
+<span id="example-responses-GETapi-admin-inquiries">
+            <blockquote>
+            <p>Example response (200, Success):</p>
+        </blockquote>
+                <pre>
+
+<code class="language-json" style="max-height: 300px;">{
+    &quot;data&quot;: [
+        {
+            &quot;id&quot;: 1,
+            &quot;full_name&quot;: &quot;John Doe&quot;,
+            &quot;email&quot;: &quot;john@example.com&quot;,
+            &quot;phone&quot;: &quot;+1234567890&quot;,
+            &quot;company&quot;: &quot;Acme Inc&quot;,
+            &quot;message&quot;: &quot;Interested in your products&quot;,
+            &quot;status&quot;: &quot;pending&quot;,
+            &quot;status_label&quot;: &quot;Pending&quot;,
+            &quot;status_color&quot;: &quot;yellow&quot;,
+            &quot;replied_at&quot;: null,
+            &quot;reply_message&quot;: null,
+            &quot;created_at&quot;: &quot;2024-01-15T10:00:00.000000Z&quot;,
+            &quot;updated_at&quot;: &quot;2024-01-15T10:00:00.000000Z&quot;
+        }
+    ]
+}</code>
+ </pre>
+            <blockquote>
+            <p>Example response (401, Unauthenticated):</p>
+        </blockquote>
+                <pre>
+
+<code class="language-json" style="max-height: 300px;">{
+    &quot;message&quot;: &quot;Unauthenticated.&quot;
+}</code>
+ </pre>
+            <blockquote>
+            <p>Example response (403, Forbidden):</p>
+        </blockquote>
+                <pre>
+
+<code class="language-json" style="max-height: 300px;">{
+    &quot;message&quot;: &quot;This action is unauthorized.&quot;
+}</code>
+ </pre>
+    </span>
+<span id="execution-results-GETapi-admin-inquiries" hidden>
+    <blockquote>Received response<span
+                id="execution-response-status-GETapi-admin-inquiries"></span>:
+    </blockquote>
+    <pre class="json"><code id="execution-response-content-GETapi-admin-inquiries"
+      data-empty-response-text="<Empty response>" style="max-height: 400px;"></code></pre>
+</span>
+<span id="execution-error-GETapi-admin-inquiries" hidden>
+    <blockquote>Request failed with error:</blockquote>
+    <pre><code id="execution-error-message-GETapi-admin-inquiries">
+
+Tip: Check that you&#039;re properly connected to the network.
+If you&#039;re a maintainer of ths API, verify that your API is running and you&#039;ve enabled CORS.
+You can check the Dev Tools console for debugging information.</code></pre>
+</span>
+<form id="form-GETapi-admin-inquiries" data-method="GET"
+      data-path="api/admin/inquiries"
+      data-authed="1"
+      data-hasfiles="0"
+      data-isarraybody="0"
+      autocomplete="off"
+      onsubmit="event.preventDefault(); executeTryOut('GETapi-admin-inquiries', this);">
+    <h3>
+        Request&nbsp;&nbsp;&nbsp;
+                    <button type="button"
+                    style="background-color: #8fbcd4; padding: 5px 10px; border-radius: 5px; border-width: thin;"
+                    id="btn-tryout-GETapi-admin-inquiries"
+                    onclick="tryItOut('GETapi-admin-inquiries');">Try it out ⚡
+            </button>
+            <button type="button"
+                    style="background-color: #c97a7e; padding: 5px 10px; border-radius: 5px; border-width: thin;"
+                    id="btn-canceltryout-GETapi-admin-inquiries"
+                    onclick="cancelTryOut('GETapi-admin-inquiries');" hidden>Cancel 🛑
+            </button>&nbsp;&nbsp;
+            <button type="submit"
+                    style="background-color: #6ac174; padding: 5px 10px; border-radius: 5px; border-width: thin;"
+                    id="btn-executetryout-GETapi-admin-inquiries"
+                    data-initial-text="Send Request 💥"
+                    data-loading-text="⏱ Sending..."
+                    hidden>Send Request 💥
+            </button>
+            </h3>
+            <p>
+            <small class="badge badge-green">GET</small>
+            <b><code>api/admin/inquiries</code></b>
+        </p>
+                <h4 class="fancy-heading-panel"><b>Headers</b></h4>
+                                <div style="padding-left: 28px; clear: unset;">
+                <b style="line-height: 2;"><code>Authorization</code></b>&nbsp;&nbsp;
+&nbsp;
+ &nbsp;
+ &nbsp;
+                <input type="text" style="display: none"
+                              name="Authorization" class="auth-value"               data-endpoint="GETapi-admin-inquiries"
+               value="Bearer {YOUR_API_TOKEN}"
+               data-component="header">
+    <br>
+<p>Example: <code>Bearer {YOUR_API_TOKEN}</code></p>
+            </div>
+                                <div style="padding-left: 28px; clear: unset;">
+                <b style="line-height: 2;"><code>Content-Type</code></b>&nbsp;&nbsp;
+&nbsp;
+ &nbsp;
+ &nbsp;
+                <input type="text" style="display: none"
+                              name="Content-Type"                data-endpoint="GETapi-admin-inquiries"
+               value="application/json"
+               data-component="header">
+    <br>
+<p>Example: <code>application/json</code></p>
+            </div>
+                                <div style="padding-left: 28px; clear: unset;">
+                <b style="line-height: 2;"><code>Accept</code></b>&nbsp;&nbsp;
+&nbsp;
+ &nbsp;
+ &nbsp;
+                <input type="text" style="display: none"
+                              name="Accept"                data-endpoint="GETapi-admin-inquiries"
+               value="application/json"
+               data-component="header">
+    <br>
+<p>Example: <code>application/json</code></p>
+            </div>
+                            <h4 class="fancy-heading-panel"><b>Query Parameters</b></h4>
+                                    <div style="padding-left: 28px; clear: unset;">
+                <b style="line-height: 2;"><code>per_page</code></b>&nbsp;&nbsp;
+<small>integer</small>&nbsp;
+<i>optional</i> &nbsp;
+ &nbsp;
+                <input type="number" style="display: none"
+               step="any"               name="per_page"                data-endpoint="GETapi-admin-inquiries"
+               value="10"
+               data-component="query">
+    <br>
+<p>Items per page. Default: 15. Example: <code>10</code></p>
+            </div>
+                                    <div style="padding-left: 28px; clear: unset;">
+                <b style="line-height: 2;"><code>status</code></b>&nbsp;&nbsp;
+<small>string</small>&nbsp;
+<i>optional</i> &nbsp;
+ &nbsp;
+                <input type="text" style="display: none"
+                              name="status"                data-endpoint="GETapi-admin-inquiries"
+               value="pending"
+               data-component="query">
+    <br>
+<p>Filter by status (pending, replied, closed). Example: <code>pending</code></p>
+            </div>
+                </form>
+
+                    <h2 id="contact-inquiries-POSTapi-admin-inquiries--inquiry_id--publish">Publish a contact inquiry.</h2>
+
+<p>
+<small class="badge badge-darkred">requires authentication</small>
+</p>
+
+<p>Mark a contact inquiry as published so it appears in public testimonials.
+Only inquiries that have been replied to can be published.</p>
+
+<span id="example-requests-POSTapi-admin-inquiries--inquiry_id--publish">
+<blockquote>Example request:</blockquote>
+
+
+<div class="bash-example">
+    <pre><code class="language-bash">curl --request POST \
+    "http://127.0.0.1:8000/api/admin/inquiries/1/publish" \
+    --header "Authorization: Bearer {YOUR_API_TOKEN}" \
+    --header "Content-Type: application/json" \
+    --header "Accept: application/json"</code></pre></div>
+
+
+<div class="javascript-example">
+    <pre><code class="language-javascript">const url = new URL(
+    "http://127.0.0.1:8000/api/admin/inquiries/1/publish"
+);
+
+const headers = {
+    "Authorization": "Bearer {YOUR_API_TOKEN}",
+    "Content-Type": "application/json",
+    "Accept": "application/json",
+};
+
+fetch(url, {
+    method: "POST",
+    headers,
+}).then(response =&gt; response.json());</code></pre></div>
+
+
+<div class="php-example">
+    <pre><code class="language-php">$client = new \GuzzleHttp\Client();
+$url = 'http://127.0.0.1:8000/api/admin/inquiries/1/publish';
+$response = $client-&gt;post(
+    $url,
+    [
+        'headers' =&gt; [
+            'Authorization' =&gt; 'Bearer {YOUR_API_TOKEN}',
+            'Content-Type' =&gt; 'application/json',
+            'Accept' =&gt; 'application/json',
+        ],
+    ]
+);
+$body = $response-&gt;getBody();
+print_r(json_decode((string) $body));</code></pre></div>
+
+</span>
+
+<span id="example-responses-POSTapi-admin-inquiries--inquiry_id--publish">
+            <blockquote>
+            <p>Example response (200, Success):</p>
+        </blockquote>
+                <pre>
+
+<code class="language-json" style="max-height: 300px;">{
+    &quot;message&quot;: &quot;Inquiry published successfully.&quot;,
+    &quot;data&quot;: {
+        &quot;id&quot;: 1,
+        &quot;full_name&quot;: &quot;John Doe&quot;,
+        &quot;email&quot;: &quot;john@example.com&quot;,
+        &quot;phone&quot;: &quot;+1234567890&quot;,
+        &quot;company&quot;: &quot;Acme Inc&quot;,
+        &quot;message&quot;: &quot;Great service!&quot;,
+        &quot;status&quot;: &quot;replied&quot;,
+        &quot;status_label&quot;: &quot;Replied&quot;,
+        &quot;status_color&quot;: &quot;green&quot;,
+        &quot;replied_at&quot;: &quot;2024-01-15T10:30:00.000000Z&quot;,
+        &quot;reply_message&quot;: &quot;Thank you for your feedback!&quot;,
+        &quot;created_at&quot;: &quot;2024-01-15T10:00:00.000000Z&quot;,
+        &quot;updated_at&quot;: &quot;2024-01-15T10:30:00.000000Z&quot;
+    }
+}</code>
+ </pre>
+            <blockquote>
+            <p>Example response (401, Unauthenticated):</p>
+        </blockquote>
+                <pre>
+
+<code class="language-json" style="max-height: 300px;">{
+    &quot;message&quot;: &quot;Unauthenticated.&quot;
+}</code>
+ </pre>
+            <blockquote>
+            <p>Example response (403, Not Replied):</p>
+        </blockquote>
+                <pre>
+
+<code class="language-json" style="max-height: 300px;">{
+    &quot;message&quot;: &quot;Only replied inquiries can be published.&quot;
+}</code>
+ </pre>
+            <blockquote>
+            <p>Example response (404, Not Found):</p>
+        </blockquote>
+                <pre>
+
+<code class="language-json" style="max-height: 300px;">{
+    &quot;message&quot;: &quot;Resource not found.&quot;
+}</code>
+ </pre>
+    </span>
+<span id="execution-results-POSTapi-admin-inquiries--inquiry_id--publish" hidden>
+    <blockquote>Received response<span
+                id="execution-response-status-POSTapi-admin-inquiries--inquiry_id--publish"></span>:
+    </blockquote>
+    <pre class="json"><code id="execution-response-content-POSTapi-admin-inquiries--inquiry_id--publish"
+      data-empty-response-text="<Empty response>" style="max-height: 400px;"></code></pre>
+</span>
+<span id="execution-error-POSTapi-admin-inquiries--inquiry_id--publish" hidden>
+    <blockquote>Request failed with error:</blockquote>
+    <pre><code id="execution-error-message-POSTapi-admin-inquiries--inquiry_id--publish">
+
+Tip: Check that you&#039;re properly connected to the network.
+If you&#039;re a maintainer of ths API, verify that your API is running and you&#039;ve enabled CORS.
+You can check the Dev Tools console for debugging information.</code></pre>
+</span>
+<form id="form-POSTapi-admin-inquiries--inquiry_id--publish" data-method="POST"
+      data-path="api/admin/inquiries/{inquiry_id}/publish"
+      data-authed="1"
+      data-hasfiles="0"
+      data-isarraybody="0"
+      autocomplete="off"
+      onsubmit="event.preventDefault(); executeTryOut('POSTapi-admin-inquiries--inquiry_id--publish', this);">
+    <h3>
+        Request&nbsp;&nbsp;&nbsp;
+                    <button type="button"
+                    style="background-color: #8fbcd4; padding: 5px 10px; border-radius: 5px; border-width: thin;"
+                    id="btn-tryout-POSTapi-admin-inquiries--inquiry_id--publish"
+                    onclick="tryItOut('POSTapi-admin-inquiries--inquiry_id--publish');">Try it out ⚡
+            </button>
+            <button type="button"
+                    style="background-color: #c97a7e; padding: 5px 10px; border-radius: 5px; border-width: thin;"
+                    id="btn-canceltryout-POSTapi-admin-inquiries--inquiry_id--publish"
+                    onclick="cancelTryOut('POSTapi-admin-inquiries--inquiry_id--publish');" hidden>Cancel 🛑
+            </button>&nbsp;&nbsp;
+            <button type="submit"
+                    style="background-color: #6ac174; padding: 5px 10px; border-radius: 5px; border-width: thin;"
+                    id="btn-executetryout-POSTapi-admin-inquiries--inquiry_id--publish"
+                    data-initial-text="Send Request 💥"
+                    data-loading-text="⏱ Sending..."
+                    hidden>Send Request 💥
+            </button>
+            </h3>
+            <p>
+            <small class="badge badge-black">POST</small>
+            <b><code>api/admin/inquiries/{inquiry_id}/publish</code></b>
+        </p>
+                <h4 class="fancy-heading-panel"><b>Headers</b></h4>
+                                <div style="padding-left: 28px; clear: unset;">
+                <b style="line-height: 2;"><code>Authorization</code></b>&nbsp;&nbsp;
+&nbsp;
+ &nbsp;
+ &nbsp;
+                <input type="text" style="display: none"
+                              name="Authorization" class="auth-value"               data-endpoint="POSTapi-admin-inquiries--inquiry_id--publish"
+               value="Bearer {YOUR_API_TOKEN}"
+               data-component="header">
+    <br>
+<p>Example: <code>Bearer {YOUR_API_TOKEN}</code></p>
+            </div>
+                                <div style="padding-left: 28px; clear: unset;">
+                <b style="line-height: 2;"><code>Content-Type</code></b>&nbsp;&nbsp;
+&nbsp;
+ &nbsp;
+ &nbsp;
+                <input type="text" style="display: none"
+                              name="Content-Type"                data-endpoint="POSTapi-admin-inquiries--inquiry_id--publish"
+               value="application/json"
+               data-component="header">
+    <br>
+<p>Example: <code>application/json</code></p>
+            </div>
+                                <div style="padding-left: 28px; clear: unset;">
+                <b style="line-height: 2;"><code>Accept</code></b>&nbsp;&nbsp;
+&nbsp;
+ &nbsp;
+ &nbsp;
+                <input type="text" style="display: none"
+                              name="Accept"                data-endpoint="POSTapi-admin-inquiries--inquiry_id--publish"
+               value="application/json"
+               data-component="header">
+    <br>
+<p>Example: <code>application/json</code></p>
+            </div>
+                        <h4 class="fancy-heading-panel"><b>URL Parameters</b></h4>
+                    <div style="padding-left: 28px; clear: unset;">
+                <b style="line-height: 2;"><code>inquiry_id</code></b>&nbsp;&nbsp;
+<small>integer</small>&nbsp;
+ &nbsp;
+ &nbsp;
+                <input type="number" style="display: none"
+               step="any"               name="inquiry_id"                data-endpoint="POSTapi-admin-inquiries--inquiry_id--publish"
+               value="1"
+               data-component="url">
+    <br>
+<p>The ID of the inquiry. Example: <code>1</code></p>
+            </div>
+                    <div style="padding-left: 28px; clear: unset;">
+                <b style="line-height: 2;"><code>inquiry</code></b>&nbsp;&nbsp;
+<small>integer</small>&nbsp;
+ &nbsp;
+ &nbsp;
+                <input type="number" style="display: none"
+               step="any"               name="inquiry"                data-endpoint="POSTapi-admin-inquiries--inquiry_id--publish"
+               value="1"
+               data-component="url">
+    <br>
+<p>The inquiry ID. Example: <code>1</code></p>
+            </div>
+                    </form>
+
+                    <h2 id="contact-inquiries-POSTapi-admin-inquiries--inquiry_id--unpublish">Unpublish a contact inquiry.</h2>
+
+<p>
+<small class="badge badge-darkred">requires authentication</small>
+</p>
+
+<p>Mark a published contact inquiry as unpublished.</p>
+
+<span id="example-requests-POSTapi-admin-inquiries--inquiry_id--unpublish">
+<blockquote>Example request:</blockquote>
+
+
+<div class="bash-example">
+    <pre><code class="language-bash">curl --request POST \
+    "http://127.0.0.1:8000/api/admin/inquiries/1/unpublish" \
+    --header "Authorization: Bearer {YOUR_API_TOKEN}" \
+    --header "Content-Type: application/json" \
+    --header "Accept: application/json"</code></pre></div>
+
+
+<div class="javascript-example">
+    <pre><code class="language-javascript">const url = new URL(
+    "http://127.0.0.1:8000/api/admin/inquiries/1/unpublish"
+);
+
+const headers = {
+    "Authorization": "Bearer {YOUR_API_TOKEN}",
+    "Content-Type": "application/json",
+    "Accept": "application/json",
+};
+
+fetch(url, {
+    method: "POST",
+    headers,
+}).then(response =&gt; response.json());</code></pre></div>
+
+
+<div class="php-example">
+    <pre><code class="language-php">$client = new \GuzzleHttp\Client();
+$url = 'http://127.0.0.1:8000/api/admin/inquiries/1/unpublish';
+$response = $client-&gt;post(
+    $url,
+    [
+        'headers' =&gt; [
+            'Authorization' =&gt; 'Bearer {YOUR_API_TOKEN}',
+            'Content-Type' =&gt; 'application/json',
+            'Accept' =&gt; 'application/json',
+        ],
+    ]
+);
+$body = $response-&gt;getBody();
+print_r(json_decode((string) $body));</code></pre></div>
+
+</span>
+
+<span id="example-responses-POSTapi-admin-inquiries--inquiry_id--unpublish">
+            <blockquote>
+            <p>Example response (200, Success):</p>
+        </blockquote>
+                <pre>
+
+<code class="language-json" style="max-height: 300px;">{
+    &quot;message&quot;: &quot;Inquiry unpublished successfully.&quot;,
+    &quot;data&quot;: {
+        &quot;id&quot;: 1,
+        &quot;full_name&quot;: &quot;John Doe&quot;,
+        &quot;email&quot;: &quot;john@example.com&quot;,
+        &quot;phone&quot;: &quot;+1234567890&quot;,
+        &quot;company&quot;: &quot;Acme Inc&quot;,
+        &quot;message&quot;: &quot;Great service!&quot;,
+        &quot;status&quot;: &quot;replied&quot;,
+        &quot;status_label&quot;: &quot;Replied&quot;,
+        &quot;status_color&quot;: &quot;green&quot;,
+        &quot;replied_at&quot;: &quot;2024-01-15T10:30:00.000000Z&quot;,
+        &quot;reply_message&quot;: &quot;Thank you for your feedback!&quot;,
+        &quot;created_at&quot;: &quot;2024-01-15T10:00:00.000000Z&quot;,
+        &quot;updated_at&quot;: &quot;2024-01-15T10:35:00.000000Z&quot;
+    }
+}</code>
+ </pre>
+            <blockquote>
+            <p>Example response (401, Unauthenticated):</p>
+        </blockquote>
+                <pre>
+
+<code class="language-json" style="max-height: 300px;">{
+    &quot;message&quot;: &quot;Unauthenticated.&quot;
+}</code>
+ </pre>
+            <blockquote>
+            <p>Example response (404, Not Found):</p>
+        </blockquote>
+                <pre>
+
+<code class="language-json" style="max-height: 300px;">{
+    &quot;message&quot;: &quot;Resource not found.&quot;
+}</code>
+ </pre>
+    </span>
+<span id="execution-results-POSTapi-admin-inquiries--inquiry_id--unpublish" hidden>
+    <blockquote>Received response<span
+                id="execution-response-status-POSTapi-admin-inquiries--inquiry_id--unpublish"></span>:
+    </blockquote>
+    <pre class="json"><code id="execution-response-content-POSTapi-admin-inquiries--inquiry_id--unpublish"
+      data-empty-response-text="<Empty response>" style="max-height: 400px;"></code></pre>
+</span>
+<span id="execution-error-POSTapi-admin-inquiries--inquiry_id--unpublish" hidden>
+    <blockquote>Request failed with error:</blockquote>
+    <pre><code id="execution-error-message-POSTapi-admin-inquiries--inquiry_id--unpublish">
+
+Tip: Check that you&#039;re properly connected to the network.
+If you&#039;re a maintainer of ths API, verify that your API is running and you&#039;ve enabled CORS.
+You can check the Dev Tools console for debugging information.</code></pre>
+</span>
+<form id="form-POSTapi-admin-inquiries--inquiry_id--unpublish" data-method="POST"
+      data-path="api/admin/inquiries/{inquiry_id}/unpublish"
+      data-authed="1"
+      data-hasfiles="0"
+      data-isarraybody="0"
+      autocomplete="off"
+      onsubmit="event.preventDefault(); executeTryOut('POSTapi-admin-inquiries--inquiry_id--unpublish', this);">
+    <h3>
+        Request&nbsp;&nbsp;&nbsp;
+                    <button type="button"
+                    style="background-color: #8fbcd4; padding: 5px 10px; border-radius: 5px; border-width: thin;"
+                    id="btn-tryout-POSTapi-admin-inquiries--inquiry_id--unpublish"
+                    onclick="tryItOut('POSTapi-admin-inquiries--inquiry_id--unpublish');">Try it out ⚡
+            </button>
+            <button type="button"
+                    style="background-color: #c97a7e; padding: 5px 10px; border-radius: 5px; border-width: thin;"
+                    id="btn-canceltryout-POSTapi-admin-inquiries--inquiry_id--unpublish"
+                    onclick="cancelTryOut('POSTapi-admin-inquiries--inquiry_id--unpublish');" hidden>Cancel 🛑
+            </button>&nbsp;&nbsp;
+            <button type="submit"
+                    style="background-color: #6ac174; padding: 5px 10px; border-radius: 5px; border-width: thin;"
+                    id="btn-executetryout-POSTapi-admin-inquiries--inquiry_id--unpublish"
+                    data-initial-text="Send Request 💥"
+                    data-loading-text="⏱ Sending..."
+                    hidden>Send Request 💥
+            </button>
+            </h3>
+            <p>
+            <small class="badge badge-black">POST</small>
+            <b><code>api/admin/inquiries/{inquiry_id}/unpublish</code></b>
+        </p>
+                <h4 class="fancy-heading-panel"><b>Headers</b></h4>
+                                <div style="padding-left: 28px; clear: unset;">
+                <b style="line-height: 2;"><code>Authorization</code></b>&nbsp;&nbsp;
+&nbsp;
+ &nbsp;
+ &nbsp;
+                <input type="text" style="display: none"
+                              name="Authorization" class="auth-value"               data-endpoint="POSTapi-admin-inquiries--inquiry_id--unpublish"
+               value="Bearer {YOUR_API_TOKEN}"
+               data-component="header">
+    <br>
+<p>Example: <code>Bearer {YOUR_API_TOKEN}</code></p>
+            </div>
+                                <div style="padding-left: 28px; clear: unset;">
+                <b style="line-height: 2;"><code>Content-Type</code></b>&nbsp;&nbsp;
+&nbsp;
+ &nbsp;
+ &nbsp;
+                <input type="text" style="display: none"
+                              name="Content-Type"                data-endpoint="POSTapi-admin-inquiries--inquiry_id--unpublish"
+               value="application/json"
+               data-component="header">
+    <br>
+<p>Example: <code>application/json</code></p>
+            </div>
+                                <div style="padding-left: 28px; clear: unset;">
+                <b style="line-height: 2;"><code>Accept</code></b>&nbsp;&nbsp;
+&nbsp;
+ &nbsp;
+ &nbsp;
+                <input type="text" style="display: none"
+                              name="Accept"                data-endpoint="POSTapi-admin-inquiries--inquiry_id--unpublish"
+               value="application/json"
+               data-component="header">
+    <br>
+<p>Example: <code>application/json</code></p>
+            </div>
+                        <h4 class="fancy-heading-panel"><b>URL Parameters</b></h4>
+                    <div style="padding-left: 28px; clear: unset;">
+                <b style="line-height: 2;"><code>inquiry_id</code></b>&nbsp;&nbsp;
+<small>integer</small>&nbsp;
+ &nbsp;
+ &nbsp;
+                <input type="number" style="display: none"
+               step="any"               name="inquiry_id"                data-endpoint="POSTapi-admin-inquiries--inquiry_id--unpublish"
+               value="1"
+               data-component="url">
+    <br>
+<p>The ID of the inquiry. Example: <code>1</code></p>
+            </div>
+                    <div style="padding-left: 28px; clear: unset;">
+                <b style="line-height: 2;"><code>inquiry</code></b>&nbsp;&nbsp;
+<small>integer</small>&nbsp;
+ &nbsp;
+ &nbsp;
+                <input type="number" style="display: none"
+               step="any"               name="inquiry"                data-endpoint="POSTapi-admin-inquiries--inquiry_id--unpublish"
+               value="1"
+               data-component="url">
+    <br>
+<p>The inquiry ID. Example: <code>1</code></p>
+            </div>
+                    </form>
+
+                <h1 id="customer-addresses">Customer Addresses</h1>
 
     <p>APIs for managing customer addresses.
 All endpoints require authentication.</p>
@@ -11256,7 +13994,7 @@ You can check the Dev Tools console for debugging information.</code></pre>
 
 <div class="bash-example">
     <pre><code class="language-bash">curl --request GET \
-    --get "http://127.0.0.1:8000/api/addresses/2" \
+    --get "http://127.0.0.1:8000/api/addresses/1" \
     --header "Authorization: Bearer {YOUR_API_TOKEN}" \
     --header "Content-Type: application/json" \
     --header "Accept: application/json"</code></pre></div>
@@ -11264,7 +14002,7 @@ You can check the Dev Tools console for debugging information.</code></pre>
 
 <div class="javascript-example">
     <pre><code class="language-javascript">const url = new URL(
-    "http://127.0.0.1:8000/api/addresses/2"
+    "http://127.0.0.1:8000/api/addresses/1"
 );
 
 const headers = {
@@ -11281,7 +14019,7 @@ fetch(url, {
 
 <div class="php-example">
     <pre><code class="language-php">$client = new \GuzzleHttp\Client();
-$url = 'http://127.0.0.1:8000/api/addresses/2';
+$url = 'http://127.0.0.1:8000/api/addresses/1';
 $response = $client-&gt;get(
     $url,
     [
@@ -11440,10 +14178,10 @@ You can check the Dev Tools console for debugging information.</code></pre>
  &nbsp;
                 <input type="number" style="display: none"
                step="any"               name="address_id"                data-endpoint="GETapi-addresses--address_id-"
-               value="2"
+               value="1"
                data-component="url">
     <br>
-<p>The ID of the address. Example: <code>2</code></p>
+<p>The ID of the address. Example: <code>1</code></p>
             </div>
                     <div style="padding-left: 28px; clear: unset;">
                 <b style="line-height: 2;"><code>address</code></b>&nbsp;&nbsp;
@@ -11474,7 +14212,7 @@ If is_default is set to true, all other addresses will be unset as default.</p>
 
 <div class="bash-example">
     <pre><code class="language-bash">curl --request PUT \
-    "http://127.0.0.1:8000/api/addresses/2" \
+    "http://127.0.0.1:8000/api/addresses/1" \
     --header "Authorization: Bearer {YOUR_API_TOKEN}" \
     --header "Content-Type: application/json" \
     --header "Accept: application/json" \
@@ -11501,7 +14239,7 @@ If is_default is set to true, all other addresses will be unset as default.</p>
 
 <div class="javascript-example">
     <pre><code class="language-javascript">const url = new URL(
-    "http://127.0.0.1:8000/api/addresses/2"
+    "http://127.0.0.1:8000/api/addresses/1"
 );
 
 const headers = {
@@ -11538,7 +14276,7 @@ fetch(url, {
 
 <div class="php-example">
     <pre><code class="language-php">$client = new \GuzzleHttp\Client();
-$url = 'http://127.0.0.1:8000/api/addresses/2';
+$url = 'http://127.0.0.1:8000/api/addresses/1';
 $response = $client-&gt;put(
     $url,
     [
@@ -11730,10 +14468,10 @@ You can check the Dev Tools console for debugging information.</code></pre>
  &nbsp;
                 <input type="number" style="display: none"
                step="any"               name="address_id"                data-endpoint="PUTapi-addresses--address_id-"
-               value="2"
+               value="1"
                data-component="url">
     <br>
-<p>The ID of the address. Example: <code>2</code></p>
+<p>The ID of the address. Example: <code>1</code></p>
             </div>
                     <div style="padding-left: 28px; clear: unset;">
                 <b style="line-height: 2;"><code>address</code></b>&nbsp;&nbsp;
@@ -11986,7 +14724,7 @@ You can check the Dev Tools console for debugging information.</code></pre>
 
 <div class="bash-example">
     <pre><code class="language-bash">curl --request DELETE \
-    "http://127.0.0.1:8000/api/addresses/2" \
+    "http://127.0.0.1:8000/api/addresses/1" \
     --header "Authorization: Bearer {YOUR_API_TOKEN}" \
     --header "Content-Type: application/json" \
     --header "Accept: application/json"</code></pre></div>
@@ -11994,7 +14732,7 @@ You can check the Dev Tools console for debugging information.</code></pre>
 
 <div class="javascript-example">
     <pre><code class="language-javascript">const url = new URL(
-    "http://127.0.0.1:8000/api/addresses/2"
+    "http://127.0.0.1:8000/api/addresses/1"
 );
 
 const headers = {
@@ -12011,7 +14749,7 @@ fetch(url, {
 
 <div class="php-example">
     <pre><code class="language-php">$client = new \GuzzleHttp\Client();
-$url = 'http://127.0.0.1:8000/api/addresses/2';
+$url = 'http://127.0.0.1:8000/api/addresses/1';
 $response = $client-&gt;delete(
     $url,
     [
@@ -12149,10 +14887,10 @@ You can check the Dev Tools console for debugging information.</code></pre>
  &nbsp;
                 <input type="number" style="display: none"
                step="any"               name="address_id"                data-endpoint="DELETEapi-addresses--address_id-"
-               value="2"
+               value="1"
                data-component="url">
     <br>
-<p>The ID of the address. Example: <code>2</code></p>
+<p>The ID of the address. Example: <code>1</code></p>
             </div>
                     <div style="padding-left: 28px; clear: unset;">
                 <b style="line-height: 2;"><code>address</code></b>&nbsp;&nbsp;
@@ -12183,7 +14921,7 @@ All other addresses will be unset as default.</p>
 
 <div class="bash-example">
     <pre><code class="language-bash">curl --request PATCH \
-    "http://127.0.0.1:8000/api/addresses/2/default" \
+    "http://127.0.0.1:8000/api/addresses/1/default" \
     --header "Authorization: Bearer {YOUR_API_TOKEN}" \
     --header "Content-Type: application/json" \
     --header "Accept: application/json"</code></pre></div>
@@ -12191,7 +14929,7 @@ All other addresses will be unset as default.</p>
 
 <div class="javascript-example">
     <pre><code class="language-javascript">const url = new URL(
-    "http://127.0.0.1:8000/api/addresses/2/default"
+    "http://127.0.0.1:8000/api/addresses/1/default"
 );
 
 const headers = {
@@ -12208,7 +14946,7 @@ fetch(url, {
 
 <div class="php-example">
     <pre><code class="language-php">$client = new \GuzzleHttp\Client();
-$url = 'http://127.0.0.1:8000/api/addresses/2/default';
+$url = 'http://127.0.0.1:8000/api/addresses/1/default';
 $response = $client-&gt;patch(
     $url,
     [
@@ -12368,10 +15106,10 @@ You can check the Dev Tools console for debugging information.</code></pre>
  &nbsp;
                 <input type="number" style="display: none"
                step="any"               name="address_id"                data-endpoint="PATCHapi-addresses--address_id--default"
-               value="2"
+               value="1"
                data-component="url">
     <br>
-<p>The ID of the address. Example: <code>2</code></p>
+<p>The ID of the address. Example: <code>1</code></p>
             </div>
                     <div style="padding-left: 28px; clear: unset;">
                 <b style="line-height: 2;"><code>address</code></b>&nbsp;&nbsp;
@@ -12454,7 +15192,7 @@ print_r(json_decode((string) $body));</code></pre></div>
 content-type: application/json
 access-control-allow-origin: http://localhost:3000
 access-control-allow-credentials: true
-set-cookie: laravel-session=eyJpdiI6Im1IRHRrYm9XbEdQUG5WRGVQbWZvb0E9PSIsInZhbHVlIjoiNENQVTZPc1JkR3oxRVdjNDlFc0wxenRpM01SUXoyYm1pUkNEaG1IdFg3eklVUHpDNk92TmpIODRPWTkxdXoxTUI1b3N0NG0vRDBGbzJNZE50bFdBZU9vbm9KQ0wrWG9JMmJMaTIvb0dBWnpvTmV1YjNPdWhqRmZqTjZPVW92cEciLCJtYWMiOiIzYmZjMzM2ODg4MjNhM2YzNjNmMjE1YWFlZTYzYTcwZjNkMjJkMDQ0MTk2YjJmNDVjMmU1NWU2MDY5YTI3Yzc5IiwidGFnIjoiIn0%3D; expires=Mon, 02 Feb 2026 16:22:08 GMT; Max-Age=7200; path=/; secure; httponly; samesite=none
+set-cookie: al-atheer-ecommerce-session=eyJpdiI6IldjYktrZ0tvd2Z3S1pkaDRGTzBOWHc9PSIsInZhbHVlIjoiUTQ5YkJNNTdWL29ZZ3YyTEQyQ2I0UFNIODRqcUdST2tIeTVsNys5YXdBVllTZm9Udmo5ZEEvUzhLL0c3YjJhN3dMMW1mVmVKYldUMWJPTzlFMEtEWUIyeHZpdGNiSjBBanBaUjJ3M2REa2R3OVc4ZGhNUXVvSmxUVStNeEc3OWIiLCJtYWMiOiI2ZTQ1Mjc5YmI3OTczNzMzNTIwZTgwNjM4Yzc1ODcwMzgxOTA3NzFjZGQzZjEwYTdlYmUxNTlmYmRkMWU1YWMzIiwidGFnIjoiIn0%3D; expires=Thu, 05 Feb 2026 13:29:08 GMT; Max-Age=7200; path=/; secure; httponly; samesite=none
  </code></pre></details>         <pre>
 
 <code class="language-json" style="max-height: 300px;">{
@@ -12634,7 +15372,7 @@ print_r(json_decode((string) $body));</code></pre></div>
 content-type: application/json
 access-control-allow-origin: http://localhost:3000
 access-control-allow-credentials: true
-set-cookie: laravel-session=eyJpdiI6IjUyVkJ5akVjR2FzeU1PcnNwNHZuZ1E9PSIsInZhbHVlIjoiT1E1eVVkUnZjQ3dHcE9GM2ExbHN0MGI2WW0vNm9TYVhwdUxMS2w4Z0oyRlhacnlmRTB1V2hxdlVmVmdhdEhUZ3Z2VmFCenlSdkpFZlFESUoxRlZsMnlLUURKR2syOEd5SmJrNmtxa1FvSnhQVjJBaUlCcDlJRWRzaW9FdG5zZGgiLCJtYWMiOiI3MTUyMzRkYzg5MjI3YzNkY2VmMjZhYjAzNTkyOWJlOGQ2NTEyZmExYWI1OWQ0YWI4YTgwYTQ5ODYxNWYxODgyIiwidGFnIjoiIn0%3D; expires=Mon, 02 Feb 2026 16:22:09 GMT; Max-Age=7200; path=/; secure; httponly; samesite=none
+set-cookie: al-atheer-ecommerce-session=eyJpdiI6IkZWZ3kwWUdoU3Y1WTk5NlE2aWgxY2c9PSIsInZhbHVlIjoiWThMUk9PSlhNbUVGWHJITkVWc1NyWlM4dTB4ZExLZWYwSDFsNUh0Ujc3aFdKVEhlQTFSbjFRR0NzdFdMUTBpNVR5djdSc3VCcmdMNmxjTTlaNFFvTFJWU3EzK0pnV000UmhoZXRxZnVQRENOcUJTSzdkWklCeUJXK1h0TlV6dEwiLCJtYWMiOiI3NDc0MDRiOGEwMGM5ODhjNjI3MDkwOTJiOTRlZjFmYzcxMTAyNGVjOTEwYjEzNzgyMGIyYjNiZGZiNzM5OGU1IiwidGFnIjoiIn0%3D; expires=Thu, 05 Feb 2026 13:29:08 GMT; Max-Age=7200; path=/; secure; httponly; samesite=none
  </code></pre></details>         <pre>
 
 <code class="language-json" style="max-height: 300px;">{
@@ -12778,7 +15516,7 @@ print_r(json_decode((string) $body));</code></pre></div>
 content-type: application/json
 access-control-allow-origin: http://localhost:3000
 access-control-allow-credentials: true
-set-cookie: laravel-session=eyJpdiI6InFUWFVzbUxaM214Lzc2eGhjaWlGUVE9PSIsInZhbHVlIjoiVmNadzY0a2Rya1RKcW9NUk1zRmsyNDA2cHI4dlo3UWJzSmJkWVBLU2M1WUFFNFpPS0x0VXo0c3BwVnJsRExRYm9mbk54NWE3Z3lQaWcwUFJ3Wnc5OGVoZlNtekNpcjV1ZzgxaldSb2E4VVFyb2hVcTdyYjNBYzdodXVHdmFqVkwiLCJtYWMiOiI5MzI2NGFjMjE2NmM0NTU5MTQyZTdkMjI1NDU5MzBlNmY2ZGQzNzA4ZGFiNzZkMzBhOWY4YTljMTlhYzAyMzkxIiwidGFnIjoiIn0%3D; expires=Mon, 02 Feb 2026 16:22:09 GMT; Max-Age=7200; path=/; secure; httponly; samesite=none
+set-cookie: al-atheer-ecommerce-session=eyJpdiI6Ijd5czNoUkxJZng0MWRLZFo3NmFqYWc9PSIsInZhbHVlIjoiczQ3TmFjT2hsa0FrVTBiU21xeFZWckJIMENicHZzbDArb3grdjE3UFZld3oyQmFrUDd4dEFyaHRxQlBkSEkrd203OUxrWTlTK0pHNzVwV1NhZTVZTSt5L0xBcTFDVFcxbWpyYXM4Z1lFYmlzY3I1SzZ5QW1ic211UWpRUlZpUFIiLCJtYWMiOiI0NGM1YTkzMjA5YmVhYWQ3MmY4MTFlYjBkMGJiNDhhOWRiNzY5NmViMzgzZWI0ODQwNzA1MWEyMDRmNzYwMzExIiwidGFnIjoiIn0%3D; expires=Thu, 05 Feb 2026 13:29:08 GMT; Max-Age=7200; path=/; secure; httponly; samesite=none
  </code></pre></details>         <pre>
 
 <code class="language-json" style="max-height: 300px;">{
@@ -12922,7 +15660,7 @@ print_r(json_decode((string) $body));</code></pre></div>
 content-type: application/json
 access-control-allow-origin: http://localhost:3000
 access-control-allow-credentials: true
-set-cookie: laravel-session=eyJpdiI6IkZod0gvdUNrSHVBcHlyNkUzR3gzNUE9PSIsInZhbHVlIjoiSmk2K1F2c1lTRHBsODZLZ2xtMVcyOGlXc01kNm9MRFpqMXJ6ZHFWeU9IQzNMZ1BBZGdWZ1NrY1phcjdXQkJ4a3VBUFNuOUU5VVp1b2ZKSW53YkxzUnFuL0puY2MrMnR2ekNuOXJpcW1WM0h4ek0vYWU0c2xxdDhLM2VQTm9iN2giLCJtYWMiOiJjZTg3MDc5ODQxOGM1YzdmZmUwNmIyMmEzN2I1YzY1OWE2ZDk3OGRmMDVhNzMyMjQyMjE4NWQ3N2FhZTkxZGVmIiwidGFnIjoiIn0%3D; expires=Mon, 02 Feb 2026 16:22:09 GMT; Max-Age=7200; path=/; secure; httponly; samesite=none
+set-cookie: al-atheer-ecommerce-session=eyJpdiI6Im12T25uN3NMZjh6TlBqdzRLTmFNZFE9PSIsInZhbHVlIjoiTm5yei9MSlVEUVhHK3d2dkh4ZGpJaW1yZ3B0NDZjaEMwU0dRUkN6M1J2a3hUakVsb28zL2tsdXZNSTZyMXI3RExMRVZYL3hUOXVtOW1BdE45Q2Q0N2pseVo3SmRwekZRbFlYbGlUUFNVeHpxa1YxOER1Y05scWMzcHM1Yi9IWE8iLCJtYWMiOiI2NzliYTQwZDcwOTcyZWFjMTMyYTY0ODUwNzMwZjdkNDgxNTI2MGY3ZTE5NjA0NDMzNjQ2ODUwOWI1ZmMyMWRjIiwidGFnIjoiIn0%3D; expires=Thu, 05 Feb 2026 13:29:08 GMT; Max-Age=7200; path=/; secure; httponly; samesite=none
  </code></pre></details>         <pre>
 
 <code class="language-json" style="max-height: 300px;">{
@@ -13066,7 +15804,7 @@ print_r(json_decode((string) $body));</code></pre></div>
 content-type: application/json
 access-control-allow-origin: http://localhost:3000
 access-control-allow-credentials: true
-set-cookie: laravel-session=eyJpdiI6IkJ3RE1heUJ1czZtMFU0aUd2dU9zbmc9PSIsInZhbHVlIjoicXhtNUM0Zk9PKzlHMUxxNks1Q1Rid1hzQ01VSFFIR2VNK1lhQXV2c3gwcTZ4RG9kdTE5akJxbnczUC9BS0RoYnQ3Q2NVSHdEdlA5QjlLb1dFOHliZTVyUWpsTk1xbEQ5ZzJnYkVDZEROcnNGdktFcWN2KzB2akkrQTMwNDlpZ0giLCJtYWMiOiI5YTE0ZjdkNTk4ZWExYjkxZmUyYzExMWIxZjQwNDc5N2RkODExNDEzYzM3YjljYzc1YWZkY2E4MWY2MDc5NjMzIiwidGFnIjoiIn0%3D; expires=Mon, 02 Feb 2026 16:22:09 GMT; Max-Age=7200; path=/; secure; httponly; samesite=none
+set-cookie: al-atheer-ecommerce-session=eyJpdiI6ImhCMW9MVi9JVjRKaGtIOCt1ck92eEE9PSIsInZhbHVlIjoieFVpV0RkMHY0V0Q4cnd0bkhwVjhXSHVMWGN4QXd3Y2JId1NvazJKUjd2aDgrTTFHVXFudnNkVHdjMlo2Nlh0WXlOM3owbzc1QVdRTWdZSWVwV2tMdWRXMzVQcHJXYU1iaGVRZXBuK1hRcThMUWVYOVlIMStGdy9MbE52U3dNN0IiLCJtYWMiOiIxNzA3OWRmOTI2ODJiNzdjZjViOGFlYmU5OGIxNWRmMTQzZjE2NzIyNjZlMDY2ZDhmNzU2YTRkNjk0MDFlZWFkIiwidGFnIjoiIn0%3D; expires=Thu, 05 Feb 2026 13:29:08 GMT; Max-Age=7200; path=/; secure; httponly; samesite=none
  </code></pre></details>         <pre>
 
 <code class="language-json" style="max-height: 300px;">{
@@ -13210,7 +15948,7 @@ print_r(json_decode((string) $body));</code></pre></div>
 content-type: application/json
 access-control-allow-origin: http://localhost:3000
 access-control-allow-credentials: true
-set-cookie: laravel-session=eyJpdiI6ImJ2TXYxRnpFSnl5YTdHQU9RYmNKOXc9PSIsInZhbHVlIjoiL0t4WUpmRjdTb3diOEhvUzYwUndwUTJUN1d2WWpDVVQwOXg2aUNYa0daTUt2UWVPTHd5N1ZLWEcrMVFTR0tmRTArVksxd1QxdVdxS01MY1VOL2k5NkQ0d244Z2VsQndtWE5lMU92Vkw3eFVvbktvdDZGQjE0OWdLUlgrc0lRalAiLCJtYWMiOiJjZDA2YzhmZDViZTBmMzNkZGY4OGExODNmYWRkYjhmOTAwOTA3YzFjMTRjNDJjNzllM2IzZGZhMzE0NDgwYjMyIiwidGFnIjoiIn0%3D; expires=Mon, 02 Feb 2026 16:22:09 GMT; Max-Age=7200; path=/; secure; httponly; samesite=none
+set-cookie: al-atheer-ecommerce-session=eyJpdiI6InpWYmVsSGc0Sy8zUnB6MVZOTFoyVWc9PSIsInZhbHVlIjoiV2MyclArSTlody9aYWdFNlZuVmQwd3Z5VEx4WVZ4V1puTzgxdUVEU3c3cmQvSUkzTFNaTk82SEQ1TENkamo4Y04vQ09EYmlZcnZCdWV5QVJ0ZmQ0VlRyOGVNTzRWdE9nOEIwQkVEeDhlaUQwdmNxRkpGVG9aSkVHdCtNcTlWZkkiLCJtYWMiOiIwN2JlMDQ1YTUyN2Q3NjY1Y2ExNDNlMjQ4NjRmNWVhOTYyNGM1NTFjNTZlOTQ0M2ZjN2FkMTNlNGVkYTQ4ZjhkIiwidGFnIjoiIn0%3D; expires=Thu, 05 Feb 2026 13:29:08 GMT; Max-Age=7200; path=/; secure; httponly; samesite=none
  </code></pre></details>         <pre>
 
 <code class="language-json" style="max-height: 300px;">{
@@ -13290,1290 +16028,6 @@ You can check the Dev Tools console for debugging information.</code></pre>
 <p>Example: <code>application/json</code></p>
             </div>
                         </form>
-
-                    <h2 id="endpoints-GETapi-contact-inquiries">Display a listing of contact inquiries.</h2>
-
-<p>
-</p>
-
-
-
-<span id="example-requests-GETapi-contact-inquiries">
-<blockquote>Example request:</blockquote>
-
-
-<div class="bash-example">
-    <pre><code class="language-bash">curl --request GET \
-    --get "http://127.0.0.1:8000/api/contact-inquiries" \
-    --header "Content-Type: application/json" \
-    --header "Accept: application/json"</code></pre></div>
-
-
-<div class="javascript-example">
-    <pre><code class="language-javascript">const url = new URL(
-    "http://127.0.0.1:8000/api/contact-inquiries"
-);
-
-const headers = {
-    "Content-Type": "application/json",
-    "Accept": "application/json",
-};
-
-fetch(url, {
-    method: "GET",
-    headers,
-}).then(response =&gt; response.json());</code></pre></div>
-
-
-<div class="php-example">
-    <pre><code class="language-php">$client = new \GuzzleHttp\Client();
-$url = 'http://127.0.0.1:8000/api/contact-inquiries';
-$response = $client-&gt;get(
-    $url,
-    [
-        'headers' =&gt; [
-            'Content-Type' =&gt; 'application/json',
-            'Accept' =&gt; 'application/json',
-        ],
-    ]
-);
-$body = $response-&gt;getBody();
-print_r(json_decode((string) $body));</code></pre></div>
-
-</span>
-
-<span id="example-responses-GETapi-contact-inquiries">
-            <blockquote>
-            <p>Example response (200):</p>
-        </blockquote>
-                <details class="annotation">
-            <summary style="cursor: pointer;">
-                <small onclick="textContent = parentElement.parentElement.open ? 'Show headers' : 'Hide headers'">Show headers</small>
-            </summary>
-            <pre><code class="language-http">cache-control: no-cache, private
-content-type: application/json
-access-control-allow-origin: http://localhost:3000
-access-control-allow-credentials: true
-set-cookie: laravel-session=eyJpdiI6IkFGbUhNbTNOdjFoY29tZ1pyZkdCN1E9PSIsInZhbHVlIjoiMjloRldIWGpFQW9WMFZjclBTbnU2QnN4RHFESXRaTTVPVmZOcFZqMGRXOTdXTFJZdWJHZGVRNld5YlIxRUtzWDlFWDhyWlZpYWdKclcybEtucldCQnFRcmk2ckV3RmhFYnhRbHliRGNINlpKMzFNWi9GSytVM0E2MFdnVG1PRlIiLCJtYWMiOiJlM2E4MzA4NzM3ZTZiOTM0YWQwYjkzN2EwMWVlMDk4ZTJhY2IyOWNjOWQ4MzM0ZWM1MzZmMDdjNThlZDQ1MWVlIiwidGFnIjoiIn0%3D; expires=Mon, 02 Feb 2026 16:22:09 GMT; Max-Age=7200; path=/; secure; httponly; samesite=none
- </code></pre></details>         <pre>
-
-<code class="language-json" style="max-height: 300px;">{
-    &quot;data&quot;: [],
-    &quot;links&quot;: {
-        &quot;first&quot;: &quot;http://127.0.0.1:8000/api/contact-inquiries?page=1&quot;,
-        &quot;last&quot;: &quot;http://127.0.0.1:8000/api/contact-inquiries?page=1&quot;,
-        &quot;prev&quot;: null,
-        &quot;next&quot;: null
-    },
-    &quot;meta&quot;: {
-        &quot;current_page&quot;: 1,
-        &quot;from&quot;: null,
-        &quot;last_page&quot;: 1,
-        &quot;links&quot;: [
-            {
-                &quot;url&quot;: null,
-                &quot;label&quot;: &quot;&amp;laquo; Previous&quot;,
-                &quot;page&quot;: null,
-                &quot;active&quot;: false
-            },
-            {
-                &quot;url&quot;: &quot;http://127.0.0.1:8000/api/contact-inquiries?page=1&quot;,
-                &quot;label&quot;: &quot;1&quot;,
-                &quot;page&quot;: 1,
-                &quot;active&quot;: true
-            },
-            {
-                &quot;url&quot;: null,
-                &quot;label&quot;: &quot;Next &amp;raquo;&quot;,
-                &quot;page&quot;: null,
-                &quot;active&quot;: false
-            }
-        ],
-        &quot;path&quot;: &quot;http://127.0.0.1:8000/api/contact-inquiries&quot;,
-        &quot;per_page&quot;: 15,
-        &quot;to&quot;: null,
-        &quot;total&quot;: 0
-    }
-}</code>
- </pre>
-    </span>
-<span id="execution-results-GETapi-contact-inquiries" hidden>
-    <blockquote>Received response<span
-                id="execution-response-status-GETapi-contact-inquiries"></span>:
-    </blockquote>
-    <pre class="json"><code id="execution-response-content-GETapi-contact-inquiries"
-      data-empty-response-text="<Empty response>" style="max-height: 400px;"></code></pre>
-</span>
-<span id="execution-error-GETapi-contact-inquiries" hidden>
-    <blockquote>Request failed with error:</blockquote>
-    <pre><code id="execution-error-message-GETapi-contact-inquiries">
-
-Tip: Check that you&#039;re properly connected to the network.
-If you&#039;re a maintainer of ths API, verify that your API is running and you&#039;ve enabled CORS.
-You can check the Dev Tools console for debugging information.</code></pre>
-</span>
-<form id="form-GETapi-contact-inquiries" data-method="GET"
-      data-path="api/contact-inquiries"
-      data-authed="0"
-      data-hasfiles="0"
-      data-isarraybody="0"
-      autocomplete="off"
-      onsubmit="event.preventDefault(); executeTryOut('GETapi-contact-inquiries', this);">
-    <h3>
-        Request&nbsp;&nbsp;&nbsp;
-                    <button type="button"
-                    style="background-color: #8fbcd4; padding: 5px 10px; border-radius: 5px; border-width: thin;"
-                    id="btn-tryout-GETapi-contact-inquiries"
-                    onclick="tryItOut('GETapi-contact-inquiries');">Try it out ⚡
-            </button>
-            <button type="button"
-                    style="background-color: #c97a7e; padding: 5px 10px; border-radius: 5px; border-width: thin;"
-                    id="btn-canceltryout-GETapi-contact-inquiries"
-                    onclick="cancelTryOut('GETapi-contact-inquiries');" hidden>Cancel 🛑
-            </button>&nbsp;&nbsp;
-            <button type="submit"
-                    style="background-color: #6ac174; padding: 5px 10px; border-radius: 5px; border-width: thin;"
-                    id="btn-executetryout-GETapi-contact-inquiries"
-                    data-initial-text="Send Request 💥"
-                    data-loading-text="⏱ Sending..."
-                    hidden>Send Request 💥
-            </button>
-            </h3>
-            <p>
-            <small class="badge badge-green">GET</small>
-            <b><code>api/contact-inquiries</code></b>
-        </p>
-                <h4 class="fancy-heading-panel"><b>Headers</b></h4>
-                                <div style="padding-left: 28px; clear: unset;">
-                <b style="line-height: 2;"><code>Content-Type</code></b>&nbsp;&nbsp;
-&nbsp;
- &nbsp;
- &nbsp;
-                <input type="text" style="display: none"
-                              name="Content-Type"                data-endpoint="GETapi-contact-inquiries"
-               value="application/json"
-               data-component="header">
-    <br>
-<p>Example: <code>application/json</code></p>
-            </div>
-                                <div style="padding-left: 28px; clear: unset;">
-                <b style="line-height: 2;"><code>Accept</code></b>&nbsp;&nbsp;
-&nbsp;
- &nbsp;
- &nbsp;
-                <input type="text" style="display: none"
-                              name="Accept"                data-endpoint="GETapi-contact-inquiries"
-               value="application/json"
-               data-component="header">
-    <br>
-<p>Example: <code>application/json</code></p>
-            </div>
-                        </form>
-
-                    <h2 id="endpoints-POSTapi-contact-inquiries">Store a newly created contact inquiry in storage.</h2>
-
-<p>
-</p>
-
-
-
-<span id="example-requests-POSTapi-contact-inquiries">
-<blockquote>Example request:</blockquote>
-
-
-<div class="bash-example">
-    <pre><code class="language-bash">curl --request POST \
-    "http://127.0.0.1:8000/api/contact-inquiries" \
-    --header "Content-Type: application/json" \
-    --header "Accept: application/json" \
-    --data "{
-    \"full_name\": \"b\",
-    \"email\": \"zbailey@example.net\",
-    \"phone\": \"iyvdljnikhwaykcm\",
-    \"company\": \"y\",
-    \"service\": \"u\",
-    \"message\": \"architecto\"
-}"
-</code></pre></div>
-
-
-<div class="javascript-example">
-    <pre><code class="language-javascript">const url = new URL(
-    "http://127.0.0.1:8000/api/contact-inquiries"
-);
-
-const headers = {
-    "Content-Type": "application/json",
-    "Accept": "application/json",
-};
-
-let body = {
-    "full_name": "b",
-    "email": "zbailey@example.net",
-    "phone": "iyvdljnikhwaykcm",
-    "company": "y",
-    "service": "u",
-    "message": "architecto"
-};
-
-fetch(url, {
-    method: "POST",
-    headers,
-    body: JSON.stringify(body),
-}).then(response =&gt; response.json());</code></pre></div>
-
-
-<div class="php-example">
-    <pre><code class="language-php">$client = new \GuzzleHttp\Client();
-$url = 'http://127.0.0.1:8000/api/contact-inquiries';
-$response = $client-&gt;post(
-    $url,
-    [
-        'headers' =&gt; [
-            'Content-Type' =&gt; 'application/json',
-            'Accept' =&gt; 'application/json',
-        ],
-        'json' =&gt; [
-            'full_name' =&gt; 'b',
-            'email' =&gt; 'zbailey@example.net',
-            'phone' =&gt; 'iyvdljnikhwaykcm',
-            'company' =&gt; 'y',
-            'service' =&gt; 'u',
-            'message' =&gt; 'architecto',
-        ],
-    ]
-);
-$body = $response-&gt;getBody();
-print_r(json_decode((string) $body));</code></pre></div>
-
-</span>
-
-<span id="example-responses-POSTapi-contact-inquiries">
-</span>
-<span id="execution-results-POSTapi-contact-inquiries" hidden>
-    <blockquote>Received response<span
-                id="execution-response-status-POSTapi-contact-inquiries"></span>:
-    </blockquote>
-    <pre class="json"><code id="execution-response-content-POSTapi-contact-inquiries"
-      data-empty-response-text="<Empty response>" style="max-height: 400px;"></code></pre>
-</span>
-<span id="execution-error-POSTapi-contact-inquiries" hidden>
-    <blockquote>Request failed with error:</blockquote>
-    <pre><code id="execution-error-message-POSTapi-contact-inquiries">
-
-Tip: Check that you&#039;re properly connected to the network.
-If you&#039;re a maintainer of ths API, verify that your API is running and you&#039;ve enabled CORS.
-You can check the Dev Tools console for debugging information.</code></pre>
-</span>
-<form id="form-POSTapi-contact-inquiries" data-method="POST"
-      data-path="api/contact-inquiries"
-      data-authed="0"
-      data-hasfiles="0"
-      data-isarraybody="0"
-      autocomplete="off"
-      onsubmit="event.preventDefault(); executeTryOut('POSTapi-contact-inquiries', this);">
-    <h3>
-        Request&nbsp;&nbsp;&nbsp;
-                    <button type="button"
-                    style="background-color: #8fbcd4; padding: 5px 10px; border-radius: 5px; border-width: thin;"
-                    id="btn-tryout-POSTapi-contact-inquiries"
-                    onclick="tryItOut('POSTapi-contact-inquiries');">Try it out ⚡
-            </button>
-            <button type="button"
-                    style="background-color: #c97a7e; padding: 5px 10px; border-radius: 5px; border-width: thin;"
-                    id="btn-canceltryout-POSTapi-contact-inquiries"
-                    onclick="cancelTryOut('POSTapi-contact-inquiries');" hidden>Cancel 🛑
-            </button>&nbsp;&nbsp;
-            <button type="submit"
-                    style="background-color: #6ac174; padding: 5px 10px; border-radius: 5px; border-width: thin;"
-                    id="btn-executetryout-POSTapi-contact-inquiries"
-                    data-initial-text="Send Request 💥"
-                    data-loading-text="⏱ Sending..."
-                    hidden>Send Request 💥
-            </button>
-            </h3>
-            <p>
-            <small class="badge badge-black">POST</small>
-            <b><code>api/contact-inquiries</code></b>
-        </p>
-                <h4 class="fancy-heading-panel"><b>Headers</b></h4>
-                                <div style="padding-left: 28px; clear: unset;">
-                <b style="line-height: 2;"><code>Content-Type</code></b>&nbsp;&nbsp;
-&nbsp;
- &nbsp;
- &nbsp;
-                <input type="text" style="display: none"
-                              name="Content-Type"                data-endpoint="POSTapi-contact-inquiries"
-               value="application/json"
-               data-component="header">
-    <br>
-<p>Example: <code>application/json</code></p>
-            </div>
-                                <div style="padding-left: 28px; clear: unset;">
-                <b style="line-height: 2;"><code>Accept</code></b>&nbsp;&nbsp;
-&nbsp;
- &nbsp;
- &nbsp;
-                <input type="text" style="display: none"
-                              name="Accept"                data-endpoint="POSTapi-contact-inquiries"
-               value="application/json"
-               data-component="header">
-    <br>
-<p>Example: <code>application/json</code></p>
-            </div>
-                                <h4 class="fancy-heading-panel"><b>Body Parameters</b></h4>
-        <div style=" padding-left: 28px;  clear: unset;">
-            <b style="line-height: 2;"><code>full_name</code></b>&nbsp;&nbsp;
-<small>string</small>&nbsp;
- &nbsp;
- &nbsp;
-                <input type="text" style="display: none"
-                              name="full_name"                data-endpoint="POSTapi-contact-inquiries"
-               value="b"
-               data-component="body">
-    <br>
-<p>Must not be greater than 255 characters. Example: <code>b</code></p>
-        </div>
-                <div style=" padding-left: 28px;  clear: unset;">
-            <b style="line-height: 2;"><code>email</code></b>&nbsp;&nbsp;
-<small>string</small>&nbsp;
- &nbsp;
- &nbsp;
-                <input type="text" style="display: none"
-                              name="email"                data-endpoint="POSTapi-contact-inquiries"
-               value="zbailey@example.net"
-               data-component="body">
-    <br>
-<p>Must be a valid email address. Must not be greater than 255 characters. Example: <code>zbailey@example.net</code></p>
-        </div>
-                <div style=" padding-left: 28px;  clear: unset;">
-            <b style="line-height: 2;"><code>phone</code></b>&nbsp;&nbsp;
-<small>string</small>&nbsp;
-<i>optional</i> &nbsp;
- &nbsp;
-                <input type="text" style="display: none"
-                              name="phone"                data-endpoint="POSTapi-contact-inquiries"
-               value="iyvdljnikhwaykcm"
-               data-component="body">
-    <br>
-<p>Must not be greater than 20 characters. Example: <code>iyvdljnikhwaykcm</code></p>
-        </div>
-                <div style=" padding-left: 28px;  clear: unset;">
-            <b style="line-height: 2;"><code>company</code></b>&nbsp;&nbsp;
-<small>string</small>&nbsp;
-<i>optional</i> &nbsp;
- &nbsp;
-                <input type="text" style="display: none"
-                              name="company"                data-endpoint="POSTapi-contact-inquiries"
-               value="y"
-               data-component="body">
-    <br>
-<p>Must not be greater than 255 characters. Example: <code>y</code></p>
-        </div>
-                <div style=" padding-left: 28px;  clear: unset;">
-            <b style="line-height: 2;"><code>service_id</code></b>&nbsp;&nbsp;
-<small>string</small>&nbsp;
-<i>optional</i> &nbsp;
- &nbsp;
-                <input type="text" style="display: none"
-                              name="service_id"                data-endpoint="POSTapi-contact-inquiries"
-               value=""
-               data-component="body">
-    <br>
-<p>The <code>id</code> of an existing record in the services table.</p>
-        </div>
-                <div style=" padding-left: 28px;  clear: unset;">
-            <b style="line-height: 2;"><code>service</code></b>&nbsp;&nbsp;
-<small>string</small>&nbsp;
-<i>optional</i> &nbsp;
- &nbsp;
-                <input type="text" style="display: none"
-                              name="service"                data-endpoint="POSTapi-contact-inquiries"
-               value="u"
-               data-component="body">
-    <br>
-<p>Must not be greater than 255 characters. Example: <code>u</code></p>
-        </div>
-                <div style=" padding-left: 28px;  clear: unset;">
-            <b style="line-height: 2;"><code>message</code></b>&nbsp;&nbsp;
-<small>string</small>&nbsp;
- &nbsp;
- &nbsp;
-                <input type="text" style="display: none"
-                              name="message"                data-endpoint="POSTapi-contact-inquiries"
-               value="architecto"
-               data-component="body">
-    <br>
-<p>Keep for backward compatibility. Example: <code>architecto</code></p>
-        </div>
-        </form>
-
-                    <h2 id="endpoints-GETapi-contact-inquiries--inquiry_id-">Display the specified contact inquiry.</h2>
-
-<p>
-</p>
-
-
-
-<span id="example-requests-GETapi-contact-inquiries--inquiry_id-">
-<blockquote>Example request:</blockquote>
-
-
-<div class="bash-example">
-    <pre><code class="language-bash">curl --request GET \
-    --get "http://127.0.0.1:8000/api/contact-inquiries/16" \
-    --header "Content-Type: application/json" \
-    --header "Accept: application/json"</code></pre></div>
-
-
-<div class="javascript-example">
-    <pre><code class="language-javascript">const url = new URL(
-    "http://127.0.0.1:8000/api/contact-inquiries/16"
-);
-
-const headers = {
-    "Content-Type": "application/json",
-    "Accept": "application/json",
-};
-
-fetch(url, {
-    method: "GET",
-    headers,
-}).then(response =&gt; response.json());</code></pre></div>
-
-
-<div class="php-example">
-    <pre><code class="language-php">$client = new \GuzzleHttp\Client();
-$url = 'http://127.0.0.1:8000/api/contact-inquiries/16';
-$response = $client-&gt;get(
-    $url,
-    [
-        'headers' =&gt; [
-            'Content-Type' =&gt; 'application/json',
-            'Accept' =&gt; 'application/json',
-        ],
-    ]
-);
-$body = $response-&gt;getBody();
-print_r(json_decode((string) $body));</code></pre></div>
-
-</span>
-
-<span id="example-responses-GETapi-contact-inquiries--inquiry_id-">
-            <blockquote>
-            <p>Example response (404):</p>
-        </blockquote>
-                <details class="annotation">
-            <summary style="cursor: pointer;">
-                <small onclick="textContent = parentElement.parentElement.open ? 'Show headers' : 'Hide headers'">Show headers</small>
-            </summary>
-            <pre><code class="language-http">cache-control: no-cache, private
-content-type: application/json
-access-control-allow-origin: http://localhost:3000
-access-control-allow-credentials: true
-set-cookie: laravel-session=eyJpdiI6InRSMnJITWJTYmhQOGhjUktOMnY1UEE9PSIsInZhbHVlIjoiMVpnU2NPZkViSGw0S3Bndzg4OGh5TXJxZTJnZHVPVDdNd0FBUzNTeENNRXR6U241RFpOb1k3YkwwTmpiN1pLWk9TbSt5c0JMeWtuK3YzOEFGUE5sdVA2bW1kMWlDZUtnb1JFeWN2Lzd4K0x1NzBKakF5YklXN0E2enh3dERXbzUiLCJtYWMiOiJhMjFmMDZhNjA0ODkwN2U2YTE4Y2M3ODBiMTg2YTM1MTE1NzJjMThhOTFiNjI5NTk3OTIxOGM2Zjg1MjY3MTI5IiwidGFnIjoiIn0%3D; expires=Mon, 02 Feb 2026 16:22:09 GMT; Max-Age=7200; path=/; secure; httponly; samesite=none
- </code></pre></details>         <pre>
-
-<code class="language-json" style="max-height: 300px;">{
-    &quot;message&quot;: &quot;No query results for model [App\\Models\\ContactInquiry] 16&quot;
-}</code>
- </pre>
-    </span>
-<span id="execution-results-GETapi-contact-inquiries--inquiry_id-" hidden>
-    <blockquote>Received response<span
-                id="execution-response-status-GETapi-contact-inquiries--inquiry_id-"></span>:
-    </blockquote>
-    <pre class="json"><code id="execution-response-content-GETapi-contact-inquiries--inquiry_id-"
-      data-empty-response-text="<Empty response>" style="max-height: 400px;"></code></pre>
-</span>
-<span id="execution-error-GETapi-contact-inquiries--inquiry_id-" hidden>
-    <blockquote>Request failed with error:</blockquote>
-    <pre><code id="execution-error-message-GETapi-contact-inquiries--inquiry_id-">
-
-Tip: Check that you&#039;re properly connected to the network.
-If you&#039;re a maintainer of ths API, verify that your API is running and you&#039;ve enabled CORS.
-You can check the Dev Tools console for debugging information.</code></pre>
-</span>
-<form id="form-GETapi-contact-inquiries--inquiry_id-" data-method="GET"
-      data-path="api/contact-inquiries/{inquiry_id}"
-      data-authed="0"
-      data-hasfiles="0"
-      data-isarraybody="0"
-      autocomplete="off"
-      onsubmit="event.preventDefault(); executeTryOut('GETapi-contact-inquiries--inquiry_id-', this);">
-    <h3>
-        Request&nbsp;&nbsp;&nbsp;
-                    <button type="button"
-                    style="background-color: #8fbcd4; padding: 5px 10px; border-radius: 5px; border-width: thin;"
-                    id="btn-tryout-GETapi-contact-inquiries--inquiry_id-"
-                    onclick="tryItOut('GETapi-contact-inquiries--inquiry_id-');">Try it out ⚡
-            </button>
-            <button type="button"
-                    style="background-color: #c97a7e; padding: 5px 10px; border-radius: 5px; border-width: thin;"
-                    id="btn-canceltryout-GETapi-contact-inquiries--inquiry_id-"
-                    onclick="cancelTryOut('GETapi-contact-inquiries--inquiry_id-');" hidden>Cancel 🛑
-            </button>&nbsp;&nbsp;
-            <button type="submit"
-                    style="background-color: #6ac174; padding: 5px 10px; border-radius: 5px; border-width: thin;"
-                    id="btn-executetryout-GETapi-contact-inquiries--inquiry_id-"
-                    data-initial-text="Send Request 💥"
-                    data-loading-text="⏱ Sending..."
-                    hidden>Send Request 💥
-            </button>
-            </h3>
-            <p>
-            <small class="badge badge-green">GET</small>
-            <b><code>api/contact-inquiries/{inquiry_id}</code></b>
-        </p>
-                <h4 class="fancy-heading-panel"><b>Headers</b></h4>
-                                <div style="padding-left: 28px; clear: unset;">
-                <b style="line-height: 2;"><code>Content-Type</code></b>&nbsp;&nbsp;
-&nbsp;
- &nbsp;
- &nbsp;
-                <input type="text" style="display: none"
-                              name="Content-Type"                data-endpoint="GETapi-contact-inquiries--inquiry_id-"
-               value="application/json"
-               data-component="header">
-    <br>
-<p>Example: <code>application/json</code></p>
-            </div>
-                                <div style="padding-left: 28px; clear: unset;">
-                <b style="line-height: 2;"><code>Accept</code></b>&nbsp;&nbsp;
-&nbsp;
- &nbsp;
- &nbsp;
-                <input type="text" style="display: none"
-                              name="Accept"                data-endpoint="GETapi-contact-inquiries--inquiry_id-"
-               value="application/json"
-               data-component="header">
-    <br>
-<p>Example: <code>application/json</code></p>
-            </div>
-                        <h4 class="fancy-heading-panel"><b>URL Parameters</b></h4>
-                    <div style="padding-left: 28px; clear: unset;">
-                <b style="line-height: 2;"><code>inquiry_id</code></b>&nbsp;&nbsp;
-<small>integer</small>&nbsp;
- &nbsp;
- &nbsp;
-                <input type="number" style="display: none"
-               step="any"               name="inquiry_id"                data-endpoint="GETapi-contact-inquiries--inquiry_id-"
-               value="16"
-               data-component="url">
-    <br>
-<p>The ID of the inquiry. Example: <code>16</code></p>
-            </div>
-                    </form>
-
-                    <h2 id="endpoints-PUTapi-contact-inquiries--inquiry_id-">Update the specified contact inquiry in storage.</h2>
-
-<p>
-</p>
-
-
-
-<span id="example-requests-PUTapi-contact-inquiries--inquiry_id-">
-<blockquote>Example request:</blockquote>
-
-
-<div class="bash-example">
-    <pre><code class="language-bash">curl --request PUT \
-    "http://127.0.0.1:8000/api/contact-inquiries/16" \
-    --header "Content-Type: application/json" \
-    --header "Accept: application/json" \
-    --data "{
-    \"full_name\": \"b\",
-    \"email\": \"zbailey@example.net\",
-    \"phone\": \"iyvdljnikhwaykcm\",
-    \"company\": \"y\",
-    \"service\": \"u\",
-    \"message\": \"architecto\",
-    \"status\": \"closed\"
-}"
-</code></pre></div>
-
-
-<div class="javascript-example">
-    <pre><code class="language-javascript">const url = new URL(
-    "http://127.0.0.1:8000/api/contact-inquiries/16"
-);
-
-const headers = {
-    "Content-Type": "application/json",
-    "Accept": "application/json",
-};
-
-let body = {
-    "full_name": "b",
-    "email": "zbailey@example.net",
-    "phone": "iyvdljnikhwaykcm",
-    "company": "y",
-    "service": "u",
-    "message": "architecto",
-    "status": "closed"
-};
-
-fetch(url, {
-    method: "PUT",
-    headers,
-    body: JSON.stringify(body),
-}).then(response =&gt; response.json());</code></pre></div>
-
-
-<div class="php-example">
-    <pre><code class="language-php">$client = new \GuzzleHttp\Client();
-$url = 'http://127.0.0.1:8000/api/contact-inquiries/16';
-$response = $client-&gt;put(
-    $url,
-    [
-        'headers' =&gt; [
-            'Content-Type' =&gt; 'application/json',
-            'Accept' =&gt; 'application/json',
-        ],
-        'json' =&gt; [
-            'full_name' =&gt; 'b',
-            'email' =&gt; 'zbailey@example.net',
-            'phone' =&gt; 'iyvdljnikhwaykcm',
-            'company' =&gt; 'y',
-            'service' =&gt; 'u',
-            'message' =&gt; 'architecto',
-            'status' =&gt; 'closed',
-        ],
-    ]
-);
-$body = $response-&gt;getBody();
-print_r(json_decode((string) $body));</code></pre></div>
-
-</span>
-
-<span id="example-responses-PUTapi-contact-inquiries--inquiry_id-">
-</span>
-<span id="execution-results-PUTapi-contact-inquiries--inquiry_id-" hidden>
-    <blockquote>Received response<span
-                id="execution-response-status-PUTapi-contact-inquiries--inquiry_id-"></span>:
-    </blockquote>
-    <pre class="json"><code id="execution-response-content-PUTapi-contact-inquiries--inquiry_id-"
-      data-empty-response-text="<Empty response>" style="max-height: 400px;"></code></pre>
-</span>
-<span id="execution-error-PUTapi-contact-inquiries--inquiry_id-" hidden>
-    <blockquote>Request failed with error:</blockquote>
-    <pre><code id="execution-error-message-PUTapi-contact-inquiries--inquiry_id-">
-
-Tip: Check that you&#039;re properly connected to the network.
-If you&#039;re a maintainer of ths API, verify that your API is running and you&#039;ve enabled CORS.
-You can check the Dev Tools console for debugging information.</code></pre>
-</span>
-<form id="form-PUTapi-contact-inquiries--inquiry_id-" data-method="PUT"
-      data-path="api/contact-inquiries/{inquiry_id}"
-      data-authed="0"
-      data-hasfiles="0"
-      data-isarraybody="0"
-      autocomplete="off"
-      onsubmit="event.preventDefault(); executeTryOut('PUTapi-contact-inquiries--inquiry_id-', this);">
-    <h3>
-        Request&nbsp;&nbsp;&nbsp;
-                    <button type="button"
-                    style="background-color: #8fbcd4; padding: 5px 10px; border-radius: 5px; border-width: thin;"
-                    id="btn-tryout-PUTapi-contact-inquiries--inquiry_id-"
-                    onclick="tryItOut('PUTapi-contact-inquiries--inquiry_id-');">Try it out ⚡
-            </button>
-            <button type="button"
-                    style="background-color: #c97a7e; padding: 5px 10px; border-radius: 5px; border-width: thin;"
-                    id="btn-canceltryout-PUTapi-contact-inquiries--inquiry_id-"
-                    onclick="cancelTryOut('PUTapi-contact-inquiries--inquiry_id-');" hidden>Cancel 🛑
-            </button>&nbsp;&nbsp;
-            <button type="submit"
-                    style="background-color: #6ac174; padding: 5px 10px; border-radius: 5px; border-width: thin;"
-                    id="btn-executetryout-PUTapi-contact-inquiries--inquiry_id-"
-                    data-initial-text="Send Request 💥"
-                    data-loading-text="⏱ Sending..."
-                    hidden>Send Request 💥
-            </button>
-            </h3>
-            <p>
-            <small class="badge badge-darkblue">PUT</small>
-            <b><code>api/contact-inquiries/{inquiry_id}</code></b>
-        </p>
-                <h4 class="fancy-heading-panel"><b>Headers</b></h4>
-                                <div style="padding-left: 28px; clear: unset;">
-                <b style="line-height: 2;"><code>Content-Type</code></b>&nbsp;&nbsp;
-&nbsp;
- &nbsp;
- &nbsp;
-                <input type="text" style="display: none"
-                              name="Content-Type"                data-endpoint="PUTapi-contact-inquiries--inquiry_id-"
-               value="application/json"
-               data-component="header">
-    <br>
-<p>Example: <code>application/json</code></p>
-            </div>
-                                <div style="padding-left: 28px; clear: unset;">
-                <b style="line-height: 2;"><code>Accept</code></b>&nbsp;&nbsp;
-&nbsp;
- &nbsp;
- &nbsp;
-                <input type="text" style="display: none"
-                              name="Accept"                data-endpoint="PUTapi-contact-inquiries--inquiry_id-"
-               value="application/json"
-               data-component="header">
-    <br>
-<p>Example: <code>application/json</code></p>
-            </div>
-                        <h4 class="fancy-heading-panel"><b>URL Parameters</b></h4>
-                    <div style="padding-left: 28px; clear: unset;">
-                <b style="line-height: 2;"><code>inquiry_id</code></b>&nbsp;&nbsp;
-<small>integer</small>&nbsp;
- &nbsp;
- &nbsp;
-                <input type="number" style="display: none"
-               step="any"               name="inquiry_id"                data-endpoint="PUTapi-contact-inquiries--inquiry_id-"
-               value="16"
-               data-component="url">
-    <br>
-<p>The ID of the inquiry. Example: <code>16</code></p>
-            </div>
-                            <h4 class="fancy-heading-panel"><b>Body Parameters</b></h4>
-        <div style=" padding-left: 28px;  clear: unset;">
-            <b style="line-height: 2;"><code>full_name</code></b>&nbsp;&nbsp;
-<small>string</small>&nbsp;
-<i>optional</i> &nbsp;
- &nbsp;
-                <input type="text" style="display: none"
-                              name="full_name"                data-endpoint="PUTapi-contact-inquiries--inquiry_id-"
-               value="b"
-               data-component="body">
-    <br>
-<p>Must not be greater than 255 characters. Example: <code>b</code></p>
-        </div>
-                <div style=" padding-left: 28px;  clear: unset;">
-            <b style="line-height: 2;"><code>email</code></b>&nbsp;&nbsp;
-<small>string</small>&nbsp;
-<i>optional</i> &nbsp;
- &nbsp;
-                <input type="text" style="display: none"
-                              name="email"                data-endpoint="PUTapi-contact-inquiries--inquiry_id-"
-               value="zbailey@example.net"
-               data-component="body">
-    <br>
-<p>Must be a valid email address. Must not be greater than 255 characters. Example: <code>zbailey@example.net</code></p>
-        </div>
-                <div style=" padding-left: 28px;  clear: unset;">
-            <b style="line-height: 2;"><code>phone</code></b>&nbsp;&nbsp;
-<small>string</small>&nbsp;
-<i>optional</i> &nbsp;
- &nbsp;
-                <input type="text" style="display: none"
-                              name="phone"                data-endpoint="PUTapi-contact-inquiries--inquiry_id-"
-               value="iyvdljnikhwaykcm"
-               data-component="body">
-    <br>
-<p>Must not be greater than 20 characters. Example: <code>iyvdljnikhwaykcm</code></p>
-        </div>
-                <div style=" padding-left: 28px;  clear: unset;">
-            <b style="line-height: 2;"><code>company</code></b>&nbsp;&nbsp;
-<small>string</small>&nbsp;
-<i>optional</i> &nbsp;
- &nbsp;
-                <input type="text" style="display: none"
-                              name="company"                data-endpoint="PUTapi-contact-inquiries--inquiry_id-"
-               value="y"
-               data-component="body">
-    <br>
-<p>Must not be greater than 255 characters. Example: <code>y</code></p>
-        </div>
-                <div style=" padding-left: 28px;  clear: unset;">
-            <b style="line-height: 2;"><code>service_id</code></b>&nbsp;&nbsp;
-<small>string</small>&nbsp;
-<i>optional</i> &nbsp;
- &nbsp;
-                <input type="text" style="display: none"
-                              name="service_id"                data-endpoint="PUTapi-contact-inquiries--inquiry_id-"
-               value=""
-               data-component="body">
-    <br>
-<p>The <code>id</code> of an existing record in the services table.</p>
-        </div>
-                <div style=" padding-left: 28px;  clear: unset;">
-            <b style="line-height: 2;"><code>service</code></b>&nbsp;&nbsp;
-<small>string</small>&nbsp;
-<i>optional</i> &nbsp;
- &nbsp;
-                <input type="text" style="display: none"
-                              name="service"                data-endpoint="PUTapi-contact-inquiries--inquiry_id-"
-               value="u"
-               data-component="body">
-    <br>
-<p>Must not be greater than 255 characters. Example: <code>u</code></p>
-        </div>
-                <div style=" padding-left: 28px;  clear: unset;">
-            <b style="line-height: 2;"><code>message</code></b>&nbsp;&nbsp;
-<small>string</small>&nbsp;
-<i>optional</i> &nbsp;
- &nbsp;
-                <input type="text" style="display: none"
-                              name="message"                data-endpoint="PUTapi-contact-inquiries--inquiry_id-"
-               value="architecto"
-               data-component="body">
-    <br>
-<p>Example: <code>architecto</code></p>
-        </div>
-                <div style=" padding-left: 28px;  clear: unset;">
-            <b style="line-height: 2;"><code>status</code></b>&nbsp;&nbsp;
-<small>string</small>&nbsp;
-<i>optional</i> &nbsp;
- &nbsp;
-                <input type="text" style="display: none"
-                              name="status"                data-endpoint="PUTapi-contact-inquiries--inquiry_id-"
-               value="closed"
-               data-component="body">
-    <br>
-<p>Example: <code>closed</code></p>
-Must be one of:
-<ul style="list-style-type: square;"><li><code>pending</code></li> <li><code>replied</code></li> <li><code>closed</code></li></ul>
-        </div>
-        </form>
-
-                    <h2 id="endpoints-PATCHapi-contact-inquiries--inquiry_id-">Partially update the specified contact inquiry in storage.</h2>
-
-<p>
-</p>
-
-
-
-<span id="example-requests-PATCHapi-contact-inquiries--inquiry_id-">
-<blockquote>Example request:</blockquote>
-
-
-<div class="bash-example">
-    <pre><code class="language-bash">curl --request PATCH \
-    "http://127.0.0.1:8000/api/contact-inquiries/16" \
-    --header "Content-Type: application/json" \
-    --header "Accept: application/json"</code></pre></div>
-
-
-<div class="javascript-example">
-    <pre><code class="language-javascript">const url = new URL(
-    "http://127.0.0.1:8000/api/contact-inquiries/16"
-);
-
-const headers = {
-    "Content-Type": "application/json",
-    "Accept": "application/json",
-};
-
-fetch(url, {
-    method: "PATCH",
-    headers,
-}).then(response =&gt; response.json());</code></pre></div>
-
-
-<div class="php-example">
-    <pre><code class="language-php">$client = new \GuzzleHttp\Client();
-$url = 'http://127.0.0.1:8000/api/contact-inquiries/16';
-$response = $client-&gt;patch(
-    $url,
-    [
-        'headers' =&gt; [
-            'Content-Type' =&gt; 'application/json',
-            'Accept' =&gt; 'application/json',
-        ],
-    ]
-);
-$body = $response-&gt;getBody();
-print_r(json_decode((string) $body));</code></pre></div>
-
-</span>
-
-<span id="example-responses-PATCHapi-contact-inquiries--inquiry_id-">
-</span>
-<span id="execution-results-PATCHapi-contact-inquiries--inquiry_id-" hidden>
-    <blockquote>Received response<span
-                id="execution-response-status-PATCHapi-contact-inquiries--inquiry_id-"></span>:
-    </blockquote>
-    <pre class="json"><code id="execution-response-content-PATCHapi-contact-inquiries--inquiry_id-"
-      data-empty-response-text="<Empty response>" style="max-height: 400px;"></code></pre>
-</span>
-<span id="execution-error-PATCHapi-contact-inquiries--inquiry_id-" hidden>
-    <blockquote>Request failed with error:</blockquote>
-    <pre><code id="execution-error-message-PATCHapi-contact-inquiries--inquiry_id-">
-
-Tip: Check that you&#039;re properly connected to the network.
-If you&#039;re a maintainer of ths API, verify that your API is running and you&#039;ve enabled CORS.
-You can check the Dev Tools console for debugging information.</code></pre>
-</span>
-<form id="form-PATCHapi-contact-inquiries--inquiry_id-" data-method="PATCH"
-      data-path="api/contact-inquiries/{inquiry_id}"
-      data-authed="0"
-      data-hasfiles="0"
-      data-isarraybody="0"
-      autocomplete="off"
-      onsubmit="event.preventDefault(); executeTryOut('PATCHapi-contact-inquiries--inquiry_id-', this);">
-    <h3>
-        Request&nbsp;&nbsp;&nbsp;
-                    <button type="button"
-                    style="background-color: #8fbcd4; padding: 5px 10px; border-radius: 5px; border-width: thin;"
-                    id="btn-tryout-PATCHapi-contact-inquiries--inquiry_id-"
-                    onclick="tryItOut('PATCHapi-contact-inquiries--inquiry_id-');">Try it out ⚡
-            </button>
-            <button type="button"
-                    style="background-color: #c97a7e; padding: 5px 10px; border-radius: 5px; border-width: thin;"
-                    id="btn-canceltryout-PATCHapi-contact-inquiries--inquiry_id-"
-                    onclick="cancelTryOut('PATCHapi-contact-inquiries--inquiry_id-');" hidden>Cancel 🛑
-            </button>&nbsp;&nbsp;
-            <button type="submit"
-                    style="background-color: #6ac174; padding: 5px 10px; border-radius: 5px; border-width: thin;"
-                    id="btn-executetryout-PATCHapi-contact-inquiries--inquiry_id-"
-                    data-initial-text="Send Request 💥"
-                    data-loading-text="⏱ Sending..."
-                    hidden>Send Request 💥
-            </button>
-            </h3>
-            <p>
-            <small class="badge badge-purple">PATCH</small>
-            <b><code>api/contact-inquiries/{inquiry_id}</code></b>
-        </p>
-                <h4 class="fancy-heading-panel"><b>Headers</b></h4>
-                                <div style="padding-left: 28px; clear: unset;">
-                <b style="line-height: 2;"><code>Content-Type</code></b>&nbsp;&nbsp;
-&nbsp;
- &nbsp;
- &nbsp;
-                <input type="text" style="display: none"
-                              name="Content-Type"                data-endpoint="PATCHapi-contact-inquiries--inquiry_id-"
-               value="application/json"
-               data-component="header">
-    <br>
-<p>Example: <code>application/json</code></p>
-            </div>
-                                <div style="padding-left: 28px; clear: unset;">
-                <b style="line-height: 2;"><code>Accept</code></b>&nbsp;&nbsp;
-&nbsp;
- &nbsp;
- &nbsp;
-                <input type="text" style="display: none"
-                              name="Accept"                data-endpoint="PATCHapi-contact-inquiries--inquiry_id-"
-               value="application/json"
-               data-component="header">
-    <br>
-<p>Example: <code>application/json</code></p>
-            </div>
-                        <h4 class="fancy-heading-panel"><b>URL Parameters</b></h4>
-                    <div style="padding-left: 28px; clear: unset;">
-                <b style="line-height: 2;"><code>inquiry_id</code></b>&nbsp;&nbsp;
-<small>integer</small>&nbsp;
- &nbsp;
- &nbsp;
-                <input type="number" style="display: none"
-               step="any"               name="inquiry_id"                data-endpoint="PATCHapi-contact-inquiries--inquiry_id-"
-               value="16"
-               data-component="url">
-    <br>
-<p>The ID of the inquiry. Example: <code>16</code></p>
-            </div>
-                    </form>
-
-                    <h2 id="endpoints-POSTapi-contact-inquiries--inquiry_id--reply">Reply to a contact inquiry.</h2>
-
-<p>
-</p>
-
-
-
-<span id="example-requests-POSTapi-contact-inquiries--inquiry_id--reply">
-<blockquote>Example request:</blockquote>
-
-
-<div class="bash-example">
-    <pre><code class="language-bash">curl --request POST \
-    "http://127.0.0.1:8000/api/contact-inquiries/16/reply" \
-    --header "Content-Type: application/json" \
-    --header "Accept: application/json" \
-    --data "{
-    \"reply_message\": \"architecto\"
-}"
-</code></pre></div>
-
-
-<div class="javascript-example">
-    <pre><code class="language-javascript">const url = new URL(
-    "http://127.0.0.1:8000/api/contact-inquiries/16/reply"
-);
-
-const headers = {
-    "Content-Type": "application/json",
-    "Accept": "application/json",
-};
-
-let body = {
-    "reply_message": "architecto"
-};
-
-fetch(url, {
-    method: "POST",
-    headers,
-    body: JSON.stringify(body),
-}).then(response =&gt; response.json());</code></pre></div>
-
-
-<div class="php-example">
-    <pre><code class="language-php">$client = new \GuzzleHttp\Client();
-$url = 'http://127.0.0.1:8000/api/contact-inquiries/16/reply';
-$response = $client-&gt;post(
-    $url,
-    [
-        'headers' =&gt; [
-            'Content-Type' =&gt; 'application/json',
-            'Accept' =&gt; 'application/json',
-        ],
-        'json' =&gt; [
-            'reply_message' =&gt; 'architecto',
-        ],
-    ]
-);
-$body = $response-&gt;getBody();
-print_r(json_decode((string) $body));</code></pre></div>
-
-</span>
-
-<span id="example-responses-POSTapi-contact-inquiries--inquiry_id--reply">
-</span>
-<span id="execution-results-POSTapi-contact-inquiries--inquiry_id--reply" hidden>
-    <blockquote>Received response<span
-                id="execution-response-status-POSTapi-contact-inquiries--inquiry_id--reply"></span>:
-    </blockquote>
-    <pre class="json"><code id="execution-response-content-POSTapi-contact-inquiries--inquiry_id--reply"
-      data-empty-response-text="<Empty response>" style="max-height: 400px;"></code></pre>
-</span>
-<span id="execution-error-POSTapi-contact-inquiries--inquiry_id--reply" hidden>
-    <blockquote>Request failed with error:</blockquote>
-    <pre><code id="execution-error-message-POSTapi-contact-inquiries--inquiry_id--reply">
-
-Tip: Check that you&#039;re properly connected to the network.
-If you&#039;re a maintainer of ths API, verify that your API is running and you&#039;ve enabled CORS.
-You can check the Dev Tools console for debugging information.</code></pre>
-</span>
-<form id="form-POSTapi-contact-inquiries--inquiry_id--reply" data-method="POST"
-      data-path="api/contact-inquiries/{inquiry_id}/reply"
-      data-authed="0"
-      data-hasfiles="0"
-      data-isarraybody="0"
-      autocomplete="off"
-      onsubmit="event.preventDefault(); executeTryOut('POSTapi-contact-inquiries--inquiry_id--reply', this);">
-    <h3>
-        Request&nbsp;&nbsp;&nbsp;
-                    <button type="button"
-                    style="background-color: #8fbcd4; padding: 5px 10px; border-radius: 5px; border-width: thin;"
-                    id="btn-tryout-POSTapi-contact-inquiries--inquiry_id--reply"
-                    onclick="tryItOut('POSTapi-contact-inquiries--inquiry_id--reply');">Try it out ⚡
-            </button>
-            <button type="button"
-                    style="background-color: #c97a7e; padding: 5px 10px; border-radius: 5px; border-width: thin;"
-                    id="btn-canceltryout-POSTapi-contact-inquiries--inquiry_id--reply"
-                    onclick="cancelTryOut('POSTapi-contact-inquiries--inquiry_id--reply');" hidden>Cancel 🛑
-            </button>&nbsp;&nbsp;
-            <button type="submit"
-                    style="background-color: #6ac174; padding: 5px 10px; border-radius: 5px; border-width: thin;"
-                    id="btn-executetryout-POSTapi-contact-inquiries--inquiry_id--reply"
-                    data-initial-text="Send Request 💥"
-                    data-loading-text="⏱ Sending..."
-                    hidden>Send Request 💥
-            </button>
-            </h3>
-            <p>
-            <small class="badge badge-black">POST</small>
-            <b><code>api/contact-inquiries/{inquiry_id}/reply</code></b>
-        </p>
-                <h4 class="fancy-heading-panel"><b>Headers</b></h4>
-                                <div style="padding-left: 28px; clear: unset;">
-                <b style="line-height: 2;"><code>Content-Type</code></b>&nbsp;&nbsp;
-&nbsp;
- &nbsp;
- &nbsp;
-                <input type="text" style="display: none"
-                              name="Content-Type"                data-endpoint="POSTapi-contact-inquiries--inquiry_id--reply"
-               value="application/json"
-               data-component="header">
-    <br>
-<p>Example: <code>application/json</code></p>
-            </div>
-                                <div style="padding-left: 28px; clear: unset;">
-                <b style="line-height: 2;"><code>Accept</code></b>&nbsp;&nbsp;
-&nbsp;
- &nbsp;
- &nbsp;
-                <input type="text" style="display: none"
-                              name="Accept"                data-endpoint="POSTapi-contact-inquiries--inquiry_id--reply"
-               value="application/json"
-               data-component="header">
-    <br>
-<p>Example: <code>application/json</code></p>
-            </div>
-                        <h4 class="fancy-heading-panel"><b>URL Parameters</b></h4>
-                    <div style="padding-left: 28px; clear: unset;">
-                <b style="line-height: 2;"><code>inquiry_id</code></b>&nbsp;&nbsp;
-<small>integer</small>&nbsp;
- &nbsp;
- &nbsp;
-                <input type="number" style="display: none"
-               step="any"               name="inquiry_id"                data-endpoint="POSTapi-contact-inquiries--inquiry_id--reply"
-               value="16"
-               data-component="url">
-    <br>
-<p>The ID of the inquiry. Example: <code>16</code></p>
-            </div>
-                            <h4 class="fancy-heading-panel"><b>Body Parameters</b></h4>
-        <div style=" padding-left: 28px;  clear: unset;">
-            <b style="line-height: 2;"><code>reply_message</code></b>&nbsp;&nbsp;
-<small>string</small>&nbsp;
- &nbsp;
- &nbsp;
-                <input type="text" style="display: none"
-                              name="reply_message"                data-endpoint="POSTapi-contact-inquiries--inquiry_id--reply"
-               value="architecto"
-               data-component="body">
-    <br>
-<p>Example: <code>architecto</code></p>
-        </div>
-        </form>
-
-                    <h2 id="endpoints-DELETEapi-contact-inquiries--inquiry_id-">Remove the specified contact inquiry from storage.</h2>
-
-<p>
-</p>
-
-
-
-<span id="example-requests-DELETEapi-contact-inquiries--inquiry_id-">
-<blockquote>Example request:</blockquote>
-
-
-<div class="bash-example">
-    <pre><code class="language-bash">curl --request DELETE \
-    "http://127.0.0.1:8000/api/contact-inquiries/16" \
-    --header "Content-Type: application/json" \
-    --header "Accept: application/json"</code></pre></div>
-
-
-<div class="javascript-example">
-    <pre><code class="language-javascript">const url = new URL(
-    "http://127.0.0.1:8000/api/contact-inquiries/16"
-);
-
-const headers = {
-    "Content-Type": "application/json",
-    "Accept": "application/json",
-};
-
-fetch(url, {
-    method: "DELETE",
-    headers,
-}).then(response =&gt; response.json());</code></pre></div>
-
-
-<div class="php-example">
-    <pre><code class="language-php">$client = new \GuzzleHttp\Client();
-$url = 'http://127.0.0.1:8000/api/contact-inquiries/16';
-$response = $client-&gt;delete(
-    $url,
-    [
-        'headers' =&gt; [
-            'Content-Type' =&gt; 'application/json',
-            'Accept' =&gt; 'application/json',
-        ],
-    ]
-);
-$body = $response-&gt;getBody();
-print_r(json_decode((string) $body));</code></pre></div>
-
-</span>
-
-<span id="example-responses-DELETEapi-contact-inquiries--inquiry_id-">
-</span>
-<span id="execution-results-DELETEapi-contact-inquiries--inquiry_id-" hidden>
-    <blockquote>Received response<span
-                id="execution-response-status-DELETEapi-contact-inquiries--inquiry_id-"></span>:
-    </blockquote>
-    <pre class="json"><code id="execution-response-content-DELETEapi-contact-inquiries--inquiry_id-"
-      data-empty-response-text="<Empty response>" style="max-height: 400px;"></code></pre>
-</span>
-<span id="execution-error-DELETEapi-contact-inquiries--inquiry_id-" hidden>
-    <blockquote>Request failed with error:</blockquote>
-    <pre><code id="execution-error-message-DELETEapi-contact-inquiries--inquiry_id-">
-
-Tip: Check that you&#039;re properly connected to the network.
-If you&#039;re a maintainer of ths API, verify that your API is running and you&#039;ve enabled CORS.
-You can check the Dev Tools console for debugging information.</code></pre>
-</span>
-<form id="form-DELETEapi-contact-inquiries--inquiry_id-" data-method="DELETE"
-      data-path="api/contact-inquiries/{inquiry_id}"
-      data-authed="0"
-      data-hasfiles="0"
-      data-isarraybody="0"
-      autocomplete="off"
-      onsubmit="event.preventDefault(); executeTryOut('DELETEapi-contact-inquiries--inquiry_id-', this);">
-    <h3>
-        Request&nbsp;&nbsp;&nbsp;
-                    <button type="button"
-                    style="background-color: #8fbcd4; padding: 5px 10px; border-radius: 5px; border-width: thin;"
-                    id="btn-tryout-DELETEapi-contact-inquiries--inquiry_id-"
-                    onclick="tryItOut('DELETEapi-contact-inquiries--inquiry_id-');">Try it out ⚡
-            </button>
-            <button type="button"
-                    style="background-color: #c97a7e; padding: 5px 10px; border-radius: 5px; border-width: thin;"
-                    id="btn-canceltryout-DELETEapi-contact-inquiries--inquiry_id-"
-                    onclick="cancelTryOut('DELETEapi-contact-inquiries--inquiry_id-');" hidden>Cancel 🛑
-            </button>&nbsp;&nbsp;
-            <button type="submit"
-                    style="background-color: #6ac174; padding: 5px 10px; border-radius: 5px; border-width: thin;"
-                    id="btn-executetryout-DELETEapi-contact-inquiries--inquiry_id-"
-                    data-initial-text="Send Request 💥"
-                    data-loading-text="⏱ Sending..."
-                    hidden>Send Request 💥
-            </button>
-            </h3>
-            <p>
-            <small class="badge badge-red">DELETE</small>
-            <b><code>api/contact-inquiries/{inquiry_id}</code></b>
-        </p>
-                <h4 class="fancy-heading-panel"><b>Headers</b></h4>
-                                <div style="padding-left: 28px; clear: unset;">
-                <b style="line-height: 2;"><code>Content-Type</code></b>&nbsp;&nbsp;
-&nbsp;
- &nbsp;
- &nbsp;
-                <input type="text" style="display: none"
-                              name="Content-Type"                data-endpoint="DELETEapi-contact-inquiries--inquiry_id-"
-               value="application/json"
-               data-component="header">
-    <br>
-<p>Example: <code>application/json</code></p>
-            </div>
-                                <div style="padding-left: 28px; clear: unset;">
-                <b style="line-height: 2;"><code>Accept</code></b>&nbsp;&nbsp;
-&nbsp;
- &nbsp;
- &nbsp;
-                <input type="text" style="display: none"
-                              name="Accept"                data-endpoint="DELETEapi-contact-inquiries--inquiry_id-"
-               value="application/json"
-               data-component="header">
-    <br>
-<p>Example: <code>application/json</code></p>
-            </div>
-                        <h4 class="fancy-heading-panel"><b>URL Parameters</b></h4>
-                    <div style="padding-left: 28px; clear: unset;">
-                <b style="line-height: 2;"><code>inquiry_id</code></b>&nbsp;&nbsp;
-<small>integer</small>&nbsp;
- &nbsp;
- &nbsp;
-                <input type="number" style="display: none"
-               step="any"               name="inquiry_id"                data-endpoint="DELETEapi-contact-inquiries--inquiry_id-"
-               value="16"
-               data-component="url">
-    <br>
-<p>The ID of the inquiry. Example: <code>16</code></p>
-            </div>
-                    </form>
 
                     <h2 id="endpoints-POSTapi-payment-process">Process payment and return payment key/iframe URL</h2>
 
@@ -14765,7 +16219,7 @@ location: http://localhost:3000/checkout_confirmation?payment_status=failed
 content-type: text/html; charset=utf-8
 access-control-allow-origin: http://localhost:3000
 access-control-allow-credentials: true
-set-cookie: laravel-session=eyJpdiI6IlJCKzhmTlhXSEh3S1Jqa09QZ2NtTXc9PSIsInZhbHVlIjoiYjhhUWZaTFlSV3JhRnNnb0FFTkg0VWExMzNwRlBlR0hnVXp5MFBYdW9QUk1SUW4yekhmV3lXcXlxTFhJdEExWkU0VXpMWVpnQ1BqZmxFS05SZTlhYXR0U0FZSEI3UERURVY3VkNZcmJSdnR4SWpNRzd1eTY4VXRnNlNjMDJWOFIiLCJtYWMiOiIxNDU1OTEwOTQwNTg1MzRkMDhlNGYxM2NlYmUyZDhhYTYyN2IyNTc0MzA1MWI0ZTFhNjlkYjc0MjM1ZjAyMDg4IiwidGFnIjoiIn0%3D; expires=Mon, 02 Feb 2026 16:22:09 GMT; Max-Age=7200; path=/; secure; httponly; samesite=none
+set-cookie: al-atheer-ecommerce-session=eyJpdiI6Im5mTkRHandjUklmTlI3aHV5K3BiYlE9PSIsInZhbHVlIjoiVjNIYTNpOEd5QmsrejkrejZXWkJKNkp3Nklwc2RBMi9pM0FLZ0RUcFhBN1RJejg1cU1rdVJkYVlEdU1lbEFiL0VHUGNuaWxnTTRPUk5rSGZvTllqVW16T0lFMVRodDdDWTBmRU92MkhqdW1ZL3pZN2dEZ3dMKzNrWlhyUzZ0RmoiLCJtYWMiOiI0YjExYWM0NjNjMTdkYTgzMTg5YjNiM2Y4ZTViM2RiZGM4NTViY2RkMDRjMGIyMmI1MGQwNzI3OWQxN2ZmYzExIiwidGFnIjoiIn0%3D; expires=Thu, 05 Feb 2026 13:29:08 GMT; Max-Age=7200; path=/; secure; httponly; samesite=none
  </code></pre></details>         <pre>
 
 <code class="language-json" style="max-height: 300px;">&lt;!DOCTYPE html&gt;
@@ -15382,7 +16836,7 @@ print_r(json_decode((string) $body));</code></pre></div>
 content-type: application/json
 access-control-allow-origin: http://localhost:3000
 access-control-allow-credentials: true
-set-cookie: laravel-session=eyJpdiI6ImtaaVhFcXJBREtvYjU5R3psdkJaTHc9PSIsInZhbHVlIjoiKzB0QjFsbEdHVFNyTmczek1YL05hUHI5R1dYVlhvREY1WTZKWlEyNTJOZVNGWWd2TUdadmxLY3YvODlHbjJaSFpKdjlFRDBYeTZ1VXdCdXlLMTFIT0x3dVU5VHd2cUlERlFJc3ROSk8yaUZtTzZFN2xNTFIrUnZMY1N4dHVHY0giLCJtYWMiOiIyMjUzYTExMzRhODFhYTc1MTY5Mjc5N2MyMjhhOGU2MzI3MDkzNGRlYzIwNzVjMmQzMWFjZmY5ZjUzODkxYTBlIiwidGFnIjoiIn0%3D; expires=Mon, 02 Feb 2026 16:22:10 GMT; Max-Age=7200; path=/; secure; httponly; samesite=none
+set-cookie: al-atheer-ecommerce-session=eyJpdiI6Im9tQ1MvNWdkN1g0MEFLbk1lWDBtN2c9PSIsInZhbHVlIjoiMGszNTFOeDdtOUkwMHNOR2doN3pDT2Q4TzRGRTRoZlAxNkt0UUhVbmcvbDdRZmZOWTZQVkM1d3p0Z250RjYzcFNmVXdXT3dXVmpyTldTangyckVPTW45Ti9YR2NBbkJicUVFVjJNTkNJcUViRnRPVWU2TWV0RjRnaWNNMW40MDQiLCJtYWMiOiIyZmRiMTAxZDQ1MmI2NmQ2NjEwZmQ3ZDkxN2Y4MjU5MmVjZWY3ZjlkNDEyZDMyMzA3OTQwNTY4Zjg4YjcxZTAxIiwidGFnIjoiIn0%3D; expires=Thu, 05 Feb 2026 13:29:09 GMT; Max-Age=7200; path=/; secure; httponly; samesite=none
  </code></pre></details>         <pre>
 
 <code class="language-json" style="max-height: 300px;">{
@@ -15672,7 +17126,7 @@ You can check the Dev Tools console for debugging information.</code></pre>
     --header "Content-Type: application/json" \
     --header "Accept: application/json" \
     --data "{
-    \"scheduledDate\": \"2052-02-26\",
+    \"scheduledDate\": \"2052-02-29\",
     \"businessLocationId\": \"architecto\",
     \"contactPerson\": {
         \"name\": \"architecto\",
@@ -15682,14 +17136,14 @@ You can check the Dev Tools console for debugging information.</code></pre>
     },
     \"notes\": \"architecto\",
     \"noOfPackages\": 22,
-    \"packageType\": \"Heavy Bulky\",
+    \"packageType\": \"Light Bulky\",
     \"repeatedData\": {
-        \"repeatedType\": \"Weekly\",
+        \"repeatedType\": \"Daily\",
         \"days\": [
-            \"Thursday\"
+            \"Monday\"
         ],
-        \"startDate\": \"2026-02-02T14:22:10\",
-        \"endDate\": \"2052-02-26\"
+        \"startDate\": \"2026-02-05T11:29:09\",
+        \"endDate\": \"2052-02-29\"
     }
 }"
 </code></pre></div>
@@ -15706,7 +17160,7 @@ const headers = {
 };
 
 let body = {
-    "scheduledDate": "2052-02-26",
+    "scheduledDate": "2052-02-29",
     "businessLocationId": "architecto",
     "contactPerson": {
         "name": "architecto",
@@ -15716,14 +17170,14 @@ let body = {
     },
     "notes": "architecto",
     "noOfPackages": 22,
-    "packageType": "Heavy Bulky",
+    "packageType": "Light Bulky",
     "repeatedData": {
-        "repeatedType": "Weekly",
+        "repeatedType": "Daily",
         "days": [
-            "Thursday"
+            "Monday"
         ],
-        "startDate": "2026-02-02T14:22:10",
-        "endDate": "2052-02-26"
+        "startDate": "2026-02-05T11:29:09",
+        "endDate": "2052-02-29"
     }
 };
 
@@ -15745,7 +17199,7 @@ $response = $client-&gt;post(
             'Accept' =&gt; 'application/json',
         ],
         'json' =&gt; [
-            'scheduledDate' =&gt; '2052-02-26',
+            'scheduledDate' =&gt; '2052-02-29',
             'businessLocationId' =&gt; 'architecto',
             'contactPerson' =&gt; [
                 'name' =&gt; 'architecto',
@@ -15755,14 +17209,14 @@ $response = $client-&gt;post(
             ],
             'notes' =&gt; 'architecto',
             'noOfPackages' =&gt; 22,
-            'packageType' =&gt; 'Heavy Bulky',
+            'packageType' =&gt; 'Light Bulky',
             'repeatedData' =&gt; [
-                'repeatedType' =&gt; 'Weekly',
+                'repeatedType' =&gt; 'Daily',
                 'days' =&gt; [
-                    'Thursday',
+                    'Monday',
                 ],
-                'startDate' =&gt; '2026-02-02T14:22:10',
-                'endDate' =&gt; '2052-02-26',
+                'startDate' =&gt; '2026-02-05T11:29:09',
+                'endDate' =&gt; '2052-02-29',
             ],
         ],
     ]
@@ -15853,10 +17307,10 @@ You can check the Dev Tools console for debugging information.</code></pre>
  &nbsp;
                 <input type="text" style="display: none"
                               name="scheduledDate"                data-endpoint="POSTapi-pickups"
-               value="2052-02-26"
+               value="2052-02-29"
                data-component="body">
     <br>
-<p>Must be a valid date. Must be a date after <code>today</code>. Example: <code>2052-02-26</code></p>
+<p>Must be a valid date. Must be a date after <code>today</code>. Example: <code>2052-02-29</code></p>
         </div>
                 <div style=" padding-left: 28px;  clear: unset;">
             <b style="line-height: 2;"><code>businessLocationId</code></b>&nbsp;&nbsp;
@@ -15961,10 +17415,10 @@ You can check the Dev Tools console for debugging information.</code></pre>
  &nbsp;
                 <input type="text" style="display: none"
                               name="packageType"                data-endpoint="POSTapi-pickups"
-               value="Heavy Bulky"
+               value="Light Bulky"
                data-component="body">
     <br>
-<p>Example: <code>Heavy Bulky</code></p>
+<p>Example: <code>Light Bulky</code></p>
 Must be one of:
 <ul style="list-style-type: square;"><li><code>Normal</code></li> <li><code>Light Bulky</code></li> <li><code>Heavy Bulky</code></li></ul>
         </div>
@@ -15985,10 +17439,10 @@ Must be one of:
  &nbsp;
                 <input type="text" style="display: none"
                               name="repeatedData.repeatedType"                data-endpoint="POSTapi-pickups"
-               value="Weekly"
+               value="Daily"
                data-component="body">
     <br>
-<p>Example: <code>Weekly</code></p>
+<p>Example: <code>Daily</code></p>
 Must be one of:
 <ul style="list-style-type: square;"><li><code>One Time</code></li> <li><code>Daily</code></li> <li><code>Weekly</code></li></ul>
                     </div>
@@ -16015,10 +17469,10 @@ Must be one of:
  &nbsp;
                 <input type="text" style="display: none"
                               name="repeatedData.startDate"                data-endpoint="POSTapi-pickups"
-               value="2026-02-02T14:22:10"
+               value="2026-02-05T11:29:09"
                data-component="body">
     <br>
-<p>Must be a valid date. Example: <code>2026-02-02T14:22:10</code></p>
+<p>Must be a valid date. Example: <code>2026-02-05T11:29:09</code></p>
                     </div>
                                                                 <div style="margin-left: 14px; clear: unset;">
                         <b style="line-height: 2;"><code>endDate</code></b>&nbsp;&nbsp;
@@ -16027,10 +17481,10 @@ Must be one of:
  &nbsp;
                 <input type="text" style="display: none"
                               name="repeatedData.endDate"                data-endpoint="POSTapi-pickups"
-               value="2052-02-26"
+               value="2052-02-29"
                data-component="body">
     <br>
-<p>Must be a valid date. Must be a date after <code>repeatedData.startDate</code>. Example: <code>2052-02-26</code></p>
+<p>Must be a valid date. Must be a date after <code>repeatedData.startDate</code>. Example: <code>2052-02-29</code></p>
                     </div>
                                     </details>
         </div>
@@ -16697,7 +18151,7 @@ print_r(json_decode((string) $body));</code></pre></div>
 content-type: application/json
 access-control-allow-origin: http://localhost:3000
 access-control-allow-credentials: true
-set-cookie: laravel-session=eyJpdiI6ImorWk9zVGl1Rldka0NndVM0TmsvY1E9PSIsInZhbHVlIjoiYnN0SDBSZkRXRDF3ZXVFQWdwZXk4TXl2bnhlWldPUnpwcjg5M1pwcDBicUdPSVZNWkZsbWpPWjJ2eWFJWlQ1dTB6QWNrZHdGR3dqd0drQ0p1WWtKOElCWTRuUVhiRHh2NmljbzZvWFRhNjY5dk5lVGkzY1VEYUowbzh2Y3h4RkQiLCJtYWMiOiI4Y2NkYjI3ZTc0ZmU2MzUyMWY0MGYzNTcwNTNlMWZlMTc1YWJlYWI4NDlhMWJmYzZhOWZhN2U5ODcwM2MyYTI4IiwidGFnIjoiIn0%3D; expires=Mon, 02 Feb 2026 16:22:10 GMT; Max-Age=7200; path=/; secure; httponly; samesite=none
+set-cookie: al-atheer-ecommerce-session=eyJpdiI6InRISHY5bXVXYWROVWNOUHZITW5KTmc9PSIsInZhbHVlIjoiOWYyL1ZSUjd5djF3cS9JczRIU2d3NWNvZmNkc214NzYvMitKdkhSZ0RRdHpZZEFkU0ZRK29XdlBlZWVDQ1g4cmk3R1BsRUNHZHBmckg0UDNEWmt1UlBnYlhrMlFXby9GcnZVdnZONFlYcWE5RXBWUEw0U1VLa2kvVjFTQWdDN0oiLCJtYWMiOiIxMWVhMDAxM2MwNWMzOGU4MjkzODI5OWQxNTAyMDdmZjBmNGYwOTIwZWZkMGQ2MGZlY2I4YjhhYjhhYTRiYmZiIiwidGFnIjoiIn0%3D; expires=Thu, 05 Feb 2026 13:29:09 GMT; Max-Age=7200; path=/; secure; httponly; samesite=none
  </code></pre></details>         <pre>
 
 <code class="language-json" style="max-height: 300px;">{
@@ -16717,7 +18171,7 @@ set-cookie: laravel-session=eyJpdiI6ImorWk9zVGl1Rldka0NndVM0TmsvY1E9PSIsInZhbHVl
         &quot;MAIL_USERNAME&quot;: &quot;ahmadkholy98@gmail.com&quot;,
         &quot;MAIL_PASSWORD&quot;: &quot;akcynlcfghdfxjrq&quot;,
         &quot;MAIL_FROM_ADDRESS&quot;: &quot;ahmadkholy98@gmail.com&quot;,
-        &quot;MAIL_FROM_NAME&quot;: &quot;laravel&quot;
+        &quot;MAIL_FROM_NAME&quot;: &quot;Al-Atheer Ecommerce&quot;
     }
 }</code>
  </pre>

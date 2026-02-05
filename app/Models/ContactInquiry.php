@@ -24,6 +24,7 @@ class ContactInquiry extends Model
         'status',
         'replied_at',
         'reply_message',
+        'is_published',
     ];
 
     /**
@@ -35,6 +36,7 @@ class ContactInquiry extends Model
     {
         return [
             'replied_at' => 'datetime',
+            'is_published' => 'boolean',
         ];
     }
 
@@ -88,4 +90,11 @@ class ContactInquiry extends Model
         return $query->where('status', 'replied');
     }
 
+    /**
+     * Scope to get published inquiries.
+     */
+    public function scopePublished($query)
+    {
+        return $query->where('is_published', true);
+    }
 }

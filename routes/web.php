@@ -2,24 +2,12 @@
 
 use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
-use Laravel\Fortify\Features;
 
 Route::get('/', function () {
-    return Inertia::render('welcome', [
-        'canRegister' => Features::enabled(Features::registration()),
-    ]);
+    return Inertia::render('welcome');
 })->name('home');
 
-// Authentication routes
-// Route::get('/login', function () {
-//     return Inertia::render('auth/login', [
-//         'canRegister' => Features::enabled(Features::registration()),
-//     ]);
-// })->name('login')->middleware('guest');
-
-Route::get('/register', function () {
-    return Inertia::render('auth/register');
-})->name('register')->middleware('guest');
+// Authentication routes are handled by FortifyServiceProvider
 
 Route::middleware(['auth', 'verified', 'admin'])->group(function () {
     Route::get('dashboard', function () {
@@ -109,6 +97,7 @@ Route::middleware(['auth', 'verified', 'admin'])->group(function () {
         // Inquiry form handling
         Route::post('inquiries/{inquiry}/reply', [\App\Http\Controllers\ContactInquiryAdminController::class, 'reply'])->name('inquiries.reply');
         Route::post('inquiries/{inquiry}/status', [\App\Http\Controllers\ContactInquiryAdminController::class, 'updateStatus'])->name('inquiries.update-status');
+        Route::post('inquiries/{inquiry}/publish', [\App\Http\Controllers\ContactInquiryAdminController::class, 'publish'])->name('inquiries.publish');
 
         // Contact Us
         Route::get('contact-us', function () {
