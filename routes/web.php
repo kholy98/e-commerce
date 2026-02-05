@@ -2,24 +2,12 @@
 
 use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
-use Laravel\Fortify\Features;
 
 Route::get('/', function () {
-    return Inertia::render('welcome', [
-        'canRegister' => Features::enabled(Features::registration()),
-    ]);
+    return Inertia::render('welcome');
 })->name('home');
 
-// Authentication routes
-// Route::get('/login', function () {
-//     return Inertia::render('auth/login', [
-//         'canRegister' => Features::enabled(Features::registration()),
-//     ]);
-// })->name('login')->middleware('guest');
-
-Route::get('/register', function () {
-    return Inertia::render('auth/register');
-})->name('register')->middleware('guest');
+// Authentication routes are handled by FortifyServiceProvider
 
 Route::middleware(['auth', 'verified', 'admin'])->group(function () {
     Route::get('dashboard', function () {
