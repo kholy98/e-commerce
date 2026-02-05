@@ -134,6 +134,7 @@ Route::middleware(['auth', 'verified', 'admin'])->group(function () {
         Route::get('users/{user}', [\App\Http\Controllers\AdminUserController::class, 'show'])->name('users.show');
         Route::get('users/{user}/edit', [\App\Http\Controllers\AdminUserController::class, 'edit'])->name('users.edit');
         Route::post('users/{user}', [\App\Http\Controllers\AdminUserController::class, 'update'])->name('users.update');
+        Route::delete('users/{user}', [\App\Http\Controllers\AdminUserController::class, 'destroy'])->name('users.destroy');
     });
 });
 
