@@ -10,7 +10,6 @@ use Illuminate\Support\Facades\Mail;
 
 class ContactInquiryAdminController extends Controller
 {
-
     /**
      * Reply to a contact inquiry
      */
@@ -50,5 +49,26 @@ class ContactInquiryAdminController extends Controller
         $inquiry->update($validated);
 
         return redirect()->back()->with('success', 'Status updated successfully.');
+    }
+
+    /**
+     * Toggle publish status for a contact inquiry
+     */
+    public function publish(Request $request, ContactInquiry $inquiry): RedirectResponse
+    {
+        // Only allow publishing if inquiry has been replied
+        if (! $inquiry->is_published && $inquiry->status !== 'replied') {
+            return redirect()->back()->with('error', 'Only replied inquiries can be published.');
+        }
+
+        $inquiry->update([
+            'is_published' => ! $inquiry->is_published,
+        ]);
+
+        $message = $inquiry->is_published
+            ? 'Inquiry published successfully.'
+            : 'Inquiry unpublished successfully.';
+
+        return redirect()->back()->with('success', $message);
     }
 }

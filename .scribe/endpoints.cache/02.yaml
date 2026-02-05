@@ -1062,7 +1062,7 @@ endpoints:
           content-type: application/json
           access-control-allow-origin: 'http://localhost:3000'
           access-control-allow-credentials: 'true'
-          set-cookie: 'al-atheer-ecommerce-session=eyJpdiI6IlhHblpJTi9mSEFHc2JTRmx2Q2wranc9PSIsInZhbHVlIjoibGZ2QWVTUzdrQ2Q0ZXRZOWlQemdkUTEyY2NzcnNlbDRqWXc0WitTdzRUNExKcE9GSmJ5c0lSdUtlcy81bUFnNVRIS1ZQdGJVazlXdUwybTdMcmVZNVJsK1hmTUxxSFBJZzdkNG9ONUJwWklxeUpZcXRSODNZdkxWb0VEcHdYenkiLCJtYWMiOiJiZjg0MGZjNWZkMjczMDU0Mjc3MTJjYTliNzExMWE4MjFmN2YwMjU1MTYzODdkYmU5N2UxZDc3OTdkNTRkODc1IiwidGFnIjoiIn0%3D; expires=Wed, 04 Feb 2026 16:01:58 GMT; Max-Age=7200; path=/; secure; httponly; samesite=none'
+          set-cookie: 'al-atheer-ecommerce-session=eyJpdiI6Im5BTjlNSUVEN1lhQkZFUFYzcm4rMXc9PSIsInZhbHVlIjoiVDJHSjZUNXg3KzhrSFhLQkZPbjZLWktRcjAvcmwzUVVtZE9Bc0dvcFZpYWh2bFlMY25tODFqblptK2kyblppVFZ6MzdYY0g3MkRnbUlkVHdDRFkwMUpLaEVoNVpQaXhYN1dTclJsWWZyTjBVU004TnZwcS9SQzFicnRnL243bzIiLCJtYWMiOiI0ZmIwODQ5MjkxZWU3ZGNjZDE3NDBkYzA2NGQwNzlhYWVkYzM3NWZiY2NjNWM1ZjhkOTI3NThlNTQ5ZjkzNjc5IiwidGFnIjoiIn0%3D; expires=Thu, 05 Feb 2026 13:29:08 GMT; Max-Age=7200; path=/; secure; httponly; samesite=none'
         description: null
     responseFields: []
     auth: []
