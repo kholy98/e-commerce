@@ -36,7 +36,7 @@ endpoints:
           content-type: application/json
           access-control-allow-origin: 'http://localhost:3000'
           access-control-allow-credentials: 'true'
-          set-cookie: 'al-atheer-ecommerce-session=eyJpdiI6IldjYktrZ0tvd2Z3S1pkaDRGTzBOWHc9PSIsInZhbHVlIjoiUTQ5YkJNNTdWL29ZZ3YyTEQyQ2I0UFNIODRqcUdST2tIeTVsNys5YXdBVllTZm9Udmo5ZEEvUzhLL0c3YjJhN3dMMW1mVmVKYldUMWJPTzlFMEtEWUIyeHZpdGNiSjBBanBaUjJ3M2REa2R3OVc4ZGhNUXVvSmxUVStNeEc3OWIiLCJtYWMiOiI2ZTQ1Mjc5YmI3OTczNzMzNTIwZTgwNjM4Yzc1ODcwMzgxOTA3NzFjZGQzZjEwYTdlYmUxNTlmYmRkMWU1YWMzIiwidGFnIjoiIn0%3D; expires=Thu, 05 Feb 2026 13:29:08 GMT; Max-Age=7200; path=/; secure; httponly; samesite=none'
+          set-cookie: 'al-atheer-ecommerce-session=eyJpdiI6Ild4ekkvQXM0TmxUWGpBbHZLREMyTEE9PSIsInZhbHVlIjoic1pYR3FZclhOUUk1dVI4Snd3dGFXT3JXaWVCbmdQWTdNYkJKdzB6M2d2UmJLWlhNR0dEeTQxVWFPUHgxZG9LSFQvY09NRUo3N0x5cTB2endQUE9NNkV4N3Q1bThBdmFqVzVOWWVaVlFkL1lVbCtMdnh3T3BuTE5mK25ROURWNm4iLCJtYWMiOiIyNTM4MGY3MDc1ZjFmYWJiY2I3NjRkMTRkMzhkNjU4Mzk4YTI3YzMxMzlkNGYwYjYzYzQzNzdmYzliMjczODM3IiwidGFnIjoiIn0%3D; expires=Sun, 08 Feb 2026 14:07:56 GMT; Max-Age=7199; path=/; secure; httponly; samesite=none'
         description: null
     responseFields: []
     auth: []
@@ -78,7 +78,7 @@ endpoints:
           content-type: application/json
           access-control-allow-origin: 'http://localhost:3000'
           access-control-allow-credentials: 'true'
-          set-cookie: 'al-atheer-ecommerce-session=eyJpdiI6IkZWZ3kwWUdoU3Y1WTk5NlE2aWgxY2c9PSIsInZhbHVlIjoiWThMUk9PSlhNbUVGWHJITkVWc1NyWlM4dTB4ZExLZWYwSDFsNUh0Ujc3aFdKVEhlQTFSbjFRR0NzdFdMUTBpNVR5djdSc3VCcmdMNmxjTTlaNFFvTFJWU3EzK0pnV000UmhoZXRxZnVQRENOcUJTSzdkWklCeUJXK1h0TlV6dEwiLCJtYWMiOiI3NDc0MDRiOGEwMGM5ODhjNjI3MDkwOTJiOTRlZjFmYzcxMTAyNGVjOTEwYjEzNzgyMGIyYjNiZGZiNzM5OGU1IiwidGFnIjoiIn0%3D; expires=Thu, 05 Feb 2026 13:29:08 GMT; Max-Age=7200; path=/; secure; httponly; samesite=none'
+          set-cookie: 'al-atheer-ecommerce-session=eyJpdiI6IklUNFRDd29XMW92aGI0djJ4Y2swbUE9PSIsInZhbHVlIjoiakhVTTNqUkxpeGlJbHZ2YTlBMHl6ZmFEcElFQ0NtZzZqVHVVcTdpZjc4RkxCdSsrYjJCcHJ4R04zaE5BdGE5Y1BGRDlUbktkbmFaMXNFQlZTdmFmOFdYdy80YjR1NmZUdHNaR3F0YkpNZDloU1EvREdoYnF2QW9Mcjh3VERVR1UiLCJtYWMiOiIwYzk5NzNkZjJhZTliYjU5NmU5NDMyZDdlYzM5MjZhNzdmMTFjMmIwYjcxODBiNjczNzAwOGMxYWZhODA0ZDI3IiwidGFnIjoiIn0%3D; expires=Sun, 08 Feb 2026 14:08:05 GMT; Max-Age=7200; path=/; secure; httponly; samesite=none'
         description: null
     responseFields: []
     auth: []
@@ -120,7 +120,7 @@ endpoints:
           content-type: application/json
           access-control-allow-origin: 'http://localhost:3000'
           access-control-allow-credentials: 'true'
-          set-cookie: 'al-atheer-ecommerce-session=eyJpdiI6Ijd5czNoUkxJZng0MWRLZFo3NmFqYWc9PSIsInZhbHVlIjoiczQ3TmFjT2hsa0FrVTBiU21xeFZWckJIMENicHZzbDArb3grdjE3UFZld3oyQmFrUDd4dEFyaHRxQlBkSEkrd203OUxrWTlTK0pHNzVwV1NhZTVZTSt5L0xBcTFDVFcxbWpyYXM4Z1lFYmlzY3I1SzZ5QW1ic211UWpRUlZpUFIiLCJtYWMiOiI0NGM1YTkzMjA5YmVhYWQ3MmY4MTFlYjBkMGJiNDhhOWRiNzY5NmViMzgzZWI0ODQwNzA1MWEyMDRmNzYwMzExIiwidGFnIjoiIn0%3D; expires=Thu, 05 Feb 2026 13:29:08 GMT; Max-Age=7200; path=/; secure; httponly; samesite=none'
+          set-cookie: 'al-atheer-ecommerce-session=eyJpdiI6Ilc2UmJFNklhYThpOXMyeGViczVVOWc9PSIsInZhbHVlIjoiU1R4ZGcvbjY4MFhrTFo4Umwrc2VicFJ1OHJaNDlNMjZvM3ZTaGV2MDU4aW9CSHdsN2Zrb2Q5OVBiRlVnT3JXcm5nNW1iaEVVcFFPVEpkZ3BsV05senBWMW9QRVZMWkp5TVBPMTV4SjA2MnR3VmZiSVVBaDBYS1BwQ3BaODVZM0siLCJtYWMiOiJlMTRlMzY5Y2ZlODMzMzlhM2M5YTViNmU5ZjgzMDZkYjcxNzJiMzc2M2M1MzhiNjZlNTliZDY1MWQxODYzOGY1IiwidGFnIjoiIn0%3D; expires=Sun, 08 Feb 2026 14:08:05 GMT; Max-Age=7200; path=/; secure; httponly; samesite=none'
         description: null
     responseFields: []
     auth: []
@@ -162,7 +162,7 @@ endpoints:
           content-type: application/json
           access-control-allow-origin: 'http://localhost:3000'
           access-control-allow-credentials: 'true'
-          set-cookie: 'al-atheer-ecommerce-session=eyJpdiI6Im12T25uN3NMZjh6TlBqdzRLTmFNZFE9PSIsInZhbHVlIjoiTm5yei9MSlVEUVhHK3d2dkh4ZGpJaW1yZ3B0NDZjaEMwU0dRUkN6M1J2a3hUakVsb28zL2tsdXZNSTZyMXI3RExMRVZYL3hUOXVtOW1BdE45Q2Q0N2pseVo3SmRwekZRbFlYbGlUUFNVeHpxa1YxOER1Y05scWMzcHM1Yi9IWE8iLCJtYWMiOiI2NzliYTQwZDcwOTcyZWFjMTMyYTY0ODUwNzMwZjdkNDgxNTI2MGY3ZTE5NjA0NDMzNjQ2ODUwOWI1ZmMyMWRjIiwidGFnIjoiIn0%3D; expires=Thu, 05 Feb 2026 13:29:08 GMT; Max-Age=7200; path=/; secure; httponly; samesite=none'
+          set-cookie: 'al-atheer-ecommerce-session=eyJpdiI6IlY2MjRaV0FBWnJDald0SVN2bklJaEE9PSIsInZhbHVlIjoiTTUwQWpUT3dqTzhUb0xKS0cyNWI0bjNncmowRWJXeCt3NHFYSTc5OHBLMGhkQm5hQUxQWmgwaTBXWDBGTldMRStITXZhK2hLSTR5TFRieXZOSktjTVRuNi9RMDQ1T0MxUVJJRnpmcCtKZS9VV2tDcjhpcVJQWFNZQkR6Q0wxa0IiLCJtYWMiOiIxM2M5MmJlY2YyNDFiY2Y3YzAwNjhhYWMwNzRmNzJmNTRiOTNjYmRmMTQyOGU3N2EwN2U3OWYzMzQ4YThlZTI5IiwidGFnIjoiIn0%3D; expires=Sun, 08 Feb 2026 14:08:05 GMT; Max-Age=7200; path=/; secure; httponly; samesite=none'
         description: null
     responseFields: []
     auth: []
@@ -204,7 +204,7 @@ endpoints:
           content-type: application/json
           access-control-allow-origin: 'http://localhost:3000'
           access-control-allow-credentials: 'true'
-          set-cookie: 'al-atheer-ecommerce-session=eyJpdiI6ImhCMW9MVi9JVjRKaGtIOCt1ck92eEE9PSIsInZhbHVlIjoieFVpV0RkMHY0V0Q4cnd0bkhwVjhXSHVMWGN4QXd3Y2JId1NvazJKUjd2aDgrTTFHVXFudnNkVHdjMlo2Nlh0WXlOM3owbzc1QVdRTWdZSWVwV2tMdWRXMzVQcHJXYU1iaGVRZXBuK1hRcThMUWVYOVlIMStGdy9MbE52U3dNN0IiLCJtYWMiOiIxNzA3OWRmOTI2ODJiNzdjZjViOGFlYmU5OGIxNWRmMTQzZjE2NzIyNjZlMDY2ZDhmNzU2YTRkNjk0MDFlZWFkIiwidGFnIjoiIn0%3D; expires=Thu, 05 Feb 2026 13:29:08 GMT; Max-Age=7200; path=/; secure; httponly; samesite=none'
+          set-cookie: 'al-atheer-ecommerce-session=eyJpdiI6Imh4bFpUYTBRYXR4ZjRpTHRWRTlqcXc9PSIsInZhbHVlIjoiWE5PWkU0Rnl0aVN0anNQQjNmL1p1MG5XY1lCcHBLcW16bk1Ub0ZrT3FpRzNnUC9LYTVubHc4RWpEZ0cySFhmT0tvZVA4TTBpdTZmQkxxVmZOT2NIcG01RUVsbXIySUxHNGgwN1JPQzZUWnZUMGpvTlJpTzNwSGozSVlwTjRKQjkiLCJtYWMiOiIxNDIyYzE3ZDJiYTU0YzNhOTdiZDhlOWEyYjBmYzUwZDcxZDBmNmZhMTU1NDU1ZTEyMjdlYWQ3OTdhNWNjNjk0IiwidGFnIjoiIn0%3D; expires=Sun, 08 Feb 2026 14:08:05 GMT; Max-Age=7200; path=/; secure; httponly; samesite=none'
         description: null
     responseFields: []
     auth: []
@@ -246,7 +246,7 @@ endpoints:
           content-type: application/json
           access-control-allow-origin: 'http://localhost:3000'
           access-control-allow-credentials: 'true'
-          set-cookie: 'al-atheer-ecommerce-session=eyJpdiI6InpWYmVsSGc0Sy8zUnB6MVZOTFoyVWc9PSIsInZhbHVlIjoiV2MyclArSTlody9aYWdFNlZuVmQwd3Z5VEx4WVZ4V1puTzgxdUVEU3c3cmQvSUkzTFNaTk82SEQ1TENkamo4Y04vQ09EYmlZcnZCdWV5QVJ0ZmQ0VlRyOGVNTzRWdE9nOEIwQkVEeDhlaUQwdmNxRkpGVG9aSkVHdCtNcTlWZkkiLCJtYWMiOiIwN2JlMDQ1YTUyN2Q3NjY1Y2ExNDNlMjQ4NjRmNWVhOTYyNGM1NTFjNTZlOTQ0M2ZjN2FkMTNlNGVkYTQ4ZjhkIiwidGFnIjoiIn0%3D; expires=Thu, 05 Feb 2026 13:29:08 GMT; Max-Age=7200; path=/; secure; httponly; samesite=none'
+          set-cookie: 'al-atheer-ecommerce-session=eyJpdiI6ImVFcXU1dllyRy9TUE1jdVNKTDBEWWc9PSIsInZhbHVlIjoiQWNBbkd5dGhWdXgzZnM0eFhVczc4c1BVUUx2am1YL2o5MTR6Z0JXYVo0a2RPbGdlaWpNREpCdjFyOExScndWL0ZPeHF6OGxmcEcyRG03M21Fdk8yQkJTZlF3REZUUGhxQ3pnYmNNU2hEMGVDTklOQkN2bVdVYU5PT0xOSUxwc2EiLCJtYWMiOiIxNjI3Y2Y3MmViYmNhYTkwMWZmOGFlZTYyNWFlMzI1ZGNhNDViMDY4MjkxNmU5ZjhiZWNmM2UxZTFhZWZkNGJkIiwidGFnIjoiIn0%3D; expires=Sun, 08 Feb 2026 14:08:05 GMT; Max-Age=7200; path=/; secure; httponly; samesite=none'
         description: null
     responseFields: []
     auth: []
@@ -333,7 +333,7 @@ endpoints:
           content-type: 'text/html; charset=utf-8'
           access-control-allow-origin: 'http://localhost:3000'
           access-control-allow-credentials: 'true'
-          set-cookie: 'al-atheer-ecommerce-session=eyJpdiI6Im5mTkRHandjUklmTlI3aHV5K3BiYlE9PSIsInZhbHVlIjoiVjNIYTNpOEd5QmsrejkrejZXWkJKNkp3Nklwc2RBMi9pM0FLZ0RUcFhBN1RJejg1cU1rdVJkYVlEdU1lbEFiL0VHUGNuaWxnTTRPUk5rSGZvTllqVW16T0lFMVRodDdDWTBmRU92MkhqdW1ZL3pZN2dEZ3dMKzNrWlhyUzZ0RmoiLCJtYWMiOiI0YjExYWM0NjNjMTdkYTgzMTg5YjNiM2Y4ZTViM2RiZGM4NTViY2RkMDRjMGIyMmI1MGQwNzI3OWQxN2ZmYzExIiwidGFnIjoiIn0%3D; expires=Thu, 05 Feb 2026 13:29:08 GMT; Max-Age=7200; path=/; secure; httponly; samesite=none'
+          set-cookie: 'al-atheer-ecommerce-session=eyJpdiI6IlE3bkFnaFZHaFBJcDZ6YUFMd2o4RUE9PSIsInZhbHVlIjoiRDVOTVhFbkdjZlJtSE5GMHNLYk5XekRtek94Q201bzJUdEVxc3owbER5Zk9kbzBibE9nT1hzbS8vVUJFdDZnMGhPWGxHajhOYnpzR0V6bFRmZytpdFZnU1VHUk9kZXJEaUIxd1ZFd2VhOVFmYWtudzh0dXZNcnFrcTlQMGJVeFQiLCJtYWMiOiIzOTE3Y2FmNWI0OWViMjI1ZmEwZDVmYzhjNDAyMGY2NTE3ODk1NTVmNjFkNmY2ZTk1MjZjYmM2MDA4NDE0ZDk3IiwidGFnIjoiIn0%3D; expires=Sun, 08 Feb 2026 14:08:08 GMT; Max-Age=7200; path=/; secure; httponly; samesite=none'
         description: null
     responseFields: []
     auth: []
@@ -616,7 +616,7 @@ endpoints:
           content-type: application/json
           access-control-allow-origin: 'http://localhost:3000'
           access-control-allow-credentials: 'true'
-          set-cookie: 'al-atheer-ecommerce-session=eyJpdiI6Im9tQ1MvNWdkN1g0MEFLbk1lWDBtN2c9PSIsInZhbHVlIjoiMGszNTFOeDdtOUkwMHNOR2doN3pDT2Q4TzRGRTRoZlAxNkt0UUhVbmcvbDdRZmZOWTZQVkM1d3p0Z250RjYzcFNmVXdXT3dXVmpyTldTangyckVPTW45Ti9YR2NBbkJicUVFVjJNTkNJcUViRnRPVWU2TWV0RjRnaWNNMW40MDQiLCJtYWMiOiIyZmRiMTAxZDQ1MmI2NmQ2NjEwZmQ3ZDkxN2Y4MjU5MmVjZWY3ZjlkNDEyZDMyMzA3OTQwNTY4Zjg4YjcxZTAxIiwidGFnIjoiIn0%3D; expires=Thu, 05 Feb 2026 13:29:09 GMT; Max-Age=7200; path=/; secure; httponly; samesite=none'
+          set-cookie: 'al-atheer-ecommerce-session=eyJpdiI6Im84TENGTlQ3eTJvTW92dERiYlFtOVE9PSIsInZhbHVlIjoiblorNkhNbm9WSnk3N2k5aTF0VVZKeG1meVJ2ejUrTFB2cWgrMHAwdFhFVjR1TkJoaXpHdmtRTS9vV2NvdGx0SmhkNjQwY05RUVBndmNJVXc0c3kwUFczWk5SVVF4dXJlZTVaRFNOUjhkZ1dMVmx2dnJoQk0zYkRSQ3RtYzRvVnkiLCJtYWMiOiIyZjZiYTA0Mjk5ODI1ODg0MzQ5YWJiMmJmNGFlYTVhNzRmNTVkNzVjYzBiZjZlYWVlZWNlNGM5YTExMjNlMDM1IiwidGFnIjoiIn0%3D; expires=Sun, 08 Feb 2026 14:08:17 GMT; Max-Age=7200; path=/; secure; httponly; samesite=none'
         description: null
     responseFields: []
     auth: []
@@ -718,7 +718,7 @@ endpoints:
         name: scheduledDate
         description: 'Must be a valid date. Must be a date after <code>today</code>.'
         required: true
-        example: '2052-02-29'
+        example: '2052-03-03'
         type: string
         enumValues: []
         exampleWasSpecified: false
@@ -817,7 +817,7 @@ endpoints:
         name: packageType
         description: ''
         required: false
-        example: 'Light Bulky'
+        example: Normal
         type: string
         enumValues:
           - Normal
@@ -857,7 +857,7 @@ endpoints:
         description: ''
         required: false
         example:
-          - Monday
+          - Tuesday
         type: 'string[]'
         enumValues:
           - Sunday
@@ -875,7 +875,7 @@ endpoints:
         name: repeatedData.startDate
         description: 'Must be a valid date.'
         required: false
-        example: '2026-02-05T11:29:09'
+        example: '2026-02-08T12:08:17'
         type: string
         enumValues: []
         exampleWasSpecified: false
@@ -886,14 +886,14 @@ endpoints:
         name: repeatedData.endDate
         description: 'Must be a valid date. Must be a date after <code>repeatedData.startDate</code>.'
         required: false
-        example: '2052-02-29'
+        example: '2052-03-03'
         type: string
         enumValues: []
         exampleWasSpecified: false
         nullable: true
         deprecated: false
     cleanBodyParameters:
-      scheduledDate: '2052-02-29'
+      scheduledDate: '2052-03-03'
       businessLocationId: architecto
       contactPerson:
         name: architecto
@@ -902,13 +902,13 @@ endpoints:
         email: zbailey@example.net
       notes: architecto
       noOfPackages: 22
-      packageType: 'Light Bulky'
+      packageType: Normal
       repeatedData:
         repeatedType: Daily
         days:
-          - Monday
-        startDate: '2026-02-05T11:29:09'
-        endDate: '2052-02-29'
+          - Tuesday
+        startDate: '2026-02-08T12:08:17'
+        endDate: '2052-03-03'
     fileParameters: []
     responses: []
     responseFields: []
@@ -1212,7 +1212,7 @@ endpoints:
           content-type: application/json
           access-control-allow-origin: 'http://localhost:3000'
           access-control-allow-credentials: 'true'
-          set-cookie: 'al-atheer-ecommerce-session=eyJpdiI6InRISHY5bXVXYWROVWNOUHZITW5KTmc9PSIsInZhbHVlIjoiOWYyL1ZSUjd5djF3cS9JczRIU2d3NWNvZmNkc214NzYvMitKdkhSZ0RRdHpZZEFkU0ZRK29XdlBlZWVDQ1g4cmk3R1BsRUNHZHBmckg0UDNEWmt1UlBnYlhrMlFXby9GcnZVdnZONFlYcWE5RXBWUEw0U1VLa2kvVjFTQWdDN0oiLCJtYWMiOiIxMWVhMDAxM2MwNWMzOGU4MjkzODI5OWQxNTAyMDdmZjBmNGYwOTIwZWZkMGQ2MGZlY2I4YjhhYjhhYTRiYmZiIiwidGFnIjoiIn0%3D; expires=Thu, 05 Feb 2026 13:29:09 GMT; Max-Age=7200; path=/; secure; httponly; samesite=none'
+          set-cookie: 'al-atheer-ecommerce-session=eyJpdiI6InJCdm1JbVFMZkQrOU5WS2pCd0lLZXc9PSIsInZhbHVlIjoieWtnaEZXVzlyMUlrSlUzZElCZGZKUXJvcmFnZ1IzSzJVL3lKU1RpRFh6eVRFRGkveTZ0OFBaS3p2V3N0cTZxWEEwRDZhS3M4OHQ2L1BiYlhxZEsyVlVvQUQ2RWo3L0JKZEdTR2t1elk4bmRGdUh6ZTJGbVdDMUxkMGtOOWFOYzUiLCJtYWMiOiI4YjgxNzA0NTk4MjM3M2MzOGExMzU1NDUwNDM3MTc2MzJlNTQ5YWRkNzA1NmNhMjVlZjJlYmJlMTdkNzI2ODQyIiwidGFnIjoiIn0%3D; expires=Sun, 08 Feb 2026 14:08:18 GMT; Max-Age=7200; path=/; secure; httponly; samesite=none'
         description: null
     responseFields: []
     auth: []
