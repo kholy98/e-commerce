@@ -217,7 +217,7 @@ Route::prefix('products')->group(function () {
     Route::get('/', [ProductController::class, 'index']);
     Route::post('/find', [ProductController::class, 'getBySpecifications']);
     // Route::get('/categories', [ProductController::class, 'categories']);
-    Route::get('/{product}', [ProductController::class, 'show']);
+    Route::get('/{identifier}', [ProductController::class, 'show']);
 });
 
 // Public category routes for API testing

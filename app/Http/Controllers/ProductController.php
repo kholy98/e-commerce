@@ -362,10 +362,11 @@ class ProductController extends Controller
      *
      * Retrieve detailed information about a specific product.
      * Returns product data in both English and Arabic.
+     * Accepts either product ID or slug as the identifier.
      *
      * @unauthenticated
      *
-     * @urlParam product integer required The product ID. Example: 1
+     * @urlParam identifier integer|string required The product ID or slug. Example: 1 or "premium-coffee-beans"
      *
      * @response 200 scenario="Success" {
      *   "success": true,
@@ -373,6 +374,7 @@ class ProductController extends Controller
      *     "en": {
      *       "id": 1,
      *       "name": "Premium Coffee Beans",
+     *       "slug": "premium-coffee-beans",
      *       "description": "High-quality arabica coffee beans",
      *       "price": 25.00,
      *       "cost": 15.00,
@@ -409,6 +411,7 @@ class ProductController extends Controller
      *     "ar": {
      *       "id": 1,
      *       "name": "حبوب قهوة ممتازة",
+     *       "slug": "premium-coffee-beans",
      *       "description": "حبوب قهوة أرابيكا عالية الجودة",
      *       "price": 25.00,
      *       "cost": 15.00,
@@ -448,9 +451,16 @@ class ProductController extends Controller
      *   "message": "Product not found"
      * }
      */
-    public function show(Product $product): JsonResponse
+    public function show(string $identifier): JsonResponse
     {
-        if (! $product->is_active) {
+        // Determine if identifier is numeric (ID) or a string (slug)
+        if (is_numeric($identifier)) {
+            $product = Product::where('id', $identifier)->first();
+        } else {
+            $product = Product::where('slug', $identifier)->first();
+        }
+
+        if (! $product || ! $product->is_active) {
             return response()->json([
                 'success' => false,
                 'message' => 'Product not found',
@@ -465,6 +475,7 @@ class ProductController extends Controller
                 'en' => [
                     'id' => $product->id,
                     'name' => $product->name,
+                    'slug' => $product->slug,
                     'description' => $product->description,
                     'price' => (float) $product->price,
                     'cost' => (float) $product->cost,
@@ -499,6 +510,7 @@ class ProductController extends Controller
                 'ar' => [
                     'id' => $product->id,
                     'name' => $product->name_ar ?: $product->name,
+                    'slug' => $product->slug,
                     'description' => $product->description_ar ?: $product->description,
                     'price' => (float) $product->price,
                     'cost' => (float) $product->cost,
@@ -506,7 +518,6 @@ class ProductController extends Controller
                     'sku' => $product->sku,
                     'category_id' => $product->category_id,
                     'is_active' => $product->is_active,
-                    // 'grind_type' => $product->grind_type?->value,
                     'grind_type_label' => $product->grind_type?->labelAr(),
                     'weight' => (float) $product->weight,
                     'weight_label' => Weight::fromKg((float) $product->weight)?->label(),
