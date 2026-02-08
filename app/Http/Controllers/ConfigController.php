@@ -27,6 +27,7 @@ class ConfigController extends Controller
             'MAIL_PASSWORD'         => 'sometimes|string',
             'MAIL_FROM_ADDRESS'     => 'sometimes|email',
             'MAIL_FROM_NAME'        => 'sometimes|string',
+            'FRONTEND_URL'          => 'sometimes|string',
         ]);
 
         $path = base_path('.env');
@@ -95,6 +96,7 @@ class ConfigController extends Controller
                 'MAIL_PASSWORD' => env('MAIL_PASSWORD'),
                 'MAIL_FROM_ADDRESS' => env('MAIL_FROM_ADDRESS'),
                 'MAIL_FROM_NAME' => env('MAIL_FROM_NAME'),
+                'FRONTEND_URL' => env('FRONTEND_URL')
             ]
         ]);
     }

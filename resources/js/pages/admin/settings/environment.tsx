@@ -46,6 +46,7 @@ interface EnvStatus {
         MAIL_PASSWORD: string;
         MAIL_FROM_ADDRESS: string;
         MAIL_FROM_NAME: string;
+        FRONTEND_URL: string;
     };
 }
 
@@ -73,6 +74,7 @@ export default function EnvironmentSettings() {
         MAIL_PASSWORD: '',
         MAIL_FROM_ADDRESS: '',
         MAIL_FROM_NAME: '',
+        FRONTEND_URL: '',
     });
 
     useEffect(() => {
@@ -109,6 +111,7 @@ export default function EnvironmentSettings() {
                 MAIL_FROM_ADDRESS:
                     data.laravel_active_values.MAIL_FROM_ADDRESS || '',
                 MAIL_FROM_NAME: data.laravel_active_values.MAIL_FROM_NAME || '',
+                FRONTEND_URL: data.laravel_active_values.FRONTEND_URL || '',
             }));
         } catch (error) {
             console.error('Failed to fetch environment status:', error);
@@ -918,6 +921,42 @@ export default function EnvironmentSettings() {
                                                         'Save'
                                                     )}
                                                 </Button>
+                                            </div>
+                                        </div>
+
+                                        <div className="grid grid-cols-1 gap-4">
+                                            <div className="grid grid-cols-12 gap-4">
+                                                <div className="col-span-12">
+                                                    <Label htmlFor="FRONTEND_URL">
+                                                        Frontend URL
+                                                    </Label>
+                                                    <div className="flex gap-2">
+                                                        <Input
+                                                            id="FRONTEND_URL"
+                                                            type="text"
+                                                            value={
+                                                                formData.FRONTEND_URL
+                                                            }
+                                                            onChange={(e) =>
+                                                                handleInputChange(
+                                                                    e,
+                                                                    'FRONTEND_URL',
+                                                                )
+                                                            }
+                                                            disabled={saving}
+                                                        />
+                                                        <Button
+                                                            onClick={(e) => {
+                                                                handleFieldSave(
+                                                                    e,
+                                                                    'FRONTEND_URL',
+                                                                );
+                                                            }}
+                                                        >
+                                                            Save
+                                                        </Button>
+                                                    </div>
+                                                </div>
                                             </div>
                                         </div>
                                     </div>
