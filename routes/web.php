@@ -7,8 +7,22 @@ Route::get('/', function () {
     return Inertia::render('welcome');
 })->name('home');
 
-// Authentication routes are handled by FortifyServiceProvider
+// Supplier authentication routes (guest only)
+Route::middleware(['guest'])->group(function () {
+    Route::get('supplier/login', [\App\Http\Controllers\SupplierAuthController::class, 'showLogin'])->name('supplier.login');
+    Route::post('supplier/login', [\App\Http\Controllers\SupplierAuthController::class, 'login']);
+});
 
+// Supplier protected routes
+Route::middleware(['supplier'])->group(function () {
+    Route::get('supplier/dashboard', [\App\Http\Controllers\SupplierDashboardWebController::class, 'index'])->name('supplier.dashboard');
+    Route::patch('supplier/orders/{order}/status', [\App\Http\Controllers\SupplierDashboardWebController::class, 'updateStatus'])->name('supplier.orders.update-status');
+    Route::post('supplier/logout', [\App\Http\Controllers\SupplierAuthController::class, 'logout'])->name('supplier.logout');
+});
+
+// Admin authentication routes are handled by FortifyServiceProvider
+
+// Admin protected routes (requires admin, not supplier)
 Route::middleware(['auth', 'verified', 'admin'])->group(function () {
     Route::get('dashboard', function () {
         return Inertia::render('dashboard');

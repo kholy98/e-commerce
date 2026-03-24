@@ -317,6 +317,16 @@ Route::middleware(['web', 'auth', 'admin'])->prefix('admin')->group(function () 
     });
 });
 
+// Supplier routes - separate from admin
+Route::middleware(['web', 'auth', 'supplier'])->prefix('supplier')->group(function () {
+    // Dashboard
+    Route::get('/dashboard/stats', [\App\Http\Controllers\SupplierDashboardController::class, 'stats'])->name('supplier.dashboard.stats');
+
+    // Orders - view and update status
+    Route::get('/orders', [\App\Http\Controllers\SupplierDashboardController::class, 'orders'])->name('supplier.orders.index');
+    Route::patch('/orders/{order}/status', [\App\Http\Controllers\SupplierDashboardController::class, 'updateStatus'])->name('supplier.orders.update-status');
+});
+
 // Team member API routes - public for now to return JSON
 Route::prefix('admin/team-members')->group(function () {
     Route::get('/', [TeamMemberApiController::class, 'index']);
@@ -377,6 +387,7 @@ Route::get('contact-inquiries/published', [ContactInquiryController::class, 'pub
  * Supports filtering by status.
  *
  * @authenticated
+ *
  * @queryParam per_page integer Items per page. Default: 15. Example: 10
  * @queryParam status string Filter by status (pending, replied, closed). Example: pending
  *
@@ -412,6 +423,7 @@ Route::get('admin/inquiries', [ContactInquiryController::class, 'adminIndex'])->
  * Only inquiries that have been replied to can be published.
  *
  * @authenticated
+ *
  * @urlParam inquiry integer required The inquiry ID. Example: 1
  *
  * @response 200 scenario="Success" {
@@ -450,6 +462,7 @@ Route::post('admin/inquiries/{inquiry}/publish', [ContactInquiryController::clas
  * Mark a published contact inquiry as unpublished.
  *
  * @authenticated
+ *
  * @urlParam inquiry integer required The inquiry ID. Example: 1
  *
  * @response 200 scenario="Success" {

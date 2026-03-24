@@ -25,6 +25,7 @@ class User extends Authenticatable
         'password',
         'phone',
         'is_admin',
+        'is_supplier',
     ];
 
     /**
@@ -51,6 +52,7 @@ class User extends Authenticatable
             'password' => 'hashed',
             'two_factor_confirmed_at' => 'datetime',
             'is_admin' => 'boolean',
+            'is_supplier' => 'boolean',
         ];
     }
 

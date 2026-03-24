@@ -6,7 +6,6 @@ use Illuminate\Foundation\Application;
 use Illuminate\Foundation\Configuration\Exceptions;
 use Illuminate\Foundation\Configuration\Middleware;
 use Illuminate\Http\Middleware\AddLinkHeadersForPreloadedAssets;
-use App\Http\Middleware\HandleAppearance;
 use Illuminate\Http\Middleware\HandleCors;
 
 return Application::configure(basePath: dirname(__DIR__))
@@ -39,6 +38,7 @@ return Application::configure(basePath: dirname(__DIR__))
         $middleware->alias([
             'optional.sanctum' => \App\Http\Middleware\OptionalSanctumAuth::class,
             'admin' => \App\Http\Middleware\AdminAuth::class,
+            'supplier' => \App\Http\Middleware\SupplierAuth::class,
         ]);
 
     })

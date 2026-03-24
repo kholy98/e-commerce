@@ -39,10 +39,17 @@ class UserSeeder extends Seeder
                 'is_admin' => true,
                 'email_verified_at' => now(),
             ],
+            [
+                'name' => 'Supplier User',
+                'email' => 'supplier@example.com',
+                'password' => Hash::make('password'),
+                'is_supplier' => true,
+                'email_verified_at' => now(),
+            ],
         ];
 
         foreach ($users as $user) {
-            User::create($user);
+            User::firstOrCreate(['email' => $user['email']], $user);
         }
     }
 }
