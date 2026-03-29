@@ -9,22 +9,35 @@ use Illuminate\Support\Facades\Log;
 
 class WhatsAppService
 {
-    private ?string $apiKey;
+    private ?string $accountSid;
 
-    private ?string $phoneNumberId;
+    private ?string $authToken;
+
+    private ?string $fromPhone;
+
+    private ?string $metaApiKey;
+
+    private ?string $metaPhoneNumberId;
 
     private ?string $baseUrl;
 
+    private bool $useTwilio;
+
     public function __construct()
     {
-        $this->apiKey = config('services.whatsapp.api_key');
-        $this->phoneNumberId = config('services.whatsapp.phone_number_id');
+        $this->accountSid = config('services.whatsapp.account_sid');
+        $this->authToken = config('services.whatsapp.auth_token');
+        $this->fromPhone = config('services.whatsapp.phone_number');
+        $this->metaApiKey = config('services.whatsapp.api_key');
+        $this->metaPhoneNumberId = config('services.whatsapp.phone_number_id');
         $this->baseUrl = config('services.whatsapp.base_url');
+
+        $this->useTwilio = ! empty($this->accountSid) && ! empty($this->authToken) && ! empty($this->fromPhone);
     }
 
     public function isConfigured(): bool
     {
-        return ! empty($this->apiKey) && ! empty($this->phoneNumberId);
+        return $this->useTwilio || (! empty($this->metaApiKey) && ! empty($this->metaPhoneNumberId));
     }
 
     public function sendOrderNotification(Order $order): bool
@@ -176,33 +189,11 @@ class WhatsAppService
     private function sendMessage(string $phoneNumber, string $message): bool
     {
         try {
-            $formattedPhone = $this->formatPhoneNumber($phoneNumber);
-
-            $response = Http::withHeaders([
-                'Authorization' => 'Bearer '.$this->apiKey,
-                'Content-Type' => 'application/json',
-            ])->post("{$this->baseUrl}/{$this->phoneNumberId}/messages", [
-                'messaging_product' => 'whatsapp',
-                'to' => $formattedPhone,
-                'type' => 'text',
-                'text' => [
-                    'body' => $message,
-                ],
-            ]);
-
-            if ($response->successful()) {
-                Log::info("WhatsApp notification sent to {$phoneNumber}");
-
-                return true;
+            if ($this->useTwilio) {
+                return $this->sendTwilioMessage($phoneNumber, $message);
             }
 
-            Log::error('WhatsApp notification failed', [
-                'phone' => $phoneNumber,
-                'status' => $response->status(),
-                'response' => $response->body(),
-            ]);
-
-            return false;
+            return $this->sendMetaMessage($phoneNumber, $message);
         } catch (\Exception $e) {
             Log::error('WhatsApp notification error', [
                 'phone' => $phoneNumber,
@@ -211,6 +202,71 @@ class WhatsAppService
 
             return false;
         }
+    }
+
+    private function sendTwilioMessage(string $phoneNumber, string $message): bool
+    {
+        $formattedPhone = $this->formatPhoneNumberForTwilio($phoneNumber);
+        $fromPhone = $this->formatPhoneNumberForTwilio($this->fromPhone);
+
+        // Debug log - comment out after testing
+        // Log::info('Twilio WhatsApp debug', [
+        //     'to' => 'whatsapp:'.$formattedPhone,
+        //     'from' => 'whatsapp:'.$fromPhone,
+        // ]);
+
+        $response = Http::withBasicAuth($this->accountSid, $this->authToken)
+            ->asForm()
+            ->post("https://api.twilio.com/2010-04-01/Accounts/{$this->accountSid}/Messages.json", [
+                'From' => 'whatsapp:'.$fromPhone,
+                'To' => 'whatsapp:'.$formattedPhone,
+                'Body' => $message,
+            ]);
+
+        if ($response->successful()) {
+            Log::info("WhatsApp notification sent via Twilio to {$phoneNumber}");
+
+            return true;
+        }
+
+        Log::error('WhatsApp notification failed via Twilio', [
+            'phone' => $phoneNumber,
+            'status' => $response->status(),
+            'response' => $response->body(),
+        ]);
+
+        return false;
+    }
+
+    private function sendMetaMessage(string $phoneNumber, string $message): bool
+    {
+        $formattedPhone = $this->formatPhoneNumber($phoneNumber);
+
+        $response = Http::withHeaders([
+            'Authorization' => 'Bearer '.$this->metaApiKey,
+            'Content-Type' => 'application/json',
+        ])->post("{$this->baseUrl}/{$this->metaPhoneNumberId}/messages", [
+            'messaging_product' => 'whatsapp',
+            'to' => $formattedPhone,
+            'type' => 'text',
+            'text' => [
+                'body' => $message,
+            ],
+        ]);
+
+        if ($response->successful()) {
+            Log::info("WhatsApp notification sent via Meta to {$phoneNumber}");
+
+            return true;
+        }
+
+        Log::error('WhatsApp notification failed via Meta', [
+            'phone' => $phoneNumber,
+            'status' => $response->status(),
+            'response' => $response->body(),
+        ]);
+
+        return false;
     }
 
     private function formatPhoneNumber(string $phone): string
@@ -226,5 +282,34 @@ class WhatsAppService
         }
 
         return $phone;
+    }
+
+    private function formatPhoneNumberForTwilio(string $phone): string
+    {
+        // Remove all non-digit characters
+        $digits = preg_replace('/[^0-9]/', '', $phone);
+
+        // If it already starts with +, return as-is
+        if (str_starts_with($phone, '+')) {
+            return $phone;
+        }
+
+        // Egyptian number starting with 0 (like 01234567890)
+        if (str_starts_with($digits, '0')) {
+            $digits = substr($digits, 1);
+        }
+
+        // Already has country code 20
+        if (str_starts_with($digits, '20')) {
+            return '+'.$digits;
+        }
+
+        // Add country code 20 for Egyptian numbers (10, 11, 12, 15, etc.)
+        if (str_starts_with($digits, '1') || str_starts_with($digits, '2')) {
+            return '+20'.$digits;
+        }
+
+        // Default: just add +
+        return '+'.$digits;
     }
 }

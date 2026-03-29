@@ -41,6 +41,11 @@ return [
     ],
 
     'whatsapp' => [
+        // Twilio Configuration
+        'account_sid' => env('WHATSAPP_ACCOUNT_SID'),
+        'auth_token' => env('WHATSAPP_AUTH_TOKEN'),
+        'phone_number' => env('WHATSAPP_PHONE_NUMBER'),
+        // Meta/WhatsApp Business API Configuration (Alternative)
         'api_key' => env('WHATSAPP_API_KEY'),
         'phone_number_id' => env('WHATSAPP_PHONE_NUMBER_ID'),
         'base_url' => env('WHATSAPP_BASE_URL', 'https://graph.facebook.com/v18.0'),
