@@ -16,6 +16,7 @@ Route::middleware(['guest'])->group(function () {
 // Supplier protected routes
 Route::middleware(['supplier'])->group(function () {
     Route::get('supplier/dashboard', [\App\Http\Controllers\SupplierDashboardWebController::class, 'index'])->name('supplier.dashboard');
+    Route::get('supplier/orders/{order}', [\App\Http\Controllers\SupplierDashboardWebController::class, 'show'])->name('supplier.orders.show');
     Route::patch('supplier/orders/{order}/status', [\App\Http\Controllers\SupplierDashboardWebController::class, 'updateStatus'])->name('supplier.orders.update-status');
     Route::post('supplier/logout', [\App\Http\Controllers\SupplierAuthController::class, 'logout'])->name('supplier.logout');
 });

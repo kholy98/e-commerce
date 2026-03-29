@@ -1,5 +1,5 @@
-import { Head, router } from '@inertiajs/react';
-import { Search } from 'lucide-react';
+import { Head, Link, router } from '@inertiajs/react';
+import { Eye, Search } from 'lucide-react';
 import { useState } from 'react';
 
 import { Button } from '@/components/ui/button';
@@ -288,9 +288,22 @@ export default function SupplierDashboard({ stats, orders, filters }: Props) {
                                                 {formatDate(order.created_at)}
                                             </TableCell>
                                             <TableCell>
-                                                <StatusUpdateModal
-                                                    order={order}
-                                                />
+                                                <div className="flex items-center gap-2">
+                                                    <Link
+                                                        href={`/supplier/orders/${order.id}`}
+                                                    >
+                                                        <Button
+                                                            variant="outline"
+                                                            size="sm"
+                                                        >
+                                                            <Eye className="mr-1 h-4 w-4" />
+                                                            View
+                                                        </Button>
+                                                    </Link>
+                                                    <StatusUpdateModal
+                                                        order={order}
+                                                    />
+                                                </div>
                                             </TableCell>
                                         </TableRow>
                                     ))}

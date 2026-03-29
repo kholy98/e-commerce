@@ -234,15 +234,54 @@ class OrderController extends Controller
      */
     public function show(Order $order): JsonResponse
     {
-        if ($order->user_id !== auth()->id() && !auth()->user()->is_admin) {
+        if ($order->user_id !== auth()->id() && ! auth()->user()->is_admin) {
             return response()->json(['error' => 'Unauthorized'], 403);
         }
 
         $order->load('items.product', 'user');
 
+        $customerName = null;
+        if ($order->user) {
+            $customerName = $order->user->name;
+        } elseif ($order->billing_address) {
+            $billingAddress = $order->billing_address;
+            $customerName = trim(($billingAddress['first_name'] ?? '').' '.($billingAddress['last_name'] ?? ''));
+        }
+
         return response()->json([
             'success' => true,
-            'data' => $order,
+            'data' => [
+                'id' => $order->id,
+                'order_number' => $order->order_number,
+                'user_id' => $order->user_id,
+                'customer_name' => $customerName,
+                'status' => $order->status,
+                'payment_status' => $order->payment_status,
+                'subtotal' => (float) $order->subtotal,
+                'tax' => (float) $order->tax,
+                'shipping_cost' => (float) $order->shipping_cost,
+                'total_amount' => (float) $order->total_amount,
+                'shipping_address' => $order->shipping_address,
+                'billing_address' => $order->billing_address,
+                'notes' => $order->notes,
+                'items' => $order->items->map(function ($item) {
+                    return [
+                        'id' => $item->id,
+                        'product_id' => $item->product_id,
+                        'quantity' => $item->quantity,
+                        'unit_price' => (float) $item->unit_price,
+                        'subtotal' => (float) $item->subtotal,
+                        'product' => $item->product ? [
+                            'id' => $item->product->id,
+                            'name' => $item->product->name,
+                            'slug' => $item->product->slug,
+                            'image' => $item->product->image,
+                        ] : null,
+                    ];
+                }),
+                'created_at' => $order->created_at,
+                'updated_at' => $order->updated_at,
+            ],
         ]);
     }
 

@@ -38,6 +38,55 @@ class SupplierDashboardWebController extends Controller
         ]);
     }
 
+    public function show(Order $order)
+    {
+        $order->load(['user', 'items.product.media']);
+
+        $customerName = null;
+        $customerEmail = null;
+        $customerPhone = null;
+
+        if ($order->user) {
+            $customerName = $order->user->name;
+            $customerEmail = $order->user->email;
+            $customerPhone = $order->billing_address['phone'] ?? $order->shipping_address['phone'] ?? null;
+        } else {
+            $billingAddress = $order->billing_address;
+            $customerName = trim(($billingAddress['first_name'] ?? '').' '.($billingAddress['last_name'] ?? ''));
+            $customerEmail = $billingAddress['email'] ?? null;
+            $customerPhone = $billingAddress['phone'] ?? null;
+        }
+
+        return Inertia::render('supplier/orders/show', [
+            'order' => [
+                'id' => $order->id,
+                'order_number' => $order->order_number,
+                'status' => $order->status,
+                'status_ar' => $order->status_ar,
+                'payment_status' => $order->payment_status,
+                'payment_method' => $order->payment_method,
+                'tracking_number' => $order->tracking_number,
+                'shipment_status' => $order->shipment_status,
+                'shipping_address' => $order->shipping_address,
+                'billing_address' => $order->billing_address,
+                'notes' => $order->notes,
+                'created_at' => $order->created_at,
+                'updated_at' => $order->updated_at,
+                'customer' => [
+                    'name' => $customerName ?: 'Guest Customer',
+                    'email' => $customerEmail,
+                    'phone' => $customerPhone,
+                ],
+                'items' => $order->items->map(fn ($item) => [
+                    'id' => $item->id,
+                    'product_name' => $item->product?->name ?? 'Deleted Product',
+                    'product_image' => $item->product?->media?->first()?->original_url ?? null,
+                    'quantity' => $item->quantity,
+                ]),
+            ],
+        ]);
+    }
+
     public function updateStatus(\Illuminate\Http\Request $request, Order $order): RedirectResponse
     {
         $validated = $request->validate([

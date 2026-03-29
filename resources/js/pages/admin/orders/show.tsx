@@ -144,7 +144,19 @@ export default function OrderShow({ order }: Props) {
                                         Name
                                     </p>
                                     <p className="font-medium">
-                                        {order.user?.name}
+                                        {order.customer_name ||
+                                            order.user?.name ||
+                                            'Guest'}
+                                    </p>
+                                </div>
+                                <div>
+                                    <p className="text-sm text-muted-foreground">
+                                        Phone
+                                    </p>
+                                    <p className="font-medium">
+                                        {order.customer_phone ||
+                                            order.billing_address?.phone ||
+                                            'N/A'}
                                     </p>
                                 </div>
                                 <div>
@@ -152,7 +164,9 @@ export default function OrderShow({ order }: Props) {
                                         Email
                                     </p>
                                     <p className="font-medium">
-                                        {order.user?.email}
+                                        {order.billing_address?.email ||
+                                            order.user?.email ||
+                                            'N/A'}
                                     </p>
                                 </div>
                             </div>

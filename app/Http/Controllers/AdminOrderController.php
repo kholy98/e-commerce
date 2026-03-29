@@ -40,7 +40,21 @@ class AdminOrderController extends Controller
         $orders = $query->with(['user', 'items.product.media'])
             ->latest()
             ->paginate(10)
-            ->withQueryString();
+            ->withQueryString()
+            ->getCollection()
+            ->map(function ($order) {
+                $customerName = null;
+                if ($order->user) {
+                    $customerName = $order->user->name;
+                } elseif ($order->billing_address) {
+                    $billingAddress = $order->billing_address;
+                    $customerName = trim(($billingAddress['first_name'] ?? '').' '.($billingAddress['last_name'] ?? ''));
+                }
+
+                return array_merge($order->toArray(), [
+                    'customer_name' => $customerName,
+                ]);
+            });
 
         return Inertia::render('admin/orders/index', [
             'stats' => $stats,
@@ -51,8 +65,24 @@ class AdminOrderController extends Controller
 
     public function show(Order $order)
     {
+        $order->load(['user', 'items.product.media']);
+
+        $customerName = null;
+        $customerPhone = null;
+        if ($order->user) {
+            $customerName = $order->user->name;
+            $customerPhone = $order->user->phone;
+        } elseif ($order->billing_address) {
+            $billingAddress = $order->billing_address;
+            $customerName = trim(($billingAddress['first_name'] ?? '').' '.($billingAddress['last_name'] ?? ''));
+            $customerPhone = $billingAddress['phone'] ?? null;
+        }
+
         return Inertia::render('admin/orders/show', [
-            'order' => $order->load(['user', 'items.product.media']),
+            'order' => array_merge($order->toArray(), [
+                'customer_name' => $customerName,
+                'customer_phone' => $customerPhone,
+            ]),
         ]);
     }
 }

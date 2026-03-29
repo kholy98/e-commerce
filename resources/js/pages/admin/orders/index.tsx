@@ -37,6 +37,7 @@ interface Order {
     user: {
         name: string;
     };
+    customer_name: string | null;
     items: OrderItem[];
 }
 
@@ -348,7 +349,9 @@ export default function OrdersIndex({ stats, orders, filters }: Props) {
                                                     </div>
                                                 </TableCell>
                                                 <TableCell className="">
-                                                    {order.user?.name}
+                                                    {order.customer_name ||
+                                                        order.user?.name ||
+                                                        'Guest'}
                                                 </TableCell>
                                                 <TableCell className="">
                                                     {formatDate(
