@@ -5,7 +5,10 @@ namespace App\Services;
 use App\Models\Order;
 use App\Models\OrderItem;
 use App\Models\Product;
+use App\Notifications\OrderCreatedForSupplierNotification;
+use App\Notifications\OrderCreatedNotification;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Log;
 
 class OrderService
 {
@@ -157,8 +160,110 @@ class OrderService
                 $product->reduceStock($quantity);
             }
 
+            // Send notifications
+            $this->sendOrderNotifications($order);
+
             return $order;
         });
+    }
+
+    private function sendOrderNotifications(Order $order): void
+    {
+        try {
+            // Get customer email and phone
+            $email = $this->getCustomerEmail($order);
+            $phone = $this->getCustomerPhone($order);
+
+            // Send Email Notification to Customer
+            if ($email) {
+                $order->notify(new OrderCreatedNotification($order));
+                Log::info('Order email notification sent to customer', ['order_id' => $order->id, 'email' => $email]);
+            }
+
+            // Send WhatsApp Notification to Customer
+            if ($phone) {
+                $whatsappService = app(WhatsAppService::class);
+                $whatsappService->sendOrderNotification($order);
+            }
+
+            // Send Email Notification to Suppliers
+            $this->sendSupplierNotifications($order);
+        } catch (\Exception $e) {
+            Log::error('Failed to send order notifications', [
+                'order_id' => $order->id,
+                'error' => $e->getMessage(),
+            ]);
+        }
+    }
+
+    private function sendSupplierNotifications(Order $order): void
+    {
+        $order->load('items.product.supplier');
+
+        $supplierNotifications = [];
+
+        foreach ($order->items as $item) {
+            $product = $item->product;
+            if (! $product || ! $product->supplier) {
+                continue;
+            }
+
+            $supplierId = $product->supplier->id;
+
+            if (! isset($supplierNotifications[$supplierId])) {
+                $supplierNotifications[$supplierId] = [
+                    'supplier' => $product->supplier,
+                    'items' => [],
+                ];
+            }
+
+            $supplierNotifications[$supplierId]['items'][] = [
+                'product_name' => $product->name,
+                'quantity' => $item->quantity,
+            ];
+        }
+
+        foreach ($supplierNotifications as $notification) {
+            $supplier = $notification['supplier'];
+            $items = $notification['items'];
+
+            if ($supplier->email) {
+                $supplier->notify(new OrderCreatedForSupplierNotification($order, $supplier, $items));
+                Log::info('Order email notification sent to supplier', [
+                    'order_id' => $order->id,
+                    'supplier_id' => $supplier->id,
+                    'supplier_email' => $supplier->email,
+                ]);
+            }
+
+            // Send WhatsApp to supplier if phone exists
+            if ($supplier->phone) {
+                $whatsappService = app(WhatsAppService::class);
+                $whatsappService->sendSupplierNotification($order, $supplier, $items);
+            }
+        }
+    }
+
+    private function getCustomerEmail(Order $order): ?string
+    {
+        if ($order->user && $order->user->email) {
+            return $order->user->email;
+        }
+
+        $billingAddress = $order->billing_address;
+
+        return $billingAddress['email'] ?? null;
+    }
+
+    private function getCustomerPhone(Order $order): ?string
+    {
+        if ($order->user && $order->user->phone) {
+            return $order->user->phone;
+        }
+
+        $billingAddress = $order->billing_address;
+
+        return $billingAddress['phone'] ?? null;
     }
 
     /**

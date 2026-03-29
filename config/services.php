@@ -40,4 +40,10 @@ return [
         'base_url' => env('BOSTA_BASE_URL', 'https://stg-app.bosta.co'),
     ],
 
+    'whatsapp' => [
+        'api_key' => env('WHATSAPP_API_KEY'),
+        'phone_number_id' => env('WHATSAPP_PHONE_NUMBER_ID'),
+        'base_url' => env('WHATSAPP_BASE_URL', 'https://graph.facebook.com/v18.0'),
+    ],
+
 ];

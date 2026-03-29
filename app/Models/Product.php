@@ -27,6 +27,7 @@ class Product extends Model implements HasMedia
         'stock',
         'sku',
         'category_id',
+        'supplier_id',
         'is_active',
         'grind_type',
         'weight',
@@ -58,6 +59,14 @@ class Product extends Model implements HasMedia
     public function category(): BelongsTo
     {
         return $this->belongsTo(Category::class);
+    }
+
+    /**
+     * Get the supplier this product belongs to
+     */
+    public function supplier(): BelongsTo
+    {
+        return $this->belongsTo(User::class, 'supplier_id');
     }
 
     /**
