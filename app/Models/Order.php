@@ -16,6 +16,7 @@ class Order extends Model
         'status',
         'status_ar',
         'payment_status',
+        'payment_method',
         'subtotal',
         'tax',
         'shipping_cost',
@@ -48,15 +49,26 @@ class Order extends Model
     ];
 
     const STATUS_PENDING = 'pending';
+
     const STATUS_PROCESSING = 'processing';
+
     const STATUS_SHIPPED = 'shipped';
+
     const STATUS_DELIVERED = 'delivered';
+
     const STATUS_CANCELLED = 'cancelled';
 
     const PAYMENT_STATUS_PENDING = 'pending';
+
     const PAYMENT_STATUS_PAID = 'paid';
+
     const PAYMENT_STATUS_FAILED = 'failed';
+
     const PAYMENT_STATUS_REFUNDED = 'refunded';
+
+    const PAYMENT_METHOD_ONLINE = 'online';
+
+    const PAYMENT_METHOD_COD = 'cod';
 
     /**
      * Get the user this order belongs to
@@ -79,7 +91,7 @@ class Order extends Model
      */
     public static function generateOrderNumber(): string
     {
-        return 'ORD-' . date('YmdHis') . '-' . strtoupper(bin2hex(random_bytes(3)));
+        return 'ORD-'.date('YmdHis').'-'.strtoupper(bin2hex(random_bytes(3)));
     }
 
     /**
@@ -107,7 +119,7 @@ class Order extends Model
      */
     public function cancel(): void
     {
-        if (!$this->canBeCancelled()) {
+        if (! $this->canBeCancelled()) {
             throw new \Exception('Order cannot be cancelled at this status');
         }
 

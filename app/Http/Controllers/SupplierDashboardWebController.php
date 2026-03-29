@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Order;
+use Illuminate\Http\RedirectResponse;
 use Inertia\Inertia;
 
 class SupplierDashboardWebController extends Controller
@@ -37,18 +38,16 @@ class SupplierDashboardWebController extends Controller
         ]);
     }
 
-    public function updateStatus(\Illuminate\Http\Request $request, Order $order): \Illuminate\Http\JsonResponse
+    public function updateStatus(\Illuminate\Http\Request $request, Order $order): RedirectResponse
     {
         $validated = $request->validate([
             'status' => 'required|in:pending,processing,shipped,delivered,cancelled',
             'status_ar' => 'nullable|string',
+            'payment_status' => 'nullable|in:pending,paid,failed,refunded',
         ]);
 
         $order->update($validated);
 
-        return response()->json([
-            'success' => true,
-            'message' => 'Order status updated successfully',
-        ]);
+        return redirect()->back()->with('success', 'Order status updated successfully.');
     }
 }

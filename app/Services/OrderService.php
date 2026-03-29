@@ -29,7 +29,7 @@ class OrderService
             foreach ($data['items'] as $item) {
                 $product = Product::lockForUpdate()->find($item['product_id']);
 
-                if (!$product->hasStock($item['quantity'])) {
+                if (! $product->hasStock($item['quantity'])) {
                     throw new \Exception("Product {$product->name} has insufficient stock");
                 }
 
@@ -59,7 +59,7 @@ class OrderService
     public function cancelOrder(Order $order): void
     {
         DB::transaction(function () use ($order) {
-            if (!$order->canBeCancelled()) {
+            if (! $order->canBeCancelled()) {
                 throw new \Exception('Order cannot be cancelled at this status');
             }
 
@@ -98,35 +98,28 @@ class OrderService
     public function updateOrderStatus(Order $order, string $status): Order
     {
         $order->update(['status' => $status]);
+
         return $order;
     }
 
     /**
      * Create order after successful payment and shipment
+     *
+     * @param  array  $orderData  Order data including items, addresses, etc.
+     * @param  array  $shipmentData  Shipment data from Bosta
+     * @param  string|null  $paymentId  Payment transaction ID (null for COD)
+     * @param  bool  $isCod  Whether this is a Cash on Delivery order
      */
-    public function createOrderAfterPayment(array $orderData, array $shipmentData, string $paymentId): Order
+    public function createOrderAfterPayment(array $orderData, array $shipmentData, ?string $paymentId = null, bool $isCod = false): Order
     {
-        return DB::transaction(function () use ($orderData, $shipmentData, $paymentId) {
-            // Handle guest checkout - create temporary user if needed
-            $userId = $orderData['user_id'];
-            if (!$userId) {
-                // Create a guest user for this order
-                $guestUser = \App\Models\User::firstOrCreate(
-                    ['email' => 'guest_' . time() . '@example.com'],
-                    [
-                        'name' => 'Guest User',
-                        'password' => bcrypt('guest_password'),
-                    ]
-                );
-                $userId = $guestUser->id;
-            }
-
-            // Create order
+        return DB::transaction(function () use ($orderData, $shipmentData, $paymentId, $isCod) {
+            // Create order (user_id is nullable for guest checkout)
             $order = Order::create([
                 'order_number' => Order::generateOrderNumber(),
-                'user_id' => $userId,
+                'user_id' => $orderData['user_id'] ?? null,
                 'status' => $orderData['status'] ?? Order::STATUS_PROCESSING,
-                'payment_status' => Order::PAYMENT_STATUS_PAID,
+                'payment_status' => $isCod ? Order::PAYMENT_STATUS_PENDING : Order::PAYMENT_STATUS_PAID,
+                'payment_method' => $orderData['payment_method'] ?? Order::PAYMENT_METHOD_ONLINE,
                 'payment_id' => $paymentId,
                 'tracking_number' => $shipmentData['tracking_number'] ?? null,
                 'shipment_status' => $shipmentData['status'] ?? 'pending',

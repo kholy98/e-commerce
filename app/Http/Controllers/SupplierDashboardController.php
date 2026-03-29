@@ -45,6 +45,7 @@ class SupplierDashboardController extends Controller
                     'status' => $order->status,
                     'status_ar' => $order->status_ar,
                     'payment_status' => $order->payment_status,
+                    'payment_method' => $order->payment_method,
                     'tracking_number' => $order->tracking_number,
                     'shipment_status' => $order->shipment_status,
                     'created_at' => $order->created_at->format('Y-m-d H:i:s'),
@@ -74,6 +75,7 @@ class SupplierDashboardController extends Controller
         $validated = $request->validate([
             'status' => 'required|in:pending,processing,shipped,delivered,cancelled',
             'status_ar' => 'nullable|string',
+            'payment_status' => 'nullable|in:pending,paid,failed,refunded',
         ]);
 
         $order->update($validated);
@@ -86,6 +88,8 @@ class SupplierDashboardController extends Controller
                 'order_number' => $order->order_number,
                 'status' => $order->status,
                 'status_ar' => $order->status_ar,
+                'payment_status' => $order->payment_status,
+                'payment_method' => $order->payment_method,
             ],
         ]);
     }

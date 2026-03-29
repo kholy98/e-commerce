@@ -163,6 +163,7 @@ class CheckoutController extends Controller
             'billing_address.apartment' => 'nullable|string',
             'notes' => 'nullable|string',
             'user_id' => 'nullable|exists:users,id', // For guest checkout with user creation
+            'payment_method' => 'nullable|in:online,cod', // online = Paymob, cod = Cash on Delivery
         ]);
 
         // Load stored addresses if IDs are provided
@@ -223,6 +224,7 @@ class CheckoutController extends Controller
                 'shipping_address_id' => $shippingAddress?->id,
                 'billing_address_id' => $billingAddress?->id,
                 'notes' => $validated['notes'] ?? null,
+                'payment_method' => $validated['payment_method'] ?? \App\Models\Order::PAYMENT_METHOD_ONLINE,
             ];
 
             // Step 1: Create shipment with Bosta
@@ -256,12 +258,15 @@ class CheckoutController extends Controller
                 ];
             }
 
+            $paymentMethod = $validated['payment_method'] ?? \App\Models\Order::PAYMENT_METHOD_ONLINE;
+            $isCod = $paymentMethod === \App\Models\Order::PAYMENT_METHOD_COD;
+
             $shipmentPayload = [
                 'type' => 10, // Required field for Bosta API - 10 = standard delivery
                 'receiver' => $receiver,
                 'dropOffAddress' => $dropOffAddress,
                 'notes' => $validated['notes'] ?? '',
-                'cod' => 0, // We're using online payment, no COD
+                'cod' => $isCod ? intval($summary['total'] * 100) : 0, // COD amount in cents if COD, else 0
             ];
 
             $shipmentResponse = $this->bostaService->createDelivery($shipmentPayload);
@@ -272,6 +277,43 @@ class CheckoutController extends Controller
                     'message' => 'Failed to create shipment',
                     'error' => $shipmentResponse['error'] ?? 'Unknown error',
                 ], 422);
+            }
+
+            // If Cash on Delivery (COD), create order directly without payment
+            if ($isCod) {
+                $order = $this->orderService->createOrderAfterPayment(
+                    $orderData,
+                    [
+                        'tracking_number' => $shipmentResponse['data']['trackingNumber'],
+                        'status' => $shipmentResponse['data']['state']['value'] ?? 'pending',
+                    ],
+                    null,
+                    true // COD flag
+                );
+
+                // Clear cart
+                $this->cartService->clearCart();
+                session()->forget(['pending_order_data', 'pending_shipment_data']);
+
+                return response()->json([
+                    'success' => true,
+                    'message' => 'Order created successfully with Cash on Delivery',
+                    'data' => [
+                        'order_id' => $order->id,
+                        'order_number' => $order->order_number,
+                        'payment_method' => 'cod',
+                        'payment_status' => $order->payment_status,
+                        'status' => $order->status,
+                        'tracking_number' => $shipmentResponse['data']['trackingNumber'],
+                        'cost_breakdown' => [
+                            'subtotal' => $summary['subtotal'],
+                            'tax' => $summary['tax'],
+                            'shipping' => $summary['shipping'],
+                            'total' => $summary['total'],
+                            'item_count' => $summary['item_count'],
+                        ],
+                    ],
+                ]);
             }
 
             // Store shipment data in session
@@ -611,8 +653,6 @@ class CheckoutController extends Controller
             // For POST requests (webhooks), get order_id from request
             $tempOrderId = $request->input('order_id');
 
-            
-
             \Log::info('Checkout complete called', [
                 'method' => $request->method(),
                 'temp_order_id' => $tempOrderId,
@@ -671,8 +711,6 @@ class CheckoutController extends Controller
             $pendingCheckout = PendingCheckout::where('temp_order_id', $tempOrderId)
                 ->active() // Only non-expired
                 ->first();
-
-
 
             \Log::info('Pending checkout lookup result', [
                 'temp_order_id' => $tempOrderId,
@@ -750,7 +788,6 @@ class CheckoutController extends Controller
         }
     }
 
-
     public function fail(Request $request)
     {
         // Clear session data
@@ -791,7 +828,8 @@ class CheckoutController extends Controller
      * }
      * @response 302 scenario="Redirect" "Redirects to /payment-failed"
      */
-    public function failGet(Request $request){
+    public function failGet(Request $request)
+    {
         return $this->fail($request);
     }
 
@@ -814,7 +852,8 @@ class CheckoutController extends Controller
      * }
      * @response 302 scenario="Redirect" "Redirects to /payment-failed"
      */
-    public function failPost(Request $request){
+    public function failPost(Request $request)
+    {
         return $this->fail($request);
     }
 
