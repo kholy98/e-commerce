@@ -41,11 +41,13 @@ return [
     ],
 
     'whatsapp' => [
+        // Provider preference: 'twilio' or 'meta' (auto-detects if not set)
+        'provider' => env('WHATSAPP_PROVIDER', 'auto'),
         // Twilio Configuration
         'account_sid' => env('WHATSAPP_ACCOUNT_SID'),
         'auth_token' => env('WHATSAPP_AUTH_TOKEN'),
         'phone_number' => env('WHATSAPP_PHONE_NUMBER'),
-        // Meta/WhatsApp Business API Configuration (Alternative)
+        // Meta/WhatsApp Business API Configuration
         'api_key' => env('WHATSAPP_API_KEY'),
         'phone_number_id' => env('WHATSAPP_PHONE_NUMBER_ID'),
         'base_url' => env('WHATSAPP_BASE_URL', 'https://graph.facebook.com/v18.0'),

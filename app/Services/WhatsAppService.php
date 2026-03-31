@@ -21,7 +21,11 @@ class WhatsAppService
 
     private ?string $baseUrl;
 
+    private ?string $provider;
+
     private bool $useTwilio;
+
+    private bool $useMeta;
 
     public function __construct()
     {
@@ -31,13 +35,32 @@ class WhatsAppService
         $this->metaApiKey = config('services.whatsapp.api_key');
         $this->metaPhoneNumberId = config('services.whatsapp.phone_number_id');
         $this->baseUrl = config('services.whatsapp.base_url');
+        $this->provider = config('services.whatsapp.provider');
 
         $this->useTwilio = ! empty($this->accountSid) && ! empty($this->authToken) && ! empty($this->fromPhone);
+        $this->useMeta = ! empty($this->metaApiKey) && ! empty($this->metaPhoneNumberId);
+    }
+
+    public function getProvider(): string
+    {
+        if ($this->provider && $this->provider !== 'auto') {
+            return strtolower($this->provider);
+        }
+
+        if ($this->useTwilio && $this->useMeta) {
+            return 'twilio';
+        }
+
+        if ($this->useTwilio) {
+            return 'twilio';
+        }
+
+        return 'meta';
     }
 
     public function isConfigured(): bool
     {
-        return $this->useTwilio || (! empty($this->metaApiKey) && ! empty($this->metaPhoneNumberId));
+        return $this->useTwilio || $this->useMeta;
     }
 
     public function sendOrderNotification(Order $order): bool
@@ -189,6 +212,16 @@ class WhatsAppService
     private function sendMessage(string $phoneNumber, string $message): bool
     {
         try {
+            $provider = $this->getProvider();
+
+            if ($provider === 'twilio' && $this->useTwilio) {
+                return $this->sendTwilioMessage($phoneNumber, $message);
+            }
+
+            if ($provider === 'meta' && $this->useMeta) {
+                return $this->sendMetaMessage($phoneNumber, $message);
+            }
+
             if ($this->useTwilio) {
                 return $this->sendTwilioMessage($phoneNumber, $message);
             }
