@@ -207,7 +207,7 @@ endpoints:
         name: inquiry_id
         description: 'The ID of the inquiry.'
         required: true
-        example: 1
+        example: 16
         type: integer
         enumValues: []
         exampleWasSpecified: false
@@ -225,7 +225,7 @@ endpoints:
         nullable: false
         deprecated: false
     cleanUrlParameters:
-      inquiry_id: 1
+      inquiry_id: 16
       inquiry: 1
     queryParameters: []
     cleanQueryParameters: []
@@ -319,7 +319,7 @@ endpoints:
         name: inquiry_id
         description: 'The ID of the inquiry.'
         required: true
-        example: 1
+        example: 16
         type: integer
         enumValues: []
         exampleWasSpecified: false
@@ -337,7 +337,7 @@ endpoints:
         nullable: false
         deprecated: false
     cleanUrlParameters:
-      inquiry_id: 1
+      inquiry_id: 16
       inquiry: 1
     queryParameters: []
     cleanQueryParameters: []
@@ -667,7 +667,7 @@ endpoints:
         name: inquiry_id
         description: 'The ID of the inquiry.'
         required: true
-        example: 1
+        example: 16
         type: integer
         enumValues: []
         exampleWasSpecified: false
@@ -685,7 +685,7 @@ endpoints:
         nullable: false
         deprecated: false
     cleanUrlParameters:
-      inquiry_id: 1
+      inquiry_id: 16
       inquiry: 1
     queryParameters: []
     cleanQueryParameters: []
@@ -767,7 +767,7 @@ endpoints:
         name: inquiry_id
         description: 'The ID of the inquiry.'
         required: true
-        example: 1
+        example: 16
         type: integer
         enumValues: []
         exampleWasSpecified: false
@@ -785,7 +785,7 @@ endpoints:
         nullable: false
         deprecated: false
     cleanUrlParameters:
-      inquiry_id: 1
+      inquiry_id: 16
       inquiry: 1
     queryParameters: []
     cleanQueryParameters: []
@@ -974,14 +974,14 @@ endpoints:
         name: inquiry_id
         description: 'The ID of the inquiry.'
         required: true
-        example: 1
+        example: 16
         type: integer
         enumValues: []
         exampleWasSpecified: false
         nullable: false
         deprecated: false
     cleanUrlParameters:
-      inquiry_id: 1
+      inquiry_id: 16
     queryParameters: []
     cleanQueryParameters: []
     bodyParameters: []
@@ -1020,7 +1020,7 @@ endpoints:
         name: inquiry_id
         description: 'The ID of the inquiry.'
         required: true
-        example: 1
+        example: 16
         type: integer
         enumValues: []
         exampleWasSpecified: false
@@ -1038,7 +1038,7 @@ endpoints:
         nullable: false
         deprecated: false
     cleanUrlParameters:
-      inquiry_id: 1
+      inquiry_id: 16
       inquiry: 1
     queryParameters: []
     cleanQueryParameters: []
@@ -1153,7 +1153,7 @@ endpoints:
         name: inquiry_id
         description: 'The ID of the inquiry.'
         required: true
-        example: 1
+        example: 16
         type: integer
         enumValues: []
         exampleWasSpecified: false
@@ -1171,7 +1171,7 @@ endpoints:
         nullable: false
         deprecated: false
     cleanUrlParameters:
-      inquiry_id: 1
+      inquiry_id: 16
       inquiry: 1
     queryParameters: []
     cleanQueryParameters: []

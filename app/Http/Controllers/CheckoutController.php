@@ -87,14 +87,34 @@ class CheckoutController extends Controller
      * @bodyParam billing_address.apartment string The apartment number (optional, defaults to NA for Paymob). Example: 5A
      * @bodyParam notes string Optional order notes for delivery instructions. Example: Please deliver in the morning
      * @bodyParam user_id integer Optional user ID for associating guest checkout with a user.
+     * @bodyParam payment_method string The payment method. Use "online" for Paymob card payment (default), or "cod" for Cash on Delivery. Example: cod
      *
-     * @response 200 scenario="Success" {
+     * @response 200 scenario="Success (Online Payment)" {
      *   "success": true,
      *   "message": "Checkout initiated successfully",
      *   "data": {
      *     "payment_key": "ZXlKaGJHY2lPaUpJVXpVeE1pSXNJblI1Y0NJNklrcFhWQ0o5...",
      *     "iframe_url": "https://accept.paymob.com/api/acceptance/iframes/123456?payment_token=ZXlKaGJHY2lPaUpJVXpVeE1pSXNJblI1Y0NJNklrcFhWQ0o5...",
      *     "temp_order_id": "149823756",
+     *     "tracking_number": "BOSTA-123456789",
+     *     "cost_breakdown": {
+     *       "subtotal": 250.00,
+     *       "tax": 35.00,
+     *       "shipping": 80.00,
+     *       "total": 365.00,
+     *       "item_count": 3
+     *     }
+     *   }
+     * }
+     * @response 200 scenario="Success (Cash on Delivery)" {
+     *   "success": true,
+     *   "message": "Order created successfully with Cash on Delivery",
+     *   "data": {
+     *     "order_id": 42,
+     *     "order_number": "ORD-20240329143000-A1B2C3",
+     *     "payment_method": "cod",
+     *     "payment_status": "pending",
+     *     "status": "processing",
      *     "tracking_number": "BOSTA-123456789",
      *     "cost_breakdown": {
      *       "subtotal": 250.00,

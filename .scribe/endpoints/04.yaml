@@ -34,9 +34,11 @@ endpoints:
         headers:
           cache-control: 'no-cache, private'
           content-type: application/json
+          x-session-token: W5jHx24kZJcgvfsn7Urjyx5Ujepo0yINSmqspoNj
           access-control-allow-origin: 'http://localhost:3000'
           access-control-allow-credentials: 'true'
-          set-cookie: 'al-atheer-ecommerce-session=eyJpdiI6Ild4ekkvQXM0TmxUWGpBbHZLREMyTEE9PSIsInZhbHVlIjoic1pYR3FZclhOUUk1dVI4Snd3dGFXT3JXaWVCbmdQWTdNYkJKdzB6M2d2UmJLWlhNR0dEeTQxVWFPUHgxZG9LSFQvY09NRUo3N0x5cTB2endQUE9NNkV4N3Q1bThBdmFqVzVOWWVaVlFkL1lVbCtMdnh3T3BuTE5mK25ROURWNm4iLCJtYWMiOiIyNTM4MGY3MDc1ZjFmYWJiY2I3NjRkMTRkMzhkNjU4Mzk4YTI3YzMxMzlkNGYwYjYzYzQzNzdmYzliMjczODM3IiwidGFnIjoiIn0%3D; expires=Sun, 08 Feb 2026 14:07:56 GMT; Max-Age=7199; path=/; secure; httponly; samesite=none'
+          access-control-expose-headers: X-Session-Token
+          set-cookie: 'al-atheer-ecommerce-session=eyJpdiI6InZ4TzIvQ2NCcUNRZnlCZXVhb1V6MkE9PSIsInZhbHVlIjoiWnpyV3EyYjdsbWpxK0xrWG1qb3B1SHZ0aUtZNzZTVGZpS1Y0d1VCaTFIcWdDdnBMNEhpU0E2YW1iSGxidDgwa0dmc29Wb0FnaHhCNnQyZ2VDc3Z6Y0dqMi9JMnNuajRXMm9hbzFGWlNyM042SjlVWW84N2tkbXlZVmFmRUI1ZHkiLCJtYWMiOiJkOWIwNDdlMmNjNjhhZGZhMWQxYmU3NmVkYmU4MWYwZGVmNDUyZjQ5NjI0NWVkN2QwNmE1YmExOGExZjYxN2RmIiwidGFnIjoiIn0%3D; expires=Sun, 29 Mar 2026 14:15:13 GMT; Max-Age=7200; path=/; secure; httponly; samesite=none'
         description: null
     responseFields: []
     auth: []
@@ -78,7 +80,8 @@ endpoints:
           content-type: application/json
           access-control-allow-origin: 'http://localhost:3000'
           access-control-allow-credentials: 'true'
-          set-cookie: 'al-atheer-ecommerce-session=eyJpdiI6IklUNFRDd29XMW92aGI0djJ4Y2swbUE9PSIsInZhbHVlIjoiakhVTTNqUkxpeGlJbHZ2YTlBMHl6ZmFEcElFQ0NtZzZqVHVVcTdpZjc4RkxCdSsrYjJCcHJ4R04zaE5BdGE5Y1BGRDlUbktkbmFaMXNFQlZTdmFmOFdYdy80YjR1NmZUdHNaR3F0YkpNZDloU1EvREdoYnF2QW9Mcjh3VERVR1UiLCJtYWMiOiIwYzk5NzNkZjJhZTliYjU5NmU5NDMyZDdlYzM5MjZhNzdmMTFjMmIwYjcxODBiNjczNzAwOGMxYWZhODA0ZDI3IiwidGFnIjoiIn0%3D; expires=Sun, 08 Feb 2026 14:08:05 GMT; Max-Age=7200; path=/; secure; httponly; samesite=none'
+          access-control-expose-headers: X-Session-Token
+          set-cookie: 'al-atheer-ecommerce-session=eyJpdiI6IjZKNy9SbXFieHR4Zmx6ZThWVWFSSmc9PSIsInZhbHVlIjoic3ZnT0JtQ1ZKNWhpRFBEM2JsOVhZS2xmeklhUHJVcDZoOHlZUUdsa05MRFhCNmZlcWRqandBdm5VcEFmTmlsdU5mZW02NHUrWGc4QThnL25tcUt6dG9CUFpnWkVJMEQ0bGxlN25JRGMwNFVFajNBZ2NLbTZUL0FFMzV5T25ZM0kiLCJtYWMiOiIyZWM3MTI1MWM3ZjRmNWViNTQ4MWVlYWMwZDVhZGJlMmM5MWQ5OTEzNTJkNjE0YTA4YWJlMDAxYzk5YjhkNDdjIiwidGFnIjoiIn0%3D; expires=Sun, 29 Mar 2026 14:15:13 GMT; Max-Age=7200; path=/; secure; httponly; samesite=none'
         description: null
     responseFields: []
     auth: []
@@ -120,7 +123,8 @@ endpoints:
           content-type: application/json
           access-control-allow-origin: 'http://localhost:3000'
           access-control-allow-credentials: 'true'
-          set-cookie: 'al-atheer-ecommerce-session=eyJpdiI6Ilc2UmJFNklhYThpOXMyeGViczVVOWc9PSIsInZhbHVlIjoiU1R4ZGcvbjY4MFhrTFo4Umwrc2VicFJ1OHJaNDlNMjZvM3ZTaGV2MDU4aW9CSHdsN2Zrb2Q5OVBiRlVnT3JXcm5nNW1iaEVVcFFPVEpkZ3BsV05senBWMW9QRVZMWkp5TVBPMTV4SjA2MnR3VmZiSVVBaDBYS1BwQ3BaODVZM0siLCJtYWMiOiJlMTRlMzY5Y2ZlODMzMzlhM2M5YTViNmU5ZjgzMDZkYjcxNzJiMzc2M2M1MzhiNjZlNTliZDY1MWQxODYzOGY1IiwidGFnIjoiIn0%3D; expires=Sun, 08 Feb 2026 14:08:05 GMT; Max-Age=7200; path=/; secure; httponly; samesite=none'
+          access-control-expose-headers: X-Session-Token
+          set-cookie: 'al-atheer-ecommerce-session=eyJpdiI6IjRTM2xxemhEWGVkejJ2NFRQbHlROXc9PSIsInZhbHVlIjoiTlJmeHM5TlowSmJ1c3A2dWtNTno5ZnBLZjVyMXY3ejhLYTVTdnZqTmZmMVNNMXFVdGFXdmtXT2pzcDAxbHBaN3FWM3d4UWVmRURreUFvc3g0eG9meWxNdUdZc1UrQmM0T2htS1gvdHZGZGltTmo4VGZiR0hEdHlZL05oMjBPV0MiLCJtYWMiOiJkNGQxNmFjMTE1YWVjNTNmZjZmOTBmNzAyNjA4NDNkZDI0M2Q0MGJmMmRjNDg3ODhmMTNlODY0ZjE1NDQ0YjAyIiwidGFnIjoiIn0%3D; expires=Sun, 29 Mar 2026 14:15:13 GMT; Max-Age=7200; path=/; secure; httponly; samesite=none'
         description: null
     responseFields: []
     auth: []
@@ -162,7 +166,8 @@ endpoints:
           content-type: application/json
           access-control-allow-origin: 'http://localhost:3000'
           access-control-allow-credentials: 'true'
-          set-cookie: 'al-atheer-ecommerce-session=eyJpdiI6IlY2MjRaV0FBWnJDald0SVN2bklJaEE9PSIsInZhbHVlIjoiTTUwQWpUT3dqTzhUb0xKS0cyNWI0bjNncmowRWJXeCt3NHFYSTc5OHBLMGhkQm5hQUxQWmgwaTBXWDBGTldMRStITXZhK2hLSTR5TFRieXZOSktjTVRuNi9RMDQ1T0MxUVJJRnpmcCtKZS9VV2tDcjhpcVJQWFNZQkR6Q0wxa0IiLCJtYWMiOiIxM2M5MmJlY2YyNDFiY2Y3YzAwNjhhYWMwNzRmNzJmNTRiOTNjYmRmMTQyOGU3N2EwN2U3OWYzMzQ4YThlZTI5IiwidGFnIjoiIn0%3D; expires=Sun, 08 Feb 2026 14:08:05 GMT; Max-Age=7200; path=/; secure; httponly; samesite=none'
+          access-control-expose-headers: X-Session-Token
+          set-cookie: 'al-atheer-ecommerce-session=eyJpdiI6IlE5MTlkOWU4THdPSXJuUkxoQ2ViZ0E9PSIsInZhbHVlIjoiam1BUHVPNXF6TjIyVFF1VkFvdEk5QkhOdHlBdDNYR0lnaWxsMy9sSnRHMXJxZXFrRmdvS1N0RkVTZ0ZIUzh0ajR5aGlzUjd0YUU2MDR1SXRMTEl5U2RqeWRUQjUvSjdFY1JWelpacVpqcFZUaGN3eGhLWTRIdlF2QzVSUW85T3QiLCJtYWMiOiJmNmY1NjY4ZmEzN2MxN2QyZDkzMDQ4YzcxZmE3MWU3MDg1ZGU5ZGUzZjBjYjFhY2YzZTljOWJkNDZlN2U4NTQ1IiwidGFnIjoiIn0%3D; expires=Sun, 29 Mar 2026 14:15:13 GMT; Max-Age=7200; path=/; secure; httponly; samesite=none'
         description: null
     responseFields: []
     auth: []
@@ -204,7 +209,8 @@ endpoints:
           content-type: application/json
           access-control-allow-origin: 'http://localhost:3000'
           access-control-allow-credentials: 'true'
-          set-cookie: 'al-atheer-ecommerce-session=eyJpdiI6Imh4bFpUYTBRYXR4ZjRpTHRWRTlqcXc9PSIsInZhbHVlIjoiWE5PWkU0Rnl0aVN0anNQQjNmL1p1MG5XY1lCcHBLcW16bk1Ub0ZrT3FpRzNnUC9LYTVubHc4RWpEZ0cySFhmT0tvZVA4TTBpdTZmQkxxVmZOT2NIcG01RUVsbXIySUxHNGgwN1JPQzZUWnZUMGpvTlJpTzNwSGozSVlwTjRKQjkiLCJtYWMiOiIxNDIyYzE3ZDJiYTU0YzNhOTdiZDhlOWEyYjBmYzUwZDcxZDBmNmZhMTU1NDU1ZTEyMjdlYWQ3OTdhNWNjNjk0IiwidGFnIjoiIn0%3D; expires=Sun, 08 Feb 2026 14:08:05 GMT; Max-Age=7200; path=/; secure; httponly; samesite=none'
+          access-control-expose-headers: X-Session-Token
+          set-cookie: 'al-atheer-ecommerce-session=eyJpdiI6IlRyek45U2NVckp0ZXRjK3M3OHN5UlE9PSIsInZhbHVlIjoiMjBTYkh2TExtWXNIc0hGSU5GejFPNFozNCtuRGs0enlaWXRrcG1QeW4xa3RSNFo2blBSU3ppZXhiMmdGeEFLc3NkWmNHOXBaZXhFa0hvNy9ybWZ0MlBGalByZHg4NHdGZTRNWHpVZmRlRWZadzJjYmRKY0dSSFhNc2VTUGZkYloiLCJtYWMiOiI1N2Q4YzgxMDc1YzFiNzQ5OGIzNzdkM2UzOGY0ZGFlYmI4YjRiZmY4ZmYwYTlkMmVhNjJkOWExMDRhZWNiMTNiIiwidGFnIjoiIn0%3D; expires=Sun, 29 Mar 2026 14:15:13 GMT; Max-Age=7200; path=/; secure; httponly; samesite=none'
         description: null
     responseFields: []
     auth: []
@@ -246,8 +252,183 @@ endpoints:
           content-type: application/json
           access-control-allow-origin: 'http://localhost:3000'
           access-control-allow-credentials: 'true'
-          set-cookie: 'al-atheer-ecommerce-session=eyJpdiI6ImVFcXU1dllyRy9TUE1jdVNKTDBEWWc9PSIsInZhbHVlIjoiQWNBbkd5dGhWdXgzZnM0eFhVczc4c1BVUUx2am1YL2o5MTR6Z0JXYVo0a2RPbGdlaWpNREpCdjFyOExScndWL0ZPeHF6OGxmcEcyRG03M21Fdk8yQkJTZlF3REZUUGhxQ3pnYmNNU2hEMGVDTklOQkN2bVdVYU5PT0xOSUxwc2EiLCJtYWMiOiIxNjI3Y2Y3MmViYmNhYTkwMWZmOGFlZTYyNWFlMzI1ZGNhNDViMDY4MjkxNmU5ZjhiZWNmM2UxZTFhZWZkNGJkIiwidGFnIjoiIn0%3D; expires=Sun, 08 Feb 2026 14:08:05 GMT; Max-Age=7200; path=/; secure; httponly; samesite=none'
+          access-control-expose-headers: X-Session-Token
+          set-cookie: 'al-atheer-ecommerce-session=eyJpdiI6IkZqdzRscGlpREVtSXNBRUt5dTk3amc9PSIsInZhbHVlIjoiK1pBOTdtOUU3eCtXRHFubDBmczBZS0FLbTl3czk3cjQrdHRJQ0J5eWpNWVhuRGh6V0VqMlFseW1VMVh1bkxKVkhPRjRrSUZpUXhLd3BFblZmOWVJS29QVFlKRDhWUjZFTXRSWXIwc2ZTQWNlRmJaWEIyZE9RS29VeUdPWG9pSzUiLCJtYWMiOiIzOGY4NTdhNzUxYWQyYzAyNDZiMzRiMmQ3YmY4OTgwMWEyYTFhM2UxMDM2MzI1NmI2MmEzZTdlYjZjNGZhMzg3IiwidGFnIjoiIn0%3D; expires=Sun, 29 Mar 2026 14:15:13 GMT; Max-Age=7200; path=/; secure; httponly; samesite=none'
         description: null
+    responseFields: []
+    auth: []
+    controller: null
+    method: null
+    route: null
+  -
+    custom: []
+    httpMethods:
+      - GET
+    uri: api/supplier/dashboard/stats
+    metadata:
+      custom: []
+      groupName: Endpoints
+      groupDescription: ''
+      subgroup: ''
+      subgroupDescription: ''
+      title: ''
+      description: ''
+      authenticated: false
+      deprecated: false
+    headers:
+      Content-Type: application/json
+      Accept: application/json
+    urlParameters: []
+    cleanUrlParameters: []
+    queryParameters: []
+    cleanQueryParameters: []
+    bodyParameters: []
+    cleanBodyParameters: []
+    fileParameters: []
+    responses:
+      -
+        custom: []
+        status: 401
+        content: '{"message":"Unauthenticated."}'
+        headers:
+          cache-control: 'no-cache, private'
+          content-type: application/json
+          access-control-allow-origin: 'http://localhost:3000'
+          access-control-allow-credentials: 'true'
+          access-control-expose-headers: X-Session-Token
+          set-cookie: 'al-atheer-ecommerce-session=eyJpdiI6IlNLcjVJTjdxZlZIdTBDT1l5N2NxdkE9PSIsInZhbHVlIjoiT1VxSWI0NTF3S2JpckNXR09YOHNIclRiR1lZSmlsY1Q2Vm1BNWFhUUdhT2ZQdTZkdS8zaytYWlAvSHlTUnlHdWJiQ3VaN20xc0dTVzBCcTFublRqY1lKNzdVSWdkbWg0UUErR2QzTnFCMnZWT1hhSUNVaHh3c3JlWEMrNXVaa0IiLCJtYWMiOiIxZmU2MzhkYjA4ZDRkYmEyYWFiOTliMjE2NzA3ZGU5ODMwNDgxMWFiMWEyOTY1NjM4N2NlNzg3OTdlZjY4NDQ4IiwidGFnIjoiIn0%3D; expires=Sun, 29 Mar 2026 14:15:13 GMT; Max-Age=7200; path=/; secure; httponly; samesite=none'
+        description: null
+    responseFields: []
+    auth: []
+    controller: null
+    method: null
+    route: null
+  -
+    custom: []
+    httpMethods:
+      - GET
+    uri: api/supplier/orders
+    metadata:
+      custom: []
+      groupName: Endpoints
+      groupDescription: ''
+      subgroup: ''
+      subgroupDescription: ''
+      title: ''
+      description: ''
+      authenticated: false
+      deprecated: false
+    headers:
+      Content-Type: application/json
+      Accept: application/json
+    urlParameters: []
+    cleanUrlParameters: []
+    queryParameters: []
+    cleanQueryParameters: []
+    bodyParameters: []
+    cleanBodyParameters: []
+    fileParameters: []
+    responses:
+      -
+        custom: []
+        status: 401
+        content: '{"message":"Unauthenticated."}'
+        headers:
+          cache-control: 'no-cache, private'
+          content-type: application/json
+          access-control-allow-origin: 'http://localhost:3000'
+          access-control-allow-credentials: 'true'
+          access-control-expose-headers: X-Session-Token
+          set-cookie: 'al-atheer-ecommerce-session=eyJpdiI6IkFoRHV5cTFsWUZRQkx1Mzl4ODR4Z1E9PSIsInZhbHVlIjoiVzNhdFpERXU2SHZ2OU5nY3d6U1BsdUJtM1E4VVNPdnhsV1pEWEpxbkRWSVhhMkZQWHRxMXI0bnI1VU1uRkZieVowOXdYcnZpV3J4a2c5ODM3WHhsY3F1QXhUTHo1REdNSGJybXRBQ1NqdE82QmZrUURMbU5jOGZaWHk2eGI0dGMiLCJtYWMiOiIxNWQzZmVhYjMyMWU1NzFlYTQ5YmFmZjY4ZGRmYTI0MDk1NjRkMGFjMDVlMzY2MTI0ZWU1NzE0MmI0ZGNlOWQ2IiwidGFnIjoiIn0%3D; expires=Sun, 29 Mar 2026 14:15:13 GMT; Max-Age=7200; path=/; secure; httponly; samesite=none'
+        description: null
+    responseFields: []
+    auth: []
+    controller: null
+    method: null
+    route: null
+  -
+    custom: []
+    httpMethods:
+      - PATCH
+    uri: 'api/supplier/orders/{order_id}/status'
+    metadata:
+      custom: []
+      groupName: Endpoints
+      groupDescription: ''
+      subgroup: ''
+      subgroupDescription: ''
+      title: ''
+      description: ''
+      authenticated: false
+      deprecated: false
+    headers:
+      Content-Type: application/json
+      Accept: application/json
+    urlParameters:
+      order_id:
+        custom: []
+        name: order_id
+        description: 'The ID of the order.'
+        required: true
+        example: 16
+        type: integer
+        enumValues: []
+        exampleWasSpecified: false
+        nullable: false
+        deprecated: false
+    cleanUrlParameters:
+      order_id: 16
+    queryParameters: []
+    cleanQueryParameters: []
+    bodyParameters:
+      status:
+        custom: []
+        name: status
+        description: ''
+        required: true
+        example: delivered
+        type: string
+        enumValues:
+          - pending
+          - processing
+          - shipped
+          - delivered
+          - cancelled
+        exampleWasSpecified: false
+        nullable: false
+        deprecated: false
+      status_ar:
+        custom: []
+        name: status_ar
+        description: ''
+        required: false
+        example: architecto
+        type: string
+        enumValues: []
+        exampleWasSpecified: false
+        nullable: true
+        deprecated: false
+      payment_status:
+        custom: []
+        name: payment_status
+        description: ''
+        required: false
+        example: pending
+        type: string
+        enumValues:
+          - pending
+          - paid
+          - failed
+          - refunded
+        exampleWasSpecified: false
+        nullable: true
+        deprecated: false
+    cleanBodyParameters:
+      status: delivered
+      status_ar: architecto
+      payment_status: pending
+    fileParameters: []
+    responses: []
     responseFields: []
     auth: []
     controller: null
@@ -331,9 +512,11 @@ endpoints:
           cache-control: 'no-cache, private'
           location: 'http://localhost:3000/checkout_confirmation?payment_status=failed'
           content-type: 'text/html; charset=utf-8'
+          x-session-token: qGH81yYy02OHwJsCK70oQwlxjOiYtar2EjLonHmz
           access-control-allow-origin: 'http://localhost:3000'
           access-control-allow-credentials: 'true'
-          set-cookie: 'al-atheer-ecommerce-session=eyJpdiI6IlE3bkFnaFZHaFBJcDZ6YUFMd2o4RUE9PSIsInZhbHVlIjoiRDVOTVhFbkdjZlJtSE5GMHNLYk5XekRtek94Q201bzJUdEVxc3owbER5Zk9kbzBibE9nT1hzbS8vVUJFdDZnMGhPWGxHajhOYnpzR0V6bFRmZytpdFZnU1VHUk9kZXJEaUIxd1ZFd2VhOVFmYWtudzh0dXZNcnFrcTlQMGJVeFQiLCJtYWMiOiIzOTE3Y2FmNWI0OWViMjI1ZmEwZDVmYzhjNDAyMGY2NTE3ODk1NTVmNjFkNmY2ZTk1MjZjYmM2MDA4NDE0ZDk3IiwidGFnIjoiIn0%3D; expires=Sun, 08 Feb 2026 14:08:08 GMT; Max-Age=7200; path=/; secure; httponly; samesite=none'
+          access-control-expose-headers: X-Session-Token
+          set-cookie: 'al-atheer-ecommerce-session=eyJpdiI6InY0WEEyeDZaNEF6bFFKdE1VenJmUVE9PSIsInZhbHVlIjoieEpMdVZXYTNsQStiQlZYSDJScjZ4VVZGN0lhU0xsSHR0UmJsRG5iaHFycGtaek82R0llV0hHZ2Mwbnd4My9yTENoK2FCMFZ4L21sT04xR2NmakFoVVlvOGpjaU8xbUhTeTZEbXo3ejJTcElhckR3VzZxcDArVXpXWUZrQnkyTEUiLCJtYWMiOiIxMDc0NmY1YzA5YjQ4NmU0ZDcwYjZhZDFmNjRjZjZlN2ZhZDBlNDNhYWZmNDIxNzNmOWU3OTFhNjEzNzIyYTA5IiwidGFnIjoiIn0%3D; expires=Sun, 29 Mar 2026 14:15:13 GMT; Max-Age=7200; path=/; secure; httponly; samesite=none'
         description: null
     responseFields: []
     auth: []
@@ -614,9 +797,11 @@ endpoints:
         headers:
           cache-control: 'no-cache, private'
           content-type: application/json
+          x-session-token: UBBrpD5BXOrnEPbkk6a3brYSDdvKlxE2h3jh6Ljh
           access-control-allow-origin: 'http://localhost:3000'
           access-control-allow-credentials: 'true'
-          set-cookie: 'al-atheer-ecommerce-session=eyJpdiI6Im84TENGTlQ3eTJvTW92dERiYlFtOVE9PSIsInZhbHVlIjoiblorNkhNbm9WSnk3N2k5aTF0VVZKeG1meVJ2ejUrTFB2cWgrMHAwdFhFVjR1TkJoaXpHdmtRTS9vV2NvdGx0SmhkNjQwY05RUVBndmNJVXc0c3kwUFczWk5SVVF4dXJlZTVaRFNOUjhkZ1dMVmx2dnJoQk0zYkRSQ3RtYzRvVnkiLCJtYWMiOiIyZjZiYTA0Mjk5ODI1ODg0MzQ5YWJiMmJmNGFlYTVhNzRmNTVkNzVjYzBiZjZlYWVlZWNlNGM5YTExMjNlMDM1IiwidGFnIjoiIn0%3D; expires=Sun, 08 Feb 2026 14:08:17 GMT; Max-Age=7200; path=/; secure; httponly; samesite=none'
+          access-control-expose-headers: X-Session-Token
+          set-cookie: 'al-atheer-ecommerce-session=eyJpdiI6IjlsSVo5ajlJSUpOVXdRTXBDS01xd0E9PSIsInZhbHVlIjoiRDBLVDk0azBWYk5rUlo5UUZlOGQ5MnFwTHVCd3JKd3BRc0xhclNyUW15V2hDc3QzWGlXRnFXaTB5aGVCZUlJUllPK3FGRmUrb0Z3d0NvQmlOL2V6TkRhLy8zRlBZekJpbUdaTTk3MnJSVUJWb0gxNjdUcTMwdmJYZmxFYWNRZkUiLCJtYWMiOiI5NzEzMjFmOTQ3YjBmMTA3MzdiZDAxM2RmNjczNDUzMThhNWU4OThhNDI0NWUwMGI2OWY5MTQzZGU2ODYwNTFjIiwidGFnIjoiIn0%3D; expires=Sun, 29 Mar 2026 14:15:14 GMT; Max-Age=7200; path=/; secure; httponly; samesite=none'
         description: null
     responseFields: []
     auth: []
@@ -718,7 +903,7 @@ endpoints:
         name: scheduledDate
         description: 'Must be a valid date. Must be a date after <code>today</code>.'
         required: true
-        example: '2052-03-03'
+        example: '2052-04-21'
         type: string
         enumValues: []
         exampleWasSpecified: false
@@ -842,7 +1027,7 @@ endpoints:
         name: repeatedData.repeatedType
         description: ''
         required: false
-        example: Daily
+        example: Weekly
         type: string
         enumValues:
           - 'One Time'
@@ -857,7 +1042,7 @@ endpoints:
         description: ''
         required: false
         example:
-          - Tuesday
+          - Monday
         type: 'string[]'
         enumValues:
           - Sunday
@@ -875,7 +1060,7 @@ endpoints:
         name: repeatedData.startDate
         description: 'Must be a valid date.'
         required: false
-        example: '2026-02-08T12:08:17'
+        example: '2026-03-29T12:15:14'
         type: string
         enumValues: []
         exampleWasSpecified: false
@@ -886,14 +1071,14 @@ endpoints:
         name: repeatedData.endDate
         description: 'Must be a valid date. Must be a date after <code>repeatedData.startDate</code>.'
         required: false
-        example: '2052-03-03'
+        example: '2052-04-21'
         type: string
         enumValues: []
         exampleWasSpecified: false
         nullable: true
         deprecated: false
     cleanBodyParameters:
-      scheduledDate: '2052-03-03'
+      scheduledDate: '2052-04-21'
       businessLocationId: architecto
       contactPerson:
         name: architecto
@@ -904,11 +1089,11 @@ endpoints:
       noOfPackages: 22
       packageType: Normal
       repeatedData:
-        repeatedType: Daily
+        repeatedType: Weekly
         days:
-          - Tuesday
-        startDate: '2026-02-08T12:08:17'
-        endDate: '2052-03-03'
+          - Monday
+        startDate: '2026-03-29T12:15:14'
+        endDate: '2052-04-21'
     fileParameters: []
     responses: []
     responseFields: []
@@ -1155,6 +1340,17 @@ endpoints:
         exampleWasSpecified: false
         nullable: false
         deprecated: false
+      FRONTEND_URL:
+        custom: []
+        name: FRONTEND_URL
+        description: ''
+        required: false
+        example: 'http://www.bailey.biz/quos-velit-et-fugiat-sunt-nihil-accusantium-harum.html'
+        type: string
+        enumValues: []
+        exampleWasSpecified: false
+        nullable: false
+        deprecated: false
     cleanBodyParameters:
       PAYMOB_BASE_URL: 'http://www.bailey.biz/quos-velit-et-fugiat-sunt-nihil-accusantium-harum.html'
       PAYMOB_API_KEY: architecto
@@ -1170,6 +1366,7 @@ endpoints:
       MAIL_PASSWORD: architecto
       MAIL_FROM_ADDRESS: zbailey@example.net
       MAIL_FROM_NAME: architecto
+      FRONTEND_URL: 'http://www.bailey.biz/quos-velit-et-fugiat-sunt-nihil-accusantium-harum.html'
     fileParameters: []
     responses: []
     responseFields: []
@@ -1206,13 +1403,15 @@ endpoints:
       -
         custom: []
         status: 200
-        content: '{"status":{"file_path":"D:\\code\\ecommerce-api\\.env","is_writable":true,"config_cached":false},"laravel_active_values":{"PAYMOB_BASE_URL":"https:\/\/accept.paymob.com","PAYMOB_API_KEY":"ZXlKaGJHY2lPaUpJVXpVeE1pSXNJblI1Y0NJNklrcFhWQ0o5LmV5SmpiR0Z6Y3lJNklrMWxjbU5vWVc1MElpd2ljSEp2Wm1sc1pWOXdheUk2TVRFeE16STRPU3dpYm1GdFpTSTZJbWx1YVhScFlXd2lmUS5NSF96bVNyVWZDTDZFeURYNjdpREstY3pxUUF0MUJoZ1d1SmFEd2xpcGstLXN1MWJ6YkZPSTVTbC15VkFNWG5GbktpZi1NQ0w1QldyYV9xZEVSM0ZRUQ==","BOSTA_API_KEY":"b286cff91b7015a1ef89aea14d750f4f1e241fd3b96486a7d87a47d21ff4933f","MAIL_MAILER":"smtp","MAIL_SCHEME":null,"MAIL_HOST":"smtp.gmail.com","MAIL_PORT":"465","MAIL_USERNAME":"ahmadkholy98@gmail.com","MAIL_PASSWORD":"akcynlcfghdfxjrq","MAIL_FROM_ADDRESS":"ahmadkholy98@gmail.com","MAIL_FROM_NAME":"Al-Atheer Ecommerce"}}'
+        content: '{"status":{"file_path":"C:\\projects\\ecommerce-api\\.env","is_writable":true,"config_cached":false},"laravel_active_values":{"PAYMOB_BASE_URL":"https:\/\/accept.paymob.com","PAYMOB_API_KEY":"ZXlKaGJHY2lPaUpJVXpVeE1pSXNJblI1Y0NJNklrcFhWQ0o5LmV5SmpiR0Z6Y3lJNklrMWxjbU5vWVc1MElpd2ljSEp2Wm1sc1pWOXdheUk2TVRFeE16STRPU3dpYm1GdFpTSTZJbWx1YVhScFlXd2lmUS5NSF96bVNyVWZDTDZFeURYNjdpREstY3pxUUF0MUJoZ1d1SmFEd2xpcGstLXN1MWJ6YkZPSTVTbC15VkFNWG5GbktpZi1NQ0w1QldyYV9xZEVSM0ZRUQ==","BOSTA_API_KEY":"b286cff91b7015a1ef89aea14d750f4f1e241fd3b96486a7d87a47d21ff4933f","MAIL_MAILER":"smtp","MAIL_SCHEME":null,"MAIL_HOST":"smtp.gmail.com","MAIL_PORT":"465","MAIL_USERNAME":"ahmadkholy98@gmail.com","MAIL_PASSWORD":"akcynlcfghdfxjrq","MAIL_FROM_ADDRESS":"ahmadkholy98@gmail.com","MAIL_FROM_NAME":"Al-Atheer Ecommerce","FRONTEND_URL":"http:\/\/localhost:3000"}}'
         headers:
           cache-control: 'no-cache, private'
           content-type: application/json
+          x-session-token: uD0PF0hwvUehHft8UdEGhusFFi3E55XJQmEMbkY7
           access-control-allow-origin: 'http://localhost:3000'
           access-control-allow-credentials: 'true'
-          set-cookie: 'al-atheer-ecommerce-session=eyJpdiI6InJCdm1JbVFMZkQrOU5WS2pCd0lLZXc9PSIsInZhbHVlIjoieWtnaEZXVzlyMUlrSlUzZElCZGZKUXJvcmFnZ1IzSzJVL3lKU1RpRFh6eVRFRGkveTZ0OFBaS3p2V3N0cTZxWEEwRDZhS3M4OHQ2L1BiYlhxZEsyVlVvQUQ2RWo3L0JKZEdTR2t1elk4bmRGdUh6ZTJGbVdDMUxkMGtOOWFOYzUiLCJtYWMiOiI4YjgxNzA0NTk4MjM3M2MzOGExMzU1NDUwNDM3MTc2MzJlNTQ5YWRkNzA1NmNhMjVlZjJlYmJlMTdkNzI2ODQyIiwidGFnIjoiIn0%3D; expires=Sun, 08 Feb 2026 14:08:18 GMT; Max-Age=7200; path=/; secure; httponly; samesite=none'
+          access-control-expose-headers: X-Session-Token
+          set-cookie: 'al-atheer-ecommerce-session=eyJpdiI6InlxMVJQTDQ4MVlCNGQ4dXdlbzhVT1E9PSIsInZhbHVlIjoiRlVwdVpVYUV5SVFtYkJpK3BicXRVQXFVb095NmVZWFlmLzVteEhmS29RSFBqVVVldUd3RERwdU5YVDd5RTd4S3BNVUdCWU1xeHJzRVZQelV3SThhbmgzMEVTbDRMc2VneWtnZFczZ3RMMUFaMVI5UzdvN3pUUklERVljRHBzb3EiLCJtYWMiOiJjOGQxNTNlM2ZhOTcxYzZjZDgwZGYwNTQzOTQ3ZTBiNjg2MmY5ODIzOTUyYjA5NTIzYTRlN2YxMjRmYzAzNDY3IiwidGFnIjoiIn0%3D; expires=Sun, 29 Mar 2026 14:15:14 GMT; Max-Age=7200; path=/; secure; httponly; samesite=none'
         description: null
     responseFields: []
     auth: []

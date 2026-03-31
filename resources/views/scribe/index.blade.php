@@ -360,6 +360,15 @@ Invalidate the current API token and log out the user.</a>
                                                                                 <li class="tocify-item level-2" data-unique="endpoints-GETapi-admin-dashboard-best-sellers">
                                 <a href="#endpoints-GETapi-admin-dashboard-best-sellers">Get best selling products</a>
                             </li>
+                                                                                <li class="tocify-item level-2" data-unique="endpoints-GETapi-supplier-dashboard-stats">
+                                <a href="#endpoints-GETapi-supplier-dashboard-stats">GET api/supplier/dashboard/stats</a>
+                            </li>
+                                                                                <li class="tocify-item level-2" data-unique="endpoints-GETapi-supplier-orders">
+                                <a href="#endpoints-GETapi-supplier-orders">GET api/supplier/orders</a>
+                            </li>
+                                                                                <li class="tocify-item level-2" data-unique="endpoints-PATCHapi-supplier-orders--order_id--status">
+                                <a href="#endpoints-PATCHapi-supplier-orders--order_id--status">PATCH api/supplier/orders/{order_id}/status</a>
+                            </li>
                                                                                 <li class="tocify-item level-2" data-unique="endpoints-POSTapi-payment-process">
                                 <a href="#endpoints-POSTapi-payment-process">Process payment and return payment key/iframe URL</a>
                             </li>
@@ -417,7 +426,7 @@ Invalidate the current API token and log out the user.</a>
     </ul>
 
     <ul class="toc-footer" id="last-updated">
-        <li>Last updated: February 8, 2026</li>
+        <li>Last updated: March 29, 2026</li>
     </ul>
 </div>
 
@@ -2273,7 +2282,7 @@ You can check the Dev Tools console for debugging information.</code></pre>
     --form "product_details[][title_ar]=g"\
     --form "product_details[][value_en]=z"\
     --form "product_details[][value_ar]=m"\
-    --form "images[]=@C:\Users\adshift FrontEnd\AppData\Local\Temp\php33B5.tmp" </code></pre></div>
+    --form "images[]=@C:\Users\adshift FrontEnd\AppData\Local\Temp\phpD97E.tmp" </code></pre></div>
 
 
 <div class="javascript-example">
@@ -2374,7 +2383,7 @@ $response = $client-&gt;post(
             ],
             [
                 'name' =&gt; 'images[]',
-                'contents' =&gt; fopen('C:\Users\adshift FrontEnd\AppData\Local\Temp\php33B5.tmp', 'r')
+                'contents' =&gt; fopen('C:\Users\adshift FrontEnd\AppData\Local\Temp\phpD97E.tmp', 'r')
             ],
         ],
     ]
@@ -3007,7 +3016,8 @@ print_r(json_decode((string) $body));</code></pre></div>
 content-type: application/json
 access-control-allow-origin: http://localhost:3000
 access-control-allow-credentials: true
-set-cookie: al-atheer-ecommerce-session=eyJpdiI6ImxESEdjdTdDb2dWQTUvZ3pva3NsNFE9PSIsInZhbHVlIjoienAvVkFvanFuRnJNQUR6OXNRSDQ5R2dMS09nRW0zWGRaZ3dJVnIyT3paOUliZ1lMSHB5YjdjUjgwdnpnUndnWWhtNi9UUUdmWUVoQ1E5anVBb1B3QTYraW1VOWFyVGlrQXExM1pRT1lHZnIxNlQvN203QW1LcnJCS1Fya0pTMnYiLCJtYWMiOiJjYTI4MzhjMDAxODJmODFhZDdmMzJhMDNkODRmMTRkYzc5Zjc4ZjBmNDI2ODc2OWEzNjVmOTQ2YzAxZTQ4YWI2IiwidGFnIjoiIn0%3D; expires=Sun, 08 Feb 2026 14:08:05 GMT; Max-Age=7200; path=/; secure; httponly; samesite=none
+access-control-expose-headers: X-Session-Token
+set-cookie: al-atheer-ecommerce-session=eyJpdiI6IllQKzBDRDQ4QU9UTG9FZVl2R3QreVE9PSIsInZhbHVlIjoiK09VVFI3WTc0YUd6eFBDMktxdnFSRGQxa0U5ZGJubytIRWh6bktyYmZWY1cvUzhSN0dXQzFONmZNY1lxSUdkT2hXWDhmTXRsbHhrVmplOWp5VXY2Y25YZmZzWXdCaUZtVks4cXZnTzlnY0lSWmtQaUdTVnBsM21SdkY0N0o2U08iLCJtYWMiOiJiZTFlNWI1ODQzYzU2MGY1ZDQzMjQ3N2NhZDExYmE3NTc1MjhhMTcyNmM1YzdlOGFjYjFhMWM0MDc3ZmJkNzU5IiwidGFnIjoiIn0%3D; expires=Sun, 29 Mar 2026 14:15:13 GMT; Max-Age=7200; path=/; secure; httponly; samesite=none
  </code></pre></details>         <pre>
 
 <code class="language-json" style="max-height: 300px;">{
@@ -3866,7 +3876,7 @@ You can check the Dev Tools console for debugging information.</code></pre>
     --form "description=Premium coffee beans from around the world"\
     --form "description_ar=حبوب قهوة ممتازة من جميع أنحاء العالم"\
     --form "is_active=1"\
-    --form "image=@C:\Users\adshift FrontEnd\AppData\Local\Temp\php34D1.tmp" </code></pre></div>
+    --form "image=@C:\Users\adshift FrontEnd\AppData\Local\Temp\phpD9A0.tmp" </code></pre></div>
 
 
 <div class="javascript-example">
@@ -3929,7 +3939,7 @@ $response = $client-&gt;post(
             ],
             [
                 'name' =&gt; 'image',
-                'contents' =&gt; fopen('C:\Users\adshift FrontEnd\AppData\Local\Temp\php34D1.tmp', 'r')
+                'contents' =&gt; fopen('C:\Users\adshift FrontEnd\AppData\Local\Temp\phpD9A0.tmp', 'r')
             ],
         ],
     ]
@@ -4138,7 +4148,7 @@ You can check the Dev Tools console for debugging information.</code></pre>
                value=""
                data-component="body">
     <br>
-<p>The category image (jpeg, png, jpg, gif, webp, max 2MB). Example: <code>C:\Users\adshift FrontEnd\AppData\Local\Temp\php34D1.tmp</code></p>
+<p>The category image (jpeg, png, jpg, gif, webp, max 2MB). Example: <code>C:\Users\adshift FrontEnd\AppData\Local\Temp\phpD9A0.tmp</code></p>
         </div>
         </form>
 
@@ -4360,7 +4370,7 @@ You can check the Dev Tools console for debugging information.</code></pre>
     --form "description_ar=architecto"\
     --form "is_active=1"\
     --form "remove_image="\
-    --form "image=@C:\Users\adshift FrontEnd\AppData\Local\Temp\php34E2.tmp" </code></pre></div>
+    --form "image=@C:\Users\adshift FrontEnd\AppData\Local\Temp\phpD9A2.tmp" </code></pre></div>
 
 
 <div class="javascript-example">
@@ -4428,7 +4438,7 @@ $response = $client-&gt;put(
             ],
             [
                 'name' =&gt; 'image',
-                'contents' =&gt; fopen('C:\Users\adshift FrontEnd\AppData\Local\Temp\php34E2.tmp', 'r')
+                'contents' =&gt; fopen('C:\Users\adshift FrontEnd\AppData\Local\Temp\phpD9A2.tmp', 'r')
             ],
         ],
     ]
@@ -4647,7 +4657,7 @@ You can check the Dev Tools console for debugging information.</code></pre>
                value=""
                data-component="body">
     <br>
-<p>The new category image (jpeg, png, jpg, gif, webp, max 2MB). Example: <code>C:\Users\adshift FrontEnd\AppData\Local\Temp\php34E2.tmp</code></p>
+<p>The new category image (jpeg, png, jpg, gif, webp, max 2MB). Example: <code>C:\Users\adshift FrontEnd\AppData\Local\Temp\phpD9A2.tmp</code></p>
         </div>
                 <div style=" padding-left: 28px;  clear: unset;">
             <b style="line-height: 2;"><code>remove_image</code></b>&nbsp;&nbsp;
@@ -6102,7 +6112,8 @@ Once payment is completed, the pending checkout is converted to a real order.</p
         \"apartment\": \"5A\"
     },
     \"notes\": \"Please deliver in the morning\",
-    \"user_id\": 16
+    \"user_id\": 16,
+    \"payment_method\": \"cod\"
 }"
 </code></pre></div>
 
@@ -6143,7 +6154,8 @@ let body = {
         "apartment": "5A"
     },
     "notes": "Please deliver in the morning",
-    "user_id": 16
+    "user_id": 16,
+    "payment_method": "cod"
 };
 
 fetch(url, {
@@ -6190,6 +6202,7 @@ $response = $client-&gt;post(
             ],
             'notes' =&gt; 'Please deliver in the morning',
             'user_id' =&gt; 16,
+            'payment_method' =&gt; 'cod',
         ],
     ]
 );
@@ -6200,7 +6213,7 @@ print_r(json_decode((string) $body));</code></pre></div>
 
 <span id="example-responses-POSTapi-checkout-initiate">
             <blockquote>
-            <p>Example response (200, Success):</p>
+            <p>Example response (200, Success (Online Payment)):</p>
         </blockquote>
                 <pre>
 
@@ -6211,6 +6224,31 @@ print_r(json_decode((string) $body));</code></pre></div>
         &quot;payment_key&quot;: &quot;ZXlKaGJHY2lPaUpJVXpVeE1pSXNJblI1Y0NJNklrcFhWQ0o5...&quot;,
         &quot;iframe_url&quot;: &quot;https://accept.paymob.com/api/acceptance/iframes/123456?payment_token=ZXlKaGJHY2lPaUpJVXpVeE1pSXNJblI1Y0NJNklrcFhWQ0o5...&quot;,
         &quot;temp_order_id&quot;: &quot;149823756&quot;,
+        &quot;tracking_number&quot;: &quot;BOSTA-123456789&quot;,
+        &quot;cost_breakdown&quot;: {
+            &quot;subtotal&quot;: 250,
+            &quot;tax&quot;: 35,
+            &quot;shipping&quot;: 80,
+            &quot;total&quot;: 365,
+            &quot;item_count&quot;: 3
+        }
+    }
+}</code>
+ </pre>
+            <blockquote>
+            <p>Example response (200, Success (Cash on Delivery)):</p>
+        </blockquote>
+                <pre>
+
+<code class="language-json" style="max-height: 300px;">{
+    &quot;success&quot;: true,
+    &quot;message&quot;: &quot;Order created successfully with Cash on Delivery&quot;,
+    &quot;data&quot;: {
+        &quot;order_id&quot;: 42,
+        &quot;order_number&quot;: &quot;ORD-20240329143000-A1B2C3&quot;,
+        &quot;payment_method&quot;: &quot;cod&quot;,
+        &quot;payment_status&quot;: &quot;pending&quot;,
+        &quot;status&quot;: &quot;processing&quot;,
         &quot;tracking_number&quot;: &quot;BOSTA-123456789&quot;,
         &quot;cost_breakdown&quot;: {
             &quot;subtotal&quot;: 250,
@@ -6654,6 +6692,18 @@ You can check the Dev Tools console for debugging information.</code></pre>
                data-component="body">
     <br>
 <p>Optional user ID for associating guest checkout with a user. Example: <code>16</code></p>
+        </div>
+                <div style=" padding-left: 28px;  clear: unset;">
+            <b style="line-height: 2;"><code>payment_method</code></b>&nbsp;&nbsp;
+<small>string</small>&nbsp;
+<i>optional</i> &nbsp;
+ &nbsp;
+                <input type="text" style="display: none"
+                              name="payment_method"                data-endpoint="POSTapi-checkout-initiate"
+               value="cod"
+               data-component="body">
+    <br>
+<p>The payment method. Use &quot;online&quot; for Paymob card payment (default), or &quot;cod&quot; for Cash on Delivery. Example: <code>cod</code></p>
         </div>
         </form>
 
@@ -8102,6 +8152,7 @@ print_r(json_decode((string) $body));</code></pre></div>
                 &quot;user_id&quot;: 1,
                 &quot;status&quot;: &quot;pending&quot;,
                 &quot;payment_status&quot;: &quot;pending&quot;,
+                &quot;payment_method&quot;: &quot;online&quot;,
                 &quot;subtotal&quot;: 100,
                 &quot;tax&quot;: 10,
                 &quot;shipping_cost&quot;: 15,
@@ -8128,6 +8179,7 @@ print_r(json_decode((string) $body));</code></pre></div>
                 &quot;user_id&quot;: 1,
                 &quot;status&quot;: &quot;قيد الانتظار&quot;,
                 &quot;payment_status&quot;: &quot;pending&quot;,
+                &quot;payment_method&quot;: &quot;online&quot;,
                 &quot;subtotal&quot;: 100,
                 &quot;tax&quot;: 10,
                 &quot;shipping_cost&quot;: 15,
@@ -8511,6 +8563,7 @@ print_r(json_decode((string) $body));</code></pre></div>
         &quot;user_id&quot;: 1,
         &quot;status&quot;: &quot;pending&quot;,
         &quot;payment_status&quot;: &quot;paid&quot;,
+        &quot;payment_method&quot;: &quot;online&quot;,
         &quot;subtotal&quot;: 100,
         &quot;tax&quot;: 10,
         &quot;shipping_cost&quot;: 15,
@@ -11499,7 +11552,7 @@ You can check the Dev Tools console for debugging information.</code></pre>
 
 <div class="bash-example">
     <pre><code class="language-bash">curl --request GET \
-    --get "http://127.0.0.1:8000/api/contact-inquiries/1" \
+    --get "http://127.0.0.1:8000/api/contact-inquiries/16" \
     --header "Authorization: Bearer {YOUR_API_TOKEN}" \
     --header "Content-Type: application/json" \
     --header "Accept: application/json"</code></pre></div>
@@ -11507,7 +11560,7 @@ You can check the Dev Tools console for debugging information.</code></pre>
 
 <div class="javascript-example">
     <pre><code class="language-javascript">const url = new URL(
-    "http://127.0.0.1:8000/api/contact-inquiries/1"
+    "http://127.0.0.1:8000/api/contact-inquiries/16"
 );
 
 const headers = {
@@ -11524,7 +11577,7 @@ fetch(url, {
 
 <div class="php-example">
     <pre><code class="language-php">$client = new \GuzzleHttp\Client();
-$url = 'http://127.0.0.1:8000/api/contact-inquiries/1';
+$url = 'http://127.0.0.1:8000/api/contact-inquiries/16';
 $response = $client-&gt;get(
     $url,
     [
@@ -11672,10 +11725,10 @@ You can check the Dev Tools console for debugging information.</code></pre>
  &nbsp;
                 <input type="number" style="display: none"
                step="any"               name="inquiry_id"                data-endpoint="GETapi-contact-inquiries--inquiry_id-"
-               value="1"
+               value="16"
                data-component="url">
     <br>
-<p>The ID of the inquiry. Example: <code>1</code></p>
+<p>The ID of the inquiry. Example: <code>16</code></p>
             </div>
                     <div style="padding-left: 28px; clear: unset;">
                 <b style="line-height: 2;"><code>inquiry</code></b>&nbsp;&nbsp;
@@ -11705,7 +11758,7 @@ You can check the Dev Tools console for debugging information.</code></pre>
 
 <div class="bash-example">
     <pre><code class="language-bash">curl --request PUT \
-    "http://127.0.0.1:8000/api/contact-inquiries/1" \
+    "http://127.0.0.1:8000/api/contact-inquiries/16" \
     --header "Authorization: Bearer {YOUR_API_TOKEN}" \
     --header "Content-Type: application/json" \
     --header "Accept: application/json" \
@@ -11724,7 +11777,7 @@ You can check the Dev Tools console for debugging information.</code></pre>
 
 <div class="javascript-example">
     <pre><code class="language-javascript">const url = new URL(
-    "http://127.0.0.1:8000/api/contact-inquiries/1"
+    "http://127.0.0.1:8000/api/contact-inquiries/16"
 );
 
 const headers = {
@@ -11753,7 +11806,7 @@ fetch(url, {
 
 <div class="php-example">
     <pre><code class="language-php">$client = new \GuzzleHttp\Client();
-$url = 'http://127.0.0.1:8000/api/contact-inquiries/1';
+$url = 'http://127.0.0.1:8000/api/contact-inquiries/16';
 $response = $client-&gt;put(
     $url,
     [
@@ -11925,10 +11978,10 @@ You can check the Dev Tools console for debugging information.</code></pre>
  &nbsp;
                 <input type="number" style="display: none"
                step="any"               name="inquiry_id"                data-endpoint="PUTapi-contact-inquiries--inquiry_id-"
-               value="1"
+               value="16"
                data-component="url">
     <br>
-<p>The ID of the inquiry. Example: <code>1</code></p>
+<p>The ID of the inquiry. Example: <code>16</code></p>
             </div>
                     <div style="padding-left: 28px; clear: unset;">
                 <b style="line-height: 2;"><code>inquiry</code></b>&nbsp;&nbsp;
@@ -12054,14 +12107,14 @@ You can check the Dev Tools console for debugging information.</code></pre>
 
 <div class="bash-example">
     <pre><code class="language-bash">curl --request PATCH \
-    "http://127.0.0.1:8000/api/contact-inquiries/1" \
+    "http://127.0.0.1:8000/api/contact-inquiries/16" \
     --header "Content-Type: application/json" \
     --header "Accept: application/json"</code></pre></div>
 
 
 <div class="javascript-example">
     <pre><code class="language-javascript">const url = new URL(
-    "http://127.0.0.1:8000/api/contact-inquiries/1"
+    "http://127.0.0.1:8000/api/contact-inquiries/16"
 );
 
 const headers = {
@@ -12077,7 +12130,7 @@ fetch(url, {
 
 <div class="php-example">
     <pre><code class="language-php">$client = new \GuzzleHttp\Client();
-$url = 'http://127.0.0.1:8000/api/contact-inquiries/1';
+$url = 'http://127.0.0.1:8000/api/contact-inquiries/16';
 $response = $client-&gt;patch(
     $url,
     [
@@ -12173,10 +12226,10 @@ You can check the Dev Tools console for debugging information.</code></pre>
  &nbsp;
                 <input type="number" style="display: none"
                step="any"               name="inquiry_id"                data-endpoint="PATCHapi-contact-inquiries--inquiry_id-"
-               value="1"
+               value="16"
                data-component="url">
     <br>
-<p>The ID of the inquiry. Example: <code>1</code></p>
+<p>The ID of the inquiry. Example: <code>16</code></p>
             </div>
                     </form>
 
@@ -12194,7 +12247,7 @@ You can check the Dev Tools console for debugging information.</code></pre>
 
 <div class="bash-example">
     <pre><code class="language-bash">curl --request POST \
-    "http://127.0.0.1:8000/api/contact-inquiries/1/reply" \
+    "http://127.0.0.1:8000/api/contact-inquiries/16/reply" \
     --header "Authorization: Bearer {YOUR_API_TOKEN}" \
     --header "Content-Type: application/json" \
     --header "Accept: application/json" \
@@ -12206,7 +12259,7 @@ You can check the Dev Tools console for debugging information.</code></pre>
 
 <div class="javascript-example">
     <pre><code class="language-javascript">const url = new URL(
-    "http://127.0.0.1:8000/api/contact-inquiries/1/reply"
+    "http://127.0.0.1:8000/api/contact-inquiries/16/reply"
 );
 
 const headers = {
@@ -12228,7 +12281,7 @@ fetch(url, {
 
 <div class="php-example">
     <pre><code class="language-php">$client = new \GuzzleHttp\Client();
-$url = 'http://127.0.0.1:8000/api/contact-inquiries/1/reply';
+$url = 'http://127.0.0.1:8000/api/contact-inquiries/16/reply';
 $response = $client-&gt;post(
     $url,
     [
@@ -12402,10 +12455,10 @@ You can check the Dev Tools console for debugging information.</code></pre>
  &nbsp;
                 <input type="number" style="display: none"
                step="any"               name="inquiry_id"                data-endpoint="POSTapi-contact-inquiries--inquiry_id--reply"
-               value="1"
+               value="16"
                data-component="url">
     <br>
-<p>The ID of the inquiry. Example: <code>1</code></p>
+<p>The ID of the inquiry. Example: <code>16</code></p>
             </div>
                     <div style="padding-left: 28px; clear: unset;">
                 <b style="line-height: 2;"><code>inquiry</code></b>&nbsp;&nbsp;
@@ -12448,7 +12501,7 @@ You can check the Dev Tools console for debugging information.</code></pre>
 
 <div class="bash-example">
     <pre><code class="language-bash">curl --request DELETE \
-    "http://127.0.0.1:8000/api/contact-inquiries/1" \
+    "http://127.0.0.1:8000/api/contact-inquiries/16" \
     --header "Authorization: Bearer {YOUR_API_TOKEN}" \
     --header "Content-Type: application/json" \
     --header "Accept: application/json"</code></pre></div>
@@ -12456,7 +12509,7 @@ You can check the Dev Tools console for debugging information.</code></pre>
 
 <div class="javascript-example">
     <pre><code class="language-javascript">const url = new URL(
-    "http://127.0.0.1:8000/api/contact-inquiries/1"
+    "http://127.0.0.1:8000/api/contact-inquiries/16"
 );
 
 const headers = {
@@ -12473,7 +12526,7 @@ fetch(url, {
 
 <div class="php-example">
     <pre><code class="language-php">$client = new \GuzzleHttp\Client();
-$url = 'http://127.0.0.1:8000/api/contact-inquiries/1';
+$url = 'http://127.0.0.1:8000/api/contact-inquiries/16';
 $response = $client-&gt;delete(
     $url,
     [
@@ -12609,10 +12662,10 @@ You can check the Dev Tools console for debugging information.</code></pre>
  &nbsp;
                 <input type="number" style="display: none"
                step="any"               name="inquiry_id"                data-endpoint="DELETEapi-contact-inquiries--inquiry_id-"
-               value="1"
+               value="16"
                data-component="url">
     <br>
-<p>The ID of the inquiry. Example: <code>1</code></p>
+<p>The ID of the inquiry. Example: <code>16</code></p>
             </div>
                     <div style="padding-left: 28px; clear: unset;">
                 <b style="line-height: 2;"><code>inquiry</code></b>&nbsp;&nbsp;
@@ -12865,7 +12918,7 @@ Only inquiries that have been replied to can be published.</p>
 
 <div class="bash-example">
     <pre><code class="language-bash">curl --request POST \
-    "http://127.0.0.1:8000/api/admin/inquiries/1/publish" \
+    "http://127.0.0.1:8000/api/admin/inquiries/16/publish" \
     --header "Authorization: Bearer {YOUR_API_TOKEN}" \
     --header "Content-Type: application/json" \
     --header "Accept: application/json"</code></pre></div>
@@ -12873,7 +12926,7 @@ Only inquiries that have been replied to can be published.</p>
 
 <div class="javascript-example">
     <pre><code class="language-javascript">const url = new URL(
-    "http://127.0.0.1:8000/api/admin/inquiries/1/publish"
+    "http://127.0.0.1:8000/api/admin/inquiries/16/publish"
 );
 
 const headers = {
@@ -12890,7 +12943,7 @@ fetch(url, {
 
 <div class="php-example">
     <pre><code class="language-php">$client = new \GuzzleHttp\Client();
-$url = 'http://127.0.0.1:8000/api/admin/inquiries/1/publish';
+$url = 'http://127.0.0.1:8000/api/admin/inquiries/16/publish';
 $response = $client-&gt;post(
     $url,
     [
@@ -13050,10 +13103,10 @@ You can check the Dev Tools console for debugging information.</code></pre>
  &nbsp;
                 <input type="number" style="display: none"
                step="any"               name="inquiry_id"                data-endpoint="POSTapi-admin-inquiries--inquiry_id--publish"
-               value="1"
+               value="16"
                data-component="url">
     <br>
-<p>The ID of the inquiry. Example: <code>1</code></p>
+<p>The ID of the inquiry. Example: <code>16</code></p>
             </div>
                     <div style="padding-left: 28px; clear: unset;">
                 <b style="line-height: 2;"><code>inquiry</code></b>&nbsp;&nbsp;
@@ -13083,7 +13136,7 @@ You can check the Dev Tools console for debugging information.</code></pre>
 
 <div class="bash-example">
     <pre><code class="language-bash">curl --request POST \
-    "http://127.0.0.1:8000/api/admin/inquiries/1/unpublish" \
+    "http://127.0.0.1:8000/api/admin/inquiries/16/unpublish" \
     --header "Authorization: Bearer {YOUR_API_TOKEN}" \
     --header "Content-Type: application/json" \
     --header "Accept: application/json"</code></pre></div>
@@ -13091,7 +13144,7 @@ You can check the Dev Tools console for debugging information.</code></pre>
 
 <div class="javascript-example">
     <pre><code class="language-javascript">const url = new URL(
-    "http://127.0.0.1:8000/api/admin/inquiries/1/unpublish"
+    "http://127.0.0.1:8000/api/admin/inquiries/16/unpublish"
 );
 
 const headers = {
@@ -13108,7 +13161,7 @@ fetch(url, {
 
 <div class="php-example">
     <pre><code class="language-php">$client = new \GuzzleHttp\Client();
-$url = 'http://127.0.0.1:8000/api/admin/inquiries/1/unpublish';
+$url = 'http://127.0.0.1:8000/api/admin/inquiries/16/unpublish';
 $response = $client-&gt;post(
     $url,
     [
@@ -13259,10 +13312,10 @@ You can check the Dev Tools console for debugging information.</code></pre>
  &nbsp;
                 <input type="number" style="display: none"
                step="any"               name="inquiry_id"                data-endpoint="POSTapi-admin-inquiries--inquiry_id--unpublish"
-               value="1"
+               value="16"
                data-component="url">
     <br>
-<p>The ID of the inquiry. Example: <code>1</code></p>
+<p>The ID of the inquiry. Example: <code>16</code></p>
             </div>
                     <div style="padding-left: 28px; clear: unset;">
                 <b style="line-height: 2;"><code>inquiry</code></b>&nbsp;&nbsp;
@@ -13985,7 +14038,7 @@ You can check the Dev Tools console for debugging information.</code></pre>
 
 <div class="bash-example">
     <pre><code class="language-bash">curl --request GET \
-    --get "http://127.0.0.1:8000/api/addresses/1" \
+    --get "http://127.0.0.1:8000/api/addresses/3" \
     --header "Authorization: Bearer {YOUR_API_TOKEN}" \
     --header "Content-Type: application/json" \
     --header "Accept: application/json"</code></pre></div>
@@ -13993,7 +14046,7 @@ You can check the Dev Tools console for debugging information.</code></pre>
 
 <div class="javascript-example">
     <pre><code class="language-javascript">const url = new URL(
-    "http://127.0.0.1:8000/api/addresses/1"
+    "http://127.0.0.1:8000/api/addresses/3"
 );
 
 const headers = {
@@ -14010,7 +14063,7 @@ fetch(url, {
 
 <div class="php-example">
     <pre><code class="language-php">$client = new \GuzzleHttp\Client();
-$url = 'http://127.0.0.1:8000/api/addresses/1';
+$url = 'http://127.0.0.1:8000/api/addresses/3';
 $response = $client-&gt;get(
     $url,
     [
@@ -14169,10 +14222,10 @@ You can check the Dev Tools console for debugging information.</code></pre>
  &nbsp;
                 <input type="number" style="display: none"
                step="any"               name="address_id"                data-endpoint="GETapi-addresses--address_id-"
-               value="1"
+               value="3"
                data-component="url">
     <br>
-<p>The ID of the address. Example: <code>1</code></p>
+<p>The ID of the address. Example: <code>3</code></p>
             </div>
                     <div style="padding-left: 28px; clear: unset;">
                 <b style="line-height: 2;"><code>address</code></b>&nbsp;&nbsp;
@@ -14203,7 +14256,7 @@ If is_default is set to true, all other addresses will be unset as default.</p>
 
 <div class="bash-example">
     <pre><code class="language-bash">curl --request PUT \
-    "http://127.0.0.1:8000/api/addresses/1" \
+    "http://127.0.0.1:8000/api/addresses/3" \
     --header "Authorization: Bearer {YOUR_API_TOKEN}" \
     --header "Content-Type: application/json" \
     --header "Accept: application/json" \
@@ -14230,7 +14283,7 @@ If is_default is set to true, all other addresses will be unset as default.</p>
 
 <div class="javascript-example">
     <pre><code class="language-javascript">const url = new URL(
-    "http://127.0.0.1:8000/api/addresses/1"
+    "http://127.0.0.1:8000/api/addresses/3"
 );
 
 const headers = {
@@ -14267,7 +14320,7 @@ fetch(url, {
 
 <div class="php-example">
     <pre><code class="language-php">$client = new \GuzzleHttp\Client();
-$url = 'http://127.0.0.1:8000/api/addresses/1';
+$url = 'http://127.0.0.1:8000/api/addresses/3';
 $response = $client-&gt;put(
     $url,
     [
@@ -14459,10 +14512,10 @@ You can check the Dev Tools console for debugging information.</code></pre>
  &nbsp;
                 <input type="number" style="display: none"
                step="any"               name="address_id"                data-endpoint="PUTapi-addresses--address_id-"
-               value="1"
+               value="3"
                data-component="url">
     <br>
-<p>The ID of the address. Example: <code>1</code></p>
+<p>The ID of the address. Example: <code>3</code></p>
             </div>
                     <div style="padding-left: 28px; clear: unset;">
                 <b style="line-height: 2;"><code>address</code></b>&nbsp;&nbsp;
@@ -14715,7 +14768,7 @@ You can check the Dev Tools console for debugging information.</code></pre>
 
 <div class="bash-example">
     <pre><code class="language-bash">curl --request DELETE \
-    "http://127.0.0.1:8000/api/addresses/1" \
+    "http://127.0.0.1:8000/api/addresses/3" \
     --header "Authorization: Bearer {YOUR_API_TOKEN}" \
     --header "Content-Type: application/json" \
     --header "Accept: application/json"</code></pre></div>
@@ -14723,7 +14776,7 @@ You can check the Dev Tools console for debugging information.</code></pre>
 
 <div class="javascript-example">
     <pre><code class="language-javascript">const url = new URL(
-    "http://127.0.0.1:8000/api/addresses/1"
+    "http://127.0.0.1:8000/api/addresses/3"
 );
 
 const headers = {
@@ -14740,7 +14793,7 @@ fetch(url, {
 
 <div class="php-example">
     <pre><code class="language-php">$client = new \GuzzleHttp\Client();
-$url = 'http://127.0.0.1:8000/api/addresses/1';
+$url = 'http://127.0.0.1:8000/api/addresses/3';
 $response = $client-&gt;delete(
     $url,
     [
@@ -14878,10 +14931,10 @@ You can check the Dev Tools console for debugging information.</code></pre>
  &nbsp;
                 <input type="number" style="display: none"
                step="any"               name="address_id"                data-endpoint="DELETEapi-addresses--address_id-"
-               value="1"
+               value="3"
                data-component="url">
     <br>
-<p>The ID of the address. Example: <code>1</code></p>
+<p>The ID of the address. Example: <code>3</code></p>
             </div>
                     <div style="padding-left: 28px; clear: unset;">
                 <b style="line-height: 2;"><code>address</code></b>&nbsp;&nbsp;
@@ -14912,7 +14965,7 @@ All other addresses will be unset as default.</p>
 
 <div class="bash-example">
     <pre><code class="language-bash">curl --request PATCH \
-    "http://127.0.0.1:8000/api/addresses/1/default" \
+    "http://127.0.0.1:8000/api/addresses/3/default" \
     --header "Authorization: Bearer {YOUR_API_TOKEN}" \
     --header "Content-Type: application/json" \
     --header "Accept: application/json"</code></pre></div>
@@ -14920,7 +14973,7 @@ All other addresses will be unset as default.</p>
 
 <div class="javascript-example">
     <pre><code class="language-javascript">const url = new URL(
-    "http://127.0.0.1:8000/api/addresses/1/default"
+    "http://127.0.0.1:8000/api/addresses/3/default"
 );
 
 const headers = {
@@ -14937,7 +14990,7 @@ fetch(url, {
 
 <div class="php-example">
     <pre><code class="language-php">$client = new \GuzzleHttp\Client();
-$url = 'http://127.0.0.1:8000/api/addresses/1/default';
+$url = 'http://127.0.0.1:8000/api/addresses/3/default';
 $response = $client-&gt;patch(
     $url,
     [
@@ -15097,10 +15150,10 @@ You can check the Dev Tools console for debugging information.</code></pre>
  &nbsp;
                 <input type="number" style="display: none"
                step="any"               name="address_id"                data-endpoint="PATCHapi-addresses--address_id--default"
-               value="1"
+               value="3"
                data-component="url">
     <br>
-<p>The ID of the address. Example: <code>1</code></p>
+<p>The ID of the address. Example: <code>3</code></p>
             </div>
                     <div style="padding-left: 28px; clear: unset;">
                 <b style="line-height: 2;"><code>address</code></b>&nbsp;&nbsp;
@@ -15181,9 +15234,11 @@ print_r(json_decode((string) $body));</code></pre></div>
             </summary>
             <pre><code class="language-http">cache-control: no-cache, private
 content-type: application/json
+x-session-token: W5jHx24kZJcgvfsn7Urjyx5Ujepo0yINSmqspoNj
 access-control-allow-origin: http://localhost:3000
 access-control-allow-credentials: true
-set-cookie: al-atheer-ecommerce-session=eyJpdiI6Ild4ekkvQXM0TmxUWGpBbHZLREMyTEE9PSIsInZhbHVlIjoic1pYR3FZclhOUUk1dVI4Snd3dGFXT3JXaWVCbmdQWTdNYkJKdzB6M2d2UmJLWlhNR0dEeTQxVWFPUHgxZG9LSFQvY09NRUo3N0x5cTB2endQUE9NNkV4N3Q1bThBdmFqVzVOWWVaVlFkL1lVbCtMdnh3T3BuTE5mK25ROURWNm4iLCJtYWMiOiIyNTM4MGY3MDc1ZjFmYWJiY2I3NjRkMTRkMzhkNjU4Mzk4YTI3YzMxMzlkNGYwYjYzYzQzNzdmYzliMjczODM3IiwidGFnIjoiIn0%3D; expires=Sun, 08 Feb 2026 14:07:56 GMT; Max-Age=7199; path=/; secure; httponly; samesite=none
+access-control-expose-headers: X-Session-Token
+set-cookie: al-atheer-ecommerce-session=eyJpdiI6InZ4TzIvQ2NCcUNRZnlCZXVhb1V6MkE9PSIsInZhbHVlIjoiWnpyV3EyYjdsbWpxK0xrWG1qb3B1SHZ0aUtZNzZTVGZpS1Y0d1VCaTFIcWdDdnBMNEhpU0E2YW1iSGxidDgwa0dmc29Wb0FnaHhCNnQyZ2VDc3Z6Y0dqMi9JMnNuajRXMm9hbzFGWlNyM042SjlVWW84N2tkbXlZVmFmRUI1ZHkiLCJtYWMiOiJkOWIwNDdlMmNjNjhhZGZhMWQxYmU3NmVkYmU4MWYwZGVmNDUyZjQ5NjI0NWVkN2QwNmE1YmExOGExZjYxN2RmIiwidGFnIjoiIn0%3D; expires=Sun, 29 Mar 2026 14:15:13 GMT; Max-Age=7200; path=/; secure; httponly; samesite=none
  </code></pre></details>         <pre>
 
 <code class="language-json" style="max-height: 300px;">{
@@ -15363,7 +15418,8 @@ print_r(json_decode((string) $body));</code></pre></div>
 content-type: application/json
 access-control-allow-origin: http://localhost:3000
 access-control-allow-credentials: true
-set-cookie: al-atheer-ecommerce-session=eyJpdiI6IklUNFRDd29XMW92aGI0djJ4Y2swbUE9PSIsInZhbHVlIjoiakhVTTNqUkxpeGlJbHZ2YTlBMHl6ZmFEcElFQ0NtZzZqVHVVcTdpZjc4RkxCdSsrYjJCcHJ4R04zaE5BdGE5Y1BGRDlUbktkbmFaMXNFQlZTdmFmOFdYdy80YjR1NmZUdHNaR3F0YkpNZDloU1EvREdoYnF2QW9Mcjh3VERVR1UiLCJtYWMiOiIwYzk5NzNkZjJhZTliYjU5NmU5NDMyZDdlYzM5MjZhNzdmMTFjMmIwYjcxODBiNjczNzAwOGMxYWZhODA0ZDI3IiwidGFnIjoiIn0%3D; expires=Sun, 08 Feb 2026 14:08:05 GMT; Max-Age=7200; path=/; secure; httponly; samesite=none
+access-control-expose-headers: X-Session-Token
+set-cookie: al-atheer-ecommerce-session=eyJpdiI6IjZKNy9SbXFieHR4Zmx6ZThWVWFSSmc9PSIsInZhbHVlIjoic3ZnT0JtQ1ZKNWhpRFBEM2JsOVhZS2xmeklhUHJVcDZoOHlZUUdsa05MRFhCNmZlcWRqandBdm5VcEFmTmlsdU5mZW02NHUrWGc4QThnL25tcUt6dG9CUFpnWkVJMEQ0bGxlN25JRGMwNFVFajNBZ2NLbTZUL0FFMzV5T25ZM0kiLCJtYWMiOiIyZWM3MTI1MWM3ZjRmNWViNTQ4MWVlYWMwZDVhZGJlMmM5MWQ5OTEzNTJkNjE0YTA4YWJlMDAxYzk5YjhkNDdjIiwidGFnIjoiIn0%3D; expires=Sun, 29 Mar 2026 14:15:13 GMT; Max-Age=7200; path=/; secure; httponly; samesite=none
  </code></pre></details>         <pre>
 
 <code class="language-json" style="max-height: 300px;">{
@@ -15507,7 +15563,8 @@ print_r(json_decode((string) $body));</code></pre></div>
 content-type: application/json
 access-control-allow-origin: http://localhost:3000
 access-control-allow-credentials: true
-set-cookie: al-atheer-ecommerce-session=eyJpdiI6Ilc2UmJFNklhYThpOXMyeGViczVVOWc9PSIsInZhbHVlIjoiU1R4ZGcvbjY4MFhrTFo4Umwrc2VicFJ1OHJaNDlNMjZvM3ZTaGV2MDU4aW9CSHdsN2Zrb2Q5OVBiRlVnT3JXcm5nNW1iaEVVcFFPVEpkZ3BsV05senBWMW9QRVZMWkp5TVBPMTV4SjA2MnR3VmZiSVVBaDBYS1BwQ3BaODVZM0siLCJtYWMiOiJlMTRlMzY5Y2ZlODMzMzlhM2M5YTViNmU5ZjgzMDZkYjcxNzJiMzc2M2M1MzhiNjZlNTliZDY1MWQxODYzOGY1IiwidGFnIjoiIn0%3D; expires=Sun, 08 Feb 2026 14:08:05 GMT; Max-Age=7200; path=/; secure; httponly; samesite=none
+access-control-expose-headers: X-Session-Token
+set-cookie: al-atheer-ecommerce-session=eyJpdiI6IjRTM2xxemhEWGVkejJ2NFRQbHlROXc9PSIsInZhbHVlIjoiTlJmeHM5TlowSmJ1c3A2dWtNTno5ZnBLZjVyMXY3ejhLYTVTdnZqTmZmMVNNMXFVdGFXdmtXT2pzcDAxbHBaN3FWM3d4UWVmRURreUFvc3g0eG9meWxNdUdZc1UrQmM0T2htS1gvdHZGZGltTmo4VGZiR0hEdHlZL05oMjBPV0MiLCJtYWMiOiJkNGQxNmFjMTE1YWVjNTNmZjZmOTBmNzAyNjA4NDNkZDI0M2Q0MGJmMmRjNDg3ODhmMTNlODY0ZjE1NDQ0YjAyIiwidGFnIjoiIn0%3D; expires=Sun, 29 Mar 2026 14:15:13 GMT; Max-Age=7200; path=/; secure; httponly; samesite=none
  </code></pre></details>         <pre>
 
 <code class="language-json" style="max-height: 300px;">{
@@ -15651,7 +15708,8 @@ print_r(json_decode((string) $body));</code></pre></div>
 content-type: application/json
 access-control-allow-origin: http://localhost:3000
 access-control-allow-credentials: true
-set-cookie: al-atheer-ecommerce-session=eyJpdiI6IlY2MjRaV0FBWnJDald0SVN2bklJaEE9PSIsInZhbHVlIjoiTTUwQWpUT3dqTzhUb0xKS0cyNWI0bjNncmowRWJXeCt3NHFYSTc5OHBLMGhkQm5hQUxQWmgwaTBXWDBGTldMRStITXZhK2hLSTR5TFRieXZOSktjTVRuNi9RMDQ1T0MxUVJJRnpmcCtKZS9VV2tDcjhpcVJQWFNZQkR6Q0wxa0IiLCJtYWMiOiIxM2M5MmJlY2YyNDFiY2Y3YzAwNjhhYWMwNzRmNzJmNTRiOTNjYmRmMTQyOGU3N2EwN2U3OWYzMzQ4YThlZTI5IiwidGFnIjoiIn0%3D; expires=Sun, 08 Feb 2026 14:08:05 GMT; Max-Age=7200; path=/; secure; httponly; samesite=none
+access-control-expose-headers: X-Session-Token
+set-cookie: al-atheer-ecommerce-session=eyJpdiI6IlE5MTlkOWU4THdPSXJuUkxoQ2ViZ0E9PSIsInZhbHVlIjoiam1BUHVPNXF6TjIyVFF1VkFvdEk5QkhOdHlBdDNYR0lnaWxsMy9sSnRHMXJxZXFrRmdvS1N0RkVTZ0ZIUzh0ajR5aGlzUjd0YUU2MDR1SXRMTEl5U2RqeWRUQjUvSjdFY1JWelpacVpqcFZUaGN3eGhLWTRIdlF2QzVSUW85T3QiLCJtYWMiOiJmNmY1NjY4ZmEzN2MxN2QyZDkzMDQ4YzcxZmE3MWU3MDg1ZGU5ZGUzZjBjYjFhY2YzZTljOWJkNDZlN2U4NTQ1IiwidGFnIjoiIn0%3D; expires=Sun, 29 Mar 2026 14:15:13 GMT; Max-Age=7200; path=/; secure; httponly; samesite=none
  </code></pre></details>         <pre>
 
 <code class="language-json" style="max-height: 300px;">{
@@ -15795,7 +15853,8 @@ print_r(json_decode((string) $body));</code></pre></div>
 content-type: application/json
 access-control-allow-origin: http://localhost:3000
 access-control-allow-credentials: true
-set-cookie: al-atheer-ecommerce-session=eyJpdiI6Imh4bFpUYTBRYXR4ZjRpTHRWRTlqcXc9PSIsInZhbHVlIjoiWE5PWkU0Rnl0aVN0anNQQjNmL1p1MG5XY1lCcHBLcW16bk1Ub0ZrT3FpRzNnUC9LYTVubHc4RWpEZ0cySFhmT0tvZVA4TTBpdTZmQkxxVmZOT2NIcG01RUVsbXIySUxHNGgwN1JPQzZUWnZUMGpvTlJpTzNwSGozSVlwTjRKQjkiLCJtYWMiOiIxNDIyYzE3ZDJiYTU0YzNhOTdiZDhlOWEyYjBmYzUwZDcxZDBmNmZhMTU1NDU1ZTEyMjdlYWQ3OTdhNWNjNjk0IiwidGFnIjoiIn0%3D; expires=Sun, 08 Feb 2026 14:08:05 GMT; Max-Age=7200; path=/; secure; httponly; samesite=none
+access-control-expose-headers: X-Session-Token
+set-cookie: al-atheer-ecommerce-session=eyJpdiI6IlRyek45U2NVckp0ZXRjK3M3OHN5UlE9PSIsInZhbHVlIjoiMjBTYkh2TExtWXNIc0hGSU5GejFPNFozNCtuRGs0enlaWXRrcG1QeW4xa3RSNFo2blBSU3ppZXhiMmdGeEFLc3NkWmNHOXBaZXhFa0hvNy9ybWZ0MlBGalByZHg4NHdGZTRNWHpVZmRlRWZadzJjYmRKY0dSSFhNc2VTUGZkYloiLCJtYWMiOiI1N2Q4YzgxMDc1YzFiNzQ5OGIzNzdkM2UzOGY0ZGFlYmI4YjRiZmY4ZmYwYTlkMmVhNjJkOWExMDRhZWNiMTNiIiwidGFnIjoiIn0%3D; expires=Sun, 29 Mar 2026 14:15:13 GMT; Max-Age=7200; path=/; secure; httponly; samesite=none
  </code></pre></details>         <pre>
 
 <code class="language-json" style="max-height: 300px;">{
@@ -15939,7 +15998,8 @@ print_r(json_decode((string) $body));</code></pre></div>
 content-type: application/json
 access-control-allow-origin: http://localhost:3000
 access-control-allow-credentials: true
-set-cookie: al-atheer-ecommerce-session=eyJpdiI6ImVFcXU1dllyRy9TUE1jdVNKTDBEWWc9PSIsInZhbHVlIjoiQWNBbkd5dGhWdXgzZnM0eFhVczc4c1BVUUx2am1YL2o5MTR6Z0JXYVo0a2RPbGdlaWpNREpCdjFyOExScndWL0ZPeHF6OGxmcEcyRG03M21Fdk8yQkJTZlF3REZUUGhxQ3pnYmNNU2hEMGVDTklOQkN2bVdVYU5PT0xOSUxwc2EiLCJtYWMiOiIxNjI3Y2Y3MmViYmNhYTkwMWZmOGFlZTYyNWFlMzI1ZGNhNDViMDY4MjkxNmU5ZjhiZWNmM2UxZTFhZWZkNGJkIiwidGFnIjoiIn0%3D; expires=Sun, 08 Feb 2026 14:08:05 GMT; Max-Age=7200; path=/; secure; httponly; samesite=none
+access-control-expose-headers: X-Session-Token
+set-cookie: al-atheer-ecommerce-session=eyJpdiI6IkZqdzRscGlpREVtSXNBRUt5dTk3amc9PSIsInZhbHVlIjoiK1pBOTdtOUU3eCtXRHFubDBmczBZS0FLbTl3czk3cjQrdHRJQ0J5eWpNWVhuRGh6V0VqMlFseW1VMVh1bkxKVkhPRjRrSUZpUXhLd3BFblZmOWVJS29QVFlKRDhWUjZFTXRSWXIwc2ZTQWNlRmJaWEIyZE9RS29VeUdPWG9pSzUiLCJtYWMiOiIzOGY4NTdhNzUxYWQyYzAyNDZiMzRiMmQ3YmY4OTgwMWEyYTFhM2UxMDM2MzI1NmI2MmEzZTdlYjZjNGZhMzg3IiwidGFnIjoiIn0%3D; expires=Sun, 29 Mar 2026 14:15:13 GMT; Max-Age=7200; path=/; secure; httponly; samesite=none
  </code></pre></details>         <pre>
 
 <code class="language-json" style="max-height: 300px;">{
@@ -16019,6 +16079,494 @@ You can check the Dev Tools console for debugging information.</code></pre>
 <p>Example: <code>application/json</code></p>
             </div>
                         </form>
+
+                    <h2 id="endpoints-GETapi-supplier-dashboard-stats">GET api/supplier/dashboard/stats</h2>
+
+<p>
+</p>
+
+
+
+<span id="example-requests-GETapi-supplier-dashboard-stats">
+<blockquote>Example request:</blockquote>
+
+
+<div class="bash-example">
+    <pre><code class="language-bash">curl --request GET \
+    --get "http://127.0.0.1:8000/api/supplier/dashboard/stats" \
+    --header "Content-Type: application/json" \
+    --header "Accept: application/json"</code></pre></div>
+
+
+<div class="javascript-example">
+    <pre><code class="language-javascript">const url = new URL(
+    "http://127.0.0.1:8000/api/supplier/dashboard/stats"
+);
+
+const headers = {
+    "Content-Type": "application/json",
+    "Accept": "application/json",
+};
+
+fetch(url, {
+    method: "GET",
+    headers,
+}).then(response =&gt; response.json());</code></pre></div>
+
+
+<div class="php-example">
+    <pre><code class="language-php">$client = new \GuzzleHttp\Client();
+$url = 'http://127.0.0.1:8000/api/supplier/dashboard/stats';
+$response = $client-&gt;get(
+    $url,
+    [
+        'headers' =&gt; [
+            'Content-Type' =&gt; 'application/json',
+            'Accept' =&gt; 'application/json',
+        ],
+    ]
+);
+$body = $response-&gt;getBody();
+print_r(json_decode((string) $body));</code></pre></div>
+
+</span>
+
+<span id="example-responses-GETapi-supplier-dashboard-stats">
+            <blockquote>
+            <p>Example response (401):</p>
+        </blockquote>
+                <details class="annotation">
+            <summary style="cursor: pointer;">
+                <small onclick="textContent = parentElement.parentElement.open ? 'Show headers' : 'Hide headers'">Show headers</small>
+            </summary>
+            <pre><code class="language-http">cache-control: no-cache, private
+content-type: application/json
+access-control-allow-origin: http://localhost:3000
+access-control-allow-credentials: true
+access-control-expose-headers: X-Session-Token
+set-cookie: al-atheer-ecommerce-session=eyJpdiI6IlNLcjVJTjdxZlZIdTBDT1l5N2NxdkE9PSIsInZhbHVlIjoiT1VxSWI0NTF3S2JpckNXR09YOHNIclRiR1lZSmlsY1Q2Vm1BNWFhUUdhT2ZQdTZkdS8zaytYWlAvSHlTUnlHdWJiQ3VaN20xc0dTVzBCcTFublRqY1lKNzdVSWdkbWg0UUErR2QzTnFCMnZWT1hhSUNVaHh3c3JlWEMrNXVaa0IiLCJtYWMiOiIxZmU2MzhkYjA4ZDRkYmEyYWFiOTliMjE2NzA3ZGU5ODMwNDgxMWFiMWEyOTY1NjM4N2NlNzg3OTdlZjY4NDQ4IiwidGFnIjoiIn0%3D; expires=Sun, 29 Mar 2026 14:15:13 GMT; Max-Age=7200; path=/; secure; httponly; samesite=none
+ </code></pre></details>         <pre>
+
+<code class="language-json" style="max-height: 300px;">{
+    &quot;message&quot;: &quot;Unauthenticated.&quot;
+}</code>
+ </pre>
+    </span>
+<span id="execution-results-GETapi-supplier-dashboard-stats" hidden>
+    <blockquote>Received response<span
+                id="execution-response-status-GETapi-supplier-dashboard-stats"></span>:
+    </blockquote>
+    <pre class="json"><code id="execution-response-content-GETapi-supplier-dashboard-stats"
+      data-empty-response-text="<Empty response>" style="max-height: 400px;"></code></pre>
+</span>
+<span id="execution-error-GETapi-supplier-dashboard-stats" hidden>
+    <blockquote>Request failed with error:</blockquote>
+    <pre><code id="execution-error-message-GETapi-supplier-dashboard-stats">
+
+Tip: Check that you&#039;re properly connected to the network.
+If you&#039;re a maintainer of ths API, verify that your API is running and you&#039;ve enabled CORS.
+You can check the Dev Tools console for debugging information.</code></pre>
+</span>
+<form id="form-GETapi-supplier-dashboard-stats" data-method="GET"
+      data-path="api/supplier/dashboard/stats"
+      data-authed="0"
+      data-hasfiles="0"
+      data-isarraybody="0"
+      autocomplete="off"
+      onsubmit="event.preventDefault(); executeTryOut('GETapi-supplier-dashboard-stats', this);">
+    <h3>
+        Request&nbsp;&nbsp;&nbsp;
+                    <button type="button"
+                    style="background-color: #8fbcd4; padding: 5px 10px; border-radius: 5px; border-width: thin;"
+                    id="btn-tryout-GETapi-supplier-dashboard-stats"
+                    onclick="tryItOut('GETapi-supplier-dashboard-stats');">Try it out ⚡
+            </button>
+            <button type="button"
+                    style="background-color: #c97a7e; padding: 5px 10px; border-radius: 5px; border-width: thin;"
+                    id="btn-canceltryout-GETapi-supplier-dashboard-stats"
+                    onclick="cancelTryOut('GETapi-supplier-dashboard-stats');" hidden>Cancel 🛑
+            </button>&nbsp;&nbsp;
+            <button type="submit"
+                    style="background-color: #6ac174; padding: 5px 10px; border-radius: 5px; border-width: thin;"
+                    id="btn-executetryout-GETapi-supplier-dashboard-stats"
+                    data-initial-text="Send Request 💥"
+                    data-loading-text="⏱ Sending..."
+                    hidden>Send Request 💥
+            </button>
+            </h3>
+            <p>
+            <small class="badge badge-green">GET</small>
+            <b><code>api/supplier/dashboard/stats</code></b>
+        </p>
+                <h4 class="fancy-heading-panel"><b>Headers</b></h4>
+                                <div style="padding-left: 28px; clear: unset;">
+                <b style="line-height: 2;"><code>Content-Type</code></b>&nbsp;&nbsp;
+&nbsp;
+ &nbsp;
+ &nbsp;
+                <input type="text" style="display: none"
+                              name="Content-Type"                data-endpoint="GETapi-supplier-dashboard-stats"
+               value="application/json"
+               data-component="header">
+    <br>
+<p>Example: <code>application/json</code></p>
+            </div>
+                                <div style="padding-left: 28px; clear: unset;">
+                <b style="line-height: 2;"><code>Accept</code></b>&nbsp;&nbsp;
+&nbsp;
+ &nbsp;
+ &nbsp;
+                <input type="text" style="display: none"
+                              name="Accept"                data-endpoint="GETapi-supplier-dashboard-stats"
+               value="application/json"
+               data-component="header">
+    <br>
+<p>Example: <code>application/json</code></p>
+            </div>
+                        </form>
+
+                    <h2 id="endpoints-GETapi-supplier-orders">GET api/supplier/orders</h2>
+
+<p>
+</p>
+
+
+
+<span id="example-requests-GETapi-supplier-orders">
+<blockquote>Example request:</blockquote>
+
+
+<div class="bash-example">
+    <pre><code class="language-bash">curl --request GET \
+    --get "http://127.0.0.1:8000/api/supplier/orders" \
+    --header "Content-Type: application/json" \
+    --header "Accept: application/json"</code></pre></div>
+
+
+<div class="javascript-example">
+    <pre><code class="language-javascript">const url = new URL(
+    "http://127.0.0.1:8000/api/supplier/orders"
+);
+
+const headers = {
+    "Content-Type": "application/json",
+    "Accept": "application/json",
+};
+
+fetch(url, {
+    method: "GET",
+    headers,
+}).then(response =&gt; response.json());</code></pre></div>
+
+
+<div class="php-example">
+    <pre><code class="language-php">$client = new \GuzzleHttp\Client();
+$url = 'http://127.0.0.1:8000/api/supplier/orders';
+$response = $client-&gt;get(
+    $url,
+    [
+        'headers' =&gt; [
+            'Content-Type' =&gt; 'application/json',
+            'Accept' =&gt; 'application/json',
+        ],
+    ]
+);
+$body = $response-&gt;getBody();
+print_r(json_decode((string) $body));</code></pre></div>
+
+</span>
+
+<span id="example-responses-GETapi-supplier-orders">
+            <blockquote>
+            <p>Example response (401):</p>
+        </blockquote>
+                <details class="annotation">
+            <summary style="cursor: pointer;">
+                <small onclick="textContent = parentElement.parentElement.open ? 'Show headers' : 'Hide headers'">Show headers</small>
+            </summary>
+            <pre><code class="language-http">cache-control: no-cache, private
+content-type: application/json
+access-control-allow-origin: http://localhost:3000
+access-control-allow-credentials: true
+access-control-expose-headers: X-Session-Token
+set-cookie: al-atheer-ecommerce-session=eyJpdiI6IkFoRHV5cTFsWUZRQkx1Mzl4ODR4Z1E9PSIsInZhbHVlIjoiVzNhdFpERXU2SHZ2OU5nY3d6U1BsdUJtM1E4VVNPdnhsV1pEWEpxbkRWSVhhMkZQWHRxMXI0bnI1VU1uRkZieVowOXdYcnZpV3J4a2c5ODM3WHhsY3F1QXhUTHo1REdNSGJybXRBQ1NqdE82QmZrUURMbU5jOGZaWHk2eGI0dGMiLCJtYWMiOiIxNWQzZmVhYjMyMWU1NzFlYTQ5YmFmZjY4ZGRmYTI0MDk1NjRkMGFjMDVlMzY2MTI0ZWU1NzE0MmI0ZGNlOWQ2IiwidGFnIjoiIn0%3D; expires=Sun, 29 Mar 2026 14:15:13 GMT; Max-Age=7200; path=/; secure; httponly; samesite=none
+ </code></pre></details>         <pre>
+
+<code class="language-json" style="max-height: 300px;">{
+    &quot;message&quot;: &quot;Unauthenticated.&quot;
+}</code>
+ </pre>
+    </span>
+<span id="execution-results-GETapi-supplier-orders" hidden>
+    <blockquote>Received response<span
+                id="execution-response-status-GETapi-supplier-orders"></span>:
+    </blockquote>
+    <pre class="json"><code id="execution-response-content-GETapi-supplier-orders"
+      data-empty-response-text="<Empty response>" style="max-height: 400px;"></code></pre>
+</span>
+<span id="execution-error-GETapi-supplier-orders" hidden>
+    <blockquote>Request failed with error:</blockquote>
+    <pre><code id="execution-error-message-GETapi-supplier-orders">
+
+Tip: Check that you&#039;re properly connected to the network.
+If you&#039;re a maintainer of ths API, verify that your API is running and you&#039;ve enabled CORS.
+You can check the Dev Tools console for debugging information.</code></pre>
+</span>
+<form id="form-GETapi-supplier-orders" data-method="GET"
+      data-path="api/supplier/orders"
+      data-authed="0"
+      data-hasfiles="0"
+      data-isarraybody="0"
+      autocomplete="off"
+      onsubmit="event.preventDefault(); executeTryOut('GETapi-supplier-orders', this);">
+    <h3>
+        Request&nbsp;&nbsp;&nbsp;
+                    <button type="button"
+                    style="background-color: #8fbcd4; padding: 5px 10px; border-radius: 5px; border-width: thin;"
+                    id="btn-tryout-GETapi-supplier-orders"
+                    onclick="tryItOut('GETapi-supplier-orders');">Try it out ⚡
+            </button>
+            <button type="button"
+                    style="background-color: #c97a7e; padding: 5px 10px; border-radius: 5px; border-width: thin;"
+                    id="btn-canceltryout-GETapi-supplier-orders"
+                    onclick="cancelTryOut('GETapi-supplier-orders');" hidden>Cancel 🛑
+            </button>&nbsp;&nbsp;
+            <button type="submit"
+                    style="background-color: #6ac174; padding: 5px 10px; border-radius: 5px; border-width: thin;"
+                    id="btn-executetryout-GETapi-supplier-orders"
+                    data-initial-text="Send Request 💥"
+                    data-loading-text="⏱ Sending..."
+                    hidden>Send Request 💥
+            </button>
+            </h3>
+            <p>
+            <small class="badge badge-green">GET</small>
+            <b><code>api/supplier/orders</code></b>
+        </p>
+                <h4 class="fancy-heading-panel"><b>Headers</b></h4>
+                                <div style="padding-left: 28px; clear: unset;">
+                <b style="line-height: 2;"><code>Content-Type</code></b>&nbsp;&nbsp;
+&nbsp;
+ &nbsp;
+ &nbsp;
+                <input type="text" style="display: none"
+                              name="Content-Type"                data-endpoint="GETapi-supplier-orders"
+               value="application/json"
+               data-component="header">
+    <br>
+<p>Example: <code>application/json</code></p>
+            </div>
+                                <div style="padding-left: 28px; clear: unset;">
+                <b style="line-height: 2;"><code>Accept</code></b>&nbsp;&nbsp;
+&nbsp;
+ &nbsp;
+ &nbsp;
+                <input type="text" style="display: none"
+                              name="Accept"                data-endpoint="GETapi-supplier-orders"
+               value="application/json"
+               data-component="header">
+    <br>
+<p>Example: <code>application/json</code></p>
+            </div>
+                        </form>
+
+                    <h2 id="endpoints-PATCHapi-supplier-orders--order_id--status">PATCH api/supplier/orders/{order_id}/status</h2>
+
+<p>
+</p>
+
+
+
+<span id="example-requests-PATCHapi-supplier-orders--order_id--status">
+<blockquote>Example request:</blockquote>
+
+
+<div class="bash-example">
+    <pre><code class="language-bash">curl --request PATCH \
+    "http://127.0.0.1:8000/api/supplier/orders/16/status" \
+    --header "Content-Type: application/json" \
+    --header "Accept: application/json" \
+    --data "{
+    \"status\": \"delivered\",
+    \"status_ar\": \"architecto\",
+    \"payment_status\": \"pending\"
+}"
+</code></pre></div>
+
+
+<div class="javascript-example">
+    <pre><code class="language-javascript">const url = new URL(
+    "http://127.0.0.1:8000/api/supplier/orders/16/status"
+);
+
+const headers = {
+    "Content-Type": "application/json",
+    "Accept": "application/json",
+};
+
+let body = {
+    "status": "delivered",
+    "status_ar": "architecto",
+    "payment_status": "pending"
+};
+
+fetch(url, {
+    method: "PATCH",
+    headers,
+    body: JSON.stringify(body),
+}).then(response =&gt; response.json());</code></pre></div>
+
+
+<div class="php-example">
+    <pre><code class="language-php">$client = new \GuzzleHttp\Client();
+$url = 'http://127.0.0.1:8000/api/supplier/orders/16/status';
+$response = $client-&gt;patch(
+    $url,
+    [
+        'headers' =&gt; [
+            'Content-Type' =&gt; 'application/json',
+            'Accept' =&gt; 'application/json',
+        ],
+        'json' =&gt; [
+            'status' =&gt; 'delivered',
+            'status_ar' =&gt; 'architecto',
+            'payment_status' =&gt; 'pending',
+        ],
+    ]
+);
+$body = $response-&gt;getBody();
+print_r(json_decode((string) $body));</code></pre></div>
+
+</span>
+
+<span id="example-responses-PATCHapi-supplier-orders--order_id--status">
+</span>
+<span id="execution-results-PATCHapi-supplier-orders--order_id--status" hidden>
+    <blockquote>Received response<span
+                id="execution-response-status-PATCHapi-supplier-orders--order_id--status"></span>:
+    </blockquote>
+    <pre class="json"><code id="execution-response-content-PATCHapi-supplier-orders--order_id--status"
+      data-empty-response-text="<Empty response>" style="max-height: 400px;"></code></pre>
+</span>
+<span id="execution-error-PATCHapi-supplier-orders--order_id--status" hidden>
+    <blockquote>Request failed with error:</blockquote>
+    <pre><code id="execution-error-message-PATCHapi-supplier-orders--order_id--status">
+
+Tip: Check that you&#039;re properly connected to the network.
+If you&#039;re a maintainer of ths API, verify that your API is running and you&#039;ve enabled CORS.
+You can check the Dev Tools console for debugging information.</code></pre>
+</span>
+<form id="form-PATCHapi-supplier-orders--order_id--status" data-method="PATCH"
+      data-path="api/supplier/orders/{order_id}/status"
+      data-authed="0"
+      data-hasfiles="0"
+      data-isarraybody="0"
+      autocomplete="off"
+      onsubmit="event.preventDefault(); executeTryOut('PATCHapi-supplier-orders--order_id--status', this);">
+    <h3>
+        Request&nbsp;&nbsp;&nbsp;
+                    <button type="button"
+                    style="background-color: #8fbcd4; padding: 5px 10px; border-radius: 5px; border-width: thin;"
+                    id="btn-tryout-PATCHapi-supplier-orders--order_id--status"
+                    onclick="tryItOut('PATCHapi-supplier-orders--order_id--status');">Try it out ⚡
+            </button>
+            <button type="button"
+                    style="background-color: #c97a7e; padding: 5px 10px; border-radius: 5px; border-width: thin;"
+                    id="btn-canceltryout-PATCHapi-supplier-orders--order_id--status"
+                    onclick="cancelTryOut('PATCHapi-supplier-orders--order_id--status');" hidden>Cancel 🛑
+            </button>&nbsp;&nbsp;
+            <button type="submit"
+                    style="background-color: #6ac174; padding: 5px 10px; border-radius: 5px; border-width: thin;"
+                    id="btn-executetryout-PATCHapi-supplier-orders--order_id--status"
+                    data-initial-text="Send Request 💥"
+                    data-loading-text="⏱ Sending..."
+                    hidden>Send Request 💥
+            </button>
+            </h3>
+            <p>
+            <small class="badge badge-purple">PATCH</small>
+            <b><code>api/supplier/orders/{order_id}/status</code></b>
+        </p>
+                <h4 class="fancy-heading-panel"><b>Headers</b></h4>
+                                <div style="padding-left: 28px; clear: unset;">
+                <b style="line-height: 2;"><code>Content-Type</code></b>&nbsp;&nbsp;
+&nbsp;
+ &nbsp;
+ &nbsp;
+                <input type="text" style="display: none"
+                              name="Content-Type"                data-endpoint="PATCHapi-supplier-orders--order_id--status"
+               value="application/json"
+               data-component="header">
+    <br>
+<p>Example: <code>application/json</code></p>
+            </div>
+                                <div style="padding-left: 28px; clear: unset;">
+                <b style="line-height: 2;"><code>Accept</code></b>&nbsp;&nbsp;
+&nbsp;
+ &nbsp;
+ &nbsp;
+                <input type="text" style="display: none"
+                              name="Accept"                data-endpoint="PATCHapi-supplier-orders--order_id--status"
+               value="application/json"
+               data-component="header">
+    <br>
+<p>Example: <code>application/json</code></p>
+            </div>
+                        <h4 class="fancy-heading-panel"><b>URL Parameters</b></h4>
+                    <div style="padding-left: 28px; clear: unset;">
+                <b style="line-height: 2;"><code>order_id</code></b>&nbsp;&nbsp;
+<small>integer</small>&nbsp;
+ &nbsp;
+ &nbsp;
+                <input type="number" style="display: none"
+               step="any"               name="order_id"                data-endpoint="PATCHapi-supplier-orders--order_id--status"
+               value="16"
+               data-component="url">
+    <br>
+<p>The ID of the order. Example: <code>16</code></p>
+            </div>
+                            <h4 class="fancy-heading-panel"><b>Body Parameters</b></h4>
+        <div style=" padding-left: 28px;  clear: unset;">
+            <b style="line-height: 2;"><code>status</code></b>&nbsp;&nbsp;
+<small>string</small>&nbsp;
+ &nbsp;
+ &nbsp;
+                <input type="text" style="display: none"
+                              name="status"                data-endpoint="PATCHapi-supplier-orders--order_id--status"
+               value="delivered"
+               data-component="body">
+    <br>
+<p>Example: <code>delivered</code></p>
+Must be one of:
+<ul style="list-style-type: square;"><li><code>pending</code></li> <li><code>processing</code></li> <li><code>shipped</code></li> <li><code>delivered</code></li> <li><code>cancelled</code></li></ul>
+        </div>
+                <div style=" padding-left: 28px;  clear: unset;">
+            <b style="line-height: 2;"><code>status_ar</code></b>&nbsp;&nbsp;
+<small>string</small>&nbsp;
+<i>optional</i> &nbsp;
+ &nbsp;
+                <input type="text" style="display: none"
+                              name="status_ar"                data-endpoint="PATCHapi-supplier-orders--order_id--status"
+               value="architecto"
+               data-component="body">
+    <br>
+<p>Example: <code>architecto</code></p>
+        </div>
+                <div style=" padding-left: 28px;  clear: unset;">
+            <b style="line-height: 2;"><code>payment_status</code></b>&nbsp;&nbsp;
+<small>string</small>&nbsp;
+<i>optional</i> &nbsp;
+ &nbsp;
+                <input type="text" style="display: none"
+                              name="payment_status"                data-endpoint="PATCHapi-supplier-orders--order_id--status"
+               value="pending"
+               data-component="body">
+    <br>
+<p>Example: <code>pending</code></p>
+Must be one of:
+<ul style="list-style-type: square;"><li><code>pending</code></li> <li><code>paid</code></li> <li><code>failed</code></li> <li><code>refunded</code></li></ul>
+        </div>
+        </form>
 
                     <h2 id="endpoints-POSTapi-payment-process">Process payment and return payment key/iframe URL</h2>
 
@@ -16208,9 +16756,11 @@ print_r(json_decode((string) $body));</code></pre></div>
             <pre><code class="language-http">cache-control: no-cache, private
 location: http://localhost:3000/checkout_confirmation?payment_status=failed
 content-type: text/html; charset=utf-8
+x-session-token: qGH81yYy02OHwJsCK70oQwlxjOiYtar2EjLonHmz
 access-control-allow-origin: http://localhost:3000
 access-control-allow-credentials: true
-set-cookie: al-atheer-ecommerce-session=eyJpdiI6IlE3bkFnaFZHaFBJcDZ6YUFMd2o4RUE9PSIsInZhbHVlIjoiRDVOTVhFbkdjZlJtSE5GMHNLYk5XekRtek94Q201bzJUdEVxc3owbER5Zk9kbzBibE9nT1hzbS8vVUJFdDZnMGhPWGxHajhOYnpzR0V6bFRmZytpdFZnU1VHUk9kZXJEaUIxd1ZFd2VhOVFmYWtudzh0dXZNcnFrcTlQMGJVeFQiLCJtYWMiOiIzOTE3Y2FmNWI0OWViMjI1ZmEwZDVmYzhjNDAyMGY2NTE3ODk1NTVmNjFkNmY2ZTk1MjZjYmM2MDA4NDE0ZDk3IiwidGFnIjoiIn0%3D; expires=Sun, 08 Feb 2026 14:08:08 GMT; Max-Age=7200; path=/; secure; httponly; samesite=none
+access-control-expose-headers: X-Session-Token
+set-cookie: al-atheer-ecommerce-session=eyJpdiI6InY0WEEyeDZaNEF6bFFKdE1VenJmUVE9PSIsInZhbHVlIjoieEpMdVZXYTNsQStiQlZYSDJScjZ4VVZGN0lhU0xsSHR0UmJsRG5iaHFycGtaek82R0llV0hHZ2Mwbnd4My9yTENoK2FCMFZ4L21sT04xR2NmakFoVVlvOGpjaU8xbUhTeTZEbXo3ejJTcElhckR3VzZxcDArVXpXWUZrQnkyTEUiLCJtYWMiOiIxMDc0NmY1YzA5YjQ4NmU0ZDcwYjZhZDFmNjRjZjZlN2ZhZDBlNDNhYWZmNDIxNzNmOWU3OTFhNjEzNzIyYTA5IiwidGFnIjoiIn0%3D; expires=Sun, 29 Mar 2026 14:15:13 GMT; Max-Age=7200; path=/; secure; httponly; samesite=none
  </code></pre></details>         <pre>
 
 <code class="language-json" style="max-height: 300px;">&lt;!DOCTYPE html&gt;
@@ -16825,9 +17375,11 @@ print_r(json_decode((string) $body));</code></pre></div>
             </summary>
             <pre><code class="language-http">cache-control: no-cache, private
 content-type: application/json
+x-session-token: UBBrpD5BXOrnEPbkk6a3brYSDdvKlxE2h3jh6Ljh
 access-control-allow-origin: http://localhost:3000
 access-control-allow-credentials: true
-set-cookie: al-atheer-ecommerce-session=eyJpdiI6Im84TENGTlQ3eTJvTW92dERiYlFtOVE9PSIsInZhbHVlIjoiblorNkhNbm9WSnk3N2k5aTF0VVZKeG1meVJ2ejUrTFB2cWgrMHAwdFhFVjR1TkJoaXpHdmtRTS9vV2NvdGx0SmhkNjQwY05RUVBndmNJVXc0c3kwUFczWk5SVVF4dXJlZTVaRFNOUjhkZ1dMVmx2dnJoQk0zYkRSQ3RtYzRvVnkiLCJtYWMiOiIyZjZiYTA0Mjk5ODI1ODg0MzQ5YWJiMmJmNGFlYTVhNzRmNTVkNzVjYzBiZjZlYWVlZWNlNGM5YTExMjNlMDM1IiwidGFnIjoiIn0%3D; expires=Sun, 08 Feb 2026 14:08:17 GMT; Max-Age=7200; path=/; secure; httponly; samesite=none
+access-control-expose-headers: X-Session-Token
+set-cookie: al-atheer-ecommerce-session=eyJpdiI6IjlsSVo5ajlJSUpOVXdRTXBDS01xd0E9PSIsInZhbHVlIjoiRDBLVDk0azBWYk5rUlo5UUZlOGQ5MnFwTHVCd3JKd3BRc0xhclNyUW15V2hDc3QzWGlXRnFXaTB5aGVCZUlJUllPK3FGRmUrb0Z3d0NvQmlOL2V6TkRhLy8zRlBZekJpbUdaTTk3MnJSVUJWb0gxNjdUcTMwdmJYZmxFYWNRZkUiLCJtYWMiOiI5NzEzMjFmOTQ3YjBmMTA3MzdiZDAxM2RmNjczNDUzMThhNWU4OThhNDI0NWUwMGI2OWY5MTQzZGU2ODYwNTFjIiwidGFnIjoiIn0%3D; expires=Sun, 29 Mar 2026 14:15:14 GMT; Max-Age=7200; path=/; secure; httponly; samesite=none
  </code></pre></details>         <pre>
 
 <code class="language-json" style="max-height: 300px;">{
@@ -17117,7 +17669,7 @@ You can check the Dev Tools console for debugging information.</code></pre>
     --header "Content-Type: application/json" \
     --header "Accept: application/json" \
     --data "{
-    \"scheduledDate\": \"2052-03-03\",
+    \"scheduledDate\": \"2052-04-21\",
     \"businessLocationId\": \"architecto\",
     \"contactPerson\": {
         \"name\": \"architecto\",
@@ -17129,12 +17681,12 @@ You can check the Dev Tools console for debugging information.</code></pre>
     \"noOfPackages\": 22,
     \"packageType\": \"Normal\",
     \"repeatedData\": {
-        \"repeatedType\": \"Daily\",
+        \"repeatedType\": \"Weekly\",
         \"days\": [
-            \"Tuesday\"
+            \"Monday\"
         ],
-        \"startDate\": \"2026-02-08T12:08:17\",
-        \"endDate\": \"2052-03-03\"
+        \"startDate\": \"2026-03-29T12:15:14\",
+        \"endDate\": \"2052-04-21\"
     }
 }"
 </code></pre></div>
@@ -17151,7 +17703,7 @@ const headers = {
 };
 
 let body = {
-    "scheduledDate": "2052-03-03",
+    "scheduledDate": "2052-04-21",
     "businessLocationId": "architecto",
     "contactPerson": {
         "name": "architecto",
@@ -17163,12 +17715,12 @@ let body = {
     "noOfPackages": 22,
     "packageType": "Normal",
     "repeatedData": {
-        "repeatedType": "Daily",
+        "repeatedType": "Weekly",
         "days": [
-            "Tuesday"
+            "Monday"
         ],
-        "startDate": "2026-02-08T12:08:17",
-        "endDate": "2052-03-03"
+        "startDate": "2026-03-29T12:15:14",
+        "endDate": "2052-04-21"
     }
 };
 
@@ -17190,7 +17742,7 @@ $response = $client-&gt;post(
             'Accept' =&gt; 'application/json',
         ],
         'json' =&gt; [
-            'scheduledDate' =&gt; '2052-03-03',
+            'scheduledDate' =&gt; '2052-04-21',
             'businessLocationId' =&gt; 'architecto',
             'contactPerson' =&gt; [
                 'name' =&gt; 'architecto',
@@ -17202,12 +17754,12 @@ $response = $client-&gt;post(
             'noOfPackages' =&gt; 22,
             'packageType' =&gt; 'Normal',
             'repeatedData' =&gt; [
-                'repeatedType' =&gt; 'Daily',
+                'repeatedType' =&gt; 'Weekly',
                 'days' =&gt; [
-                    'Tuesday',
+                    'Monday',
                 ],
-                'startDate' =&gt; '2026-02-08T12:08:17',
-                'endDate' =&gt; '2052-03-03',
+                'startDate' =&gt; '2026-03-29T12:15:14',
+                'endDate' =&gt; '2052-04-21',
             ],
         ],
     ]
@@ -17298,10 +17850,10 @@ You can check the Dev Tools console for debugging information.</code></pre>
  &nbsp;
                 <input type="text" style="display: none"
                               name="scheduledDate"                data-endpoint="POSTapi-pickups"
-               value="2052-03-03"
+               value="2052-04-21"
                data-component="body">
     <br>
-<p>Must be a valid date. Must be a date after <code>today</code>. Example: <code>2052-03-03</code></p>
+<p>Must be a valid date. Must be a date after <code>today</code>. Example: <code>2052-04-21</code></p>
         </div>
                 <div style=" padding-left: 28px;  clear: unset;">
             <b style="line-height: 2;"><code>businessLocationId</code></b>&nbsp;&nbsp;
@@ -17430,10 +17982,10 @@ Must be one of:
  &nbsp;
                 <input type="text" style="display: none"
                               name="repeatedData.repeatedType"                data-endpoint="POSTapi-pickups"
-               value="Daily"
+               value="Weekly"
                data-component="body">
     <br>
-<p>Example: <code>Daily</code></p>
+<p>Example: <code>Weekly</code></p>
 Must be one of:
 <ul style="list-style-type: square;"><li><code>One Time</code></li> <li><code>Daily</code></li> <li><code>Weekly</code></li></ul>
                     </div>
@@ -17460,10 +18012,10 @@ Must be one of:
  &nbsp;
                 <input type="text" style="display: none"
                               name="repeatedData.startDate"                data-endpoint="POSTapi-pickups"
-               value="2026-02-08T12:08:17"
+               value="2026-03-29T12:15:14"
                data-component="body">
     <br>
-<p>Must be a valid date. Example: <code>2026-02-08T12:08:17</code></p>
+<p>Must be a valid date. Example: <code>2026-03-29T12:15:14</code></p>
                     </div>
                                                                 <div style="margin-left: 14px; clear: unset;">
                         <b style="line-height: 2;"><code>endDate</code></b>&nbsp;&nbsp;
@@ -17472,10 +18024,10 @@ Must be one of:
  &nbsp;
                 <input type="text" style="display: none"
                               name="repeatedData.endDate"                data-endpoint="POSTapi-pickups"
-               value="2052-03-03"
+               value="2052-04-21"
                data-component="body">
     <br>
-<p>Must be a valid date. Must be a date after <code>repeatedData.startDate</code>. Example: <code>2052-03-03</code></p>
+<p>Must be a valid date. Must be a date after <code>repeatedData.startDate</code>. Example: <code>2052-04-21</code></p>
                     </div>
                                     </details>
         </div>
@@ -17763,7 +18315,8 @@ You can check the Dev Tools console for debugging information.</code></pre>
     \"MAIL_USERNAME\": \"architecto\",
     \"MAIL_PASSWORD\": \"architecto\",
     \"MAIL_FROM_ADDRESS\": \"zbailey@example.net\",
-    \"MAIL_FROM_NAME\": \"architecto\"
+    \"MAIL_FROM_NAME\": \"architecto\",
+    \"FRONTEND_URL\": \"http:\\/\\/www.bailey.biz\\/quos-velit-et-fugiat-sunt-nihil-accusantium-harum.html\"
 }"
 </code></pre></div>
 
@@ -17792,7 +18345,8 @@ let body = {
     "MAIL_USERNAME": "architecto",
     "MAIL_PASSWORD": "architecto",
     "MAIL_FROM_ADDRESS": "zbailey@example.net",
-    "MAIL_FROM_NAME": "architecto"
+    "MAIL_FROM_NAME": "architecto",
+    "FRONTEND_URL": "http:\/\/www.bailey.biz\/quos-velit-et-fugiat-sunt-nihil-accusantium-harum.html"
 };
 
 fetch(url, {
@@ -17827,6 +18381,7 @@ $response = $client-&gt;post(
             'MAIL_PASSWORD' =&gt; 'architecto',
             'MAIL_FROM_ADDRESS' =&gt; 'zbailey@example.net',
             'MAIL_FROM_NAME' =&gt; 'architecto',
+            'FRONTEND_URL' =&gt; 'http://www.bailey.biz/quos-velit-et-fugiat-sunt-nihil-accusantium-harum.html',
         ],
     ]
 );
@@ -18077,6 +18632,18 @@ You can check the Dev Tools console for debugging information.</code></pre>
     <br>
 <p>Example: <code>architecto</code></p>
         </div>
+                <div style=" padding-left: 28px;  clear: unset;">
+            <b style="line-height: 2;"><code>FRONTEND_URL</code></b>&nbsp;&nbsp;
+<small>string</small>&nbsp;
+<i>optional</i> &nbsp;
+ &nbsp;
+                <input type="text" style="display: none"
+                              name="FRONTEND_URL"                data-endpoint="POSTapi-settings-env"
+               value="http://www.bailey.biz/quos-velit-et-fugiat-sunt-nihil-accusantium-harum.html"
+               data-component="body">
+    <br>
+<p>Example: <code>http://www.bailey.biz/quos-velit-et-fugiat-sunt-nihil-accusantium-harum.html</code></p>
+        </div>
         </form>
 
                     <h2 id="endpoints-GETapi-settings-env-debug">GET api/settings/env/debug</h2>
@@ -18140,14 +18707,16 @@ print_r(json_decode((string) $body));</code></pre></div>
             </summary>
             <pre><code class="language-http">cache-control: no-cache, private
 content-type: application/json
+x-session-token: uD0PF0hwvUehHft8UdEGhusFFi3E55XJQmEMbkY7
 access-control-allow-origin: http://localhost:3000
 access-control-allow-credentials: true
-set-cookie: al-atheer-ecommerce-session=eyJpdiI6InJCdm1JbVFMZkQrOU5WS2pCd0lLZXc9PSIsInZhbHVlIjoieWtnaEZXVzlyMUlrSlUzZElCZGZKUXJvcmFnZ1IzSzJVL3lKU1RpRFh6eVRFRGkveTZ0OFBaS3p2V3N0cTZxWEEwRDZhS3M4OHQ2L1BiYlhxZEsyVlVvQUQ2RWo3L0JKZEdTR2t1elk4bmRGdUh6ZTJGbVdDMUxkMGtOOWFOYzUiLCJtYWMiOiI4YjgxNzA0NTk4MjM3M2MzOGExMzU1NDUwNDM3MTc2MzJlNTQ5YWRkNzA1NmNhMjVlZjJlYmJlMTdkNzI2ODQyIiwidGFnIjoiIn0%3D; expires=Sun, 08 Feb 2026 14:08:18 GMT; Max-Age=7200; path=/; secure; httponly; samesite=none
+access-control-expose-headers: X-Session-Token
+set-cookie: al-atheer-ecommerce-session=eyJpdiI6InlxMVJQTDQ4MVlCNGQ4dXdlbzhVT1E9PSIsInZhbHVlIjoiRlVwdVpVYUV5SVFtYkJpK3BicXRVQXFVb095NmVZWFlmLzVteEhmS29RSFBqVVVldUd3RERwdU5YVDd5RTd4S3BNVUdCWU1xeHJzRVZQelV3SThhbmgzMEVTbDRMc2VneWtnZFczZ3RMMUFaMVI5UzdvN3pUUklERVljRHBzb3EiLCJtYWMiOiJjOGQxNTNlM2ZhOTcxYzZjZDgwZGYwNTQzOTQ3ZTBiNjg2MmY5ODIzOTUyYjA5NTIzYTRlN2YxMjRmYzAzNDY3IiwidGFnIjoiIn0%3D; expires=Sun, 29 Mar 2026 14:15:14 GMT; Max-Age=7200; path=/; secure; httponly; samesite=none
  </code></pre></details>         <pre>
 
 <code class="language-json" style="max-height: 300px;">{
     &quot;status&quot;: {
-        &quot;file_path&quot;: &quot;D:\\code\\ecommerce-api\\.env&quot;,
+        &quot;file_path&quot;: &quot;C:\\projects\\ecommerce-api\\.env&quot;,
         &quot;is_writable&quot;: true,
         &quot;config_cached&quot;: false
     },
@@ -18162,7 +18731,8 @@ set-cookie: al-atheer-ecommerce-session=eyJpdiI6InJCdm1JbVFMZkQrOU5WS2pCd0lLZXc9
         &quot;MAIL_USERNAME&quot;: &quot;ahmadkholy98@gmail.com&quot;,
         &quot;MAIL_PASSWORD&quot;: &quot;akcynlcfghdfxjrq&quot;,
         &quot;MAIL_FROM_ADDRESS&quot;: &quot;ahmadkholy98@gmail.com&quot;,
-        &quot;MAIL_FROM_NAME&quot;: &quot;Al-Atheer Ecommerce&quot;
+        &quot;MAIL_FROM_NAME&quot;: &quot;Al-Atheer Ecommerce&quot;,
+        &quot;FRONTEND_URL&quot;: &quot;http://localhost:3000&quot;
     }
 }</code>
  </pre>
