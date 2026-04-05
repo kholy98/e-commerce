@@ -18,7 +18,7 @@ return new class extends Migration
             $table->json('order_data'); // Complete order information
             $table->json('shipment_data'); // Shipment tracking info
             $table->timestamp('created_at');
-            $table->timestamp('expires_at')->index(); // For cleanup
+            $table->timestamp('expires_at')->nullable()->index();
             $table->timestamp('updated_at')->nullable();
         });
     }
