@@ -46,6 +46,14 @@ class UserSeeder extends Seeder
                 'is_supplier' => true,
                 'email_verified_at' => now(),
             ],
+            [
+                'name' => 'Maher',
+                'email' => 'maher@alatheer.com',
+                'password' => Hash::make('maher@12345'),
+                'phone' => '+201200000155',
+                'is_supplier' => true,
+                'email_verified_at' => now(),
+            ],
         ];
 
         foreach ($users as $user) {
