@@ -25,12 +25,12 @@ class WhatsAppService
 
     public function __construct()
     {
-        $this->accountSid = config('services.whatsapp.account_sid');
-        $this->authToken = config('services.whatsapp.auth_token');
-        $this->fromPhone = config('services.whatsapp.phone_number');
-        $this->metaApiKey = config('services.whatsapp.api_key');
-        $this->metaPhoneNumberId = config('services.whatsapp.phone_number_id');
-        $this->baseUrl = config('services.whatsapp.base_url');
+        $this->accountSid = \App\Models\Setting::get('WHATSAPP_ACCOUNT_SID', config('services.whatsapp.account_sid'));
+        $this->authToken = \App\Models\Setting::get('WHATSAPP_AUTH_TOKEN', config('services.whatsapp.auth_token'));
+        $this->fromPhone = \App\Models\Setting::get('WHATSAPP_PHONE_NUMBER', config('services.whatsapp.phone_number'));
+        $this->metaApiKey = \App\Models\Setting::get('WHATSAPP_API_KEY', config('services.whatsapp.api_key'));
+        $this->metaPhoneNumberId = \App\Models\Setting::get('WHATSAPP_PHONE_NUMBER_ID', config('services.whatsapp.phone_number_id'));
+        $this->baseUrl = \App\Models\Setting::get('WHATSAPP_BASE_URL', config('services.whatsapp.base_url'));
 
         $this->useTwilio = ! empty($this->accountSid) && ! empty($this->authToken) && ! empty($this->fromPhone);
     }

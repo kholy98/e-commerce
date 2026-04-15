@@ -1,5 +1,5 @@
 import { Head } from '@inertiajs/react';
-import { AlertCircle, Loader2 } from 'lucide-react';
+import { AlertCircle, Eye, EyeOff, Loader2 } from 'lucide-react';
 import { FormEvent, useEffect, useState } from 'react';
 
 import { Alert, AlertDescription } from '@/components/ui/alert';
@@ -37,7 +37,10 @@ interface EnvStatus {
     laravel_active_values: {
         PAYMOB_BASE_URL: string;
         PAYMOB_API_KEY: string;
+        PAYMOB_INTEGRATION_ID: string;
+        PAYMOB_IFRAME_ID: string;
         BOSTA_API_KEY: string;
+        BOSTA_BASE_URL: string;
         MAIL_MAILER: string;
         MAIL_SCHEME: string;
         MAIL_HOST: string;
@@ -77,6 +80,10 @@ export default function EnvironmentSettings() {
         FRONTEND_URL: '',
     });
 
+    const [visiblePasswords, setVisiblePasswords] = useState<
+        Record<string, boolean>
+    >({});
+
     useEffect(() => {
         fetchEnvStatus();
     }, []);
@@ -101,7 +108,12 @@ export default function EnvironmentSettings() {
                 PAYMOB_BASE_URL:
                     data.laravel_active_values.PAYMOB_BASE_URL || '',
                 PAYMOB_API_KEY: data.laravel_active_values.PAYMOB_API_KEY || '',
+                PAYMOB_INTEGRATION_ID:
+                    data.laravel_active_values.PAYMOB_INTEGRATION_ID || '',
+                PAYMOB_IFRAME_ID:
+                    data.laravel_active_values.PAYMOB_IFRAME_ID || '',
                 BOSTA_API_KEY: data.laravel_active_values.BOSTA_API_KEY || '',
+                BOSTA_BASE_URL: data.laravel_active_values.BOSTA_BASE_URL || '',
                 MAIL_MAILER: data.laravel_active_values.MAIL_MAILER || '',
                 MAIL_SCHEME: data.laravel_active_values.MAIL_SCHEME || '',
                 MAIL_HOST: data.laravel_active_values.MAIL_HOST || '',
@@ -131,6 +143,13 @@ export default function EnvironmentSettings() {
         setFormData((prev) => ({
             ...prev,
             [field]: e.target.value,
+        }));
+    };
+
+    const togglePasswordVisibility = (field: string) => {
+        setVisiblePasswords((prev) => ({
+            ...prev,
+            [field]: !prev[field],
         }));
     };
 
@@ -383,21 +402,42 @@ export default function EnvironmentSettings() {
                                                 Paymob API Key
                                             </Label>
                                             <div className="flex gap-2">
-                                                <Input
-                                                    id="PAYMOB_API_KEY"
-                                                    type="password"
-                                                    placeholder="Your Paymob API Key"
-                                                    value={
-                                                        formData.PAYMOB_API_KEY
-                                                    }
-                                                    onChange={(e) =>
-                                                        handleInputChange(
-                                                            e,
-                                                            'PAYMOB_API_KEY',
-                                                        )
-                                                    }
-                                                    className="flex-1"
-                                                />
+                                                <div className="relative flex-1">
+                                                    <Input
+                                                        id="PAYMOB_API_KEY"
+                                                        type={
+                                                            visiblePasswords.PAYMOB_API_KEY
+                                                                ? 'text'
+                                                                : 'password'
+                                                        }
+                                                        placeholder="Your Paymob API Key"
+                                                        value={
+                                                            formData.PAYMOB_API_KEY
+                                                        }
+                                                        onChange={(e) =>
+                                                            handleInputChange(
+                                                                e,
+                                                                'PAYMOB_API_KEY',
+                                                            )
+                                                        }
+                                                        className="pe-10"
+                                                    />
+                                                    <button
+                                                        type="button"
+                                                        onClick={() =>
+                                                            togglePasswordVisibility(
+                                                                'PAYMOB_API_KEY',
+                                                            )
+                                                        }
+                                                        className="absolute top-1/2 right-3 -translate-y-1/2 text-muted-foreground transition-colors hover:text-foreground"
+                                                    >
+                                                        {visiblePasswords.PAYMOB_API_KEY ? (
+                                                            <EyeOff className="h-4 w-4" />
+                                                        ) : (
+                                                            <Eye className="h-4 w-4" />
+                                                        )}
+                                                    </button>
+                                                </div>
                                                 <Button
                                                     type="button"
                                                     onClick={(e) =>
@@ -557,21 +597,42 @@ export default function EnvironmentSettings() {
                                                 Bosta API Key
                                             </Label>
                                             <div className="flex gap-2">
-                                                <Input
-                                                    id="BOSTA_API_KEY"
-                                                    type="password"
-                                                    placeholder="Your Bosta API Key"
-                                                    value={
-                                                        formData.BOSTA_API_KEY
-                                                    }
-                                                    onChange={(e) =>
-                                                        handleInputChange(
-                                                            e,
-                                                            'BOSTA_API_KEY',
-                                                        )
-                                                    }
-                                                    className="flex-1"
-                                                />
+                                                <div className="relative flex-1">
+                                                    <Input
+                                                        id="BOSTA_API_KEY"
+                                                        type={
+                                                            visiblePasswords.BOSTA_API_KEY
+                                                                ? 'text'
+                                                                : 'password'
+                                                        }
+                                                        placeholder="Your Bosta API Key"
+                                                        value={
+                                                            formData.BOSTA_API_KEY
+                                                        }
+                                                        onChange={(e) =>
+                                                            handleInputChange(
+                                                                e,
+                                                                'BOSTA_API_KEY',
+                                                            )
+                                                        }
+                                                        className="pe-10"
+                                                    />
+                                                    <button
+                                                        type="button"
+                                                        onClick={() =>
+                                                            togglePasswordVisibility(
+                                                                'BOSTA_API_KEY',
+                                                            )
+                                                        }
+                                                        className="absolute top-1/2 right-3 -translate-y-1/2 text-muted-foreground transition-colors hover:text-foreground"
+                                                    >
+                                                        {visiblePasswords.BOSTA_API_KEY ? (
+                                                            <EyeOff className="h-4 w-4" />
+                                                        ) : (
+                                                            <Eye className="h-4 w-4" />
+                                                        )}
+                                                    </button>
+                                                </div>
                                                 <Button
                                                     type="button"
                                                     onClick={(e) =>
@@ -806,21 +867,42 @@ export default function EnvironmentSettings() {
                                                 Mail Password
                                             </Label>
                                             <div className="flex gap-2">
-                                                <Input
-                                                    id="MAIL_PASSWORD"
-                                                    type="password"
-                                                    placeholder="Your app password"
-                                                    value={
-                                                        formData.MAIL_PASSWORD
-                                                    }
-                                                    onChange={(e) =>
-                                                        handleInputChange(
-                                                            e,
-                                                            'MAIL_PASSWORD',
-                                                        )
-                                                    }
-                                                    className="flex-1"
-                                                />
+                                                <div className="relative flex-1">
+                                                    <Input
+                                                        id="MAIL_PASSWORD"
+                                                        type={
+                                                            visiblePasswords.MAIL_PASSWORD
+                                                                ? 'text'
+                                                                : 'password'
+                                                        }
+                                                        placeholder="Your app password"
+                                                        value={
+                                                            formData.MAIL_PASSWORD
+                                                        }
+                                                        onChange={(e) =>
+                                                            handleInputChange(
+                                                                e,
+                                                                'MAIL_PASSWORD',
+                                                            )
+                                                        }
+                                                        className="pe-10"
+                                                    />
+                                                    <button
+                                                        type="button"
+                                                        onClick={() =>
+                                                            togglePasswordVisibility(
+                                                                'MAIL_PASSWORD',
+                                                            )
+                                                        }
+                                                        className="absolute top-1/2 right-3 -translate-y-1/2 text-muted-foreground transition-colors hover:text-foreground"
+                                                    >
+                                                        {visiblePasswords.MAIL_PASSWORD ? (
+                                                            <EyeOff className="h-4 w-4" />
+                                                        ) : (
+                                                            <Eye className="h-4 w-4" />
+                                                        )}
+                                                    </button>
+                                                </div>
                                                 <Button
                                                     type="button"
                                                     onClick={(e) =>

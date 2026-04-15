@@ -9,23 +9,26 @@ use Illuminate\Support\Facades\Storage;
 class PaymobPaymentService extends BasePaymentService implements PaymentGatewayInterface
 {
     protected $api_key;
+
     protected $integrations_id;
+
     protected $integration_id;
-    protected $iframe_id; // Iframe ID for URL construction
+
+    protected $iframe_id;
 
     public function __construct()
     {
-        $this->base_url = config('paymob.base_url');
-        $this->api_key = config('paymob.api_key');
-        $this->integration_id = config('paymob.integration_id');
-        $this->iframe_id = config('paymob.iframe_id');
+        $this->base_url = \App\Models\Setting::get('PAYMOB_BASE_URL', config('paymob.base_url'));
+        $this->api_key = \App\Models\Setting::get('PAYMOB_API_KEY', config('paymob.api_key'));
+        $this->integration_id = \App\Models\Setting::get('PAYMOB_INTEGRATION_ID', config('paymob.integration_id'));
+        $this->iframe_id = \App\Models\Setting::get('PAYMOB_IFRAME_ID', config('paymob.iframe_id'));
 
         $this->header = [
             'Accept' => 'application/json',
             'Content-Type' => 'application/json',
         ];
 
-        $this->integrations_id = config('paymob.integrations_id');
+        $this->integrations_id = \App\Models\Setting::get('PAYMOB_INTEGRATION_ID', config('paymob.integrations_id'));
     }
 
     /**
@@ -33,9 +36,10 @@ class PaymobPaymentService extends BasePaymentService implements PaymentGatewayI
      */
     protected function generateToken(): string
     {
-        \Log::info('Paymob: Generating auth token', ['api_key' => substr($this->api_key, 0, 10) . '...']);
+        \Log::info('Paymob: Generating auth token', ['api_key' => substr($this->api_key, 0, 10).'...']);
         $response = $this->buildRequest('POST', '/api/auth/tokens', ['api_key' => $this->api_key]);
         \Log::info('Paymob: Auth token response', ['response' => $response->getData(true)]);
+
         return $response->getData(true)['data']['token'];
     }
 
@@ -45,27 +49,27 @@ class PaymobPaymentService extends BasePaymentService implements PaymentGatewayI
     protected function createOrder(array $orderData): array
     {
         $auth_token = $this->generateToken();
-        $this->header['Authorization'] = 'Bearer ' . $auth_token;
+        $this->header['Authorization'] = 'Bearer '.$auth_token;
 
-        $orderData['api_source'] = "INVOICE";
+        $orderData['api_source'] = 'INVOICE';
         $orderData['integrations'] = is_string($this->integrations_id)
             ? json_decode($this->integrations_id)
             : $this->integrations_id;
 
         \Log::info('Paymob: Creating order', [
             'orderData' => $orderData,
-            'auth_token' => substr($auth_token, 0, 20) . '...'
+            'auth_token' => substr($auth_token, 0, 20).'...',
         ]);
 
         $response = $this->buildRequest('POST', '/api/ecommerce/orders', $orderData);
 
         \Log::info('Paymob: Order creation response', ['response' => $response->getData(true)]);
 
-        if (!$response->getData(true)['success']) {
+        if (! $response->getData(true)['success']) {
             return [
                 'success' => false,
                 'message' => 'Failed to create order',
-                'error' => $response->getData(true)
+                'error' => $response->getData(true),
             ];
         }
 
@@ -90,28 +94,26 @@ class PaymobPaymentService extends BasePaymentService implements PaymentGatewayI
                 'json'
             );
 
-
-            if (!$response->getData(true)['success']) {
+            if (! $response->getData(true)['success']) {
                 return [
                     'success' => false,
                     'message' => 'Failed to generate payment key',
-                    'error' => $response->getData(true)
+                    'error' => $response->getData(true),
                 ];
             }
 
             $payment_token = $response->getData(true)['data']['token'];
 
-
             return [
                 'success' => true,
                 'payment_key' => $payment_token,
-                'iframe_url' => 'https://accept.paymob.com/api/acceptance/iframes/' . $this->iframe_id . '?payment_token=' . $payment_token
+                'iframe_url' => 'https://accept.paymob.com/api/acceptance/iframes/'.$this->iframe_id.'?payment_token='.$payment_token,
             ];
         } catch (\Exception $e) {
             return [
                 'success' => false,
                 'message' => 'Payment key generation failed',
-                'error' => $e->getMessage()
+                'error' => $e->getMessage(),
             ];
         }
     }
@@ -126,13 +128,11 @@ class PaymobPaymentService extends BasePaymentService implements PaymentGatewayI
         // Create order first
         $orderResponse = $this->createOrder($orderData);
 
-
-
-        if (!$orderResponse['success']) {
+        if (! $orderResponse['success']) {
             return [
                 'success' => false,
                 'message' => $orderResponse['message'],
-                'url' => route('payment.failed')
+                'url' => route('payment.failed'),
             ];
         }
 
@@ -150,14 +150,13 @@ class PaymobPaymentService extends BasePaymentService implements PaymentGatewayI
             'integration_id' => $this->integration_id,
         ];
 
-
         $paymentKeyResponse = $this->generatePaymentKey($paymentKeyData);
 
-        if (!$paymentKeyResponse['success']) {
+        if (! $paymentKeyResponse['success']) {
             return [
                 'success' => false,
                 'message' => $paymentKeyResponse['message'],
-                'url' => route('payment.failed')
+                'url' => route('payment.failed'),
             ];
         }
 
@@ -190,14 +189,14 @@ class PaymobPaymentService extends BasePaymentService implements PaymentGatewayI
             'obj' => $obj,
             'success' => $success,
             'order_id' => $orderId,
-            'payment_id' => $paymentId
+            'payment_id' => $paymentId,
         ]);
 
         return [
             'success' => $success,
             'order_id' => $orderId,
             'payment_id' => $paymentId,
-            'response' => $response
+            'response' => $response,
         ];
     }
 }

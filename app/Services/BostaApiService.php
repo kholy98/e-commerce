@@ -12,8 +12,8 @@ class BostaApiService
 
     public function __construct()
     {
-        $this->apiKey = config('services.bosta.api_key');
-        $this->baseUrl = config('services.bosta.base_url');
+        $this->apiKey = \App\Models\Setting::get('BOSTA_API_KEY', config('services.bosta.api_key'));
+        $this->baseUrl = \App\Models\Setting::get('BOSTA_BASE_URL', config('services.bosta.base_url'));
     }
 
     // Helper for authenticated requests
@@ -67,7 +67,7 @@ class BostaApiService
     {
         // According to Bosta API, you can update the delivery state to cancelled
         return $this->updateDelivery($trackingNumber, [
-            'state' => 49 // cancelled state
+            'state' => 49, // cancelled state
         ]);
     }
 }
