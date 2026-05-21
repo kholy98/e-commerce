@@ -1,4 +1,4 @@
-# Al-Ather E-Commerce Platform
+# Coffe E-Commerce Platform
 
 A production-ready bilingual (Arabic/English) multi-vendor e-commerce platform for coffee products, built for the Egyptian market. Features full integration with **Paymob** (payments), **Bosta** (logistics), and **WhatsApp** (notifications).
 
